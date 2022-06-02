@@ -1,4 +1,4 @@
-package project.components;
+package project.components.tabs;
 
 import java.util.HashSet;
 
@@ -8,7 +8,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import project.Manager;
-import project.utils.FileParser;
 
 public class FileView extends JScrollPane {
   private JTree files;

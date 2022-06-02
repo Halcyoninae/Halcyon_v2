@@ -10,11 +10,11 @@ public class Manager {
   }
 
   /// BIGCONTAINER Size Config START ///
-  public static final int MIN_WIDTH = 550;
-  public static final int MIN_HEIGHT = 750;
+  public static final int MIN_WIDTH = 500;
+  public static final int MIN_HEIGHT = 600;
 
-  public static final int MAX_WIDTH = MIN_HEIGHT + 50;
-  public static final int MAX_HEIGHT = MIN_HEIGHT + 50;
+  public static final int MAX_WIDTH = MIN_HEIGHT + 40;
+  public static final int MAX_HEIGHT = MIN_HEIGHT + 40;
   /// BIGCONTAINER Size Config END ///
 
   /// FILEVIEW Size Config START ///
@@ -22,11 +22,11 @@ public class Manager {
   public static final int FILEVIEW_MIN_HEIGHT = MIN_HEIGHT - 50 / 2;
 
   public static final int FILEVIEW_MAX_WIDTH = MAX_WIDTH - 50;
-  public static final int FILEVIEW_MAX_HEIGHT = MAX_HEIGHT + 50 / 2;
+  public static final int FILEVIEW_MAX_HEIGHT = MAX_HEIGHT + 50 / 2 - 40;
   /// FILEVIEW Size Config END ///
 
   /// B Bloc Size Config START ///
-  public static final int B_MIN_WIDTH = MIN_WIDTH - FILEVIEW_MIN_WIDTH;
+  public static final int B_MIN_WIDTH = MIN_WIDTH - FILEVIEW_MIN_WIDTH - 40;
   public static final int B_MIN_HEIGHT = MIN_HEIGHT / 2;
 
   public static final int B_MAX_WIDTH = B_MIN_WIDTH - FILEVIEW_MAX_WIDTH;

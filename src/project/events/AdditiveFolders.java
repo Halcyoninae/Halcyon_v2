@@ -1,7 +1,7 @@
 package project.events;
 
-import project.components.FileView;
 import project.components.dialog.SelectApplicableFolders;
+import project.components.tabs.FileView;
 
 public class AdditiveFolders {
   private SelectApplicableFolders saf;

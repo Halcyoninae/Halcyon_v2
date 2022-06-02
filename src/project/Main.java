@@ -5,7 +5,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import project.components.BBlocView;
 import project.components.BigContainerTest;
 import project.components.BottomPane;
-import project.components.FileView;
+import project.components.tabs.FileView;
 
 import java.awt.*;
 import java.util.HashMap;

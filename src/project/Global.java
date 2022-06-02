@@ -1,6 +1,6 @@
 package project;
 
-import project.components.FileView;
+import project.components.tabs.FileView;
 import project.connections.resource.ResourceDistributor;
 
 public final class Global {

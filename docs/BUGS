@@ -1,0 +1,5 @@
+[!FIXED!] [***] #1 "Folders without acceptable Audio Files will enter in with unqualified blank file names"
+      Detailed Description: Folders that do not contain any extension ruled files will still enter
+      as unqualified with empty names instead of proper names or no at all.
+      Status: FIXED
+      State: Experimental-Build ~ MP4J
