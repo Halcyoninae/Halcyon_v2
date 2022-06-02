@@ -23,7 +23,6 @@ public class BBlocView extends JPanel {
       public void actionPerformed(ActionEvent e) {
         SelectApplicableFolders s = new SelectApplicableFolders();
         s.setFolderSelectedListener(new FolderSelectedListener() {
-          /// TODO: Make only one instance of this class or this instance of the program
           @Override
           public void folderSelected(String folder) {
             if (FileParser.isEmptyFolder(new File(folder))) {

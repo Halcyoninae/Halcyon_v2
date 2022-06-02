@@ -58,4 +58,20 @@ public class Manager {
   public static final int TOPPANE_MAX_WIDTH = TOPPANE_MIN_WIDTH - FILEVIEW_MAX_WIDTH;
   public static final int TOPPANE_MAX_HEIGHT = MAX_HEIGHT / 2;
   /// TOPPane Wrapper Config END
+
+  /// ButtonControl Config START
+  public static final int BUTTONCONTROL_MIN_WIDTH = MIN_WIDTH;
+  public static final int BUTTONCONTROL_MIN_HEIGHT = MIN_HEIGHT / 4;
+
+  public static final int BUTTONCONTROL_MAX_WIDTH = MAX_WIDTH;
+  public static final int BUTTONCONTROL_MAX_HEIGHT = MAX_HEIGHT / 4;
+  /// ButtonControl Config END
+
+  /// InfoView Config START
+  public static final int INFOVIEW_MIN_WIDTH = MIN_WIDTH;
+  public static final int INFOVIEW_MIN_HEIGHT = MIN_HEIGHT / 4;
+
+  public static final int INFOVIEW_MAX_WIDTH = MAX_WIDTH;
+  public static final int INFOVIEW_MAX_HEIGHT = MAX_HEIGHT / 4;
+  /// InfoView Config END
 }

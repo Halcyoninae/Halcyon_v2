@@ -1,8 +1,5 @@
 package project.connections.resource;
 
-import java.io.*;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class ResourceDistributor {

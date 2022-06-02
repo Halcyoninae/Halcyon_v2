@@ -2,9 +2,11 @@ package project;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 
+import debug.DebugView;
 import project.components.BBlocView;
 import project.components.BigContainerTest;
 import project.components.BottomPane;
+import project.components.toppane.TopPane;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -27,13 +29,17 @@ public class Main {
 
   public static void main(String... args) {
 
-    JPanel one = new JPanel();
-    one.setOpaque(true);
-    one.setSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-    one.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-    one.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-    one.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
-    one.setBackground(Color.WHITE);
+    /* STUB PANEL:
+     * JPanel one = new JPanel();
+     * one.setOpaque(true);
+     * one.setSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+     * one.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT /
+     * 2));
+     * one.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+     * one.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
+     * one.setBackground(Color.WHITE);
+     */
+    TopPane tp = new TopPane(Global.ifp, Global.bctp);
 
     JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
     bottom.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
@@ -42,12 +48,13 @@ public class Main {
     BBlocView b = new BBlocView();
     Map<String, JComponent> tabs = new HashMap<>();
     tabs.put("Playlist", Global.f);
+    tabs.put("Debug", new DebugView());
     BottomPane bp = new BottomPane(tabs);
-    
+
     bottom.add(b);
     bottom.add(bp);
 
-    JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, one, bottom);
+    JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
 
     new BigContainerTest(m).run();
   }
