@@ -23,28 +23,37 @@ public class FileView extends JScrollPane {
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
     root = new DefaultMutableTreeNode("MP4J - PlayList Handler");
-    root.add(generateGenericNode("Click [+] to add a folder!"));
+    root.add(generateGenericNode("Click [+] (on the right ->) to add a folder!"));
     files = new JTree(root);
     files.setRootVisible(true);
     files.setShowsRootHandles(true);
     files.setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     files.setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     files.setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
+    files.setAutoscrolls(true);
     getViewport().add(files);
   }
 
   public static DefaultMutableTreeNode generateGenericNode(String message) {
-    DefaultMutableTreeNode node = new DefaultMutableTreeNode(message);
-    return node;
+    return new DefaultMutableTreeNode(message);
   }
 
   public void pokeFolder(String folder) {
     folders.add(folder);
-    DefaultMutableTreeNode node = new DefaultMutableTreeNode(FileParser.getDirectoryName(folder));
-    DefaultTreeModel parent = (DefaultTreeModel) files.getModel();
-    DefaultMutableTreeNode root2 = (DefaultMutableTreeNode) parent.getRoot();
-    root2.add(node);
-    parent.reload(root2);
-    files.updateUI();
+    DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(folder);
+    root.add(newNode);
+    DefaultTreeModel model = (DefaultTreeModel) files.getModel();
+    model.reload();
+  }
+
+  public void pokeFolder(String folder, String[] files) {
+    folders.add(folder);
+    DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(folder);
+    root.add(newNode);
+    for (String filet : files) {
+      newNode.add(new DefaultMutableTreeNode(filet));
+    }
+    DefaultTreeModel model = (DefaultTreeModel) this.files.getModel();
+    model.reload();
   }
 }

@@ -4,9 +4,12 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import project.components.BBlocView;
 import project.components.BigContainerTest;
+import project.components.BottomPane;
 import project.components.FileView;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -37,9 +40,14 @@ public class Main {
     bottom.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
-    bottom.add(Global.f);
     BBlocView b = new BBlocView();
+    Map<String, JComponent> tabs = new HashMap<>();
+    tabs.put("Playlist", Global.f);
+    BottomPane bp = new BottomPane(tabs);
+    
     bottom.add(b);
+    bottom.add(bp);
+
     JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, one, bottom);
 
     new BigContainerTest(m).run();

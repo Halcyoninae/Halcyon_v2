@@ -37,6 +37,11 @@ public class Manager {
   public static final String RSC_FOLDER_NAME = "resource";
   /// GENERAL RESOURCE LOCATION END
 
+  /// GENERAL PROGRAM CONFIGURATION START
+  public static final String[] ALLOWED_FORMATS = new String[] { "wav", "mp3" };
+  public static final int TAB_VIEW_MAX_CHAR_LENGTH = 10;
+  /// GENERAL PROGRAM CONFIGURATION END
+
   /// BEGIN RESOURCE LOCATION FOR ICONS
   public static final String FILEVIEW_ICON_FOLDER_OPEN = RSC_FOLDER_NAME + "/fileview/folder_open.png";
   public static final String FILEVIEW_ICON_FOLDER_CLOSED = RSC_FOLDER_NAME + "/fileview/folder_closed.png";
