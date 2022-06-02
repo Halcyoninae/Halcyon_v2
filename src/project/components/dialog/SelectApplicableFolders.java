@@ -2,6 +2,8 @@ package project.components.dialog;
 
 import javax.swing.*;
 
+import project.components.inheritabledialog.FSVDefault;
+
 public class SelectApplicableFolders extends JFileChooser implements Runnable {
   public interface FolderSelectedListener {
     public void folderSelected(String folder);
@@ -21,9 +23,8 @@ public class SelectApplicableFolders extends JFileChooser implements Runnable {
 
   @Override
   public void run() {
-    int returnVal = showOpenDialog(null);
+    int returnVal = showOpenDialog(new FSVDefault());
     if (returnVal == JFileChooser.APPROVE_OPTION) {
-      System.out.println("You chose to open this file: " + getSelectedFile().getName());
       if(fs != null) {
         fs.folderSelected(getSelectedFile().getAbsolutePath());
       }

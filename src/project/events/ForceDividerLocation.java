@@ -14,7 +14,6 @@ public class ForceDividerLocation implements PropertyChangeListener {
     this.e = e;
     min = (int) ((e.getPreferredSize().getHeight() / 2) - threshold);
     max = (int) (threshold + (e.getPreferredSize().getHeight() / 2));
-    System.out.println(min + " " + max);
 
   }
 
@@ -22,7 +21,6 @@ public class ForceDividerLocation implements PropertyChangeListener {
   public void propertyChange(PropertyChangeEvent evt) {
     if (evt.getPropertyName().equals("dividerLocation")) {
       int dividerLoc = e.getDividerLocation();
-      System.out.println(dividerLoc);
       if (dividerLoc < min) {
         e.setDividerLocation(min);
       }

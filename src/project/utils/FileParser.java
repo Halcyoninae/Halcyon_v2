@@ -1,6 +1,9 @@
 package project.utils;
 
 import java.io.*;
+import java.util.ArrayList;
+
+import debug.Debugger;
 
 public class FileParser {
   private FileParser() {
@@ -8,18 +11,18 @@ public class FileParser {
 
   public static File[] parseOnlyAudioFiles(File folder, String[] rules) {
     File[] files = folder.listFiles();
-    File[] audioFiles = new File[files.length];
+    ArrayList<File> audioFiles = new ArrayList<>();
     for (int i = 0; i < files.length; i++) {
       if (files[i].isFile()) {
         for (int j = 0; j < rules.length; j++) {
-          if (files[i].getAbsolutePath().endsWith(rules[j])) {
-            audioFiles[i] = files[i];
-            System.out.println(audioFiles[i].getName());
+          if (files[i].getAbsolutePath().endsWith("." + rules[j])) {
+            audioFiles.add(files[i]);
           }
         }
       }
     }
-    return audioFiles;
+    
+    return audioFiles.toArray(new File[audioFiles.size()]);
   }
 
   public static String folderName(String f) {
@@ -29,7 +32,9 @@ public class FileParser {
   public static String[] parseFileNames(File... files) {
     String[] fileNames = new String[files.length];
     for (int i = 0; i < files.length; i++) {
-      fileNames[i] = files[i].getName();
+      if (files[i] != null && files[i].isFile()) {
+        fileNames[i] = files[i].getName();
+      }
     }
     return fileNames;
   }
