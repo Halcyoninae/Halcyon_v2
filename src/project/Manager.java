@@ -50,4 +50,12 @@ public class Manager {
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
   /// END RESOURCE LOCATION FOR ICONS
+
+  /// TOPPane Wrapper Config START
+  public static final int TOPPANE_MIN_WIDTH = MIN_WIDTH - FILEVIEW_MIN_WIDTH;
+  public static final int TOPPANE_MIN_HEIGHT = MIN_HEIGHT / 2;
+
+  public static final int TOPPANE_MAX_WIDTH = TOPPANE_MIN_WIDTH - FILEVIEW_MAX_WIDTH;
+  public static final int TOPPANE_MAX_HEIGHT = MAX_HEIGHT / 2;
+  /// TOPPane Wrapper Config END
 }

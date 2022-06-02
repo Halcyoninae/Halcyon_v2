@@ -22,8 +22,7 @@ public class FileView extends JScrollPane {
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
-    root = new DefaultMutableTreeNode("MP4J - PlayList Handler");
-    root.add(generateGenericNode("Click [+] (on the right ->) to add a folder!"));
+    root = new DefaultMutableTreeNode("Your Playlist(s)");
     files = new JTree(root);
     files.setRootVisible(true);
     files.setShowsRootHandles(true);
