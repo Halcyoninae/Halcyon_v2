@@ -25,7 +25,7 @@ public class SelectApplicableFolders extends JFileChooser implements Runnable {
   public void run() {
     int returnVal = showOpenDialog(new FSVDefault());
     if (returnVal == JFileChooser.APPROVE_OPTION) {
-      if(fs != null) {
+      if (fs != null) {
         fs.folderSelected(getSelectedFile().getAbsolutePath());
       }
     }

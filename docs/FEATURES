@@ -1,4 +1,10 @@
+[**] #2 "Make only one dialog instance of SelectionApplicableFolders be able to be launched at once"
+        Detailed Description: Title only
+        Status: Investigating
+        Category: Background Guard
+
 [**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
         Detailed Description: Show a dialog prompt for when the user has chosen a folder that does not
         contain any valid audio files.
         Status: Unchecked
+        Category: GUI Guard
