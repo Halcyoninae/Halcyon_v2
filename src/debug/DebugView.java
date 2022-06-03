@@ -36,6 +36,6 @@ public class DebugView extends JScrollPane {
 
   private static String getMemoryUsage() {
     return "Memory (mB): " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024
-        + " / " + Runtime.getRuntime().totalMemory() / 1024 / 1024;
+        + "/" + Runtime.getRuntime().totalMemory() / 1024 / 1024;
   }
 }

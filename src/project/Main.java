@@ -1,11 +1,19 @@
 package project;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.intellijthemes.FlatGradiantoDarkFuchsiaIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMonokaiProIJTheme;
 
 import debug.DebugView;
 import project.components.BBlocView;
 import project.components.BigContainerTest;
 import project.components.BottomPane;
+import project.components.tabs.FileAttributesView;
 import project.components.toppane.TopPane;
 
 import java.awt.*;
@@ -21,7 +29,7 @@ public class Main {
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     UIManager.put("FileChooser.readOnly", true);
     try {
-      UIManager.setLookAndFeel(FlatDarkLaf.class.getName());
+      UIManager.setLookAndFeel(FlatVuesionIJTheme.class.getName());
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -49,6 +57,7 @@ public class Main {
     Map<String, JComponent> tabs = new HashMap<>();
     tabs.put("Playlist", Global.f);
     tabs.put("Debug", new DebugView());
+    tabs.put("Files", new FileAttributesView());
     BottomPane bp = new BottomPane(tabs);
 
     bottom.add(b);

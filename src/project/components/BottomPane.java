@@ -2,6 +2,10 @@ package project.components;
 
 import javax.swing.*;
 
+import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
+
+import mdlaf.utils.MaterialBorders;
+
 import java.awt.*;
 
 import project.Manager;
@@ -24,6 +28,7 @@ public class BottomPane extends JTabbedPane {
       this.tabs[i] = tabs.get(s);
       i++;
     }
+    setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
   }
 
   public JComponent[] getTabs() {

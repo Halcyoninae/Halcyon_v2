@@ -13,10 +13,9 @@ public class TopPane extends JPanel {
     setPreferredSize(new Dimension(Manager.TOPPANE_MIN_WIDTH, Manager.TOPPANE_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.TOPPANE_MAX_WIDTH, Manager.TOPPANE_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.TOPPANE_MIN_WIDTH, Manager.TOPPANE_MIN_HEIGHT));
-
     setLayout(new BorderLayout());
-
-    add(ifp, BorderLayout.NORTH);
-    add(bctp, BorderLayout.SOUTH);
+    
+    add(ifp, BorderLayout.PAGE_START);
+    add(bctp, BorderLayout.PAGE_END);
   }
 }

@@ -26,10 +26,10 @@ public class BBlocView extends JPanel {
           @Override
           public void folderSelected(String folder) {
             if (FileParser.isEmptyFolder(new File(folder))) {
-              Global.f.pokeFolder(FileParser.folderName(folder));
+              Global.f.pokeFolder(folder);
             } else {
-              Global.f.pokeFolder(FileParser.folderName(
-                  folder),
+              Global.f.pokeFolder(
+                  folder,
                   FileParser.parseFileNames(FileParser.parseOnlyAudioFiles(new File(folder), Manager.ALLOWED_FORMATS)));
             }
           }
