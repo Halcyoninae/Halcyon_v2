@@ -1,9 +1,5 @@
 package project;
 
-import java.awt.*;
-
-import mdlaf.utils.MaterialBorders;
-
 /**
  * A global scope project manager that contains
  * constants to most used objects and values throughout the
@@ -78,4 +74,9 @@ public class Manager {
   public static final int INFOVIEW_MAX_WIDTH = MAX_WIDTH;
   public static final int INFOVIEW_MAX_HEIGHT = MAX_HEIGHT / 4;
   /// InfoView Config END
+
+  /// TABBED View Config Start
+  public static final String ATTRIBUTES_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/attributes_tab.png";
+  public static final String PLAYLIST_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
+  /// TABBED View Config End
 }
