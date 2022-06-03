@@ -5,9 +5,7 @@ package project;
  * constants to most used objects and values throughout the
  * program.
  */
-public class Manager {
-  private Manager() {
-  }
+public interface Manager {
 
   /// BIGCONTAINER Size Config START ///
   public static final int MIN_WIDTH = 500;
@@ -75,8 +73,23 @@ public class Manager {
   public static final int INFOVIEW_MAX_HEIGHT = MAX_HEIGHT / 4;
   /// InfoView Config END
 
+  /// DIALOG_ERROR Config START
+  public static final int DIALOG_ERROR_MIN_WIDTH = 300;
+  public static final int DIALOG_ERROR_MIN_HEIGHT = 150;
+  
+  public static final String DIALOG_ERROR_WIN_TITLE = "Exception!";
+  /// DIALOG_ERROR Config END
+
   /// TABBED View Config Start
   public static final String ATTRIBUTES_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/attributes_tab.png";
   public static final String PLAYLIST_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
+
+  public static final String FILEVIEW_DEFAULT_TAB_NAME = "Playlist";
+  public static final String ATTRIBUTES_DEFAULT_TAB_NAME = "Attributes";
+
+  public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP = "View your selected playlist(s) here.";
+  public static final String ATTRIBUTES_DEFAULT_TAB_TOOLTIP = "View important properties regarding the program.";
+
+  public static final int TAB_VIEW_MIN_TEXT_STRIP_LENGTH = 10;
   /// TABBED View Config End
 }

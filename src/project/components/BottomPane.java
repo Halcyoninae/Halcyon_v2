@@ -2,39 +2,27 @@ package project.components;
 
 import javax.swing.*;
 
-import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
-
-import mdlaf.utils.MaterialBorders;
-
 import java.awt.*;
 
-import project.Global;
 import project.Manager;
 import project.utils.TextParser;
 
-import java.util.Map;
+import java.util.List;
 
 public class BottomPane extends JTabbedPane {
   private JComponent[] tabs;
 
-  public BottomPane(Map<String, JComponent> tabs) {
+  public BottomPane(List<BPTabs> tabs) {
     super();
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     this.tabs = new JComponent[tabs.size()];
     int i = 0;
-    for (String s : tabs.keySet()) {
-      if (s.contains("Attributes")) {
-        addTab(TextParser.strip(s, Manager.TAB_VIEW_MAX_CHAR_LENGTH),
-            Global.rd.getFromAsImageIcon(Manager.ATTRIBUTES_TAB_ICON), tabs.get(s));
-      } else if (s.contains("Playlist")) {
-        addTab(TextParser.strip(s, Manager.TAB_VIEW_MAX_CHAR_LENGTH),
-            Global.rd.getFromAsImageIcon(Manager.PLAYLIST_TAB_ICON), tabs.get(s));
-      } else {
-        addTab(TextParser.strip(s, Manager.TAB_VIEW_MAX_CHAR_LENGTH), tabs.get(s));
-      }
-      this.tabs[i] = tabs.get(s);
+    for (BPTabs t : tabs) {
+      this.tabs[i] = t.getTabContent();
+      addTab(t.restrainTabName() ? TextParser.strip(t.getTabName(), Manager.TAB_VIEW_MIN_TEXT_STRIP_LENGTH)
+          : t.getTabName(), t.getTabIcon(), t.getTabContent(), t.getTabToolTip());
       i++;
     }
     setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);

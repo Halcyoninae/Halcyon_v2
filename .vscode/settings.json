@@ -3,11 +3,14 @@
     "bctp",
     "BIGCONTAINER",
     "BUTTONCONTROL",
+    "excec",
     "FILEVIEW",
     "fileviewer",
     "flatlaf",
     "INFOVIEW",
     "mdlaf",
+    "ploogins",
+    "tabsview",
     "TOPPANE"
   ]
 }

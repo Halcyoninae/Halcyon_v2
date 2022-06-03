@@ -10,12 +10,15 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
 import global.Pair;
+import project.Global;
 import project.Manager;
+import project.components.BPTabs;
+import project.events.FVRightClick;
 import project.utils.FileParser;
 
-public class FileView extends JScrollPane {
+public class FileView extends JScrollPane implements BPTabs {
   private JTree files;
-  private Map<String, Pair<String, String[]>> folders = new HashMap<>();
+  private transient Map<String, Pair<String, String[]>> folders = new HashMap<>();
   private DefaultMutableTreeNode root;
 
   public FileView() {
@@ -42,6 +45,7 @@ public class FileView extends JScrollPane {
     renderer.setClosedIcon(closedIcon);
     renderer.setOpenIcon(openIcon);
     renderer.setLeafIcon(leafIcon);
+    files.addMouseListener(new FVRightClick(files));
     files.setCellRenderer(renderer);
   }
 
@@ -70,5 +74,25 @@ public class FileView extends JScrollPane {
     }
     DefaultTreeModel model = (DefaultTreeModel) this.files.getModel();
     model.reload();
+  }
+
+  @Override
+  public String getTabName() {
+    return Manager.FILEVIEW_DEFAULT_TAB_NAME;
+  }
+
+  @Override
+  public String getTabToolTip() {
+    return Manager.FILEVIEW_DEFAULT_TAB_TOOLTIP;
+  }
+
+  @Override
+  public ImageIcon getTabIcon() {
+    return Global.rd.getFromAsImageIcon(Manager.PLAYLIST_TAB_ICON);
+  }
+
+  @Override
+  public JComponent getTabContent() {
+    return this;
   }
 }

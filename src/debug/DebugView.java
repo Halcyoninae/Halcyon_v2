@@ -3,12 +3,13 @@ package debug;
 import javax.swing.*;
 
 import project.Manager;
+import project.components.BPTabs;
 
 import java.awt.*;
 
 /**
  * This class is kind of like a plugin to the main program
- * as it functions as a new tab in the {@link project.components.BottomPane} 
+ * as it functions as a new tab in the {@link project.components.BottomPane}
  * class.
  * 
  * It displays helpful debug information regarding the running program.
@@ -17,7 +18,7 @@ import java.awt.*;
  * @since 3.0
  * @see project.components.BottomPane
  */
-public class DebugView extends JScrollPane {
+public class DebugView extends JScrollPane implements BPTabs {
   private JEditorPane text;
 
   /**
@@ -50,10 +51,26 @@ public class DebugView extends JScrollPane {
 
   /**
    * Returns the memory usage for the first debug option
+   * 
    * @return String representation of memory usage
    */
   private static String getMemoryUsage() {
     return "Memory (mB): " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024
         + "/" + Runtime.getRuntime().totalMemory() / 1024 / 1024;
+  }
+
+  @Override
+  public String getTabName() {
+    return "Debug";
+  }
+
+  @Override
+  public String getTabToolTip() {
+    return "Debug information";
+  }
+
+  @Override
+  public JComponent getTabContent() {
+    return this;
   }
 }

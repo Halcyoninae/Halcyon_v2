@@ -1,29 +1,18 @@
 package project;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoDarkFuchsiaIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialDarkerIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMonokaiProIJTheme;
-
 import debug.DebugView;
 import project.components.BBlocView;
+import project.components.BPTabs;
 import project.components.BigContainerTest;
 import project.components.BottomPane;
 import project.components.tabs.FileAttributesView;
 import project.components.toppane.TopPane;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.ArrayList;
 import javax.swing.*;
+
+import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 
 public class Main {
   static {
@@ -40,7 +29,8 @@ public class Main {
 
   public static void main(String... args) {
 
-    /* STUB PANEL:
+    /*
+     * STUB PANEL:
      * JPanel one = new JPanel();
      * one.setOpaque(true);
      * one.setSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
@@ -57,12 +47,11 @@ public class Main {
     bottom.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
     BBlocView b = new BBlocView();
-    Map<String, JComponent> tabs = new HashMap<>();
-    tabs.put("Playlist", Global.f);
-    tabs.put("Debug", new DebugView());
-    tabs.put("Attributes", new FileAttributesView());
+    ArrayList<BPTabs> tabs = new ArrayList<>();
+    tabs.add(Global.f);
+    tabs.add(new DebugView());
+    tabs.add(new FileAttributesView());
     BottomPane bp = new BottomPane(tabs);
-
     bottom.add(b);
     bottom.add(bp);
 

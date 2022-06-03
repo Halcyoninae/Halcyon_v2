@@ -5,11 +5,12 @@ import javax.swing.*;
 import global.Pair;
 import project.Global;
 import project.Manager;
+import project.components.BPTabs;
 
 import java.awt.*;
 import java.util.Map;
 
-public class FileAttributesView extends JScrollPane {
+public class FileAttributesView extends JScrollPane implements BPTabs {
   private JEditorPane editor;
 
   public FileAttributesView() {
@@ -50,5 +51,20 @@ public class FileAttributesView extends JScrollPane {
     }
     sb.append("</p></html>");
     return sb.toString();
+  }
+
+  @Override
+  public String getTabName() {
+    return Manager.ATTRIBUTES_DEFAULT_TAB_NAME;
+  }
+
+  @Override
+  public String getTabToolTip() {
+    return Manager.ATTRIBUTES_DEFAULT_TAB_TOOLTIP;
+  }
+
+  @Override
+  public JComponent getTabContent() {
+    return this;
   }
 }
