@@ -80,6 +80,16 @@ public interface Manager {
   public static final String DIALOG_ERROR_WIN_TITLE = "Exception!";
   /// DIALOG_ERROR Config END
 
+  /// DIALOG_CONFIRM Config START
+  public static final int DIALOG_CONFIRM_MIN_WIDTH = 300;
+  public static final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
+
+  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
+  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
+
+  public static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
+  /// DIALOG_CONFIRM Config END
+
   /// TABBED View Config Start
   public static final String ATTRIBUTES_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/attributes_tab.png";
   public static final String PLAYLIST_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
