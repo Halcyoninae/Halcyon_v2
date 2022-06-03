@@ -2,7 +2,10 @@ package project;
 
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoDarkFuchsiaIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatGrayIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatHiberbeeDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatVuesionIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
@@ -29,7 +32,7 @@ public class Main {
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     UIManager.put("FileChooser.readOnly", true);
     try {
-      UIManager.setLookAndFeel(FlatVuesionIJTheme.class.getName());
+      UIManager.setLookAndFeel(FlatArcDarkIJTheme.class.getName());
     } catch (Exception e) {
       e.printStackTrace();
     }

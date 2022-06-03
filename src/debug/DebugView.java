@@ -6,9 +6,23 @@ import project.Manager;
 
 import java.awt.*;
 
+/**
+ * This class is kind of like a plugin to the main program
+ * as it functions as a new tab in the {@link project.components.BottomPane} 
+ * class.
+ * 
+ * It displays helpful debug information regarding the running program.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ * @see project.components.BottomPane
+ */
 public class DebugView extends JScrollPane {
   private JEditorPane text;
 
+  /**
+   * Constructs the JScrollPane tab view
+   */
   public DebugView() {
     super();
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
@@ -34,6 +48,10 @@ public class DebugView extends JScrollPane {
 
   }
 
+  /**
+   * Returns the memory usage for the first debug option
+   * @return String representation of memory usage
+   */
   private static String getMemoryUsage() {
     return "Memory (mB): " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024
         + "/" + Runtime.getRuntime().totalMemory() / 1024 / 1024;

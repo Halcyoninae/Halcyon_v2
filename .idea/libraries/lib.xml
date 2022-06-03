@@ -1,0 +1,32 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/radiance-neon-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jflac-codec-1.5.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/flatlaf-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/material-ui-swing-1.1.2-with-dependencies.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaudiotagger-2.2.6-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/annotations-23.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/flatlaf-intellij-themes-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/java-stream-player-9.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaudiotagger-2.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mp3spi-1.9.5.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jorbis-0.0.17-2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-io-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jlayer-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jaudiotagger-3.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/radiance-trident-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ResourceManager4J.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-3.8.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/discord-rpc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/radiance-substance-2.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jave-1.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/vorbis-support-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ant-junit-1.6.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jlayer-1.0.1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/tritonus-all-0.3.7.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
