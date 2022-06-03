@@ -36,9 +36,9 @@ public class FileView extends JScrollPane {
     files.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     getViewport().add(files);
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) files.getCellRenderer();
-    Icon closedIcon = new ImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON);
-    Icon openIcon = new ImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON);
-    Icon leafIcon = new ImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON);
+    Icon closedIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
+    Icon openIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
+    Icon leafIcon = new ImageIcon(Manager.FILEVIEW_ICON_FILE);
     renderer.setClosedIcon(closedIcon);
     renderer.setOpenIcon(openIcon);
     renderer.setLeafIcon(leafIcon);

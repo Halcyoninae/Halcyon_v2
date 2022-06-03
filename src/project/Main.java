@@ -57,7 +57,7 @@ public class Main {
     Map<String, JComponent> tabs = new HashMap<>();
     tabs.put("Playlist", Global.f);
     tabs.put("Debug", new DebugView());
-    tabs.put("Files", new FileAttributesView());
+    tabs.put("Attributes", new FileAttributesView());
     BottomPane bp = new BottomPane(tabs);
 
     bottom.add(b);
