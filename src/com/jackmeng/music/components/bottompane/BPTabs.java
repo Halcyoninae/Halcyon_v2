@@ -1,4 +1,4 @@
-package com.jackmeng.music.components;
+package com.jackmeng.music.components.bottompane;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -14,7 +14,7 @@ import com.jackmeng.music.Manager;
  * 
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.music.components.BottomPane
+ * @see com.jackmeng.music.components.bottompane.BottomPane
  */
 public interface BPTabs {
   /**

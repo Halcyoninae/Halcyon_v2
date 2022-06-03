@@ -1,24 +1,21 @@
-package com.jackmeng.music.components;
+package com.jackmeng.music.components.bbloc.buttons;
 
 import javax.swing.*;
 
 import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
+import com.jackmeng.music.components.bbloc.BBlocButton;
 import com.jackmeng.music.components.dialog.SelectApplicableFolders;
 import com.jackmeng.music.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.music.utils.FileParser;
 
 import java.awt.event.*;
 import java.io.File;
-import java.awt.*;
 
-public class BBlocView extends JPanel {
-  private JButton openAddFolder;
-
-  public BBlocView() {
-    super();
-    openAddFolder = new JButton("+");
-    openAddFolder.addActionListener(new ActionListener() {
+public class AddFolder extends JButton implements BBlocButton {
+  public AddFolder() {
+    super(Manager.ADDFOLDER_BUTTON_TEXT);
+    addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
         SelectApplicableFolders s = new SelectApplicableFolders();
@@ -37,9 +34,10 @@ public class BBlocView extends JPanel {
         s.run();
       }
     });
-    setPreferredSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.B_MAX_WIDTH, Manager.B_MAX_HEIGHT));
-    add(openAddFolder);
+  }
+
+  @Override
+  public JComponent getComponent() {
+    return this;
   }
 }

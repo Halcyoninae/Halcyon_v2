@@ -1,4 +1,4 @@
-package com.jackmeng.music.components;
+package com.jackmeng.music.components.bottompane;
 
 import javax.swing.*;
 

@@ -92,4 +92,9 @@ public interface Manager {
 
   public static final int TAB_VIEW_MIN_TEXT_STRIP_LENGTH = 10;
   /// TABBED View Config End
+
+  /// BBLOC BUTTONS Config START
+  public static final String ADDFOLDER_BUTTON_TEXT = "+";
+
+  /// BBLOC BUTTONS Config END
 }

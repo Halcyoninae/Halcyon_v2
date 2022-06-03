@@ -1,3 +1,11 @@
+[***] #2 "Folders that have been deleted should also be removed from the attributes view"
+      Detailed Description: Folders should not be kept for ever in the attributes view once
+                            they have been marked for deletion by the user.
+      Potential Fix: Keep track if the folder exists or not
+      Additional Feature Request: FEATURES/#4
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #1 "Folders without acceptable Audio Files will enter in with unqualified blank file names"
       Detailed Description: Folders that do not contain any extension ruled files will still enter
       as unqualified with empty names instead of proper names or no at all.

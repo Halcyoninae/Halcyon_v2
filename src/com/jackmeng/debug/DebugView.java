@@ -3,20 +3,20 @@ package com.jackmeng.debug;
 import javax.swing.*;
 
 import com.jackmeng.music.Manager;
-import com.jackmeng.music.components.BPTabs;
+import com.jackmeng.music.components.bottompane.BPTabs;
 
 import java.awt.*;
 
 /**
  * This class is kind of like a plugin to the main program
- * as it functions as a new tab in the {@link com.jackmeng.music.components.BottomPane}
+ * as it functions as a new tab in the {@link com.jackmeng.music.components.bottompane.BottomPane}
  * class.
  * 
  * It displays helpful debug information regarding the running program.
  * 
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.music.components.BottomPane
+ * @see com.jackmeng.music.components.bottompane.BottomPane
  */
 public class DebugView extends JScrollPane implements BPTabs {
   private JEditorPane text;

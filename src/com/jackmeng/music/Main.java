@@ -6,11 +6,13 @@ import javax.swing.*;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.jackmeng.debug.DebugView;
-import com.jackmeng.music.components.BBlocView;
-import com.jackmeng.music.components.BPTabs;
 import com.jackmeng.music.components.BigContainerTest;
-import com.jackmeng.music.components.BottomPane;
-import com.jackmeng.music.components.tabs.FileAttributesView;
+import com.jackmeng.music.components.bbloc.BBlocButton;
+import com.jackmeng.music.components.bbloc.BBlocView;
+import com.jackmeng.music.components.bbloc.buttons.AddFolder;
+import com.jackmeng.music.components.bottompane.BPTabs;
+import com.jackmeng.music.components.bottompane.BottomPane;
+import com.jackmeng.music.components.bottompane.tabs.FileAttributesView;
 import com.jackmeng.music.components.toppane.TopPane;
 
 public class Main {
@@ -45,7 +47,10 @@ public class Main {
     bottom.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
+    ArrayList<BBlocButton> bb = new ArrayList<>();
+    bb.add(new AddFolder());
     BBlocView b = new BBlocView();
+    b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
     ArrayList<BPTabs> tabs = new ArrayList<>();
     tabs.add(Global.f);
     tabs.add(new DebugView());

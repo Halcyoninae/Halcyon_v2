@@ -1,4 +1,4 @@
-package com.jackmeng.music.components.tabs;
+package com.jackmeng.music.components.bottompane.tabs;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import javax.swing.tree.TreeSelectionModel;
 import com.jackmeng.global.Pair;
 import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
-import com.jackmeng.music.components.BPTabs;
+import com.jackmeng.music.components.bottompane.BPTabs;
 import com.jackmeng.music.events.FVRightClick;
 import com.jackmeng.music.utils.FileParser;
 
@@ -21,13 +21,13 @@ import com.jackmeng.music.utils.FileParser;
  * for where the user will be able to interact with the selected files.
  * 
  * It is member belonging to the BottomPane tabs and thus implements
- * the interface {@link com.jackmeng.music.components.BPTabs} in order to be a
+ * the interface {@link com.jackmeng.music.components.bottompane.BPTabs} in order to be a
  * qualified tab.
  * 
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.music.components.BottomPane
- * @see com.jackmeng.music.components.BPTabs
+ * @see com.jackmeng.music.components.bottompane.BottomPane
+ * @see com.jackmeng.music.components.bottompane.BPTabs
  */
 public class FileView extends JScrollPane implements BPTabs {
   private JTree files;

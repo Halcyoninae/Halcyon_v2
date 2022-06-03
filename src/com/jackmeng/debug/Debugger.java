@@ -25,7 +25,7 @@ public class Debugger {
    * @return The Header Log text
    */
   public static String getLogText() {
-    return "[debug ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
+    return "[Debug ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
   /**
@@ -38,7 +38,7 @@ public class Debugger {
   public static <T> void log(T... o) {
     for (int i = 0; i < o.length; i++) {
       if (o[i] != null) {
-        System.err.print(o[i].toString() + " ");
+        System.err.print(getLogText() + o[i].toString() + " ");
       } else {
         System.err.print(getLogText() + "NULL_CONTENT" + " ");
       }

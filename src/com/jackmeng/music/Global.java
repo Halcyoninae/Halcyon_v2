@@ -1,6 +1,6 @@
 package com.jackmeng.music;
 
-import com.jackmeng.music.components.tabs.FileView;
+import com.jackmeng.music.components.bottompane.tabs.FileView;
 import com.jackmeng.music.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.music.components.toppane.layout.InfoViewTP;
 import com.jackmeng.music.connections.resource.ResourceDistributor;

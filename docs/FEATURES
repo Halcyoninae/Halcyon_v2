@@ -1,7 +1,17 @@
-[**] #2 "Make only one dialog instance of SelectionApplicableFolders be able to be launched at once"
-        Detailed Description: Title only
+[***] #4 "Update folder option"
+        Detailed Description: Prompt the user if they want to update a node if they added the same folder
+                              with content inside.
+        Category: User Comfort
         Status: Investigating
+
+[***] #3 "Make global constants for valid resource distribution to stop wasting time on fetching resources"
+        Status: Investigating
+        Category: Potential Optimization
+
+[!IGNORED!] [**] #2 "Make only one dialog instance of SelectionApplicableFolders be able to be launched at once"
+        Detailed Description: Title only
         Category: Background Guard
+        Status: IGNORED
 
 [**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
         Detailed Description: Show a dialog prompt for when the user has chosen a folder that does not

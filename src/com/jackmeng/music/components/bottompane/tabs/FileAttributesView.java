@@ -1,11 +1,11 @@
-package com.jackmeng.music.components.tabs;
+package com.jackmeng.music.components.bottompane.tabs;
 
 import javax.swing.*;
 
 import com.jackmeng.global.Pair;
 import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
-import com.jackmeng.music.components.BPTabs;
+import com.jackmeng.music.components.bottompane.BPTabs;
 
 import java.awt.*;
 import java.util.Map;
