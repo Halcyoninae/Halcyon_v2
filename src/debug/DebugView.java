@@ -2,21 +2,21 @@ package debug;
 
 import javax.swing.*;
 
-import project.Manager;
-import project.components.BPTabs;
+import mp4j.Manager;
+import mp4j.components.BPTabs;
 
 import java.awt.*;
 
 /**
  * This class is kind of like a plugin to the main program
- * as it functions as a new tab in the {@link project.components.BottomPane}
+ * as it functions as a new tab in the {@link mp4j.components.BottomPane}
  * class.
  * 
  * It displays helpful debug information regarding the running program.
  * 
  * @author Jack Meng
  * @since 3.0
- * @see project.components.BottomPane
+ * @see mp4j.components.BottomPane
  */
 public class DebugView extends JScrollPane implements BPTabs {
   private JEditorPane text;

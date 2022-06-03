@@ -1,6 +1,6 @@
 package debug;
 
-import project.utils.TimeParser;
+import mp4j.utils.TimeParser;
 
 /**
  * This is an external class that is called upon for when the
