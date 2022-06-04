@@ -33,7 +33,7 @@ public class FileAttributesView extends JScrollPane implements BPTabs {
       while (true) {
         editor.setText(getFileViewHash());
         try {
-          Thread.sleep(500);
+          Thread.sleep(800);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class FileAttributesView extends JScrollPane implements BPTabs {
     Map<String, Pair<String, String[]>> files = Global.f.getFolders();
 
     for (String key : files.keySet()) {
-      sb.append(key + "=" + files.get(key).getFirst() + "<br>");
+      sb.append("<b>"+key + "</b>=" + files.get(key).getFirst() + "<br>");
     }
     sb.append("</p></html>");
     return sb.toString();

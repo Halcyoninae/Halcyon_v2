@@ -2,10 +2,13 @@ package com.jackmeng.music.components.bbloc.buttons;
 
 import javax.swing.*;
 
+import com.jackmeng.debug.Debugger;
 import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
 import com.jackmeng.music.components.bbloc.BBlocButton;
+import com.jackmeng.music.components.dialog.ConfirmWindow;
 import com.jackmeng.music.components.dialog.SelectApplicableFolders;
+import com.jackmeng.music.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.music.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.music.utils.FileParser;
 
@@ -14,7 +17,11 @@ import java.io.File;
 
 public class AddFolder extends JButton implements BBlocButton {
   public AddFolder() {
-    super(Manager.ADDFOLDER_BUTTON_TEXT);
+    super(Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON));
+    setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
+    setOpaque(true);
+    setBackground(null);
+    setBorder(null);
     addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
@@ -22,8 +29,30 @@ public class AddFolder extends JButton implements BBlocButton {
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
           public void folderSelected(String folder) {
-            if (FileParser.isEmptyFolder(new File(folder))) {
-              Global.f.pokeFolder(folder);
+            if (Global.f.containsAbsolute(folder)) {
+              new ConfirmWindow(
+                  "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
+                  new ConfirmationListener() {
+                    @Override
+                    public void onStatus(boolean status) {
+                      if (status) {
+                        Global.f.pokeFolder(folder);
+                      }
+                    }
+                  }).run();
+            } else if (FileParser.isEmptyFolder(new File(folder))
+                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+
+              new ConfirmWindow(
+                  "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
+                  new ConfirmationListener() {
+                    @Override
+                    public void onStatus(boolean status) {
+                      if (status) {
+                        Global.f.pokeFolder(folder);
+                      }
+                    }
+                  }).run();
             } else {
               Global.f.pokeFolder(
                   folder,

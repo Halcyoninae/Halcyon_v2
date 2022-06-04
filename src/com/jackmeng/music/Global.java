@@ -1,5 +1,7 @@
 package com.jackmeng.music;
 
+import com.jackmeng.debug.DebugView;
+import com.jackmeng.music.components.bottompane.BPTabs;
 import com.jackmeng.music.components.bottompane.tabs.FileView;
 import com.jackmeng.music.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.music.components.toppane.layout.InfoViewTP;
@@ -11,4 +13,5 @@ public interface Global {
   public static final ResourceDistributor rd = new ResourceDistributor();
   public static ButtonControlTP bctp = new ButtonControlTP();
   public static InfoViewTP ifp = new InfoViewTP();
+  public static BPTabs debuggerTab = new DebugView();
 }

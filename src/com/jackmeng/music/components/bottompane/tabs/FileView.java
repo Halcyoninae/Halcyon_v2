@@ -21,7 +21,8 @@ import com.jackmeng.music.utils.FileParser;
  * for where the user will be able to interact with the selected files.
  * 
  * It is member belonging to the BottomPane tabs and thus implements
- * the interface {@link com.jackmeng.music.components.bottompane.BPTabs} in order to be a
+ * the interface {@link com.jackmeng.music.components.bottompane.BPTabs} in
+ * order to be a
  * qualified tab.
  * 
  * @author Jack Meng
@@ -100,6 +101,54 @@ public class FileView extends JScrollPane implements BPTabs {
    */
   public Map<String, Pair<String, String[]>> getFolders() {
     return folders;
+  }
+
+  /**
+   * Removes a relative foldername from the Map of folders.
+   * 
+   * This is used for deep searching in which only the relative
+   * folder name is provided instead of the ABSOLUTE Path.
+   * 
+   * @param folderName the relative foldername to be removed
+   */
+  public void remove(String folderName) {
+    for (String key : folders.keySet()) {
+      if (folders.get(key).first.equals(folderName)) {
+        folders.remove(key);
+        break;
+      }
+    }
+  }
+
+  /**
+   * For relative searching in which the absolute path is provided.
+   * 
+   * @param absolutePath the absolute path to be searched
+   * @return (true || false) based on the existence of the absolute folder name
+   */
+  public boolean containsAbsolute(String absolutePath) {
+    for (String key : folders.keySet()) {
+      if (key.equals(absolutePath)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * For deep searching in which only the file name is provided instead
+   * of the ABSOLUTE Path which is the Map's keys.
+   * 
+   * @param folderName This is found as Pair.first in the Map
+   * @return (true || false) based on the existence of the relative folder name
+   */
+  public boolean contains(String folderName) {
+    for (String key : folders.keySet()) {
+      if (folders.get(key).first.equals(folderName)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   /**

@@ -1,8 +1,13 @@
 package com.jackmeng.music.components.bbloc;
 
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import java.awt.event.*;
 
-public interface BBlocButton {
+public interface BBlocButton extends ActionListener {
   JComponent getComponent();
+
+  @Override
+  default void actionPerformed(ActionEvent e) {
+    // DO NOTHING
+  }
 }

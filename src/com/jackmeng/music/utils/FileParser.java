@@ -3,8 +3,6 @@ package com.jackmeng.music.utils;
 import java.io.*;
 import java.util.ArrayList;
 
-import com.jackmeng.debug.Debugger;
-
 public class FileParser {
   private FileParser() {
   }
@@ -23,6 +21,20 @@ public class FileParser {
     }
     
     return audioFiles.toArray(new File[audioFiles.size()]);
+  }
+
+  public static boolean contains(File folder, String[] rules) {
+    File[] files = folder.listFiles();
+    for (int i = 0; i < files.length; i++) {
+      if (files[i].isFile()) {
+        for (int j = 0; j < rules.length; j++) {
+          if (files[i].getAbsolutePath().endsWith("." + rules[j])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
   }
 
   public static String folderName(String f) {

@@ -36,13 +36,16 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void log(T... o) {
-    for (int i = 0; i < o.length; i++) {
-      if (o[i] != null) {
-        System.err.print(getLogText() + o[i].toString() + " ");
-      } else {
-        System.err.print(getLogText() + "NULL_CONTENT" + " ");
+    new Thread(() -> {
+      for (int i = 0; i < o.length; i++) {
+        if (o[i] != null) {
+          System.err.print(getLogText() + o[i].toString() + " ");
+        } else {
+          System.err.print(getLogText() + "NULL_CONTENT" + " ");
+        }
       }
-    }
-    System.err.println();
+      System.err.println();
+    }).start();
+
   }
 }

@@ -35,6 +35,7 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
     prompt = new JTextArea(content);
     prompt.setLineWrap(true);
+    prompt.setWrapStyleWord(true);
     prompt.setAlignmentY(Component.CENTER_ALIGNMENT);
     prompt.setEditable(false);
 
@@ -76,15 +77,5 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
   public void actionPerformed(ActionEvent e) {
     dispatchConfirmationEvents(e.getSource() == confirm);
     dispose();
-  }
-
-  public static void main(String... args) {
-    ConfirmWindow cw = new ConfirmWindow("Are you sure?", new ConfirmationListener() {
-      @Override
-      public void onStatus(boolean status) {
-        System.out.println(status);
-      }
-    });
-    cw.run();
   }
 }

@@ -6,6 +6,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import com.jackmeng.debug.Debugger;
+import com.jackmeng.music.Global;
 import com.jackmeng.music.components.dialog.ErrorWindow;
 import com.jackmeng.music.utils.FileParser;
 
@@ -13,7 +15,7 @@ public class FVRightClick extends MouseAdapter {
 
     public FVRightClick() {
     }
-
+    
     private void popup(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
@@ -48,6 +50,7 @@ public class FVRightClick extends MouseAdapter {
                 parent.remove(rcNode);
                 DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                 model.reload();
+                Global.f.remove(rcNode.toString());
             } catch (NullPointerException excec) {
                 new ErrorWindow("You are not permitted to delete the root node!").run();
             }

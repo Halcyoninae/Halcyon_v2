@@ -6,6 +6,7 @@ package com.jackmeng.music;
  * program.
  */
 public interface Manager {
+  public static final int BUTTON_STD_ICON_WIDTH_N_HEIGHT = 16;
 
   /// BIGCONTAINER Size Config START ///
   public static final int MIN_WIDTH = 500;
@@ -45,6 +46,8 @@ public interface Manager {
   public static final String FILEVIEW_ICON_FOLDER_CLOSED = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
   public static final String FILEVIEW_ICON_FILE = RSC_FOLDER_NAME + "/fileview/leaf.png";
   public static final String FILEVIEW_DEFAULT_FOLDER_ICON = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  
+  public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
   /// END RESOURCE LOCATION FOR ICONS
@@ -105,6 +108,8 @@ public interface Manager {
 
   /// BBLOC BUTTONS Config START
   public static final String ADDFOLDER_BUTTON_TEXT = "+";
+  public static final String ADDFOLDER_BUTTON_TOOLTIP = "Add a new folder to the playlist.";
 
+  public static final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";
   /// BBLOC BUTTONS Config END
 }
