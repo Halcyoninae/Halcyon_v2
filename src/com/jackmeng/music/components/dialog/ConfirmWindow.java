@@ -2,6 +2,7 @@ package com.jackmeng.music.components.dialog;
 
 import javax.swing.*;
 
+import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
 
 import java.awt.*;
@@ -20,6 +21,7 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
   public ConfirmWindow(String content, ConfirmationListener... listeners) {
     super(Manager.DIALOG_CONFIRM_WIN_TITLE);
+    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     this.listeners = listeners;
     setPreferredSize(new Dimension(Manager.DIALOG_CONFIRM_MIN_WIDTH, Manager.DIALOG_CONFIRM_MIN_HEIGHT));
     setLocationRelativeTo(null);

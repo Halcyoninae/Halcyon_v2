@@ -2,6 +2,7 @@ package com.jackmeng.music.components.dialog;
 
 import javax.swing.*;
 
+import com.jackmeng.music.Global;
 import com.jackmeng.music.Manager;
 
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.*;
 public class ErrorWindow extends JFrame implements Runnable {
   public ErrorWindow(String content) {
     super(Manager.DIALOG_ERROR_WIN_TITLE);
+    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     setPreferredSize(new Dimension(Manager.DIALOG_ERROR_MIN_WIDTH, Manager.DIALOG_ERROR_MIN_HEIGHT));
     setLocationRelativeTo(null);
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
