@@ -12,6 +12,7 @@ public class BBlocView extends JPanel {
     setPreferredSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
     setMinimumSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.B_MAX_WIDTH, Manager.B_MAX_HEIGHT));
+
   }
 
   public void addBBlockButtons(BBlocButton... buttons) {

@@ -48,6 +48,7 @@ public interface Manager {
   public static final String FILEVIEW_DEFAULT_FOLDER_ICON = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
   
   public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
+  public static final String SPOTIFY_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/spotify_green.png";
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
   /// END RESOURCE LOCATION FOR ICONS
@@ -111,5 +112,6 @@ public interface Manager {
   public static final String ADDFOLDER_BUTTON_TOOLTIP = "Add a new folder to the playlist.";
 
   public static final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";
+  public static final String SPOTIFYPAGE_BUTTON_TOOLTIP = "Visit Spotify Webplayer!";
   /// BBLOC BUTTONS Config END
 }

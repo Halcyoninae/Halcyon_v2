@@ -11,6 +11,7 @@ import com.jackmeng.music.components.bbloc.BBlocButton;
 import com.jackmeng.music.components.bbloc.BBlocView;
 import com.jackmeng.music.components.bbloc.buttons.AddFolder;
 import com.jackmeng.music.components.bbloc.buttons.ProjectPage;
+import com.jackmeng.music.components.bbloc.buttons.SpotifyPage;
 import com.jackmeng.music.components.bottompane.BPTabs;
 import com.jackmeng.music.components.bottompane.BottomPane;
 import com.jackmeng.music.components.bottompane.tabs.FileAttributesView;
@@ -50,6 +51,7 @@ public class Main {
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
     ArrayList<BBlocButton> bb = new ArrayList<>();
     bb.add(new AddFolder());
+    bb.add(new SpotifyPage());
     bb.add(new ProjectPage());
     BBlocView b = new BBlocView();
     b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
