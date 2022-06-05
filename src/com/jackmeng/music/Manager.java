@@ -50,6 +50,7 @@ public interface Manager {
   public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
   public static final String SPOTIFY_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/spotify_green.png";
   public static final String YOUTUBE_LOGO_RED = RSC_FOLDER_NAME + "/external/youtube_red.png";
+  public static final String SOUNDCLOUD_LOGO_ORANGE = RSC_FOLDER_NAME + "/external/soundcloud_orange.png";
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
   /// END RESOURCE LOCATION FOR ICONS
@@ -115,5 +116,6 @@ public interface Manager {
   public static final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";
   public static final String SPOTIFYPAGE_BUTTON_TOOLTIP = "Visit Spotify Webplayer!";
   public static final String YOUTUBEPAGE_BUTTON_TOOLTIP = "Visit YouTube!";
+  public static final String SOUNDCLOUD_BUTTON_TOOLTIP = "Visit SoundCloud!";
   /// BBLOC BUTTONS Config END
 }

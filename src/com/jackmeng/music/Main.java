@@ -12,9 +12,6 @@ import com.jackmeng.music.components.bbloc.BBlocButton;
 import com.jackmeng.music.components.bbloc.BBlocView;
 import com.jackmeng.music.components.bbloc.buttons.AddFolder;
 import com.jackmeng.music.components.bbloc.buttons.GenericWebsiteLinker;
-import com.jackmeng.music.components.bbloc.buttons.ProjectPage;
-import com.jackmeng.music.components.bbloc.buttons.SpotifyPage;
-import com.jackmeng.music.components.bbloc.buttons.YouTubePage;
 import com.jackmeng.music.components.bottompane.BPTabs;
 import com.jackmeng.music.components.bottompane.BottomPane;
 import com.jackmeng.music.components.bottompane.tabs.FileAttributesView;
@@ -54,9 +51,14 @@ public class Main {
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
     ArrayList<BBlocButton> bb = new ArrayList<>();
     bb.add(new AddFolder());
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.SPOTIFY_PAGE, Manager.SPOTIFYPAGE_BUTTON_TOOLTIP, Global.rd.getFromAsImageIcon(Manager.SPOTIFY_LOGO_LIGHT)));
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.YOUTUBE_PAGE, Manager.YOUTUBEPAGE_BUTTON_TOOLTIP, Global.rd.getFromAsImageIcon(Manager.YOUTUBE_LOGO_RED)));
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.PROJECT_GITHUB_PAGE, Manager.PROJECTPAGE_BUTTON_TOOLTIP, Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
+    bb.add(GenericWebsiteLinker.getButton(ProjectManager.SPOTIFY_PAGE, Manager.SPOTIFYPAGE_BUTTON_TOOLTIP,
+        Global.rd.getFromAsImageIcon(Manager.SPOTIFY_LOGO_LIGHT)));
+    bb.add(GenericWebsiteLinker.getButton(ProjectManager.YOUTUBE_PAGE, Manager.YOUTUBEPAGE_BUTTON_TOOLTIP,
+        Global.rd.getFromAsImageIcon(Manager.YOUTUBE_LOGO_RED)));
+    bb.add(GenericWebsiteLinker.getButton(ProjectManager.SOUNDCLOUD_PAGE, Manager.SOUNDCLOUD_BUTTON_TOOLTIP,
+        Global.rd.getFromAsImageIcon(Manager.SOUNDCLOUD_LOGO_ORANGE)));
+    bb.add(GenericWebsiteLinker.getButton(ProjectManager.PROJECT_GITHUB_PAGE, Manager.PROJECTPAGE_BUTTON_TOOLTIP,
+        Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
     BBlocView b = new BBlocView();
     b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
     ArrayList<BPTabs> tabs = new ArrayList<>();
