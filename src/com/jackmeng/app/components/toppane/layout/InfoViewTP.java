@@ -1,11 +1,9 @@
 package com.jackmeng.app.components.toppane.layout;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeSelectionModel;
 import javax.swing.tree.TreePath;
 
 import com.jackmeng.app.ColorManager;
@@ -16,7 +14,6 @@ import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
-import com.jackmeng.debug.Debugger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

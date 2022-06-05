@@ -5,11 +5,6 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatArcIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatHighContrastIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatArcDarkContrastIJTheme;
 import com.jackmeng.ProjectManager;
 import com.jackmeng.app.components.BigContainerTest;
 import com.jackmeng.app.components.bbloc.BBlocButton;
@@ -20,7 +15,6 @@ import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
 import com.jackmeng.app.components.toppane.TopPane;
-import com.jackmeng.debug.DebugView;
 
 public class Main {
   static {

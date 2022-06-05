@@ -1,6 +1,5 @@
 package com.jackmeng.app.events;
 
-import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 

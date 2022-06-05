@@ -5,14 +5,12 @@ import java.awt.event.*;
 
 public class ForceMaxSize implements ComponentListener {
   private int a = 0, b = 0, c = 0, d = 0;
-  private JFrame comp;
 
   public ForceMaxSize(JFrame c, int MAX_WIDTH, int MAX_HEIGHT, int MIN_WIDTH, int MIN_HEIGHT) {
     this.a = MAX_HEIGHT;
     this.b = MAX_WIDTH;
     this.c = MIN_HEIGHT;
     this.d = MIN_WIDTH;
-    this.comp = c;
   }
 
   @Override
