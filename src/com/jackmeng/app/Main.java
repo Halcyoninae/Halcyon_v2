@@ -22,6 +22,7 @@ public class Main {
     System.setProperty("file.encoding", "UTF-8");
     System.setProperty("sun.jnu.encoding", "UTF-8");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
+    System.setOut(null);
     UIManager.put("FileChooser.readOnly", true);
     try {
       UIManager.setLookAndFeel(FlatArcDarkIJTheme.class.getName());

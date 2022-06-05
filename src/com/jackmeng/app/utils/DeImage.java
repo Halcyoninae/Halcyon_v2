@@ -95,8 +95,8 @@ public class DeImage {
     g.setColor(color);
     g.setStroke(new BasicStroke(thickness));
     g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-    g.draw(new RoundRectangle2D.Float(0, 0, r.getWidth() , r.getHeight() , arcV, arcH));
-    g.drawImage(r, 0, 0, r.getWidth() - thickness, r.getHeight() - thickness, null);
+    g.draw(new RoundRectangle2D.Float(0, 0, r.getWidth(), r.getHeight(), arcV, arcH));
+    g.drawImage(r, 0, 0, null);
     g.dispose();
     return rounded;
   }

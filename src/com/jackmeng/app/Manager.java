@@ -83,6 +83,13 @@ public interface Manager {
 
   public static final int INFOVIEW_MAX_WIDTH = MAX_WIDTH;
   public static final int INFOVIEW_MAX_HEIGHT = MAX_HEIGHT / 4;
+
+  public static final int INFOVIEW_INFODISPLAY_MAX_CHARS = 25;
+
+  public static final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 96;
+
+  public static final int INFOVIEW_FLOWLAYOUT_HGAP = 30;
+  public static final int INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN = 6;
   /// InfoView Config END
 
   /// DIALOG_ERROR Config START
