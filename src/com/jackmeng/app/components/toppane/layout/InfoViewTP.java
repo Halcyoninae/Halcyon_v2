@@ -8,12 +8,14 @@ import javax.swing.tree.TreePath;
 
 import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Global;
+import com.jackmeng.app.Main;
 import com.jackmeng.app.Manager;
 import com.jackmeng.app.StringManager;
 import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.debug.Debugger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,7 +44,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     infoDisplay = new JLabel(infoToString(info));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setBounds(0, 0, getPreferredSize().width, getPreferredSize().height);
+    infoDisplay.setBounds(0, 0, getPreferredSize().width - 20, getPreferredSize().height);
     infoDisplay.setToolTipText(infoToString(info));
     BufferedImage bi = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
@@ -62,6 +64,13 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       info = new AudioInfo(f);
       infoDisplay.setText(infoToString(info));
       infoDisplay.setToolTipText(infoToString(info));
+      if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width - artWork.getPreferredSize().width
+          - Manager.INFOVIEW_FLOWLAYOUT_HGAP * 2)) {
+        if(Main.bgt != null) {
+          Main.bgt.getFrame().setSize(new Dimension(Manager.MAX_WIDTH, Main.bgt.getFrame().getMinimumSize().height));
+        }
+      }
+
       if (info.getArtwork() != null) {
         BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
         artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 2, ColorManager.BORDER_THEME)));
@@ -72,6 +81,8 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
             Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 3, ColorManager.BORDER_THEME)));
       }
+      infoDisplay.revalidate();
+      revalidate();
       dispatchEvents();
     }
   }

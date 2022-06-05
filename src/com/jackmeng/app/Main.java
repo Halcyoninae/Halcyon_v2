@@ -30,6 +30,8 @@ public class Main {
     }
   }
 
+  public static BigContainerTest bgt;
+
   public static void main(String... args) {
 
     /*
@@ -71,7 +73,7 @@ public class Main {
     bottom.add(bp);
 
     JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-
-    new BigContainerTest(m).run();
+    bgt = new BigContainerTest(m);
+    bgt.run();
   }
 }

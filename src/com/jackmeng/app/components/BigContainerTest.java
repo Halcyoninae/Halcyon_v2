@@ -15,7 +15,7 @@ public class BigContainerTest implements Runnable {
   public BigContainerTest(JSplitPane mainPane) {
     this.mainPane = mainPane;
     this.mainPane.setBorder(BorderFactory.createEmptyBorder());
-    bigContainer = new JFrame("UwUxijinping ~ MP4J");
+    bigContainer = new JFrame("UwUxijinping ~ exoad");
     bigContainer.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     bigContainer.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     bigContainer.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
@@ -23,6 +23,10 @@ public class BigContainerTest implements Runnable {
     bigContainer.addComponentListener(
         new ForceMaxSize(bigContainer, Manager.MAX_WIDTH, Manager.MAX_HEIGHT, Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     bigContainer.getContentPane().add(mainPane);
+  }
+
+  public JFrame getFrame() {
+    return bigContainer;
   }
 
   @Override
