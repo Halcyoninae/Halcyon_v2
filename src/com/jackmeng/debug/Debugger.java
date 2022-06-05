@@ -1,6 +1,6 @@
 package com.jackmeng.debug;
 
-import com.jackmeng.music.utils.TimeParser;
+import com.jackmeng.app.utils.TimeParser;
 
 /**
  * This is an external class that is called upon for when the
