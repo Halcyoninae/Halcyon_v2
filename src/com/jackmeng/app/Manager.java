@@ -11,8 +11,8 @@ public interface Manager {
   public static final int BUTTON_STD_ICON_WIDTH_N_HEIGHT = 16;
 
   /// BIGCONTAINER Size Config START ///
-  public static final int MIN_WIDTH = 500;
-  public static final int MIN_HEIGHT = 600;
+  public static final int MIN_WIDTH = 480;
+  public static final int MIN_HEIGHT = 540;
 
   public static final int MAX_WIDTH = MIN_HEIGHT + 40;
   public static final int MAX_HEIGHT = MIN_HEIGHT + 40;
@@ -55,6 +55,14 @@ public interface Manager {
   public static final String SOUNDCLOUD_LOGO_ORANGE = RSC_FOLDER_NAME + "/external/soundcloud_orange.png";
 
   public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.png";
+  public static final String BUTTONCTRL_PLAY_PAUSE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
+  public static final String BUTTONCTRL_FWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
+  public static final String BUTTONCTRL_BWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
+  public static final String BUTTONCTRL_LOOP_ICON = RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
+  public static final String BUTTONCTRL_SHUFFLE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
+  public static final String BUTTONCTRL_MUTED_ICON = RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
+  public static final String BUTTONCTRL_LIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
+  public static final String BUTTONCTRL_NOLIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
 
   public static final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON);
 

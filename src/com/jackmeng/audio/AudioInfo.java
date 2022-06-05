@@ -71,7 +71,7 @@ public class AudioInfo {
     tags = new HashMap<String, String>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
     tags.put(KEY_FILE_NAME, "Nothing.mp3");
-    tags.put(KEY_MEDIA_DURATION, "0:00");
+    tags.put(KEY_MEDIA_DURATION, "0");
     tags.put(KEY_MEDIA_TITLE, "Nothing");
     tags.put(KEY_BITRATE, "0kpbs");
     tags.put(KEY_SAMPLE_RATE, "0.0khz");
