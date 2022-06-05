@@ -6,16 +6,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import com.jackmeng.debug.Debugger;
 import com.jackmeng.music.Global;
 import com.jackmeng.music.components.dialog.ErrorWindow;
-import com.jackmeng.music.utils.FileParser;
 
 public class FVRightClick extends MouseAdapter {
 
     public FVRightClick() {
     }
-    
+
     private void popup(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
