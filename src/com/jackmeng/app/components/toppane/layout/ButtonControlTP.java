@@ -88,7 +88,7 @@ public class ButtonControlTP extends JPanel {
         progressBar.setBorder(null);
         progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        progressSlider = new JSlider(0, 100);
+        progressSlider = new JSlider(0, 200);
         progressSlider.setValue(0);
         progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
         progressSlider.setBorder(null);
