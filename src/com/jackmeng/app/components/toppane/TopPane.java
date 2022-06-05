@@ -18,4 +18,11 @@ public class TopPane extends JPanel {
     add(ifp, BorderLayout.PAGE_START);
     add(bctp, BorderLayout.PAGE_END);
   }
+
+  @Override
+  public void paintComponent(Graphics g) {
+    Graphics2D g2 = (Graphics2D) g;
+    super.paintComponent(g2);
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+  }
 }

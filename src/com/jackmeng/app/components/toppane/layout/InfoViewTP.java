@@ -17,14 +17,21 @@ import com.jackmeng.audio.AudioInfo;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.*;
 
 public class InfoViewTP extends JPanel implements TreeSelectionListener {
+  public static interface InfoViewUpdateListener {
+    void infoView(AudioInfo info);
+  }
+
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
+  private ArrayList<InfoViewUpdateListener> listeners;
 
   public InfoViewTP() {
     super();
+    listeners = new ArrayList<InfoViewUpdateListener>();
     setPreferredSize(new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
@@ -38,7 +45,8 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     infoDisplay.setBounds(0, 0, getPreferredSize().width, getPreferredSize().height);
     infoDisplay.setToolTipText(infoToString(info));
     BufferedImage bi = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-    bi = DeImage.resize(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+    bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
     artWork = new JLabel(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 3, ColorManager.BORDER_THEME)));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,16 +63,30 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       infoDisplay.setText(infoToString(info));
       infoDisplay.setToolTipText(infoToString(info));
       if (info.getArtwork() != null) {
-        BufferedImage bi = DeImage.resize(info.getArtwork(), 96, 96);
+        BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
         artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 2, ColorManager.BORDER_THEME)));
       } else {
         BufferedImage bi = DeImage
             .imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-        bi = DeImage.resize(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+        bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+            Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 3, ColorManager.BORDER_THEME)));
       }
-
+      dispatchEvents();
     }
+  }
+
+  private void dispatchEvents() {
+    new Thread(() -> {
+      for (InfoViewUpdateListener l : listeners) {
+        l.infoView(info);
+      }
+    }).start();
+
+  }
+
+  public void addInfoViewUpdateListener(InfoViewUpdateListener l) {
+    listeners.add(l);
   }
 
   private static String infoToString(AudioInfo info) {

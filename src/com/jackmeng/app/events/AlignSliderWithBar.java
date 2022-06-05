@@ -16,7 +16,7 @@ public class AlignSliderWithBar implements ChangeListener {
 
   @Override
   public void stateChanged(ChangeEvent e) {
-    progressBar.setValue(slider.getValue() / (slider.getMaximum() / 100));
+    progressBar.setValue(slider.getValue());
   }
   
 }

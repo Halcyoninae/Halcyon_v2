@@ -6,15 +6,18 @@ import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Global;
 import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.LikeButton;
+import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.events.AlignSliderWithBar;
 import com.jackmeng.app.utils.DeImage;
+import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.debug.Debugger;
 
 import java.awt.*;
 
-public class ButtonControlTP extends JPanel {
+public class ButtonControlTP extends JPanel implements InfoViewUpdateListener {
         private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
-        private LikeButton likeButton, mutedButton;
-        private JSlider progressSlider;
+        private LikeButton likeButton;
+        private JSlider progressSlider, volumeSlider;
         private JProgressBar progressBar;
         private JPanel sliders, buttons;
 
@@ -33,7 +36,7 @@ public class ButtonControlTP extends JPanel {
                                 new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
                 buttons.setMaximumSize(
                                 new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT / 2));
-                buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 20, getPreferredSize().height / 6));
+                buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 15, getPreferredSize().height / 6));
 
                 playButton = new JButton(
                                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_PLAY_PAUSE_ICON),
@@ -63,13 +66,10 @@ public class ButtonControlTP extends JPanel {
                 shuffleButton.setBackground(null);
                 shuffleButton.setBorder(null);
 
-                mutedButton = new LikeButton(
-                                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_NOMUTED_ICON), 24,
-                                                24),
-                                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_MUTED_ICON), 24,
-                                                24));
-                mutedButton.setBackground(null);
-                mutedButton.setBorder(null);
+                volumeSlider = new JSlider(0, 100);
+                volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
+                volumeSlider.setBorder(null);
+                volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
 
                 likeButton = new LikeButton(
                                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_NOLIKE_ICON), 24,
@@ -79,7 +79,7 @@ public class ButtonControlTP extends JPanel {
                 likeButton.setBackground(null);
                 likeButton.setBorder(null);
 
-                buttons.add(mutedButton);
+                buttons.add(volumeSlider);
                 buttons.add(shuffleButton);
                 buttons.add(previousButton);
                 buttons.add(playButton);
@@ -98,11 +98,14 @@ public class ButtonControlTP extends JPanel {
 
                 progressBar = new JProgressBar(0, 100);
                 progressBar.setStringPainted(true);
+                progressBar.setString("Waiting for music...");
+                progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
+                progressBar.setIndeterminate(true);
                 progressBar.setForeground(ColorManager.MAIN_FG_THEME);
                 progressBar.setBorder(null);
                 progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                progressSlider = new JSlider(0, 200);
+                progressSlider = new JSlider(0, 100);
                 progressSlider.setValue(0);
                 progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
                 progressSlider.setBorder(null);
@@ -110,9 +113,16 @@ public class ButtonControlTP extends JPanel {
                 progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
 
                 sliders.add(progressSlider);
+                sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
                 sliders.add(progressBar);
 
                 add(buttons);
                 add(sliders);
+        }
+
+        @Override
+        public void infoView(AudioInfo info) {
+                Debugger.log("bruh");
+                progressBar.setIndeterminate(false);  
         }
 }

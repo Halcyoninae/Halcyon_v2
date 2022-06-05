@@ -82,6 +82,18 @@ public class DeImage {
     }
   }
 
+  public static BufferedImage resizeNoDistort(BufferedImage img, int newW, int newH) {
+    int w = img.getWidth();
+    int h = img.getHeight();
+    BufferedImage dimg = null;
+    if (w > h) {
+      dimg = img.getSubimage(w / 2 - h / 2, 0, h, h);
+    } else {
+      dimg = img.getSubimage(0, h / 2 - w / 2, w, w);
+    }
+    return resize(dimg, newW, newH);
+  }
+
   /**
    * Generates a rounded image with borders
    * 

@@ -44,7 +44,7 @@ public class Main {
      * one.setBackground(Color.WHITE);
      */
     TopPane tp = new TopPane(Global.ifp, Global.bctp);
-
+    Global.ifp.addInfoViewUpdateListener(Global.bctp);
     JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
     bottom.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
     bottom.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));

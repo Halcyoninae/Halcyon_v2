@@ -1,3 +1,9 @@
+[***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
+      Detailed Description: Literally the title
+      Potential Fix: Better way to count String length if dealing with UTF-8 or UTF-16 charsets
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #2 "Folders that have been deleted should also be removed from the attributes view"
       Detailed Description: Folders should not be kept for ever in the attributes view once
                             they have been marked for deletion by the user.
