@@ -59,8 +59,26 @@ public class AudioInfo {
     initTags();
   }
 
+  public AudioInfo() {
+    defInitTags();
+  }
+
   private boolean checkEmptiness(String s) {
     return s == null || s.isEmpty();
+  }
+
+  private void defInitTags() {
+    tags = new HashMap<String, String>();
+    tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
+    tags.put(KEY_FILE_NAME, "Nothing.mp3");
+    tags.put(KEY_MEDIA_DURATION, "0:00");
+    tags.put(KEY_MEDIA_TITLE, "Nothing");
+    tags.put(KEY_BITRATE, "0kpbs");
+    tags.put(KEY_SAMPLE_RATE, "0.0khz");
+    tags.put(KEY_ALBUM, "");
+    tags.put(KEY_GENRE, "");
+    tags.put(KEY_MEDIA_ARTIST, "No-one");
+    tags.put(KEY_ARTWORK, "");
   }
 
   private void initTags() {
@@ -106,5 +124,4 @@ public class AudioInfo {
   public String getTag(String key) {
     return tags.get(key);
   }
-
 }

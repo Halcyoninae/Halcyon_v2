@@ -65,6 +65,7 @@ public class Main {
     tabs.add(Global.f);
     tabs.add(Global.debuggerTab);
     tabs.add(new FileAttributesView());
+    Global.f.getTree().addTreeSelectionListener(Global.ifp);
     BottomPane bp = new BottomPane(tabs);
     bottom.add(b);
     bottom.add(bp);

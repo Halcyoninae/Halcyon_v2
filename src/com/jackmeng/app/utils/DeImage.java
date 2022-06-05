@@ -11,9 +11,13 @@ import java.awt.Graphics2D;
 import java.awt.*;
 import javax.imageio.*;
 
+import java.awt.geom.RoundRectangle2D;
+
 /**
  * This is a class that modifies images that are fed to it.
  * It is primarily used to handle resources that are in image form.
+ * 
+ * This is a general utility class and is licensed under GPL-3.0.
  * 
  * @author Jack Meng
  * @since 2.0
@@ -78,8 +82,38 @@ public class DeImage {
     }
   }
 
+  /**
+   * Generates a rounded image with borders
+   * 
+   * @param r         The image to be rounded
+   * @param thickness The thickness of the border
+   * @return BufferedImage The rounded image
+   */
+  public static BufferedImage createRoundedBorder(BufferedImage r, int arcH, int arcV, int thickness, Color color) {
+    BufferedImage rounded = new BufferedImage(r.getWidth(), r.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = rounded.createGraphics();
+    g.setColor(color);
+    g.setStroke(new BasicStroke(thickness));
+    g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+    g.draw(new RoundRectangle2D.Float(0, 0, r.getWidth() , r.getHeight() , arcV, arcH));
+    g.drawImage(r, 0, 0, r.getWidth() - thickness, r.getHeight() - thickness, null);
+    g.dispose();
+    return rounded;
+  }
+
   public static BufferedImage imageIconToBI(ImageIcon icon) {
     return imagetoBI(icon.getImage());
+  }
+
+  public static BufferedImage resize(BufferedImage img, int newW, int newH) {
+    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
+
+    Graphics2D g2d = dimg.createGraphics();
+    g2d.drawImage(tmp, 0, 0, null);
+    g2d.dispose();
+
+    return dimg;
   }
 
   /**

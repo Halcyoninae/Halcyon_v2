@@ -11,6 +11,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import com.jackmeng.app.Global;
 import com.jackmeng.app.Manager;
+import com.jackmeng.app.StringManager;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FileParser;
@@ -57,7 +58,7 @@ public class FileView extends JScrollPane implements BPTabs {
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
-    root = new DefaultMutableTreeNode("Your Playlist(s)");
+    root = new DefaultMutableTreeNode(StringManager.JTREE_ROOT_NAME);
     files = new JTree(root);
     files.setRootVisible(true);
     files.setShowsRootHandles(true);
@@ -104,6 +105,22 @@ public class FileView extends JScrollPane implements BPTabs {
   }
 
   /**
+   * Returns the root node of the tree.
+   * @return the root node of the tree
+   */
+  public DefaultMutableTreeNode getRoot() {
+    return root;
+  }
+
+  /**
+   * Returns the tree.
+   * @return The JTree
+   */
+  public JTree getTree() {
+    return files;
+  }
+
+  /**
    * Removes a relative foldername from the Map of folders.
    * 
    * This is used for deep searching in which only the relative
@@ -133,6 +150,21 @@ public class FileView extends JScrollPane implements BPTabs {
       }
     }
     return false;
+  }
+
+  /**
+   * For relative searching in which the relative path is provided.
+   * 
+   * @param relativePath the relative path to be searched
+   * @return The key in which the relative path is associated
+   */
+  public String findKey(String folderName) {
+    for (String key : folders.keySet()) {
+      if (folders.get(key).first.equals(folderName)) {
+        return key;
+      }
+    }
+    return null;
   }
 
   /**

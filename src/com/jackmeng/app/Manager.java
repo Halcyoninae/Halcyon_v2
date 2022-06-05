@@ -1,5 +1,7 @@
 package com.jackmeng.app;
 
+import javax.swing.ImageIcon;
+
 /**
  * A global scope project manager that contains
  * constants to most used objects and values throughout the
@@ -51,6 +53,10 @@ public interface Manager {
   public static final String SPOTIFY_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/spotify_green.png";
   public static final String YOUTUBE_LOGO_RED = RSC_FOLDER_NAME + "/external/youtube_red.png";
   public static final String SOUNDCLOUD_LOGO_ORANGE = RSC_FOLDER_NAME + "/external/soundcloud_orange.png";
+
+  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.png";
+
+  public static final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON);
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
   /// END RESOURCE LOCATION FOR ICONS

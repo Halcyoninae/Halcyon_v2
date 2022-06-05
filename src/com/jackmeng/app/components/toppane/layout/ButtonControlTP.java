@@ -12,6 +12,6 @@ public class ButtonControlTP extends JPanel {
     setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
-    setBorder(BorderFactory.createLineBorder(Color.WHITE));
+    setOpaque(false);
   }
 }
