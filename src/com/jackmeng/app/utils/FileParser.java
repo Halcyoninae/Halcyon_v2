@@ -19,7 +19,6 @@ public class FileParser {
         }
       }
     }
-    
     return audioFiles.toArray(new File[audioFiles.size()]);
   }
 

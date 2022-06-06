@@ -65,6 +65,8 @@ public interface Manager {
   public static final String BUTTONCTRL_LIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
   public static final String BUTTONCTRL_NOLIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
 
+  public static final String BBLOC_REFRESH_FILEVIEW_ICON = RSC_FOLDER_NAME + "/bbloc/refresh_icon.png";
+
   public static final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON);
 
   public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo.png";
@@ -139,5 +141,7 @@ public interface Manager {
   public static final String SPOTIFYPAGE_BUTTON_TOOLTIP = "Visit Spotify Webplayer!";
   public static final String YOUTUBEPAGE_BUTTON_TOOLTIP = "Visit YouTube!";
   public static final String SOUNDCLOUD_BUTTON_TOOLTIP = "Visit SoundCloud!";
+
+  public static final String REFRESH_BUTTON_TOOLTIP = "Refresh the playlist.";
   /// BBLOC BUTTONS Config END
 }

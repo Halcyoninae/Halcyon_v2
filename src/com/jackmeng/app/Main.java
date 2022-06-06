@@ -11,6 +11,7 @@ import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.bbloc.BBlocView;
 import com.jackmeng.app.components.bbloc.buttons.AddFolder;
 import com.jackmeng.app.components.bbloc.buttons.GenericWebsiteLinker;
+import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
@@ -53,6 +54,7 @@ public class Main {
     bottom.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
     ArrayList<BBlocButton> bb = new ArrayList<>();
     bb.add(new AddFolder());
+    bb.add(new RefreshFileView());
     bb.add(GenericWebsiteLinker.getButton(ProjectManager.SPOTIFY_PAGE, Manager.SPOTIFYPAGE_BUTTON_TOOLTIP,
         Global.rd.getFromAsImageIcon(Manager.SPOTIFY_LOGO_LIGHT)));
     bb.add(GenericWebsiteLinker.getButton(ProjectManager.YOUTUBE_PAGE, Manager.YOUTUBEPAGE_BUTTON_TOOLTIP,

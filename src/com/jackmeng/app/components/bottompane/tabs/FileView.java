@@ -4,17 +4,23 @@ import java.util.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import com.jackmeng.ProjectManager;
 import com.jackmeng.app.Global;
 import com.jackmeng.app.Manager;
 import com.jackmeng.app.StringManager;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FileParser;
+import com.jackmeng.debug.Debugger;
 import com.jackmeng.global.Pair;
 
 /**
@@ -106,6 +112,7 @@ public class FileView extends JScrollPane implements BPTabs {
 
   /**
    * Returns the root node of the tree.
+   * 
    * @return the root node of the tree
    */
   public DefaultMutableTreeNode getRoot() {
@@ -114,6 +121,7 @@ public class FileView extends JScrollPane implements BPTabs {
 
   /**
    * Returns the tree.
+   * 
    * @return The JTree
    */
   public JTree getTree() {
@@ -133,6 +141,31 @@ public class FileView extends JScrollPane implements BPTabs {
       if (folders.get(key).first.equals(folderName)) {
         folders.remove(key);
         break;
+      }
+    }
+  }
+
+  /**
+   * This method will be called and will update the FileView
+   * if there are any new files or folders. made:
+   * 1. If a folder does not exist anymore (either name or existence) it will be
+   * removed
+   * 2. If a file does not exist or is under a different name it will be removed
+   * and re-added to the tree under it's new alias
+   * 3. If a new file is under a directory it will be inserted into the correct
+   * parent node.
+   */
+  public void revalidateFiles() {
+    Debugger.log(folders);
+    for (String key : folders.keySet()) {
+      if (new File(key).exists() || new File(key).isDirectory()) {
+        Pair<String, String[]> flder = folders.get(key);
+        for (String str : flder.second) {
+          File f = new File(key + ProjectManager.FILE_SLASH + str);
+        }
+      } else {
+        DefaultTreeModel model = (DefaultTreeModel) files.getModel();
+        model.
       }
     }
   }

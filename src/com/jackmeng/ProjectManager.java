@@ -5,4 +5,6 @@ public interface ProjectManager {
   public static final String SPOTIFY_PAGE = "https://open.spotify.com/";
   public static final String YOUTUBE_PAGE = "https://www.youtube.com/";
   public static final String SOUNDCLOUD_PAGE = "https://soundcloud.com/";
+
+  public static final String FILE_SLASH = System.getProperty("file.separator");
 }
