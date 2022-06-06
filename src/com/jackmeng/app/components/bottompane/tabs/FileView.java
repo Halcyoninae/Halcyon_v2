@@ -22,6 +22,7 @@ import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FileParser;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.global.Pair;
+import com.jackmeng.global.Trio;
 
 /**
  * Represents the default PlayList view or FileView
@@ -37,7 +38,7 @@ import com.jackmeng.global.Pair;
  * @see com.jackmeng.app.components.bottompane.BottomPane
  * @see com.jackmeng.app.components.bottompane.BPTabs
  */
-public class FileView extends JScrollPane implements BPTabs {
+public final class FileView extends JScrollPane implements BPTabs {
   private JTree files;
   /**
    * The map's first parameter is of type String which represents the folder's
@@ -50,6 +51,29 @@ public class FileView extends JScrollPane implements BPTabs {
    * @since 3.0
    */
   private transient Map<String, Pair<String, String[]>> folders = new HashMap<>();
+
+  /**
+   * The map's first parameter is of type String {@see java.lang.String} which
+   * represents the folder's
+   * ABSOLUTE PATH
+   * 
+   * The map's second parameter is of type Trio<Node, Node, Pair<String,
+   * String[]>> which
+   * represents
+   * <li>
+   * <ul>
+   * 1. The Node that is attributed to this folder
+   * </ul>
+   * <ul>
+   * 2. The individual folder's correlated nodes
+   * </ul>
+   * <ul>
+   * 3. The third a pair containing first: the folder's NAME (stripped) and
+   * second: its files
+   * </ul>
+   * </li>
+   */
+  private transient Map<String, Trio<DefaultMutableTreeNode, DefaultMutableTreeNode[], Pair<String, String[]>>> folderNodes = new HashMap<>();
   private DefaultMutableTreeNode root;
 
   /**
@@ -162,10 +186,24 @@ public class FileView extends JScrollPane implements BPTabs {
         Pair<String, String[]> flder = folders.get(key);
         for (String str : flder.second) {
           File f = new File(key + ProjectManager.FILE_SLASH + str);
+          if (!f.exists() || !f.isFile()) {
+            searchAbleLoop: for (DefaultMutableTreeNode node : folderNodes.get(key).second) {
+              if (node.getUserObject().equals(str)) {
+                DefaultTreeModel model = (DefaultTreeModel) files.getModel();
+                model.removeNodeFromParent(node);
+                model.reload();
+                break searchAbleLoop;
+              }
+            }
+          }
         }
       } else {
+        DefaultMutableTreeNode newNode = folderNodes.get(key).first;
         DefaultTreeModel model = (DefaultTreeModel) files.getModel();
-        model.
+        model.removeNodeFromParent(newNode);
+        model.reload();
+        folderNodes.remove(key);
+        folders.remove(key);
       }
     }
   }
@@ -228,6 +266,8 @@ public class FileView extends JScrollPane implements BPTabs {
     folders.put(folder, new Pair<>(FileParser.folderName(folder), new String[] {}));
     DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(FileParser.folderName(folder));
     root.add(newNode);
+    folderNodes.put(folder, new Trio<>(newNode, new DefaultMutableTreeNode[] {},
+        new Pair<>(FileParser.folderName(folder), new String[] {})));
     DefaultTreeModel model = (DefaultTreeModel) files.getModel();
     model.reload();
   }
@@ -245,9 +285,15 @@ public class FileView extends JScrollPane implements BPTabs {
     folders.put(folder, new Pair<>(FileParser.folderName(folder), files));
     DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(FileParser.folderName(folder));
     root.add(newNode);
+    DefaultMutableTreeNode[] e = new DefaultMutableTreeNode[files.length];
+    int i = 0;
     for (String filet : files) {
-      newNode.add(new DefaultMutableTreeNode(filet));
+      DefaultMutableTreeNode ex = new DefaultMutableTreeNode(filet);
+      newNode.add(ex);
+      e[i] = ex;
+      i++;
     }
+    folderNodes.put(folder, new Trio<>(newNode, e, new Pair<>(FileParser.folderName(folder), files)));
     DefaultTreeModel model = (DefaultTreeModel) this.files.getModel();
     model.reload();
   }
