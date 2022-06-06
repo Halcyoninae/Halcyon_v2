@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.jackmeng.ProjectManager;
 import com.jackmeng.app.components.BigContainerTest;
 import com.jackmeng.app.components.bbloc.BBlocButton;
@@ -18,23 +17,10 @@ import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
 import com.jackmeng.app.components.toppane.TopPane;
 
 public class Main {
-  static {
-    System.setProperty("file.encoding", "UTF-8");
-    System.setProperty("sun.jnu.encoding", "UTF-8");
-    System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
-    System.setOut(null);
-    UIManager.put("FileChooser.readOnly", true);
-    try {
-      UIManager.setLookAndFeel(FlatArcDarkIJTheme.class.getName());
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
-
   public static BigContainerTest bgt;
 
   public static void main(String... args) {
-
+    new ThreadedScheduler();
     /*
      * STUB PANEL:
      * JPanel one = new JPanel();
