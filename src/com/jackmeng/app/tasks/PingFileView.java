@@ -1,12 +1,17 @@
 package com.jackmeng.app.tasks;
 
+import java.util.Map;
+
 import com.jackmeng.app.components.bottompane.tabs.FileView;
+import com.jackmeng.global.Pair;
 
 public final class PingFileView implements Runnable {
   private FileView fv;
+  private Map<String, Pair<String, String[]>> lastMap;
 
   public PingFileView(FileView fv) {
     this.fv = fv;
+    lastMap = fv.getFolders();
   }
 
   @Override
@@ -17,7 +22,11 @@ public final class PingFileView implements Runnable {
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      fv.revalidateFiles();
+      if (FileView.compareTreeFolders(fv.getFolders(), lastMap)) {
+        fv.revalidateFiles();
+      }
+
+      lastMap = fv.getFolders();
     }
   }
 

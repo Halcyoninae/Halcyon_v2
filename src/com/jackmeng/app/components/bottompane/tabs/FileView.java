@@ -170,6 +170,41 @@ public final class FileView extends JScrollPane implements BPTabs {
   }
 
   /**
+   * Takes two maps and check if they are different or not
+   * 
+   * @param first
+   * @param second
+   * @return
+   */
+  public static boolean compareTreeFolders(Map<String, Pair<String, String[]>> first,
+      Map<String, Pair<String, String[]>> second) {
+    if (first.size() != second.size()) {
+      return true;
+    }
+
+    for (String key : first.keySet()) {
+      if (!second.containsKey(key)) {
+        return true;
+      }
+    }
+
+    for (String key : second.keySet()) {
+      if (!first.containsKey(key)) {
+        return true;
+      }
+    }
+
+    for (String key : first.keySet()) {
+      if (!first.get(key).equals(second.get(key))) {
+        return true;
+      }
+    }
+
+    return false;
+
+  }
+
+  /**
    * This method will be called and will update the FileView
    * if there are any new files or folders. made:
    * 1. If a folder does not exist anymore (either name or existence) it will be
