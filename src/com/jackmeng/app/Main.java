@@ -15,6 +15,7 @@ import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
 import com.jackmeng.app.components.toppane.TopPane;
+import com.jackmeng.app.connections.discord.Discordo;
 
 public class Main {
   public static BigContainerTest bgt;
@@ -63,5 +64,7 @@ public class Main {
     JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
     bgt = new BigContainerTest(m);
     bgt.run();
+
+    Global.ifp.addInfoViewUpdateListener(new Discordo());
   }
 }

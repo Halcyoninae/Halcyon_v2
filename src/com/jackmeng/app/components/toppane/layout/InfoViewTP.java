@@ -44,7 +44,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     infoDisplay = new JLabel(infoToString(info));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setBounds(0, 0, getPreferredSize().width - 20, getPreferredSize().height);
     infoDisplay.setToolTipText(infoToString(info));
     BufferedImage bi = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
@@ -102,7 +101,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   private static String infoToString(AudioInfo info) {
     return "<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: "
-        + ColorManager.MAIN_FG_STR + ";font-size: 13px;\"><strong>"
+        + ColorManager.MAIN_FG_STR + ";font-size: 12px;\"><strong>"
         + TextParser.strip(info.getTag(AudioInfo.KEY_MEDIA_TITLE), Manager.INFOVIEW_INFODISPLAY_MAX_CHARS)
         + "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
         + info.getTag(AudioInfo.KEY_MEDIA_ARTIST)
