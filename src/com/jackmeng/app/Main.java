@@ -14,6 +14,7 @@ import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
+import com.jackmeng.app.components.bottompane.tabs.SettingsView;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.discord.Discordo;
 
@@ -54,6 +55,7 @@ public class Main {
     b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
     ArrayList<BPTabs> tabs = new ArrayList<>();
     tabs.add(Global.f);
+    tabs.add(new SettingsView());
     tabs.add(Global.debuggerTab);
     tabs.add(new FileAttributesView());
     Global.f.getTree().addTreeSelectionListener(Global.ifp);

@@ -126,9 +126,13 @@ public interface Manager {
 
   public static final String FILEVIEW_DEFAULT_TAB_NAME = "Playlist";
   public static final String ATTRIBUTES_DEFAULT_TAB_NAME = "Attributes";
+  public static final String SETTINGS_DEFAULT_TAB_NAME = "Settings";
 
   public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP = "View your selected playlist(s) here.";
   public static final String ATTRIBUTES_DEFAULT_TAB_TOOLTIP = "View important properties regarding the program.";
+
+  public static final String SETTINGS_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/settings_tab.png";
+  public static final String SETTINGS_TAB_DEFAULT_TOOLTIP = "View and modify program settings.";
 
   public static final int TAB_VIEW_MIN_TEXT_STRIP_LENGTH = 10;
   /// TABBED View Config End
