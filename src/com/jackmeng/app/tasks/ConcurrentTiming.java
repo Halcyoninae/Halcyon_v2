@@ -1,5 +1,5 @@
 package com.jackmeng.app.tasks;
 
 public interface ConcurrentTiming {
-  public static final int MAX_TLE = 3000;
+  public static final int MAX_TLE = 2000;
 }
