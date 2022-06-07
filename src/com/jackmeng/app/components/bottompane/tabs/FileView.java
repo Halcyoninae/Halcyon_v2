@@ -205,6 +205,21 @@ public final class FileView extends JScrollPane implements BPTabs {
   }
 
   /**
+   * Returns true if the desired Str is present in the String Array.
+   * @param strArr
+   * @param str
+   * @return
+   */
+  private static boolean contains(String[] strArr, String str) {
+    for (String s : strArr) {
+      if (s.equals(str)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
    * This method will be called and will update the FileView
    * if there are any new files or folders. made:
    * 1. If a folder does not exist anymore (either name or existence) it will be
@@ -229,6 +244,18 @@ public final class FileView extends JScrollPane implements BPTabs {
                 model.reload();
                 break searchAbleLoop;
               }
+            }
+          }
+        }
+        File[] filesList = new File(key).listFiles();
+        for(File f : filesList) {
+          if(f.isFile()) {
+            String name = f.getName();
+            if(!contains(flder.second, name)) {
+              DefaultMutableTreeNode node = new DefaultMutableTreeNode(name);
+              DefaultTreeModel model = (DefaultTreeModel) files.getModel();
+              model.insertNodeInto(node, folderNodes.get(key).first, folderNodes.get(key).first.getChildCount());
+              model.reload();
             }
           }
         }

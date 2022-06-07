@@ -70,6 +70,8 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener {
                 volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
                 volumeSlider.setBorder(null);
                 volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
+                volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
+                volumeSlider.setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 2, 20));
 
                 likeButton = new LikeButton(
                                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_NOLIKE_ICON), 24,

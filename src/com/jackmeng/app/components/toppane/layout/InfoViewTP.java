@@ -49,7 +49,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     BufferedImage bi = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-    artWork = new JLabel(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 3, ColorManager.BORDER_THEME)));
+    artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
     artWork.setVerticalAlignment(SwingConstants.CENTER);
@@ -73,13 +73,13 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
       if (info.getArtwork() != null) {
         BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
-        artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 2, ColorManager.BORDER_THEME)));
+        artWork.setIcon(new ImageIcon(bi));
       } else {
         BufferedImage bi = DeImage
             .imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
         bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
             Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-        artWork.setIcon(new ImageIcon(DeImage.createRoundedBorder(bi, 15, 15, 3, ColorManager.BORDER_THEME)));
+        artWork.setIcon(new ImageIcon(bi));
       }
       infoDisplay.revalidate();
       revalidate();
