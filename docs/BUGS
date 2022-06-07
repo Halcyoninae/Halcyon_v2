@@ -1,3 +1,10 @@
+[!FIXED!] [***] #4 "FileView scrolling goes out of boundary"
+      Detailed Description: The FileView Scrollpane will not scroll past a certain point even though
+      there is more content after.
+      Fix: Remove the set sizes for the fileview or viewport content
+      Status: FIXED
+      State: Experimental-Build ~ MP4J
+
 [***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
       Detailed Description: Literally the title
       Potential Fix: Better way to count String length if dealing with UTF-8 or UTF-16 charsets

@@ -95,7 +95,7 @@ public interface Manager {
   public static final int INFOVIEW_MAX_WIDTH = MAX_WIDTH;
   public static final int INFOVIEW_MAX_HEIGHT = MAX_HEIGHT / 4;
 
-  public static final int INFOVIEW_INFODISPLAY_MAX_CHARS = 20;
+  public static final int INFOVIEW_INFODISPLAY_MAX_CHARS = 22;
 
   public static final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 96;
 

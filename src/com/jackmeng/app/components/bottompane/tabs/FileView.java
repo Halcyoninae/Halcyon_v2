@@ -92,9 +92,7 @@ public final class FileView extends JScrollPane implements BPTabs {
     files = new JTree(root);
     files.setRootVisible(true);
     files.setShowsRootHandles(true);
-    files.setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    files.setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    files.setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
+
     files.setAutoscrolls(true);
     files.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     getViewport().add(files);
@@ -199,9 +197,7 @@ public final class FileView extends JScrollPane implements BPTabs {
         return true;
       }
     }
-
     return false;
-
   }
 
   /**
