@@ -92,7 +92,10 @@ public final class FileView extends JScrollPane implements BPTabs {
     files = new JTree(root);
     files.setRootVisible(true);
     files.setShowsRootHandles(true);
-
+    files.setExpandsSelectedPaths(true);
+    files.setEditable(false);
+    files.setRequestFocusEnabled(false);
+    files.setScrollsOnExpand(true);
     files.setAutoscrolls(true);
     files.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     getViewport().add(files);

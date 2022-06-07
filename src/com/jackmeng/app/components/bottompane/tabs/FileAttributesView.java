@@ -22,6 +22,7 @@ public class FileAttributesView extends JScrollPane implements BPTabs {
     editor.setEditable(false);
     editor.setContentType("text/html");
     editor.setText(getFileViewHash());
+    setRequestFocusEnabled(false);
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));

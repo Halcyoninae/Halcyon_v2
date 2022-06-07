@@ -2,6 +2,7 @@ package com.jackmeng.app.components.bottompane;
 
 import javax.swing.*;
 
+import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Manager;
 import com.jackmeng.app.utils.TextParser;
 
@@ -24,7 +25,7 @@ public class BottomPane extends JTabbedPane {
           : t.getTabName(), t.getTabIcon(), t.getTabContent(), t.getTabToolTip());
       i++;
     }
-    setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+    setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
   }
 
   public JComponent[] getTabs() {
