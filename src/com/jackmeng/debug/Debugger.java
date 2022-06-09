@@ -39,20 +39,15 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void log(T... o) {
-    Runnable e = new Runnable() {
-      @Override
-      public void run() {
-        for (int i = 0; i < o.length; i++) {
-          if (o[i] != null) {
-            System.err.println(getLogText() + o[i].toString() + " ");
-          } else {
-            System.err.println(getLogText() + "NULL_CONTENT" + " ");
-          }
+    new Thread(() -> {
+      for (int i = 0; i < o.length; i++) {
+        if (o[i] != null) {
+          System.err.println(getLogText() + o[i].toString() + " ");
+        } else {
+          System.err.println(getLogText() + "NULL_CONTENT" + " ");
         }
-        System.err.println();
       }
-    };
-    FutureTask<Void> task = new FutureTask<Void>(e);
-
+      System.err.println();
+    }).start();
   }
 }
