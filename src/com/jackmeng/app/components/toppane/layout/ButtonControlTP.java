@@ -14,15 +14,20 @@ import com.jackmeng.debug.Debugger;
 
 import java.awt.*;
 
-public class ButtonControlTP extends JPanel implements InfoViewUpdateListener {
+import java.awt.event.*;
+
+public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener {
         private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
         private LikeButton likeButton;
         private JSlider progressSlider, volumeSlider;
         private JProgressBar progressBar;
         private JPanel sliders, buttons;
+        private AudioInfo aif;
 
         public ButtonControlTP() {
                 super();
+
+                aif = null;
                 setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
                 setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT));
                 setMinimumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
@@ -43,6 +48,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener {
                                                 40, 40));
                 playButton.setBackground(null);
                 playButton.setBorder(null);
+                playButton.addActionListener(this);
 
                 nextButton = new JButton(
                                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_FWD_ICON), 24, 24));
@@ -124,7 +130,17 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener {
 
         @Override
         public void infoView(AudioInfo info) {
-                Debugger.log("bruh");
                 progressBar.setIndeterminate(false);  
+                aif = info;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                if(e.getSource().equals(playButton)) {
+                        if(aif != null) {
+                                Debugger.log(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+                                Global.player.open(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+                        }
+                }
         }
 }

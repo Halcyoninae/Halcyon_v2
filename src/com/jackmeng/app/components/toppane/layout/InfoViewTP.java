@@ -41,10 +41,10 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     info = new AudioInfo();
     setLayout(new FlowLayout(FlowLayout.CENTER, Manager.INFOVIEW_FLOWLAYOUT_HGAP,
         getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
-    infoDisplay = new JLabel(infoToString(info));
+    infoDisplay = new JLabel(infoToString(info, true));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setToolTipText(infoToString(info));
+    infoDisplay.setToolTipText(infoToString(info, false));
     BufferedImage bi = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.resizeNoDistort(bi, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
@@ -61,11 +61,11 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
   private void setAssets(File f) {
     if (f.exists() && f.isFile()) {
       info = new AudioInfo(f);
-      infoDisplay.setText(infoToString(info));
-      infoDisplay.setToolTipText(infoToString(info));
+      infoDisplay.setText(infoToString(info, true));
+      infoDisplay.setToolTipText(infoToString(info, false));
       if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width - artWork.getPreferredSize().width
           - Manager.INFOVIEW_FLOWLAYOUT_HGAP * 2)) {
-        if(Main.bgt != null) {
+        if (Main.bgt != null) {
           Main.bgt.getFrame().setSize(new Dimension(Manager.MAX_WIDTH, Main.bgt.getFrame().getMinimumSize().height));
         }
       }
@@ -99,10 +99,11 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     listeners.add(l);
   }
 
-  private static String infoToString(AudioInfo info) {
+  private static String infoToString(AudioInfo info, boolean enforceLength) {
     return "<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: "
         + ColorManager.MAIN_FG_STR + ";font-size: 12px;\"><strong>"
-        + TextParser.strip(info.getTag(AudioInfo.KEY_MEDIA_TITLE), Manager.INFOVIEW_INFODISPLAY_MAX_CHARS)
+        + (enforceLength ? TextParser.strip(info.getTag(AudioInfo.KEY_MEDIA_TITLE),
+            Manager.INFOVIEW_INFODISPLAY_MAX_CHARS) : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
         + "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
         + info.getTag(AudioInfo.KEY_MEDIA_ARTIST)
         + "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">"

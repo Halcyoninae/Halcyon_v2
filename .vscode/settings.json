@@ -34,5 +34,9 @@
     "Uxijinping",
     "Webplayer",
     "YOUTUBEPAGE"
+  ],
+  "java.project.sourcePaths": [
+    "src",
+    "srctest"
   ]
 }
