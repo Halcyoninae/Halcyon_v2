@@ -1,6 +1,8 @@
 package com.jackmeng.app.components.toppane.layout;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Global;
@@ -16,7 +18,7 @@ import java.awt.*;
 
 import java.awt.event.*;
 
-public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener {
+public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
   private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
   private LikeButton likeButton;
   private JSlider progressSlider, volumeSlider;
@@ -78,6 +80,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
     volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
     volumeSlider.setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 2, 20));
+    volumeSlider.addChangeListener(this);
 
     likeButton = new LikeButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_NOLIKE_ICON), 24,
@@ -140,8 +143,15 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
       if (aif != null) {
         Debugger.log(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
         Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-        Global.player.play();
+        Global.player.startPlay();
       }
+    }
+  }
+
+  @Override
+  public void stateChanged(ChangeEvent e) {
+    if(e.getSource().equals(volumeSlider)) {
+      //TODO: to be implemented
     }
   }
 }

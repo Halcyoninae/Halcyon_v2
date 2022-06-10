@@ -28,16 +28,19 @@
     "ploogins",
     "PROJECTPAGE",
     "ralleytn",
+    "reinit",
     "SOUNDCLOUD",
     "SPOTIFYPAGE",
     "tabsview",
     "TOPPANE",
     "Uxijinping",
     "Webplayer",
-    "YOUTUBEPAGE"
+    "YOUTUBEPAGE",
+    "Yukus"
   ],
   "java.project.sourcePaths": [
     "src",
-    "srctest"
+    "srctest",
+    "engine\\src"
   ]
 }

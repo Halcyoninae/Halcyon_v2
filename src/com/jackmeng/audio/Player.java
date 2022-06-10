@@ -4,28 +4,30 @@ import java.io.File;
 
 import com.jackmeng.app.Global;
 
-import de.ralleytn.simple.audio.AudioException;
-import de.ralleytn.simple.audio.AudioListener;
-import de.ralleytn.simple.audio.StreamedAudio;
+import simple.audio.AudioException;
+import simple.audio.AudioListener;
+import simple.audio.StreamedAudio;
 
 /**
- * A simplified version of the {@link de.ralleytn.simple.audio.Audio} interface
- * and all of it's subsets in order to make it easier to communicate with and utilize
+ * A simplified version of the {@link simple.audio.Audio} interface
+ * and all of it's subsets in order to make it easier to communicate with and
+ * utilize
  * in the final program.
  * 
- * This simplification is due to some of the methods not being to be needed and to
- * have much more control over the playback library.
+ * This simplification is due to some of the methods not being to be needed and
+ * to
+ * have much more control over the playback library and to make it a global
+ * scope player instead of having to reinit everything on something new.
  * 
  * @author Jack Meng
- * @see de.ralleytn.simple.audio.Audio
- * @see de.ralleytn.simple.audio.StreamedAudio
+ * @see simple.audio.Audio
+ * @see simple.audio.StreamedAudio
  * @since 3.0
  */
 public class Player {
 
   private String current = "";
   private StreamedAudio audio;
-  private Thread worker;
 
   public Player() {
     try {
@@ -45,24 +47,22 @@ public class Player {
     this.current = f.getAbsolutePath();
   }
 
-  public void play() {
-    if(!worker.isInterrupted() || !worker.isAlive()) {
-      worker = new Thread(() -> {
-        try {
-          audio.open();
-          audio.play();
-        } catch (AudioException e) {
-          e.printStackTrace();
-        }
-      });
-      worker.start();
+  public String getCurrent() {
+    return current;
+  }
+
+  public void startPlay() {
+    try {
+      audio.open();
+      audio.play();
+    } catch (AudioException e) {
+      e.printStackTrace();
     }
+
   }
 
   public void pause() {
-    if(!worker.isInterrupted() || worker.isAlive()) {
-      audio.pause();
-    }
+    audio.pause();
   }
 
   public StreamedAudio getAudio() {

@@ -1,8 +1,8 @@
 package com.jackmeng.audio;
 
-import de.ralleytn.simple.audio.Audio;
-import de.ralleytn.simple.audio.AudioEvent;
-import de.ralleytn.simple.audio.AudioListener;
+import simple.audio.AbstractAudio;
+import simple.audio.AudioEvent;
+import simple.audio.AudioListener;
 
 public class DefaultAudioListener implements AudioListener {
   private PlayType type;
@@ -30,7 +30,7 @@ public class DefaultAudioListener implements AudioListener {
       if (type.equals(PlayType.STANDARD_CLOSE_ON_END)) {
         arg0.getAudio().close();
       } else if (type.equals(PlayType.STANDARD_LOOP)) {
-        arg0.getAudio().loop(Audio.LOOP_ENDLESS);
+        arg0.getAudio().loop(AbstractAudio.LOOP_ENDLESS);
       }
     }
   }
