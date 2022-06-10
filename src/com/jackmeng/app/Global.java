@@ -6,7 +6,7 @@ import com.jackmeng.app.components.bottompane.tabs.FileView;
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP;
 import com.jackmeng.app.connections.resource.ResourceDistributor;
-import com.jackmeng.audio.AudioPlayer;
+import com.jackmeng.audio.Player;
 import com.jackmeng.debug.DebugView;
 
 public interface Global {
@@ -15,5 +15,5 @@ public interface Global {
   public static ButtonControlTP bctp = new ButtonControlTP();
   public static InfoViewTP ifp = new InfoViewTP();
   public static BPTabs debuggerTab = new DebugView();
-  public static AudioPlayer player = new AudioPlayer();
+  public static Player player = new Player();
 }

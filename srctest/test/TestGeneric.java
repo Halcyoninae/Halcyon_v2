@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
 
-import com.jackmeng.audio.AudioPlayer;
+import com.jackmeng.audio.Player;
 
 public class TestGeneric {
   public static void main(String... args) {
