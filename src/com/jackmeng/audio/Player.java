@@ -4,17 +4,28 @@ import java.io.File;
 
 import com.jackmeng.app.Global;
 
-import de.ralleytn.simple.audio.Audio;
-import de.ralleytn.simple.audio.AudioEvent;
 import de.ralleytn.simple.audio.AudioException;
 import de.ralleytn.simple.audio.AudioListener;
 import de.ralleytn.simple.audio.StreamedAudio;
 
+/**
+ * A simplified version of the {@link de.ralleytn.simple.audio.Audio} interface
+ * and all of it's subsets in order to make it easier to communicate with and utilize
+ * in the final program.
+ * 
+ * This simplification is due to some of the methods not being to be needed and to
+ * have much more control over the playback library.
+ * 
+ * @author Jack Meng
+ * @see de.ralleytn.simple.audio.Audio
+ * @see de.ralleytn.simple.audio.StreamedAudio
+ * @since 3.0
+ */
 public class Player {
 
   private String current = "";
-  private Audio audio;
-  private transient Thread worker;
+  private StreamedAudio audio;
+  private Thread worker;
 
   public Player() {
     try {
@@ -30,6 +41,10 @@ public class Player {
     this.current = file;
   }
 
+  public void setFile(File f) {
+    this.current = f.getAbsolutePath();
+  }
+
   public void play() {
     if(!worker.isInterrupted() || !worker.isAlive()) {
       worker = new Thread(() -> {
@@ -42,6 +57,16 @@ public class Player {
       });
       worker.start();
     }
+  }
+
+  public void pause() {
+    if(!worker.isInterrupted() || worker.isAlive()) {
+      audio.pause();
+    }
+  }
+
+  public StreamedAudio getAudio() {
+    return audio;
   }
 
   public void addAudioListener(AudioListener... listeners) {
