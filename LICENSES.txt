@@ -1,6 +1,3 @@
-JFormDesigner/flatlaf (https://github.com/JFormDesigner/FlatLaf)
-Provided under:
-
                                 Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -228,8 +225,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ========================
-IJabz/jaudiotagger (https://bitbucket.org/ijabz/jaudiotagger)
-Provided under:
+
 
   jaudiotagger:audio tagging library Copyright (C) 2015 Paul Taylor
 
@@ -252,8 +248,6 @@ The licenses for most software are designed to take away your freedom to share a
 
 This license, the Lesser General Public License, applies to some specially designated software packages--typically libraries--of the Free Software Foundation and other authors who decide to use it. You can use it too, but we suggest you first think carefully about whether this license or the ordinary General Public License is the better strategy to use in any particular case, based on the explanations below.
 ========================
-umjammer/jlayer (https://github.com/umjammer/jlayer)
-Provided under:
  		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999
 
@@ -757,8 +751,6 @@ necessary.  Here is a sample; alter the names:
 
 That's all there is to it!
 ========================
-ymnk/jorbis (https://github.com/ymnk/jorbis)
-Provided under:
 
                   GNU LESSER GENERAL PUBLIC LICENSE
                        Version 2.1, February 1999
@@ -1273,8 +1265,6 @@ Random Hacker.
 
 That's all there is to it!
 ========================
-umjammer/mp3spi (https://github.com/umjammer/mp3spi)
-Provided under:
  		  GNU LESSER GENERAL PUBLIC LICENSE
 		       Version 2.1, February 1999
 
@@ -1778,8 +1768,6 @@ necessary.  Here is a sample; alter the names:
 
 That's all there is to it!
 ========================
-Trilarion/java-vorbis-support (https://github.com/Trilarion/java-vorbis-support)
-Provided under:
                     GNU LESSER GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
@@ -1946,9 +1934,6 @@ apply, that proxy's public statement of acceptance of any version is
 permanent authorization for you to choose that version for the
 Library.
 ========================
-bome/tritonus (https://github.com/bome/tritonus)
-Provided under:
-
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
