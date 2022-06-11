@@ -14,8 +14,8 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.jackmeng.ProjectManager;
-import com.jackmeng.app.Global;
 import com.jackmeng.app.components.bottompane.BPTabs;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.constant.StringManager;
 import com.jackmeng.app.events.FVRightClick;
@@ -79,7 +79,7 @@ public final class FileView extends JScrollPane implements BPTabs {
   /**
    * Constructs a new FileView tab,
    * there should only be one that is held
-   * globally in the {@link com.jackmeng.app.Global} class.
+   * globally in the {@link com.jackmeng.app.constant.Global} class.
    */
   public FileView() {
     setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

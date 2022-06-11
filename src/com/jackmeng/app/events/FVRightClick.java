@@ -6,8 +6,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
-import com.jackmeng.app.Global;
 import com.jackmeng.app.components.dialog.ErrorWindow;
+import com.jackmeng.app.constant.Global;
 
 public class FVRightClick extends MouseAdapter {
 

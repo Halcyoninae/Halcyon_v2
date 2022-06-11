@@ -2,8 +2,6 @@ package com.jackmeng.app.constant;
 
 import javax.swing.ImageIcon;
 
-import com.jackmeng.app.Global;
-
 /**
  * A global scope project manager that contains
  * constants to most used objects and values throughout the

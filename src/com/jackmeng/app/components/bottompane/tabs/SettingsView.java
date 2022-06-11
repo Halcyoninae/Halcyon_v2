@@ -2,8 +2,8 @@ package com.jackmeng.app.components.bottompane.tabs;
 
 import javax.swing.JComponent;
 
-import com.jackmeng.app.Global;
 import com.jackmeng.app.components.bottompane.BPTabs;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 
 import javax.swing.*;

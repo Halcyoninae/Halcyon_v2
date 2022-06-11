@@ -3,7 +3,7 @@ package com.jackmeng.app.components.bottompane;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-import com.jackmeng.app.Global;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 
 /**

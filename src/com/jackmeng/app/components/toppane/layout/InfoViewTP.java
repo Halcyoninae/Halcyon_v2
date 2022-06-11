@@ -6,9 +6,9 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
-import com.jackmeng.app.Global;
 import com.jackmeng.app.Halcyon;
 import com.jackmeng.app.constant.ColorManager;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.constant.StringManager;
 import com.jackmeng.app.utils.DeImage;

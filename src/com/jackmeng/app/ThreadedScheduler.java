@@ -3,6 +3,7 @@ package com.jackmeng.app;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.tasks.ConcurrentTiming;
 import com.jackmeng.app.tasks.PingFileView;
 

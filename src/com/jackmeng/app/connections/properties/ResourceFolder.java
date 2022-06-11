@@ -3,7 +3,15 @@ package com.jackmeng.app.connections.properties;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
+import com.jackmeng.ProjectManager;
 import com.jackmeng.app.constant.ProgramResourceManager;
 
 import java.awt.image.BufferedImage;
@@ -137,5 +145,34 @@ public class ResourceFolder {
       return folder.mkdir();
     }
     return false;
+  }
+
+  public static synchronized void dispatchLog(Exception... ex) {
+    long start = System.currentTimeMillis();
+    ExecutorService dispatch = Executors.newCachedThreadPool();
+    Future<Void> writableTask = dispatch.submit(() -> {
+      StringBuilder sb = new StringBuilder();
+      for (Exception e : ex) {
+        sb.append(e.toString());
+
+        Date d = new Date(System.currentTimeMillis());
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        writeLog("log",
+            "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d) + "\n"
+                + e.getClass() + "\n" + e.toString() + "\n" +
+                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n" + e.getStackTrace() + "\n"
+                + "Submit an issue by making a PR to the file BUGS at " + ProjectManager.PROJECT_GITHUB_PAGE);
+      }
+      return null;
+    });
+    while (!writableTask.isDone()) {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e1) {
+        e1.printStackTrace();
+      }
+    }
+    long end = System.currentTimeMillis();
+    Debugger.log("LOG > Log dispatch finished in " + (end - start) + "ms.");
   }
 }

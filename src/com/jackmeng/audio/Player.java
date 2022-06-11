@@ -7,7 +7,7 @@ import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
 
 import com.formdev.flatlaf.ui.FlatListCellBorder.Default;
-import com.jackmeng.app.Global;
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.debug.Debugger;
 
 import simple.audio.AudioException;

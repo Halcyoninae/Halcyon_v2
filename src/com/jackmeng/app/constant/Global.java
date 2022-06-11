@@ -1,4 +1,4 @@
-package com.jackmeng.app;
+package com.jackmeng.app.constant;
 
 import com.jackmeng.app.components.BigContainerTest;
 import com.jackmeng.app.components.bottompane.BPTabs;
