@@ -29,3 +29,8 @@ The current state of the repository will not enable the usage of the ISSUEs tab.
 
 Why you may ask? It is because adding this PR only feature allows me to better look at the issues on my side without having to pull up GitHub or another
 Git service every time I want to look at issues.
+
+## Legals
+
+This program uses external libraries and framework, and their attributed licenses
+can be found [here](ADDITIONAL.txt).
