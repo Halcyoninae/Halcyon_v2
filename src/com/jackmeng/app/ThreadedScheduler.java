@@ -4,13 +4,10 @@ import javax.swing.UIManager;
 
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.tasks.ConcurrentTiming;
 import com.jackmeng.app.tasks.PingFileView;
 
-public final class ThreadedScheduler {
-  public ThreadedScheduler() {
-  }
-
+public class ThreadedScheduler {
+  public ThreadedScheduler() {}
   /**
    * Anything that needs initialization should be done here.
    * <br>

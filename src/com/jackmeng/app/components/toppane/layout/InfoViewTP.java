@@ -15,7 +15,7 @@ import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
-import com.jackmeng.debug.Debugger;
+
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -29,7 +29,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
-  private ArrayList<InfoViewUpdateListener> listeners;
+  private transient ArrayList<InfoViewUpdateListener> listeners;
 
   public InfoViewTP() {
     super();

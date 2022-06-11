@@ -1,6 +1,5 @@
 package com.jackmeng.app.connections.discord;
 
-import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.debug.Debugger;
 
 import net.arikia.dev.drpc.DiscordEventHandlers;

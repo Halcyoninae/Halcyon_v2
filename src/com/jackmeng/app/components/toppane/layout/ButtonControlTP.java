@@ -10,7 +10,6 @@ import com.jackmeng.app.constant.ColorManager;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.events.AlignSliderWithBar;
-import com.jackmeng.app.tasks.PlayerProgressAlign;
 import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.debug.Debugger;
@@ -20,8 +19,6 @@ import simple.audio.AudioException;
 import java.awt.*;
 
 import java.awt.event.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
   private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
@@ -31,7 +28,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   private JPanel sliders, buttons;
   private transient AudioInfo aif;
   private boolean hasPlayed = false;
-  private Thread progressThread;
+  private transient Thread progressThread;
 
   public ButtonControlTP() {
     super();
@@ -127,12 +124,12 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
-    Debugger.log("Amogus");
     progressThread = new Thread(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
-          // set progressSlider value out of the length of the song 
-          progressSlider.setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
+          // set progressSlider value out of the length of the song
+          progressSlider
+              .setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
         }
         try {
           Thread.sleep(100);
@@ -188,11 +185,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   @Override
   public synchronized void stateChanged(ChangeEvent e) {
     if (e.getSource().equals(volumeSlider)) {
-      new Thread(() -> {
-        Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
-      }).start();
-    } else if (e.getSource().equals(progressSlider)) {
-
+      new Thread(() -> Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()))).start();
     }
   }
 }

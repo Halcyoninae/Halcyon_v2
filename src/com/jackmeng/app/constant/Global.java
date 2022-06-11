@@ -1,6 +1,5 @@
 package com.jackmeng.app.constant;
 
-import com.jackmeng.app.components.BigContainerTest;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.tabs.FileView;
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;

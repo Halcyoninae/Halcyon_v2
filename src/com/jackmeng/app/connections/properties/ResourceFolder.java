@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -53,7 +52,6 @@ public class ResourceFolder {
    * 
    * @param length The length of the random string
    * @return String The random string
-   * @deprecated This method is planned to be moved to {@link project.Utils}
    */
   private static String getRandomString(int length) {
     StringBuilder sb = new StringBuilder();

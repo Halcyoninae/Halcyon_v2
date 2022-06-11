@@ -9,7 +9,6 @@ import com.jackmeng.app.utils.DeImage;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
 
 public class RefreshFileView extends JButton implements BBlocButton {
 

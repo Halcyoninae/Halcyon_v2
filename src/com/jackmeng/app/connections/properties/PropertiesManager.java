@@ -77,7 +77,7 @@ public final class PropertiesManager {
    * 
    * If a key does not exist, it will be created with the default value.
    */
-  private void checkAllPropertiesExistence() {
+  public void checkAllPropertiesExistence() {
     try {
       util.load(new FileReader(location));
     } catch (IOException e) {

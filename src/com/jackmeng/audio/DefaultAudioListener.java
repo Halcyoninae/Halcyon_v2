@@ -1,8 +1,5 @@
 package com.jackmeng.audio;
 
-import com.jackmeng.debug.Debugger;
-
-import simple.audio.AbstractAudio;
 import simple.audio.AudioEvent;
 import simple.audio.AudioListener;
 

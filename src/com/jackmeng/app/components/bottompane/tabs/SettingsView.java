@@ -7,7 +7,6 @@ import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
 
 public class SettingsView extends JScrollPane implements BPTabs {
