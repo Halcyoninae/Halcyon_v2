@@ -18,7 +18,7 @@ import com.jackmeng.app.components.bottompane.tabs.SettingsView;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.discord.Discordo;
 
-public class Main {
+public class Halcyon {
   public static BigContainerTest bgt;
 
   public static void main(String... args) {

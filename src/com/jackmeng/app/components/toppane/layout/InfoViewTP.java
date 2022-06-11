@@ -8,7 +8,7 @@ import javax.swing.tree.TreePath;
 
 import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Global;
-import com.jackmeng.app.Main;
+import com.jackmeng.app.Halcyon;
 import com.jackmeng.app.Manager;
 import com.jackmeng.app.StringManager;
 import com.jackmeng.app.utils.DeImage;
@@ -65,8 +65,8 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       infoDisplay.setToolTipText(infoToString(info, false));
       if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width - artWork.getPreferredSize().width
           - Manager.INFOVIEW_FLOWLAYOUT_HGAP * 2)) {
-        if (Main.bgt != null) {
-          Main.bgt.getFrame().setSize(new Dimension(Manager.MAX_WIDTH, Main.bgt.getFrame().getMinimumSize().height));
+        if (Halcyon.bgt != null) {
+          Halcyon.bgt.getFrame().setSize(new Dimension(Manager.MAX_WIDTH, Halcyon.bgt.getFrame().getMinimumSize().height));
         }
       }
 

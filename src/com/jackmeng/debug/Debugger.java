@@ -18,6 +18,8 @@ import com.jackmeng.app.utils.TimeParser;
  * @since 3.0
  */
 public class Debugger {
+  protected static final boolean DISABLE_DEBUGGER = true;
+
   private Debugger() {
   }
 
@@ -39,15 +41,18 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void log(T... o) {
-    new Thread(() -> {
-      for (int i = 0; i < o.length; i++) {
-        if (o[i] != null) {
-          System.err.println(getLogText() + o[i].toString() + " ");
-        } else {
-          System.err.println(getLogText() + "NULL_CONTENT" + " ");
+    if (!DISABLE_DEBUGGER) {
+      new Thread(() -> {
+        for (int i = 0; i < o.length; i++) {
+          if (o[i] != null) {
+            System.err.println(getLogText() + o[i].toString() + " ");
+          } else {
+            System.err.println(getLogText() + "NULL_CONTENT" + " ");
+          }
         }
-      }
-      System.err.println();
-    }).start();
+        System.err.println();
+      }).start();
+    }
+    return;
   }
 }

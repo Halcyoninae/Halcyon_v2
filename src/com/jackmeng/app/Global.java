@@ -9,7 +9,8 @@ import com.jackmeng.app.connections.resource.ResourceDistributor;
 import com.jackmeng.audio.Player;
 import com.jackmeng.debug.DebugView;
 
-public interface Global {
+public class Global {
+  private Global() {}
   public static FileView f = new FileView();
   public static final ResourceDistributor rd = new ResourceDistributor();
   public static ButtonControlTP bctp = new ButtonControlTP();

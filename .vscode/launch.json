@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Launch Halcyon",
+      "request": "launch",
+      "mainClass": "com.jackmeng.app.Halcyon",
+      "projectName": "mp4j-test_be486658"
+    },
+    {
+      "type": "java",
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}"

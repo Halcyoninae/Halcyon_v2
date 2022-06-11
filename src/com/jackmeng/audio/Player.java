@@ -1,8 +1,14 @@
 package com.jackmeng.audio;
 
 import java.io.File;
+import java.util.stream.Stream;
 
+import javax.sound.sampled.Control;
+import javax.sound.sampled.FloatControl;
+
+import com.formdev.flatlaf.ui.FlatListCellBorder.Default;
 import com.jackmeng.app.Global;
+import com.jackmeng.debug.Debugger;
 
 import simple.audio.AudioException;
 import simple.audio.AudioListener;
@@ -25,53 +31,69 @@ import simple.audio.StreamedAudio;
  * @since 3.0
  */
 public class Player {
-
-  private String current = "";
   private StreamedAudio audio;
+  private String currentAbsolutePath = "";
 
   public Player() {
+    this(Global.rd.getFromAsFile(PlayerManager.BLANK_MP3_FILE));
+  }
+
+  public Player(String file) {
     try {
-      audio = new StreamedAudio(Global.rd.getFromAsFile(PlayerManager.BLANK_MP3_FILE));
-      current = PlayerManager.BLANK_MP3_FILE;
-      audio.addAudioListener(new DefaultAudioListener(this));
+      audio = new StreamedAudio(new File(file));
+      audio.addAudioListener(new DefaultAudioListener());
+      currentAbsolutePath = file;
     } catch (AudioException e) {
-      e.printStackTrace();
+      Debugger.log(e);
     }
   }
 
-  public void setFile(String file) {
-    this.current = file;
+  public Player(File f) {
+    try {
+      audio = new StreamedAudio(f);
+      currentAbsolutePath = f.getAbsolutePath();
+      audio.addAudioListener(new DefaultAudioListener());
+    } catch (AudioException e) {
+      Debugger.log(e);
+    }
   }
 
-  public void setFile(File f) {
-    this.current = f.getAbsolutePath();
-  }
-
-  public String getCurrent() {
-    return current;
-  }
-
-  public void startPlay() {
+  public void play() {
     try {
       audio.open();
-      audio.play();
+    } catch (AudioException e) {
+      Debugger.log(e);
+    }
+    audio.play();
+  }
+
+  public void setFile(String f) {
+    this.currentAbsolutePath = f;
+    if (audio.isOpen() || audio.isPlaying()) {
+      audio.stop();
+      audio.close();
+    }
+    try {
+      this.audio = new StreamedAudio(new File(f));
     } catch (AudioException e) {
       e.printStackTrace();
     }
-
   }
 
-  public void pause() {
-    audio.pause();
+  public String getCurrentFile() {
+    return currentAbsolutePath;
   }
 
-  public StreamedAudio getAudio() {
+  public StreamedAudio getStream() {
     return audio;
   }
 
-  public void addAudioListener(AudioListener... listeners) {
-    for (AudioListener listener : listeners) {
-      audio.addAudioListener(listener);
-    }
+  public Control getControl(String key) {
+    return audio.getControls().get(key);
+  }
+
+  public float convertVolume(float zeroToHundred) {
+    FloatControl control = (FloatControl) audio.getControls().get("Master Gain");
+    return (control.getMaximum() - control.getMinimum()) * zeroToHundred / 100 + control.getMinimum();
   }
 }

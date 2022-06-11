@@ -10,13 +10,18 @@ import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.events.AlignSliderWithBar;
+import com.jackmeng.app.tasks.PlayerProgressAlign;
 import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.debug.Debugger;
 
+import simple.audio.AudioException;
+
 import java.awt.*;
 
 import java.awt.event.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
   private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
@@ -24,11 +29,12 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   private JSlider progressSlider, volumeSlider;
   private JProgressBar progressBar;
   private JPanel sliders, buttons;
-  private AudioInfo aif;
+  private transient AudioInfo aif;
+  private boolean hasPlayed = false;
+  private Thread progressThread;
 
   public ButtonControlTP() {
     super();
-
     aif = null;
     setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT));
@@ -109,7 +115,6 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
 
     progressBar = new JProgressBar(0, 100);
     progressBar.setStringPainted(true);
-    progressBar.setString("Waiting for music...");
     progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
     progressBar.setIndeterminate(true);
     progressBar.setForeground(ColorManager.MAIN_FG_THEME);
@@ -122,6 +127,21 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
+    Debugger.log("Amogus");
+    progressThread = new Thread(() -> {
+      while (true) {
+        if (Global.player.getStream().isPlaying()) {
+          // set progressSlider value out of the length of the song 
+          progressSlider.setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
+        }
+        try {
+          Thread.sleep(100);
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    });
+    progressThread.start();
 
     sliders.add(progressSlider);
     sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
@@ -134,6 +154,11 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   @Override
   public void infoView(AudioInfo info) {
     progressBar.setIndeterminate(false);
+    if (aif != null) {
+      if (!aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
+        Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+      }
+    }
     aif = info;
   }
 
@@ -141,17 +166,33 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(playButton)) {
       if (aif != null) {
-        Debugger.log(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-        Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-        Global.player.startPlay();
+        if (!Global.player.getStream().isPlaying()) {
+          if (!hasPlayed) {
+            Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+            try {
+              Global.player.getStream().open();
+            } catch (AudioException e1) {
+              Debugger.log(e1);
+            }
+            Global.player.play();
+          } else {
+            Global.player.getStream().resume();
+          }
+        } else {
+          Global.player.getStream().pause();
+        }
       }
     }
   }
 
   @Override
-  public void stateChanged(ChangeEvent e) {
-    if(e.getSource().equals(volumeSlider)) {
-      //TODO: to be implemented
+  public synchronized void stateChanged(ChangeEvent e) {
+    if (e.getSource().equals(volumeSlider)) {
+      new Thread(() -> {
+        Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
+      }).start();
+    } else if (e.getSource().equals(progressSlider)) {
+
     }
   }
 }
