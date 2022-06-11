@@ -131,7 +131,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
               .setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
         }
         try {
-          Thread.sleep(100);
+          Thread.sleep(50);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
@@ -156,40 +156,45 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressBar.setIndeterminate(false);
     if (aif != null) {
       if (!aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
-        Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+        new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
       }
     }
     aif = info;
+    progressSlider.setValue(0);
   }
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (e.getSource().equals(playButton)) {
-      if (aif != null) {
-        if (!Global.player.getStream().isPlaying()) {
-          if (!hasPlayed) {
-            Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-            try {
-              Global.player.getStream().open();
-            } catch (AudioException e1) {
-              Debugger.log(e1);
+    new Thread(() -> {
+      if (e.getSource().equals(playButton)) {
+        if (aif != null) {
+          if (!Global.player.getStream().isPlaying()) {
+            if (!hasPlayed) {
+              Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+              try {
+                Global.player.getStream().open();
+              } catch (AudioException e1) {
+                Debugger.log(e1);
+              }
+              Global.player.play();
+            } else {
+              Global.player.getStream().resume();
             }
-            Global.player.play();
+            assertVolume();
           } else {
-            Global.player.getStream().resume();
+            Global.player.getStream().pause();
           }
-          assertVolume();
-        } else {
-          Global.player.getStream().pause();
         }
       }
-    }
+    }).start();
+
   }
 
   @Override
   public synchronized void stateChanged(ChangeEvent e) {
     if (e.getSource().equals(volumeSlider)) {
-      new Thread(() -> Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()))).start();
+      new Thread(() -> Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue())))
+          .start();
     }
   }
 }

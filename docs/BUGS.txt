@@ -1,3 +1,14 @@
+[***] #7 "Progress Slider value should reset on a new file being chosen"
+      Detailed Description: Read the title
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [**] #6 "Minor lag after clicking play button"
+      Detailed Description: Read the title
+      Status: Fixed
+      Fix: Used concurrency and threading
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #5 "Volume resetting on each renewal of the Music Player"
       Detailed Description: Volume resetting and inaccuracy 
       Fix: Called the setVolume after playing immediately to assert volume

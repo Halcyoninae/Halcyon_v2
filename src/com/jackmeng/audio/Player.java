@@ -70,11 +70,15 @@ public class Player {
       audio.stop();
       audio.close();
     }
-    try {
-      this.audio = new StreamedAudio(new File(f));
-    } catch (AudioException e) {
-      e.printStackTrace();
-    }
+
+    new Thread(() -> {
+      try {
+        this.audio = new StreamedAudio(new File(f));
+      } catch (AudioException e) {
+        e.printStackTrace();
+      }
+    }).start();
+
   }
 
   public String getCurrentFile() {

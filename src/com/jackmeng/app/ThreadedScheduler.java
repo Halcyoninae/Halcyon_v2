@@ -2,7 +2,7 @@ package com.jackmeng.app;
 
 import javax.swing.UIManager;
 
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.tasks.PingFileView;
 
@@ -28,7 +28,7 @@ public class ThreadedScheduler {
     System.setOut(null);
     UIManager.put("FileChooser.readOnly", true);
     try {
-      UIManager.setLookAndFeel(FlatArcDarkIJTheme.class.getName());
+      UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
     } catch (Exception e) {
       e.printStackTrace();
     }
