@@ -17,6 +17,9 @@ import com.jackmeng.app.components.bottompane.tabs.FileAttributesView;
 import com.jackmeng.app.components.bottompane.tabs.SettingsView;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.discord.Discordo;
+import com.jackmeng.app.connections.properties.ResourceFolder;
+import com.jackmeng.app.constant.Manager;
+import com.jackmeng.app.constant.ProgramResourceManager;
 
 public class Halcyon {
   public static BigContainerTest bgt;
@@ -43,12 +46,6 @@ public class Halcyon {
     ArrayList<BBlocButton> bb = new ArrayList<>();
     bb.add(new AddFolder());
     bb.add(new RefreshFileView());
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.SPOTIFY_PAGE, Manager.SPOTIFYPAGE_BUTTON_TOOLTIP,
-        Global.rd.getFromAsImageIcon(Manager.SPOTIFY_LOGO_LIGHT)));
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.YOUTUBE_PAGE, Manager.YOUTUBEPAGE_BUTTON_TOOLTIP,
-        Global.rd.getFromAsImageIcon(Manager.YOUTUBE_LOGO_RED)));
-    bb.add(GenericWebsiteLinker.getButton(ProjectManager.SOUNDCLOUD_PAGE, Manager.SOUNDCLOUD_BUTTON_TOOLTIP,
-        Global.rd.getFromAsImageIcon(Manager.SOUNDCLOUD_LOGO_ORANGE)));
     bb.add(GenericWebsiteLinker.getButton(ProjectManager.PROJECT_GITHUB_PAGE, Manager.PROJECTPAGE_BUTTON_TOOLTIP,
         Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
     BBlocView b = new BBlocView();
@@ -63,6 +60,11 @@ public class Halcyon {
     bottom.add(b);
     bottom.add(bp);
 
+    ResourceFolder.checkResourceFolder(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
+    for(String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
+      ResourceFolder.createFolder(str);
+    }
+  
     JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
     bgt = new BigContainerTest(m);
     bgt.run();

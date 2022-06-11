@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 import com.jackmeng.app.Global;
-import com.jackmeng.app.Manager;
+import com.jackmeng.app.constant.Manager;
 
 /**
  * This interface is for all tabs that are going to be added to the bottom pane.

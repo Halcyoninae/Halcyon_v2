@@ -4,11 +4,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.jackmeng.app.ColorManager;
 import com.jackmeng.app.Global;
-import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.jackmeng.app.constant.ColorManager;
+import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.events.AlignSliderWithBar;
 import com.jackmeng.app.tasks.PlayerProgressAlign;
 import com.jackmeng.app.utils.DeImage;

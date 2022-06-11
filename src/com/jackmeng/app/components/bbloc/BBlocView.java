@@ -2,7 +2,7 @@ package com.jackmeng.app.components.bbloc;
 
 import javax.swing.*;
 
-import com.jackmeng.app.Manager;
+import com.jackmeng.app.constant.Manager;
 
 import java.awt.*;
 

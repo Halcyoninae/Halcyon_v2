@@ -2,8 +2,8 @@ package com.jackmeng.app.components.bottompane;
 
 import javax.swing.*;
 
-import com.jackmeng.app.ColorManager;
-import com.jackmeng.app.Manager;
+import com.jackmeng.app.constant.ColorManager;
+import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.TextParser;
 
 import java.awt.*;

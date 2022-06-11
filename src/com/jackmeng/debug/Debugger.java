@@ -53,6 +53,5 @@ public class Debugger {
         System.err.println();
       }).start();
     }
-    return;
   }
 }

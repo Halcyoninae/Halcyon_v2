@@ -3,12 +3,12 @@ package com.jackmeng.app.components.bbloc.buttons;
 import javax.swing.*;
 
 import com.jackmeng.app.Global;
-import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.dialog.ConfirmWindow;
 import com.jackmeng.app.components.dialog.SelectApplicableFolders;
 import com.jackmeng.app.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
+import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FileParser;
 
 import java.awt.event.*;

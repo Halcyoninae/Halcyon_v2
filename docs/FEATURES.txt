@@ -1,3 +1,9 @@
+[***] #5 "Callable function for verifying allowed property in PropertiesManager"
+        Detailed Description: Enables for a much more dynamic approach to validating
+        a file instead of hardcoded strings.
+        Category: Program dynamic
+        Status: Investigating
+
 [!IMPLEMENTED!] [***] #4 "Update folder option"
         Detailed Description: Prompt the user if they want to update a node if they added the same folder
                               with content inside.

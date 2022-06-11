@@ -2,8 +2,8 @@ package com.jackmeng.debug;
 
 import javax.swing.*;
 
-import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.bottompane.BPTabs;
+import com.jackmeng.app.constant.Manager;
 
 import java.awt.*;
 

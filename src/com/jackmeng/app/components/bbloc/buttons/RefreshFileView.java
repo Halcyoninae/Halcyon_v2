@@ -3,8 +3,8 @@ package com.jackmeng.app.components.bbloc.buttons;
 import javax.swing.JComponent;
 
 import com.jackmeng.app.Global;
-import com.jackmeng.app.Manager;
 import com.jackmeng.app.components.bbloc.BBlocButton;
+import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.DeImage;
 
 import javax.swing.*;
