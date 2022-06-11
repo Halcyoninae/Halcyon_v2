@@ -91,6 +91,8 @@ public class Player {
 
   public float convertVolume(float zeroToHundred) {
     FloatControl control = (FloatControl) audio.getControls().get("Master Gain");
-    return (control.getMaximum() - control.getMinimum()) * zeroToHundred / 100 + control.getMinimum();
+    float range = control.getMaximum() - control.getMinimum();
+    float gain = (zeroToHundred / 100.0f) * range + control.getMinimum();
+    return gain;
   }
 }

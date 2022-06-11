@@ -1,3 +1,9 @@
+[!FIXED!] [***] #5 "Volume resetting on each renewal of the Music Player"
+      Detailed Description: Volume resetting and inaccuracy 
+      Fix: Called the setVolume after playing immediately to assert volume
+      Status: Fixed
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #4 "FileView scrolling goes out of boundary"
       Detailed Description: The FileView Scrollpane will not scroll past a certain point even though
       there is more content after.

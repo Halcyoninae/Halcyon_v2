@@ -127,7 +127,6 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressThread = new Thread(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
-          // set progressSlider value out of the length of the song
           progressSlider
               .setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
         }
@@ -146,6 +145,10 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
 
     add(buttons);
     add(sliders);
+  }
+
+  private void assertVolume() {
+    Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }
 
   @Override
@@ -175,6 +178,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
           } else {
             Global.player.getStream().resume();
           }
+          assertVolume();
         } else {
           Global.player.getStream().pause();
         }

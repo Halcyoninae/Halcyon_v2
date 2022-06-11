@@ -14,6 +14,7 @@ import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.bottompane.tabs.SettingsView;
+import com.jackmeng.app.components.bottompane.tabs.SliderView;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.discord.Discordo;
 import com.jackmeng.app.connections.properties.ResourceFolder;
@@ -53,6 +54,7 @@ public class Halcyon {
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
       ArrayList<BPTabs> tabs = new ArrayList<>();
       tabs.add(Global.f);
+      tabs.add(new SliderView());
       tabs.add(new SettingsView());
       Global.f.getTree().addTreeSelectionListener(Global.ifp);
       BottomPane bp = new BottomPane(tabs);

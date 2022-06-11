@@ -121,16 +121,15 @@ public interface Manager {
   /// DIALOG_CONFIRM Config END
 
   /// TABBED View Config Start
-  public static final String ATTRIBUTES_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/attributes_tab.png";
   public static final String PLAYLIST_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
+  public static final String SLIDERS_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/slider_tab.png";
 
   public static final String FILEVIEW_DEFAULT_TAB_NAME = "Playlist";
-  public static final String ATTRIBUTES_DEFAULT_TAB_NAME = "Attributes";
   public static final String SETTINGS_DEFAULT_TAB_NAME = "Settings";
+  public static final String SLIDERS_DEFAULT_TAB_NAME = "Controls";
 
   public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP = "View your selected playlist(s) here.";
-  public static final String ATTRIBUTES_DEFAULT_TAB_TOOLTIP = "View important properties regarding the program.";
-
+  public static final String SLIDERS_DEFAULT_TAB_TOOLTIP = "Sliders to adjust certain attributes of the stream.";
   public static final String SETTINGS_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/settings_tab.png";
   public static final String SETTINGS_TAB_DEFAULT_TOOLTIP = "View and modify program settings.";
 
