@@ -1,5 +1,7 @@
 # Halcyon (MP4J 3.0)
 
+*Copyright (C) 2021-2022 Halcyon (MP4J) to Jack Meng*
+
 > This is rework of an original project by me [MP4J](https://github.com/Exoad4JVM/mp4j)
 
 This is a music player written in Java with a nice GUI to facilitate your musical
