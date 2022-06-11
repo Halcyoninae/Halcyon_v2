@@ -9,6 +9,11 @@ BSD-2-Clause
 Attached with your distribution of this program should have all of these
 legal documentation attached.
 
+You are allowed to modify and/or distribute under the terms of the GPL2.0
+license stated below.
+
+Begin GPL-2.0
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 
