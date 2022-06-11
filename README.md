@@ -33,4 +33,4 @@ Git service every time I want to look at issues.
 ## Legals
 
 This program uses external libraries and framework, and their attributed licenses
-can be found [here](LICENSES.txt).
+can be found [here](LICENSE.txt).
