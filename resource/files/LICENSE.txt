@@ -1,3 +1,14 @@
+This program is authored by Jack Meng and is licensed under:
+GPL-2.0
+External libraries are licensed under:
+Apache 2.0
+MIT License
+GPL-Lesser-2.1
+BSD-2-Clause
+
+Attached with your distribution of this program should have all of these
+legal documentation attached.
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 2, June 1991
 

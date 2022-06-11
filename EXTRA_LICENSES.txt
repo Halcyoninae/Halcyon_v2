@@ -1,12 +1,3 @@
-This program also uses external libraries that may use differing libraries
-but those that do not contradict the license of this program's license.
-
-This document will entitle all of the notices to the used licenses.
-
-This document is in no way stating liability for the program towards their original
-owners, instead is a way to document the proper licenses towards those
-libraries and/or software.
-========================
 JFormDesigner/flatlaf (https://github.com/JFormDesigner/FlatLaf)
 Provided under:
 
