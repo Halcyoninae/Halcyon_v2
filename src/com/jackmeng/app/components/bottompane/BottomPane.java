@@ -8,6 +8,12 @@ import com.jackmeng.app.utils.TextParser;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Handles the Tabs in the BottomPane.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class BottomPane extends JTabbedPane {
   private JComponent[] tabs;
 

@@ -36,6 +36,4 @@ public class Settings extends JButton implements BBlocButton {
   public void actionPerformed(ActionEvent e) {
 
   }
-
-
 }

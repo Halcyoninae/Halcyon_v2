@@ -30,6 +30,5 @@ public class RefreshFileView extends JButton implements BBlocButton {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    Global.f.revalidateFiles();
   }
 }

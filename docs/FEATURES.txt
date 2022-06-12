@@ -1,3 +1,8 @@
+[*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
+        Detailed Description: As the title says
+        Category: Visual Comfort
+        Status: None
+
 [***] #10 "Static Layout for infoview"
         Detailed Description: Prevent the components in InfoView from moving so much
         whenever new content is repainted on to it.
@@ -15,6 +20,10 @@
         Then move the settings tab, etc. to bbloc
         Category: User Comfort
         Status: Testing
+        Potential Bugs: 
+                -All of the listeners should be updated immediately regarding a closing of
+                a tab
+                -The player should immediately stop when a stream from a tab has been closed
 
 [!IMPLEMENTED!] [**] #7 "Tool Tip popup for when hovering over the image"
         Detailed Description: Show an expanded view of the current track's Cover Image when the

@@ -35,7 +35,9 @@ import com.jackmeng.global.Trio;
  * @since 3.0
  * @see com.jackmeng.app.components.bottompane.BottomPane
  * @see com.jackmeng.app.components.bottompane.BPTabs
+ * @deprecated FileView being moved from a single tab to the entire bottom pane [see FEATURES #8]
  */
+@Deprecated(forRemoval=true,since="3.0")
 public final class FileView extends JScrollPane implements BPTabs {
   private JTree files;
   /**
