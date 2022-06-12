@@ -37,11 +37,36 @@ public class AddFolder extends JButton implements BBlocButton {
         SelectApplicableFolders s = new SelectApplicableFolders();
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
-          public void folderSelected(String folder) { 
-            Global.bp.pokeNewFileListTab(folder);
+          public void folderSelected(String folder) {
+            if (Global.bp.contains(folder)) {
+              new ConfirmWindow(
+                  "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
+                  new ConfirmationListener() {
+                    @Override
+                    public void onStatus(boolean status) {
+                      if (status) {
+                        Global.bp.pokeNewFileListTab(folder);
+                      }
+                    }
+                  }).run();
+            } else if (FileParser.isEmptyFolder(new File(folder))
+                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+
+              new ConfirmWindow(
+                  "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
+                  new ConfirmationListener() {
+                    @Override
+                    public void onStatus(boolean status) {
+                      if (status) {
+                        Global.bp.pokeNewFileListTab(folder);
+                      }
+                    }
+                  }).run();
+            } else {
+              Global.bp.pokeNewFileListTab(folder);
+            }
           }
         });
-        s.run();
       }
     });
   }

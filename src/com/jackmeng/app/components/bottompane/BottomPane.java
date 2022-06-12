@@ -52,6 +52,10 @@ public class BottomPane extends JTabbedPane {
     return null;
   }
 
+  public boolean contains(String folderAbsolute) {
+    return foldersAbsolute.contains(folderAbsolute);
+  }
+
   public List<String> getStrTabs() {
     return foldersAbsolute;
   }
