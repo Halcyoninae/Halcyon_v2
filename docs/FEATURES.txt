@@ -24,6 +24,7 @@
                 -All of the listeners should be updated immediately regarding a closing of
                 a tab
                 -The player should immediately stop when a stream from a tab has been closed
+                -Close buttons to close a tab once it has been open instead of being Static
 
 [!IMPLEMENTED!] [**] #7 "Tool Tip popup for when hovering over the image"
         Detailed Description: Show an expanded view of the current track's Cover Image when the

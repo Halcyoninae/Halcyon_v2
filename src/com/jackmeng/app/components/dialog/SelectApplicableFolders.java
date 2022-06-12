@@ -2,7 +2,7 @@ package com.jackmeng.app.components.dialog;
 
 import javax.swing.*;
 
-import com.jackmeng.app.components.inheritabledialog.FSVDefault;
+import com.jackmeng.app.components.inheritable.FSVDefault;
 
 /**
  * This dialog class constructs a simple

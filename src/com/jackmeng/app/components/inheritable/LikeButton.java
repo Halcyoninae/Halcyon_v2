@@ -1,4 +1,4 @@
-package com.jackmeng.app.components;
+package com.jackmeng.app.components.inheritable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

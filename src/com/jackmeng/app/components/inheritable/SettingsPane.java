@@ -1,4 +1,4 @@
-package com.jackmeng.app.components.inheritabledialog;
+package com.jackmeng.app.components.inheritable;
 
 import javax.swing.*;
 import java.awt.*;

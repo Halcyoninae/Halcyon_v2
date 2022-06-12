@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.jackmeng.app.components.LikeButton;
+import com.jackmeng.app.components.inheritable.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.constant.ColorManager;
 import com.jackmeng.app.constant.Global;
