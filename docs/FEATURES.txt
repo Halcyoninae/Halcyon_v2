@@ -1,3 +1,14 @@
+[**] #7 "Tool Tip popup for when hovering over the image"
+        Detailed Description: Show an expanded view of the current track's Cover Image when the
+        mouse is hovered over the component
+        Category: User Comfort
+        Status: Working On
+
+[*] #6 "Sorting methods for File View Tree"
+        Detailed Description: Allow the files in the JTree to be sorted either alphabetically or by size.
+        Category: User Comfort
+        Status: None
+
 [***] #5 "Callable function for verifying allowed property in PropertiesManager"
         Detailed Description: Enables for a much more dynamic approach to validating
         a file instead of hardcoded strings.
