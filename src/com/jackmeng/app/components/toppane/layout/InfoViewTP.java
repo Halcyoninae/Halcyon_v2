@@ -10,15 +10,18 @@ import com.jackmeng.app.Halcyon;
 import com.jackmeng.app.constant.ColorManager;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
+import com.jackmeng.app.constant.ProgramResourceManager;
 import com.jackmeng.app.constant.StringManager;
 import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
-
+import com.jackmeng.debug.Debugger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.awt.*;
 
@@ -33,7 +36,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   public InfoViewTP() {
     super();
-    listeners = new ArrayList<InfoViewUpdateListener>();
+    listeners = new ArrayList<>();
     setPreferredSize(new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
@@ -66,7 +69,8 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width - artWork.getPreferredSize().width
           - Manager.INFOVIEW_FLOWLAYOUT_HGAP * 2)) {
         if (Halcyon.bgt != null) {
-          Halcyon.bgt.getFrame().setSize(new Dimension(Manager.MAX_WIDTH, Halcyon.bgt.getFrame().getMinimumSize().height));
+          Halcyon.bgt.getFrame()
+              .setSize(new Dimension(Manager.MAX_WIDTH, Halcyon.bgt.getFrame().getMinimumSize().height));
         }
       }
 
@@ -80,9 +84,11 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
             Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         artWork.setIcon(new ImageIcon(bi));
       }
+      artWork.setToolTipText(coverIMGToolTip(info));
       infoDisplay.revalidate();
       revalidate();
       dispatchEvents();
+      Debugger.unsafeLog(coverIMGToolTip(info));
     }
   }
 
@@ -110,6 +116,18 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
         + info.getTag(AudioInfo.KEY_BITRATE) + "kpbs," + info.getTag(AudioInfo.KEY_SAMPLE_RATE) + "kHz,"
         + TimeParser.fromSeconds(Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
         + "</span></p></body></html>";
+  }
+
+  private static String coverIMGToolTip(AudioInfo info) {
+    try {
+      return "<html><body><img src=\""
+          + new URL("file:///" + ProgramResourceManager.writeBufferedImageToBin(info.getArtwork()))
+          + "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">"
+          + info.getArtwork().getWidth() + "x" + info.getArtwork().getHeight() + "</p></body></html>";
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 
   @Override

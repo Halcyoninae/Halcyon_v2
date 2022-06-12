@@ -48,11 +48,8 @@ public interface Manager {
   public static final String FILEVIEW_ICON_FOLDER_CLOSED = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
   public static final String FILEVIEW_ICON_FILE = RSC_FOLDER_NAME + "/fileview/leaf.png";
   public static final String FILEVIEW_DEFAULT_FOLDER_ICON = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  
+
   public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
-  public static final String SPOTIFY_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/spotify_green.png";
-  public static final String YOUTUBE_LOGO_RED = RSC_FOLDER_NAME + "/external/youtube_red.png";
-  public static final String SOUNDCLOUD_LOGO_ORANGE = RSC_FOLDER_NAME + "/external/soundcloud_orange.png";
 
   public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.jpg";
   public static final String BUTTONCTRL_PLAY_PAUSE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
@@ -129,9 +126,6 @@ public interface Manager {
   public static final String SLIDERS_DEFAULT_TAB_NAME = "Controls";
 
   public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP = "View your selected playlist(s) here.";
-  public static final String SLIDERS_DEFAULT_TAB_TOOLTIP = "Sliders to adjust certain attributes of the stream.";
-  public static final String SETTINGS_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/settings_tab.png";
-  public static final String SETTINGS_TAB_DEFAULT_TOOLTIP = "View and modify program settings.";
 
   public static final int TAB_VIEW_MIN_TEXT_STRIP_LENGTH = 10;
   /// TABBED View Config End
@@ -140,10 +134,11 @@ public interface Manager {
   public static final String ADDFOLDER_BUTTON_TEXT = "+";
   public static final String ADDFOLDER_BUTTON_TOOLTIP = "Add a new folder to the playlist.";
 
+  public static final String SETTINGS_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/settings_normal.png";
+  public static final String SETTINGS_BUTTON_PRESSED_ICON = RSC_FOLDER_NAME + "/bbloc/settings_pressed.png";
+  public static final String SETTINGS_BUTTON_TOOLTIP = "Open the settings dialog.";
+
   public static final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";
-  public static final String SPOTIFYPAGE_BUTTON_TOOLTIP = "Visit Spotify Webplayer!";
-  public static final String YOUTUBEPAGE_BUTTON_TOOLTIP = "Visit YouTube!";
-  public static final String SOUNDCLOUD_BUTTON_TOOLTIP = "Visit SoundCloud!";
 
   public static final String REFRESH_BUTTON_TOOLTIP = "Refresh the playlist.";
   /// BBLOC BUTTONS Config END

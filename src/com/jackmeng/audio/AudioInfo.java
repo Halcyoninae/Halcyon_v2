@@ -16,6 +16,10 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
+import com.jackmeng.app.constant.Global;
+import com.jackmeng.app.constant.Manager;
+import com.jackmeng.app.utils.DeImage;
+
 import java.awt.image.BufferedImage;
 
 public class AudioInfo {
@@ -110,11 +114,13 @@ public class AudioInfo {
         } catch (IOException e) {
           e.printStackTrace();
         }
-      } else {
-        return img;
       }
     }
-    return img;
+    if (img == null) {
+      return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+    } else {
+      return img;
+    }
   }
 
   public Map<String, String> getTags() {

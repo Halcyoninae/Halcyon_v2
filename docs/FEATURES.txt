@@ -1,13 +1,31 @@
-[**] #7 "Tool Tip popup for when hovering over the image"
+[***] #10 "Static Layout for infoview"
+        Detailed Description: Prevent the components in InfoView from moving so much
+        whenever new content is repainted on to it.
+        Category: Visual Comfort
+        Status: Investigating
+
+[**] #9 "Based on the implementation of feature #8 and #6"
+        Detailed Description: individual sorting buttons per opened tab view
+        Category: User Comfort
+        Status: Working on
+
+[**] #8 "Turn the tab view into a scrollable list for folders"
+        Detailed Description: Instead of using the tabs view as a way to scroll between
+        different tabs, make it a view to display all of the user's selected playlists. 
+        Then move the settings tab, etc. to bbloc
+        Category: User Comfort
+        Status: Testing
+
+[!IMPLEMENTED!] [**] #7 "Tool Tip popup for when hovering over the image"
         Detailed Description: Show an expanded view of the current track's Cover Image when the
         mouse is hovered over the component
         Category: User Comfort
-        Status: Working On
+        Status: Implemented
 
-[*] #6 "Sorting methods for File View Tree"
+[!FORWARDED!] [*] #6 "Sorting methods for File View Tree"
         Detailed Description: Allow the files in the JTree to be sorted either alphabetically or by size.
         Category: User Comfort
-        Status: None
+        Status: Forwarded to #9
 
 [***] #5 "Callable function for verifying allowed property in PropertiesManager"
         Detailed Description: Enables for a much more dynamic approach to validating

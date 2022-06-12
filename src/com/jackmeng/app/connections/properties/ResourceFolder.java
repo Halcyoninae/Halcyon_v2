@@ -122,13 +122,14 @@ public class ResourceFolder {
    * of the main resource folder.
    * 
    * @param bi The buffered image to write
-   * @return String The name of the file that was written
+   * @return String the absolute path of the image
    */
-  public static String writeBufferedImageCacheFile(BufferedImage bi) {
-    DeImage.write(bi, ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-        + getRandomString(10) + ".png");
-    return ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + getRandomString(10)
-        + ".png";
+  public static String writeBufferedImageCacheFile(BufferedImage bi, String cacheFolder, String fileName) {
+    DeImage.write(bi, ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/" + cacheFolder
+        + "/" + fileName);
+    return new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/" + cacheFolder
+        + "/" + fileName).getAbsolutePath();
+
   }
 
   /**
@@ -156,7 +157,8 @@ public class ResourceFolder {
         Date d = new Date(System.currentTimeMillis());
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         writeLog("log",
-            "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d) + "\n"
+            "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
+                + "\n"
                 + e.getClass() + "\n" + e.toString() + "\n" +
                 e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n" + e.getStackTrace() + "\n"
                 + "Submit an issue by making a PR to the file BUGS at " + ProjectManager.PROJECT_GITHUB_PAGE);

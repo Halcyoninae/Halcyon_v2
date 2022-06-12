@@ -51,4 +51,21 @@ public class Debugger {
       }).start();
     }
   }
+
+  /**
+   * This method is only used for programming purposes.
+   * @param <T>
+   * @param o
+   */
+  @SafeVarargs
+  public static <T> void unsafeLog(T ... o) {
+    for (int i = 0; i < o.length; i++) {
+      if (o[i] != null) {
+        System.err.println(getLogText() + o[i].toString() + " ");
+      } else {
+        System.err.println(getLogText() + "NULL_CONTENT" + " ");
+      }
+    }
+    System.err.println();
+  }
 }

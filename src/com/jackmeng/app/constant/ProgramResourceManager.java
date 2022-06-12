@@ -1,7 +1,12 @@
 package com.jackmeng.app.constant;
 
 import java.util.Map;
+
+import com.jackmeng.app.connections.properties.ResourceFolder;
+
 import java.util.HashMap;
+
+import java.awt.image.BufferedImage;
 
 public class ProgramResourceManager {
   private ProgramResourceManager() {}
@@ -14,6 +19,7 @@ public class ProgramResourceManager {
     "log",
     "bin"
   };
+  public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 
   public static Map<String, String> getProgramDefaultProperties() {
     Map<String, String> properties = new HashMap<>();
@@ -27,5 +33,9 @@ public class ProgramResourceManager {
     properties.put(KEY_USER_DEFAULT_FOLDER, new String[] {});
 
     return properties;
+  }
+
+  public static String writeBufferedImageToBin(BufferedImage img) {
+    return ResourceFolder.writeBufferedImageCacheFile(img, RESOURCE_SUBFOLDERS[1], DEFAULT_ARTWORK_FILE_NAME);
   }
 }
