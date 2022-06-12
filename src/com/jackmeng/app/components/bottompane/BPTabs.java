@@ -3,9 +3,6 @@ package com.jackmeng.app.components.bottompane;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
-
 /**
  * This interface is for all tabs that are going to be added to the bottom pane.
  * 
@@ -15,7 +12,9 @@ import com.jackmeng.app.constant.Manager;
  * @author Jack Meng
  * @since 3.0
  * @see com.jackmeng.app.components.bottompane.BottomPane
+ * @deprecated See FEATURES#8
  */
+@Deprecated(forRemoval = true, since = "3.0")
 public interface BPTabs {
   /**
    * Gets the desired component's
@@ -52,7 +51,7 @@ public interface BPTabs {
    * @return The desired ImageIcon
    */
   default ImageIcon getTabIcon() {
-    return Global.rd.getFromAsImageIcon(Manager.ATTRIBUTES_TAB_ICON);
+    return null;
   }
 
   /**

@@ -6,12 +6,18 @@ import java.util.Map;
 
 import java.awt.*;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreeSelectionModel;
 
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
+import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FolderInfo;
 
 /**
@@ -41,10 +47,13 @@ public class FileList extends JScrollPane {
    */
   private Map<File, DefaultMutableTreeNode> fileMap;
 
+  private FolderInfo info;
+
   private DefaultMutableTreeNode root;
 
   public FileList(FolderInfo info) {
     super();
+    this.info = info;
     fileMap = new HashMap<>();
     root = new DefaultMutableTreeNode(info.getName());
 
@@ -54,10 +63,45 @@ public class FileList extends JScrollPane {
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
-    for(File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-      fileMap.put(f, node);
-      root.add(node);
+    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+      if (f != null) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+        fileMap.put(f, node);
+        root.add(node);
+      }
     }
+
+    tree = new JTree(root);
+    tree.setRootVisible(true);
+    tree.setShowsRootHandles(true);
+    tree.setExpandsSelectedPaths(true);
+    tree.setEditable(false);
+    tree.setRequestFocusEnabled(false);
+    tree.setScrollsOnExpand(true);
+    tree.setAutoscrolls(true);
+    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+    DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+    Icon closedIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
+    Icon openIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
+    Icon leafIcon = new ImageIcon(Manager.FILEVIEW_ICON_FILE);
+    renderer.setClosedIcon(closedIcon);
+    renderer.setOpenIcon(openIcon);
+    renderer.setLeafIcon(leafIcon);
+
+    tree.addMouseListener(new FVRightClick());
+    tree.setCellRenderer(renderer);
+
+    tree.addTreeSelectionListener(Global.ifp);
+
+    getViewport().add(tree);
+  }
+
+  public JTree getTree() {
+    return tree;
+  }
+
+  public FolderInfo getFolderInfo() {
+    return info;
   }
 }

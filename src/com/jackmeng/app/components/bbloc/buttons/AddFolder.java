@@ -38,8 +38,7 @@ public class AddFolder extends JButton implements BBlocButton {
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
           public void folderSelected(String folder) { 
-
-            
+            Global.bp.pokeNewFileListTab(folder);
           }
         });
         s.run();

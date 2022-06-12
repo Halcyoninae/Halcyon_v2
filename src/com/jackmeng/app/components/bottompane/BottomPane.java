@@ -2,10 +2,12 @@ package com.jackmeng.app.components.bottompane;
 
 import javax.swing.*;
 
+import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
-import com.jackmeng.app.utils.TextParser;
+import com.jackmeng.app.utils.FolderInfo;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ import java.util.List;
  * @since 3.0
  */
 public class BottomPane extends JTabbedPane {
-  private JComponent[] tabs;
+  private ArrayList<FileList> tabs;
 
   /**
    * Represents an absolute list of folders
@@ -24,30 +26,38 @@ public class BottomPane extends JTabbedPane {
    */
   private ArrayList<String> foldersAbsolute;
 
-  public BottomPane(List<BPTabs> tabs) {
+  public BottomPane() {
     super();
     foldersAbsolute = new ArrayList<>();
 
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    this.tabs = new JComponent[tabs.size()];
-    int i = 0;
-    for (BPTabs t : tabs) {
-      this.tabs[i] = t.getTabContent();
-      addTab(t.restrainTabName() ? TextParser.strip(t.getTabName(), Manager.TAB_VIEW_MIN_TEXT_STRIP_LENGTH)
-          : t.getTabName(), t.getTabIcon(), t.getTabContent(), t.getTabToolTip());
-      i++;
-    }
+    this.tabs = new ArrayList<>();
     setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-    
   }
 
-  public JComponent[] getTabs() {
+  public List<FileList> getTabs() {
     return tabs;
   }
 
-  public void pokeNewFileListTab(String folder) {
+  public FileList findByTree(JTree tree) {
+    for (FileList tab : tabs) {
+      if (tab.getTree().equals(tree)) {
+        return tab;
+      }
+    }
+    return null;
+  }
 
+  public List<String> getStrTabs() {
+    return foldersAbsolute;
+  }
+
+  public void pokeNewFileListTab(String folder) {
+    FileList list = new FileList(new FolderInfo(folder));
+    addTab(new File(folder).getName(), Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON), list, "Playlist: " + folder);
+    this.revalidate();
+    tabs.add(list);
   }
 }

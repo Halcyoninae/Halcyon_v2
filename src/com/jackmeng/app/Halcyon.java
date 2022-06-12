@@ -14,6 +14,7 @@ import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bbloc.buttons.Settings;
 import com.jackmeng.app.components.bottompane.BPTabs;
 import com.jackmeng.app.components.bottompane.BottomPane;
+import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.discord.Discordo;
 import com.jackmeng.app.connections.properties.ResourceFolder;
@@ -41,12 +42,8 @@ public class Halcyon {
           Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
       BBlocView b = new BBlocView();
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
-      ArrayList<BPTabs> tabs = new ArrayList<>();
-      tabs.add(Global.f);
-      Global.f.getTree().addTreeSelectionListener(Global.ifp);
-      BottomPane bp = new BottomPane(tabs);
       bottom.add(b);
-      bottom.add(bp);
+      bottom.add(Global.bp);
 
       ResourceFolder.checkResourceFolder(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
       for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
@@ -59,9 +56,9 @@ public class Halcyon {
 
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
 
-      throw new Exception("oops");
-    } catch (Exception e) {
-      ResourceFolder.dispatchLog(e);
+    } catch (Exception ex) {
+      ResourceFolder.dispatchLog(ex);
+      new ErrorWindow(ex.toString()).run();
     }
   }
 }

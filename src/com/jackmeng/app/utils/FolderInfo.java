@@ -2,6 +2,8 @@ package com.jackmeng.app.utils;
 
 import java.io.File;
 
+import com.jackmeng.debug.Debugger;
+
 /**
  * A simple class that inits and holds
  * a folder information.
@@ -41,11 +43,13 @@ public class FolderInfo {
     File[] f = new File(absPath).listFiles();
     String[] s = new String[f.length];
     for (int i = 0; i < f.length; i++) {
-      String curr = f[i].getName();
-      rulesLoop: for (String r : rules) {
-        if (curr.endsWith(r)) {
-          s[i] = curr;
-          break rulesLoop;
+      if (f[i].isFile()) {
+        String curr = f[i].getAbsolutePath();
+        rulesLoop: for (String r : rules) {
+          if (curr.endsWith(r)) {
+            s[i] = curr;
+            break rulesLoop;
+          }
         }
       }
     }
@@ -56,14 +60,20 @@ public class FolderInfo {
     File[] f = new File(absPath).listFiles();
     File[] s = new File[f.length];
     for (int i = 0; i < f.length; i++) {
-      String curr = f[i].getName();
-      rulesLoop: for (String r : rules) {
-        if (curr.endsWith(r)) {
-          s[i] = f[i];
-          break rulesLoop;
+      if (f[i].isFile()) {
+        String curr = f[i].getAbsolutePath();
+        rulesLoop: for (String r : rules) {
+          if (curr.endsWith(r)) {
+            s[i] = f[i];
+            break rulesLoop;
+          }
         }
       }
     }
     return s;
+  }
+
+  public String toString() {
+    return absPath + "[" + getFilesAsStr() + "]";
   }
 }

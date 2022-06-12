@@ -26,6 +26,13 @@ import java.util.ArrayList;
 import java.awt.*;
 
 public class InfoViewTP extends JPanel implements TreeSelectionListener {
+  /**
+   * An extended listener for any classes that want
+   * to get events regarding any info changes.
+   * 
+   * @author Jack Meng
+   * @since 3.0
+   */
   public static interface InfoViewUpdateListener {
     void infoView(AudioInfo info);
   }
@@ -88,7 +95,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       infoDisplay.revalidate();
       revalidate();
       dispatchEvents();
-      Debugger.unsafeLog(coverIMGToolTip(info));
     }
   }
 
@@ -98,7 +104,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
         l.infoView(info);
       }
     }).start();
-
   }
 
   public void addInfoViewUpdateListener(InfoViewUpdateListener l) {
@@ -120,6 +125,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   private static String coverIMGToolTip(AudioInfo info) {
     try {
+      Debugger.unsafeLog(new URL("file:///" + ProgramResourceManager.writeBufferedImageToBin(info.getArtwork())));
       return "<html><body><img src=\""
           + new URL("file:///" + ProgramResourceManager.writeBufferedImageToBin(info.getArtwork()))
           + "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">"
@@ -132,12 +138,13 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   @Override
   public void valueChanged(TreeSelectionEvent e) {
-    TreePath path = Global.f.getTree().getSelectionPath();
+    TreePath path = ((JTree) e.getSource()).getSelectionPath();
     if (path != null) {
       DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
       if (node.isLeaf() && !node.isRoot()) {
         if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-          setAssets(new File(Global.f.findKey(node.getParent().toString()) + "/" + node.toString()));
+          setAssets(new File(Global.bp.findByTree((JTree) e.getSource()).getFolderInfo().getAbsolutePath()
+              + ProgramResourceManager.FILE_SLASH + node.toString()));
         }
       }
     }
