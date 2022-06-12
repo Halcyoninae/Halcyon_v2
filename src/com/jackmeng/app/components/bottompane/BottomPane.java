@@ -6,6 +6,7 @@ import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.TextParser;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,8 +18,16 @@ import java.util.List;
 public class BottomPane extends JTabbedPane {
   private JComponent[] tabs;
 
+  /**
+   * Represents an absolute list of folders
+   * that have been selected by the user.
+   */
+  private ArrayList<String> foldersAbsolute;
+
   public BottomPane(List<BPTabs> tabs) {
     super();
+    foldersAbsolute = new ArrayList<>();
+
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
@@ -31,9 +40,14 @@ public class BottomPane extends JTabbedPane {
       i++;
     }
     setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+    
   }
 
   public JComponent[] getTabs() {
     return tabs;
+  }
+
+  public void pokeNewFileListTab(String folder) {
+
   }
 }

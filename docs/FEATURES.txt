@@ -14,12 +14,12 @@
         Category: User Comfort
         Status: Working on
 
-[**] #8 "Turn the tab view into a scrollable list for folders"
+[**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
         Detailed Description: Instead of using the tabs view as a way to scroll between
         different tabs, make it a view to display all of the user's selected playlists. 
         Then move the settings tab, etc. to bbloc
         Category: User Comfort
-        Status: Testing
+        Status: Testing, All resource focused
         Potential Bugs: 
                 -All of the listeners should be updated immediately regarding a closing of
                 a tab

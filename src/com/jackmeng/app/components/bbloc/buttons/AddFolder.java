@@ -14,6 +14,16 @@ import com.jackmeng.app.utils.FileParser;
 import java.awt.event.*;
 import java.io.File;
 
+/**
+ * A BBloc button that handles when a user selects
+ * a folder from the
+ * {@link com.jackmeng.app.components.dialog.SelectApplicableFolders} instance.
+ * 
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ * @see com.jackmeng.app.components.dialog.SelectApplicableFolders
+ */
 public class AddFolder extends JButton implements BBlocButton {
   public AddFolder() {
     super(Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON));
@@ -27,36 +37,9 @@ public class AddFolder extends JButton implements BBlocButton {
         SelectApplicableFolders s = new SelectApplicableFolders();
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
-          public void folderSelected(String folder) {
-            if (Global.f.containsAbsolute(folder)) {
-              new ConfirmWindow(
-                  "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
-                  new ConfirmationListener() {
-                    @Override
-                    public void onStatus(boolean status) {
-                      if (status) {
-                        Global.f.pokeFolder(folder);
-                      }
-                    }
-                  }).run();
-            } else if (FileParser.isEmptyFolder(new File(folder))
-                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+          public void folderSelected(String folder) { 
 
-              new ConfirmWindow(
-                  "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                  new ConfirmationListener() {
-                    @Override
-                    public void onStatus(boolean status) {
-                      if (status) {
-                        Global.f.pokeFolder(folder);
-                      }
-                    }
-                  }).run();
-            } else {
-              Global.f.pokeFolder(
-                  folder,
-                  FileParser.parseFileNames(FileParser.parseOnlyAudioFiles(new File(folder), Manager.ALLOWED_FORMATS)));
-            }
+            
           }
         });
         s.run();

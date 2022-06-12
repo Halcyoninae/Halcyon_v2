@@ -4,10 +4,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.awt.*;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FolderInfo;
 
 /**
@@ -43,5 +47,17 @@ public class FileList extends JScrollPane {
     super();
     fileMap = new HashMap<>();
     root = new DefaultMutableTreeNode(info.getName());
+
+    setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
+
+    for(File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+      DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+      fileMap.put(f, node);
+      root.add(node);
+    }
   }
 }
