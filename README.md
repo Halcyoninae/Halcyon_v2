@@ -16,6 +16,12 @@ for you to simply download and run. However, you can download this project and r
 
 **Main Class:** `Halcyon` [here](src/com/jackmeng/app/Halcyon.java)
 
+## Audio Framework
+
+This program uses a heavily modified version of [this](https://github.com/RalleYTN/SimpleAudio) framework with my own
+implementations to improve performance and fit with the needs of this program. If you are going to use the framework,
+you should not use the JAR from this repository. Instead, use it from here: https://github.com/exoad/SimpleAudio/releases/tag/1.0ex
+
 ## Current
 
 Currently this program is still in development and is not yet ready for consumer usage,
