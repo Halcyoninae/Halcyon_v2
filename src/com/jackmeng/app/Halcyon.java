@@ -27,17 +27,6 @@ public class Halcyon {
   public static void main(String... args) {
     try {
       new ThreadedScheduler();
-      /*
-       * STUB PANEL:
-       * JPanel one = new JPanel();
-       * one.setOpaque(true);
-       * one.setSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-       * one.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT /
-       * 2));
-       * one.setMinimumSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-       * one.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
-       * one.setBackground(Color.WHITE);
-       */
       TopPane tp = new TopPane(Global.ifp, Global.bctp);
       Global.ifp.addInfoViewUpdateListener(Global.bctp);
       JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
