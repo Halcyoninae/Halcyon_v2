@@ -2,7 +2,6 @@ package com.jackmeng.app.components.bottompane;
 
 import javax.swing.*;
 
-import com.jackmeng.app.components.inheritable.Tab;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FolderInfo;
