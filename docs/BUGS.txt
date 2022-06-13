@@ -1,3 +1,10 @@
+[**] #10 "Parse whether a click is right or left click for FileList"
+      Detailed Description: No matter the click type, the action listener would always
+      open the desired action no matter if the action type was right or left mouse click. 
+      This should be handled by a master MouseListener.
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
 [*] #9 "Illegal argument error for remove implementation of a FileList
       Detailed Description: Low risk
       Status: None

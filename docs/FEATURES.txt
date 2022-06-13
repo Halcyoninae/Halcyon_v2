@@ -1,8 +1,8 @@
-[**] #14 "Add an Audio File Info right click menu tab for a MP3 File in a FileList"
+[!IMPLEMENTED!] [**] #14 "Add an Audio File Info right click menu tab for a MP3 File in a FileList"
         Detailed Description: Add an option for a pop-up to be shown with the information
         regarding an audio file in the FVRightClick for a FileList
         Category: Program Dynamic
-        Status: Working
+        Status: IMPLEMENTED
 
 [**] #13 "Even though there is not a forward or backtrack feature yet, change the icons of forward and backward"
         Detailed Description: Change the icons of forward and backward to be
