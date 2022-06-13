@@ -1,0 +1,65 @@
+[*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
+        Detailed Description: As the title says
+        Category: Visual Comfort
+        Status: None
+
+[***] #10 "Static Layout for infoview"
+        Detailed Description: Prevent the components in InfoView from moving so much
+        whenever new content is repainted on to it.
+        Category: Visual Comfort
+        Status: Investigating
+
+[**] #9 "Based on the implementation of feature #8 and #6"
+        Detailed Description: individual sorting buttons per opened tab view
+        Category: User Comfort
+        Status: Working on
+
+[**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
+        Detailed Description: Instead of using the tabs view as a way to scroll between
+        different tabs, make it a view to display all of the user's selected playlists. 
+        Then move the settings tab, etc. to bbloc
+        Category: User Comfort
+        Status: Testing, All resource focused
+        Potential Bugs: 
+                -All of the listeners should be updated immediately regarding a closing of
+                a tab
+                -The player should immediately stop when a stream from a tab has been closed
+                -Close buttons to close a tab once it has been open instead of being Static
+
+[!IMPLEMENTED!] [**] #7 "Tool Tip popup for when hovering over the image"
+        Detailed Description: Show an expanded view of the current track's Cover Image when the
+        mouse is hovered over the component
+        Category: User Comfort
+        Status: Implemented
+
+[!FORWARDED!] [*] #6 "Sorting methods for File View Tree"
+        Detailed Description: Allow the files in the JTree to be sorted either alphabetically or by size.
+        Category: User Comfort
+        Status: Forwarded to #9
+
+[***] #5 "Callable function for verifying allowed property in PropertiesManager"
+        Detailed Description: Enables for a much more dynamic approach to validating
+        a file instead of hardcoded strings.
+        Category: Program dynamic
+        Status: Investigating
+
+[!IMPLEMENTED!] [***] #4 "Update folder option"
+        Detailed Description: Prompt the user if they want to update a node if they added the same folder
+                              with content inside.
+        Category: User Comfort
+        Status: Implemented
+
+[!IGNORED!] [***] #3 "Make global constants for valid resource distribution to stop wasting time on fetching resources"
+        Status: IGNORED
+        Category: Potential Optimization
+
+[!IGNORED!] [**] #2 "Make only one dialog instance of SelectionApplicableFolders be able to be launched at once"
+        Detailed Description: Title only
+        Category: Background Guard
+        Status: IGNORED
+
+[**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
+        Detailed Description: Show a dialog prompt for when the user has chosen a folder that does not
+        contain any valid audio files.
+        Status: Unchecked
+        Category: GUI Guard

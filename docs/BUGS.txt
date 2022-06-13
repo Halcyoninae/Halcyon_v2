@@ -1,0 +1,45 @@
+[***] #7 "Progress Slider value should reset on a new file being chosen"
+      Detailed Description: Read the title
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [**] #6 "Minor lag after clicking play button"
+      Detailed Description: Read the title
+      Status: Fixed
+      Fix: Used concurrency and threading
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [***] #5 "Volume resetting on each renewal of the Music Player"
+      Detailed Description: Volume resetting and inaccuracy 
+      Fix: Called the setVolume after playing immediately to assert volume
+      Status: Fixed
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [***] #4 "FileView scrolling goes out of boundary"
+      Detailed Description: The FileView Scroll pane will not scroll past a certain point even though
+      there is more content after.
+      Fix: Remove the set sizes for the fileview or viewport content
+      Status: FIXED
+      State: Experimental-Build ~ MP4J
+
+[***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
+      Detailed Description: Literally the title. Ok literally need to fix this and stress test against anything non-ascii cuz it's goofy
+      af trying to fix this; in particular with none ASCII chars
+      Potential Fix: Better way to count String length if dealing with UTF-8 or UTF-16 charsets. Another way to fix this issue is
+      to resize the text or think of a universal size that works for all UTF-8 Chars.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [***] #2 "Folders that have been deleted should also be removed from the attributes view"
+      Detailed Description: Folders should not be kept for ever in the attributes view once
+                            they have been marked for deletion by the user.
+      Potential Fix: Keep track if the folder exists or not
+      Additional Feature Request: FEATURES/#4
+      Status: FIXED
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [***] #1 "Folders without acceptable Audio Files will enter in with unqualified blank file names"
+      Detailed Description: Folders that do not contain any extension ruled files will still enter
+      as unqualified with empty names instead of proper names or no at all.
+      Status: FIXED
+      State: Experimental-Build ~ MP4J
