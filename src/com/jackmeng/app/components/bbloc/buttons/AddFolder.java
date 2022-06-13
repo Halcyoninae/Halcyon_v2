@@ -51,7 +51,6 @@ public class AddFolder extends JButton implements BBlocButton {
                   }).run();
             } else if (FileParser.isEmptyFolder(new File(folder))
                 || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
-
               new ConfirmWindow(
                   "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
                   new ConfirmationListener() {
@@ -67,6 +66,7 @@ public class AddFolder extends JButton implements BBlocButton {
             }
           }
         });
+        s.run();
       }
     });
   }

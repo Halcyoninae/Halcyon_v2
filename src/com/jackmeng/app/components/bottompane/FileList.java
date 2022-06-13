@@ -14,6 +14,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
+import javax.swing.tree.DefaultTreeModel;
 
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
@@ -47,7 +48,7 @@ public class FileList extends JScrollPane {
    */
   private Map<File, DefaultMutableTreeNode> fileMap;
 
-  private FolderInfo info;
+  private transient FolderInfo info;
 
   private DefaultMutableTreeNode root;
 
@@ -103,5 +104,33 @@ public class FileList extends JScrollPane {
 
   public FolderInfo getFolderInfo() {
     return info;
+  }
+
+  /**
+   * This function facilitates reloading the current
+   * folder:
+   * 
+   * 1. If a file doesn't exist anymore, it will be removed
+   * 2. If a new file has been added, it will be added into the Tree
+   * 
+   * The detection on if a folder exists or not is up to the parent
+   * BottomPane {@link com.jackmeng.app.components.bottompane.BottomPane}.
+   */
+  public void revalidateFiles() {
+    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+      if (f != null) {
+        if (!fileMap.containsKey(f)) {
+          DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+          fileMap.put(f, node);
+          root.add(node);
+        }
+      }
+    }
+    for (File f : fileMap.keySet()) {
+      if (!f.exists() || !f.isFile()) {
+        ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
+        fileMap.remove(f);
+      }
+    }
   }
 }

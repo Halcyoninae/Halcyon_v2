@@ -5,7 +5,6 @@ import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 
 import javax.swing.*;
-import java.awt.*;
 
 import java.awt.event.ActionEvent;
 

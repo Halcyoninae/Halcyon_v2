@@ -5,13 +5,16 @@ import javax.swing.*;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FolderInfo;
+import com.jackmeng.debug.Debugger;
+import com.jackmeng.global.Pair;
 
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import java.awt.event.*;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  * Handles the Tabs in the BottomPane.
@@ -20,8 +23,8 @@ import java.awt.event.*;
  * @since 3.0
  */
 public class BottomPane extends JTabbedPane {
-  private ArrayList<FileList> tabs;
-  private int indexCurr = 0;
+  private List<FileList> tabs;
+  private int index = 0;
   /**
    * Represents an absolute list of folders
    * that have been selected by the user.
@@ -62,8 +65,34 @@ public class BottomPane extends JTabbedPane {
 
   public void pokeNewFileListTab(String folder) {
     FileList list = new FileList(new FolderInfo(folder));
-    addTab(new File(folder).getName(), Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON), list, "Folder/Playlist: " + folder);
+    addTab(new File(folder).getName(), Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON), list,
+        "Folder/Playlist: " + folder);
     this.revalidate();
     tabs.add(list);
+  }
+
+  /**
+   * Runs a master revalidation of all of the
+   * FileLists and checks if every added folder exists
+   * and all of it's sub-files.
+   * 
+   * @see com.jackmeng.app.components.bottompane.FileList#revalidateFiles()
+   */
+  public synchronized void mastRevalidate() {
+    List<Integer> needToRemove = new ArrayList<>();
+    int i = 0;
+    for (FileList l : tabs) {
+      if (!new File(l.getFolderInfo().getAbsolutePath()).exists()
+          || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
+        removeTabAt(i);
+        needToRemove.add(i);
+        foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
+      } else {
+        l.revalidateFiles();
+      }
+    }
+    for (int ix : needToRemove) {
+      tabs.remove(ix);
+    }
   }
 }

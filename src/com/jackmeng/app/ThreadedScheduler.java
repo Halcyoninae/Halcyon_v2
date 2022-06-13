@@ -35,7 +35,7 @@ public class ThreadedScheduler {
 
     // PROGRAMMABLE THREADS
     Runnable[] tasks = new Runnable[] {
-        new PingFileView(Global.f),
+        new PingFileView(Global.bp),
     };
 
     for (Runnable t : tasks) {
