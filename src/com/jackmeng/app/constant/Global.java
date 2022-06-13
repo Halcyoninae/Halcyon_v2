@@ -9,9 +9,20 @@ import com.jackmeng.app.connections.resource.ResourceDistributor;
 import com.jackmeng.audio.Player;
 import com.jackmeng.debug.DebugView;
 
+/**
+ * This class holds any public scoped Objects that may be used throughout
+ * the program.
+ *
+ * This class eliminates different classes having to hot potato pass
+ * difference object instances to each other.
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class Global {
+
   private Global() {}
-  public static FileView f = new FileView();
+
   public static BottomPane bp = new BottomPane();
   public static final ResourceDistributor rd = new ResourceDistributor();
   public static ButtonControlTP bctp = new ButtonControlTP();

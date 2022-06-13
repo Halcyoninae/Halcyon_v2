@@ -3,9 +3,29 @@ package com.jackmeng.app.events;
 import javax.swing.JFrame;
 import java.awt.event.*;
 
+/**
+ * This class forces a certain size limit upon a JFrame.
+ * 
+ * This means it can only be:
+ * >= minWidth x >= minHeight
+ * 
+ * This mode can be quite janky at times, making the application
+ * glitch around if the Max or Min size is exceeded.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class ForceMaxSize implements ComponentListener {
   private int a = 0, b = 0, c = 0, d = 0;
 
+  /**
+   * Constructs this object instance with the necessary instance variables.
+   * @param c The JFrame instance
+   * @param MAX_WIDTH
+   * @param MAX_HEIGHT
+   * @param MIN_WIDTH
+   * @param MIN_HEIGHT
+   */
   public ForceMaxSize(JFrame c, int MAX_WIDTH, int MAX_HEIGHT, int MIN_WIDTH, int MIN_HEIGHT) {
     this.a = MAX_HEIGHT;
     this.b = MAX_WIDTH;

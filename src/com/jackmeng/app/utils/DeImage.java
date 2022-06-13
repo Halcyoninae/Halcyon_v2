@@ -82,6 +82,13 @@ public class DeImage {
     }
   }
 
+  /**
+   * Resizes a BufferedImage by preserving the aspect ratio.
+   * @param img The BufferedImage to be resized.
+   * @param newW The new width of the image.
+   * @param newH The new height of the image.
+   * @return BufferedImage The resized image.
+   */
   public static BufferedImage resizeNoDistort(BufferedImage img, int newW, int newH) {
     int w = img.getWidth();
     int h = img.getHeight();
@@ -114,10 +121,22 @@ public class DeImage {
     return rounded;
   }
 
+  /**
+   * Converts an ImageIcon to a BufferedImage
+   * @param icon The ImageIcon to be converted
+   * @return BufferedImage The converted BufferedImage
+   */
   public static BufferedImage imageIconToBI(ImageIcon icon) {
     return imagetoBI(icon.getImage());
   }
 
+  /**
+   * Resizes a BufferedImage
+   * @param img The BufferedImage to be resized
+   * @param newW The new width
+   * @param newH The new height
+   * @return BufferedImage The resized BufferedImage
+   */
   public static BufferedImage resize(BufferedImage img, int newW, int newH) {
     Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
     BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);

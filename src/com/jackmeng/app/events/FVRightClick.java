@@ -9,11 +9,25 @@ import javax.swing.tree.TreePath;
 import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.app.constant.Global;
 
+/**
+ * This class handles the right click event for any JTree instance.
+ * 
+ * This right click menu currently allows the user to hide a node from view.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ * @see javax.swing.JTree
+ * @see javax.swing.tree.DefaultMutableTreeNode
+ */
 public class FVRightClick extends MouseAdapter {
 
     public FVRightClick() {
     }
 
+    /**
+     * A function that displays the right click menu.
+     * @param e The MouseEvent that was triggered.
+     */
     private void popup(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
