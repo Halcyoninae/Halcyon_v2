@@ -20,6 +20,11 @@ public final class PingFileView implements Runnable {
   private Thread worker;
   private BottomPane bp;
 
+  /**
+   * Calls the default BottomPane Object 
+   * @param bp the bottompane instance
+   * @see com.jackmeng.app.components.bottompane.BottomPane
+   */
   public PingFileView(BottomPane bp) {
     this.bp = bp;
   }

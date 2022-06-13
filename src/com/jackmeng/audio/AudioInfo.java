@@ -22,6 +22,17 @@ import com.jackmeng.app.utils.DeImage;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * This class holds information regarding an audio
+ * file; specifically, an MP3 file which can be parsed
+ * into ID3 tags.
+ * 
+ * Other formats that are supported such as raw PCM,WAV,OGG
+ * are not parsable.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class AudioInfo {
   private File f;
   private Map<String, String> tags;
@@ -33,6 +44,10 @@ public class AudioInfo {
       KEY_SAMPLE_RATE = "mediaSRate", KEY_ALBUM = "mediaAlbum", KEY_GENRE = "mediaGenre",
       KEY_MEDIA_ARTIST = "mediaArtist", KEY_ARTWORK = "mediaSpecial";
 
+  /**
+   * Constructs the AudioInfo object with the specified file.
+   * @param f The file to construct the AudioInfo object with.
+   */
   public AudioInfo(File f) {
     this.f = f;
     AudioFile af = null;
@@ -48,6 +63,10 @@ public class AudioInfo {
     initTags();
   }
 
+  /**
+   * Constructs the AudioInfo object with the specified file path.
+   * @param locale The file path to construct the AudioInfo object with. (ABSOLUTE FILE PATH)
+   */
   public AudioInfo(String locale) {
     this.f = new File(locale);
     AudioFile af = null;
@@ -63,14 +82,27 @@ public class AudioInfo {
     initTags();
   }
 
+  /**
+   * Initializes the tags map and adds default values to the map
+   * 
+   * Default init
+   */
   public AudioInfo() {
     defInitTags();
   }
 
+  /**
+   * Checks if the given String is in any way empty.
+   * @param s The string to check
+   * @return (true || false) Depending on if the string is empty or not.
+   */
   private boolean checkEmptiness(String s) {
     return s == null || s.isEmpty();
   }
 
+  /**
+   * Initializes the tags map and adds default values to the map
+   */
   private void defInitTags() {
     tags = new HashMap<String, String>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
@@ -85,6 +117,10 @@ public class AudioInfo {
     tags.put(KEY_ARTWORK, "");
   }
 
+  /**
+   * Initializes the tags map and adds the appropriate values from the 
+   * parsed Audio File to the map.
+   */
   private void initTags() {
     tags = new HashMap<>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
@@ -98,6 +134,11 @@ public class AudioInfo {
     tags.put(KEY_MEDIA_ARTIST, checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
   }
 
+  /**
+   * Returns the artwork of the Audio File, if there isn't any, then it
+   * returns the specified default artwork.
+   * @return A BufferedImage representing the artwork without any modifications.
+   */
   public BufferedImage getArtwork() {
     BufferedImage img = null;
     if (f.getAbsolutePath().endsWith(".mp3")) {
@@ -123,10 +164,19 @@ public class AudioInfo {
     }
   }
 
+  /**
+   * Returns the map of tags to the Audio file
+   * @return A Map of String, String representing the parsed tags from the audio file.
+   */
   public Map<String, String> getTags() {
     return tags;
   }
 
+  /**
+   * Get a specific key from the parsed tags
+   * @param key the Key see above 
+   * @return The value of the key
+   */
   public String getTag(String key) {
     return tags.get(key);
   }

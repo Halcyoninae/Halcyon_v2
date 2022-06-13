@@ -1,5 +1,14 @@
 package com.jackmeng;
 
+/**
+ * This interface primarily manages
+ * any links and does not seem to manage
+ * any data. It is similar to Manager
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ * @see com.jackmeng.app.constant.Manager
+ */
 public interface ProjectManager {
   public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";
   public static final String SPOTIFY_PAGE = "https://open.spotify.com/";
