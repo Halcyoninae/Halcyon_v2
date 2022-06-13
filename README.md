@@ -20,7 +20,9 @@ for you to simply download and run. However, you can download this project and r
 
 This program uses a heavily modified version of [this](https://github.com/RalleYTN/SimpleAudio) framework with my own
 implementations to improve performance and fit with the needs of this program. If you are going to use the framework,
-you should not use the JAR from this repository. Instead, use it from here: https://github.com/exoad/SimpleAudio/releases/tag/1.0ex
+you should not use the JAR from this repository. Instead, use it from here: https://github.com/exoad/SimpleAudio/releases/tag/1.0ex as there might be broken implementations that might not work from this project's inclusion of the framework.
+
+This engine currently enables playing wav & mp3. However, soon it will allow for other types (check [features](./docs/FEATURES.txt/)
 
 ## Current
 
