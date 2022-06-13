@@ -175,4 +175,15 @@ public interface Manager {
 
   public static final String REFRESH_BUTTON_TOOLTIP = "Refresh the playlist.";
   /// BBLOC BUTTONS Config END
+
+  /// AUDIOINFO Window Config START
+  public static final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
+  public static final int AUDIOINFO_MIN_WIDTH = 400;
+  public static final int AUDIOINFO_MIN_HEIGHT = 400;
+
+  public static final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 3;
+
+  public static final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 3;
+  public static final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
+  /// AUDIOINFO Window Config END
 }

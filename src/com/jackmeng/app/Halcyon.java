@@ -1,7 +1,7 @@
 package com.jackmeng.app;
 
 import com.jackmeng.ProjectManager;
-import com.jackmeng.app.components.BigContainerTest;
+import com.jackmeng.app.components.BigContainer;
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.bbloc.BBlocView;
 import com.jackmeng.app.components.bbloc.buttons.AddFolder;
@@ -74,7 +74,7 @@ public class Halcyon {
    * This is the only instance of a variable
    * being placed here.
    */
-  public static BigContainerTest bgt;
+  public static BigContainer bgt;
 
   /**
    * No arguments are taken from the entry point
@@ -119,7 +119,7 @@ public class Halcyon {
       }
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-      bgt = new BigContainerTest(m);
+      bgt = new BigContainer(m);
       bgt.run();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
 

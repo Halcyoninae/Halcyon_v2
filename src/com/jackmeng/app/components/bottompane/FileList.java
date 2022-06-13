@@ -20,6 +20,7 @@ import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FolderInfo;
+import com.jackmeng.debug.Debugger;
 
 /**
  * Represents a Pane containing a list of files for only
@@ -34,7 +35,7 @@ import com.jackmeng.app.utils.FolderInfo;
  * @author Jack Meng
  * @since 3.1
  */
-public class FileList extends JScrollPane {
+public class FileList extends JScrollPane implements TabTree {
   private JTree tree;
 
   /**
@@ -90,7 +91,7 @@ public class FileList extends JScrollPane {
     renderer.setOpenIcon(openIcon);
     renderer.setLeafIcon(leafIcon);
 
-    tree.addMouseListener(new FVRightClick());
+    tree.addMouseListener(new FVRightClick(this));
     tree.setCellRenderer(renderer);
 
     tree.addTreeSelectionListener(Global.ifp);
@@ -121,6 +122,7 @@ public class FileList extends JScrollPane {
       if (f != null) {
         if (!fileMap.containsKey(f)) {
           DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+          node.setParent(root);
           fileMap.put(f, node);
           root.add(node);
         }
@@ -132,5 +134,32 @@ public class FileList extends JScrollPane {
         fileMap.remove(f);
       }
     }
+  }
+
+  @Override
+  public void remove(String nodeName) {
+    try {
+      for (File f : fileMap.keySet()) {
+        if (f.getName().equals(nodeName)) {
+          DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+          Debugger.unsafeLog(fileMap.get(f).getParent());
+          model.removeNodeFromParent(fileMap.get(f));
+          model.reload();
+          fileMap.remove(f);
+        }
+      }
+    } catch (IllegalArgumentException e) {
+      // IGNORE
+    }
+  }
+
+  @Override
+  public String getSelectedNode(DefaultMutableTreeNode node) {
+    for(File f : fileMap.keySet()) {
+      if(fileMap.get(f).equals(node)) {
+        return f.getAbsolutePath();
+      }
+    }
+    return "";
   }
 }

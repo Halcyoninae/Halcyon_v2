@@ -1,13 +1,18 @@
 package com.jackmeng.app.events;
 
 import java.awt.event.*;
+import java.io.File;
+
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+import com.jackmeng.app.components.bottompane.TabTree;
+import com.jackmeng.app.components.dialog.AudioInfoDialog;
 import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.app.constant.Global;
+import com.jackmeng.audio.AudioInfo;
 
 /**
  * This class handles the right click event for any JTree instance.
@@ -20,12 +25,22 @@ import com.jackmeng.app.constant.Global;
  * @see javax.swing.tree.DefaultMutableTreeNode
  */
 public class FVRightClick extends MouseAdapter {
+    private TabTree tree;
 
+    public FVRightClick(TabTree tree) {
+        this.tree = tree;
+    }
+
+    /**
+     * DEFUNCT Constructor
+     */
     public FVRightClick() {
+
     }
 
     /**
      * A function that displays the right click menu.
+     * 
      * @param e The MouseEvent that was triggered.
      */
     private void popup(MouseEvent e) {
@@ -55,20 +70,30 @@ public class FVRightClick extends MouseAdapter {
         }
 
         JPopupMenu popup = new JPopupMenu();
-        JMenuItem refreshMenuItem = new JMenuItem("Remove");
+        JMenuItem refreshMenuItem = new JMenuItem("Hide Item");
         refreshMenuItem.addActionListener(ev -> {
             try {
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode) rcNode.getParent();
                 parent.remove(rcNode);
                 DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                 model.reload();
-                Global.f.remove(rcNode.toString());
+                tree.remove(rcNode.toString());
             } catch (NullPointerException excec) {
-                new ErrorWindow("You are not permitted to delete the root node!").run();
+                new ErrorWindow("Hiding the root node is not allowed.").run();
+            }
+        });
+
+        JMenuItem audioInfoItem = new JMenuItem("Information");
+        audioInfoItem.addActionListener(ev -> {
+            try {
+                new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run();
+            } catch (NullPointerException excec) {
+                new ErrorWindow("A root node is not a valid audio stream.").run();
             }
         });
 
         popup.add(refreshMenuItem);
+        popup.add(audioInfoItem);
         popup.show(t, x, y);
 
     }

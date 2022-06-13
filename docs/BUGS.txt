@@ -1,3 +1,13 @@
+[*] #9 "Illegal argument error for remove implementation of a FileList
+      Detailed Description: Low risk
+      Status: None
+      State: Experimental-Build ~ MP4J
+
+[***] #8 "Fix FVRightClick to work with the new layout"
+      Detailed Description: none
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
 [***] #7 "Progress Slider value should reset on a new file being chosen"
       Detailed Description: Read the title
       Status: Fixing
