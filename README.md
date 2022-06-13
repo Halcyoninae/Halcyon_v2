@@ -9,6 +9,10 @@ playing needs.
 
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
 
+### Version Info
+This README is updated for the version: 3.1 [For the program]
+This README's constant version is 3.0 [For the iteration]
+
 ## Installation
 
 Currently there are no direct pre-compiled binary and executables that I have made
