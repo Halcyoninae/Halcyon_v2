@@ -118,6 +118,8 @@ public class Halcyon {
         ResourceFolder.createFolder(str);
       }
 
+      ResourceFolder.pm.checkAllPropertiesExistence();
+
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
       bgt = new BigContainer(m);
       bgt.run();

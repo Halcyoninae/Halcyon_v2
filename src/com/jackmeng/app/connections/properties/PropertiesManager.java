@@ -79,6 +79,9 @@ public final class PropertiesManager {
    */
   public void checkAllPropertiesExistence() {
     try {
+      if(!new File(location).exists() || !new File(location).isFile()) {
+        new File(location).createNewFile();
+      }
       util.load(new FileReader(location));
     } catch (IOException e) {
       e.printStackTrace();
@@ -219,9 +222,6 @@ public final class PropertiesManager {
       util.setProperty(key, map.get(key));
       save();
     }
-    System.err
-        .print(Objects.equals(":) " + util.getProperty(key), null + " " + !allowed(key, util.getProperty(key)) + " "
-            + util.getProperty(key)));
     return util.getProperty(key) == null || !allowed(key, util.getProperty(key)) ? map.get(key) : util.getProperty(key);
   }
 
@@ -282,7 +282,6 @@ public final class PropertiesManager {
         e.printStackTrace();
         return false;
       }
-      System.out.println(f.getAbsolutePath());
       createWithDefaultVals();
     } else {
       try {

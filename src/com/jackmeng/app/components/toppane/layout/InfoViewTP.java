@@ -7,6 +7,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
 import com.jackmeng.app.Halcyon;
+import com.jackmeng.app.connections.properties.ResourceFolder;
 import com.jackmeng.app.constant.ColorManager;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
@@ -113,7 +114,11 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
   private static String infoToString(AudioInfo info, boolean enforceLength) {
     return "<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: "
         + ColorManager.MAIN_FG_STR + ";font-size: 12px;\"><strong>"
-        + (enforceLength ? TextParser.strip(info.getTag(AudioInfo.KEY_MEDIA_TITLE),
+        + (enforceLength ? TextParser.strip(
+            info.getTag(
+                ResourceFolder.pm.get(ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER).equals("true")
+                    ? AudioInfo.KEY_MEDIA_TITLE
+                    : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName()),
             Manager.INFOVIEW_INFODISPLAY_MAX_CHARS) : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
         + "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
         + info.getTag(AudioInfo.KEY_MEDIA_ARTIST)

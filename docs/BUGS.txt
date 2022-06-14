@@ -1,3 +1,9 @@
+[***] #11 "Asking whether a selected folder has already been selected is not enabled"
+      Detailed Description: Checking if a file-list is already added to the Bottompane
+      is not enabled.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [**] #10 "Parse whether a click is right or left click for FileList"
       Detailed Description: No matter the click type, the action listener would always
       open the desired action no matter if the action type was right or left mouse click. 
