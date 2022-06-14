@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadFactory;
  * Provides a concurrent logging system for the program
  * instead of using Debugger, which is meant for debugging during
  * initial development.
- * 
+ *
  * @author Jack Meng
  * @since 3.1
  */
@@ -16,7 +16,7 @@ public class Program {
   private static ExecutorService executorService;
 
   private static void println(String e) {
-    if (executorService.isShutdown() || executorService.isTerminated()) {
+    if (executorService == null) {
       executorService =
         Executors.newCachedThreadPool(
           new ThreadFactory() {
@@ -60,7 +60,7 @@ public class Program {
    */
   public static void main(String... args) {
     for (String arg : args) {
-        println(arg);
+      println(arg);
     }
   }
 }
