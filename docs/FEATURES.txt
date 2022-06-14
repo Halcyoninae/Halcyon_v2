@@ -1,3 +1,9 @@
+[***] #16 "For each file added to a file-list, check if that file can be added"
+        Detailed Description: Make sure each file has the right permissions for the 
+        file system and that each of them are actually valid files (by chunk headers)
+        Category: Program Dynamic
+        Status: Not-started
+
 [!NOT-IMPLEMENTING!] [**] #15 "Add a scroll bar to the InfoView's artwork label"
         Detailed Description: Allow the user to scroll through the image horizontally
         Category: Visual Comfort
