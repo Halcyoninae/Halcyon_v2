@@ -2,8 +2,6 @@ package com.jackmeng.app.utils;
 
 import java.io.File;
 
-import com.jackmeng.debug.Debugger;
-
 /**
  * A simple class that inits and holds
  * a folder information.

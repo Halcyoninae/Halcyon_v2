@@ -49,8 +49,8 @@ public class BottomPane extends JTabbedPane {
     return null;
   }
 
-  public boolean contains(String folderAbsolute) {
-    return foldersAbsolute.contains(folderAbsolute);
+  public boolean containsFolder(String folderAbsoluteStr) {
+    return foldersAbsolute.contains(folderAbsoluteStr);
   }
 
   public List<String> getStrTabs() {
@@ -63,6 +63,7 @@ public class BottomPane extends JTabbedPane {
         "Folder/Playlist: " + folder);
     this.revalidate();
     tabs.add(list);
+    foldersAbsolute.add(new File(folder).getAbsolutePath());
   }
 
   /**

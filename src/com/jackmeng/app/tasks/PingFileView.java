@@ -1,12 +1,7 @@
 package com.jackmeng.app.tasks;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 import com.jackmeng.app.components.bottompane.BottomPane;
-import com.jackmeng.app.components.bottompane.FileList;
-import com.jackmeng.app.components.bottompane.tabs.FileView;
-import com.jackmeng.global.Pair;
 
 /**
  * A class designed to constantly ping

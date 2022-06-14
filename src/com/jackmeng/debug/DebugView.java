@@ -2,7 +2,7 @@ package com.jackmeng.debug;
 
 import javax.swing.*;
 
-import com.jackmeng.app.components.bottompane.BPTabs;
+
 import com.jackmeng.app.constant.Manager;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ import java.awt.*;
  * @since 3.0
  * @see com.jackmeng.app.components.bottompane.BottomPane
  */
-public class DebugView extends JScrollPane implements BPTabs {
+public class DebugView extends JScrollPane {
   private JEditorPane text;
 
   /**
@@ -57,20 +57,5 @@ public class DebugView extends JScrollPane implements BPTabs {
   private static String getMemoryUsage() {
     return "Memory (mB): " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024
         + "/" + Runtime.getRuntime().totalMemory() / 1024 / 1024;
-  }
-
-  @Override
-  public String getTabName() {
-    return "Debug";
-  }
-
-  @Override
-  public String getTabToolTip() {
-    return "Debug information";
-  }
-
-  @Override
-  public JComponent getTabContent() {
-    return this;
   }
 }

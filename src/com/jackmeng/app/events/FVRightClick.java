@@ -1,7 +1,6 @@
 package com.jackmeng.app.events;
 
 import java.awt.event.*;
-import java.io.File;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -11,7 +10,6 @@ import javax.swing.tree.TreePath;
 import com.jackmeng.app.components.bottompane.TabTree;
 import com.jackmeng.app.components.dialog.AudioInfoDialog;
 import com.jackmeng.app.components.dialog.ErrorWindow;
-import com.jackmeng.app.constant.Global;
 import com.jackmeng.audio.AudioInfo;
 
 /**

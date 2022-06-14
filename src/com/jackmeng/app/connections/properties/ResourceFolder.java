@@ -53,7 +53,7 @@ public class ResourceFolder {
    * @param length The length of the random string
    * @return String The random string
    */
-  private static String getRandomString(int length) {
+  public static String getRandomString(int length) {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
       sb.append((char) (Math.random() * 26 + 'a'));

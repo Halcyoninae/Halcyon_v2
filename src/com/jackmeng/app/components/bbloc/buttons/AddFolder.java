@@ -38,7 +38,7 @@ public class AddFolder extends JButton implements BBlocButton {
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
           public void folderSelected(String folder) {
-            if (Global.bp.contains(folder)) {
+            if (Global.bp.containsFolder(folder)) {
               new ConfirmWindow(
                   "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
                   new ConfirmationListener() {

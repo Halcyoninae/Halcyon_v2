@@ -20,7 +20,6 @@ import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FolderInfo;
-import com.jackmeng.debug.Debugger;
 
 /**
  * Represents a Pane containing a list of files for only
@@ -142,7 +141,6 @@ public class FileList extends JScrollPane implements TabTree {
       for (File f : fileMap.keySet()) {
         if (f.getName().equals(nodeName)) {
           DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-          Debugger.unsafeLog(fileMap.get(f).getParent());
           model.removeNodeFromParent(fileMap.get(f));
           model.reload();
           fileMap.remove(f);

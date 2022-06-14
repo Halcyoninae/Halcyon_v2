@@ -17,7 +17,6 @@ import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
-import com.jackmeng.debug.Debugger;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -130,7 +129,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
 
   private static String coverIMGToolTip(AudioInfo info) {
     try {
-      Debugger.unsafeLog(new URL("file:///" + ProgramResourceManager.writeBufferedImageToBin(info.getArtwork())));
       return "<html><body><img src=\""
           + new URL("file:///" + ProgramResourceManager.writeBufferedImageToBin(info.getArtwork()))
           + "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">"
