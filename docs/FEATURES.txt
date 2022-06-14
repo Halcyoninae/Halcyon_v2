@@ -16,8 +16,8 @@
         Category: Visual Comfort
         Status: IMPLEMENTED
 
-[***] #12 "Lmao rename BigContainerTest to like something else"
-        Status: Investigating
+[!IMPLEMENTED!] [***] #12 "Lmao rename BigContainerTest to like something else"
+        Status: IMPLEMENTED
         Category: Program Dynamic 
 
 [!IMPLEMENTED!] [*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
