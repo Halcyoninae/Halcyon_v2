@@ -20,10 +20,10 @@
         Status: Investigating
         Category: Program Dynamic 
 
-[*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
+[!IMPLEMENTED!] [*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
         Detailed Description: As the title says
         Category: Visual Comfort
-        Status: None
+        Status: IMPLEMENTED
 
 [***] #10 "Static Layout for infoview"
         Detailed Description: Prevent the components in InfoView from moving so much
