@@ -14,7 +14,6 @@ import com.jackmeng.app.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
-
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -39,12 +38,12 @@ import javax.swing.*;
  * and copies of this program, source code, and associated linked
  * libraries. If you have not received a copy of the license, please
  * contact me at: {@link mailto://jackmeng0814@gmail.com}
- * 
+ *
  * Any external libraries used by this program including the audio
  * engine are licensed separately and are included in this program,
  * and also any other subsequent programs that are distributed with
  * or utilizing this library.
- * 
+ *
  * <br>
  * NOTICE: This program is made in the purpose for educational and private use,
  * the original author, Jack Meng and any other contributors, cannot be held
@@ -53,7 +52,7 @@ import javax.swing.*;
  * illegal activities, of those that voids a country's copyright, and/or international
  * copyright laws.
  * <br>
- * 
+ *
  * This is the main class that starts the program.
  *
  * It manages setting up the UI and reading any external
@@ -83,6 +82,15 @@ public class Halcyon {
    */
   public static void main(String... args) {
     try {
+      ResourceFolder.checkResourceFolder(
+        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
+      );
+      for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
+        ResourceFolder.createFolder(str);
+      }
+
+      ResourceFolder.pm.checkAllPropertiesExistence();
+
       new ThreadedScheduler();
       TopPane tp = new TopPane(Global.ifp, Global.bctp);
       Global.ifp.addInfoViewUpdateListener(Global.bctp);
@@ -111,15 +119,6 @@ public class Halcyon {
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
       bottom.add(b);
       bottom.add(Global.bp);
-
-      ResourceFolder.checkResourceFolder(
-        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
-      );
-      for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
-        ResourceFolder.createFolder(str);
-      }
-
-      ResourceFolder.pm.checkAllPropertiesExistence();
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
       bgt = new BigContainer(m);
