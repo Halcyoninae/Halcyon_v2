@@ -49,6 +49,14 @@ public class Debugger {
         }
         System.err.println();
       }).start();
+    } else {
+      String[] s = new String[o.length];
+      int i = 0;
+      for(T t : o) {
+        s[i] = t.toString();
+        i++;
+      }
+      Program.main(s);
     }
   }
 

@@ -1,10 +1,11 @@
 package com.jackmeng.app.connections.resource;
 
-import com.jackmeng.debug.Debugger;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.ImageIcon;
+
+import com.jackmeng.debug.Debugger;
 
 /**
  * Retrieves resources from the binary resource folder.
