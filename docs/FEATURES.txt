@@ -9,12 +9,12 @@
         Category: Program Dynamic
         Status: IMPLEMENTED
 
-[**] #13 "Even though there is not a forward or backtrack feature yet, change the icons of forward and backward"
+[!IMPLEMENTED!] [**] #13 "Even though there is not a forward or backtrack feature yet, change the icons of forward and backward"
         Detailed Description: Change the icons of forward and backward to be
         of the standard next file or last file icons and change them to match the 
         color scheme.
         Category: Visual Comfort
-        Status: None
+        Status: IMPLEMENTED
 
 [***] #12 "Lmao rename BigContainerTest to like something else"
         Status: Investigating
