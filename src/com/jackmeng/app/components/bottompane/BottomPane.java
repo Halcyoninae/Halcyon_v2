@@ -5,16 +5,11 @@ import javax.swing.*;
 import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FolderInfo;
-import com.jackmeng.debug.Debugger;
-import com.jackmeng.global.Pair;
 
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Vector;
 
 /**
  * Handles the Tabs in the BottomPane.
@@ -24,7 +19,6 @@ import java.util.Vector;
  */
 public class BottomPane extends JTabbedPane {
   private List<FileList> tabs;
-  private int index = 0;
   /**
    * Represents an absolute list of folders
    * that have been selected by the user.

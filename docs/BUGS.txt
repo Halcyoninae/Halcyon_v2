@@ -15,9 +15,9 @@
       Status: Fixing
       State: Experimental-Build ~ MP4J
 
-[***] #7 "Progress Slider value should reset on a new file being chosen"
+[!FIXED!] [***] #7 "Progress Slider value should reset on a new file being chosen"
       Detailed Description: Read the title
-      Status: Fixing
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [**] #6 "Minor lag after clicking play button"
