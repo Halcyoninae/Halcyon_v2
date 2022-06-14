@@ -19,6 +19,7 @@ public class LegalNoticeDialog extends JFrame implements Runnable {
         setTitle("License Agreement");
         setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
         setResizable(false);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         JPanel mainPane = new JPanel();
         mainPane.setLayout(new BorderLayout());
@@ -52,6 +53,7 @@ public class LegalNoticeDialog extends JFrame implements Runnable {
                 listener.onStatus(status);
             }
         }).start();
+        dispose();
     }
 
     @Override
