@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.io.File;
-import java.awt.*;
 
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.dialog.ConfirmWindow;

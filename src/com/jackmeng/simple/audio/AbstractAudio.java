@@ -84,7 +84,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(String file) throws AudioException {
+  protected AbstractAudio(String file) throws AudioException {
     try {
       this.resource = new File(file).toURI().toURL();
       this.fileFormat =
