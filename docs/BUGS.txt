@@ -15,11 +15,12 @@
       open the desired action no matter if the action type was right or left mouse click. 
       This should be handled by a master MouseListener.
       Status: Fixing
+      Note: Use a mouse listener to understand which mouse click was called upon
       State: Experimental-Build ~ MP4J
 
-[*] #9 "Illegal argument error for remove implementation of a FileList
+[!TEMPORARY FIX!] [*] #9 "Illegal argument error for remove implementation of a FileList
       Detailed Description: Low risk
-      Status: None
+      Status: Temporary Fix; Used a try-catch
       State: Experimental-Build ~ MP4J
 
 [***] #8 "Fix FVRightClick to work with the new layout"
