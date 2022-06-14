@@ -188,4 +188,11 @@ public interface Manager {
   public static final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
   public static final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
   /// AUDIOINFO Window Config END
+
+  /// LEGALNOTICEDIALOG Config START
+  public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 400;
+  public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 600;
+
+  public static final int LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT = LEGALNOTICEDIALOG_MIN_HEIGHT - 100;
+  /// LEGALNOTICEDIALOG Config END
 }
