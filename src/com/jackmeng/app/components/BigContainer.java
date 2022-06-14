@@ -8,10 +8,28 @@ import com.jackmeng.constant.Manager;
 
 import java.awt.*;
 
+/**
+ * BigContainer is the main window for the program,
+ * it is the parent container for BottomPane and TopPane.
+ * 
+ * It performs no other tasks but to align the components together
+ * in a top-to-bottom fashion.
+ * 
+ * @see com.jackmeng.app.components.bottompane.BottomPane
+ * @see com.jackmeng.app.components.toppane.TopPane
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class BigContainer implements Runnable {
   private JFrame container;
   private JSplitPane mainPane;
 
+  /**
+   * A JSplitPane contains a BottomPane and TopPane that
+   * will be used as the content pane for the JFrame.
+   * @param mainPane The JSplitPane instance to attach with
+   */
   public BigContainer(JSplitPane mainPane) {
     this.mainPane = mainPane;
     this.mainPane.setBorder(BorderFactory.createEmptyBorder());
@@ -25,6 +43,10 @@ public class BigContainer implements Runnable {
     container.getContentPane().add(mainPane);
   }
 
+  /**
+   * Returns the JFrame instance
+   * @return The JFrame instance
+   */
   public JFrame getFrame() {
     return container;
   }

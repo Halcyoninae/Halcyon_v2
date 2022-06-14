@@ -20,6 +20,17 @@ import java.awt.*;
 
 import java.awt.event.*;
 
+/**
+ * This class represents the GUI component collection
+ * class that maintains all of the buttons like:
+ * play, forward, volume. 
+ * 
+ * This component is located under the {@link com.jackmeng.app.components.toppane.layout.InfoViewTP}
+ * component.
+ * 
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
   private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
   private LikeButton likeButton;
