@@ -1,3 +1,9 @@
+[***] #12 "Resource Folder creation fault"
+      Detailed Description: Failure to create the resource folder along with the needed
+      properties file that is included with the program.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #11 "Asking whether a selected folder has already been selected is not enabled"
       Detailed Description: Checking if a file-list is already added to the Bottompane
       is not enabled.
