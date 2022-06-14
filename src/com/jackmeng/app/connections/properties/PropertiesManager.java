@@ -3,7 +3,6 @@ package com.jackmeng.app.connections.properties;
 import java.util.Properties;
 import java.util.Map;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
