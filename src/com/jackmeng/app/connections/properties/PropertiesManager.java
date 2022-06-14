@@ -78,8 +78,9 @@ public final class PropertiesManager {
    */
   public void checkAllPropertiesExistence() {
     try {
-      if(!new File(location).exists() || !new File(location).isFile()) {
+      if (!new File(location).exists() || !new File(location).isFile()) {
         new File(location).createNewFile();
+        createWithDefaultVals();
       }
       util.load(new FileReader(location));
     } catch (IOException e) {
@@ -207,8 +208,12 @@ public final class PropertiesManager {
   public String get(String key) {
     if (fr == null) {
       try {
+        if (!new File(location).exists() || !new File(location).isFile()) {
+          new File(location).createNewFile();
+          createWithDefaultVals();
+        }
         fr = new FileReader(location);
-      } catch (FileNotFoundException e) {
+      } catch ( IOException e) {
         e.printStackTrace();
       }
     }
