@@ -1,3 +1,10 @@
+[**] #17 "Liked Audio Tracks"
+        Detailed Description: Will be a pinned tab in the Bottom pane tabs view, and will
+        be rendered from a properties file containing liked songs from the heart button from
+        button controls.
+        Category: Program Dynamic
+        Status: Investigating
+
 [***] #16 "For each file added to a file-list, check if that file can be added"
         Detailed Description: Make sure each file has the right permissions for the 
         file system and that each of them are actually valid files (by chunk headers)
