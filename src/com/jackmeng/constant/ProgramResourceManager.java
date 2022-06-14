@@ -1,4 +1,4 @@
-package com.jackmeng.app.constant;
+package com.jackmeng.constant;
 
 import com.jackmeng.app.connections.properties.ResourceFolder;
 import java.awt.image.BufferedImage;

@@ -1,4 +1,4 @@
-package com.jackmeng.app.constant;
+package com.jackmeng.constant;
 
 /**
  * This interface holds constant for the Tab View

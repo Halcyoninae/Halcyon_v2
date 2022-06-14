@@ -2,10 +2,12 @@ package com.jackmeng.app.components.dialog;
 
 import javax.swing.*;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
+import org.jaudiotagger.tag.FieldKey;
+
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 import java.awt.*;
 
@@ -17,7 +19,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
   private JEditorPane infoText;
 
   // Non Gui Components
-  private AudioInfo info;
+  private transient AudioInfo info;
 
   public AudioInfoDialog(AudioInfo info) {
     setTitle(Manager.AUDIOINFO_WIN_TITLE);
@@ -67,7 +69,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
   }
 
   private static synchronized String parseAsProperty(String key, String ti) {
-    return "<u><b>"+key+"</b></u>: "+ti+"<br>";
+    return "<u><b>" + key + "</b></u>: " + ti + "<br>";
   }
 
   private static synchronized String infoToHtml(AudioInfo in) {
@@ -78,10 +80,19 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     sb.append(parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)));
     sb.append(parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)));
     sb.append(parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)));
-    sb.append(parseAsProperty("Duration", TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
+    sb.append(
+        parseAsProperty("Duration", TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
     sb.append(parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)));
     sb.append(parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)));
     sb.append(parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
+    sb.append(parseAsProperty("BPM", in.getRaw(FieldKey.BPM)));
+    sb.append(parseAsProperty("Track", in.getRaw(FieldKey.TRACK)));
+    sb.append(parseAsProperty("Year", in.getRaw(FieldKey.YEAR)));
+    sb.append(parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)));
+    sb.append(parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)));
+    sb.append(parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)));
+    sb.append(parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)));
+    sb.append(parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)));
     sb.append("</body></html>");
     return sb.toString();
   }

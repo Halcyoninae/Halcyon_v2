@@ -1,4 +1,4 @@
-package com.jackmeng.app.constant;
+package com.jackmeng.constant;
 
 import com.jackmeng.app.utils.ColorTool;
 import java.awt.Color;

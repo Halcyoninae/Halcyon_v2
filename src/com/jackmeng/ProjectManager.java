@@ -7,7 +7,7 @@ package com.jackmeng;
  * 
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.app.constant.Manager
+ * @see com.jackmeng.constant.Manager
  */
 public interface ProjectManager {
   public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";

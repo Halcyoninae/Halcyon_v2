@@ -11,10 +11,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import com.jackmeng.ProjectManager;
-import com.jackmeng.app.constant.ProgramResourceManager;
 
 import java.awt.image.BufferedImage;
 import com.jackmeng.app.utils.DeImage;
+import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.debug.Debugger;
 
 /**

@@ -3,8 +3,8 @@ package com.jackmeng.app;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-import com.jackmeng.app.constant.Global;
 import com.jackmeng.app.tasks.PingFileView;
+import com.jackmeng.constant.Global;
 
 public class ThreadedScheduler {
   public ThreadedScheduler() {}

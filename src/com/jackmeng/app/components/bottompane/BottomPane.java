@@ -2,9 +2,9 @@ package com.jackmeng.app.components.bottompane;
 
 import javax.swing.*;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FolderInfo;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 import java.awt.*;
 import java.io.File;

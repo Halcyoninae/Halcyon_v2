@@ -16,10 +16,10 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultTreeModel;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FolderInfo;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 /**
  * Represents a Pane containing a list of files for only

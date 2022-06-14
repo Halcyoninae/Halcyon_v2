@@ -16,9 +16,9 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.DeImage;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 import java.awt.image.BufferedImage;
 
@@ -42,10 +42,11 @@ public class AudioInfo {
   public static final String KEY_ABSOLUTE_FILE_PATH = "absFilePath", KEY_FILE_NAME = "fileName",
       KEY_MEDIA_DURATION = "mediaDur", KEY_MEDIA_TITLE = "mediaTitle", KEY_BITRATE = "mediaBitRate",
       KEY_SAMPLE_RATE = "mediaSRate", KEY_ALBUM = "mediaAlbum", KEY_GENRE = "mediaGenre",
-      KEY_MEDIA_ARTIST = "mediaArtist", KEY_ARTWORK = "mediaSpecial";
+      KEY_MEDIA_ARTIST = "mediaArtist", KEY_ARTWORK = "mediaSpecial", KEY_TRACK = "mediaTrack";
 
   /**
    * Constructs the AudioInfo object with the specified file.
+   * 
    * @param f The file to construct the AudioInfo object with.
    */
   public AudioInfo(File f) {
@@ -65,7 +66,9 @@ public class AudioInfo {
 
   /**
    * Constructs the AudioInfo object with the specified file path.
-   * @param locale The file path to construct the AudioInfo object with. (ABSOLUTE FILE PATH)
+   * 
+   * @param locale The file path to construct the AudioInfo object with. (ABSOLUTE
+   *               FILE PATH)
    */
   public AudioInfo(String locale) {
     this.f = new File(locale);
@@ -93,6 +96,7 @@ public class AudioInfo {
 
   /**
    * Checks if the given String is in any way empty.
+   * 
    * @param s The string to check
    * @return (true || false) Depending on if the string is empty or not.
    */
@@ -104,7 +108,7 @@ public class AudioInfo {
    * Initializes the tags map and adds default values to the map
    */
   private void defInitTags() {
-    tags = new HashMap<String, String>();
+    tags = new HashMap<>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
     tags.put(KEY_FILE_NAME, "Nothing.mp3");
     tags.put(KEY_MEDIA_DURATION, "0");
@@ -118,7 +122,7 @@ public class AudioInfo {
   }
 
   /**
-   * Initializes the tags map and adds the appropriate values from the 
+   * Initializes the tags map and adds the appropriate values from the
    * parsed Audio File to the map.
    */
   private void initTags() {
@@ -137,6 +141,7 @@ public class AudioInfo {
   /**
    * Returns the artwork of the Audio File, if there isn't any, then it
    * returns the specified default artwork.
+   * 
    * @return A BufferedImage representing the artwork without any modifications.
    */
   public BufferedImage getArtwork() {
@@ -166,7 +171,9 @@ public class AudioInfo {
 
   /**
    * Returns the map of tags to the Audio file
-   * @return A Map of String, String representing the parsed tags from the audio file.
+   * 
+   * @return A Map of String, String representing the parsed tags from the audio
+   *         file.
    */
   public Map<String, String> getTags() {
     return tags;
@@ -174,10 +181,22 @@ public class AudioInfo {
 
   /**
    * Get a specific key from the parsed tags
-   * @param key the Key see above 
+   * 
+   * @param key the Key see above
    * @return The value of the key
    */
   public String getTag(String key) {
     return tags.get(key);
+  }
+
+  /**
+   * Returns the value raw from the
+   * tagger.
+   * 
+   * @param key A FieldKey object representing the desired value to seek for.
+   * @return The value of the key.
+   */
+  public String getRaw(FieldKey key) {
+    return checkEmptiness(t.getFirst(key)) ? "Unknown" : t.getFirst(key);
   }
 }

@@ -13,11 +13,11 @@ import javax.swing.tree.TreeSelectionModel;
 
 import com.jackmeng.ProjectManager;
 import com.jackmeng.app.components.bottompane.BPTabs;
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
-import com.jackmeng.app.constant.StringManager;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.app.utils.FileParser;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
+import com.jackmeng.constant.StringManager;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.global.Pair;
 import com.jackmeng.global.Trio;
@@ -79,7 +79,7 @@ public final class FileView extends JScrollPane implements BPTabs {
   /**
    * Constructs a new FileView tab,
    * there should only be one that is held
-   * globally in the {@link com.jackmeng.app.constant.Global} class.
+   * globally in the {@link com.jackmeng.constant.Global} class.
    */
   public FileView() {
     setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -337,7 +337,7 @@ public final class FileView extends JScrollPane implements BPTabs {
    * Attempts to add a folder with actual scannable
    * files to the FileView.
    * 
-   * This scannable files are determined by {@link com.jackmeng.app.constant.Manager}
+   * This scannable files are determined by {@link com.jackmeng.constant.Manager}
    * 
    * @param folder The folder name
    * @param files  The files from this folder

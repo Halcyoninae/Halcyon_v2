@@ -45,7 +45,7 @@
       Status: FIXED
       State: Experimental-Build ~ MP4J
 
-[***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
+{!URGENT!} [***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
       Detailed Description: Literally the title. Ok literally need to fix this and stress test against anything non-ascii cuz it's goofy
       af trying to fix this; in particular with none ASCII chars
       Potential Fix: Better way to count String length if dealing with UTF-8 or UTF-16 charsets. Another way to fix this issue is

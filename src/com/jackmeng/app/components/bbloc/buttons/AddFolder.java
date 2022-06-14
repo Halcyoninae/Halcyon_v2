@@ -7,9 +7,9 @@ import com.jackmeng.app.components.dialog.ConfirmWindow;
 import com.jackmeng.app.components.dialog.SelectApplicableFolders;
 import com.jackmeng.app.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
 import com.jackmeng.app.utils.FileParser;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 import java.awt.event.*;
 import java.io.File;

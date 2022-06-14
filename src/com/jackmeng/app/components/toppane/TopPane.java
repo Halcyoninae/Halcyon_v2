@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP;
-import com.jackmeng.app.constant.Manager;
+import com.jackmeng.constant.Manager;
 
 import java.awt.*;
 

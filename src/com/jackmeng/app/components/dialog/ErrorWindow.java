@@ -2,8 +2,8 @@ package com.jackmeng.app.components.dialog;
 
 import javax.swing.*;
 
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
 
 import java.awt.*;
 

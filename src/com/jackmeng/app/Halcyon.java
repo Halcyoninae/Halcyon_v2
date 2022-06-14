@@ -11,9 +11,10 @@ import com.jackmeng.app.components.bbloc.buttons.Settings;
 import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.app.components.toppane.TopPane;
 import com.jackmeng.app.connections.properties.ResourceFolder;
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
-import com.jackmeng.app.constant.ProgramResourceManager;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
+import com.jackmeng.constant.ProgramResourceManager;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -63,11 +64,11 @@ import javax.swing.*;
  *
  * If there needs to be any objects that needs to be passed down,
  * the programmer must specify that as a global scope object in
- * {@link com.jackmeng.app.constant.Global}.
+ * {@link com.jackmeng.constant.Global}.
  * </p>
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.app.constant.Global
+ * @see com.jackmeng.constant.Global
  */
 public class Halcyon {
   /**

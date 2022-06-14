@@ -8,15 +8,15 @@ import javax.swing.tree.TreePath;
 
 import com.jackmeng.app.Halcyon;
 import com.jackmeng.app.connections.properties.ResourceFolder;
-import com.jackmeng.app.constant.ColorManager;
-import com.jackmeng.app.constant.Global;
-import com.jackmeng.app.constant.Manager;
-import com.jackmeng.app.constant.ProgramResourceManager;
-import com.jackmeng.app.constant.StringManager;
 import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.app.utils.TextParser;
 import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.constant.ColorManager;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.Manager;
+import com.jackmeng.constant.ProgramResourceManager;
+import com.jackmeng.constant.StringManager;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

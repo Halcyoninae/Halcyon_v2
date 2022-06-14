@@ -1,4 +1,4 @@
-package com.jackmeng.app.constant;
+package com.jackmeng.constant;
 
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;

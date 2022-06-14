@@ -1,4 +1,4 @@
-package com.jackmeng.app.constant;
+package com.jackmeng.constant;
 
 import javax.swing.ImageIcon;
 
@@ -178,12 +178,12 @@ public interface Manager {
 
   /// AUDIOINFO Window Config START
   public static final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
-  public static final int AUDIOINFO_MIN_WIDTH = 400;
+  public static final int AUDIOINFO_MIN_WIDTH = 500;
   public static final int AUDIOINFO_MIN_HEIGHT = 400;
 
-  public static final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 3;
+  public static final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 2;
 
-  public static final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 3;
+  public static final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
   public static final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
   /// AUDIOINFO Window Config END
 }
