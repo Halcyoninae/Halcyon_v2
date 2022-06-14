@@ -7,10 +7,11 @@ import com.jackmeng.constant.Manager;
 import javax.swing.*;
 import java.awt.*;
 
-public class LegalNoticeDialog extends JFrame {
+public class LegalNoticeDialog extends JFrame implements Runnable {
     private String legalContext = "";
     private transient ConfirmationListener[] listeners;
-    public LegalNoticeDialog(String legalContext, ConfirmationListener ... listeners) {
+
+    public LegalNoticeDialog(String legalContext, ConfirmationListener... listeners) {
         this.legalContext = legalContext;
         this.listeners = listeners;
 
@@ -21,7 +22,8 @@ public class LegalNoticeDialog extends JFrame {
 
         JPanel mainPane = new JPanel();
         mainPane.setLayout(new BorderLayout());
-        mainPane.setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
+        mainPane.setPreferredSize(
+                new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
 
         getContentPane().add(mainPane);
 
@@ -32,7 +34,31 @@ public class LegalNoticeDialog extends JFrame {
         legalNotice.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         JScrollPane inheritedScrollPane = new JScrollPane(legalNotice);
-        inheritedScrollPane.setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT));
+        inheritedScrollPane.setPreferredSize(
+                new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT));
+    }
 
+    public synchronized ConfirmationListener[] getConfirmListeners() {
+        return listeners;
+    }
+
+    public String getLegalText() {
+        return legalContext;
+    }
+
+    private void dispatchEvents(boolean status) {
+        new Thread(() -> {
+            for (ConfirmationListener listener : listeners) {
+                listener.onStatus(status);
+            }
+        }).start();
+    }
+
+    @Override
+    public void run() {
+        pack();
+        setLocationRelativeTo(null);
+        setAlwaysOnTop(true);
+        setVisible(true);
     }
 }

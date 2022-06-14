@@ -1,3 +1,8 @@
+[***] #13 "Unsupported Operation for Raw getting tags from WAV"
+      Detailed Description: none
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #12 "Resource Folder creation fault"
       Detailed Description: Failure to create the resource folder along with the needed
       properties file that is included with the program.

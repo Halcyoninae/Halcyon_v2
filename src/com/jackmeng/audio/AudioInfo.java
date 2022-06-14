@@ -197,6 +197,10 @@ public class AudioInfo {
    * @return The value of the key.
    */
   public String getRaw(FieldKey key) {
-    return checkEmptiness(t.getFirst(key)) ? "Unknown" : t.getFirst(key);
+    try {
+      return checkEmptiness(t.getFirst(key)) ? "Unknown" : t.getFirst(key);
+    } catch (UnsupportedOperationException e) {
+      return "Unsupported";
+    }
   }
 }
