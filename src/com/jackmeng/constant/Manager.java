@@ -162,6 +162,8 @@ public interface Manager {
   public static final String ADDFOLDER_BUTTON_TEXT = "+";
   public static final String ADDFOLDER_BUTTON_TOOLTIP =
     "Add a new folder to the playlist.";
+  
+  public static final String ADDFOLDER_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/add_folder.png";
 
   public static final String SETTINGS_BUTTON_DEFAULT_ICON =
     RSC_FOLDER_NAME + "/bbloc/settings_normal.png";

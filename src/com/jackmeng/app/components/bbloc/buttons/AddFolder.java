@@ -26,7 +26,7 @@ import java.io.File;
  */
 public class AddFolder extends JButton implements BBlocButton {
   public AddFolder() {
-    super(Global.rd.getFromAsImageIcon(Manager.FILEVIEW_DEFAULT_FOLDER_ICON));
+    super(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON));
     setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
     setOpaque(true);
     setBackground(null);
