@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 /**
  * Represents an audio event.

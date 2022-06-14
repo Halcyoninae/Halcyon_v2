@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 import java.util.ArrayList;
 import java.util.List;

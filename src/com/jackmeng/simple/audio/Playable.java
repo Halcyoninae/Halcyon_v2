@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 /**
  * Implemented by everything that can be played.

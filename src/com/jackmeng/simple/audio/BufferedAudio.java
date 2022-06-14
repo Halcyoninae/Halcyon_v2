@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 import java.io.File;
 import java.io.IOException;

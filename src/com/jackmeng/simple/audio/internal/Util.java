@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio.internal;
+package com.jackmeng.simple.audio.internal;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

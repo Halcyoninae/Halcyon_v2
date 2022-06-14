@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 /**
  * This Listener interface is fired
@@ -41,7 +41,7 @@ public interface AudioTimeListener {
    *
    * @param event The event tied in with the proper event being fired
    *
-   * @see  simple.audio.AudioTimeEvent
+   * @see  com.jackmeng.simple.audio.AudioTimeEvent
    */
   public void timeUpdate(AudioTimeEvent event);
 }

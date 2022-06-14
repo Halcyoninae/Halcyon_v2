@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 /**
  * Is thrown when an error inside of SimpleAudio happens.

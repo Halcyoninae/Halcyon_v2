@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio.internal;
+package com.jackmeng.simple.audio.internal;
 
 import de.jarnbjo.ogg.EndOfOggStreamException;
 import de.jarnbjo.vorbis.VorbisStream;

@@ -2,15 +2,15 @@ package com.jackmeng.audio;
 
 import com.jackmeng.constant.Global;
 import com.jackmeng.debug.Debugger;
+import com.jackmeng.simple.audio.AudioException;
+import com.jackmeng.simple.audio.StreamedAudio;
 
 import java.io.File;
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
-import simple.audio.AudioException;
-import simple.audio.StreamedAudio;
 
 /**
- * A simplified version of the {@link simple.audio.Audio} interface
+ * A simplified version of the {@link com.jackmeng.simple.audio.Audio} interface
  * and all of it's subsets in order to make it easier to communicate with and
  * utilize
  * in the final program.
@@ -21,8 +21,8 @@ import simple.audio.StreamedAudio;
  * scope player instead of having to reinit everything on something new.
  *
  * @author Jack Meng
- * @see simple.audio.Audio
- * @see simple.audio.StreamedAudio
+ * @see com.jackmeng.simple.audio.Audio
+ * @see com.jackmeng.simple.audio.StreamedAudio
  * @since 3.0
  */
 public class Player {

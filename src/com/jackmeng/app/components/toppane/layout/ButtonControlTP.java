@@ -13,8 +13,7 @@ import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.debug.Debugger;
-
-import simple.audio.AudioException;
+import com.jackmeng.simple.audio.AudioException;
 
 import java.awt.*;
 

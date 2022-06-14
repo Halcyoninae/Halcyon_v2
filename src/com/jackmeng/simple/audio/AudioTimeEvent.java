@@ -1,9 +1,9 @@
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 /**
  * Represents the event fired
  * by the listener implemented:
- * {@link  simple.audio.AudioTimeListener}.
+ * {@link  com.jackmeng.simple.audio.AudioTimeListener}.
  *
  * @author Jack Meng
  */

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
@@ -52,7 +52,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
-import simple.audio.internal.VorbisInputStream;
+
+import com.jackmeng.simple.audio.internal.VorbisInputStream;
 
 /**
  * Implements the {@linkplain Audio} and should be extended by all classes representing a form of playable audio.

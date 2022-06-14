@@ -1,7 +1,7 @@
 package com.jackmeng.audio;
 
-import simple.audio.AudioEvent;
-import simple.audio.AudioListener;
+import com.jackmeng.simple.audio.AudioEvent;
+import com.jackmeng.simple.audio.AudioListener;
 
 /**
  * Represents a default audio listener,

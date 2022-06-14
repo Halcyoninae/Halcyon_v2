@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package simple.audio;
+package com.jackmeng.simple.audio;
 
 import java.net.URL;
 import java.util.List;
@@ -184,7 +184,7 @@ public interface Audio extends Playable {
    * Represents the return value of a set of
    * audio time listeners for the current audio stream.
    * @return A List representing an array of AudioTimeListener(s)
-   * @see  simple.audio.AudioTimeListener
+   * @see  com.jackmeng.simple.audio.AudioTimeListener
    * @author Jack Meng
    */
   public List<AudioTimeListener> getAudioTimeListeners();
