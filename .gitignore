@@ -3,3 +3,6 @@
 /halcyon
 /srctest
 .vscode
+*.iml
+.idea
+/out
