@@ -14,8 +14,6 @@ import com.jackmeng.app.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
-import com.jackmeng.debug.Debugger;
-import com.jackmeng.debug.Program;
 
 import java.awt.*;
 import java.util.ArrayList;
