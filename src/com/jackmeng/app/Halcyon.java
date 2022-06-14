@@ -6,6 +6,7 @@ import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.bbloc.BBlocView;
 import com.jackmeng.app.components.bbloc.buttons.AddFolder;
 import com.jackmeng.app.components.bbloc.buttons.GenericWebsiteLinker;
+import com.jackmeng.app.components.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bbloc.buttons.Settings;
 import com.jackmeng.app.components.dialog.ErrorWindow;
@@ -116,6 +117,7 @@ public class Halcyon {
           Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)
         )
       );
+      bb.add(new LegalNoticeButton());
       BBlocView b = new BBlocView();
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
       bottom.add(b);

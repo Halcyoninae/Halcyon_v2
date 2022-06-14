@@ -193,6 +193,10 @@ public interface Manager {
   public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 400;
   public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 600;
 
+  public static final String LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL = RSC_FOLDER_NAME + "/bbloc/legals_normal.png";
+
+  public static final String LEGAL_NOTICE_DOCS = RSC_FOLDER_NAME + "/files/LICENSE.txt";
+
   public static final int LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT = LEGALNOTICEDIALOG_MIN_HEIGHT - 100;
   /// LEGALNOTICEDIALOG Config END
 }

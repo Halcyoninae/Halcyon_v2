@@ -37,6 +37,21 @@ public class LegalNoticeDialog extends JFrame implements Runnable {
         JScrollPane inheritedScrollPane = new JScrollPane(legalNotice);
         inheritedScrollPane.setPreferredSize(
                 new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT));
+
+        JButton confirm = new JButton("Ok");
+        confirm.addActionListener(e -> dispatchEvents(true));
+
+        JButton cancel = new JButton("Close");
+        cancel.addActionListener(e -> dispatchEvents(false));
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        buttonPanel.add(confirm);
+        buttonPanel.add(cancel);
+
+        mainPane.add(inheritedScrollPane, BorderLayout.CENTER);
+        mainPane.add(buttonPanel, BorderLayout.SOUTH);
     }
 
     public synchronized ConfirmationListener[] getConfirmListeners() {
@@ -48,11 +63,13 @@ public class LegalNoticeDialog extends JFrame implements Runnable {
     }
 
     private void dispatchEvents(boolean status) {
-        new Thread(() -> {
-            for (ConfirmationListener listener : listeners) {
-                listener.onStatus(status);
-            }
-        }).start();
+        if (listeners != null) {
+            new Thread(() -> {
+                for (ConfirmationListener listener : listeners) {
+                    listener.onStatus(status);
+                }
+            }).start();
+        }
         dispose();
     }
 
