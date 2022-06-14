@@ -1,6 +1,6 @@
-[***] #13 "Unsupported Operation for Raw getting tags from WAV"
+[!FIXED!] [***] #13 "Unsupported Operation for Raw getting tags from WAV"
       Detailed Description: none
-      Status: Fixing
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #12 "Resource Folder creation fault"
