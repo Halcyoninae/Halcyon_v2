@@ -31,10 +31,10 @@
         Category: Visual Comfort
         Status: Investigating
 
-[**] #9 "Based on the implementation of feature #8 and #6"
+[!IGNORED!] [**] #9 "Based on the implementation of feature #8 and #6"
         Detailed Description: individual sorting buttons per opened tab view
         Category: User Comfort
-        Status: Working on
+        Status: IGNORED FOR-NOW
 
 [**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
         Detailed Description: Instead of using the tabs view as a way to scroll between
