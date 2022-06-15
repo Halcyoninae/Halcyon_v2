@@ -19,7 +19,7 @@ public class RefreshFileView extends JButton implements BBlocButton {
     setOpaque(true);
     setBackground(null);
     setBorder(null);
-
+    setContentAreaFilled(false);
     addActionListener(this);
   }
 

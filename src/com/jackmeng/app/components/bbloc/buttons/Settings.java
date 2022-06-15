@@ -24,6 +24,7 @@ public class Settings extends JButton implements BBlocButton {
     setBorder(null);
     setBackground(null);
     addActionListener(this);
+    setContentAreaFilled(false);
   }
 
   @Override

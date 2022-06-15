@@ -64,28 +64,33 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     playButton.setBackground(null);
     playButton.setBorder(null);
     playButton.addActionListener(this);
+    playButton.setContentAreaFilled(false);
 
     nextButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_FWD_ICON), 24, 24));
     nextButton.setBackground(null);
     nextButton.setBorder(null);
+    nextButton.setContentAreaFilled(false);
 
     previousButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_BWD_ICON), 24, 24));
     previousButton.setBackground(null);
     previousButton.setBorder(null);
+    previousButton.setContentAreaFilled(false);
 
     loopButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
             24));
     loopButton.setBackground(null);
     loopButton.setBorder(null);
+    loopButton.setContentAreaFilled(false);
 
     shuffleButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
             24));
     shuffleButton.setBackground(null);
     shuffleButton.setBorder(null);
+    shuffleButton.setContentAreaFilled(false);
 
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
@@ -102,6 +107,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
             24));
     likeButton.setBackground(null);
     likeButton.setBorder(null);
+    likeButton.setContentAreaFilled(false);
 
     buttons.add(volumeSlider);
     buttons.add(shuffleButton);
