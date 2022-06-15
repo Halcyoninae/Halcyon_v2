@@ -33,6 +33,7 @@ import org.jaudiotagger.tag.TagException;
 
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.debug.Debugger;
 import com.jackmeng.utils.DeImage;
 
 import java.awt.image.BufferedImage;
@@ -91,7 +92,7 @@ public class AudioInfo {
     try {
       af = AudioFileIO.read(f);
     } catch (Exception e) {
-      e.printStackTrace();
+      Debugger.log(e);
     }
     if (af != null) {
       t = af.getTag();

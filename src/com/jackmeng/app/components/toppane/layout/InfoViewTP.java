@@ -338,7 +338,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
   @Override
   public void componentResized(ComponentEvent e) {
     backPanel.repaint();
-    Debugger.unsafeLog("Amogus");
   }
 
   @Override
