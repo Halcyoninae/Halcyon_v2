@@ -1,3 +1,8 @@
+[***] #14 "When a tab is removed from the view, the duplicate dialog pops up"
+      Detailed Description: The duplicate dialog pops up when a closed tab is closed.
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [***] #13 "Unsupported Operation for Raw getting tags from WAV"
       Detailed Description: none
       Status: FIXED
