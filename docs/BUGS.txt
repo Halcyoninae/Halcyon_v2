@@ -1,6 +1,12 @@
-[***] #15 "Null ptr for un-invoked controls for volume slider"
-      Detailed Description: Called upon by convertVolume
+[***] #16 "InfoView not displaying audio track title"
+      Detailed Description: Something to do with properties reading, with the 
+      broken read from media track header property.
       Status: Fixing
+      State: Experimental-Build ~ MP4J
+
+[!FIXED!] [***] #15 "Null ptr for un-invoked controls for volume slider"
+      Detailed Description: Called upon by convertVolume
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #14 "When a tab is removed from the view, the duplicate dialog pops up"

@@ -21,6 +21,6 @@ public class TextParser {
    * @return A string that has been stripped based on the desired length
    */
   public static String strip(String str, int validLength) {
-    return str.length() > validLength ? str.substring(0, validLength) + "..." : str;
+    return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
   }
 }

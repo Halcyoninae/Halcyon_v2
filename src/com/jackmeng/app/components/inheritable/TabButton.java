@@ -7,7 +7,6 @@ import com.jackmeng.constant.Manager;
 import java.awt.*;
 
 import java.awt.event.*;
-import java.util.ArrayList;
 
 public class TabButton extends JPanel {
 
