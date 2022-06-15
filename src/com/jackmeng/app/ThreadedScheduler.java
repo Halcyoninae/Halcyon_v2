@@ -3,6 +3,7 @@ package com.jackmeng.app;
 import javax.swing.UIManager;
 
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
+import com.jackmeng.app.tasks.DefunctOptimizer;
 import com.jackmeng.app.tasks.PingFileView;
 import com.jackmeng.constant.Global;
 
@@ -36,6 +37,7 @@ public class ThreadedScheduler {
     // PROGRAMMABLE THREADS
     Runnable[] tasks = new Runnable[] {
         new PingFileView(Global.bp),
+        new DefunctOptimizer(),
     };
 
     for (Runnable t : tasks) {
