@@ -50,9 +50,9 @@
       Status: Temporary Fix; Used a try-catch
       State: Experimental-Build ~ MP4J
 
-[***] #8 "Fix FVRightClick to work with the new layout"
+[!FIXED!] [***] #8 "Fix FVRightClick to work with the new layout"
       Detailed Description: none
-      Status: Fixing
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #7 "Progress Slider value should reset on a new file being chosen"
