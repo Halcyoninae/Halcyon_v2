@@ -11,6 +11,14 @@ import com.jackmeng.app.components.dialog.LegalNoticeDialog;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
+/**
+ * A button that when pressed launches
+ * {@link com.jackmeng.app.components.dialog.LegalNoticeDialog} which displays
+ * information regarding legal documentation for all libraries and this program.
+ * 
+ * @author Jack Meng
+ * @since 3.1
+ */
 public class LegalNoticeButton extends JButton implements BBlocButton {
 
   public LegalNoticeButton() {

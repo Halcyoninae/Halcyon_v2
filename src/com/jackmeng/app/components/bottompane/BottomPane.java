@@ -27,6 +27,10 @@ public class BottomPane extends JTabbedPane {
    */
   private ArrayList<String> foldersAbsolute;
 
+  /**
+   * Holds a list of folder paths in correspondence with their index
+   * in the JTabbedPane.
+   */
   private Map<String, Integer> tabsMap;
 
   public BottomPane() {
