@@ -1,7 +1,7 @@
-[***] #16 "InfoView not displaying audio track title"
+[!FIXED!] [***] #16 "InfoView not displaying audio track title"
       Detailed Description: Something to do with properties reading, with the 
       broken read from media track header property.
-      Status: Fixing
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #15 "Null ptr for un-invoked controls for volume slider"

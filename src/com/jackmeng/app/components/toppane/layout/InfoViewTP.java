@@ -32,6 +32,7 @@ import javax.swing.tree.TreePath;
  * part.
  *
  * If the user wants to know more about the audio file
+ * 
  * @see com.jackmeng.app.components.dialog.AudioInfoDialog
  *
  * @author Jack Meng
@@ -58,36 +59,28 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     super();
     listeners = new ArrayList<>();
     setPreferredSize(
-      new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT)
-    );
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setMaximumSize(
-      new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT)
-    );
+        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     setMinimumSize(
-      new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT)
-    );
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setOpaque(false);
     info = new AudioInfo();
     setLayout(
-      new FlowLayout(
-        FlowLayout.CENTER,
-        Manager.INFOVIEW_FLOWLAYOUT_HGAP,
-        getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN
-      )
-    );
+        new FlowLayout(
+            FlowLayout.CENTER,
+            Manager.INFOVIEW_FLOWLAYOUT_HGAP,
+            getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
     infoDisplay = new JLabel(infoToString(info, true));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
     infoDisplay.setToolTipText(infoToString(info, false));
     BufferedImage bi = DeImage.imageIconToBI(
-      Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON)
-    );
-    bi =
-      DeImage.grayScale(DeImage.resizeNoDistort(
+        Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+    bi = DeImage.grayScale(DeImage.resizeNoDistort(
         bi,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT
-      ));
+        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT));
     artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,6 +96,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
    * the current audio file needs updating.
    *
    * Mostly when the user selects a new track to play.
+   * 
    * @param f The audio track to play {@link java.io.File}
    */
   private void setAssets(File f) {
@@ -110,24 +104,16 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       info = new AudioInfo(f);
       infoDisplay.setText(infoToString(info, true));
       infoDisplay.setToolTipText(infoToString(info, false));
-      if (
-        infoDisplay.getPreferredSize().width >=
-        (
-          getPreferredSize().width -
+      if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
           artWork.getPreferredSize().width -
           Manager.INFOVIEW_FLOWLAYOUT_HGAP *
-          2
-        )
-      ) {
+              2)) {
         if (Halcyon.bgt != null) {
-          Halcyon
-            .bgt.getFrame()
-            .setSize(
-              new Dimension(
-                Manager.MAX_WIDTH,
-                Halcyon.bgt.getFrame().getMinimumSize().height
-              )
-            );
+          Halcyon.bgt.getFrame()
+              .setSize(
+                  new Dimension(
+                      Manager.MAX_WIDTH,
+                      Halcyon.bgt.getFrame().getMinimumSize().height));
         }
       }
 
@@ -136,16 +122,12 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
         artWork.setIcon(new ImageIcon(bi));
       } else {
         BufferedImage bi = DeImage.imageIconToBI(
-          Global.rd.getFromAsImageIcon(
-            Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON
-          )
-        );
-        bi =
-          DeImage.resizeNoDistort(
+            Global.rd.getFromAsImageIcon(
+                Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        bi = DeImage.resizeNoDistort(
             bi,
             Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-            Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT
-          );
+            Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         artWork.setIcon(new ImageIcon(bi));
       }
       artWork.setToolTipText(coverIMGToolTip(info));
@@ -164,13 +146,12 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
    */
   private void dispatchEvents() {
     new Thread(
-      () -> {
-        for (InfoViewUpdateListener l : listeners) {
-          l.infoView(info);
-        }
-      }
-    )
-    .start();
+        () -> {
+          for (InfoViewUpdateListener l : listeners) {
+            l.infoView(info);
+          }
+        })
+        .start();
   }
 
   /**
@@ -192,48 +173,43 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
    * <li>Artist of the track</li>
    * <li>Bitrate, SampleRate, and Duration</li>
    * </ul>
-   * @param info The track to generate the information off of
-   * @param enforceLength The text length to enforce so the text doesn't go off the screen or become bugged.
-   * @return An HTML string that can be used by html supporting GUI Components to display the information.
+   * 
+   * @param info          The track to generate the information off of
+   * @param enforceLength The text length to enforce so the text doesn't go off
+   *                      the screen or become bugged.
+   * @return An HTML string that can be used by html supporting GUI Components to
+   *         display the information.
    */
   private static String infoToString(AudioInfo info, boolean enforceLength) {
-    return (
-      "<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: " +
-      ColorManager.MAIN_FG_STR +
-      ";font-size: 12px;\"><strong>" +
-      (
-        enforceLength
-          ? TextParser.strip(
-            info.getTag(
-              ResourceFolder
-                  .pm.get(
-                    ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER
-                  )
-                  .equals("true")
-                ? AudioInfo.KEY_MEDIA_TITLE
-                : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))
-                .getName()
-            ),
-            Manager.INFOVIEW_INFODISPLAY_MAX_CHARS
-          )
-          : info.getTag(AudioInfo.KEY_MEDIA_TITLE)
-      ) +
-      "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
-      info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
-      "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">" +
-      info.getTag(AudioInfo.KEY_BITRATE) +
-      "kpbs," +
-      info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
-      "kHz," +
-      TimeParser.fromSeconds(
-        Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION))
-      ) +
-      "</span></p></body></html>"
-    );
+    return ("<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: "
+        +
+        ColorManager.MAIN_FG_STR +
+        ";font-size: 12px;\"><strong>" +
+        (enforceLength
+            ? TextParser.strip(
+                ResourceFolder.pm.get(
+                    ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+                    .equals("true")
+                        ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+                        : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName(),
+                Manager.INFOVIEW_INFODISPLAY_MAX_CHARS)
+            : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
+        +
+        "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+        info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
+        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">" +
+        info.getTag(AudioInfo.KEY_BITRATE) +
+        "kpbs," +
+        info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
+        "kHz," +
+        TimeParser.fromSeconds(
+            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
+        +
+        "</span></p></body></html>");
   }
-  
+
   /**
-   * This internal method handles converting the given track's 
+   * This internal method handles converting the given track's
    * artwork into the tooltip information.
    * 
    * This tooltip information attached to the artwork label
@@ -247,22 +223,21 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
    * default external folder.
    * 
    * @param info The audio track to base off of
-   * @return An HTML string that formats the necessary information for the tooltip.
+   * @return An HTML string that formats the necessary information for the
+   *         tooltip.
    */
   private static String coverIMGToolTip(AudioInfo info) {
     try {
-      return (
-        "<html><body><img src=\"" +
-        new URL(
-          "file:///" +
-          ProgramResourceManager.writeBufferedImageToBin(info.getArtwork())
-        ) +
-        "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">" +
-        info.getArtwork().getWidth() +
-        "x" +
-        info.getArtwork().getHeight() +
-        "</p></body></html>"
-      );
+      return ("<html><body><img src=\"" +
+          new URL(
+              "file:///" +
+                  ProgramResourceManager.writeBufferedImageToBin(info.getArtwork()))
+          +
+          "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">" +
+          info.getArtwork().getWidth() +
+          "x" +
+          info.getArtwork().getHeight() +
+          "</p></body></html>");
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }
@@ -275,19 +250,14 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     if (path != null) {
       DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
       if (node.isLeaf() && !node.isRoot()) {
-        if (
-          !node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)
-        ) {
+        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
           setAssets(
-            new File(
-              Global
-                .bp.findByTree((JTree) e.getSource())
-                .getFolderInfo()
-                .getAbsolutePath() +
-              ProgramResourceManager.FILE_SLASH +
-              node.toString()
-            )
-          );
+              new File(
+                  Global.bp.findByTree((JTree) e.getSource())
+                      .getFolderInfo()
+                      .getAbsolutePath() +
+                      ProgramResourceManager.FILE_SLASH +
+                      node.toString()));
         }
       }
     }
