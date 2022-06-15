@@ -28,7 +28,7 @@ public class ThreadedScheduler {
     System.setOut(null);
     UIManager.put("FileChooser.readOnly", true);
     try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+      UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
     } catch (Exception e) {
       e.printStackTrace();
     }

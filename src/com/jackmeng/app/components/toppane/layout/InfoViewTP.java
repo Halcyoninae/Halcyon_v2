@@ -83,11 +83,11 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON)
     );
     bi =
-      DeImage.resizeNoDistort(
+      DeImage.grayScale(DeImage.resizeNoDistort(
         bi,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT
-      );
+      ));
     artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);

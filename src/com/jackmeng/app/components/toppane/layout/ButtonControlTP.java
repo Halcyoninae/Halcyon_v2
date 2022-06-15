@@ -22,9 +22,10 @@ import java.awt.event.*;
 /**
  * This class represents the GUI component collection
  * class that maintains all of the buttons like:
- * play, forward, volume. 
+ * play, forward, volume.
  * 
- * This component is located under the {@link com.jackmeng.app.components.toppane.layout.InfoViewTP}
+ * This component is located under the
+ * {@link com.jackmeng.app.components.toppane.layout.InfoViewTP}
  * component.
  * 
  * @author Jack Meng
@@ -65,18 +66,24 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     playButton.setBorder(null);
     playButton.addActionListener(this);
     playButton.setContentAreaFilled(false);
+    playButton.setRolloverEnabled(false);
+    playButton.setBorderPainted(false);
 
     nextButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_FWD_ICON), 24, 24));
     nextButton.setBackground(null);
     nextButton.setBorder(null);
     nextButton.setContentAreaFilled(false);
+    nextButton.setRolloverEnabled(false);
+    nextButton.setBorderPainted(false);
 
     previousButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_BWD_ICON), 24, 24));
     previousButton.setBackground(null);
     previousButton.setBorder(null);
     previousButton.setContentAreaFilled(false);
+    previousButton.setRolloverEnabled(false);
+    previousButton.setBorderPainted(false);
 
     loopButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
@@ -84,6 +91,8 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     loopButton.setBackground(null);
     loopButton.setBorder(null);
     loopButton.setContentAreaFilled(false);
+    loopButton.setRolloverEnabled(false);
+    loopButton.setBorderPainted(false);
 
     shuffleButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
@@ -91,6 +100,8 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     shuffleButton.setBackground(null);
     shuffleButton.setBorder(null);
     shuffleButton.setContentAreaFilled(false);
+    shuffleButton.setRolloverEnabled(false);
+    shuffleButton.setBorderPainted(false);
 
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
@@ -209,8 +220,13 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   @Override
   public synchronized void stateChanged(ChangeEvent e) {
     if (e.getSource().equals(volumeSlider)) {
-      new Thread(() -> Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue())))
-          .start();
+      new Thread(() -> {
+        try {
+          Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
+        } catch (NullPointerException ex) {
+          Debugger.log(ex);
+        }
+      }).start();
     }
   }
 }

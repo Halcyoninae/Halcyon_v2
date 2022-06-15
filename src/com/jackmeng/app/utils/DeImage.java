@@ -67,6 +67,18 @@ public class DeImage {
     return maskedImage;
   }
 
+  public static BufferedImage grayScale(BufferedImage sourceImage) {
+    BufferedImage grayImage = new BufferedImage(sourceImage.getWidth(), sourceImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g = grayImage.createGraphics();
+    g.drawImage(sourceImage, 0, 0, null);
+    g.setColor(Color.WHITE);
+    g.drawRect(0, 0, grayImage.getWidth() - 1, grayImage.getHeight() - 1);
+    g.setColor(Color.BLACK);
+    g.fillRect(0, 0, grayImage.getWidth() - 1, grayImage.getHeight() - 1);
+    g.dispose();
+    return grayImage;
+  }
+
   /**
    * Writes a BufferedImage to a file.
    * 

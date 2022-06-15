@@ -39,8 +39,10 @@ public class Player {
   /**
    * Constructs a player with a file location
    *
-   * Note: This constructor does assert for the file path leading to the file to be having access to the file
+   * Note: This constructor does assert for the file path leading to the file to
+   * be having access to the file
    * or the file existing at all.
+   * 
    * @param file The absolute file path leading to the audio track
    */
   public Player(String file) {
@@ -55,6 +57,7 @@ public class Player {
 
   /**
    * Constructs a player with a file object
+   * 
    * @param f The file object
    */
   public Player(File f) {
@@ -84,6 +87,7 @@ public class Player {
    * 
    * This method will create the new track in a threaded manner in order
    * prevent any other processes from being blocked.
+   * 
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
@@ -93,15 +97,14 @@ public class Player {
       audio.close();
     }
     new Thread(
-      () -> {
-        try {
-          this.audio = new StreamedAudio(new File(f));
-        } catch (AudioException e) {
-          e.printStackTrace();
-        }
-      }
-    )
-    .start();
+        () -> {
+          try {
+            this.audio = new StreamedAudio(new File(f));
+          } catch (AudioException e) {
+            e.printStackTrace();
+          }
+        })
+        .start();
   }
 
   public String getCurrentFile() {
@@ -117,11 +120,14 @@ public class Player {
   }
 
   public float convertVolume(float zeroToHundred) {
-    FloatControl control = (FloatControl) audio
-      .getControls()
-      .get("Master Gain");
-    float range = control.getMaximum() - control.getMinimum();
-    float gain = (zeroToHundred / 100.0f) * range + control.getMinimum();
-    return gain;
+    try {
+      FloatControl control = (FloatControl) audio
+          .getControls()
+          .get("Master Gain");
+      float range = control.getMaximum() - control.getMinimum();
+      return (zeroToHundred / 100.0f) * range + control.getMinimum();
+    } catch (NullPointerException e) {
+      return 0;
+    }
   }
 }
