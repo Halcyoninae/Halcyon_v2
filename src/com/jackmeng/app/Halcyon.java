@@ -1,7 +1,7 @@
 package com.jackmeng.app;
 
 import com.jackmeng.ProjectManager;
-import com.jackmeng.app.components.BigContainer;
+import com.jackmeng.app.components.Tailwind;
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.bbloc.BBlocView;
 import com.jackmeng.app.components.bbloc.buttons.AddFolder;
@@ -76,7 +76,7 @@ public class Halcyon {
    * This is the only instance of a variable
    * being placed here.
    */
-  public static BigContainer bgt;
+  public static Tailwind bgt;
 
   /**
    * No arguments are taken from the entry point
@@ -124,7 +124,7 @@ public class Halcyon {
       bottom.add(Global.bp);
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-      bgt = new BigContainer(m);
+      bgt = new Tailwind(m);
       bgt.run();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
 

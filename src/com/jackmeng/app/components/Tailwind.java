@@ -21,7 +21,7 @@ import java.awt.*;
  * @author Jack Meng
  * @since 3.0
  */
-public class BigContainer implements Runnable {
+public class Tailwind implements Runnable {
   private JFrame container;
   private JSplitPane mainPane;
 
@@ -30,7 +30,7 @@ public class BigContainer implements Runnable {
    * will be used as the content pane for the JFrame.
    * @param mainPane The JSplitPane instance to attach with
    */
-  public BigContainer(JSplitPane mainPane) {
+  public Tailwind(JSplitPane mainPane) {
     this.mainPane = mainPane;
     this.mainPane.setBorder(BorderFactory.createEmptyBorder());
     container = new JFrame("Halcyon Beta ~ exoad");
