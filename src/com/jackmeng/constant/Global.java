@@ -18,8 +18,8 @@ package com.jackmeng.constant;
 import com.jackmeng.app.components.bottompane.BottomPane;
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP;
-import com.jackmeng.app.connections.resource.ResourceDistributor;
 import com.jackmeng.audio.Player;
+import com.jackmeng.connections.resource.ResourceDistributor;
 
 /**
  * This class holds any public scoped Objects that may be used throughout

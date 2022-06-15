@@ -15,10 +15,11 @@
 
 package com.jackmeng.constant;
 
-import com.jackmeng.app.connections.properties.ResourceFolder;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.jackmeng.connections.properties.ResourceFolder;
 
 /**
  * A constant defined class that holds

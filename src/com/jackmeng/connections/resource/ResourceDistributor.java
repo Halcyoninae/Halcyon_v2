@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app.connections.resource;
+package com.jackmeng.connections.resource;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -28,7 +28,7 @@ import com.jackmeng.debug.Debugger;
  * This resource folder is not located externally and is packed in during
  * compilation to the generated binary.
  *
- * This class should not be confused with {@link com.jackmeng.app.connections.properties.ResourceFolder}
+ * This class should not be confused with {@link com.jackmeng.connections.properties.ResourceFolder}
  * as that class handles external resources, while this class handles internal resources.
  *
  * @author Jack Meng

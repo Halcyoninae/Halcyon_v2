@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app.connections.discord;
+package com.jackmeng.connections.discord;
 
 import com.jackmeng.debug.Debugger;
 

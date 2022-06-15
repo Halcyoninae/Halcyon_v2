@@ -26,7 +26,7 @@ import com.jackmeng.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.app.components.bbloc.buttons.Settings;
 import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.app.components.toppane.TopPane;
-import com.jackmeng.app.connections.properties.ResourceFolder;
+import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;

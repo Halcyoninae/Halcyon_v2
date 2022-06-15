@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app.connections.discord;
+package com.jackmeng.connections.discord;
 
 /**
  * An interface that manages constants for the Discord RPC 

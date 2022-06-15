@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app.connections.properties;
+package com.jackmeng.connections.properties;
 
 import java.util.Properties;
 import java.util.Map;
