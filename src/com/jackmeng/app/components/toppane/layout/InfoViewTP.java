@@ -17,15 +17,16 @@ package com.jackmeng.app.components.toppane.layout;
 
 import com.jackmeng.app.Halcyon;
 import com.jackmeng.app.connections.properties.ResourceFolder;
-import com.jackmeng.app.utils.DeImage;
-import com.jackmeng.app.utils.TextParser;
-import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.constant.StringManager;
+import com.jackmeng.utils.DeImage;
+import com.jackmeng.utils.TextParser;
+import com.jackmeng.utils.TimeParser;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

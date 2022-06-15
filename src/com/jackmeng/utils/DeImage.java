@@ -13,18 +13,27 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app.utils;
+package com.jackmeng.utils;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
+import de.ralleytn.simple.image.BoxBlurFilter;
+import de.ralleytn.simple.image.DesaturationGrayscaleFilter;
+import de.ralleytn.simple.image.GaussianBlurFilter;
+import de.ralleytn.simple.image.SimpleImage;
+
 import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.*;
 import javax.imageio.*;
+
+import java.awt.image.Kernel;
+import java.awt.image.ConvolveOp;
 
 import java.awt.geom.RoundRectangle2D;
 
@@ -38,6 +47,7 @@ import java.awt.geom.RoundRectangle2D;
  * @since 2.0
  */
 public class DeImage {
+
   private DeImage() {
   }
 
@@ -83,8 +93,9 @@ public class DeImage {
   }
 
   public static BufferedImage grayScale(BufferedImage sourceImage) {
-    // TO BE IMPL LATER
-    return sourceImage;
+    SimpleImage img = new SimpleImage(sourceImage);
+    img = img.filter(new DesaturationGrayscaleFilter());
+    return img.toBufferedImage();
   }
 
   /**
@@ -104,7 +115,8 @@ public class DeImage {
 
   /**
    * Resizes a BufferedImage by preserving the aspect ratio.
-   * @param img The BufferedImage to be resized.
+   * 
+   * @param img  The BufferedImage to be resized.
    * @param newW The new width of the image.
    * @param newH The new height of the image.
    * @return BufferedImage The resized image.
@@ -119,6 +131,39 @@ public class DeImage {
       dimg = img.getSubimage(0, h / 2 - w / 2, w, w);
     }
     return resize(dimg, newW, newH);
+  }
+
+  public static BufferedImage scaleDown(BufferedImage src, float scaleFactor) {
+    SimpleImage img = new SimpleImage(src);
+    img = img.scaleByFactor(scaleFactor);
+    return img.toBufferedImage();
+  }
+
+  public static BufferedImage zoomToCenter(BufferedImage img, double scaleFactor) {
+    int w = img.getWidth();
+    int h = img.getHeight();
+    int newW = (int) (w * scaleFactor);
+    int newH = (int) (h * scaleFactor);
+    BufferedImage dimg = null;
+    if (w > h) {
+      dimg = img.getSubimage(w / 2 - h / 2, 0, h, h);
+    } else {
+      dimg = img.getSubimage(0, h / 2 - w / 2, w, w);
+    }
+    return resize(dimg, newW, newH);
+  }
+
+  public static BufferedImage blurImage(BufferedImage srcIMG, float radius) {
+    BufferedImage dest =  srcIMG;
+    ColorModel cm = dest.getColorModel();
+    BufferedImage src = new BufferedImage(cm, dest.copyData(dest.getRaster().createCompatibleWritableRaster()),
+        cm.isAlphaPremultiplied(), null).getSubimage(0, 0, dest.getWidth(), dest.getHeight());
+    float[] matrix = new float[400];
+    for (int i = 0; i < matrix.length; i++) {
+      matrix[i] = 1f / matrix.length;
+    }
+    new ConvolveOp(new Kernel(20, 20, matrix), ConvolveOp.EDGE_NO_OP, null).filter(src, dest);
+    return dest;
   }
 
   /**
@@ -143,6 +188,7 @@ public class DeImage {
 
   /**
    * Converts an ImageIcon to a BufferedImage
+   * 
    * @param icon The ImageIcon to be converted
    * @return BufferedImage The converted BufferedImage
    */
@@ -152,7 +198,8 @@ public class DeImage {
 
   /**
    * Resizes a BufferedImage
-   * @param img The BufferedImage to be resized
+   * 
+   * @param img  The BufferedImage to be resized
    * @param newW The new width
    * @param newH The new height
    * @return BufferedImage The resized BufferedImage

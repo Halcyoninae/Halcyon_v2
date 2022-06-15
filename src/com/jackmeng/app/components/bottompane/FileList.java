@@ -32,9 +32,9 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultTreeModel;
 
 import com.jackmeng.app.events.FVRightClick;
-import com.jackmeng.app.utils.FolderInfo;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.FolderInfo;
 
 /**
  * Represents a Pane containing a list of files for only

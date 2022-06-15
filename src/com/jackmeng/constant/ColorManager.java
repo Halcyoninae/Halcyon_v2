@@ -15,8 +15,9 @@
 
 package com.jackmeng.constant;
 
-import com.jackmeng.app.utils.ColorTool;
 import java.awt.Color;
+
+import com.jackmeng.utils.ColorTool;
 
 /**
  * This interface holds constants for any color values that

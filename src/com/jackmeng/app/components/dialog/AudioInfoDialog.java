@@ -19,10 +19,10 @@ import javax.swing.*;
 
 import org.jaudiotagger.tag.FieldKey;
 
-import com.jackmeng.app.utils.TimeParser;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.TimeParser;
 
 import java.awt.*;
 

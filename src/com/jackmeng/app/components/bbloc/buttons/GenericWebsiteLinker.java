@@ -22,8 +22,8 @@ import javax.swing.JComponent;
 import java.awt.Desktop;
 
 import com.jackmeng.app.components.bbloc.BBlocButton;
-import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.debug.Debugger;
+import com.jackmeng.utils.DeImage;
 
 public class GenericWebsiteLinker {
   private GenericWebsiteLinker() {

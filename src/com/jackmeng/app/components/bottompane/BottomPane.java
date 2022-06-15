@@ -18,8 +18,8 @@ package com.jackmeng.app.components.bottompane;
 import javax.swing.*;
 
 import com.jackmeng.app.components.inheritable.TabButton;
-import com.jackmeng.app.utils.FolderInfo;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.FolderInfo;
 
 import java.awt.*;
 import java.io.File;

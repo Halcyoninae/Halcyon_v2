@@ -15,7 +15,7 @@
 
 package com.jackmeng.debug;
 
-import com.jackmeng.app.utils.TimeParser;
+import com.jackmeng.utils.TimeParser;
 
 /**
  * This is an external class that is called upon for when the

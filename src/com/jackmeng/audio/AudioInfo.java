@@ -31,9 +31,9 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.DeImage;
 
 import java.awt.image.BufferedImage;
 

@@ -22,13 +22,13 @@ import javax.swing.event.ChangeListener;
 import com.jackmeng.app.components.inheritable.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.events.AlignSliderWithBar;
-import com.jackmeng.app.utils.DeImage;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.simple.audio.AudioException;
+import com.jackmeng.utils.DeImage;
 
 import java.awt.*;
 
