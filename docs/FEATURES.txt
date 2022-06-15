@@ -11,11 +11,11 @@
         Category: Program Dynamic
         Status: Investigating
 
-[***] #16 "For each file added to a file-list, check if that file can be added"
+[!DENIED!] [***] #16 "For each file added to a file-list, check if that file can be added"
         Detailed Description: Make sure each file has the right permissions for the 
         file system and that each of them are actually valid files (by chunk headers)
         Category: Program Dynamic
-        Status: Not-started
+        Status: DENIED; really not needed
 
 [!NOT-IMPLEMENTING!] [**] #15 "Add a scroll bar to the InfoView's artwork label"
         Detailed Description: Allow the user to scroll through the image horizontally
@@ -55,12 +55,12 @@
         Category: User Comfort
         Status: IGNORED FOR-NOW
 
-[**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
+[!IMPLEMENTED!] [**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
         Detailed Description: Instead of using the tabs view as a way to scroll between
         different tabs, make it a view to display all of the user's selected playlists. 
         Then move the settings tab, etc. to bbloc
         Category: User Comfort
-        Status: Testing, All resource focused
+        Status: IMPLEMENTED
         Potential Bugs: 
                 -All of the listeners should be updated immediately regarding a closing of
                 a tab
