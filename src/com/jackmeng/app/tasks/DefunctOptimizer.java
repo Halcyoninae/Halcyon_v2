@@ -15,8 +15,11 @@
 
 package com.jackmeng.app.tasks;
 
+import com.jackmeng.connections.properties.ResourceFolder;
+import com.jackmeng.constant.ProgramResourceManager;
+
 /**
- * This class aims to optimize tasks throughout the JVM 
+ * This class aims to optimize tasks throughout the JVM
  * environment for this application during runtime.
  * 
  * It runs in the background and tries to optimize any
@@ -32,15 +35,17 @@ public class DefunctOptimizer implements Runnable {
 
   @Override
   public void run() {
-    new Thread(() -> {
-      while(true) {
-        Runtime.getRuntime().gc();
-        try {
-          Thread.sleep(4000);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
+      new Thread(() -> {
+        while (true) {
+          Runtime.getRuntime().gc();
+          try {
+            Thread.sleep(4000);
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
-      }
-    }).start();
+      }).start();
+    }
   }
 }

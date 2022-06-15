@@ -19,9 +19,16 @@ import javax.swing.*;
 
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP;
+import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
+import de.ralleytn.simple.image.SimpleImage;
+
 import java.awt.*;
+
+import java.awt.image.*;
 
 /**
  * The Halcyon Music Player has two main components for it's main component: A top and a
@@ -38,7 +45,7 @@ import java.awt.*;
  * @since 3.0
  */
 public class TopPane extends JPanel {
-
+  
   /**
    * Two instances of an InfoView and a ButtonControl view
    * are used to construct the Top View object.
@@ -50,16 +57,7 @@ public class TopPane extends JPanel {
     setMaximumSize(new Dimension(Manager.TOPPANE_MAX_WIDTH, Manager.TOPPANE_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.TOPPANE_MIN_WIDTH, Manager.TOPPANE_MIN_HEIGHT));
     setLayout(new BorderLayout());
-    
     add(ifp, BorderLayout.PAGE_START);
     add(bctp, BorderLayout.PAGE_END);
-  }
-
-  @Override
-  public void paintComponent(Graphics g) {
-    Graphics2D g2 = (Graphics2D) g;
-    super.paintComponent(g2);
-    /* TODO: Make this rendering use a speed render */
-    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
   }
 }

@@ -103,7 +103,7 @@ public interface Manager {
   );
 
   public static final String PROGRAM_ICON_LOGO =
-    RSC_FOLDER_NAME + "/app/logo.png";
+    RSC_FOLDER_NAME + "/app/logo2.png";
   /// END RESOURCE LOCATION FOR ICONS
 
   /// TOPPane Wrapper Config START

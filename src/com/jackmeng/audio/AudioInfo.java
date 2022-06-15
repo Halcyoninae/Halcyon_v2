@@ -161,26 +161,30 @@ public class AudioInfo {
    */
   public BufferedImage getArtwork() {
     BufferedImage img = null;
-    if (f.getAbsolutePath().endsWith(".mp3")) {
-      MP3File mp = null;
-      try {
-        mp = new MP3File(f);
-      } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
-          | InvalidAudioFrameException e1) {
-        e1.printStackTrace();
-      }
-      if (mp.getTag().getFirstArtwork() != null) {
+    try {
+      if (f.getAbsolutePath().endsWith(".mp3")) {
+        MP3File mp = null;
         try {
-          img = (BufferedImage) mp.getTag().getFirstArtwork().getImage();
-        } catch (IOException e) {
-          e.printStackTrace();
+          mp = new MP3File(f);
+        } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
+            | InvalidAudioFrameException e1) {
+          e1.printStackTrace();
+        }
+        if (mp.getTag().getFirstArtwork() != null) {
+          try {
+            img = (BufferedImage) mp.getTag().getFirstArtwork().getImage();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
         }
       }
-    }
-    if (img == null) {
+      if (img == null) {
+        return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+      } else {
+        return img;
+      }
+    } catch (NullPointerException e) {
       return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-    } else {
-      return img;
     }
   }
 

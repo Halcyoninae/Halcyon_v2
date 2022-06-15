@@ -23,11 +23,15 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.constant.StringManager;
+import com.jackmeng.debug.Debugger;
 import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.TextParser;
 import com.jackmeng.utils.TimeParser;
 
+import de.ralleytn.simple.image.SimpleImage;
+
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.net.MalformedURLException;
@@ -54,7 +58,7 @@ import javax.swing.tree.TreePath;
  * @author Jack Meng
  * @since 3.0
  */
-public class InfoViewTP extends JPanel implements TreeSelectionListener {
+public class InfoViewTP extends JPanel implements TreeSelectionListener, ComponentListener {
 
   /**
    * An extended listener for any classes that want
@@ -67,6 +71,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     void infoView(AudioInfo info);
   }
 
+  private JPanel topPanel, backPanel;
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
   private transient ArrayList<InfoViewUpdateListener> listeners;
@@ -81,8 +86,50 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     setMinimumSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setOpaque(false);
+
+    topPanel = new JPanel();
+    topPanel.setPreferredSize(
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+    topPanel.setMaximumSize(
+        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
+    topPanel.setMinimumSize(
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+    topPanel.setOpaque(false);
+
+    backPanel = new JPanel() {
+      @Override
+      public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setComposite(
+            AlphaComposite.getInstance(
+                AlphaComposite.SRC_ATOP,
+                0.2f));
+        BufferedImage original = Global.ifp.getInfo().getArtwork();
+        if (original.getWidth() > this.getWidth()
+            || original.getHeight() > this.getHeight()) {
+          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
+              this.getWidth(), this.getHeight())).toBufferedImage();
+        }
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+          original = DeImage.grayScale(original);
+        }
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+          original = DeImage.createGradientVertical(original, 255, 0);
+        }
+        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2, 0, null);
+      }
+    };
+    backPanel.setPreferredSize(
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+    backPanel.setMaximumSize(
+        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
+    backPanel.setMinimumSize(
+        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+    backPanel.setOpaque(false);
+
     info = new AudioInfo();
-    setLayout(
+    topPanel.setLayout(
         new FlowLayout(
             FlowLayout.CENTER,
             Manager.INFOVIEW_FLOWLAYOUT_HGAP,
@@ -103,8 +150,12 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
     artWork.setVerticalAlignment(SwingConstants.CENTER);
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    add(artWork);
-    add(infoDisplay);
+    topPanel.add(artWork);
+    topPanel.add(infoDisplay);
+    addComponentListener(this);
+    setLayout(new OverlayLayout(this));
+    add(topPanel);
+    add(backPanel);
   }
 
   /**
@@ -150,6 +201,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
       infoDisplay.revalidate();
       revalidate();
       dispatchEvents();
+      backPanel.repaint();
     }
   }
 
@@ -277,5 +329,30 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener {
         }
       }
     }
+  }
+
+  public AudioInfo getInfo() {
+    return info;
+  }
+
+  @Override
+  public void componentResized(ComponentEvent e) {
+    backPanel.repaint();
+    Debugger.unsafeLog("Amogus");
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e) {
+    // IGNORED
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e) {
+    // IGNORED
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e) {
+    // IGNORED
   }
 }
