@@ -4,7 +4,6 @@ import javax.swing.*;
 
 import com.jackmeng.app.components.inheritable.TabButton;
 import com.jackmeng.app.utils.FolderInfo;
-import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
 import java.awt.*;
@@ -25,8 +24,6 @@ public class BottomPane extends JTabbedPane {
    * that have been selected by the user.
    */
   private ArrayList<String> foldersAbsolute;
-
-  private int length = 0;
 
   public BottomPane() {
     super();
@@ -62,11 +59,11 @@ public class BottomPane extends JTabbedPane {
 
   public void pokeNewFileListTab(String folder) {
     FileList list = new FileList(new FolderInfo(folder));
-    add(new File(folder).getName(), new JLabel());
-    setTabComponentAt(length, new TabButton(this));
+    foldersAbsolute.add(new File(folder).getAbsolutePath());
+    add(new File(folder).getName(), list);
+    setTabComponentAt(getTabCount() - 1, new TabButton(this));
     this.revalidate();
     tabs.add(list);
-    foldersAbsolute.add(new File(folder).getAbsolutePath());
   }
 
   /**
@@ -85,7 +82,6 @@ public class BottomPane extends JTabbedPane {
         removeTabAt(i);
         needToRemove.add(i);
         foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
-        length--;
       } else {
         l.revalidateFiles();
       }
