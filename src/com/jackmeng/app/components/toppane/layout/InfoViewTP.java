@@ -117,7 +117,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
           original = DeImage.createGradientVertical(original, 255, 0);
         }
-        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2, 0, null);
+        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2, (this.getHeight() - original.getHeight()) / 2, null);
       }
     };
     backPanel.setPreferredSize(

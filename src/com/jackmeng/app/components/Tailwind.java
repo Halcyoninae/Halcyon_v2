@@ -18,6 +18,7 @@ package com.jackmeng.app.components;
 import javax.swing.*;
 
 import com.jackmeng.app.events.ForceMaxSize;
+import com.jackmeng.app.events.InstantClose;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
@@ -56,6 +57,8 @@ public class Tailwind implements Runnable {
     container.addComponentListener(
         new ForceMaxSize(container, Manager.MAX_WIDTH, Manager.MAX_HEIGHT, Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     container.getContentPane().add(mainPane);
+    
+    container.addWindowListener(new InstantClose());
   }
 
   /**
