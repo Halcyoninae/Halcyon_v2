@@ -9,7 +9,9 @@ import com.jackmeng.constant.Manager;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Handles the Tabs in the BottomPane.
@@ -25,9 +27,12 @@ public class BottomPane extends JTabbedPane {
    */
   private ArrayList<String> foldersAbsolute;
 
+  private Map<String, Integer> tabsMap;
+
   public BottomPane() {
     super();
     foldersAbsolute = new ArrayList<>();
+    tabsMap = new HashMap<>();
 
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
@@ -61,7 +66,18 @@ public class BottomPane extends JTabbedPane {
     FileList list = new FileList(new FolderInfo(folder));
     foldersAbsolute.add(new File(folder).getAbsolutePath());
     add(new File(folder).getName(), list);
-    setTabComponentAt(getTabCount() - 1, new TabButton(this));
+    TabButton button = new TabButton(this);
+    setTabComponentAt(getTabCount() - 1, button);
+    tabsMap.put(folder, getTabCount() - 1);
+    button.setListener(new TabButton.RemoveTabListener() {
+      @Override
+      public void onRemoveTab() {
+        int i = tabsMap.get(folder);
+        foldersAbsolute.remove(i);
+        tabsMap.remove(folder);
+        tabs.remove(i);
+      }
+    });
     this.revalidate();
     tabs.add(list);
   }
@@ -74,7 +90,7 @@ public class BottomPane extends JTabbedPane {
    * @see com.jackmeng.app.components.bottompane.FileList#revalidateFiles()
    */
   public synchronized void mastRevalidate() {
-    List<Integer> needToRemove = new ArrayList<>();
+    List<Integer> needToRemove = new ArrayList<>(); // helps to avoid ConcurrentModificationException
     int i = 0;
     for (FileList l : tabs) {
       if (!new File(l.getFolderInfo().getAbsolutePath()).exists()
@@ -82,6 +98,7 @@ public class BottomPane extends JTabbedPane {
         removeTabAt(i);
         needToRemove.add(i);
         foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
+        tabsMap.remove(l.getFolderInfo().getAbsolutePath());
       } else {
         l.revalidateFiles();
       }

@@ -7,12 +7,20 @@ import com.jackmeng.constant.Manager;
 import java.awt.*;
 
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class TabButton extends JPanel {
 
+  public static interface RemoveTabListener {
+    public void onRemoveTab();
+  }
+
   private final JTabbedPane parentPane;
 
+  private transient RemoveTabListener listener;
+
   public class CloseTabButton extends JButton implements ActionListener {
+
     public CloseTabButton() {
       setPreferredSize(new Dimension(Manager.BUTTON_STD_ICON_WIDTH_N_HEIGHT, Manager.BUTTON_STD_ICON_WIDTH_N_HEIGHT));
       setToolTipText("Close Tab");
@@ -34,8 +42,8 @@ public class TabButton extends JPanel {
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       g2.setStroke(new BasicStroke(1));
       g2.setColor(Color.WHITE);
-      g2.drawLine(2, 2, getWidth() - 2, getHeight() - 2);
-      g2.drawLine(getWidth() - 2, 2, 2, getHeight() - 2);
+      g2.drawLine(3, 3, getWidth() - 3, getHeight() - 3);
+      g2.drawLine(getWidth() - 3, 3, 3, getHeight() - 3);
     }
 
     @Override
@@ -43,6 +51,7 @@ public class TabButton extends JPanel {
       int i = parentPane.indexOfTabComponent(TabButton.this);
       if (i != -1) {
         parentPane.remove(i);
+        dispatchRemoveEvent();
       }
     }
   }
@@ -55,9 +64,9 @@ public class TabButton extends JPanel {
     JLabel label = new JLabel() {
       @Override
       public String getText() {
-        int index = parentPane.indexOfTabComponent(TabButton.this);
-        if (index != -1) {
-          return parentPane.getTitleAt(index);
+        int i = parentPane.indexOfTabComponent(TabButton.this);
+        if (i != -1) {
+          return parentPane.getTitleAt(i);
         }
         return null;
       }
@@ -67,5 +76,19 @@ public class TabButton extends JPanel {
     label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
     add(new CloseTabButton());
     setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
+  }
+
+  public CloseTabButton getInternalButton() {
+    return (CloseTabButton) getComponent(1);
+  }
+
+  public void setListener(RemoveTabListener listener) {
+    this.listener = listener;
+  }
+
+  public void dispatchRemoveEvent() {
+    if (listener != null) {
+      listener.onRemoveTab();
+    }
   }
 }
