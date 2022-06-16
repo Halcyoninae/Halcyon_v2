@@ -5,7 +5,7 @@
 
 > This is rework of an original project by me [MP4J](https://github.com/Exoad4JVM/mp4j)
 
-This is a music player written in Java with a nice GUI to facilitate your musical
+This is a music player written in Java with a nice GUI to facilitate your music
 playing needs.
 
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
