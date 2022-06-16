@@ -47,3 +47,5 @@ Git service every time I want to look at issues.
 
 This program uses external libraries and framework, and their attributed licenses
 can be found [here](LICENSE.txt).
+
+## Screenshots
