@@ -62,56 +62,41 @@ public interface Manager {
   /// GENERAL PROGRAM CONFIGURATION END
 
   /// BEGIN RESOURCE LOCATION FOR ICONS
-  public static final String FILEVIEW_ICON_FOLDER_OPEN =
-    RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  public static final String FILEVIEW_ICON_FOLDER_CLOSED =
-    RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  public static final String FILEVIEW_ICON_FILE =
-    RSC_FOLDER_NAME + "/fileview/leaf.png";
-  public static final String FILEVIEW_DEFAULT_FOLDER_ICON =
-    RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_FOLDER_OPEN = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_FOLDER_CLOSED = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_FILE = RSC_FOLDER_NAME + "/fileview/leaf.png";
+  public static final String FILEVIEW_DEFAULT_FOLDER_ICON = RSC_FOLDER_NAME + "/fileview/folder_icon.png";
 
-  public static final String GITHUB_LOGO_LIGHT =
-    RSC_FOLDER_NAME + "/external/github_light.png";
+  public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
 
-  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON =
-    RSC_FOLDER_NAME + "/infoview/disk.jpg";
-  public static final String BUTTONCTRL_PLAY_PAUSE_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
-  public static final String BUTTONCTRL_FWD_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
-  public static final String BUTTONCTRL_BWD_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
-  public static final String BUTTONCTRL_LOOP_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
-  public static final String BUTTONCTRL_SHUFFLE_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
-  public static final String BUTTONCTRL_MUTED_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
-  public static final String BUTTONCTRL_NOMUTED_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
-  public static final String BUTTONCTRL_LIKE_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
-  public static final String BUTTONCTRL_NOLIKE_ICON =
-    RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
+  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.jpg";
+  public static final String BUTTONCTRL_PLAY_PAUSE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
+  public static final String BUTTONCTRL_FWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
+  public static final String BUTTONCTRL_BWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
+  public static final String BUTTONCTRL_LOOP_ICON = RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
+  public static final String BUTTONCTRL_SHUFFLE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
+  public static final String BUTTONCTRL_MUTED_ICON = RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
+  public static final String BUTTONCTRL_NOMUTED_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
+  public static final String BUTTONCTRL_LIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
+  public static final String BUTTONCTRL_NOLIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
+  public static final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED = RSC_FOLDER_NAME
+      + "/buttoncontrol/shuffle_button_pressed.png";
+  public static final String BUTTONCONTROL_LOOP_ICON_PRESSED = RSC_FOLDER_NAME
+      + "/buttoncontrol/loop_button_pressed.png";
 
-  public static final String BBLOC_REFRESH_FILEVIEW_ICON =
-    RSC_FOLDER_NAME + "/bbloc/refresh_icon.png";
+  public static final String BBLOC_REFRESH_FILEVIEW_ICON = RSC_FOLDER_NAME + "/bbloc/refresh_icon.png";
 
   public static final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(
-    INFOVIEW_DISK_NO_FILE_LOADED_ICON
-  );
+      INFOVIEW_DISK_NO_FILE_LOADED_ICON);
 
-  public static final String PROGRAM_ICON_LOGO =
-    RSC_FOLDER_NAME + "/app/logo2.png";
+  public static final String PROGRAM_ICON_LOGO = RSC_FOLDER_NAME + "/app/logo2.png";
   /// END RESOURCE LOCATION FOR ICONS
 
   /// TOPPane Wrapper Config START
   public static final int TOPPANE_MIN_WIDTH = MIN_WIDTH - FILEVIEW_MIN_WIDTH;
   public static final int TOPPANE_MIN_HEIGHT = MIN_HEIGHT / 2;
 
-  public static final int TOPPANE_MAX_WIDTH =
-    TOPPANE_MIN_WIDTH - FILEVIEW_MAX_WIDTH;
+  public static final int TOPPANE_MAX_WIDTH = TOPPANE_MIN_WIDTH - FILEVIEW_MAX_WIDTH;
   public static final int TOPPANE_MAX_HEIGHT = MAX_HEIGHT / 2;
   /// TOPPane Wrapper Config END
 
@@ -149,46 +134,36 @@ public interface Manager {
   public static final int DIALOG_CONFIRM_MIN_WIDTH = 300;
   public static final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
 
-  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH =
-    DIALOG_CONFIRM_MIN_WIDTH - 20;
-  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT =
-    DIALOG_CONFIRM_MIN_HEIGHT / 5;
+  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
+  public static final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
 
   public static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
   /// DIALOG_CONFIRM Config END
 
   /// TABBED View Config Start
-  public static final String PLAYLIST_TAB_ICON =
-    RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
-  public static final String SLIDERS_TAB_ICON =
-    RSC_FOLDER_NAME + "/tabsview/slider_tab.png";
+  public static final String PLAYLIST_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/playlist_tab.png";
+  public static final String SLIDERS_TAB_ICON = RSC_FOLDER_NAME + "/tabsview/slider_tab.png";
 
   public static final String FILEVIEW_DEFAULT_TAB_NAME = "Playlist";
   public static final String SETTINGS_DEFAULT_TAB_NAME = "Settings";
   public static final String SLIDERS_DEFAULT_TAB_NAME = "Controls";
 
-  public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP =
-    "View your selected playlist(s) here.";
+  public static final String FILEVIEW_DEFAULT_TAB_TOOLTIP = "View your selected playlist(s) here.";
 
   public static final int TAB_VIEW_MIN_TEXT_STRIP_LENGTH = 10;
   /// TABBED View Config End
 
   /// BBLOC BUTTONS Config START
   public static final String ADDFOLDER_BUTTON_TEXT = "+";
-  public static final String ADDFOLDER_BUTTON_TOOLTIP =
-    "Add a new folder to the playlist.";
-  
+  public static final String ADDFOLDER_BUTTON_TOOLTIP = "Add a new folder to the playlist.";
+
   public static final String ADDFOLDER_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/add_folder.png";
 
-  public static final String SETTINGS_BUTTON_DEFAULT_ICON =
-    RSC_FOLDER_NAME + "/bbloc/settings_normal.png";
-  public static final String SETTINGS_BUTTON_PRESSED_ICON =
-    RSC_FOLDER_NAME + "/bbloc/settings_pressed.png";
-  public static final String SETTINGS_BUTTON_TOOLTIP =
-    "Open the settings dialog.";
+  public static final String SETTINGS_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/settings_normal.png";
+  public static final String SETTINGS_BUTTON_PRESSED_ICON = RSC_FOLDER_NAME + "/bbloc/settings_pressed.png";
+  public static final String SETTINGS_BUTTON_TOOLTIP = "Open the settings dialog.";
 
-  public static final String PROJECTPAGE_BUTTON_TOOLTIP =
-    "Visit this project's GitHub page.";
+  public static final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";
 
   public static final String REFRESH_BUTTON_TOOLTIP = "Refresh the playlist.";
   /// BBLOC BUTTONS Config END

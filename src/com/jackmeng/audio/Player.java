@@ -43,6 +43,7 @@ import javax.sound.sampled.FloatControl;
 public class Player {
   private StreamedAudio audio;
   private String currentAbsolutePath = "";
+  private boolean isLooping = false, isPlayListShuffling = false;
 
   /**
    * Constructs a player with a blank mp3 file
@@ -63,7 +64,7 @@ public class Player {
   public Player(String file) {
     try {
       audio = new StreamedAudio(new File(file));
-      audio.addAudioListener(new DefaultAudioListener());
+      audio.addAudioListener(new DefaultAudioListener(this));
       currentAbsolutePath = file;
     } catch (AudioException e) {
       Debugger.log(e);
@@ -79,7 +80,7 @@ public class Player {
     try {
       audio = new StreamedAudio(f);
       currentAbsolutePath = f.getAbsolutePath();
-      audio.addAudioListener(new DefaultAudioListener());
+      audio.addAudioListener(new DefaultAudioListener(this));
     } catch (AudioException e) {
       Debugger.log(e);
     }
@@ -95,6 +96,22 @@ public class Player {
       Debugger.log(e);
     }
     audio.play();
+  }
+
+  public void setLooping(boolean b) {
+    isLooping = b;
+  }
+
+  public boolean isLooping() {
+    return isLooping;
+  }
+
+  public void setShuffling(boolean b) {
+    isPlayListShuffling = b;
+  }
+
+  public boolean isShuffling() {
+    return isPlayListShuffling;
   }
 
   /**

@@ -33,6 +33,7 @@ import com.jackmeng.utils.DeImage;
 import java.awt.*;
 
 import java.awt.event.*;
+import java.io.File;
 
 /**
  * This class represents the GUI component collection
@@ -108,6 +109,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     loopButton.setContentAreaFilled(false);
     loopButton.setRolloverEnabled(false);
     loopButton.setBorderPainted(false);
+    loopButton.addActionListener(this);
 
     shuffleButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
@@ -117,6 +119,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     shuffleButton.setContentAreaFilled(false);
     shuffleButton.setRolloverEnabled(false);
     shuffleButton.setBorderPainted(false);
+    shuffleButton.addActionListener(this);
 
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
@@ -227,9 +230,50 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
             Global.player.getStream().pause();
           }
         }
+      } else if (e.getSource().equals(loopButton)) {
+        if (aif != null) {
+          if (Global.player.isShuffling()) {
+            Global.player.setShuffling(false);
+            shuffleButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
+                    24));
+          }
+          if (Global.player.isLooping()) {
+            Global.player.setLooping(false);
+            loopButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
+                    24));
+          } else {
+            Global.player.setLooping(true);
+            loopButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_LOOP_ICON_PRESSED), 24,
+                    24));
+          }
+        }
+      } else if (e.getSource().equals(shuffleButton)) {
+        if (aif != null) {
+          if (Global.player.isLooping()) {
+            Global.player.setLooping(false);
+            loopButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
+                    24));
+          }
+          if (Global.player.isShuffling()) {
+            Global.player.setShuffling(false);
+            shuffleButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
+                    24));
+          } else {
+            Global.player.setShuffling(true);
+            shuffleButton.setIcon(
+                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
+                    24));
+          }
+        }
       }
+      loopButton.repaint();
+      shuffleButton.repaint();
     }).start();
-
   }
 
   @Override

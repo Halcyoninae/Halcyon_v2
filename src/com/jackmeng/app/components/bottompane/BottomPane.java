@@ -109,7 +109,7 @@ public class BottomPane extends JTabbedPane {
    * @see com.jackmeng.app.components.bottompane.FileList#revalidateFiles()
    */
   public synchronized void mastRevalidate() {
-    List<Integer> needToRemove = new ArrayList<>(); // helps to avoid ConcurrentModificationException
+    List<Integer> needToRemove = new ArrayList<>();
     int i = 0;
     for (FileList l : tabs) {
       if (!new File(l.getFolderInfo().getAbsolutePath()).exists()

@@ -1,3 +1,8 @@
+[***] #19 "Pressing play again after initial pause starts all over"
+      Detailed Description: Causes a new file to be loaded
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] [**] #18 "Instantly stop audio on window close"
       Status: FIXED
       State: Experimental-Build ~ MP4J
