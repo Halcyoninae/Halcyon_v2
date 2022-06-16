@@ -83,7 +83,7 @@ int main(int argc, char** argv) {
       return 0;
     } else if(id == IDTRYAGAIN) {
       reconstructable();
-    } else if(id == IDOK) {
+    } else if(id == IDCONTINUE) {
       ShellExecute(NULL, "open", "https://www.java.com/en/download/", NULL, NULL,
                    SW_SHOW);
     }
