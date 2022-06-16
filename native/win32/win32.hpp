@@ -15,6 +15,10 @@
 
 #include <fstream>
 
+#include <string.h>
+
 #include <stdio.h>
+
+#include <windows.h>
 
 #endif
