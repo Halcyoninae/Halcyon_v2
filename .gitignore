@@ -7,3 +7,5 @@
 .idea
 /out
 *.exe
+*.jar
+*.jarzip

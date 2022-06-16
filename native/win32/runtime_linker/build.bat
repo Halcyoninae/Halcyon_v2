@@ -8,7 +8,7 @@
 @rem but WITHOUT ANY WARRANTY; without even the implied warranty of
 @rem MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 @rem GNU General Public License for more details.
-@rem You should have received a copy of the GNU General Public License
+@rem You should have received a copy of the GNU Getneral Public License
 @rem along with this program; If not, see <http://www.gnu.org/licenses/>.
 
 @rem !INSTALL
