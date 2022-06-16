@@ -1,3 +1,8 @@
+[***] #20 "Add functionality for next and backward"
+        Detailed Description: Since each FileList is a playlist technically.
+        Category: Implementation
+        Status: Working
+
 [***] #19 "Plugin Manager and Implementation"
         Detailed Description: Add a plugin manager interface for the program so users can
         add on to the program. Use the Discord RPC as a testing platform.
