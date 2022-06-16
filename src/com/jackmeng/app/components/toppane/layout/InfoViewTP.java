@@ -15,7 +15,7 @@
 
 package com.jackmeng.app.components.toppane.layout;
 
-import com.jackmeng.app.Halcyon;
+import com.jackmeng.Halcyon;
 import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.ColorManager;

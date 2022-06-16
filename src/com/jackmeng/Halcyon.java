@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.app;
+package com.jackmeng;
 
-import com.jackmeng.ProjectManager;
+import com.jackmeng.app.ThreadedScheduler;
 import com.jackmeng.app.components.Tailwind;
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.bbloc.BBlocView;
