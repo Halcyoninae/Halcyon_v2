@@ -3,3 +3,5 @@ without having to go into the deep end to make it work if there are any middlwar
 
 The native implementations are very limited and may not work for all Operating Systems, and 
 all of them are written in either the native Shell-code or C/C++.
+
+Everything in this directory are not built at the same time as the Java Source code. 
