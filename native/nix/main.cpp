@@ -84,9 +84,14 @@ std::string exec(const char* cmd) {
 int main(int argc, char** argv) {
   printf("%s", LICENSE_PRINTABLE.c_str());
 
-  // check if java is installed
   if (exec("which java").length() == 0) {
-    printf(JRE_FAILURE.c_str());
+    printf(JRE_FAILURE.c_str() "\nWould you like to install via SNAP?");
+    if (std::getchar() == 'y' && exec("which snap".length() != 0)) {
+          std::system("sudo snap install openjdk");
+    } else {
+      printf("\nPlease install Java Runtime Environment (JRE) and try again.\n");
+      exit(1);
+    }
     return 1;
   }
 
