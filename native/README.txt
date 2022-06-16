@@ -1,7 +1,6 @@
-The purpose of native linkers is for users to easily launch the program
-without having to go into the deep end to make it work if there are any middlware issues.
-
-The native implementations are very limited and may not work for all Operating Systems, and 
-all of them are written in either the native Shell-code or C/C++.
+The native implementations are meant to simplify any issues
+during the initial execution of JAR files that are binded to the program. However,
+these implementations can also be an updater for the program in which new information regarding
+the newest releast will be fetched.
 
 Everything in this directory are not built at the same time as the Java Source code. 
