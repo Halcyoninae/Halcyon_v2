@@ -29,7 +29,7 @@ public interface Manager {
   public static final int BUTTON_STD_ICON_WIDTH_N_HEIGHT = 16;
 
   /// BIGCONTAINER Size Config START ///
-  public static final int MIN_WIDTH = 460;
+  public static final int MIN_WIDTH = 450;
   public static final int MIN_HEIGHT = 500;
 
   public static final int MAX_WIDTH = MIN_HEIGHT + 40;
