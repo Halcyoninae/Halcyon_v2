@@ -19,7 +19,8 @@ This README's constant version is 3.0 [For the iteration]
 Currently there are no direct pre-compiled binary and executables that I have made
 for you to simply download and run. However, you can download this project and run it from source.
 
-**Main Class:** `Halcyon` [here](src/com/jackmeng/Halcyon.java)
+**Main Class:** `Halcyon` [here](src/com/jackmeng/Halcyon.java)<br>
+**Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
 
 ## Audio Framework
 
