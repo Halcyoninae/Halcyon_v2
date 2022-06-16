@@ -33,21 +33,42 @@ const std::string LINK_FAILURE =
     "however was not found.\nIn order to properly link, you must place the "
     "Halcyon.jar file in the ./bin/ directory.\n";
 
+const std::string JRE_FAILURE =
+    "The dynamic runtime linker did not find an installed JRE that can be used "
+    "to run the secondary executable.\nPress \"TRY AGAIN\" to force "
+    "load.\nPress \"OK\" to go to the JRE download page.\n";
+
 int main(int argc, char** argv) {
   printf("%s", LICENSE_PRINTABLE.c_str());
 
+  // check if java is installed
+  if (system("java -version") != 0) {
+    int id = MessageBox(HWND_MESSAGE, (LPCSTR)JRE_FAILURE, (LPCSTR)L"JRE Missing",
+                        MB_CANCELTRYCONTINUE | MB_ICONWARNING);
+    if(id == IDCANCEL) {
+      return 0;
+    } else if(id == IDTRYAGAIN) {
+      std::system("java -jar ./bin/Halcyon.jar");
+    } else if(id == IDOK) {
+      ShellExecute(NULL, "open", "https://www.java.com/en/download/", NULL, NULL,
+                   SW_SHOW);
+    }
+    return 1;
+  }
+
   std::ifstream file("./bin/Halcyon.jar");
+
   if (!file.good()) {
     printf(LINK_FAILURE.c_str());
 
     MessageBox(NULL, (LPCSTR)LINK_FAILURE.c_str(),
-               (LPCSTR) "Halcyon Native Linker", MB_ICONWARNING | MB_OK);
+               (LPCSTR)L"Halcyon Native Linker", MB_ICONWARNING | MB_OK);
     ShellExecute(NULL, (LPCSTR) "open", (LPCSTR) "explorer.exe", (LPCSTR) ".",
                  NULL, SW_SHOW);
 
     return 1;
   } else {
-    std::system("java -jar /bin/Halcyon.jar");
+    std::system("java -jar ./bin/Halcyon.jar");
   }
   return 0;
 }
