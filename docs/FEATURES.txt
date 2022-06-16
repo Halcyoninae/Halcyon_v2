@@ -1,3 +1,9 @@
+[***] #19 "Plugin Manager and Implementation"
+        Detailed Description: Add a plugin manager interface for the program so users can
+        add on to the program. Use the Discord RPC as a testing platform.
+        Category: Program Dynamic
+        Status: None
+
 [!DENIED!] [**] #18 "Add a second Tree to display all of the available playlists"
         Detailed Description: Add a tree component to the right of BottomPane
         that displays a list of all of the available playlists
