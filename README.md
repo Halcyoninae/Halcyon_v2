@@ -5,7 +5,7 @@
 
 > This is rework of an original project by me [MP4J](https://github.com/Exoad4JVM/mp4j)
 
-This is a music player written in Java with a nice GUI to facilitate your musical
+This is a music player written in Java with a nice GUI to facilitate your music
 playing needs.
 
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
@@ -19,7 +19,8 @@ This README's constant version is 3.0 [For the iteration]
 Currently there are no direct pre-compiled binary and executables that I have made
 for you to simply download and run. However, you can download this project and run it from source.
 
-**Main Class:** `Halcyon` [here](src/com/jackmeng/app/Halcyon.java)
+**Main Class:** `Halcyon` [here](src/com/jackmeng/Halcyon.java)<br>
+**Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
 
 ## Audio Framework
 
@@ -47,3 +48,6 @@ Git service every time I want to look at issues.
 
 This program uses external libraries and framework, and their attributed licenses
 can be found [here](LICENSE.txt).
+
+## Screenshots
+![](docs/unknown.png) ![](docs/unknown2.png)
