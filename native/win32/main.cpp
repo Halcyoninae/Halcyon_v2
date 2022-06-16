@@ -36,19 +36,53 @@ const std::string LINK_FAILURE =
 const std::string JRE_FAILURE =
     "The dynamic runtime linker did not find an installed JRE that can be used "
     "to run the secondary executable.\nPress \"TRY AGAIN\" to force "
-    "load.\nPress \"OK\" to go to the JRE download page.\n";
+    "load.\nPress \"CONTINUE\" to go to the JRE download page.\n";
+
+inline void reconstructable() {
+  std::ifstream file("./bin/Halcyon.jar");
+
+  if (!file.good()) {
+    printf(LINK_FAILURE.c_str());
+
+    MessageBox(NULL, (LPCSTR)LINK_FAILURE.c_str(),
+               (LPCSTR)"Halcyon Native Linker", MB_ICONWARNING | MB_OK);
+    ShellExecute(NULL, (LPCSTR) "open", (LPCSTR) "explorer.exe", (LPCSTR) ".",
+                 NULL, SW_SHOW);
+
+   exit(1);
+  } else {
+    std::system("java -jar ./bin/Halcyon.jar");
+  }
+}
+
+std::string exec(const char* cmd) {
+  char buffer[128];
+  std::string result = "";
+  FILE* pipe = popen(cmd, "r");
+  if (!pipe) throw std::runtime_error("popen() failed!");
+  try {
+    while (fgets(buffer, sizeof buffer, pipe) != NULL) {
+      result += buffer;
+    }
+  } catch (...) {
+    pclose(pipe);
+    throw;
+  }
+  pclose(pipe);
+  return result;
+}
 
 int main(int argc, char** argv) {
   printf("%s", LICENSE_PRINTABLE.c_str());
 
   // check if java is installed
-  if (system("java -version") != 0) {
-    int id = MessageBox(HWND_MESSAGE, (LPCSTR)JRE_FAILURE, (LPCSTR)L"JRE Missing",
+  if (exec("which javacxzcxzcxzcx").length() == 0) {
+    int id = MessageBox(NULL, (LPCSTR)JRE_FAILURE.c_str(), (LPCSTR)"JRE Missing",
                         MB_CANCELTRYCONTINUE | MB_ICONWARNING);
     if(id == IDCANCEL) {
       return 0;
     } else if(id == IDTRYAGAIN) {
-      std::system("java -jar ./bin/Halcyon.jar");
+      reconstructable();
     } else if(id == IDOK) {
       ShellExecute(NULL, "open", "https://www.java.com/en/download/", NULL, NULL,
                    SW_SHOW);
@@ -56,19 +90,6 @@ int main(int argc, char** argv) {
     return 1;
   }
 
-  std::ifstream file("./bin/Halcyon.jar");
-
-  if (!file.good()) {
-    printf(LINK_FAILURE.c_str());
-
-    MessageBox(NULL, (LPCSTR)LINK_FAILURE.c_str(),
-               (LPCSTR)L"Halcyon Native Linker", MB_ICONWARNING | MB_OK);
-    ShellExecute(NULL, (LPCSTR) "open", (LPCSTR) "explorer.exe", (LPCSTR) ".",
-                 NULL, SW_SHOW);
-
-    return 1;
-  } else {
-    std::system("java -jar ./bin/Halcyon.jar");
-  }
+  reconstructable();
   return 0;
 }
