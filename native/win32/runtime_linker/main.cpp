@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
   printf("%s", LICENSE_PRINTABLE.c_str());
 
   // check if java is installed
-  if (exec("which javacxzcxzcxzcx").length() == 0) {
+  if (exec("which java").length() == 0) {
     int id = MessageBox(NULL, (LPCSTR)JRE_FAILURE.c_str(), (LPCSTR)"JRE Missing",
                         MB_CANCELTRYCONTINUE | MB_ICONWARNING);
     if(id == IDCANCEL) {
