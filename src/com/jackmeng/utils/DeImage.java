@@ -47,6 +47,9 @@ import java.awt.geom.RoundRectangle2D;
  * @since 2.0
  */
 public class DeImage {
+  public enum Directional {
+    TOP, LEFT, RIGHT, BOTTOM;
+  }
 
   private DeImage() {
   }
@@ -92,6 +95,12 @@ public class DeImage {
     return maskedImage;
   }
 
+  /**
+   * Applies a grayscale to an image.
+   * 
+   * @param sourceImage The image to be grayscaled.
+   * @return BufferedImage The grayscaled image.
+   */
   public static BufferedImage grayScale(BufferedImage sourceImage) {
     SimpleImage img = new SimpleImage(sourceImage);
     img = img.filter(new DesaturationGrayscaleFilter());
@@ -154,7 +163,7 @@ public class DeImage {
   }
 
   public static BufferedImage blurImage(BufferedImage srcIMG, float radius) {
-    BufferedImage dest =  srcIMG;
+    BufferedImage dest = srcIMG;
     ColorModel cm = dest.getColorModel();
     BufferedImage src = new BufferedImage(cm, dest.copyData(dest.getRaster().createCompatibleWritableRaster()),
         cm.isAlphaPremultiplied(), null).getSubimage(0, 0, dest.getWidth(), dest.getHeight());
@@ -228,13 +237,57 @@ public class DeImage {
     Graphics2D g2d = alphamask.createGraphics();
     LinearGradientPaint lgp = new LinearGradientPaint(
         new Point(0, 0),
-        new Point(0, alphamask.getHeight() / 2),
+        new Point(0, alphamask.getHeight()),
         new float[] { 0, 1 },
         new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
     g2d.setPaint(lgp);
     g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
     g2d.dispose();
     return applyMask(img, alphamask, AlphaComposite.DST_IN);
+  }
+
+  public static BufferedImage createGradient(BufferedImage img, int startOpacity, int endOpacity,
+      Directional opacityStartDirection) {
+    if (opacityStartDirection == Directional.TOP) {
+      return createGradientVertical(img, startOpacity, endOpacity);
+    } else if (opacityStartDirection == Directional.BOTTOM) {
+      BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = alphamask.createGraphics();
+      LinearGradientPaint lgp = new LinearGradientPaint(
+          new Point(0, alphamask.getHeight()),
+          new Point(0, 0),
+          new float[] { 0, 1 },
+          new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
+      g2d.setPaint(lgp);
+      g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
+      g2d.dispose();
+      return applyMask(img, alphamask, AlphaComposite.DST_IN);
+    } else if (opacityStartDirection == Directional.LEFT) {
+      BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = alphamask.createGraphics();
+      LinearGradientPaint lgp = new LinearGradientPaint(
+          new Point(0, alphamask.getHeight() / 2),
+          new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
+          new float[] { 0, 1 },
+          new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
+      g2d.setPaint(lgp);
+      g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
+      g2d.dispose();
+      return applyMask(img, alphamask, AlphaComposite.DST_IN);
+    } else if (opacityStartDirection == Directional.RIGHT) {
+      BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
+      Graphics2D g2d = alphamask.createGraphics();
+      LinearGradientPaint lgp = new LinearGradientPaint(
+          new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
+          new Point(0, alphamask.getHeight() /2),
+          new float[] { 0, 1 },
+          new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
+      g2d.setPaint(lgp);
+      g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
+      g2d.dispose();
+      return applyMask(img, alphamask, AlphaComposite.DST_IN);
+    }
+    return img;
   }
 
   /**

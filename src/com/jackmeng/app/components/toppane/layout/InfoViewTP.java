@@ -23,9 +23,11 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.constant.StringManager;
+import com.jackmeng.debug.Debugger;
 import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.TextParser;
 import com.jackmeng.utils.TimeParser;
+import com.jackmeng.utils.DeImage.Directional;
 
 import de.ralleytn.simple.image.SimpleImage;
 
@@ -100,10 +102,18 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
+        float compositeAlpha = 0.5f;
+
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+          compositeAlpha = 0.2f;
+        } else {
+          compositeAlpha = 0.6f;
+        }
+
         g2d.setComposite(
             AlphaComposite.getInstance(
                 AlphaComposite.SRC_ATOP,
-                0.2f));
+                compositeAlpha));
         BufferedImage original = Global.ifp.getInfo().getArtwork();
         if (original.getWidth() > this.getWidth()
             || original.getHeight() > this.getHeight()) {
@@ -115,8 +125,18 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
         }
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
           original = DeImage.createGradientVertical(original, 255, 0);
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("focused")) {
+            original = DeImage.createGradient(original, 255, 0, Directional.BOTTOM);
+          } else if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
+              .equals("left")) {
+            original = DeImage.createGradient(original, 255, 0, Directional.LEFT);
+          } else if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
+              .equals("right")) {
+            original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
+          }
         }
-        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2, (this.getHeight() - original.getHeight()) / 2, null);
+        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2,
+            (this.getHeight() - original.getHeight()) / 2, null);
       }
     };
     backPanel.setPreferredSize(
