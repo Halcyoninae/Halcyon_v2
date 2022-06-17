@@ -17,6 +17,9 @@ playing needs.
 This README is updated for the version: 3.1 [For the program]
 This README's constant version is 3.0 [For the iteration]
 
+This program currently has a lot of features yet to be implemented. And with these new additions also bring a lot of new bugs that needs
+fixing!
+
 ## Installation
 
 Currently there are no direct pre-compiled binary and executables that I have made
