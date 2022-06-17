@@ -1,7 +1,7 @@
-{URGENT} [***] "Icons are very pixelated for resources"
+[!FIXED!] {URGENT} [***] #20 "Icons are very pixelated for resources"
       Detailed Description: Upscale icons so they are not as blurry or pixelated
       for certain resolutions
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [***] #19 "Pressing play again after initial pause starts all over"
