@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * @since 3.0
  * @see java.io.File
  */
-public class FileParser {
+public final class FileParser {
 
   private FileParser() {}
 
@@ -40,11 +40,11 @@ public class FileParser {
   public static File[] parseOnlyAudioFiles(File folder, String[] rules) {
     File[] files = folder.listFiles();
     ArrayList<File> audioFiles = new ArrayList<>();
-    for (int i = 0; i < files.length; i++) {
-      if (files[i].isFile()) {
-        for (int j = 0; j < rules.length; j++) {
-          if (files[i].getAbsolutePath().endsWith("." + rules[j])) {
-            audioFiles.add(files[i]);
+    for (File f : files) {
+      if (f.isFile()) {
+        for (String rule : rules) {
+          if (f.getAbsolutePath().endsWith("." + rule)) {
+            audioFiles.add(f);
           }
         }
       }
@@ -60,10 +60,10 @@ public class FileParser {
    */
   public static boolean contains(File folder, String[] rules) {
     File[] files = folder.listFiles();
-    for (int i = 0; i < files.length; i++) {
-      if (files[i].isFile()) {
-        for (int j = 0; j < rules.length; j++) {
-          if (files[i].getAbsolutePath().endsWith("." + rules[j])) {
+    for(File f : files) {
+      if (f.isFile()) {
+        for(String rule : rules) {
+          if(f.getAbsolutePath().endsWith("." + rule)) {
             return true;
           }
         }

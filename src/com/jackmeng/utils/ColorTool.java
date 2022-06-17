@@ -23,7 +23,7 @@ import java.awt.Color;
  * @author Jack Meng
  * @since 2.0
  */
-public class ColorTool {
+public final class ColorTool {
   private ColorTool() {
   }
 

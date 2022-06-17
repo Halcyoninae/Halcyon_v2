@@ -21,7 +21,7 @@ package com.jackmeng.utils;
  * @author Jack Meng
  * @since 3.0
  */
-public class TextParser {
+public final class TextParser {
   private TextParser() {}
 
   /**

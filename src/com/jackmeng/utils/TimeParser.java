@@ -25,7 +25,7 @@ import java.util.Date;
  * @author Jack Meng
  * @since 3.0
  */
-public class TimeParser {
+public final class TimeParser {
 
   private TimeParser() {}
 

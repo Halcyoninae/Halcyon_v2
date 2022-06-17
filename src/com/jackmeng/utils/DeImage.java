@@ -44,7 +44,7 @@ import java.awt.geom.RoundRectangle2D;
  * @author Jack Meng
  * @since 2.0
  */
-public class DeImage {
+public final class DeImage {
   public enum Directional {
     TOP, LEFT, RIGHT, BOTTOM;
   }
