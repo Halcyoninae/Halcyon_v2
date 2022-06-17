@@ -63,6 +63,7 @@ public final class DeImage {
   public static BufferedImage imagetoBI(Image image) {
     BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
     Graphics2D big = bi.createGraphics();
+    big.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     big.drawImage(image, 0, 0, null);
     big.dispose();
     return bi;
@@ -216,6 +217,8 @@ public final class DeImage {
     BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
     Graphics2D g2d = dimg.createGraphics();
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2d.drawImage(tmp, 0, 0, null);
     g2d.dispose();
 
@@ -296,7 +299,7 @@ public final class DeImage {
    */
   public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
     Image img = image.getImage();
-    Image newImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    return new ImageIcon(newImg);
+    Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+    return new ImageIcon(newimg);
   }
 }

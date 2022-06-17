@@ -48,6 +48,7 @@ public class AddFolder extends JButton implements BBlocButton {
     setOpaque(true);
     setBackground(null);
     setBorder(null);
+    setDoubleBuffered(true);
     setContentAreaFilled(false);
     addActionListener(new ActionListener() {
       @Override

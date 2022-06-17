@@ -39,6 +39,7 @@ public class GenericWebsiteLinker {
       setOpaque(true);
       setBackground(null);
       setBorder(null);
+      setDoubleBuffered(true);
       setContentAreaFilled(false);
       this.url = url;
     }

@@ -43,6 +43,7 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
     addActionListener(this);
     setOpaque(true);
     setBackground(null);
+    setDoubleBuffered(true);
     setBorder(null);
     setContentAreaFilled(false);
   }

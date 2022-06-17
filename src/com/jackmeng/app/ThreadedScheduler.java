@@ -23,7 +23,9 @@ import com.jackmeng.app.tasks.PingFileView;
 import com.jackmeng.constant.Global;
 
 public class ThreadedScheduler {
-  public ThreadedScheduler() {}
+  public ThreadedScheduler() {
+  }
+
   /**
    * Anything that needs initialization should be done here.
    * <br>
@@ -42,6 +44,7 @@ public class ThreadedScheduler {
     System.setProperty("sun.jnu.encoding", "UTF-8");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     System.setOut(null);
+    System.setProperty("sun.java2d.uiScale", "1.0");
     UIManager.put("FileChooser.readOnly", true);
     try {
       UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());

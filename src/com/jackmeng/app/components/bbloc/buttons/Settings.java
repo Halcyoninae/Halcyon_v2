@@ -38,6 +38,7 @@ public class Settings extends JButton implements BBlocButton {
     setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
     setOpaque(true);
     setBorder(null);
+    setDoubleBuffered(true);
     setBackground(null);
     addActionListener(this);
     setContentAreaFilled(false);
