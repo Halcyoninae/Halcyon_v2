@@ -1,3 +1,8 @@
+[**] #21 "Add property setting to have to different gradient, one from the left and one from the top"
+        Detailed Description: Top, left, bottom, right
+        Category: Visual Comfort, Program Dynamic
+        Status: none
+
 [***] #20 "Add functionality for next and backward"
         Detailed Description: Since each FileList is a playlist technically.
         Category: Implementation
