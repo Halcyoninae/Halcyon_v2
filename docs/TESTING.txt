@@ -1,8 +1,0 @@
-[#2] "Check if everything works after removing deprecated classes"
-  Testing Quote: Test for any runtime exceptions that may occur during
-  removal of deprecated GUI based classes.
-  Dire; 25/30
-
-[#1] "File View System Revalidation"
-  Testing Quota: Stress Test against large amount of files
-  Dire: 1/30
