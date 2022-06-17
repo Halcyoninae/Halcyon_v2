@@ -85,7 +85,7 @@ public class ProgramResourceManager {
     properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, new String[] { "true", "false" });
     properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
         new String[] { "top", "focused", "left", "right" });
-    properties.put(KEY_PROGRAM_HIDPI_VALUE, new String[] { "1.0", "1.1", "1.2", "0.9", "0.8", "1.3" });
+    properties.put(KEY_PROGRAM_HIDPI_VALUE, new String[] { "1.0", "1.1", "0.9" });
     return properties;
   }
 

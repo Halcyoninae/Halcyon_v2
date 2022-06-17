@@ -23,6 +23,7 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.constant.StringManager;
+import com.jackmeng.utils.Async;
 import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.TextParser;
 import com.jackmeng.utils.TimeParser;
@@ -185,42 +186,44 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
    * @param f The audio track to play {@link java.io.File}
    */
   private void setAssets(File f) {
-    if (f.exists() && f.isFile()) {
-      info = new AudioInfo(f);
-      infoDisplay.setText(infoToString(info, true));
-      infoDisplay.setToolTipText(infoToString(info, false));
-      if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
-          artWork.getPreferredSize().width -
-          Manager.INFOVIEW_FLOWLAYOUT_HGAP *
-              2)) {
-        if (Halcyon.bgt != null) {
-          Halcyon.bgt.getFrame()
-              .setSize(
-                  new Dimension(
-                      Manager.MAX_WIDTH,
-                      Halcyon.bgt.getFrame().getMinimumSize().height));
+    Async.async(() -> {
+      if (f.exists() && f.isFile()) {
+        info = new AudioInfo(f);
+        infoDisplay.setText(infoToString(info, true));
+        infoDisplay.setToolTipText(infoToString(info, false));
+        if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
+            artWork.getPreferredSize().width -
+            Manager.INFOVIEW_FLOWLAYOUT_HGAP *
+                2)) {
+          if (Halcyon.bgt != null) {
+            Halcyon.bgt.getFrame()
+                .setSize(
+                    new Dimension(
+                        Manager.MAX_WIDTH,
+                        Halcyon.bgt.getFrame().getMinimumSize().height));
+          }
         }
-      }
 
-      if (info.getArtwork() != null) {
-        BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
-        artWork.setIcon(new ImageIcon(bi));
-      } else {
-        BufferedImage bi = DeImage.imageIconToBI(
-            Global.rd.getFromAsImageIcon(
-                Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-        bi = DeImage.resizeNoDistort(
-            bi,
-            Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-            Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-        artWork.setIcon(new ImageIcon(bi));
+        if (info.getArtwork() != null) {
+          BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
+          artWork.setIcon(new ImageIcon(bi));
+        } else {
+          BufferedImage bi = DeImage.imageIconToBI(
+              Global.rd.getFromAsImageIcon(
+                  Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+          bi = DeImage.resizeNoDistort(
+              bi,
+              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+          artWork.setIcon(new ImageIcon(bi));
+        }
+        artWork.setToolTipText(coverIMGToolTip(info));
+        infoDisplay.revalidate();
+        revalidate();
+        dispatchEvents();
+        backPanel.repaint();
       }
-      artWork.setToolTipText(coverIMGToolTip(info));
-      infoDisplay.revalidate();
-      revalidate();
-      dispatchEvents();
-      backPanel.repaint();
-    }
+    });
   }
 
   /**
