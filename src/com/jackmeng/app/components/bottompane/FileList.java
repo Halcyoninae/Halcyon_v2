@@ -18,6 +18,8 @@ package com.jackmeng.app.components.bottompane;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.awt.*;
 
@@ -145,11 +147,15 @@ public class FileList extends JScrollPane implements TabTree {
         }
       }
     }
+    List<File> toRemove = new ArrayList<>();
     for (File f : fileMap.keySet()) {
       if (!f.exists() || !f.isFile()) {
         ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
-        fileMap.remove(f);
+        toRemove.add(f);
       }
+    }
+    for (File f : toRemove) {
+      fileMap.remove(f);
     }
   }
 

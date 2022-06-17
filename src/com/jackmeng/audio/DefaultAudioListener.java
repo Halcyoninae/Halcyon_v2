@@ -48,6 +48,7 @@ public class DefaultAudioListener implements AudioListener {
 
   @Override
   public void update(AudioEvent arg0) {
+    Debugger.unsafeLog("AudioEvent: " + arg0.toString());
     if (arg0.getType().equals(AudioEvent.Type.REACHED_END)) {
       if (p.isShuffling()) {
         if (next != null) {
@@ -63,7 +64,9 @@ public class DefaultAudioListener implements AudioListener {
         p.getStream().play();
       } else {
         p.getStream().stop();
+        p.getStream().close();
       }
+      Debugger.unsafeLog(p.isLooping() + " " + p.isShuffling());
     } else if (arg0.getType().equals(AudioEvent.Type.OPENED)) {
       curr = new File(p.getCurrentFile());
       new Thread(() -> next = getRandomFile(curr.getParentFile())).start();
