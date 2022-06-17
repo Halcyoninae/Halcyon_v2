@@ -1,4 +1,7 @@
 # Halcyon (MP4J 3.0)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/09115c9807c64bfbb92e6bc4bc71c48b)](https://www.codacy.com/gh/exoad/halcyon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=exoad/halcyon&amp;utm_campaign=Badge_Grade)
+
 [![Download Halcyon](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/halcyon4j/files/latest/download)
 
 *Copyright (C) 2021-2022 Halcyon (MP4J) to Jack Meng*
