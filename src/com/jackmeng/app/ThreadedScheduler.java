@@ -20,7 +20,9 @@ import javax.swing.UIManager;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.jackmeng.app.tasks.DefunctOptimizer;
 import com.jackmeng.app.tasks.PingFileView;
+import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
+import com.jackmeng.constant.ProgramResourceManager;
 
 public class ThreadedScheduler {
   public ThreadedScheduler() {
@@ -44,7 +46,7 @@ public class ThreadedScheduler {
     System.setProperty("sun.jnu.encoding", "UTF-8");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     System.setOut(null);
-    System.setProperty("sun.java2d.uiScale", "1.0");
+    System.setProperty("sun.java2d.uiScale", ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_HIDPI_VALUE));
     UIManager.put("FileChooser.readOnly", true);
     try {
       UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());

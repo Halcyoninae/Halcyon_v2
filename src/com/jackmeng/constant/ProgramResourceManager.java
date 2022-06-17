@@ -50,6 +50,8 @@ public class ProgramResourceManager {
   public static final String VALUE_PROGRAM_FORCE_OPTIMIZATION = "true";
   public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
   public static final String VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE = "focused";
+  public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
+  public static final String VALUE_PROGRAM_HIDPI_VALUE = "1.0";
   public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin", "user" };
   public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 
@@ -65,6 +67,7 @@ public class ProgramResourceManager {
     properties.put(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, VALUE_INFOVIEW_BACKDROP_USE_GRADIENT);
     properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, VALUE_PROGRAM_FORCE_OPTIMIZATION);
     properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE, VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE);
+    properties.put(KEY_PROGRAM_HIDPI_VALUE, VALUE_PROGRAM_HIDPI_VALUE);
     return properties;
   }
 
@@ -82,6 +85,7 @@ public class ProgramResourceManager {
     properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, new String[] { "true", "false" });
     properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
         new String[] { "top", "focused", "left", "right" });
+    properties.put(KEY_PROGRAM_HIDPI_VALUE, new String[] { "1.0", "1.1", "1.2", "0.9", "0.8", "1.3" });
     return properties;
   }
 
