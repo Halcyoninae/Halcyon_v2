@@ -24,6 +24,7 @@ import com.jackmeng.app.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.FileParser;
 
 import java.awt.event.*;
@@ -41,7 +42,8 @@ import java.io.File;
  */
 public class AddFolder extends JButton implements BBlocButton {
   public AddFolder() {
-    super(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON));
+    super(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON), 16, 16));
+    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_PRESSED_ICON), 16, 16));
     setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
     setOpaque(true);
     setBackground(null);

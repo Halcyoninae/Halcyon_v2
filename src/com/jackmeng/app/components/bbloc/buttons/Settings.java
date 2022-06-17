@@ -18,6 +18,7 @@ package com.jackmeng.app.components.bbloc.buttons;
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.DeImage;
 
 import javax.swing.*;
 
@@ -32,8 +33,8 @@ import java.awt.event.ActionEvent;
  */
 public class Settings extends JButton implements BBlocButton {
   public Settings() {
-    setRolloverIcon(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON));
-    setIcon(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON));
+    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
+    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
     setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
     setOpaque(true);
     setBorder(null);

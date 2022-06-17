@@ -30,6 +30,8 @@ public class RefreshFileView extends JButton implements BBlocButton {
   public RefreshFileView() {
     super(new ImageIcon(DeImage
         .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16, 16)));
+    setRolloverIcon(new ImageIcon(DeImage
+        .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16, 16)));
     setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
     setOpaque(true);
     setBackground(null);

@@ -85,6 +85,7 @@ public interface Manager {
       + "/buttoncontrol/loop_button_pressed.png";
 
   public static final String BBLOC_REFRESH_FILEVIEW_ICON = RSC_FOLDER_NAME + "/bbloc/refresh_icon.png";
+    public static final String BBLOC_REFRESH_FILEVIEW_ICON_PRESSED = RSC_FOLDER_NAME + "/bbloc/refresh_icon_pressed.png";
 
   public static final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(
       INFOVIEW_DISK_NO_FILE_LOADED_ICON);
@@ -158,6 +159,7 @@ public interface Manager {
   public static final String ADDFOLDER_BUTTON_TOOLTIP = "Add a new folder to the playlist.";
 
   public static final String ADDFOLDER_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/add_folder.png";
+  public static final String ADDFOLDER_BUTTON_PRESSED_ICON = RSC_FOLDER_NAME + "/bbloc/add_folder_pressed.png";
 
   public static final String SETTINGS_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/settings_normal.png";
   public static final String SETTINGS_BUTTON_PRESSED_ICON = RSC_FOLDER_NAME + "/bbloc/settings_pressed.png";
@@ -184,6 +186,7 @@ public interface Manager {
   public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 600;
 
   public static final String LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL = RSC_FOLDER_NAME + "/bbloc/legals_normal.png";
+  public static final String LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED = RSC_FOLDER_NAME + "/bbloc/legals_pressed.png";
 
   public static final String LEGAL_NOTICE_DOCS = RSC_FOLDER_NAME + "/files/LICENSE.txt";
 

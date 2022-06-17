@@ -25,6 +25,7 @@ import com.jackmeng.app.components.dialog.ConfirmWindow;
 import com.jackmeng.app.components.dialog.LegalNoticeDialog;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.DeImage;
 
 /**
  * A button that when pressed launches
@@ -37,7 +38,8 @@ import com.jackmeng.constant.Manager;
 public class LegalNoticeButton extends JButton implements BBlocButton {
 
   public LegalNoticeButton() {
-    setIcon(Global.rd.getFromAsImageIcon(Manager.LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL));
+    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
+    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
     addActionListener(this);
     setOpaque(true);
     setBackground(null);

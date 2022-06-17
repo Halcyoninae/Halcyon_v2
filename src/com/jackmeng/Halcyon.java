@@ -125,6 +125,7 @@ public class Halcyon {
       bb.add(new AddFolder());
       bb.add(new RefreshFileView());
       bb.add(new Settings());
+      bb.add(new LegalNoticeButton());
       bb.add(
         GenericWebsiteLinker.getButton(
           ProjectManager.PROJECT_GITHUB_PAGE,
@@ -132,7 +133,6 @@ public class Halcyon {
           Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)
         )
       );
-      bb.add(new LegalNoticeButton());
       BBlocView b = new BBlocView();
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
       bottom.add(b);
