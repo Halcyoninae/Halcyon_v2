@@ -115,8 +115,8 @@
         Category: Background Guard
         Status: IGNORED
 
-[**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
+[!IMPLEMENTED!] [**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
         Detailed Description: Show a dialog prompt for when the user has chosen a folder that does not
         contain any valid audio files.
-        Status: Unchecked
+        Status: Implemented
         Category: GUI Guard

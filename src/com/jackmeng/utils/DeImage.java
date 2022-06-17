@@ -22,9 +22,7 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
-import de.ralleytn.simple.image.BoxBlurFilter;
 import de.ralleytn.simple.image.DesaturationGrayscaleFilter;
-import de.ralleytn.simple.image.GaussianBlurFilter;
 import de.ralleytn.simple.image.SimpleImage;
 
 import java.awt.Image;
