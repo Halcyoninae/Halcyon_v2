@@ -19,16 +19,11 @@ import javax.swing.*;
 
 import com.jackmeng.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP;
-import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
-import com.jackmeng.audio.AudioInfo;
-import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
-import de.ralleytn.simple.image.SimpleImage;
 
 import java.awt.*;
 
-import java.awt.image.*;
 
 /**
  * The Halcyon Music Player has two main components for it's main component: A top and a

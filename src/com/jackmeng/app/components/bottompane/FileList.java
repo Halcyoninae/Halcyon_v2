@@ -36,7 +36,6 @@ import javax.swing.tree.DefaultTreeModel;
 import com.jackmeng.app.events.FVRightClick;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
-import com.jackmeng.simple.audio.Playlist;
 import com.jackmeng.utils.FolderInfo;
 
 /**
@@ -70,7 +69,6 @@ public class FileList extends JScrollPane implements TabTree {
 
   private DefaultMutableTreeNode root;
 
-  private Playlist list;
 
   public FileList(FolderInfo info) {
     super();

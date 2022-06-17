@@ -33,7 +33,6 @@ import com.jackmeng.utils.DeImage;
 import java.awt.*;
 
 import java.awt.event.*;
-import java.io.File;
 
 /**
  * This class represents the GUI component collection

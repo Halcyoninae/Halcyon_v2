@@ -50,7 +50,7 @@ public class ProgramResourceManager {
   public static final String VALUE_PROGRAM_FORCE_OPTIMIZATION = "true";
   public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
   public static final String VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE = "focused";
-  public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin" };
+  public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin", "user" };
   public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 
   /**
