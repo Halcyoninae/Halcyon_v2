@@ -36,32 +36,33 @@ public class PlooginManager {
 
   public static void main(String... args) {
     File[] list = getListOfPlugins();
-    for (File f : list) {
-      try (JarFile currPlugin = new JarFile(f)) {
-        Enumeration<JarEntry> e = currPlugin.entries();
-        URL[] urls = { new URL("jar:file:" + f.getAbsolutePath() + "!/") };
-        URLClassLoader cl = URLClassLoader.newInstance(urls);
-
-        while (e.hasMoreElements()) {
-          JarEntry je = e.nextElement();
-          if (je.isDirectory() || !je.getName().endsWith(".class")) {
-            continue;
+    if (list.length > 0) {
+      for (File f : list) {
+        try (JarFile currPlugin = new JarFile(f)) {
+          Enumeration<JarEntry> e = currPlugin.entries();
+          URL[] urls = { new URL("jar:file:" + f.getAbsolutePath() + "!/") };
+          URLClassLoader cl = URLClassLoader.newInstance(urls);
+          while (e.hasMoreElements()) {
+            JarEntry je = e.nextElement();
+            if (je.isDirectory() || !je.getName().endsWith(".class")) {
+              continue;
+            }
+            String className = je.getName().substring(0, je.getName().length() - 6);
+            className = className.replace('/', '.');
+            Class<?> c = cl.loadClass(className);
+            if (Ploogin.class.isAssignableFrom(c)) {
+              Constructor<?> constructor = c.getConstructor();
+              Ploogin plugin = (Ploogin) constructor.newInstance();
+              ploogins.add(new Pair<>(c, plugin));
+              plugin.run();
+            }
           }
-          String className = je.getName().substring(0, je.getName().length() - 6);
-          className = className.replace('/', '.');
-          Class<?> c = cl.loadClass(className);
-          if (Ploogin.class.isAssignableFrom(c)) {
-            Constructor<?> constructor = c.getConstructor();
-            Ploogin plugin = (Ploogin) constructor.newInstance();
-            ploogins.add(new Pair<>(c, plugin));
-            plugin.run();
-          }
+        } catch (IOException | ClassNotFoundException | NoSuchMethodException | SecurityException
+            | InstantiationException
+            | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+          e.printStackTrace();
         }
-      } catch (IOException | ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-          | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-        e.printStackTrace();
       }
-
     }
   }
 }
