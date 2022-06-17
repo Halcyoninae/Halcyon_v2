@@ -1,0 +1,5 @@
+My dependence on Workflows is not a lot and thus these are only used to help me find
+actual errors instead of trying to correct code styles.
+
+if you would like to fix code styles, sub a pr by pulling the latest iteration of the main
+branch.
