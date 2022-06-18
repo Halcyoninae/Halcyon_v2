@@ -1,9 +1,14 @@
+[***] #26 "No max size restriction"
+        Detailed Description None
+        Category: Visual Comfort, Program Dynamic
+        Status: Implementing
+
 [***] #25 "Help page as a set of guides for the program, tabbed window"
         Detailed Description: Turn the help page into a tabbed window, in which
         each tab represents an internal HTML resource file that contains the content.
         Category: Program Dynamic
         Status: Implementing
-        
+
 [***] #24 "Lock Single Instance"
         Detailed Description: Only allow one instance of this program to be run at once. A lock
         file is temporarily written to local storage contained the serial ID of the current
