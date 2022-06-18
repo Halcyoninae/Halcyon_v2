@@ -1,8 +1,14 @@
-[***] #24 "Help page as a set of guides for the program, tabbed window"
+[***] #25 "Help page as a set of guides for the program, tabbed window"
         Detailed Description: Turn the help page into a tabbed window, in which
         each tab represents an internal HTML resource file that contains the content.
         Category: Program Dynamic
         Status: Implementing
+[***] #24 "Lock Single Instance"
+        Detailed Description: Only allow one instance of this program to be run at once. A lock
+        file is temporarily written to local storage contained the serial ID of the current
+        instance. However can be overridden in the properties file.
+        Category: Potential Optimization
+        Status: None
 
 [**] #23 "Native Headless mode"
         Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
