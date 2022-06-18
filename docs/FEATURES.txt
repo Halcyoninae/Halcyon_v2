@@ -1,3 +1,9 @@
+[**] #22 "Serialization of all threads for future processes"
+        Detailed Description: Serialize threads that are needed for audio streaming for future usage
+        as a localized file instead of having to reset the object reference every time.
+        Category: Potential Optimization
+        Status: None
+
 [**] #21 "Add property setting to have to different gradient, one from the left and one from the top"
         Detailed Description: Top, left, bottom, right
         Category: Visual Comfort, Program Dynamic
