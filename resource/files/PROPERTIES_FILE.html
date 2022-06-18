@@ -1,0 +1,63 @@
+<!doctypehtml>
+    <html:lang>
+        <style>
+            body {
+                text-align: center;
+                word-wrap: normal
+            }
+        </style>
+        <h2>Halcyon-Properties File definitions</h2>
+        <p>This window will show you the different usages for the properties files that can be used to modify the
+            program. However this document does not cover every possible property that is avaliable with the program.
+        <p>
+        <div id=properties_user>
+            <h3 style=text-align:left>Program specific (user.)</h3>
+        </div>
+        <div id=properties_audio>
+            <h3 style=text-align:left>Player properties</h3>
+        </div>
+        <script>const doc = document.getElementById("properties_user");
+            class tuple {
+                /**
+                 * @param {string} name - The name of the property.
+                 * @param {string} description - The description of the property.
+                 * @param {string} usage - The usage of the property.
+                 */
+                constructor (name, description, usage) {
+                    this.name = name;
+                    this.description = description;
+                    this.usage = usage;
+                }
+            }
+            const properties_user_arr = [
+                new tuple("user.default.folder", "The default launch location of the select folder", "true || false"),
+                new tuple("user.force_optimization", "Causes the program to optimize as much possible if you are facing overhead or are very limited", "true || false"),
+                new tuple("user.hidpi_value", "The value to use for the Screen scaling property, BEST TO LEAVE AS IS", "0.9 || 1.0 || 1.1"),
+
+            ];
+
+            const doc2 = document.getElementById("properties_audio");
+            const properties_audio_arr = [
+                new tuple("audio.info.media_title_as_header", "Use the internal media title (if avaliable) as the info header or the file name", "true || false"),
+                new tuple("audio.info.backdrop_use_greyscale", "Use greyscale for the backdrop of the info display", "true || false"),
+                new tuple("audio.info.backdrop_gradient_style", "Change how the gradient appears for the backdrop of the info display", "top || focused || left || right"),
+                new tuple("audio.info.backdrop_use_gradient", "Determines if the backdrop of the info display uses a gradient", "true || false"),
+            ];
+
+            for (let i = 0; i < properties_user_arr.length; i++) {
+                const p = document.createElement("ul");
+                p.style = "text-align: left;";
+                const element = properties_user_arr[i];
+                p.innerHTML = "<strong>" + element.name + "</strong>:<ul><li><u>Description:</u> " + element.description + "</li> <li><u>Allowed values:</u> (" + element.usage + ")</li></ul>";
+                doc.appendChild(p);
+            }
+
+            for (let i = 0; i < properties_audio_arr.length; i++) {
+                const p = document.createElement("ul");
+                p.style = "text-align:left;"
+                const element = properties_audio_arr[i];
+                p.innerHTML = "<strong>" + element.name + "</strong>:<ul><li><u>Description:</u> " + element.description + "</li> <li><u>Allowed values:</u> (" + element.usage + ")</li></ul>";
+                doc2.appendChild(p);
+            }</script>
+        </body>
+    </html:lang>
