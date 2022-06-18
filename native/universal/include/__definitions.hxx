@@ -15,7 +15,8 @@ class definitions {
   ~definitions();
   byte* raw_data();
   // varargs
-  const char* parseable_base64(const char * data);
+  const char* parseable_base64(const char * data, size_t * out_len);
+  const char* unparse_base64(const char * data, size_t * out_len);
 };
 };  // namespace packer_definitions
 
