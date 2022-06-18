@@ -1,3 +1,9 @@
+[***] #24 "Help page as a set of guides for the program, tabbed window"
+        Detailed Description: Turn the help page into a tabbed window, in which
+        each tab represents an internal HTML resource file that contains the content.
+        Category: Program Dynamic
+        Status: Implementing
+
 [**] #23 "Native Headless mode"
         Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
         applies to audio encoding, decoding, and transcoding. This Headless mode should not be used
