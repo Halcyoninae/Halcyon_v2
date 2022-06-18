@@ -1,3 +1,12 @@
+[**] #23 "Native Headless mode"
+        Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
+        applies to audio encoding, decoding, and transcoding. This Headless mode should not be used
+        for directly invoking audio playback. This should be a native implementation that is called
+        upon by JNI if the user decides they want to use this feature; however, the present dynamic
+        linked libraries must be present in order to run the associated functions.
+        Category: Program Dynamic
+        Status: none
+
 [**] #22 "Serialization of all threads for future processes"
         Detailed Description: Serialize threads that are needed for audio streaming for future usage
         as a localized file instead of having to reset the object reference every time.
