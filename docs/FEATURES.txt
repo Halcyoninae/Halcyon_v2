@@ -3,6 +3,7 @@
         each tab represents an internal HTML resource file that contains the content.
         Category: Program Dynamic
         Status: Implementing
+        
 [***] #24 "Lock Single Instance"
         Detailed Description: Only allow one instance of this program to be run at once. A lock
         file is temporarily written to local storage contained the serial ID of the current

@@ -16,9 +16,13 @@
 package com.jackmeng.connections.resource;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.ImageIcon;
+
+import java.io.InputStream;
 
 import com.jackmeng.debug.Debugger;
 
@@ -88,6 +92,24 @@ public class ResourceDistributor {
       try {
         return new URL(path);
       } catch (MalformedURLException e1) {
+        e1.printStackTrace();
+      }
+    }
+    return null;
+  }
+
+  public InputStream getFromAsStream(String path) {
+    try {
+      return java.util.Objects.requireNonNull(getClass().getResourceAsStream(path));
+    } catch (NullPointerException e) {
+      Debugger.log(
+        "Resource Distributor [STREAM] was unable to fetch the expected path: " +
+        path +
+        "\nResorted to raw fetching..."
+      );
+      try {
+        return new FileInputStream(path);
+      } catch (FileNotFoundException e1) {
         e1.printStackTrace();
       }
     }
