@@ -1,3 +1,10 @@
+[***] #21 "Native headless handling"
+      Detailed Description: Prevent the JVM from throwing any exceptions
+      and automatically detect a headless runner beforehand prompt
+      for [?[FEATURE#23];] to be launched or not.
+      Status: None
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] {URGENT} [***] #20 "Icons are very pixelated for resources"
       Detailed Description: Upscale icons so they are not as blurry or pixelated
       for certain resolutions
