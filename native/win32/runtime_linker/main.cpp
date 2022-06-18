@@ -29,6 +29,8 @@
 
 #include "win32.hpp"
 
+#include "__win32_halcyon.hpp"
+
 const std::string LICENSE_PRINTABLE =
     "(C) 2022 name of Jack Meng\n Halcyon MP4J is music-playing software.\n "
     "This program is free software; you can redistribute it and/or\n "
@@ -87,24 +89,28 @@ std::string exec(const char* cmd) {
   return result;
 }
 
-int main(int argc, char** argv) {
+inline void calleable() {
   printf("%s", LICENSE_PRINTABLE.c_str());
 
-  // check if java is installed
   if (exec("which java").length() == 0) {
-    int id = MessageBox(NULL, (LPCSTR)JRE_FAILURE.c_str(), (LPCSTR)"JRE Missing",
-                        MB_CANCELTRYCONTINUE | MB_ICONWARNING);
-    if(id == IDCANCEL) {
-      return 0;
-    } else if(id == IDTRYAGAIN) {
+    int id =
+        MessageBox(NULL, (LPCSTR)JRE_FAILURE.c_str(), (LPCSTR) "JRE Missing",
+                   MB_CANCELTRYCONTINUE | MB_ICONWARNING);
+    if (id == IDCANCEL) {
+      exit(0);
+    } else if (id == IDTRYAGAIN) {
       reconstructable();
-    } else if(id == IDCONTINUE) {
-      ShellExecute(NULL, "open", "https://www.java.com/en/download/", NULL, NULL,
-                   SW_SHOW);
+    } else if (id == IDCONTINUE) {
+      ShellExecute(NULL, "open", "https://www.java.com/en/download/", NULL,
+                   NULL, SW_SHOW);
     }
-    return 1;
+    exit(1);
   }
 
   reconstructable();
-  return 0;
+  exit(0);
+}
+
+int main(int argc, char** argv) {
+  halcyon::win32::is_win32() ? calleable() : exit(0);
 }
