@@ -39,7 +39,7 @@ This engine currently enables playing wav & mp3. However, soon it will allow for
 ## Current
 
 Currently this program is still in development and is not yet ready for consumer usage,
-with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEATURES](docs/FEATURES.txt));
+with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEATURES](docs/FEATURES.txt)).
 
 However, improvements upon it's backend audio framework will be needed in order to introduce newer features to the program.
 
