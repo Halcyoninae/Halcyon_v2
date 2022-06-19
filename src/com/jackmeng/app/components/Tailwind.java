@@ -40,7 +40,6 @@ import java.awt.*;
  */
 public class Tailwind implements Runnable {
   private JFrame container;
-  private JSplitPane mainPane;
 
   /**
    * A JSplitPane contains a BottomPane and TopPane that
@@ -49,8 +48,7 @@ public class Tailwind implements Runnable {
    * @param mainPane The JSplitPane instance to attach with
    */
   public Tailwind(JSplitPane mainPane) {
-    this.mainPane = mainPane;
-    this.mainPane.setBorder(BorderFactory.createEmptyBorder());
+    mainPane.setBorder(BorderFactory.createEmptyBorder());
     container = new JFrame("Halcyon Beta ~ exoad");
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
       container.setUndecorated(true);

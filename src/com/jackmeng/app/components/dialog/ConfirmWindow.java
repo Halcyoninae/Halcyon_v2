@@ -44,10 +44,7 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
   }
 
   private JButton confirm;
-  private JButton cancel;
-  private JTextArea prompt;
-  private JPanel jp;
-  private JScrollPane container;
+
   private transient ConfirmationListener[] listeners;
 
   public ConfirmWindow(String content, ConfirmationListener... listeners) {
@@ -62,23 +59,23 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     confirm.setAlignmentY(Component.CENTER_ALIGNMENT);
     confirm.addActionListener(this);
 
-    cancel = new JButton("Cancel");
+    JButton cancel = new JButton("Cancel");
     cancel.setAlignmentY(Component.CENTER_ALIGNMENT);
     cancel.addActionListener(this);
 
-    prompt = new JTextArea(content);
+    JTextArea prompt = new JTextArea(content);
     prompt.setLineWrap(true);
     prompt.setWrapStyleWord(true);
     prompt.setAlignmentY(Component.CENTER_ALIGNMENT);
     prompt.setEditable(false);
 
-    container = new JScrollPane(prompt);
+    JScrollPane container = new JScrollPane(prompt);
     container.setPreferredSize(
         new Dimension(Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
     container.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     container.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    jp = new JPanel();
+    JPanel jp = new JPanel();
     jp.setLayout(new FlowLayout(FlowLayout.CENTER));
     jp.setPreferredSize(
         new Dimension(Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
@@ -108,7 +105,7 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    dispatchConfirmationEvents(e.getSource() == confirm);
+    dispatchConfirmationEvents(e.getSource().equals(confirm));
     dispose();
   }
 }
