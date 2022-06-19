@@ -40,7 +40,6 @@ public class Program {
     if (executorService == null) {
       executorService = Executors.newCachedThreadPool(
           new ThreadFactory() {
-
             @Override
             public Thread newThread(Runnable r) {
               Thread t = new Thread(r);
@@ -50,7 +49,6 @@ public class Program {
           });
       executorService.submit(
           new Runnable() {
-
             @Override
             public synchronized void run() {
               while (true) {
@@ -66,6 +64,13 @@ public class Program {
     }
   }
 
+  /**
+   * This function is run before anything in order to ensure that only one
+   * instance of this program is being ran.
+   *
+   * A signature is generated from the current time as an 8 digit integer using
+   * the current unix timestamp.
+   */
   public static void syncPID() {
     Async.async(() -> {
       File f = new File(Manager.RSC_FOLDER_NAME + "/bin/instance.pid");
@@ -96,6 +101,7 @@ public class Program {
    * the program.
    *
    * This async mechanism is called natively.
+   *
    * @param args Initial items to log
    */
   public static void main(String... args) {

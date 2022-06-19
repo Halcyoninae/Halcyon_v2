@@ -38,13 +38,16 @@ import java.awt.geom.RoundRectangle2D;
 /**
  * This is a class that modifies images that are fed to it.
  * It is primarily used to handle resources that are in image form.
- * 
+ *
  * This is a general utility class and is licensed under GPL-3.0.
- * 
+ *
  * @author Jack Meng
  * @since 2.0
  */
 public final class DeImage {
+  /**
+   * Holds enum constants for the different aspects of the image.
+   */
   public enum Directional {
     TOP, LEFT, RIGHT, BOTTOM;
   }
@@ -55,7 +58,7 @@ public final class DeImage {
   /**
    * Turns an Image read raw from a stream to be enwrapped by a BufferedImage
    * object.
-   * 
+   *
    * @param image An Image from a stream.
    * @return BufferedImage A modified image that has been converted and held in a
    *         BufferedImage object.
@@ -71,7 +74,7 @@ public final class DeImage {
 
   /**
    * Combines a mask between a source image and a mask image.
-   * 
+   *
    * @param sourceImage The image to be masked.
    * @param maskImage   The image to be used as a mask.
    * @param method      The method to be used to combine the images.
@@ -96,7 +99,7 @@ public final class DeImage {
 
   /**
    * Applies a grayscale to an image.
-   * 
+   *
    * @param sourceImage The image to be grayscaled.
    * @return BufferedImage The grayscaled image.
    */
@@ -108,7 +111,7 @@ public final class DeImage {
 
   /**
    * Writes a BufferedImage to a file.
-   * 
+   *
    * @param r    The BufferedImage to be written.
    * @param path The path to the file to be written.
    */
@@ -123,7 +126,7 @@ public final class DeImage {
 
   /**
    * Resizes a BufferedImage by preserving the aspect ratio.
-   * 
+   *
    * @param img  The BufferedImage to be resized.
    * @param newW The new width of the image.
    * @param newH The new height of the image.
@@ -141,12 +144,26 @@ public final class DeImage {
     return resize(dimg, newW, newH);
   }
 
+  /**
+   * Scales down an image by a scale factor
+   *
+   * @param src         The image to be scaled down.
+   * @param scaleFactor The scale factor.
+   * @return BufferedImage The scaled down image.
+   */
   public static BufferedImage scaleDown(BufferedImage src, float scaleFactor) {
     SimpleImage img = new SimpleImage(src);
     img = img.scaleByFactor(scaleFactor);
     return img.toBufferedImage();
   }
 
+  /**
+   * Scales up an image to it's center
+   *
+   * @param img         The image to be scaled up.
+   * @param scaleFactor The scale factor.
+   * @return BufferedImage The scaled up image.
+   */
   public static BufferedImage zoomToCenter(BufferedImage img, double scaleFactor) {
     int w = img.getWidth();
     int h = img.getHeight();
@@ -161,6 +178,12 @@ public final class DeImage {
     return resize(dimg, newW, newH);
   }
 
+  /**
+   * Blurs an image using a Gaussian blur.
+   * @param srcIMG The image to be blurred.
+   * @param radius The radius of the Gaussian blur.
+   * @return BufferedImage The blurred image.
+   */
   public static BufferedImage blurImage(BufferedImage srcIMG, float radius) {
     BufferedImage dest = srcIMG;
     ColorModel cm = dest.getColorModel();
@@ -176,7 +199,7 @@ public final class DeImage {
 
   /**
    * Generates a rounded image with borders
-   * 
+   *
    * @param r         The image to be rounded
    * @param thickness The thickness of the border
    * @return BufferedImage The rounded image
@@ -196,7 +219,7 @@ public final class DeImage {
 
   /**
    * Converts an ImageIcon to a BufferedImage
-   * 
+   *
    * @param icon The ImageIcon to be converted
    * @return BufferedImage The converted BufferedImage
    */
@@ -206,7 +229,7 @@ public final class DeImage {
 
   /**
    * Resizes a BufferedImage
-   * 
+   *
    * @param img  The BufferedImage to be resized
    * @param newW The new width
    * @param newH The new height
@@ -227,7 +250,7 @@ public final class DeImage {
 
   /**
    * Makes a gradient from top to bottom.
-   * 
+   *
    * @param img          The source image
    * @param startOpacity The begin opacity of the gradient.
    * @param endOpacity   The end opacity of the gradient.
@@ -247,6 +270,15 @@ public final class DeImage {
     return applyMask(img, alphamask, AlphaComposite.DST_IN);
   }
 
+  /**
+   * Creates a gradient from a certain side.
+   *
+   * @param img                   The source image
+   * @param startOpacity          The begin opacity of the gradient.
+   * @param endOpacity            The end opacity of the gradient.
+   * @param opacityStartDirection The direction of the gradient.
+   * @return BufferedImage The gradient image.
+   */
   public static BufferedImage createGradient(BufferedImage img, int startOpacity, int endOpacity,
       Directional opacityStartDirection) {
     if (opacityStartDirection == Directional.TOP) {
@@ -280,7 +312,7 @@ public final class DeImage {
       Graphics2D g2d = alphamask.createGraphics();
       LinearGradientPaint lgp = new LinearGradientPaint(
           new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
-          new Point(0, alphamask.getHeight() /2),
+          new Point(0, alphamask.getHeight() / 2),
           new float[] { 0, 1 },
           new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
       g2d.setPaint(lgp);
