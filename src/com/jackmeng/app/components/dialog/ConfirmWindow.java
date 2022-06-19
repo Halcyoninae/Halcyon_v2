@@ -43,7 +43,8 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     void onStatus(boolean status);
   }
 
-  private JButton confirm, cancel;
+  private JButton confirm;
+  private JButton cancel;
   private JTextArea prompt;
   private JPanel jp;
   private JScrollPane container;
