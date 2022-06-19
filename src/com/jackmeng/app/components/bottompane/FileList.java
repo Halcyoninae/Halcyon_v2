@@ -34,7 +34,6 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultTreeModel;
 
 import com.jackmeng.app.events.FVRightClick;
-import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.utils.FolderInfo;
 
@@ -109,7 +108,7 @@ public class FileList extends JScrollPane implements TabTree {
     renderer.setLeafIcon(leafIcon);
 
     tree.addMouseListener(new FVRightClick(this));
-    tree.setCellRenderer(renderer);;
+    tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
   }

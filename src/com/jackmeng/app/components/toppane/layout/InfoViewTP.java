@@ -22,7 +22,6 @@ import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
-import com.jackmeng.constant.StringManager;
 import com.jackmeng.utils.Async;
 import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.TextParser;
@@ -39,10 +38,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
 
 /**
  * This class sits on the most upper part of the GUI frame.

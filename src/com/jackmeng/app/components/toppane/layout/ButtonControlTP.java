@@ -57,7 +57,6 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   private JPanel sliders, buttons;
   private transient AudioInfo aif;
   private boolean hasPlayed = false;
-  private transient Thread progressThread;
 
   public ButtonControlTP() {
     super();

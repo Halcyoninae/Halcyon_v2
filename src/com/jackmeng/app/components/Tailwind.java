@@ -17,7 +17,6 @@ package com.jackmeng.app.components;
 
 import javax.swing.*;
 
-import com.jackmeng.app.events.ForceMaxSize;
 import com.jackmeng.app.events.InstantClose;
 import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
