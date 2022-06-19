@@ -1,5 +1,10 @@
+[*] #27 "Add no gradient property to infoview gradient"
+        Detailed Description: None
+        Category: Visual Comfort
+        Status: None
+
 [!PARTIALLY IMPLEMENTED!] [***] #26 "No max size restriction"
-        Detailed Description None
+        Detailed Description: None
         Category: Visual Comfort, Program Dynamic
         Status: Partial Implementation
 
