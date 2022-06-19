@@ -16,6 +16,7 @@
 package com.jackmeng.app.components.bbloc.buttons;
 
 import com.jackmeng.app.components.bbloc.BBlocButton;
+import com.jackmeng.app.components.inheritable.SettingsPane;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.utils.DeImage;
@@ -51,6 +52,6 @@ public class Settings extends JButton implements BBlocButton {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-
+    new SettingsPane();
   }
 }

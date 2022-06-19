@@ -17,16 +17,11 @@ package com.jackmeng.app;
 
 import javax.swing.UIManager;
 
-import java.awt.*;
-import java.io.IOException;
-
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.jackmeng.app.tasks.DefunctOptimizer;
 import com.jackmeng.app.tasks.PingFileView;
 import com.jackmeng.connections.properties.ResourceFolder;
-import com.jackmeng.connections.resource.ResourceDistributor;
 import com.jackmeng.constant.Global;
-import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 
 public class ThreadedScheduler {

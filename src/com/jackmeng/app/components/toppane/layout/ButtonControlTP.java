@@ -50,7 +50,11 @@ import java.awt.event.*;
  * @since 3.0
  */
 public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
-  private JButton playButton, nextButton, previousButton, loopButton, shuffleButton;
+  private JButton playButton;
+  private JButton nextButton;
+  private JButton previousButton;
+  private JButton loopButton;
+  private JButton shuffleButton;
   private LikeButton likeButton;
   private JSlider progressSlider, volumeSlider;
   private JProgressBar progressBar;
