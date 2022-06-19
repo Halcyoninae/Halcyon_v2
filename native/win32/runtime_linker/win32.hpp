@@ -40,4 +40,19 @@
 #include <stdexcept>
 #include <string>
 
+namespace __win32 {
+class single_instance {
+ public:
+  static boolean check() {
+    std::ifstream f("/bin/halcyon/halcyon.pid");
+    if (!f.good()) {
+      return false;
+    }
+    std::string pid;
+    f >> pid;
+    return pid.length() > 0 || pid.length() == 8;
+  }
+};
+};  // namespace __win32
+
 #endif
