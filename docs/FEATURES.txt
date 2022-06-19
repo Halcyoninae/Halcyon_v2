@@ -19,12 +19,12 @@
         Category: Program Dynamic
         Status: Implementing
 
-[***] #24 "Lock Single Instance"
+[!PARTIALLY IMPLEMENTED!] [***] #24 "Lock Single Instance"
         Detailed Description: Only allow one instance of this program to be run at once. A lock
         file is temporarily written to local storage contained the serial ID of the current
         instance. However can be overridden in the properties file.
         Category: Potential Optimization
-        Status: None
+        Status: Partial Implementation for Native Side
 
 [**] #23 "Native Headless mode"
         Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
@@ -71,7 +71,7 @@
         Status: Investigating
 
 [!DENIED!] [***] #16 "For each file added to a file-list, check if that file can be added"
-        Detailed Description: Make sure each file has the right permissions for the 
+        Detailed Description: Make sure each file has the right permissions for the
         file system and that each of them are actually valid files (by chunk headers)
         Category: Program Dynamic
         Status: DENIED; really not needed
@@ -89,14 +89,14 @@
 
 [!IMPLEMENTED!] [**] #13 "Even though there is not a forward or backtrack feature yet, change the icons of forward and backward"
         Detailed Description: Change the icons of forward and backward to be
-        of the standard next file or last file icons and change them to match the 
+        of the standard next file or last file icons and change them to match the
         color scheme.
         Category: Visual Comfort
         Status: IMPLEMENTED
 
 [!IMPLEMENTED!] [***] #12 "Lmao rename BigContainerTest to like something else"
         Status: IMPLEMENTED
-        Category: Program Dynamic 
+        Category: Program Dynamic
 
 [!IMPLEMENTED!] [*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
         Detailed Description: As the title says
@@ -116,11 +116,11 @@
 
 [!IMPLEMENTED!] [**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
         Detailed Description: Instead of using the tabs view as a way to scroll between
-        different tabs, make it a view to display all of the user's selected playlists. 
+        different tabs, make it a view to display all of the user's selected playlists.
         Then move the settings tab, etc. to bbloc
         Category: User Comfort
         Status: IMPLEMENTED
-        Potential Bugs: 
+        Potential Bugs:
                 -All of the listeners should be updated immediately regarding a closing of
                 a tab
                 -Options button for each tab button: Close, Sort by a-z, properties
