@@ -25,16 +25,16 @@
         Category: Program Dynamic
         Status: none
 
-[**] #22 "Serialization of all threads for future processes"
+[!DENIED!] [**] #22 "Serialization of all threads for future processes"
         Detailed Description: Serialize threads that are needed for audio streaming for future usage
         as a localized file instead of having to reset the object reference every time.
         Category: Potential Optimization
-        Status: None
+        Status: DENIED
 
-[**] #21 "Add property setting to have to different gradient, one from the left and one from the top"
+[!IMPLEMENTED!] [**] #21 "Add property setting to have to different gradient, one from the left and one from the top"
         Detailed Description: Top, left, bottom, right
         Category: Visual Comfort, Program Dynamic
-        Status: none
+        Status: IMPLEMENTED
 
 [***] #20 "Add functionality for next and backward"
         Detailed Description: Since each FileList is a playlist technically.
