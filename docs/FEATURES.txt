@@ -1,12 +1,12 @@
-[**] #28 "Disable most image drawings when forced optimization"
+[!DENIED!] [**] #28 "Disable most image drawings when forced optimization"
         Detailed Description: Disable the backdrop drawing
         Category: Forced Optimization
-        Status: None
+        Status: Denied, This is a user controlled optimization
 
-[*] #27 "Add no gradient property to infoview gradient"
+[!DENIED!] [*] #27 "Add no gradient property to infoview gradient"
         Detailed Description: None
         Category: Visual Comfort
-        Status: None
+        Status: Denied, already implemented as a separate property operand
 
 [!PARTIALLY IMPLEMENTED!] [***] #26 "No max size restriction"
         Detailed Description: None

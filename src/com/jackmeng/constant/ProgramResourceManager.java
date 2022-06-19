@@ -91,7 +91,7 @@ public class ProgramResourceManager {
 
   /**
    * Writes a bufferedimage to the resource folder.
-   * 
+   *
    * @param img An image to write; a BufferedImage instance
    * @return The string representing the location of the image (ABSOLUTE PATH)
    */
