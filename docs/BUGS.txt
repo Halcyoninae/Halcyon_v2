@@ -1,3 +1,8 @@
+[*] #22 "Visual Artifact from ImgBot in the main disk display for no artwork"
+      Detailed Description: Compression Artifact
+      Status: None
+      State: Experimental-Build ~ MP4J
+
 [***] #21 "Native headless handling"
       Detailed Description: Prevent the JVM from throwing any exceptions
       and automatically detect a headless runner beforehand prompt
