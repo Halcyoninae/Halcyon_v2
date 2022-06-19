@@ -133,13 +133,11 @@ public class FileList extends JScrollPane implements TabTree {
    */
   public void revalidateFiles() {
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null) {
-        if (!fileMap.containsKey(f)) {
+      if (f != null && !fileMap.containsKey(f)) {
           DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
           node.setParent(root);
           fileMap.put(f, node);
           root.add(node);
-        }
       }
     }
     List<File> toRemove = new ArrayList<>();

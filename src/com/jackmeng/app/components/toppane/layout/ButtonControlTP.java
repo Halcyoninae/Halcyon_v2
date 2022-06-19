@@ -215,10 +215,9 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
   @Override
   public void infoView(AudioInfo info) {
     progressBar.setIndeterminate(false);
-    if (aif != null) {
-      if (!aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
-        new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
-      }
+    if (aif != null
+        && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
+      new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
     }
     aif = info;
     progressSlider.setValue(0);
@@ -266,26 +265,25 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
                     24));
           }
         }
-      } else if (e.getSource().equals(shuffleButton)) {
-        if (aif != null) {
-          if (Global.player.isLooping()) {
-            Global.player.setLooping(false);
-            loopButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
-                    24));
-          }
-          if (Global.player.isShuffling()) {
-            Global.player.setShuffling(false);
-            shuffleButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
-                    24));
-          } else {
-            Global.player.setShuffling(true);
-            shuffleButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
-                    24));
-          }
+      } else if (e.getSource().equals(shuffleButton) && aif != null) {
+        if (Global.player.isLooping()) {
+          Global.player.setLooping(false);
+          loopButton.setIcon(
+              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
+                  24));
         }
+        if (Global.player.isShuffling()) {
+          Global.player.setShuffling(false);
+          shuffleButton.setIcon(
+              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
+                  24));
+        } else {
+          Global.player.setShuffling(true);
+          shuffleButton.setIcon(
+              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
+                  24));
+        }
+
       }
       loopButton.repaint();
       shuffleButton.repaint();

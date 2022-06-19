@@ -109,7 +109,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 AlphaComposite.SRC_ATOP,
                 compositeAlpha));
 
-         BufferedImage original = Global.ifp.getInfo().getArtwork();
+        BufferedImage original = Global.ifp.getInfo().getArtwork();
         if (original.getWidth() > backPanel.getWidth()
             || original.getHeight() > backPanel.getHeight()) {
           original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
@@ -195,14 +195,14 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
             artWork.getPreferredSize().width -
             Manager.INFOVIEW_FLOWLAYOUT_HGAP *
-                2)) {
-          if (Halcyon.bgt != null) {
-            Halcyon.bgt.getFrame()
-                .setSize(
-                    new Dimension(
-                        Manager.MAX_WIDTH,
-                        Halcyon.bgt.getFrame().getMinimumSize().height));
-          }
+                2)
+            && Halcyon.bgt != null) {
+          Halcyon.bgt.getFrame()
+              .setSize(
+                  new Dimension(
+                      Manager.MAX_WIDTH,
+                      Halcyon.bgt.getFrame().getMinimumSize().height));
+
         }
 
         if (info.getArtwork() != null) {
