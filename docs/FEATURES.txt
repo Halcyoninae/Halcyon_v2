@@ -1,3 +1,8 @@
+[**] #28 "Disable most image drawings when forced optimization"
+        Detailed Description: Disable the backdrop drawing
+        Category: Forced Optimization
+        Status: None
+
 [*] #27 "Add no gradient property to infoview gradient"
         Detailed Description: None
         Category: Visual Comfort
