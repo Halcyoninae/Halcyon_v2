@@ -41,7 +41,7 @@ public class ForceMaxSize implements ComponentListener {
    * @param MIN_WIDTH
    * @param MIN_HEIGHT
    */
-  public ForceMaxSize(JFrame c, int MAX_WIDTH, int MAX_HEIGHT, int MIN_WIDTH, int MIN_HEIGHT) {
+  public ForceMaxSize(int MAX_WIDTH, int MAX_HEIGHT, int MIN_WIDTH, int MIN_HEIGHT) {
     this.a = MAX_HEIGHT;
     this.b = MAX_WIDTH;
     this.c = MIN_HEIGHT;

@@ -299,7 +299,7 @@ public final class DeImage {
    */
   public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
     Image img = image.getImage();
-    Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
+    Image newimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     return new ImageIcon(newimg);
   }
 }

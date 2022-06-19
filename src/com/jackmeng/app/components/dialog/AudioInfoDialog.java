@@ -31,7 +31,6 @@ public class AudioInfoDialog extends JFrame implements Runnable {
   private JScrollPane artWorkPanel;
   private JPanel artWork;
   private JScrollPane infoPanel;
-  private JEditorPane infoText;
 
   // Non Gui Components
   private transient AudioInfo info;
@@ -60,7 +59,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     artWorkPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
     artWorkPanel.setPreferredSize(new Dimension(Manager.AUDIOINFO_ARTWORK_PANE_WIDTH, Manager.AUDIOINFO_MIN_HEIGHT));
 
-    infoText = new JEditorPane();
+    JEditorPane infoText = new JEditorPane();
     infoText.setEditable(false);
     infoText.setContentType("text/html");
     infoText.setText(infoToHtml(info));
