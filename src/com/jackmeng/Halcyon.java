@@ -30,6 +30,8 @@ import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
+import com.jackmeng.debug.Debugger;
+import com.jackmeng.debug.Program;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -98,6 +100,13 @@ public class Halcyon {
    * @param args Null arguments
    */
   public static void main(String... args) {
+    Program.syncPID();
+    if (args.length > 0) {
+      if (args[0].equals("-debug")) {
+        ProjectManager.DEBUG_PROGRAM = true;
+        Debugger.DISABLE_DEBUGGER = false;
+      }
+    }
     try {
       ResourceFolder.checkResourceFolder(
         ProgramResourceManager.PROGRAM_RESOURCE_FOLDER

@@ -15,9 +15,17 @@
 
 package com.jackmeng.debug;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
+
+import javax.naming.ldap.ManageReferralControl;
+
+import com.jackmeng.constant.Manager;
+import com.jackmeng.utils.Async;
 
 /**
  * Provides a concurrent logging system for the program
@@ -32,8 +40,7 @@ public class Program {
 
   private static void println(String e) {
     if (executorService == null) {
-      executorService =
-        Executors.newCachedThreadPool(
+      executorService = Executors.newCachedThreadPool(
           new ThreadFactory() {
 
             @Override
@@ -42,25 +49,45 @@ public class Program {
               t.setDaemon(true);
               return t;
             }
-          }
-        );
+          });
       executorService.submit(
-        new Runnable() {
+          new Runnable() {
 
-          @Override
-          public synchronized void run() {
-            while (true) {
-              try {
-                wait();
-                System.err.println(e);
-              } catch (InterruptedException e) {
-                e.printStackTrace();
+            @Override
+            public synchronized void run() {
+              while (true) {
+                try {
+                  wait();
+                  System.err.println(e);
+                } catch (InterruptedException e) {
+                  e.printStackTrace();
+                }
               }
             }
-          }
-        }
-      );
+          });
     }
+  }
+
+  public static void syncPID() {
+    Async.async(() -> {
+      File f = new File(Manager.RSC_FOLDER_NAME + "/bin/instance.pid");
+      if (f.exists()) {
+        System.err.println("Only one instance allowed for this program.");
+        System.exit(1);
+      } else {
+        try {
+          f.createNewFile();
+          String s = String.valueOf(System.currentTimeMillis());
+          s = s.substring(s.length() - 8);
+          FileWriter fw = new FileWriter(f);
+          fw.write(s);
+          fw.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+
+      }
+    });
   }
 
   /**

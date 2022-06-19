@@ -112,5 +112,5 @@ inline void calleable() {
 }
 
 int main(int argc, char** argv) {
-  __win32::single_instance::check() ? halcyon::win32::is_win32() ? calleable() : exit(0) : exit(-1);
+  !__win32::single_instance::check() ? halcyon::win32::is_win32() ? calleable() : exit(0) : exit(-1);
 }

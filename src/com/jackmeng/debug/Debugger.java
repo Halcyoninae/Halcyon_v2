@@ -20,17 +20,17 @@ import com.jackmeng.utils.TimeParser;
 /**
  * This is an external class that is called upon for when the
  * program needs something printed the Console.
- * 
+ *
  * However the standard console or System.out {@link java.lang.System}.out can
  * be disabled for extraneous logging.
- * 
+ *
  * This means the program must use System.err.
- * 
+ *
  * @author Jack Meng
  * @since 3.0
  */
 public class Debugger {
-  protected static final boolean DISABLE_DEBUGGER = true;
+  public static boolean DISABLE_DEBUGGER = true;
 
   private Debugger() {
   }
@@ -38,7 +38,7 @@ public class Debugger {
   /**
    * This function returns the default heder text to define itself as a
    * logging message instead of other extraneous messages.
-   * 
+   *
    * @return The Header Log text
    */
   public static String getLogText() {
@@ -47,7 +47,7 @@ public class Debugger {
 
   /**
    * Prints the necessary Objects to System.err
-   * 
+   *
    * @param <T> The varargs of types as a generic
    * @param o   The objects to be printed to the stream
    */
