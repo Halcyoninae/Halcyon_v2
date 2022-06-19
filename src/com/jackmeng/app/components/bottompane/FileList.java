@@ -109,9 +109,7 @@ public class FileList extends JScrollPane implements TabTree {
     renderer.setLeafIcon(leafIcon);
 
     tree.addMouseListener(new FVRightClick(this));
-    tree.setCellRenderer(renderer);
-
-    tree.addTreeSelectionListener(Global.ifp);
+    tree.setCellRenderer(renderer);;
 
     getViewport().add(tree);
   }

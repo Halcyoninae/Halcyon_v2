@@ -48,7 +48,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
       @Override
       public synchronized void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(info.getArtwork(), 0, 0, this);
+        g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2, (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
       }
     };
     artWork.setPreferredSize(new Dimension(info.getArtwork().getWidth(), info.getArtwork().getHeight()));

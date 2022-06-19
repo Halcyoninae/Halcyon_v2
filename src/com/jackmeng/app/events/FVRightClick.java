@@ -16,6 +16,7 @@
 package com.jackmeng.app.events;
 
 import java.awt.event.*;
+import java.io.File;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -26,6 +27,10 @@ import com.jackmeng.app.components.bottompane.TabTree;
 import com.jackmeng.app.components.dialog.AudioInfoDialog;
 import com.jackmeng.app.components.dialog.ErrorWindow;
 import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.constant.Global;
+import com.jackmeng.constant.ProgramResourceManager;
+import com.jackmeng.constant.StringManager;
+import com.jackmeng.utils.Async;
 
 /**
  * This class handles the right click event for any JTree instance.
@@ -99,7 +104,7 @@ public class FVRightClick extends MouseAdapter {
         JMenuItem audioInfoItem = new JMenuItem("Information");
         audioInfoItem.addActionListener(ev -> {
             try {
-                new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run();
+                new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();;
             } catch (NullPointerException excec) {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
             }
@@ -113,15 +118,39 @@ public class FVRightClick extends MouseAdapter {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (e.isPopupTrigger()) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             popup(e);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (e.isPopupTrigger()) {
+        if (e.getButton() == MouseEvent.BUTTON3) {
             popup(e);
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            Async.async(() -> {
+                JTree pathTree = (JTree) e.getSource();
+                TreePath path = pathTree.getSelectionPath();
+                if (path != null) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+
+                    if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                        Global.ifp.setAssets(
+                                new File(
+                                        Global.bp.findByTree((JTree) e.getSource())
+                                                .getFolderInfo()
+                                                .getAbsolutePath() +
+                                                ProgramResourceManager.FILE_SLASH +
+                                                node.toString()));
+                    }
+                }
+            });
+
         }
     }
 

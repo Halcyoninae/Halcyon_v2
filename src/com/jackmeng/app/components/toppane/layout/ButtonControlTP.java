@@ -163,7 +163,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
       progressBar.setIndeterminate(true);
     }
-    
+
     progressBar.setForeground(ColorManager.MAIN_FG_THEME);
     progressBar.setBorder(null);
     progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -223,7 +223,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    new Thread(() -> {
+    Async.async(() -> {
       if (e.getSource().equals(playButton)) {
         if (aif != null) {
           if (!Global.player.getStream().isPlaying()) {
@@ -286,7 +286,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
       }
       loopButton.repaint();
       shuffleButton.repaint();
-    }).start();
+    });
   }
 
   @Override

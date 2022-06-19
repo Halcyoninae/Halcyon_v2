@@ -59,7 +59,7 @@ import javax.swing.tree.TreePath;
  * @author Jack Meng
  * @since 3.0
  */
-public class InfoViewTP extends JPanel implements TreeSelectionListener, ComponentListener {
+public class InfoViewTP extends JPanel implements ComponentListener {
 
   /**
    * An extended listener for any classes that want
@@ -191,7 +191,7 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
    * 
    * @param f The audio track to play {@link java.io.File}
    */
-  private void setAssets(File f) {
+  public void setAssets(File f) {
     Async.async(() -> {
       if (f.exists() && f.isFile()) {
         info = new AudioInfo(f);
@@ -337,25 +337,6 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
       e.printStackTrace();
     }
     return "";
-  }
-
-  @Override
-  public void valueChanged(TreeSelectionEvent e) {
-    TreePath path = ((JTree) e.getSource()).getSelectionPath();
-    if (path != null) {
-      DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-      if (node.isLeaf() && !node.isRoot()) {
-        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-          setAssets(
-              new File(
-                  Global.bp.findByTree((JTree) e.getSource())
-                      .getFolderInfo()
-                      .getAbsolutePath() +
-                      ProgramResourceManager.FILE_SLASH +
-                      node.toString()));
-        }
-      }
-    }
   }
 
   public AudioInfo getInfo() {
