@@ -19,6 +19,8 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.simple.audio.AudioException;
 import com.jackmeng.simple.audio.StreamedAudio;
+import com.jackmeng.utils.Async;
+import com.jackmeng.utils.TimeParser;
 
 import java.io.File;
 import javax.sound.sampled.Control;
@@ -128,15 +130,15 @@ public class Player {
       audio.stop();
       audio.close();
     }
-    new Thread(
-        () -> {
-          try {
-            this.audio = new StreamedAudio(new File(f));
-          } catch (AudioException e) {
-            e.printStackTrace();
-          }
-        })
-        .start();
+
+    Async.async(() -> {
+      try {
+        this.audio = new StreamedAudio(new File(f));
+      } catch (AudioException e) {
+        e.printStackTrace();
+      }
+    });
+
   }
 
   public String getCurrentFile() {
@@ -145,6 +147,11 @@ public class Player {
 
   public StreamedAudio getStream() {
     return audio;
+  }
+
+  public synchronized String getStringedTime() {
+    return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
+        + TimeParser.fromSeconds((int) audio.getLength() * 1000);
   }
 
   public Control getControl(String key) {

@@ -19,8 +19,10 @@ import javax.swing.*;
 
 import com.jackmeng.app.events.ForceMaxSize;
 import com.jackmeng.app.events.InstantClose;
+import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.constant.ProgramResourceManager;
 
 import java.awt.*;
 
@@ -44,25 +46,43 @@ public class Tailwind implements Runnable {
   /**
    * A JSplitPane contains a BottomPane and TopPane that
    * will be used as the content pane for the JFrame.
+   * 
    * @param mainPane The JSplitPane instance to attach with
    */
   public Tailwind(JSplitPane mainPane) {
     this.mainPane = mainPane;
     this.mainPane.setBorder(BorderFactory.createEmptyBorder());
     container = new JFrame("Halcyon Beta ~ exoad");
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+      container.setUndecorated(true);
+      container = new JFrame("Halcyon Beta ~ exoad") {
+        @Override
+        public void paint(Graphics g) {
+          super.paint(g);
+          Graphics2D g2d = (Graphics2D) g;
+          g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+          g2d.setColor(Color.BLACK);
+          g2d.drawRoundRect(0, 0, container.getWidth(), container.getHeight(), 20, 20);
+        }
+      };
+    }
+
     container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     container.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     container.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT));
-    //container.addComponentListener(
-    //    new ForceMaxSize(container, Manager.MAX_WIDTH, Manager.MAX_HEIGHT, Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
+    // container.addComponentListener(
+    // new ForceMaxSize(container, Manager.MAX_WIDTH, Manager.MAX_HEIGHT,
+    // Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     container.getContentPane().add(mainPane);
-    
+
     container.addWindowListener(new InstantClose());
+
   }
 
   /**
    * Returns the JFrame instance
+   * 
    * @return The JFrame instance
    */
   public JFrame getFrame() {

@@ -109,16 +109,16 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
         } else {
           compositeAlpha = 0.6f;
         }
-
         g2d.setComposite(
             AlphaComposite.getInstance(
                 AlphaComposite.SRC_ATOP,
                 compositeAlpha));
-        BufferedImage original = Global.ifp.getInfo().getArtwork();
-        if (original.getWidth() > this.getWidth()
-            || original.getHeight() > this.getHeight()) {
+
+         BufferedImage original = Global.ifp.getInfo().getArtwork();
+        if (original.getWidth() > backPanel.getWidth()
+            || original.getHeight() > backPanel.getHeight()) {
           original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
-              this.getWidth(), this.getHeight())).toBufferedImage();
+              backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
         }
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
           original = DeImage.grayScale(original);
@@ -135,10 +135,16 @@ public class InfoViewTP extends JPanel implements TreeSelectionListener, Compone
             original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
           }
         }
-        g2d.drawImage(original, (this.getWidth() - original.getWidth()) / 2,
-            (this.getHeight() - original.getHeight()) / 2, null);
+        g2d.drawImage(original, (backPanel.getWidth() - original.getWidth()) / 2,
+            (backPanel.getHeight() - original.getHeight()) / 2, this);
       }
     };
+    backPanel.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentResized(ComponentEvent e) {
+        backPanel.repaint();
+      }
+    });
     backPanel.setPreferredSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     backPanel.setMaximumSize(

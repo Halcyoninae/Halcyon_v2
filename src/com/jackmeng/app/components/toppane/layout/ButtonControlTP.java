@@ -23,11 +23,14 @@ import com.jackmeng.app.components.inheritable.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.events.AlignSliderWithBar;
 import com.jackmeng.audio.AudioInfo;
+import com.jackmeng.connections.properties.ResourceFolder;
 import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
+import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.simple.audio.AudioException;
+import com.jackmeng.utils.Async;
 import com.jackmeng.utils.DeImage;
 
 import java.awt.*;
@@ -72,7 +75,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
     buttons.setMaximumSize(
         new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT / 2));
-    buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 15, getPreferredSize().height / 6));
+    buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 15, getPreferredSize().height / 6));
 
     playButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_PLAY_PAUSE_ICON),
@@ -157,7 +160,10 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressBar = new JProgressBar(0, 100);
     progressBar.setStringPainted(true);
     progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
-    progressBar.setIndeterminate(true);
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+      progressBar.setIndeterminate(true);
+    }
+    
     progressBar.setForeground(ColorManager.MAIN_FG_THEME);
     progressBar.setBorder(null);
     progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -168,24 +174,32 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
-    progressThread = new Thread(() -> {
+    Async.async(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
           progressSlider
-              .setValue((int) (Global.player.getStream().getPosition() * 100 / Global.player.getStream().getLength()));
+              .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
+                  / Global.player.getStream().getLength()));
         }
         try {
-          Thread.sleep(50);
+          Thread.sleep(30);
         } catch (InterruptedException e) {
           e.printStackTrace();
         }
       }
     });
-    progressThread.start();
 
     sliders.add(progressSlider);
     sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
     sliders.add(progressBar);
+
+    addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentResized(ComponentEvent e) {
+        progressSlider.setMaximum(getWidth() - 10);
+        progressBar.setMaximum(progressSlider.getMaximum());
+      }
+    });
 
     add(buttons);
     add(sliders);

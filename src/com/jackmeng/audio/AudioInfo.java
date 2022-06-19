@@ -189,6 +189,10 @@ public class AudioInfo {
     }
   }
 
+  public static BufferedImage getDefaultIcon() {
+    return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+  }
+
   /**
    * Returns the map of tags to the Audio file
    * 

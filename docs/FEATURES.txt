@@ -1,7 +1,7 @@
-[***] #26 "No max size restriction"
+[!PARTIALLY IMPLEMENTED!] [***] #26 "No max size restriction"
         Detailed Description None
         Category: Visual Comfort, Program Dynamic
-        Status: Implementing
+        Status: Partial Implementation
 
 [***] #25 "Help page as a set of guides for the program, tabbed window"
         Detailed Description: Turn the help page into a tabbed window, in which
