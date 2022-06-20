@@ -1,3 +1,8 @@
+[*] #30 "Use an icon to display currently playing track"
+        Detailed Description: None
+        Category: Visual Comfort
+        Status: None
+
 [**] #29 "Save Feature"
         Detailed Description: Save added playlists on exit
         Category: Program Dynamic
