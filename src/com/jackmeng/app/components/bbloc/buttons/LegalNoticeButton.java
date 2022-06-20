@@ -22,16 +22,16 @@ import java.io.File;
 
 import com.jackmeng.app.components.bbloc.BBlocButton;
 import com.jackmeng.app.components.dialog.ConfirmWindow;
-import com.jackmeng.app.components.dialog.LegalNoticeDialog;
+import com.jackmeng.app.components.info.InformationDialog;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.utils.DeImage;
 
 /**
  * A button that when pressed launches
- * {@link com.jackmeng.app.components.dialog.LegalNoticeDialog} which displays
+ * {@link com.jackmeng.app.components.info.InformationDialog} which displays
  * information regarding legal documentation for all libraries and this program.
- * 
+ *
  * @author Jack Meng
  * @since 3.1
  */
@@ -48,22 +48,6 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
     setContentAreaFilled(false);
   }
 
-  private String readLegal() {
-    File f = Global.rd.getFromAsFile(Manager.LEGAL_NOTICE_DOCS);
-    StringBuilder sb = new StringBuilder();
-    try {
-      java.util.Scanner s = new java.util.Scanner(f);
-      while (s.hasNextLine()) {
-        sb.append(s.nextLine());
-        sb.append("\n");
-      }
-      s.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return sb.toString();
-  }
-
   @Override
   public JComponent getComponent() {
     return this;
@@ -71,7 +55,7 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    new LegalNoticeDialog(readLegal(), (ConfirmWindow.ConfirmationListener[]) null).run();
+    new InformationDialog().run();
   }
 
 }

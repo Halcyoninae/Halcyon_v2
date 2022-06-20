@@ -18,11 +18,11 @@
         Category: Visual Comfort, Program Dynamic
         Status: Partial Implementation
 
-[***] #25 "Help page as a set of guides for the program, tabbed window"
+[!IMPLEMENTED] [***] #25 "Help page as a set of guides for the program, tabbed window"
         Detailed Description: Turn the help page into a tabbed window, in which
         each tab represents an internal HTML resource file that contains the content.
         Category: Program Dynamic
-        Status: Implementing
+        Status: IMPLEMENTED
 
 [!PARTIALLY IMPLEMENTED!] [***] #24 "Lock Single Instance"
         Detailed Description: Only allow one instance of this program to be run at once. A lock

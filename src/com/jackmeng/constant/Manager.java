@@ -182,13 +182,14 @@ public interface Manager {
   /// AUDIOINFO Window Config END
 
   /// LEGALNOTICEDIALOG Config START
-  public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 400;
-  public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 600;
+  public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 500;
+  public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 550;
 
   public static final String LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL = RSC_FOLDER_NAME + "/bbloc/legals_normal.png";
   public static final String LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED = RSC_FOLDER_NAME + "/bbloc/legals_pressed.png";
 
-  public static final String LEGAL_NOTICE_DOCS = RSC_FOLDER_NAME + "/files/LICENSE.txt";
+  public static final String LEGAL_NOTICE_DOCS = RSC_FOLDER_NAME + "/files/LICENSE.html";
+  public static final String LEGAL_NOTICE_PROPERTIES_DOCS = RSC_FOLDER_NAME + "/files/PROPERTIES_FILE.html";
 
   public static final int LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT = LEGALNOTICEDIALOG_MIN_HEIGHT - 100;
   /// LEGALNOTICEDIALOG Config END
