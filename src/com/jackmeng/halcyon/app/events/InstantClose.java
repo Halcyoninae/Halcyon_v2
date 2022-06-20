@@ -20,13 +20,11 @@ public class InstantClose implements WindowListener {
       Global.player.getStream().close();
     }
     Program.forcedSavePlaylists();
-
     System.exit(0);
   }
 
   @Override
   public void windowClosed(WindowEvent e) {
-    // TO BE IMPLEMENTED OR IGNORED
   }
 
   @Override

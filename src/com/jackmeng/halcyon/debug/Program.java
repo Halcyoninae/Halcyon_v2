@@ -28,6 +28,7 @@ import java.util.concurrent.ThreadFactory;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.Wrapper;
 
@@ -87,12 +88,16 @@ public class Program {
    *
    * A signature is generated from the current time as an 8 digit integer using
    * the current unix timestamp.
+   *
+   * @deprecated This function is not used anymore and will be moved to a native implementation
    */
+  @Deprecated(since="3.1", forRemoval = true)
   public static void syncPID() {
     Wrapper.async(() -> {
-      File f = new File(Manager.RSC_FOLDER_NAME + "/bin/instance.pid");
+      File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/instance.pid");
       if (f.exists()) {
-        System.err.println("Only one instance allowed for this program.");
+        Debugger.warn(
+            "Only one instance of this program is allowed to be run at any given time.\nIf this is a mistake, please delete the instance.pid from the /bin/ folder in the program's halcyon configuration folder.\nIn most cases this should be handled internally.");
         System.exit(1);
       } else {
         try {
@@ -105,7 +110,6 @@ public class Program {
         } catch (IOException e) {
           e.printStackTrace();
         }
-
       }
     });
   }

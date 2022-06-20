@@ -52,6 +52,8 @@ public class ProgramResourceManager {
   public static final String VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE = "focused";
   public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
   public static final String VALUE_PROGRAM_HIDPI_VALUE = "1.0";
+  public static final String KEY_PROGRAM_USE_SINGLE_INSTANCE = "user.use_single_instance";
+  public static final String VALUE_PROGRAM_USE_SINGLE_INSTANCE = "false";
   public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin", "user" };
   public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 
@@ -68,6 +70,7 @@ public class ProgramResourceManager {
     properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, VALUE_PROGRAM_FORCE_OPTIMIZATION);
     properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE, VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE);
     properties.put(KEY_PROGRAM_HIDPI_VALUE, VALUE_PROGRAM_HIDPI_VALUE);
+    properties.put(KEY_PROGRAM_USE_SINGLE_INSTANCE, VALUE_PROGRAM_USE_SINGLE_INSTANCE);
     return properties;
   }
 
@@ -86,6 +89,7 @@ public class ProgramResourceManager {
     properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
         new String[] { "top", "focused", "left", "right" });
     properties.put(KEY_PROGRAM_HIDPI_VALUE, new String[] { "1.0", "1.1", "0.9" });
+    properties.put(KEY_PROGRAM_USE_SINGLE_INSTANCE, new String[] { "true", "false" });
     return properties;
   }
 

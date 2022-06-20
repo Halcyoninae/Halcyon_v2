@@ -106,7 +106,6 @@ public class Halcyon {
    * @param args Null arguments
    */
   public static void main(String... args) {
-    Program.syncPID();
     if (args.length > 0) {
       if (args[0].equals("-debug")) {
         ProjectManager.DEBUG_PROGRAM = true;
