@@ -19,6 +19,7 @@ import javax.swing.*;
 
 import com.jackmeng.halcyon.app.components.inheritable.TabButton;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.FolderInfo;
 
 import java.awt.*;
@@ -92,7 +93,7 @@ public class BottomPane extends JTabbedPane {
       @Override
       public void onRemoveTab() {
         int i = tabsMap.get(folder);
-        foldersAbsolute.remove(i);
+        foldersAbsolute.remove(folder);
         tabsMap.remove(folder);
         tabs.remove(i);
       }
