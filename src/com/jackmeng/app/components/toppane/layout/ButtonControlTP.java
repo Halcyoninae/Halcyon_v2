@@ -30,7 +30,9 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.debug.Debugger;
+import com.jackmeng.simple.audio.AbstractAudio;
 import com.jackmeng.simple.audio.AudioException;
+import com.jackmeng.simple.audio.StreamedAudio;
 import com.jackmeng.utils.Async;
 import com.jackmeng.utils.DeImage;
 
@@ -58,6 +60,7 @@ public class ButtonControlTP extends JPanel
   private JButton previousButton;
   private JButton loopButton;
   private JButton shuffleButton;
+  private JButton restartButton;
   private LikeButton likeButton;
   private JSlider progressSlider, volumeSlider;
   private JProgressBar progressBar;
@@ -81,13 +84,14 @@ public class ButtonControlTP extends JPanel
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
     buttons.setMaximumSize(
         new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT / 2));
-    buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 15, getPreferredSize().height / 6));
+    buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 12, getPreferredSize().height / 6));
 
     playButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_PLAY_PAUSE_ICON),
             40, 40));
     playButton.setBackground(null);
     playButton.setBorder(null);
+    playButton.setToolTipText("Play/Pause");
     playButton.addActionListener(this);
     playButton.setContentAreaFilled(false);
     playButton.setRolloverEnabled(false);
@@ -98,6 +102,7 @@ public class ButtonControlTP extends JPanel
     nextButton.setBackground(null);
     nextButton.setBorder(null);
     nextButton.setContentAreaFilled(false);
+    nextButton.setToolTipText("Next track");
     nextButton.setRolloverEnabled(false);
     nextButton.setBorderPainted(false);
 
@@ -105,9 +110,20 @@ public class ButtonControlTP extends JPanel
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_BWD_ICON), 24, 24));
     previousButton.setBackground(null);
     previousButton.setBorder(null);
+    previousButton.setToolTipText("Previous track");
     previousButton.setContentAreaFilled(false);
     previousButton.setRolloverEnabled(false);
     previousButton.setBorderPainted(false);
+
+    restartButton = new JButton(
+        DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_RESTART_ICON), 24, 24));
+    restartButton.setBackground(null);
+    restartButton.setBorder(null);
+    restartButton.setContentAreaFilled(false);
+    restartButton.setToolTipText("Restart");
+    restartButton.setRolloverEnabled(false);
+    restartButton.setBorderPainted(false);
+    restartButton.addActionListener(this);
 
     loopButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
@@ -115,6 +131,7 @@ public class ButtonControlTP extends JPanel
     loopButton.setBackground(null);
     loopButton.setBorder(null);
     loopButton.setContentAreaFilled(false);
+    loopButton.setToolTipText("Loop");
     loopButton.setRolloverEnabled(false);
     loopButton.setBorderPainted(false);
     loopButton.addActionListener(this);
@@ -125,6 +142,7 @@ public class ButtonControlTP extends JPanel
     shuffleButton.setBackground(null);
     shuffleButton.setBorder(null);
     shuffleButton.setContentAreaFilled(false);
+    shuffleButton.setToolTipText("Shuffle");
     shuffleButton.setRolloverEnabled(false);
     shuffleButton.setBorderPainted(false);
     shuffleButton.addActionListener(this);
@@ -132,6 +150,7 @@ public class ButtonControlTP extends JPanel
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
     volumeSlider.setBorder(null);
+
     volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
     volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
     volumeSlider.setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 2, 20));
@@ -147,6 +166,7 @@ public class ButtonControlTP extends JPanel
     likeButton.setContentAreaFilled(false);
 
     buttons.add(volumeSlider);
+    buttons.add(restartButton);
     buttons.add(shuffleButton);
     buttons.add(previousButton);
     buttons.add(playButton);
@@ -186,9 +206,10 @@ public class ButtonControlTP extends JPanel
             Global.player.getStream().setPosition(0);
           } else {
             Debugger.unsafeLog(
-                "Seeking to: " + (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) + " 0:00 format:" + String.format("%02d:%02d",
-                    (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) / 60,
-                    (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) % 60));
+                "Seeking to: " + (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100)
+                    + " 0:00 format:" + String.format("%02d:%02d",
+                        (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) / 60,
+                        (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) % 60));
 
             Global.player.getStream().setPosition(
                 (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100));
@@ -263,70 +284,62 @@ public class ButtonControlTP extends JPanel
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    Async.async(() -> {
-      if (e.getSource().equals(playButton)) {
-        if (aif != null) {
-          if (!Global.player.getStream().isPlaying()) {
-            if (!hasPlayed) {
-              Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-              try {
-                Global.player.getStream().open();
-              } catch (AudioException e1) {
-                Debugger.log(e1);
-              }
-              Global.player.play();
-              hasPlayed = true;
-            } else {
-              Global.player.getStream().resume();
+    if (e.getSource().equals(playButton)) {
+      if (aif != null) {
+        if (!Global.player.getStream().isPlaying()) {
+          if (!hasPlayed) {
+            Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+            try {
+              Global.player.getStream().open();
+            } catch (AudioException e1) {
+              Debugger.log(e1);
             }
-            assertVolume();
+            Global.player.play();
+            hasPlayed = true;
           } else {
-            Global.player.getStream().pause();
+            Global.player.getStream().resume();
           }
+          assertVolume();
+        } else {
+          Global.player.getStream().pause();
         }
-      } else if (e.getSource().equals(loopButton)) {
-        if (aif != null) {
-          if (Global.player.isShuffling()) {
-            Global.player.setShuffling(false);
-            shuffleButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
-                    24));
-          }
-          if (Global.player.isLooping()) {
-            Global.player.setLooping(false);
-            loopButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
-                    24));
-          } else {
-            Global.player.setLooping(true);
-            loopButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_LOOP_ICON_PRESSED), 24,
-                    24));
-          }
-        }
-      } else if (e.getSource().equals(shuffleButton) && aif != null) {
-        if (Global.player.isLooping()) {
-          Global.player.setLooping(false);
+      }
+    } else if (e.getSource().equals(loopButton)) {
+      if (Global.player.getStream().isOpen()) {
+        if (!Global.player.getStream().isLooping()) {
+          Global.player.getStream().loop(AbstractAudio.LOOP_ENDLESS);
           loopButton.setIcon(
-              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
-                  24));
-        }
-        if (Global.player.isShuffling()) {
-          Global.player.setShuffling(false);
-          shuffleButton.setIcon(
-              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
+              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_LOOP_ICON_PRESSED), 24,
                   24));
         } else {
-          Global.player.setShuffling(true);
-          shuffleButton.setIcon(
-              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
-                  24));
+          Global.player.getStream().loop(1);
+          DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
+              24);
         }
-
       }
-      loopButton.repaint();
-      shuffleButton.repaint();
-    });
+    } else if (e.getSource().equals(shuffleButton) && aif != null) {
+      if (Global.player.isLooping()) {
+        Global.player.setLooping(false);
+        loopButton.setIcon(
+            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
+                24));
+      }
+      if (Global.player.isShuffling()) {
+        Global.player.setShuffling(false);
+        shuffleButton.setIcon(
+            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
+                24));
+      } else {
+        Global.player.setShuffling(true);
+        shuffleButton.setIcon(
+            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
+                24));
+      }
+
+    } else if (e.getSource().equals(restartButton)) {
+    }
+    loopButton.repaint();
+    shuffleButton.repaint();
   }
 
   @Override

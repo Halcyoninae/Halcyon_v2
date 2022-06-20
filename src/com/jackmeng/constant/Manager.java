@@ -79,6 +79,7 @@ public interface Manager {
   public static final String BUTTONCTRL_NOMUTED_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
   public static final String BUTTONCTRL_LIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
   public static final String BUTTONCTRL_NOLIKE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
+  public static final String BUTTONCTRL_RESTART_ICON = RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
   public static final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED = RSC_FOLDER_NAME
       + "/buttoncontrol/shuffle_button_pressed.png";
   public static final String BUTTONCONTROL_LOOP_ICON_PRESSED = RSC_FOLDER_NAME
