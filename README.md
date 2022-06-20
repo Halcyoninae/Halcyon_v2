@@ -30,6 +30,7 @@ from a pre-compiled binary. Note: Tag for forcing optimizations upon the program
 different runtimes, but for my own side I used Corretto-16-JDK, if you feel like it is not doing the correct thing, you may disable this feature.
 
 **Main Class:** `Halcyon` [here](src/com/jackmeng/halcyon/Halcyon.java)<br>
+*Note there are more than one `main()` functions throughout the program! The above is the class that starts everything and not separate daemons.*<br>
 **Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
 
 ## Audio Framework
