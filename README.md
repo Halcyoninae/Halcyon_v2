@@ -56,4 +56,5 @@ This program uses external libraries and framework, and their attributed license
 can be found [here](LICENSE.txt).
 
 ## Screenshots
+*Note these are not the latest screenshots for the current main branch.*<br>
 ![](docs/unknown.png) ![](docs/unknown2.png)
