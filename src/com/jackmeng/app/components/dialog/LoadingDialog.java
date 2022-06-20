@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
-import com.jackmeng.utils.Async;
+import com.jackmeng.utils.Wrapper;
 
 import java.awt.*;
 import java.util.concurrent.Callable;

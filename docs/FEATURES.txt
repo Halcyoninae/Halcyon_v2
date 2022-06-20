@@ -9,10 +9,10 @@
         Category: Visual Comfort
         Status: None
 
-[**] #29 "Save Feature"
+[!IMPLEMENTED] [**] #29 "Save Feature"
         Detailed Description: Save added playlists on exit
         Category: Program Dynamic
-        Status: none
+        Status: IMPLEMENTED
 
 [!DENIED!] [**] #28 "Disable most image drawings when forced optimization"
         Detailed Description: Disable the backdrop drawing

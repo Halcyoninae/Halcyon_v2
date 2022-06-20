@@ -32,8 +32,10 @@ import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.debug.Program;
+import com.jackmeng.utils.FolderInfo;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -66,9 +68,11 @@ import javax.swing.*;
  * <br>
  * NOTICE: This program is made in the purpose for educational and private use,
  * the original author, Jack Meng and any other contributors, cannot be held
- * responsible for any damage, loss, or anything else that may occur due to the usage
+ * responsible for any damage, loss, or anything else that may occur due to the
+ * usage
  * of this program. Nor, can such contributors can be held responsible for any
- * illegal activities, of those that voids a country's copyright, and/or international
+ * illegal activities, of those that voids a country's copyright, and/or
+ * international
  * copyright laws.
  * <br>
  *
@@ -84,6 +88,7 @@ import javax.swing.*;
  * the programmer must specify that as a global scope object in
  * {@link com.jackmeng.constant.Global}.
  * </p>
+ *
  * @author Jack Meng
  * @since 3.0
  * @see com.jackmeng.constant.Global
@@ -97,6 +102,7 @@ public class Halcyon {
 
   /**
    * No arguments are taken from the entry point
+   *
    * @param args Null arguments
    */
   public static void main(String... args) {
@@ -109,8 +115,7 @@ public class Halcyon {
     }
     try {
       ResourceFolder.checkResourceFolder(
-        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
-      );
+          ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
       for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
         ResourceFolder.createFolder(str);
       }
@@ -122,26 +127,21 @@ public class Halcyon {
       Global.ifp.addInfoViewUpdateListener(Global.bctp);
       JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
       bottom.setMinimumSize(
-        new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2)
-      );
+          new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
       bottom.setPreferredSize(
-        new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2)
-      );
+          new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
       bottom.setMaximumSize(
-        new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2)
-      );
+          new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
       ArrayList<BBlocButton> bb = new ArrayList<>();
       bb.add(new AddFolder());
       bb.add(new RefreshFileView());
       bb.add(new Settings());
       bb.add(new LegalNoticeButton());
       bb.add(
-        GenericWebsiteLinker.getButton(
-          ProjectManager.PROJECT_GITHUB_PAGE,
-          Manager.PROJECTPAGE_BUTTON_TOOLTIP,
-          Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)
-        )
-      );
+          GenericWebsiteLinker.getButton(
+              ProjectManager.PROJECT_GITHUB_PAGE,
+              Manager.PROJECTPAGE_BUTTON_TOOLTIP,
+              Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
       BBlocView b = new BBlocView();
       b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
       bottom.add(b);
@@ -149,6 +149,19 @@ public class Halcyon {
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
       bgt = new Tailwind(m);
+
+      FolderInfo[] fi = Program.fetchSavedPlayLists();
+      if (fi.length > 0) {
+        for (FolderInfo f : fi) {
+          if (new File(f.getAbsolutePath()).exists() && new File(f.getAbsolutePath()).isDirectory()) {
+            Global.bp.pokeNewFileListTab(f.getAbsolutePath());
+            Debugger.good("Added playlist: " + f.getAbsolutePath());
+          } else {
+            Debugger.warn("Could not add playlist: " + f.getAbsolutePath());
+          }
+        }
+      }
+
       bgt.run();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
 

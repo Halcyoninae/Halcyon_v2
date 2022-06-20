@@ -2,7 +2,9 @@ package com.jackmeng.app.events;
 
 import java.awt.event.*;
 
+import com.jackmeng.Halcyon;
 import com.jackmeng.constant.Global;
+import com.jackmeng.debug.Program;
 
 public class InstantClose implements WindowListener {
 
@@ -13,9 +15,13 @@ public class InstantClose implements WindowListener {
 
   @Override
   public void windowClosing(WindowEvent e) {
-    if(Global.player.getStream().isOpen() || Global.player.getStream().isPlaying()) {
+    Halcyon.bgt.getFrame().dispose();
+    if (Global.player.getStream().isOpen() || Global.player.getStream().isPlaying()) {
       Global.player.getStream().close();
     }
+    Program.forcedSavePlaylists();
+
+    System.exit(0);
   }
 
   @Override
@@ -42,5 +48,5 @@ public class InstantClose implements WindowListener {
   public void windowDeactivated(WindowEvent e) {
     // TO BE IMPLEMENTED OR IGNORED
   }
-  
+
 }

@@ -30,13 +30,13 @@ import com.jackmeng.audio.AudioInfo;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.constant.StringManager;
-import com.jackmeng.utils.Async;
+import com.jackmeng.utils.Wrapper;
 
 /**
  * This class handles the right click event for any JTree instance.
- * 
+ *
  * This right click menu currently allows the user to hide a node from view.
- * 
+ *
  * @author Jack Meng
  * @since 3.0
  * @see javax.swing.JTree
@@ -58,7 +58,7 @@ public class FVRightClick extends MouseAdapter {
 
     /**
      * A function that displays the right click menu.
-     * 
+     *
      * @param e The MouseEvent that was triggered.
      */
     private void popup(MouseEvent e) {
@@ -133,7 +133,7 @@ public class FVRightClick extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            Async.async(() -> {
+            Wrapper.async(() -> {
                 JTree pathTree = (JTree) e.getSource();
                 TreePath path = pathTree.getSelectionPath();
                 if (path != null) {

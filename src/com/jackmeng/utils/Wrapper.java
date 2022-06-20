@@ -24,15 +24,13 @@ import com.jackmeng.constant.ProgramResourceManager;
 
 /**
  * This class provides a globalized way
- * for certain asynchronous tasks to be provided.
- *
- * An async task is not run as a thread here, but
- * a quick cached thread if needed.
+ * for certain tasks to be executed
+ * without making the code too complex.
  *
  * @author Jack Meng
  * @author 3.1
  */
-public final class Async {
+public final class Wrapper {
   /**
    * Launches a runnable in an async pool.
    *
@@ -44,6 +42,23 @@ public final class Async {
       threadpool.submit(runnable);
     } else {
       CompletableFuture.runAsync(runnable);
+    }
+  }
+
+  /**
+   * Launches a Runnable in a precatched
+   * Exception handler.
+   *
+   * @param runnable The task to run safely on.
+   */
+  public static void safeLog(Runnable runnable, boolean isAsync) {
+    try {
+      if (isAsync)
+        async(runnable);
+      else
+        runnable.run();
+    } catch (Exception e) {
+      ResourceFolder.dispatchLog(e);
     }
   }
 }

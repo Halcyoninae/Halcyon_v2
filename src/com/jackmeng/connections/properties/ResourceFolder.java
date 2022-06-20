@@ -31,6 +31,7 @@ import java.awt.image.BufferedImage;
 
 import com.jackmeng.constant.ProgramResourceManager;
 import com.jackmeng.debug.Debugger;
+import com.jackmeng.debug.Program;
 import com.jackmeng.utils.DeImage;
 
 /**
@@ -160,6 +161,45 @@ public class ResourceFolder {
       return folder.mkdir();
     }
     return false;
+  }
+
+  /**
+   * Creates a cache file in the standard usr folder that is
+   * for this program.
+   *
+   * @param fileName The file to be created, just file name.
+   * @param content  The contents of the file as a varargs of Objects
+   * @return (true || false) depending on if the creation process was a
+   *         success or not.
+   */
+  public static boolean cacheFile(String fileName, String[] content) {
+    File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
+        + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
+    try {
+      if (!f.isFile()) {
+        f.createNewFile();
+      } else {
+        f.delete();
+        f.createNewFile();
+      }
+    } catch (IOException e) {
+      dispatchLog(e);
+    }
+    try (FileWriter fw = new FileWriter(f)) {
+      for (String str : content) {
+        fw.write(str + "\n");
+      }
+      fw.flush();
+    } catch (IOException e) {
+      dispatchLog(e);
+      return false;
+    }
+    return true;
+  }
+
+  public static File getCacheFile(String fileName) {
+    return new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
+        + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
   }
 
   /**

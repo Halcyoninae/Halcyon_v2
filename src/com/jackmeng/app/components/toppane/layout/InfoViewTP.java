@@ -22,7 +22,7 @@ import com.jackmeng.constant.ColorManager;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 import com.jackmeng.constant.ProgramResourceManager;
-import com.jackmeng.utils.Async;
+import com.jackmeng.utils.Wrapper;
 import com.jackmeng.utils.DeImage;
 import com.jackmeng.utils.TextParser;
 import com.jackmeng.utils.TimeParser;
@@ -187,7 +187,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * @param f The audio track to play {@link java.io.File}
    */
   public void setAssets(File f) {
-    Async.async(() -> {
+    Wrapper.async(() -> {
       if (f.exists() && f.isFile()) {
         info = new AudioInfo(f);
         infoDisplay.setText(infoToString(info, true));

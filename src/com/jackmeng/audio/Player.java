@@ -19,7 +19,7 @@ import com.jackmeng.constant.Global;
 import com.jackmeng.debug.Debugger;
 import com.jackmeng.simple.audio.AudioException;
 import com.jackmeng.simple.audio.StreamedAudio;
-import com.jackmeng.utils.Async;
+import com.jackmeng.utils.Wrapper;
 import com.jackmeng.utils.TimeParser;
 
 import java.io.File;
@@ -131,7 +131,7 @@ public class Player {
       audio.close();
     }
 
-    Async.async(() -> {
+    Wrapper.async(() -> {
       try {
         this.audio = new StreamedAudio(new File(f));
       } catch (AudioException e) {

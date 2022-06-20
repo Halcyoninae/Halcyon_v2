@@ -33,7 +33,7 @@ import com.jackmeng.debug.Debugger;
 import com.jackmeng.simple.audio.AbstractAudio;
 import com.jackmeng.simple.audio.AudioException;
 import com.jackmeng.simple.audio.StreamedAudio;
-import com.jackmeng.utils.Async;
+import com.jackmeng.utils.Wrapper;
 import com.jackmeng.utils.DeImage;
 
 import java.awt.*;
@@ -223,7 +223,7 @@ public class ButtonControlTP extends JPanel
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
     progressSlider.addChangeListener(this);
-    Async.async(() -> {
+    Wrapper.async(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
           progressSlider
@@ -337,6 +337,7 @@ public class ButtonControlTP extends JPanel
       }
 
     } else if (e.getSource().equals(restartButton)) {
+      // TO BE IMPLEMENTED
     }
     loopButton.repaint();
     shuffleButton.repaint();
