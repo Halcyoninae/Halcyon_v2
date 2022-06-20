@@ -48,7 +48,7 @@ import javax.swing.*;
  * part.
  *
  * If the user wants to know more about the audio file
- * 
+ *
  * @see com.jackmeng.app.components.dialog.AudioInfoDialog
  *
  * @author Jack Meng
@@ -100,9 +100,9 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         float compositeAlpha = 0.5f;
 
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
-          compositeAlpha = 0.2f;
+          compositeAlpha = 0.3f;
         } else {
-          compositeAlpha = 0.6f;
+          compositeAlpha = 0.7f;
         }
         g2d.setComposite(
             AlphaComposite.getInstance(
@@ -183,7 +183,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * the current audio file needs updating.
    *
    * Mostly when the user selects a new track to play.
-   * 
+   *
    * @param f The audio track to play {@link java.io.File}
    */
   public void setAssets(File f) {
@@ -263,7 +263,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * <li>Artist of the track</li>
    * <li>Bitrate, SampleRate, and Duration</li>
    * </ul>
-   * 
+   *
    * @param info          The track to generate the information off of
    * @param enforceLength The text length to enforce so the text doesn't go off
    *                      the screen or become bugged.
@@ -301,17 +301,17 @@ public class InfoViewTP extends JPanel implements ComponentListener {
   /**
    * This internal method handles converting the given track's
    * artwork into the tooltip information.
-   * 
+   *
    * This tooltip information attached to the artwork label
    * will display the following information:
    * <ul>
    * <li>Artwork (RAW)</li>
    * <li>WIDTH x HEIGHT</li>
    * </ul>
-   * 
+   *
    * Note: this method caches the result into this program's
    * default external folder.
-   * 
+   *
    * @param info The audio track to base off of
    * @return An HTML string that formats the necessary information for the
    *         tooltip.

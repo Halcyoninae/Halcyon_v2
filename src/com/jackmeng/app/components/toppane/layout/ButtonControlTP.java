@@ -19,6 +19,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import com.jackmeng.app.components.dialog.LoadingDialog;
 import com.jackmeng.app.components.inheritable.LikeButton;
 import com.jackmeng.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.app.events.AlignSliderWithBar;
@@ -36,20 +37,22 @@ import com.jackmeng.utils.DeImage;
 import java.awt.*;
 
 import java.awt.event.*;
+import java.util.concurrent.Callable;
 
 /**
  * This class represents the GUI component collection
  * class that maintains all of the buttons like:
  * play, forward, volume.
- * 
+ *
  * This component is located under the
  * {@link com.jackmeng.app.components.toppane.layout.InfoViewTP}
  * component.
- * 
+ *
  * @author Jack Meng
  * @since 3.0
  */
-public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, ActionListener, ChangeListener {
+public class ButtonControlTP extends JPanel
+    implements InfoViewUpdateListener, ActionListener, ChangeListener {
   private JButton playButton;
   private JButton nextButton;
   private JButton previousButton;
@@ -162,6 +165,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
 
     progressBar = new JProgressBar(0, 100);
     progressBar.setStringPainted(true);
+    progressBar.setString("0:00 / 0:00");
     progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
       progressBar.setIndeterminate(true);
@@ -173,16 +177,50 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
 
     progressSlider = new JSlider(0, 100);
     progressSlider.setValue(0);
+    progressSlider.setFocusable(false);
+    progressSlider.addMouseListener(new MouseAdapter() {
+      @Override
+      public void mousePressed(MouseEvent e) {
+        if (e.getButton() == MouseEvent.BUTTON1) {
+          if (progressSlider.getValue() == 0) {
+            Global.player.getStream().setPosition(0);
+          } else {
+            Debugger.unsafeLog(
+                "Seeking to: " + (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) + " 0:00 format:" + String.format("%02d:%02d",
+                    (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) / 60,
+                    (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) % 60));
+
+            Global.player.getStream().setPosition(
+                (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100));
+            Global.player.play();
+          }
+        }
+      }
+    });
     progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
+    progressSlider.addChangeListener(this);
     Async.async(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
           progressSlider
               .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
                   / Global.player.getStream().getLength()));
+          progressSlider.setToolTipText(
+              String.format("%d:%02d / %d:%02d",
+                  (int) (Global.player.getStream().getPosition() / 60000),
+                  (int) (Global.player.getStream().getPosition() % 60000) / 1000,
+                  (int) (Global.player.getStream().getLength() / 60000),
+                  (int) (Global.player.getStream().getLength() % 60000) / 1000));
+
+          progressBar.setString(
+              String.format("%d:%02d / %d:%02d",
+                  (int) (Global.player.getStream().getPosition() / 60000),
+                  (int) (Global.player.getStream().getPosition() % 60000) / 1000,
+                  (int) (Global.player.getStream().getLength() / 60000),
+                  (int) (Global.player.getStream().getLength() % 60000) / 1000));
         }
         try {
           Thread.sleep(30);
@@ -237,6 +275,7 @@ public class ButtonControlTP extends JPanel implements InfoViewUpdateListener, A
                 Debugger.log(e1);
               }
               Global.player.play();
+              hasPlayed = true;
             } else {
               Global.player.getStream().resume();
             }

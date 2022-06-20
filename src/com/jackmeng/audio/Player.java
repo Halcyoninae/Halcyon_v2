@@ -60,7 +60,7 @@ public class Player {
    * Note: This constructor does assert for the file path leading to the file to
    * be having access to the file
    * or the file existing at all.
-   * 
+   *
    * @param file The absolute file path leading to the audio track
    */
   public Player(String file) {
@@ -75,7 +75,7 @@ public class Player {
 
   /**
    * Constructs a player with a file object
-   * 
+   *
    * @param f The file object
    */
   public Player(File f) {
@@ -118,10 +118,10 @@ public class Player {
 
   /**
    * Resets the audio to a different track.
-   * 
+   *
    * This method will create the new track in a threaded manner in order
    * prevent any other processes from being blocked.
-   * 
+   *
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
