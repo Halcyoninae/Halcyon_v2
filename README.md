@@ -57,4 +57,5 @@ can be found [here](LICENSE.txt).
 
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
-![](docs/unknown.png) ![](docs/unknown2.png)
+<img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
+<img src="docs/unknown2.png" alt="sc2" width="35%" height="35%" />
