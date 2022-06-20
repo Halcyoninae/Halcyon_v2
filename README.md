@@ -25,6 +25,10 @@ fixing!
 Currently there are no direct pre-compiled binary and executables that I have made
 for you to simply download and run. However, you can download this project and run it from source.
 
+It is recommended to have Java 8 or above in order to run this program either from source or 
+from a pre-compiled binary. Note: Tag for forcing optimizations upon the program may or may not work for
+different runtimes, but for my own side I used Corretto-16-JDK, if you feel like it is not doing the correct thing, you may disable this feature.
+
 **Main Class:** `Halcyon` [here](src/com/jackmeng/halcyon/Halcyon.java)<br>
 **Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
 
