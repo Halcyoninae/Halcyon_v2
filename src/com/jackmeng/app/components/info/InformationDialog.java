@@ -15,7 +15,6 @@
 
 package com.jackmeng.app.components.info;
 
-import com.jackmeng.app.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.app.components.info.layout.FileFromSourceTab;
 import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;

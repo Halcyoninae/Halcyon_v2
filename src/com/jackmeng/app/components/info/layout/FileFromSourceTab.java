@@ -8,7 +8,6 @@ import java.io.FileReader;
 
 import com.jackmeng.app.components.info.InformationTab;
 import com.jackmeng.connections.properties.ResourceFolder;
-import com.jackmeng.constant.Global;
 import com.jackmeng.constant.Manager;
 
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
