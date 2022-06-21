@@ -25,6 +25,13 @@ import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
 
+/**
+ * Creates a BBloc button that opens
+ * to a URL object
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class GenericWebsiteLinker {
   private GenericWebsiteLinker() {
   }
@@ -32,6 +39,13 @@ public class GenericWebsiteLinker {
   public static class WebsitePage extends JButton implements BBlocButton {
     private String url;
 
+    /**
+     * Creates a WebSite button
+     *
+     * @param tooltip The tooltip for the button
+     * @param ico     The icon of the button
+     * @param url     The url to link to.
+     */
     public WebsitePage(String tooltip, ImageIcon ico, String url) {
       super(DeImage.resizeImage(ico, 16, 16));
       setToolTipText(tooltip);
@@ -60,6 +74,14 @@ public class GenericWebsiteLinker {
 
   }
 
+  /**
+   * The generic implementation constructor
+   *
+   * @param url
+   * @param tooltip
+   * @param icon
+   * @return
+   */
   public static BBlocButton getButton(String url, String tooltip, ImageIcon icon) {
     return new WebsitePage(tooltip, icon, url);
   }

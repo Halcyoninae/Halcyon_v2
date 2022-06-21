@@ -18,7 +18,16 @@ package com.jackmeng.halcyon.app.components.bbloc;
 import javax.swing.JComponent;
 import java.awt.event.*;
 
+/**
+ * A template used for a BBloc button
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public interface BBlocButton extends ActionListener {
+  /**
+   * @return The Component representing this BBloc Button
+   */
   JComponent getComponent();
 
   @Override
