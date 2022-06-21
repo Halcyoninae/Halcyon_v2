@@ -24,10 +24,9 @@ public class LikeList extends FileList {
   }
 
   public void unset(String file) {
-    Debugger.unsafeLog(folder);
     try {
       for (File f : getFileMap().keySet()) {
-        if (f.getName().equals(file)) {
+        if (f.getAbsolutePath().equals(file)) {
           DefaultTreeModel model = (DefaultTreeModel) getTree().getModel();
           model.removeNodeFromParent(getFileMap().get(f));
           model.reload();
@@ -41,20 +40,19 @@ public class LikeList extends FileList {
   }
 
   public void set(String file) {
-    Debugger.unsafeLog(folder);
-    DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(file).getName());
-    getFileMap().put(new File(file), node);
-    super.getRoot().add(node);
-    folder.addFile(new File(file));
+    if (!folder.getAsListFiles().contains(new File(file))) {
+      DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(file).getName());
+      getFileMap().put(new File(file), node);
+      super.getRoot().add(node);
+      folder.addFile(new File(file));
+    }
   }
 
   public VirtualFolder getFolder() {
-    Debugger.unsafeLog(folder);
     return folder;
   }
 
   public boolean isLiked(String file) {
-    Debugger.unsafeLog(folder);
     return Arrays.asList(folder.getFiles()).contains(new File(file));
   }
 }

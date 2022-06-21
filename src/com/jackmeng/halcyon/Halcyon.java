@@ -163,6 +163,18 @@ public class Halcyon {
         }
       }
 
+      File[] files = Program.fetchLikedTracks();
+      if (files.length > 0) {
+        for (File f : files) {
+          if (f.exists() && f.isFile()) {
+            Global.ll.set(f.getAbsolutePath());
+            Debugger.good("Added Liked Track: " + f.getAbsolutePath());
+          } else {
+            Debugger.warn("Could not load liked track: " + f.getAbsolutePath());
+          }
+        }
+      }
+
       bgt.run();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
