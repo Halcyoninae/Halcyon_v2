@@ -1,3 +1,9 @@
+[***] #25 "Error handling for incorrect file type"
+      Detailed description: Display a messaeg showing that a selected file is
+      not a file type based on it's content. Then delete it from the tree.
+      Status: None
+      State: Experimental-Build ~ MP4J
+
 {URGENT} [***] #24 "Audio Buffer not reforming on new audio opening"
       Detailed description: I am so fucking confused
       Status: Investigating tf out
