@@ -305,7 +305,6 @@ public class ButtonControlTP extends JPanel
             Global.player.getStream().resume();
           }
           assertVolume();
-
         } else {
           Global.player.getStream().pause();
         }
