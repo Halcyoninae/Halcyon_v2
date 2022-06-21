@@ -1,4 +1,11 @@
-{BIG-FEATURE} [**] "Unified file type"
+[*] #33 "Download some resources"
+        Detailed Description: If needed, certain things should be downloaded
+        afterwards and put into the /user/ folder and cached. This can however
+        means the user must have a constant internet connection.
+        Category: Program Dynamic
+        Status: none
+
+{BIG-FEATURE} [**] #32 "Unified file type"
         Detailed Description: *.halcyon files have a top signature detailing
         what file information is being stored and how a global "HalcyonFile"
         would handle such a file.

@@ -25,7 +25,12 @@ fixing!
 Currently there are no direct pre-compiled binary and executables that I have made
 for you to simply download and run. However, you can download this project and run it from source.
 
+It is recommended to have Java 8 or above in order to run this program either from source or 
+from a pre-compiled binary. Note: Tag for forcing optimizations upon the program may or may not work for
+different runtimes, but for my own side I used Corretto-16-JDK, if you feel like it is not doing the correct thing, you may disable this feature.
+
 **Main Class:** `Halcyon` [here](src/com/jackmeng/halcyon/Halcyon.java)<br>
+*Note there are more than one `main()` functions throughout the program! The above is the class that starts everything and not separate daemons.*<br>
 **Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
 
 ## Audio Framework
@@ -56,4 +61,6 @@ This program uses external libraries and framework, and their attributed license
 can be found [here](LICENSE.txt).
 
 ## Screenshots
-![](docs/unknown.png) ![](docs/unknown2.png)
+*Note these are not the latest screenshots for the current main branch.*<br>
+<img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
+<img src="docs/unknown2.png" alt="sc2" width="35%" height="35%" />
