@@ -83,6 +83,11 @@ public class BottomPane extends JTabbedPane {
     return foldersAbsolute;
   }
 
+  public void pokeewFileList(FileList plain) {
+    add(plain.getFolderInfo().getName(), plain);
+    tabs.add(plain);
+  }
+
   public void pokeNewFileListTab(String folder) {
     FileList list = new FileList(new FolderInfo(folder));
     foldersAbsolute.add(new File(folder).getAbsolutePath());
@@ -116,14 +121,16 @@ public class BottomPane extends JTabbedPane {
     List<Integer> needToRemove = new ArrayList<>();
     int i = 0;
     for (FileList l : tabs) {
-      if (!new File(l.getFolderInfo().getAbsolutePath()).exists()
-          || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
-        removeTabAt(i);
-        needToRemove.add(i);
-        foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
-        tabsMap.remove(l.getFolderInfo().getAbsolutePath());
-      } else {
-        l.revalidateFiles();
+      if (!l.isVirtual) {
+        if (!new File(l.getFolderInfo().getAbsolutePath()).exists()
+            || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
+          removeTabAt(i);
+          needToRemove.add(i);
+          foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
+          tabsMap.remove(l.getFolderInfo().getAbsolutePath());
+        } else {
+          l.revalidateFiles();
+        }
       }
     }
     for (int ix : needToRemove) {

@@ -24,6 +24,7 @@ import com.jackmeng.halcyon.app.components.bbloc.buttons.GenericWebsiteLinker;
 import com.jackmeng.halcyon.app.components.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyon.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.halcyon.app.components.bbloc.buttons.Settings;
+import com.jackmeng.halcyon.app.components.bottompane.LikeList;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
 import com.jackmeng.halcyon.app.components.toppane.TopPane;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
@@ -148,6 +149,7 @@ public class Halcyon {
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
       bgt = new Tailwind(m);
+      Global.bp.pokeewFileList(Global.ll);
 
       FolderInfo[] fi = Program.fetchSavedPlayLists();
       if (fi.length > 0) {
@@ -163,7 +165,6 @@ public class Halcyon {
 
       bgt.run();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
-
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);
       new ErrorWindow(ex.toString()).run();

@@ -220,6 +220,13 @@ public final class PropertiesManager {
    * @return The value of the key in the properties file.
    */
   public String get(String key) {
+    if (!new File(location).exists() || !new File(location).isFile()) {
+      try {
+        new File(location).createNewFile();
+      } catch (IOException e) {
+      }
+      createWithDefaultVals();
+    }
     if (fr == null) {
       try {
         if (!new File(location).exists() || !new File(location).isFile()) {
@@ -227,11 +234,12 @@ public final class PropertiesManager {
           createWithDefaultVals();
         }
         fr = new FileReader(location);
-      } catch ( IOException e) {
+      } catch (IOException e) {
         e.printStackTrace();
       }
     }
     try {
+      fr = new FileReader(location);
       util.load(fr);
     } catch (IOException e) {
       e.printStackTrace();

@@ -1,3 +1,8 @@
+[***] #24 "Audio Buffer not reforming on new audio opening"
+      Detailed description: I am so fucking confused
+      Status: Investigating tf out
+      State: Experimental-Build ~ MP4J
+
 [***] #23 "Closing Tabs pre conditions"
       Detailed Description: Make sure the foldersAbsolute list
       completely synced.

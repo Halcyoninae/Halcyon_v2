@@ -34,8 +34,10 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultTreeModel;
 
 import com.jackmeng.halcyon.app.events.FVRightClick;
+import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.utils.VirtualFolder;
 
 /**
  * Represents a Pane containing a list of files for only
@@ -68,13 +70,14 @@ public class FileList extends JScrollPane implements TabTree {
 
   private DefaultMutableTreeNode root;
 
+  public boolean isVirtual;
 
-  public FileList(FolderInfo info) {
+  public FileList(FolderInfo info, Icon closed, Icon open, Icon leaf) {
     super();
     this.info = info;
     fileMap = new HashMap<>();
     root = new DefaultMutableTreeNode(info.getName());
-
+    isVirtual = info instanceof VirtualFolder;
     setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
@@ -100,9 +103,51 @@ public class FileList extends JScrollPane implements TabTree {
     tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    Icon closedIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
-    Icon openIcon = new ImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
-    Icon leafIcon = new ImageIcon(Manager.FILEVIEW_ICON_FILE);
+    renderer.setClosedIcon(closed);
+    renderer.setOpenIcon(open);
+    renderer.setLeafIcon(leaf);
+
+    tree.addMouseListener(new FVRightClick(this));
+    tree.setCellRenderer(renderer);
+
+    getViewport().add(tree);
+  }
+
+  public FileList(FolderInfo info) {
+    super();
+    this.info = info;
+    fileMap = new HashMap<>();
+    root = new DefaultMutableTreeNode(info.getName());
+    isVirtual = info instanceof VirtualFolder;
+    setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
+
+    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+      if (f != null) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+        fileMap.put(f, node);
+        root.add(node);
+      }
+    }
+
+    tree = new JTree(root);
+    tree.setRootVisible(true);
+    tree.setShowsRootHandles(true);
+    tree.setExpandsSelectedPaths(true);
+    tree.setScrollsOnExpand(true);
+    tree.setEditable(false);
+    tree.setRequestFocusEnabled(false);
+    tree.setScrollsOnExpand(true);
+    tree.setAutoscrolls(true);
+    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+    DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+    Icon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
+    Icon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
+    Icon leafIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FILE);
     renderer.setClosedIcon(closedIcon);
     renderer.setOpenIcon(openIcon);
     renderer.setLeafIcon(leafIcon);
@@ -121,6 +166,14 @@ public class FileList extends JScrollPane implements TabTree {
     return info;
   }
 
+  public DefaultMutableTreeNode getRoot() {
+    return root;
+  }
+
+  public Map<File, DefaultMutableTreeNode> getFileMap() {
+    return fileMap;
+  }
+
   /**
    * This function facilitates reloading the current
    * folder:
@@ -134,10 +187,10 @@ public class FileList extends JScrollPane implements TabTree {
   public void revalidateFiles() {
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null && !fileMap.containsKey(f)) {
-          DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-          node.setParent(root);
-          fileMap.put(f, node);
-          root.add(node);
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+        fileMap.put(f, node);
+        root.add(node);
+        ((DefaultTreeModel) tree.getModel()).reload();
       }
     }
     List<File> toRemove = new ArrayList<>();
@@ -170,8 +223,8 @@ public class FileList extends JScrollPane implements TabTree {
 
   @Override
   public String getSelectedNode(DefaultMutableTreeNode node) {
-    for(File f : fileMap.keySet()) {
-      if(fileMap.get(f).equals(node)) {
+    for (File f : fileMap.keySet()) {
+      if (fileMap.get(f).equals(node)) {
         return f.getAbsolutePath();
       }
     }

@@ -18,11 +18,15 @@ package com.jackmeng.halcyon.app.components.inheritable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import com.jackmeng.halcyon.audio.AudioInfo;
+import com.jackmeng.halcyon.constant.Global;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LikeButton extends JButton implements ActionListener {
   private ImageIcon like, noLike;
+
   public LikeButton(ImageIcon noLike, ImageIcon like) {
     super(noLike);
     this.like = like;
@@ -30,12 +34,22 @@ public class LikeButton extends JButton implements ActionListener {
     addActionListener(this);
   }
 
+  public void noLike() {
+    setIcon(noLike);
+  }
+
+  public void like() {
+    setIcon(like);
+  }
+
   @Override
   public void actionPerformed(ActionEvent e) {
     if (this.getIcon() == noLike) {
       this.setIcon(like);
+      Global.ll.set(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
     } else {
       this.setIcon(noLike);
+      Global.ll.unset(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
     }
   }
 }

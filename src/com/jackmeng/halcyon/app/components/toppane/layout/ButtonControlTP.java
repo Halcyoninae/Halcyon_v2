@@ -279,6 +279,11 @@ public class ButtonControlTP extends JPanel
       new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
     }
     aif = info;
+    if (Global.ll.isLiked(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
+      likeButton.like();
+    } else {
+      likeButton.noLike();
+    }
     progressSlider.setValue(0);
   }
 
@@ -296,10 +301,10 @@ public class ButtonControlTP extends JPanel
             }
             Global.player.play();
             hasPlayed = true;
+            assertVolume();
           } else {
             Global.player.getStream().resume();
           }
-          assertVolume();
         } else {
           Global.player.getStream().pause();
         }

@@ -16,6 +16,9 @@
 package com.jackmeng.halcyon.utils;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple class that inits and holds
@@ -33,6 +36,7 @@ public class FolderInfo {
    *
    * Note: this path does not assert that the entered instance is
    * a folder that exists or the file system has access/permission to.
+   *
    * @param absolutePath The path to construct the folder-info object with.
    */
   public FolderInfo(String absolutePath) {
@@ -41,6 +45,7 @@ public class FolderInfo {
 
   /**
    * Returns the absolute path of the folder-info object.
+   *
    * @return The absolute path of the folder-info object.
    */
   public String getAbsolutePath() {
@@ -50,6 +55,7 @@ public class FolderInfo {
   /**
    * Returns the Files (not sub-folders) in the folder-info object
    * or the folder as the file's names.
+   *
    * @return A string array
    */
   public String[] getFilesAsStr() {
@@ -63,6 +69,7 @@ public class FolderInfo {
 
   /**
    * Returns all of the files within the folder
+   *
    * @return File array
    */
   public File[] getFiles() {
@@ -71,6 +78,7 @@ public class FolderInfo {
 
   /**
    * Get this folder's name
+   *
    * @return A String
    */
   public String getName() {
@@ -80,6 +88,7 @@ public class FolderInfo {
   /**
    * Returns an array of String in which each String
    * represents a file inside the folder (absolute path).
+   *
    * @param rules An array of extensions to search for and compare to.
    * @return An array of String
    */

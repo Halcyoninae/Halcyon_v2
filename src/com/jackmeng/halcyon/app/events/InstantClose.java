@@ -20,6 +20,7 @@ public class InstantClose implements WindowListener {
       Global.player.getStream().close();
     }
     Program.forcedSavePlaylists();
+    Program.forcedSaveLikedTracks();
     System.exit(0);
   }
 
