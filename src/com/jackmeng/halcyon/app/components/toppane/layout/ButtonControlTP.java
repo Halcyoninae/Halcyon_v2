@@ -301,46 +301,55 @@ public class ButtonControlTP extends JPanel
             }
             Global.player.play();
             hasPlayed = true;
-            assertVolume();
           } else {
             Global.player.getStream().resume();
           }
+          assertVolume();
+
         } else {
           Global.player.getStream().pause();
         }
       }
     } else if (e.getSource().equals(loopButton)) {
-      if (Global.player.getStream().isOpen()) {
-        if (!Global.player.getStream().isLooping()) {
-          Global.player.getStream().loop(AbstractAudio.LOOP_ENDLESS);
-          loopButton.setIcon(
-              DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_LOOP_ICON_PRESSED), 24,
-                  24));
-        } else {
-          Global.player.getStream().loop(1);
-          DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
-              24);
-        }
-      }
+      /*
+       * if (Global.player.getStream().isOpen()) {
+       * if (!Global.player.getStream().isLooping()) {
+       * Global.player.getStream().loop(AbstractAudio.LOOP_ENDLESS);
+       * loopButton.setIcon(
+       * DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.
+       * BUTTONCONTROL_LOOP_ICON_PRESSED), 24,
+       * 24));
+       * } else {
+       * Global.player.getStream().loop(1);
+       * DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON
+       * ), 24,
+       * 24);
+       * }
+       * }
+       */
     } else if (e.getSource().equals(shuffleButton) && aif != null) {
-      if (Global.player.isLooping()) {
-        Global.player.setLooping(false);
-        loopButton.setIcon(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON), 24,
-                24));
-      }
-      if (Global.player.isShuffling()) {
-        Global.player.setShuffling(false);
-        shuffleButton.setIcon(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_SHUFFLE_ICON), 24,
-                24));
-      } else {
-        Global.player.setShuffling(true);
-        shuffleButton.setIcon(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
-                24));
-      }
-
+      /*
+       * if (Global.player.isLooping()) {
+       * Global.player.setLooping(false);
+       * loopButton.setIcon(
+       * DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_LOOP_ICON
+       * ), 24,
+       * 24));
+       * }
+       * if (Global.player.isShuffling()) {
+       * Global.player.setShuffling(false);
+       * shuffleButton.setIcon(
+       * DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.
+       * BUTTONCTRL_SHUFFLE_ICON), 24,
+       * 24));
+       * } else {
+       * Global.player.setShuffling(true);
+       * shuffleButton.setIcon(
+       * DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.
+       * BUTTONCONTROL_SHUFFLE_ICON_PRESSED), 24,
+       * 24));
+       * }
+       */
     } else if (e.getSource().equals(restartButton)) {
       // TO BE IMPLEMENTED
     }
