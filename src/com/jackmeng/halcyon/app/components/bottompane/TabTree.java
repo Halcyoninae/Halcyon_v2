@@ -17,6 +17,13 @@ package com.jackmeng.halcyon.app.components.bottompane;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+/**
+ * Represents a standard tree in the bottom pane
+ * viewport.
+ *
+ * @author Jack Meng
+ * @since 3.1
+ */
 public interface TabTree {
   /**
    * Calls the remove function on the JTree instance.

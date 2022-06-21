@@ -72,14 +72,39 @@ public class VirtualFolder extends FolderInfo {
     return buff.toArray(new File[buff.size()]);
   }
 
+  /**
+   * Insert a file into this
+   * virtual folder instance.
+   *
+   * This method does not handle if
+   * this file instance exists or not.
+   *
+   * The implementation must handle this by
+   * themselves.
+   *
+   * @param f A file to insert.
+   * @return (true || false) if the action was a success
+   */
   public boolean addFile(File f) {
     return list.add(f);
   }
 
+  /**
+   * Returns the absolute list.
+   *
+   * @return A List
+   */
   public List<File> getAsListFiles() {
     return list;
   }
 
+  /**
+   * Removes a file from the
+   * absolute list.
+   *
+   * @param f The file instance to remove.
+   * @return (true || false) if the action was a success
+   */
   public boolean removeFile(File f) {
     return list.remove(f);
   }

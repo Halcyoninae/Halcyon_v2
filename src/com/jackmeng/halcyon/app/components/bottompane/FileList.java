@@ -158,18 +158,30 @@ public class FileList extends JScrollPane implements TabTree {
     getViewport().add(tree);
   }
 
+  /**
+   * @return The JTree representing this viewport.
+   */
   public JTree getTree() {
     return tree;
   }
 
+  /**
+   * @return A FolderInfo object representing this FileList
+   */
   public FolderInfo getFolderInfo() {
     return info;
   }
 
+  /**
+   * @return A Node that represents the root node.
+   */
   public DefaultMutableTreeNode getRoot() {
     return root;
   }
 
+  /**
+   * @return Returns the default file map with each File object having a node.
+   */
   public Map<File, DefaultMutableTreeNode> getFileMap() {
     return fileMap;
   }
