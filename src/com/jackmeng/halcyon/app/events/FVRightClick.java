@@ -30,6 +30,7 @@ import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.constant.StringManager;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.Wrapper;
 
 /**
@@ -43,7 +44,21 @@ import com.jackmeng.halcyon.utils.Wrapper;
  * @see javax.swing.tree.DefaultMutableTreeNode
  */
 public class FVRightClick extends MouseAdapter {
+
+    public interface RightClickHideItemListener {
+        void onRemove(String content);
+    }
+
     private TabTree tree;
+    private String hideString = "Hide Item";
+
+    private RightClickHideItemListener hideTask;
+
+    public FVRightClick(TabTree tree, String hideItemString, RightClickHideItemListener hideTask) {
+        this(tree);
+        this.hideTask = hideTask;
+        this.hideString = hideItemString;
+    }
 
     public FVRightClick(TabTree tree) {
         this.tree = tree;
@@ -88,7 +103,7 @@ public class FVRightClick extends MouseAdapter {
         }
 
         JPopupMenu popup = new JPopupMenu();
-        JMenuItem refreshMenuItem = new JMenuItem("Hide Item");
+        JMenuItem refreshMenuItem = new JMenuItem(hideString);
         refreshMenuItem.addActionListener(ev -> {
             try {
                 DefaultMutableTreeNode parent = (DefaultMutableTreeNode) rcNode.getParent();
@@ -96,6 +111,10 @@ public class FVRightClick extends MouseAdapter {
                 DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                 model.reload();
                 tree.remove(rcNode.toString());
+                if (hideTask != null) {
+                    Debugger.unsafeLog("Dispatching hide_task callable...");
+                    hideTask.onRemove(tree.getSelectedNode(rcNode));
+                }
             } catch (NullPointerException excec) {
                 new ErrorWindow("Hiding the root node is not allowed.").run();
             }

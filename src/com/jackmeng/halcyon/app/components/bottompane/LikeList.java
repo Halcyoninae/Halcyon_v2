@@ -15,6 +15,7 @@
 
 package com.jackmeng.halcyon.app.components.bottompane;
 
+import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.debug.Debugger;
@@ -48,6 +49,13 @@ import javax.swing.tree.DefaultTreeModel;
  */
 public class LikeList extends FileList {
   private transient VirtualFolder folder;
+  private static RightClickHideItemListener itemListener = new RightClickHideItemListener() {
+    @Override
+    public void onRemove(String content) {
+      Global.ll.unset(content);
+      Debugger.good("Removed: " + content + " " + Global.ll.getFolder().getAsListFiles().contains(new File(content)));
+    }
+  };
 
   /**
    * Inits the LikeList object as a child of the FileList
@@ -57,9 +65,9 @@ public class LikeList extends FileList {
     super(new VirtualFolder("Liked Tracks", Program.fetchLikedTracks()),
         Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED),
         Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN),
-        Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_LIKED_FILE));
+        Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
     folder = (VirtualFolder) getFolderInfo();
-  }
+   }
 
   /**
    * Removes a track from the liked list listing.
@@ -67,6 +75,7 @@ public class LikeList extends FileList {
    * @param file The file's absolute path to remove from.
    */
   public void unset(String file) {
+    folder.removeFile(new File(file));
     try {
       for (File f : getFileMap().keySet()) {
         if (f.getAbsolutePath().equals(file)) {
@@ -74,7 +83,8 @@ public class LikeList extends FileList {
           model.removeNodeFromParent(getFileMap().get(f));
           model.reload();
           getFileMap().remove(f);
-          folder.removeFile(new File(file));
+        } else {
+          Debugger.warn("Not match " + f.getAbsolutePath() + " for: " + file);
         }
       }
     } catch (IllegalArgumentException e) {
@@ -132,4 +142,5 @@ public class LikeList extends FileList {
   public boolean isLiked(String file) {
     return Arrays.asList(folder.getFiles()).contains(new File(file));
   }
+
 }
