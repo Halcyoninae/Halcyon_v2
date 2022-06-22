@@ -50,22 +50,36 @@ public class BottomPane extends JTabbedPane {
    */
   private Map<String, Integer> tabsMap;
 
+  /**
+   * Creates a bottom viewport
+   */
   public BottomPane() {
     super();
     foldersAbsolute = new ArrayList<>();
     tabsMap = new HashMap<>();
 
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     this.tabs = new ArrayList<>();
     setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
   }
 
+  /**
+   * @return list that represents the
+   *         FileList tabs.
+   */
   public List<FileList> getTabs() {
     return tabs;
   }
 
+  /**
+   * Goes through all of the avaliable
+   * FileList components and gets which ever
+   * has the same instance of a JTree
+   *
+   * @param tree The JTree to compare against
+   * @return The FileList component holding the JTree component
+   */
   public FileList findByTree(JTree tree) {
     for (FileList tab : tabs) {
       if (tab.getTree().equals(tree)) {
@@ -75,19 +89,40 @@ public class BottomPane extends JTabbedPane {
     return null;
   }
 
+  /**
+   * @param folderAbsoluteStr A folder's absolute path
+   * @return (true || false) if said folder is within the list.
+   */
   public boolean containsFolder(String folderAbsoluteStr) {
     return foldersAbsolute.contains(folderAbsoluteStr);
   }
 
+  /**
+   * @return A List of String representsin the tabs with the different names.
+   */
   public List<String> getStrTabs() {
     return foldersAbsolute;
   }
 
+  /**
+   * Pokes a direct File List object
+   *
+   * This should only be used to add a static
+   * viewport, which means this tab cannot be deleted
+   * by the end-user
+   *
+   * @param plain A File List Component
+   */
   public void pokeewFileList(FileList plain) {
     add(plain.getFolderInfo().getName(), plain);
     tabs.add(plain);
   }
 
+  /**
+   * Adds a new File List object to the viewport of tabs.
+   *
+   * @param folder An absolute path to a folder.
+   */
   public void pokeNewFileListTab(String folder) {
     FileList list = new FileList(new FolderInfo(folder));
     foldersAbsolute.add(new File(folder).getAbsolutePath());

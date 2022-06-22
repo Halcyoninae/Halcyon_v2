@@ -26,6 +26,7 @@ import com.jackmeng.halcyon.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.halcyon.app.components.bbloc.buttons.Settings;
 import com.jackmeng.halcyon.app.components.bottompane.LikeList;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
+import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.toppane.TopPane;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
@@ -123,6 +124,11 @@ public class Halcyon {
       ResourceFolder.pm.checkAllPropertiesExistence();
 
       new ThreadedScheduler();
+
+      LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
+
+      new Thread(ld::run).start();
+
       TopPane tp = new TopPane(Global.ifp, Global.bctp);
       Global.ifp.addInfoViewUpdateListener(Global.bctp);
       JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -130,8 +136,6 @@ public class Halcyon {
           new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
       bottom.setPreferredSize(
           new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-      bottom.setMaximumSize(
-          new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
       ArrayList<BBlocButton> bb = new ArrayList<>();
       bb.add(new AddFolder());
       bb.add(new RefreshFileView());
@@ -163,7 +167,20 @@ public class Halcyon {
         }
       }
 
+      File[] files = Program.fetchLikedTracks();
+      if (files.length > 0) {
+        for (File f : files) {
+          if (f.exists() && f.isFile()) {
+            Global.ll.set(f.getAbsolutePath());
+            Debugger.good("Added Liked Track: " + f.getAbsolutePath());
+          } else {
+            Debugger.warn("Could not load liked track: " + f.getAbsolutePath());
+          }
+        }
+      }
+
       bgt.run();
+      ld.kill();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);

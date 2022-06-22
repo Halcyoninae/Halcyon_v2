@@ -44,7 +44,7 @@ public class LikeButton extends JButton implements ActionListener {
 
   @Override
   public void actionPerformed(ActionEvent e) {
-    if (this.getIcon() == noLike) {
+    if (this.getIcon().equals(noLike)) {
       this.setIcon(like);
       Global.ll.set(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
     } else {

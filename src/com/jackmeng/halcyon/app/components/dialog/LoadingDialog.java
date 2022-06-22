@@ -41,27 +41,16 @@ public class LoadingDialog extends JFrame {
     getContentPane().add(panel);
   }
 
-  public void run(Callable<Boolean> task) {
+  public void run(Runnable task) {
     this.pack();
     this.setAlwaysOnTop(true);
     this.setVisible(true);
+    new Thread(task::run);
+  }
 
-    ExecutorService executor = Executors.newCachedThreadPool();
-    Future<Boolean> future = executor.submit(task);
-    while (!future.isDone()) {
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-    try {
-      boolean result = future.get();
-    } catch (InterruptedException | ExecutionException e) {
-      e.printStackTrace();
-    }
-    executor.shutdown();
-    kill();
+  public void run() {
+    run(() -> {
+    });
   }
 
   public void kill() {

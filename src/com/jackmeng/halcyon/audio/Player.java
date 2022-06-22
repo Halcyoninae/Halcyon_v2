@@ -66,7 +66,7 @@ public class Player {
   public Player(String file) {
     try {
       audio = new StreamedAudio(new File(file));
-      audio.addAudioListener(new DefaultAudioListener(this));
+      audio.addAudioListener(new PlainAudioListener(this));
       currentAbsolutePath = file;
     } catch (AudioException e) {
       Debugger.log(e);
@@ -82,7 +82,7 @@ public class Player {
     try {
       audio = new StreamedAudio(f);
       currentAbsolutePath = f.getAbsolutePath();
-      audio.addAudioListener(new DefaultAudioListener(this));
+      audio.addAudioListener(new PlainAudioListener(this));
     } catch (AudioException e) {
       Debugger.log(e);
     }

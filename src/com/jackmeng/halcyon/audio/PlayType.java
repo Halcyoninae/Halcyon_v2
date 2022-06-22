@@ -15,6 +15,13 @@
 
 package com.jackmeng.halcyon.audio;
 
+/**
+ * Returns an enum that holds
+ * states for the audio.
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public enum PlayType {
   STANDARD_CLOSE_ON_END,
   STANDARD_LOOP;

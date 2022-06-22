@@ -20,8 +20,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -130,7 +132,7 @@ public class Program {
   }
 
   public static void forcedSaveLikedTracks() {
-    List<String> list = new ArrayList<>();
+    Set<String> list = new HashSet<>();
     Debugger.warn("Now saving liked tracks.");
     for (File f : Global.ll.getFolder().getFiles()) {
       list.add(f.getAbsolutePath());
@@ -157,7 +159,7 @@ public class Program {
       }, true);
       return new File[0];
     }
-    List<File> list = new ArrayList<>();
+    Set<File> list = new HashSet<>();
     try (Scanner sc = new Scanner(ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE))) {
       while (sc.hasNext()) {
         String str = sc.nextLine();

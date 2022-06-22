@@ -72,7 +72,6 @@ public class ButtonControlTP extends JPanel
     super();
     aif = null;
     setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT));
     setOpaque(false);
     setLayout(new GridLayout(2, 1));
@@ -82,8 +81,6 @@ public class ButtonControlTP extends JPanel
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
     buttons.setMinimumSize(
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
-    buttons.setMaximumSize(
-        new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT / 2));
     buttons.setLayout(new FlowLayout(FlowLayout.CENTER, 12, getPreferredSize().height / 6));
 
     playButton = new JButton(
@@ -153,7 +150,6 @@ public class ButtonControlTP extends JPanel
 
     volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
     volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
-    volumeSlider.setMaximumSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 2, 20));
     volumeSlider.addChangeListener(this);
 
     likeButton = new LikeButton(
@@ -180,8 +176,6 @@ public class ButtonControlTP extends JPanel
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
     sliders.setMinimumSize(
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
-    sliders.setMaximumSize(
-        new Dimension(Manager.BUTTONCONTROL_MAX_WIDTH, Manager.BUTTONCONTROL_MAX_HEIGHT / 2));
 
     progressBar = new JProgressBar(0, 100);
     progressBar.setStringPainted(true);
@@ -267,6 +261,10 @@ public class ButtonControlTP extends JPanel
     add(sliders);
   }
 
+  /**
+   * Sets the volume to the current slider's volume
+   * if the stream is reset.
+   */
   private void assertVolume() {
     Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }
@@ -305,7 +303,6 @@ public class ButtonControlTP extends JPanel
             Global.player.getStream().resume();
           }
           assertVolume();
-
         } else {
           Global.player.getStream().pause();
         }

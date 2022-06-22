@@ -82,7 +82,6 @@ public class FileList extends JScrollPane implements TabTree {
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null) {
@@ -123,7 +122,6 @@ public class FileList extends JScrollPane implements TabTree {
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
 
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null) {
@@ -158,18 +156,30 @@ public class FileList extends JScrollPane implements TabTree {
     getViewport().add(tree);
   }
 
+  /**
+   * @return The JTree representing this viewport.
+   */
   public JTree getTree() {
     return tree;
   }
 
+  /**
+   * @return A FolderInfo object representing this FileList
+   */
   public FolderInfo getFolderInfo() {
     return info;
   }
 
+  /**
+   * @return A Node that represents the root node.
+   */
   public DefaultMutableTreeNode getRoot() {
     return root;
   }
 
+  /**
+   * @return Returns the default file map with each File object having a node.
+   */
   public Map<File, DefaultMutableTreeNode> getFileMap() {
     return fileMap;
   }

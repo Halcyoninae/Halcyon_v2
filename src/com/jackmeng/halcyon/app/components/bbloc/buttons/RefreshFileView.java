@@ -25,13 +25,21 @@ import com.jackmeng.halcyon.utils.DeImage;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+ * Dispatches a call for all of the tabs in the FileList
+ * to be refreshed.
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class RefreshFileView extends JButton implements BBlocButton {
 
   public RefreshFileView() {
     super(new ImageIcon(DeImage
         .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16, 16)));
     setRolloverIcon(new ImageIcon(DeImage
-        .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16, 16)));
+        .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
+            16)));
     setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
     setOpaque(true);
     setBackground(null);
