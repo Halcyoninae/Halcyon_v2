@@ -26,6 +26,13 @@ import com.jackmeng.halcyon.utils.TimeParser;
 
 import java.awt.*;
 
+/**
+ * This is a window popup that shows information regarding the current
+ * track by using the AudioInfo class.
+ *
+ * @author Jack Meng
+ * @since 3.1
+ */
 public class AudioInfoDialog extends JFrame implements Runnable {
   private JSplitPane mainPane;
   private JScrollPane artWorkPanel;
@@ -47,7 +54,8 @@ public class AudioInfoDialog extends JFrame implements Runnable {
       @Override
       public synchronized void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2, (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
+        g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2,
+            (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
       }
     };
     artWork.setPreferredSize(new Dimension(info.getArtwork().getWidth(), info.getArtwork().getHeight()));
@@ -78,6 +86,10 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     getContentPane().add(mainPane);
   }
 
+  /**
+   * @return This instance's AudioInfo object that is being used to generate the
+   *         compiled information.
+   */
   public AudioInfo getInfo() {
     return info;
   }

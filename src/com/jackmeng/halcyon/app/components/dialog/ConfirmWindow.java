@@ -30,6 +30,13 @@
 
 package com.jackmeng.halcyon.app.components.dialog;
 
+/**
+ * Displays a window that calls for a confirmation
+ * status.
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 import javax.swing.*;
 
 import com.jackmeng.halcyon.constant.Global;
@@ -39,7 +46,19 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
+  /**
+   * A listener that is called upon for any classes that
+   * wish to listen in on anything about the update for this confirmation
+   * daemon.
+   *
+   * @author Jack Meng
+   * @since 3.0
+   */
   public interface ConfirmationListener {
+    /**
+     * Called for a status update for this class.
+     * @param status The status (true || false)
+     */
     void onStatus(boolean status);
   }
 

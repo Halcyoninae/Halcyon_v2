@@ -26,6 +26,7 @@ import com.jackmeng.halcyon.app.components.bbloc.buttons.RefreshFileView;
 import com.jackmeng.halcyon.app.components.bbloc.buttons.Settings;
 import com.jackmeng.halcyon.app.components.bottompane.LikeList;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
+import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.toppane.TopPane;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
@@ -123,6 +124,11 @@ public class Halcyon {
       ResourceFolder.pm.checkAllPropertiesExistence();
 
       new ThreadedScheduler();
+
+      LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
+
+      new Thread(ld::run).start();
+
       TopPane tp = new TopPane(Global.ifp, Global.bctp);
       Global.ifp.addInfoViewUpdateListener(Global.bctp);
       JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
@@ -176,6 +182,7 @@ public class Halcyon {
       }
 
       bgt.run();
+      ld.kill();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);

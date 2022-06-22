@@ -267,6 +267,10 @@ public class ButtonControlTP extends JPanel
     add(sliders);
   }
 
+  /**
+   * Sets the volume to the current slider's volume
+   * if the stream is reset.
+   */
   private void assertVolume() {
     Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }

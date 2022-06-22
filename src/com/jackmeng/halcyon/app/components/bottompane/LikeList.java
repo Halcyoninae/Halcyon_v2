@@ -17,11 +17,14 @@ package com.jackmeng.halcyon.app.components.bottompane;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.debug.Program;
 import com.jackmeng.halcyon.utils.VirtualFolder;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -90,6 +93,22 @@ public class LikeList extends FileList {
       getFileMap().put(new File(file), node);
       super.getRoot().add(node);
       folder.addFile(new File(file));
+    }
+  }
+
+  @Override
+  public void revalidateFiles() {
+    List<File> toRemove = new ArrayList<>();
+    for (File f : getFileMap().keySet()) {
+      if (!f.exists() || !f.isFile()) {
+        ((DefaultTreeModel) getTree().getModel()).removeNodeFromParent(getFileMap().get(f));
+        toRemove.add(f);
+        Debugger.warn("File not found: " + f.getName());
+      }
+    }
+
+    for (File f : toRemove) {
+      getFileMap().remove(f);
     }
   }
 
