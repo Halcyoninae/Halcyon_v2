@@ -34,6 +34,7 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.tree.DefaultTreeModel;
 
 import com.jackmeng.halcyon.app.events.FVRightClick;
+import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.FolderInfo;
@@ -72,7 +73,7 @@ public class FileList extends JScrollPane implements TabTree {
 
   public boolean isVirtual;
 
-  public FileList(FolderInfo info, Icon closed, Icon open, Icon leaf) {
+  public FileList(FolderInfo info, Icon closed, Icon open, Icon leaf, String rightClickHideString, RightClickHideItemListener hideStringTask) {
     super();
     this.info = info;
     fileMap = new HashMap<>();
@@ -106,7 +107,7 @@ public class FileList extends JScrollPane implements TabTree {
     renderer.setOpenIcon(open);
     renderer.setLeafIcon(leaf);
 
-    tree.addMouseListener(new FVRightClick(this));
+    tree.addMouseListener(new FVRightClick(this, rightClickHideString, hideStringTask));
     tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
