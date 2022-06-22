@@ -67,7 +67,7 @@ public class Tailwind implements Runnable {
     container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     container.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
-    container.setMaximumSize(new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT));
+    container.setMinimumSize(container.getPreferredSize());
     // container.addComponentListener(
     // new ForceMaxSize(container, Manager.MAX_WIDTH, Manager.MAX_HEIGHT,
     // Manager.MIN_WIDTH, Manager.MIN_HEIGHT));

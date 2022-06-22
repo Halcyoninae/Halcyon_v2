@@ -22,6 +22,7 @@ import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.TimeParser;
@@ -67,6 +68,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     void infoView(AudioInfo info);
   }
 
+  private int displayAbleChars = Manager.INFOVIEW_INFODISPLAY_MAX_CHARS;
   private JPanel topPanel, backPanel;
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
@@ -77,8 +79,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     listeners = new ArrayList<>();
     setPreferredSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
-    setMaximumSize(
-        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     setMinimumSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     setOpaque(false);
@@ -86,8 +86,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     topPanel = new JPanel();
     topPanel.setPreferredSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
-    topPanel.setMaximumSize(
-        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     topPanel.setMinimumSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     topPanel.setOpaque(false);
@@ -130,34 +128,24 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
           }
         }
-        g2d.drawImage(original, (backPanel.getWidth() - original.getWidth()) / 2,
-            (backPanel.getHeight() - original.getHeight()) / 2, this);
+        g2d.drawImage(original, ((int) backPanel.getPreferredSize().getWidth() - original.getWidth()) / 2,
+            ((int) backPanel.getPreferredSize().getHeight() - original.getHeight()) / 2, this);
       }
     };
     backPanel.addComponentListener(new ComponentAdapter() {
       @Override
       public void componentResized(ComponentEvent e) {
         backPanel.repaint();
+        Debugger.warn(infoDisplay.getSize());
       }
     });
     backPanel.setPreferredSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
-    backPanel.setMaximumSize(
-        new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     backPanel.setMinimumSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
     backPanel.setOpaque(false);
 
     info = new AudioInfo();
-    topPanel.setLayout(
-        new FlowLayout(
-            FlowLayout.CENTER,
-            Manager.INFOVIEW_FLOWLAYOUT_HGAP,
-            getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
-    infoDisplay = new JLabel(infoToString(info, true));
-    infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-    infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setToolTipText(infoToString(info, false));
     BufferedImage bi = DeImage.imageIconToBI(
         Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.grayScale(DeImage.resizeNoDistort(
@@ -168,14 +156,40 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
     artWork.setVerticalAlignment(SwingConstants.CENTER);
+
+    /*
+     * topPanel.setLayout(
+     * new FlowLayout(
+     * FlowLayout.CENTER,
+     * Manager.INFOVIEW_FLOWLAYOUT_HGAP,
+     * getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
+     */
+
+    GridBagLayout gbl = new GridBagLayout();
+    GridBagConstraints constraints = new GridBagConstraints();
+    constraints.fill = GridBagConstraints.BOTH;
+    constraints.gridx = 20;
+    constraints.weightx = 0.5;
+    constraints.gridwidth = artWork.getWidth();
+
+    GridBagConstraints constraints2 = new GridBagConstraints();
+    constraints2.fill = GridBagConstraints.BOTH;
+    // topPanel.setLayout(new GridLayout(1, 2,0,0));
+    topPanel.setLayout(gbl);
+    infoDisplay = new JLabel(infoToString(info, true));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    topPanel.add(artWork);
-    topPanel.add(infoDisplay);
+    infoDisplay.setToolTipText(infoToString(info, false));
+    infoDisplay.setHorizontalTextPosition(SwingConstants.LEADING);
+    infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
+    infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
+    topPanel.add(artWork, constraints);
+    topPanel.add(infoDisplay, constraints);
     addComponentListener(this);
     setLayout(new OverlayLayout(this));
     add(topPanel);
     add(backPanel);
+    topPanel.setOpaque(false);
   }
 
   /**
@@ -270,8 +284,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * @return An HTML string that can be used by html supporting GUI Components to
    *         display the information.
    */
-  private static String infoToString(AudioInfo info, boolean enforceLength) {
-    return ("<html><body style=\"font-family='Trebuchet MS', sans-serif;\"><p style=\"text-align: left;\"><span style=\"color: "
+  private String infoToString(AudioInfo info, boolean enforceLength) {
+    return ("<html><body style=\"font-family='Trebuchet MS', monospace;\"><p style=\"text-align: left;\"><span style=\"color: "
         +
         ColorManager.MAIN_FG_STR +
         ";font-size: 12px;\"><strong>" +
@@ -282,7 +296,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     .equals("true")
                         ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
                         : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName(),
-                Manager.INFOVIEW_INFODISPLAY_MAX_CHARS)
+                displayAbleChars)
             : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
         +
         "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +

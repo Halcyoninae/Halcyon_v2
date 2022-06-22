@@ -136,8 +136,6 @@ public class Halcyon {
           new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
       bottom.setPreferredSize(
           new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-      bottom.setMaximumSize(
-          new Dimension(Manager.MAX_WIDTH, Manager.MAX_HEIGHT / 2));
       ArrayList<BBlocButton> bb = new ArrayList<>();
       bb.add(new AddFolder());
       bb.add(new RefreshFileView());

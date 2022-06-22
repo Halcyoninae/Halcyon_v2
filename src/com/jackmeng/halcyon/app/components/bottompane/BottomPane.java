@@ -59,7 +59,6 @@ public class BottomPane extends JTabbedPane {
     tabsMap = new HashMap<>();
 
     setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMaximumSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MAX_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     this.tabs = new ArrayList<>();
     setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
