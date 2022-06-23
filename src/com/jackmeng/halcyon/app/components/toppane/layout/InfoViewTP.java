@@ -128,8 +128,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
           }
         }
-        g2d.drawImage(original, ((int) backPanel.getPreferredSize().getWidth() - original.getWidth()) / 2,
-            ((int) backPanel.getPreferredSize().getHeight() - original.getHeight()) / 2, this);
+        g2d.drawImage(original, ((int) this.getPreferredSize().getWidth() - original.getWidth()) / 2,
+            ((int) this.getPreferredSize().getHeight() - original.getHeight()) / 2, null);
       }
     };
     backPanel.addComponentListener(new ComponentAdapter() {
@@ -165,17 +165,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
      */
 
-    GridBagLayout gbl = new GridBagLayout();
-    GridBagConstraints constraints = new GridBagConstraints();
-    constraints.fill = GridBagConstraints.BOTH;
-    constraints.gridx = 20;
-    constraints.weightx = 0.5;
-    constraints.gridwidth = artWork.getWidth();
-
-    GridBagConstraints constraints2 = new GridBagConstraints();
-    constraints2.fill = GridBagConstraints.BOTH;
-    // topPanel.setLayout(new GridLayout(1, 2,0,0));
-    topPanel.setLayout(gbl);
+    topPanel.setLayout(new GridLayout(1, 3,15, topPanel.getPreferredSize().height / 2));
     infoDisplay = new JLabel(infoToString(info, true));
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
@@ -183,8 +173,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     infoDisplay.setHorizontalTextPosition(SwingConstants.LEADING);
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    topPanel.add(artWork, constraints);
-    topPanel.add(infoDisplay, constraints);
+    topPanel.add(artWork);
+    topPanel.add(infoDisplay);
     addComponentListener(this);
     setLayout(new OverlayLayout(this));
     add(topPanel);
@@ -220,7 +210,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         }
 
         if (info.getArtwork() != null) {
-          BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 96, 96);
+          BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
           artWork.setIcon(new ImageIcon(bi));
         } else {
           BufferedImage bi = DeImage.imageIconToBI(

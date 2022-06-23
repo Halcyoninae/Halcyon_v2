@@ -15,6 +15,9 @@
 
 package com.jackmeng.halcyon.debug;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.constant.Global;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.TimeParser;
 
 /**
@@ -130,15 +133,17 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void warn(T... o) {
-    for (int i = 0; i < o.length; i++) {
-      if (o[i] != null) {
-        System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
-            + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + o[i].toString()
-            + CLIStyles.RESET.getColor());
-      } else {
-        System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
-            + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
-            + CLIStyles.RESET.getColor());
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+      for (int i = 0; i < o.length; i++) {
+        if (o[i] != null) {
+          System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
+              + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + o[i].toString()
+              + CLIStyles.RESET.getColor());
+        } else {
+          System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
+              + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
+              + CLIStyles.RESET.getColor());
+        }
       }
     }
   }
@@ -155,15 +160,17 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void good(T... o) {
-    for (int i = 0; i < o.length; i++) {
-      if (o[i] != null) {
-        System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
-            + CLIStyles.GREEN_TXT.getColor() + o[i].toString()
-            + CLIStyles.RESET.getColor());
-      } else {
-        System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
-            + CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
-            + CLIStyles.RESET.getColor());
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+      for (int i = 0; i < o.length; i++) {
+        if (o[i] != null) {
+          System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
+              + CLIStyles.GREEN_TXT.getColor() + o[i].toString()
+              + CLIStyles.RESET.getColor());
+        } else {
+          System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
+              + CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
+              + CLIStyles.RESET.getColor());
+        }
       }
     }
   }
@@ -176,13 +183,15 @@ public class Debugger {
    */
   @SafeVarargs
   public static <T> void unsafeLog(T... o) {
-    for (int i = 0; i < o.length; i++) {
-      if (o[i] != null) {
-        System.err.println(getLogText() + o[i].toString() + " ");
-      } else {
-        System.err.println(getLogText() + "NULL_CONTENT" + " ");
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+      for (int i = 0; i < o.length; i++) {
+        if (o[i] != null) {
+          System.err.println(getLogText() + o[i].toString() + " ");
+        } else {
+          System.err.println(getLogText() + "NULL_CONTENT" + " ");
+        }
       }
+      System.err.println();
     }
-    System.err.println();
   }
 }

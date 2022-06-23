@@ -53,21 +53,6 @@ public class ProgramResourceManager {
   private ProgramResourceManager() {
   }
 
-  public static final Property[] propertiesList = {
-      new Property("user.default.folder", "."),
-      new Property("audio.info.media_title_as_header",
-          "true", "true", "false"),
-      new Property("audio.info.backdrop_use_grayscale",
-          "false", "true", "false"),
-      new Property("audio.info.backdrop_use_gradient", "true",
-          "true", "false"),
-      new Property("user.force_optimization", "true", "true",
-          "false"),
-      new Property("audio.info.backdrop_gradient_style",
-          "focused", "top", "left", "right", "focused"),
-      new Property("user.hidpi_value", "1.0", "0.9", "1.1")
-  };
-
   public static final String KEY_USER_DEFAULT_FOLDER = "user.default.folder";
   public static final String KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER = "audio.info.media_title_as_header";
   public static final String KEY_INFOVIEW_BACKDROP_USE_GREYSCALE = "audio.info.backdrop_use_grayscale";
@@ -75,7 +60,23 @@ public class ProgramResourceManager {
   public static final String KEY_PROGRAM_FORCE_OPTIMIZATION = "user.force_optimization";
   public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
   public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
-  public static final String KEY_PROGRAM_USE_SINGLE_INSTANCE = "user.use_single_instance";
+  public static final String KEY_USER_DSIABLE_CLI = "user.disable_cli";
+
+  public static final Property[] propertiesList = {
+      new Property(KEY_USER_DEFAULT_FOLDER, "."),
+      new Property(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
+          "true", "true", "false"),
+      new Property(KEY_INFOVIEW_BACKDROP_USE_GREYSCALE,
+          "false", "true", "false"),
+      new Property(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, "true",
+          "true", "false"),
+      new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "true", "true",
+          "false"),
+      new Property(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
+          "focused", "top", "left", "right", "focused"),
+      new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", "0.9", "1.1"),
+      new Property(KEY_USER_DSIABLE_CLI, "true", "true", "false"),
+  };
 
   public static final String FILE_SLASH = "/";
   public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";

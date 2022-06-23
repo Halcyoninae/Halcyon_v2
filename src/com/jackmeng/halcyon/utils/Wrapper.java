@@ -19,6 +19,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.swing.SwingUtilities;
+
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 
@@ -43,6 +45,10 @@ public final class Wrapper {
     } else {
       CompletableFuture.runAsync(runnable);
     }
+  }
+
+  public static void asyncSwingUtil(Runnable runnable) {
+    SwingUtilities.invokeLater(runnable);
   }
 
   /**
