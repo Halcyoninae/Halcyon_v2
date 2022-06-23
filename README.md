@@ -25,13 +25,13 @@ fixing!
 Currently there are no direct pre-compiled binary and executables that I have made
 for you to simply download and run. However, you can download this project and run it from source.
 
-It is recommended to have Java 8 or above in order to run this program either from source or 
+It is recommended to have Java 8 or above in order to run this program either from source or
 from a pre-compiled binary. Note: Tag for forcing optimizations upon the program may or may not work for
 different runtimes, but for my own side I used Corretto-16-JDK, if you feel like it is not doing the correct thing, you may disable this feature.
 
-**Main Class:** `Halcyon` [here](src/com/jackmeng/halcyon/Halcyon.java)<br>
+**Main Class:** `Halcyon` [here](Source/com/jackmeng/halcyon/Halcyon.java)<br>
 *Note there are more than one `main()` functions throughout the program! The above is the class that starts everything and not separate daemons.*<br>
-**Linker Manifest:** `MANIFEST.MF` [here](src/META-INF/MANIFEST.MF)
+**Linker Manifest:** `MANIFEST.MF` [here](Source/META-INF/MANIFEST.MF)
 
 ## Audio Framework
 
@@ -39,18 +39,18 @@ This program uses a heavily modified version of [this](https://github.com/RalleY
 implementations to improve performance and fit with the needs of this program. If you are going to use the framework,
 you should not use the JAR from this repository. Instead, use it from here: https://github.com/exoad/SimpleAudio/releases/tag/1.0ex as there might be broken implementations that might not work from this project's inclusion of the framework.
 
-This engine currently enables playing wav & mp3. However, soon it will allow for other types (check [features](./docs/FEATURES.txt/)
+This engine currently enables playing wav & mp3. However, soon it will allow for other types (check [features](./Docs/FEATURES.txt/)
 
 ## Current
 
 Currently this program is still in development and is not yet ready for consumer usage,
-with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEATURES](docs/FEATURES.txt)).
+with yet some missing features and bugs. (Check out [BUGS](Docs/BUGS.txt) & [FEATURES](Docs/FEATURES.txt)).
 
 However, improvements upon it's backend audio framework will be needed in order to introduce newer features to the program.
 
 ## Contributing
 
-The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](docs/BUGS.txt) OR [FEATURES](docs/FEATURES.txt) files via a pull request. I will then review it from there.
+The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](Docs/BUGS.txt) OR [FEATURES](Docs/FEATURES.txt) files via a pull request. I will then review it from there.
 
 Why you may ask? It is because adding this PR only feature allows me to better look at the issues on my side without having to pull up GitHub or another
 Git service every time I want to look at issues.
@@ -62,5 +62,5 @@ can be found [here](LICENSE.txt).
 
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
-<img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
-<img src="docs/unknown2.png" alt="sc2" width="35%" height="35%" />
+<img src="Docs/unknown.png" alt="sc1" width="35%" height="35%" />
+<img src="Docs/unknown2.png" alt="sc2" width="35%" height="35%" />
