@@ -28,6 +28,7 @@ import com.jackmeng.halcyon.app.components.bottompane.LikeList;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
 import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.toppane.TopPane;
+import com.jackmeng.halcyon.connections.ploogin.discord.Discordo;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
@@ -181,6 +182,9 @@ public class Halcyon {
 
       bgt.run();
       ld.kill();
+      Discordo dp = new Discordo();
+      Global.ifp.addInfoViewUpdateListener(dp);
+      dp.start();
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);
