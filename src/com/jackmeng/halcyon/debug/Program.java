@@ -121,14 +121,13 @@ public class Program {
 
   public static void forcedSavePlaylists() {
     List<String> list = Global.bp.getStrTabs();
-    if (list.size() >= 0) {
-      boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[list.size()]));
-      if (!result) {
-        Debugger.warn("Failed to save playlists.");
-      } else {
-        Debugger.good("Saved playlists.");
-      }
+    boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[list.size()]));
+    if (!result) {
+      Debugger.warn("Failed to save playlists.");
+    } else {
+      Debugger.good("Saved playlists.");
     }
+
   }
 
   public static void forcedSaveLikedTracks() {
@@ -138,16 +137,13 @@ public class Program {
       list.add(f.getAbsolutePath());
     }
     Debugger.warn(list);
-    if (list.size() >= 0) {
-      boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[list.size()]));
-      if (!result) {
-        Debugger.warn("Failed to save liked tracks.");
-      } else {
-        Debugger.good("Saved liked tracks.");
-      }
-
-      Debugger.unsafeLog(list.toArray(new String[list.size()]));
+    boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[list.size()]));
+    if (!result) {
+      Debugger.warn("Failed to save liked tracks.");
+    } else {
+      Debugger.good("Saved liked tracks.");
     }
+    Debugger.unsafeLog(list.toArray(new String[list.size()]));
   }
 
   public static File[] fetchLikedTracks() {

@@ -32,28 +32,54 @@ import com.jackmeng.halcyon.connections.properties.ResourceFolder;
  */
 public class ProgramResourceManager {
 
+  /**
+   * A template class that holds
+   * information on a single property.
+   *
+   * @author Jack Meng
+   * @since 3.1
+   */
+  public static class Property {
+    public String propertyName = "", defaultProperty = "";
+    public String[] allowedProperties;
+
+    public Property(String propertyName, String defaultProperty, String... allowedProperties) {
+      this.propertyName = propertyName;
+      this.defaultProperty = defaultProperty;
+      this.allowedProperties = allowedProperties;
+    }
+  }
+
   private ProgramResourceManager() {
   }
+
+  public static final Property[] propertiesList = {
+      new Property("user.default.folder", "."),
+      new Property("audio.info.media_title_as_header",
+          "true", "true", "false"),
+      new Property("audio.info.backdrop_use_grayscale",
+          "false", "true", "false"),
+      new Property("audio.info.backdrop_use_gradient", "true",
+          "true", "false"),
+      new Property("user.force_optimization", "true", "true",
+          "false"),
+      new Property("audio.info.backdrop_gradient_style",
+          "focused", "top", "left", "right", "focused"),
+      new Property("user.hidpi_value", "1.0", "0.9", "1.1")
+  };
+
+  public static final String KEY_USER_DEFAULT_FOLDER = "user.default.folder";
+  public static final String KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER = "audio.info.media_title_as_header";
+  public static final String KEY_INFOVIEW_BACKDROP_USE_GREYSCALE = "audio.info.backdrop_use_grayscale";
+  public static final String KEY_INFOVIEW_BACKDROP_USE_GRADIENT = "audio.info.backdrop_use_gradient";
+  public static final String KEY_PROGRAM_FORCE_OPTIMIZATION = "user.force_optimization";
+  public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
+  public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
+  public static final String KEY_PROGRAM_USE_SINGLE_INSTANCE = "user.use_single_instance";
 
   public static final String FILE_SLASH = "/";
   public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";
   public static final String PROGRAM_RESOURCE_FILE_PROPERTIES = "halcyon.properties";
-  public static final String KEY_USER_DEFAULT_FOLDER = "user.default.folder";
-  public static final String VALUE_USER_DEFAULT_FOLDER = ".";
-  public static final String KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER = "audio.info.media_title_as_header";
-  public static final String VALUE_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER = "true";
-  public static final String KEY_INFOVIEW_BACKDROP_USE_GREYSCALE = "audio.info.backdrop_use_grayscale";
-  public static final String VALUE_INFOVIEW_BACKDROP_USE_GREYSCALE = "false";
-  public static final String KEY_INFOVIEW_BACKDROP_USE_GRADIENT = "audio.info.backdrop_use_gradient";
-  public static final String VALUE_INFOVIEW_BACKDROP_USE_GRADIENT = "true";
-  public static final String KEY_PROGRAM_FORCE_OPTIMIZATION = "user.force_optimization";
-  public static final String VALUE_PROGRAM_FORCE_OPTIMIZATION = "true";
-  public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
-  public static final String VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE = "focused";
-  public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
-  public static final String VALUE_PROGRAM_HIDPI_VALUE = "1.0";
-  public static final String KEY_PROGRAM_USE_SINGLE_INSTANCE = "user.use_single_instance";
-  public static final String VALUE_PROGRAM_USE_SINGLE_INSTANCE = "false";
   public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin", "user" };
   public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 
@@ -62,15 +88,8 @@ public class ProgramResourceManager {
    */
   public static Map<String, String> getProgramDefaultProperties() {
     Map<String, String> properties = new HashMap<>();
-    properties.put(KEY_USER_DEFAULT_FOLDER, VALUE_USER_DEFAULT_FOLDER);
-    properties.put(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
-        VALUE_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER);
-    properties.put(KEY_INFOVIEW_BACKDROP_USE_GREYSCALE, VALUE_INFOVIEW_BACKDROP_USE_GREYSCALE);
-    properties.put(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, VALUE_INFOVIEW_BACKDROP_USE_GRADIENT);
-    properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, VALUE_PROGRAM_FORCE_OPTIMIZATION);
-    properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE, VALUE_INFOVIEW_BACKDROP_GRADIENT_STYLE);
-    properties.put(KEY_PROGRAM_HIDPI_VALUE, VALUE_PROGRAM_HIDPI_VALUE);
-    properties.put(KEY_PROGRAM_USE_SINGLE_INSTANCE, VALUE_PROGRAM_USE_SINGLE_INSTANCE);
+    for (Property p : propertiesList)
+      properties.put(p.propertyName, p.defaultProperty);
     return properties;
   }
 
@@ -79,17 +98,8 @@ public class ProgramResourceManager {
    */
   public static Map<String, String[]> getAllowedProperties() {
     Map<String, String[]> properties = new HashMap<>();
-    properties.put(KEY_USER_DEFAULT_FOLDER, new String[] {});
-    properties.put(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
-        new String[] { "true", "false" });
-    properties.put(KEY_INFOVIEW_BACKDROP_USE_GREYSCALE,
-        new String[] { "true", "false" });
-    properties.put(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, new String[] { "true", "false" });
-    properties.put(KEY_PROGRAM_FORCE_OPTIMIZATION, new String[] { "true", "false" });
-    properties.put(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
-        new String[] { "top", "focused", "left", "right" });
-    properties.put(KEY_PROGRAM_HIDPI_VALUE, new String[] { "1.0", "1.1", "0.9" });
-    properties.put(KEY_PROGRAM_USE_SINGLE_INSTANCE, new String[] { "true", "false" });
+    for (Property p : propertiesList)
+      properties.put(p.propertyName, p.allowedProperties);
     return properties;
   }
 
