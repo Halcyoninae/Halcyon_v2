@@ -9,10 +9,10 @@
       Status: Investigating tf out
       State: Experimental-Build ~ MP4J
 
-[***] #23 "Closing Tabs pre conditions"
+[!FIXED!] [***] #23 "Closing Tabs pre conditions"
       Detailed Description: Make sure the foldersAbsolute list
       completely synced.
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [*] #22 "Visual Artifact from ImgBot in the main disk display for no artwork"
@@ -20,11 +20,11 @@
       Status: None
       State: Experimental-Build ~ MP4J
 
-[***] #21 "Native headless handling"
+[!POSTPONED!] [***] #21 "Native headless handling"
       Detailed Description: Prevent the JVM from throwing any exceptions
       and automatically detect a headless runner beforehand prompt
       for [?[FEATURE#23];] to be launched or not.
-      Status: None
+      Status: POSTPONED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] {URGENT} [***] #20 "Icons are very pixelated for resources"
@@ -33,9 +33,9 @@
       Status: FIXED
       State: Experimental-Build ~ MP4J
 
-[***] #19 "Pressing play again after initial pause starts all over"
+[!FIXED!] [***] #19 "Pressing play again after initial pause starts all over"
       Detailed Description: Causes a new file to be loaded
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [**] #18 "Instantly stop audio on window close"

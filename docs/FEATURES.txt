@@ -56,14 +56,14 @@
         Category: Potential Optimization
         Status: Partial Implementation for Native Side
 
-[**] #23 "Native Headless mode"
+[!POSTPONED!] [**] #23 "Native Headless mode"
         Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
         applies to audio encoding, decoding, and transcoding. This Headless mode should not be used
         for directly invoking audio playback. This should be a native implementation that is called
         upon by JNI if the user decides they want to use this feature; however, the present dynamic
         linked libraries must be present in order to run the associated functions.
         Category: Program Dynamic
-        Status: none
+        Status: POSTPONED
 
 [!DENIED!] [**] #22 "Serialization of all threads for future processes"
         Detailed Description: Serialize threads that are needed for audio streaming for future usage
@@ -81,11 +81,11 @@
         Category: Implementation
         Status: Working
 
-[***] #19 "Plugin Manager and Implementation"
+[!POSTPONED!] [***] #19 "Plugin Manager and Implementation"
         Detailed Description: Add a plugin manager interface for the program so users can
         add on to the program. Use the Discord RPC as a testing platform.
         Category: Program Dynamic
-        Status: None
+        Status: POSTPONED
 
 [!DENIED!] [**] #18 "Add a second Tree to display all of the available playlists"
         Detailed Description: Add a tree component to the right of BottomPane
@@ -137,7 +137,7 @@
         Detailed Description: Prevent the components in InfoView from moving so much
         whenever new content is repainted on to it.
         Category: Visual Comfort
-        Status: Investigating
+        Status: Implementing
 
 [!IGNORED!] [**] #9 "Based on the implementation of feature #8 and #6"
         Detailed Description: individual sorting buttons per opened tab view
@@ -167,11 +167,11 @@
         Category: User Comfort
         Status: Forwarded to #9
 
-[***] #5 "Callable function for verifying allowed property in PropertiesManager"
+[!POSTPONED!] [***] #5 "Callable function for verifying allowed property in PropertiesManager"
         Detailed Description: Enables for a much more dynamic approach to validating
         a file instead of hardcoded strings.
         Category: Program dynamic
-        Status: Investigating
+        Status: POSTPONED; although I did restructure how properties are handled.
 
 [!IMPLEMENTED!] [***] #4 "Update folder option"
         Detailed Description: Prompt the user if they want to update a node if they added the same folder
