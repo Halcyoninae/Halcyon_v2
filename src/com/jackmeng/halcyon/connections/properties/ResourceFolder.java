@@ -174,7 +174,7 @@ public class ResourceFolder {
     File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
         + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
     try {
-      if (!f.isFile()) {
+      if (!f.isFile() || !f.exists()) {
         f.createNewFile();
       } else {
         f.delete();

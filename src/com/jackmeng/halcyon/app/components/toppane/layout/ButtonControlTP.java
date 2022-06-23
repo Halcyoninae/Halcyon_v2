@@ -159,6 +159,7 @@ public class ButtonControlTP extends JPanel
             24));
     likeButton.setBackground(null);
     likeButton.setBorder(null);
+    likeButton.setEnabled(false);
     likeButton.setContentAreaFilled(false);
 
     buttons.add(volumeSlider);
@@ -277,6 +278,8 @@ public class ButtonControlTP extends JPanel
       new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
     }
     aif = info;
+    if(!likeButton.isEnabled())
+      likeButton.setEnabled(true);
     if (Global.ll.isLiked(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
       likeButton.like();
     } else {

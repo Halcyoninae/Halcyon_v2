@@ -121,7 +121,7 @@ public class Program {
 
   public static void forcedSavePlaylists() {
     List<String> list = Global.bp.getStrTabs();
-    if (list.size() > 0) {
+    if (list.size() >= 0) {
       boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[list.size()]));
       if (!result) {
         Debugger.warn("Failed to save playlists.");
@@ -134,16 +134,19 @@ public class Program {
   public static void forcedSaveLikedTracks() {
     Set<String> list = new HashSet<>();
     Debugger.warn("Now saving liked tracks.");
-    for (File f : Global.ll.getFolder().getFiles()) {
+    for (File f : Global.ll.getFolder().getAsListFiles()) {
       list.add(f.getAbsolutePath());
     }
-    if (list.size() > 0) {
+    Debugger.warn(list);
+    if (list.size() >= 0) {
       boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[list.size()]));
       if (!result) {
         Debugger.warn("Failed to save liked tracks.");
       } else {
         Debugger.good("Saved liked tracks.");
       }
+
+      Debugger.unsafeLog(list.toArray(new String[list.size()]));
     }
   }
 

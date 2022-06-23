@@ -75,7 +75,7 @@ public class LikeList extends FileList {
    * @param file The file's absolute path to remove from.
    */
   public void unset(String file) {
-    folder.removeFile(new File(file));
+    Debugger.unsafeLog(folder.removeFile(new File(file)));
     try {
       for (File f : getFileMap().keySet()) {
         if (f.getAbsolutePath().equals(file)) {
@@ -83,8 +83,7 @@ public class LikeList extends FileList {
           model.removeNodeFromParent(getFileMap().get(f));
           model.reload();
           getFileMap().remove(f);
-        } else {
-          Debugger.warn("Not match " + f.getAbsolutePath() + " for: " + file);
+          return;
         }
       }
     } catch (IllegalArgumentException e) {
@@ -102,7 +101,10 @@ public class LikeList extends FileList {
       DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(file).getName());
       getFileMap().put(new File(file), node);
       super.getRoot().add(node);
+      getTree().revalidate();
       folder.addFile(new File(file));
+      ((DefaultTreeModel) getTree().getModel()).reload();
+      Debugger.good(file + " added");
     }
   }
 
