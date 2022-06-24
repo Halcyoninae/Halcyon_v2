@@ -148,10 +148,14 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     info = new AudioInfo();
     BufferedImage bi = DeImage.imageIconToBI(
         Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-    bi = DeImage.grayScale(DeImage.resizeNoDistort(
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+      bi = DeImage.grayScale(bi);
+    }
+    bi = DeImage.resizeNoDistort(
         bi,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT));
+        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+
     artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);

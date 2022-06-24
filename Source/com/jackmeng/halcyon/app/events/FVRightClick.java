@@ -123,7 +123,11 @@ public class FVRightClick extends MouseAdapter {
         JMenuItem audioInfoItem = new JMenuItem("Information");
         audioInfoItem.addActionListener(ev -> {
             try {
-                new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
+                if (!rcNode.equals(((DefaultTreeModel) t.getModel()).getRoot())) {
+                    new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
+                } else {
+                    new ErrorWindow("This selected node has no valid audio information.").run();
+                }
             } catch (NullPointerException excec) {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
             }

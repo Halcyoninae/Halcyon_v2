@@ -29,7 +29,7 @@ public interface Manager {
   public static final int BUTTON_STD_ICON_WIDTH_N_HEIGHT = 16;
 
   /// BIGCONTAINER Size Config START ///
-  public static final int MIN_WIDTH = 450;
+  public static final int MIN_WIDTH = 480;
   public static final int MIN_HEIGHT = 500;
 
   public static final int MAX_WIDTH = MIN_HEIGHT + 40;
@@ -69,7 +69,7 @@ public interface Manager {
   public static final String FILEVIEW_ICON_LIKED_FILE = RSC_FOLDER_NAME + "/fileview/leaf_like.png";
   public static final String GITHUB_LOGO_LIGHT = RSC_FOLDER_NAME + "/external/github_light.png";
 
-  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.jpg";
+  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = RSC_FOLDER_NAME + "/infoview/disk.png";
   public static final String BUTTONCTRL_PLAY_PAUSE_ICON = RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
   public static final String BUTTONCTRL_FWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
   public static final String BUTTONCTRL_BWD_ICON = RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
