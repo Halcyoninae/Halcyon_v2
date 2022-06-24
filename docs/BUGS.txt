@@ -4,9 +4,9 @@
       Status: None
       State: Experimental-Build ~ MP4J
 
-{URGENT} [***] #24 "Audio Buffer not reforming on new audio opening"
+[!FIXED!] {URGENT} [***] #24 "Audio Buffer not reforming on new audio opening"
       Detailed description: I am so fucking confused
-      Status: Investigating tf out
+      Status: FIXED, the hasPlayed bool not being reset
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #23 "Closing Tabs pre conditions"
@@ -15,9 +15,9 @@
       Status: FIXED
       State: Experimental-Build ~ MP4J
 
-[*] #22 "Visual Artifact from ImgBot in the main disk display for no artwork"
+[!FIXED!] [*] #22 "Visual Artifact from ImgBot in the main disk display for no artwork"
       Detailed Description: Compression Artifact
-      Status: None
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!POSTPONED!] [***] #21 "Native headless handling"

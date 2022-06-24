@@ -193,26 +193,7 @@ public class ButtonControlTP extends JPanel
     progressSlider = new JSlider(0, 100);
     progressSlider.setValue(0);
     progressSlider.setFocusable(false);
-    progressSlider.addMouseListener(new MouseAdapter() {
-      @Override
-      public void mousePressed(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
-          if (progressSlider.getValue() == 0) {
-            Global.player.getStream().setPosition(0);
-          } else {
-            Debugger.unsafeLog(
-                "Seeking to: " + (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100)
-                    + " 0:00 format:" + String.format("%02d:%02d",
-                        (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) / 60,
-                        (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100) % 60));
 
-            Global.player.getStream().setPosition(
-                (int) (progressSlider.getValue() * Global.player.getStream().getLength() / 100));
-            Global.player.play();
-          }
-        }
-      }
-    });
     progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -284,6 +265,9 @@ public class ButtonControlTP extends JPanel
       likeButton.like();
     } else {
       likeButton.noLike();
+    }
+    if (hasPlayed) {
+      hasPlayed = false;
     }
     progressSlider.setValue(0);
   }

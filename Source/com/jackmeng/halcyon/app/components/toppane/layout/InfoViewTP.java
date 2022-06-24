@@ -189,22 +189,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     insetsHorizontal = infoDisplay.getInsets().left + getInsets().right;
     fontMetrics = infoDisplay.getFontMetrics(infoDisplay.getFont());
     calcWidths();
-    infoDisplay.addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentResized(ComponentEvent e) {
-        int avail = infoDisplay.getWidth();
-        if (properWidth > avail - (insetsHorizontal + borderHorizontal)) {
-          String clip = infoTitle;
-          while (clip.length() > 0
-              && fontMetrics.stringWidth(clip) + ellipsisWidth > avail - (insetsHorizontal + borderHorizontal)) {
-            clip = TextParser.clipText(clip);
-          }
-          infoDisplay.setText(infoStart + infoString(info, clip) + ellipsis + infoEnd);
-        } else {
-          infoDisplay.setText(infoStart + infoString(info, infoTitle) + infoEnd);
-        }
-      }
-    });
+
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
     infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE)));
@@ -335,26 +320,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         "</span></p></body></html>");
   }
 
-  private String infoString(AudioInfo info, String text) {
-    return ("<body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
-        +
-        ColorManager.MAIN_FG_STR +
-        ";font-size: 12px;\"><strong>" +
-        text
-        +
-        "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
-        info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
-        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">" +
-        info.getTag(AudioInfo.KEY_BITRATE) +
-        "kpbs," +
-        info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
-        "kHz," +
-        TimeParser.fromSeconds(
-            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
-        +
-        "</span></p></body>");
-  }
-
   /**
    * This internal method handles converting the given track's
    * artwork into the tooltip information.
@@ -374,21 +339,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    *         tooltip.
    */
   private static String coverIMGToolTip(AudioInfo info) {
-    try {
-      return ("<html><body><img src=\"" +
-          new URL(
-              "file:///" +
-                  ProgramResourceManager.writeBufferedImageToBin(info.getArtwork()))
-          +
-          "style=\"width:auto;max-height:50%;\" \"><p style=\"text-align: center;\">" +
-          info.getArtwork().getWidth() +
-          "x" +
-          info.getArtwork().getHeight() +
-          "</p></body></html>");
-    } catch (MalformedURLException e) {
-      e.printStackTrace();
-    }
-    return "";
+    return ("<html><body><img src=\"" +
+        info.getArtwork().getWidth() +
+        "x" +
+        info.getArtwork().getHeight() +
+        "</p></body></html>");
   }
 
   public AudioInfo getInfo() {
