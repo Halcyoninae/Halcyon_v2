@@ -38,4 +38,8 @@ public final class TextParser {
   public static String strip(String str, int validLength) {
     return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
   }
+
+  public static String clipText(String str) {
+    return str.substring(0, str.length() - 1);
+  }
 }

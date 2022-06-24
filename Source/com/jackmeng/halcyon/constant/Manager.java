@@ -119,7 +119,7 @@ public interface Manager {
 
   public static final int INFOVIEW_INFODISPLAY_MAX_CHARS = 22;
 
-  public static final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 96;
+  public static final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 108;
 
   public static final int INFOVIEW_FLOWLAYOUT_HGAP = 30;
   public static final int INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN = 6;

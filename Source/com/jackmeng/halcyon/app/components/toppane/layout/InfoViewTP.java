@@ -39,6 +39,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.Border;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -73,6 +74,9 @@ public class InfoViewTP extends JPanel implements ComponentListener {
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
   private transient ArrayList<InfoViewUpdateListener> listeners;
+  private String ellipsis = "...", infoTitle, infoStart = "<html>", infoEnd = "</html>";
+  private FontMetrics fontMetrics;
+  private int properWidth, ellipsisWidth, insetsHorizontal, borderHorizontal;
 
   public InfoViewTP() {
     super();
@@ -98,13 +102,13 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         float compositeAlpha = 0.5f;
 
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
-          compositeAlpha = 0.3f;
+          compositeAlpha = 0.2f;
         } else {
-          compositeAlpha = 0.7f;
+          compositeAlpha = 0.6f;
         }
         g2d.setComposite(
             AlphaComposite.getInstance(
-                AlphaComposite.SRC_ATOP,
+                AlphaComposite.SRC_OVER,
                 compositeAlpha));
 
         BufferedImage original = Global.ifp.getInfo().getArtwork();
@@ -128,21 +132,14 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
           }
         }
-        g2d.drawImage(original, ((int) this.getPreferredSize().getWidth() - original.getWidth()) / 2,
-            ((int) this.getPreferredSize().getHeight() - original.getHeight()) / 2, null);
+        g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
+            (backPanel.getSize().height - original.getHeight()) / 2, this);
+
       }
     };
-    backPanel.addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentResized(ComponentEvent e) {
-        backPanel.repaint();
-        Debugger.warn(infoDisplay.getSize());
-      }
-    });
     backPanel.setPreferredSize(
         new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
-    backPanel.setMinimumSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+    backPanel.setMaximumSize(new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
     backPanel.setOpaque(false);
 
     info = new AudioInfo();
@@ -161,19 +158,56 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
     artWork.setVerticalAlignment(SwingConstants.CENTER);
 
-    /*
-     * topPanel.setLayout(
-     * new FlowLayout(
-     * FlowLayout.CENTER,
-     * Manager.INFOVIEW_FLOWLAYOUT_HGAP,
-     * getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
-     */
+    infoTitle = ResourceFolder.pm.get(
+        ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+        .equals("true")
+            ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+            : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
+    // topPanel.setLayout(
+    // new FlowLayout(
+    // FlowLayout.CENTER,
+    // Manager.INFOVIEW_FLOWLAYOUT_HGAP,
+    // getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
+    topPanel.setLayout(new GridLayout(1, 3, 15,
+        topPanel.getPreferredSize().height / 2));
+    infoDisplay = new JLabel(infoToString(info, infoTitle)) {
+      @Override
+      public void setFont(Font font) {
+        super.setFont(font);
+        if (fontMetrics != null) {
+          fontMetrics = infoDisplay.getFontMetrics(getFont());
+          calcWidths();
+        }
+      }
 
-    topPanel.setLayout(new GridLayout(1, 3,15, topPanel.getPreferredSize().height / 2));
-    infoDisplay = new JLabel(infoToString(info, true));
+      @Override
+      public void setBorder(Border border) {
+        super.setBorder(border);
+        borderHorizontal = border.getBorderInsets(infoDisplay).left + border.getBorderInsets(infoDisplay).right;
+      }
+    };
+    insetsHorizontal = infoDisplay.getInsets().left + getInsets().right;
+    fontMetrics = infoDisplay.getFontMetrics(infoDisplay.getFont());
+    calcWidths();
+    infoDisplay.addComponentListener(new ComponentAdapter() {
+      @Override
+      public void componentResized(ComponentEvent e) {
+        int avail = infoDisplay.getWidth();
+        if (properWidth > avail - (insetsHorizontal + borderHorizontal)) {
+          String clip = infoTitle;
+          while (clip.length() > 0
+              && fontMetrics.stringWidth(clip) + ellipsisWidth > avail - (insetsHorizontal + borderHorizontal)) {
+            clip = TextParser.clipText(clip);
+          }
+          infoDisplay.setText(infoStart + infoString(info, clip) + ellipsis + infoEnd);
+        } else {
+          infoDisplay.setText(infoStart + infoString(info, infoTitle) + infoEnd);
+        }
+      }
+    });
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setToolTipText(infoToString(info, false));
+    infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE)));
     infoDisplay.setHorizontalTextPosition(SwingConstants.LEADING);
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
@@ -186,6 +220,16 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     topPanel.setOpaque(false);
   }
 
+  private void calcWidths() {
+    if (infoTitle != null) {
+      properWidth = fontMetrics.stringWidth(infoTitle);
+    }
+
+    if (ellipsis != null) {
+      ellipsisWidth = fontMetrics.stringWidth(ellipsis);
+    }
+  }
+
   /**
    * This method is pinged whenever the information regarding
    * the current audio file needs updating.
@@ -195,44 +239,39 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * @param f The audio track to play {@link java.io.File}
    */
   public void setAssets(File f) {
-    Wrapper.async(() -> {
-      if (f.exists() && f.isFile()) {
-        info = new AudioInfo(f);
-        infoDisplay.setText(infoToString(info, true));
-        infoDisplay.setToolTipText(infoToString(info, false));
-        if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
-            artWork.getPreferredSize().width -
-            Manager.INFOVIEW_FLOWLAYOUT_HGAP *
-                2)
-            && Halcyon.bgt != null) {
-          Halcyon.bgt.getFrame()
-              .setSize(
-                  new Dimension(
-                      Manager.MAX_WIDTH,
-                      Halcyon.bgt.getFrame().getMinimumSize().height));
+    if (f.exists() && f.isFile()) {
+      info = new AudioInfo(f);
+      infoTitle = ResourceFolder.pm.get(
+          ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+          .equals("true")
+              ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+              : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
+      infoDisplay.setText(infoToString(info, infoTitle));
+      infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE)));
 
-        }
+      if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
+          artWork.getPreferredSize().width -
+          Manager.INFOVIEW_FLOWLAYOUT_HGAP *
+              2)
+          && Halcyon.bgt != null) {
+        Halcyon.bgt.getFrame()
+            .setSize(
+                new Dimension(
+                    Manager.MAX_WIDTH,
+                    Halcyon.bgt.getFrame().getMinimumSize().height));
 
-        if (info.getArtwork() != null) {
-          BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
-          artWork.setIcon(new ImageIcon(bi));
-        } else {
-          BufferedImage bi = DeImage.imageIconToBI(
-              Global.rd.getFromAsImageIcon(
-                  Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-          bi = DeImage.resizeNoDistort(
-              bi,
-              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-          artWork.setIcon(new ImageIcon(bi));
-        }
-        artWork.setToolTipText(coverIMGToolTip(info));
-        infoDisplay.revalidate();
-        revalidate();
-        dispatchEvents();
+      }
+
+      if (info.getArtwork() != null) {
+        BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
+        artWork.setIcon(new ImageIcon(bi));
         backPanel.repaint();
       }
-    });
+      artWork.setToolTipText(coverIMGToolTip(info));
+      infoDisplay.revalidate();
+      revalidate();
+      dispatchEvents();
+    }
   }
 
   /**
@@ -272,26 +311,16 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * <li>Bitrate, SampleRate, and Duration</li>
    * </ul>
    *
-   * @param info          The track to generate the information off of
-   * @param enforceLength The text length to enforce so the text doesn't go off
-   *                      the screen or become bugged.
+   * @param info The track to generate the information off of
    * @return An HTML string that can be used by html supporting GUI Components to
    *         display the information.
    */
-  private String infoToString(AudioInfo info, boolean enforceLength) {
-    return ("<html><body style=\"font-family='Trebuchet MS', monospace;\"><p style=\"text-align: left;\"><span style=\"color: "
+  private String infoToString(AudioInfo info, String text) {
+    return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
         +
         ColorManager.MAIN_FG_STR +
         ";font-size: 12px;\"><strong>" +
-        (enforceLength
-            ? TextParser.strip(
-                ResourceFolder.pm.get(
-                    ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
-                    .equals("true")
-                        ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
-                        : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName(),
-                displayAbleChars)
-            : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
+        text
         +
         "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
         info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
@@ -304,6 +333,26 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
         +
         "</span></p></body></html>");
+  }
+
+  private String infoString(AudioInfo info, String text) {
+    return ("<body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
+        +
+        ColorManager.MAIN_FG_STR +
+        ";font-size: 12px;\"><strong>" +
+        text
+        +
+        "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+        info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
+        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">" +
+        info.getTag(AudioInfo.KEY_BITRATE) +
+        "kpbs," +
+        info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
+        "kHz," +
+        TimeParser.fromSeconds(
+            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
+        +
+        "</span></p></body>");
   }
 
   /**
