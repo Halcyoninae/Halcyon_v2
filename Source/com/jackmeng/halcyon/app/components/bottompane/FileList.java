@@ -37,6 +37,7 @@ import com.jackmeng.halcyon.app.events.FVRightClick;
 import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.VirtualFolder;
 
@@ -103,9 +104,9 @@ public class FileList extends JScrollPane implements TabTree {
     tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    renderer.setClosedIcon(closed);
-    renderer.setOpenIcon(open);
-    renderer.setLeafIcon(leaf);
+    renderer.setClosedIcon(DeImage.resizeImage((ImageIcon) closed, 16, 16));
+    renderer.setOpenIcon(DeImage.resizeImage((ImageIcon) open, 16, 16));
+    renderer.setLeafIcon(DeImage.resizeImage((ImageIcon) leaf, 16, 16));
 
     tree.addMouseListener(new FVRightClick(this, rightClickHideString, hideStringTask));
     tree.setCellRenderer(renderer);
@@ -147,9 +148,9 @@ public class FileList extends JScrollPane implements TabTree {
     Icon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
     Icon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
     Icon leafIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FILE);
-    renderer.setClosedIcon(closedIcon);
-    renderer.setOpenIcon(openIcon);
-    renderer.setLeafIcon(leafIcon);
+    renderer.setClosedIcon(DeImage.resizeImage((ImageIcon) closedIcon, 16, 16));
+    renderer.setOpenIcon(DeImage.resizeImage((ImageIcon) openIcon, 16, 16));
+    renderer.setLeafIcon(DeImage.resizeImage((ImageIcon) leafIcon, 16, 16));
 
     tree.addMouseListener(new FVRightClick(this));
     tree.setCellRenderer(renderer);
