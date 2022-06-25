@@ -311,6 +311,7 @@ public class StreamedAudio extends AbstractAudio {
           this.audioInputStream = null;
         }
       } catch (IOException exception) {
+        // IGNORED
       }
     }
 
@@ -423,11 +424,10 @@ public class StreamedAudio extends AbstractAudio {
               }
             } else {
               while (StreamedAudio.this.paused) {
-                synchronized (StreamedAudio.this.object) {
-                  try {
-                    StreamedAudio.this.object.wait();
-                  } catch (InterruptedException exception) {
-                  }
+                try {
+                  StreamedAudio.this.object.wait();
+                } catch (InterruptedException exception) {
+                  // IGNORED
                 }
               }
             }
@@ -494,13 +494,13 @@ public class StreamedAudio extends AbstractAudio {
             }
           } else {
             while (StreamedAudio.this.paused) {
-              synchronized (StreamedAudio.this.object) {
-                try {
-                  StreamedAudio.this.object.wait();
-                } catch (InterruptedException exception) {
-                }
+              try {
+                StreamedAudio.this.object.wait();
+              } catch (InterruptedException exception) {
+                // IGNORED
               }
             }
+
           }
         }
       }

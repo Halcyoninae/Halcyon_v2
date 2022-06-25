@@ -23,6 +23,8 @@
  */
 package com.jackmeng.simple.audio;
 
+import com.jackmeng.halcyon.audio.AudioInfo;
+
 /**
  * Represents a playlist event.
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
@@ -34,15 +36,17 @@ public class PlaylistEvent {
   private Object oldVal;
   private Object newVal;
   private Type type;
+  private AudioInfo audioInfo;
 
   /**
    * @param playlist the {@linkplain Playlist} on which the event happened
    * @param type the type of event this is
    * @since 1.2.0
    */
-  public PlaylistEvent(Playlist playlist, Type type) {
+  public PlaylistEvent(Playlist playlist, Type type, AudioInfo audio) {
     this.playlist = playlist;
     this.type = type;
+    this.audioInfo = audio;
   }
 
   /**
@@ -80,6 +84,10 @@ public class PlaylistEvent {
     return this.type;
   }
 
+  public AudioInfo getAudioInfo() {
+    return audioInfo;
+  }
+
   /**
    * @return the value before the event happened
    * @since 1.2.0
@@ -102,7 +110,7 @@ public class PlaylistEvent {
    * @version 1.2.0
    * @since 1.2.0
    */
-  public static enum Type {
+  public enum Type {
     /**
      * When the currently selected track in a {@linkplain Playlist} reached its end
      * @since 1.2.0

@@ -53,17 +53,21 @@ import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import org.tritonus.share.sampled.file.TAudioFileFormat;
 
+import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.simple.audio.internal.VorbisInputStream;
 
 /**
- * Implements the {@linkplain Audio} and should be extended by all classes representing a form of playable audio.
+ * Implements the {@linkplain Audio} and should be extended by all classes
+ * representing a form of playable audio.
+ *
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 2.0.1
  * @since 1.0.0
  */
 public abstract class AbstractAudio implements Audio {
   // ==== 18.03.2018 | Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
-  // Made the trigger methods synchronized to prevent concurrent access on the listeners
+  // Made the trigger methods synchronized to prevent concurrent access on the
+  // listeners
   // ====
 
   /**
@@ -87,8 +91,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(String file) throws AudioException {
     try {
       this.resource = new File(file).toURI().toURL();
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -106,8 +109,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(File file) throws AudioException {
     try {
       this.resource = file.toURI().toURL();
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -125,8 +127,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(Path file) throws AudioException {
     try {
       this.resource = file.toUri().toURL();
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
       }
@@ -136,7 +137,7 @@ public abstract class AbstractAudio implements Audio {
   }
 
   /**
-   * @param zip zip file containing the resource
+   * @param zip   zip file containing the resource
    * @param entry name of the resource entry
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
@@ -144,8 +145,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(String zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip)) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -156,7 +156,7 @@ public abstract class AbstractAudio implements Audio {
   }
 
   /**
-   * @param zip zip file containing the resource
+   * @param zip   zip file containing the resource
    * @param entry name of the resource entry
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
@@ -164,8 +164,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(File zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip)) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -176,7 +175,7 @@ public abstract class AbstractAudio implements Audio {
   }
 
   /**
-   * @param zip zip file containing the resource
+   * @param zip   zip file containing the resource
    * @param entry name of the resource entry
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
@@ -184,8 +183,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(Path zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip.toFile())) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -202,8 +200,7 @@ public abstract class AbstractAudio implements Audio {
    */
   protected AbstractAudio(URL url) throws AudioException {
     this.resource = url;
-    this.fileFormat =
-      FileFormat.getFormatByName(this.resource.toExternalForm());
+    this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
     if (this.fileFormat == null) {
       throw new AudioException("Unsupported file format!");
@@ -218,8 +215,7 @@ public abstract class AbstractAudio implements Audio {
   protected AbstractAudio(URI uri) throws AudioException {
     try {
       this.resource = uri.toURL();
-      this.fileFormat =
-        FileFormat.getFormatByName(this.resource.toExternalForm());
+      this.fileFormat = FileFormat.getFormatByName(this.resource.toExternalForm());
 
       if (this.fileFormat == null) {
         throw new AudioException("Unsupported file format!");
@@ -230,9 +226,12 @@ public abstract class AbstractAudio implements Audio {
   }
 
   /**
-   * Obtains an array of mixer info objects that represents the set of audio mixers that are
+   * Obtains an array of mixer info objects that represents the set of audio
+   * mixers that are
    * currently installed on the system.
-   * @return an array of info objects for the currently installed mixers. If no mixers are available on the system, an array of length 0 is returned
+   *
+   * @return an array of info objects for the currently installed mixers. If no
+   *         mixers are available on the system, an array of length 0 is returned
    * @since 1.0.0
    */
   public static Mixer.Info[] getPorts() {
@@ -250,28 +249,28 @@ public abstract class AbstractAudio implements Audio {
    */
   public static AudioFormat getDefaultAudioFormat() {
     return new AudioFormat(
-      AudioFormat.Encoding.PCM_SIGNED,
-      44100,
-      16,
-      2,
-      4,
-      44100,
-      false
-    );
+        AudioFormat.Encoding.PCM_SIGNED,
+        44100,
+        16,
+        2,
+        4,
+        44100,
+        false);
   }
 
   /**
-   * @param resource the resource from which you want the {@linkplain AudioInputStream} from
+   * @param resource the resource from which you want the
+   *                 {@linkplain AudioInputStream} from
    * @return the {@linkplain AudioInputStream} from the resource
-   * @throws AudioException if something went wrong while retrieving the {@linkplain AudioInputStream}
+   * @throws AudioException if something went wrong while retrieving the
+   *                        {@linkplain AudioInputStream}
    * @since 1.1.0
    */
   public static AudioInputStream getAudioInputStream(URL resource)
-    throws AudioException {
+      throws AudioException {
     AudioInputStream audioInputStream = null;
     FileFormat fileFormat = FileFormat.getFormatByName(
-      resource.toExternalForm()
-    );
+        resource.toExternalForm());
 
     try {
       switch (fileFormat) {
@@ -279,34 +278,29 @@ public abstract class AbstractAudio implements Audio {
           audioInputStream = AudioSystem.getAudioInputStream(resource);
           AudioFormat baseFormat = audioInputStream.getFormat();
           AudioFormat decodedFormat = new AudioFormat(
-            AudioFormat.Encoding.PCM_SIGNED,
-            baseFormat.getSampleRate(),
-            16,
-            baseFormat.getChannels(),
-            baseFormat.getChannels() * 2,
-            baseFormat.getSampleRate(),
-            false
-          );
-          audioInputStream =
-            AudioSystem.getAudioInputStream(decodedFormat, audioInputStream);
+              AudioFormat.Encoding.PCM_SIGNED,
+              baseFormat.getSampleRate(),
+              16,
+              baseFormat.getChannels(),
+              baseFormat.getChannels() * 2,
+              baseFormat.getSampleRate(),
+              false);
+          audioInputStream = AudioSystem.getAudioInputStream(decodedFormat, audioInputStream);
           break;
         case OGG:
           LogicalOggStream loggs = (LogicalOggStream) new OnDemandUrlStream(
-            resource
-          )
-            .getLogicalStreams()
-            .iterator()
-            .next();
+              resource)
+              .getLogicalStreams()
+              .iterator()
+              .next();
 
           if (!loggs.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
             throw new AudioException("Not a plain Ogg/Vorbis audio file!");
           }
 
           VorbisInputStream vis = new VorbisInputStream(
-            new VorbisStream(loggs)
-          );
-          audioInputStream =
-            new AudioInputStream(vis, vis.getAudioFormat(), -1L);
+              new VorbisStream(loggs));
+          audioInputStream = new AudioInputStream(vis, vis.getAudioFormat(), -1L);
           break;
         case AU:
         case AIFC:
@@ -327,60 +321,58 @@ public abstract class AbstractAudio implements Audio {
 
   /**
    * Generates a single sound
-   * @param hz the sound's frequency
-   * @param msecs the length of the sound in milliseconds
-   * @param volume the volume of the sound (0 - 100)
+   *
+   * @param hz          the sound's frequency
+   * @param msecs       the length of the sound in milliseconds
+   * @param volume      the volume of the sound (0 - 100)
    * @param addHarmonic adds a sinus curve to the sound
    * @since 1.0.0
    */
   public static void generateSound(
-    int hz,
-    int msecs,
-    int volume,
-    boolean addHarmonic
-  ) {
-    new Thread(
-      () -> {
-        try {
-          float frequency = 44100;
-          byte[] buffer;
-          AudioFormat format;
+      int hz,
+      int msecs,
+      int volume,
+      boolean addHarmonic) {
+    Wrapper.async(() -> {
+      try {
+        float frequency = 44100;
+        byte[] buffer;
+        AudioFormat format;
+
+        if (addHarmonic) {
+          buffer = new byte[2];
+          format = new AudioFormat(frequency, 8, 2, true, false);
+        } else {
+          buffer = new byte[1];
+          format = new AudioFormat(frequency, 8, 1, true, false);
+        }
+
+        SourceDataLine source = AudioSystem.getSourceDataLine(format);
+        source = AudioSystem.getSourceDataLine(format);
+        source.open(format);
+        source.start();
+
+        for (int index = 0; index < msecs * frequency / 1000; index++) {
+          double angle = index / (frequency / hz) * 2.0 * Math.PI;
+          buffer[0] = (byte) (Math.sin(angle) * volume);
 
           if (addHarmonic) {
-            buffer = new byte[2];
-            format = new AudioFormat(frequency, 8, 2, true, false);
+            double angle2 = index / (frequency / hz) * 2.0 * Math.PI;
+            buffer[1] = (byte) (Math.sin(2 * angle2) * volume * 0.6);
+            source.write(buffer, 0, 2);
           } else {
-            buffer = new byte[1];
-            format = new AudioFormat(frequency, 8, 1, true, false);
+            source.write(buffer, 0, 1);
           }
-
-          SourceDataLine source = AudioSystem.getSourceDataLine(format);
-          source = AudioSystem.getSourceDataLine(format);
-          source.open(format);
-          source.start();
-
-          for (int index = 0; index < msecs * frequency / 1000; index++) {
-            double angle = index / (frequency / hz) * 2.0 * Math.PI;
-            buffer[0] = (byte) (Math.sin(angle) * volume);
-
-            if (addHarmonic) {
-              double angle2 = index / (frequency / hz) * 2.0 * Math.PI;
-              buffer[1] = (byte) (Math.sin(2 * angle2) * volume * 0.6);
-              source.write(buffer, 0, 2);
-            } else {
-              source.write(buffer, 0, 1);
-            }
-          }
-
-          source.drain();
-          source.stop();
-          source.close();
-        } catch (LineUnavailableException exception) {
-          exception.printStackTrace();
         }
+
+        source.drain();
+        source.stop();
+        source.close();
+      } catch (LineUnavailableException exception) {
+        exception.printStackTrace();
       }
-    )
-    .start();
+
+    });
   }
 
   @Override
@@ -408,8 +400,7 @@ public abstract class AbstractAudio implements Audio {
     float max = balanceControl.getMaximum();
     float min = balanceControl.getMinimum();
     balanceControl.setValue(
-      balance < min ? min : (balance > max ? max : balance)
-    );
+        balance < min ? min : (balance > max ? max : balance));
   }
 
   @Override
@@ -462,8 +453,7 @@ public abstract class AbstractAudio implements Audio {
           if (element != listener) {
             newList.add(element);
           }
-        }
-      );
+        });
 
     this.listeners = newList;
   }
@@ -517,8 +507,7 @@ public abstract class AbstractAudio implements Audio {
       case MP3:
         try {
           AudioFileFormat audioFileFormat = AudioSystem.getAudioFileFormat(
-            this.resource
-          );
+              this.resource);
 
           if (audioFileFormat instanceof TAudioFileFormat) {
             headers = ((TAudioFileFormat) audioFileFormat).properties();
@@ -544,6 +533,7 @@ public abstract class AbstractAudio implements Audio {
 
   /**
    * Triggers a new {@linkplain AudioEvent}.
+   *
    * @param type the event type
    * @since 1.1.0
    */
@@ -554,31 +544,31 @@ public abstract class AbstractAudio implements Audio {
 
   /**
    * Triggers a new {@linkplain AudioEvent}.
-   * @param type the event type
+   *
+   * @param type   the event type
    * @param oldVal the old value
    * @param newVal the new value
    * @since 1.1.0
    */
   protected synchronized void trigger(
-    AudioEvent.Type type,
-    Object oldVal,
-    Object newVal
-  ) {
+      AudioEvent.Type type,
+      Object oldVal,
+      Object newVal) {
     AudioEvent event = new AudioEvent(this, type, oldVal, newVal);
     this.listeners.forEach(listener -> listener.update(event));
   }
 
   /**
    * Extracts the controls from a {@linkplain Line} based on an old control map.
+   *
    * @param line the {@linkplain Line}
-   * @param old the old control map
+   * @param old  the old control map
    * @return a new control map based on an old one
    * @since 1.0.0
    */
   protected static final HashMap<String, Control> extractControls(
-    Line line,
-    Map<String, Control> old
-  ) {
+      Line line,
+      Map<String, Control> old) {
     HashMap<String, Control> controls = new HashMap<>();
 
     for (Control control : line.getControls()) {
@@ -587,25 +577,16 @@ public abstract class AbstractAudio implements Audio {
       if (old != null && old.containsKey(key)) {
         Control oldControl = old.get(key);
 
-        if (
-          control instanceof FloatControl && oldControl instanceof FloatControl
-        ) {
+        if (control instanceof FloatControl && oldControl instanceof FloatControl) {
           ((FloatControl) control).setValue(
-              ((FloatControl) oldControl).getValue()
-            );
-        } else if (
-          control instanceof BooleanControl &&
-          oldControl instanceof BooleanControl
-        ) {
+              ((FloatControl) oldControl).getValue());
+        } else if (control instanceof BooleanControl &&
+            oldControl instanceof BooleanControl) {
           ((BooleanControl) control).setValue(
-              ((BooleanControl) oldControl).getValue()
-            );
-        } else if (
-          control instanceof EnumControl && oldControl instanceof EnumControl
-        ) {
+              ((BooleanControl) oldControl).getValue());
+        } else if (control instanceof EnumControl && oldControl instanceof EnumControl) {
           ((EnumControl) control).setValue(
-              ((EnumControl) oldControl).getValue()
-            );
+              ((EnumControl) oldControl).getValue());
         }
       }
 
@@ -616,20 +597,18 @@ public abstract class AbstractAudio implements Audio {
   }
 
   private static final URL extractZipEntry(ZipFile zip, String entry)
-    throws IOException {
+      throws IOException {
     ZipEntry zipEntry = zip.getEntry(entry);
     byte[] buffer = new byte[1024];
     String extension = entry.substring(entry.lastIndexOf('.')).toLowerCase();
     File tempDir = new File(System.getProperty("java.io.tmpdir"));
     File extracted = new File(
-      tempDir,
-      "simple-audio_buffered-" + System.nanoTime() + extension
-    );
+        tempDir,
+        "simple-audio_buffered-" + System.nanoTime() + extension);
 
     try (
-      InputStream input = zip.getInputStream(zipEntry);
-      FileOutputStream output = new FileOutputStream(extracted)
-    ) {
+        InputStream input = zip.getInputStream(zipEntry);
+        FileOutputStream output = new FileOutputStream(extracted)) {
       int readBytes = 0;
 
       while ((readBytes = input.read(buffer)) > -1) {

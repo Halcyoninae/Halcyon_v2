@@ -27,9 +27,12 @@ package com.jackmeng.simple.audio;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jackmeng.halcyon.audio.AudioInfo;
+
 /**
  * Stores multiple {@linkplain Audio}s and plays them in a batch.
  * Handy if you want to program an audio player.
+ *
  * @author Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
  * @version 2.0.0
  * @since 1.1.0
@@ -53,6 +56,7 @@ public class Playlist implements Playable {
 
   /**
    * Adds a new track to the track list.
+   *
    * @param audio the audio of the track
    * @since 1.1.0
    */
@@ -62,6 +66,7 @@ public class Playlist implements Playable {
 
   /**
    * Adds a {@linkplain PlaylistListener} to this {@linkplain Playlist}.
+   *
    * @param listener the {@linkplain PlaylistListener} to add
    * @since 1.2.0
    */
@@ -70,7 +75,9 @@ public class Playlist implements Playable {
   }
 
   /**
-   * Remove the given {@linkplain PlaylistListener} from this {@linkplain Playlist}.
+   * Remove the given {@linkplain PlaylistListener} from this
+   * {@linkplain Playlist}.
+   *
    * @param listener the {@linkplain PlaylistListener} to remove
    * @since 1.2.0
    */
@@ -81,8 +88,7 @@ public class Playlist implements Playable {
           if (element != listener) {
             newList.add(element);
           }
-        }
-      );
+        });
 
     this.listeners = newList;
   }
@@ -97,6 +103,7 @@ public class Playlist implements Playable {
 
   /**
    * Removes a track from the track list.
+   *
    * @param index index of the track which should be removed
    * @since 1.1.0
    */
@@ -130,7 +137,9 @@ public class Playlist implements Playable {
 
   /**
    * Sets whether the next track to play should be picked randomly or not.
-   * @param shuffle {@code true} if tracks should be picked randomly, else {@code false}
+   *
+   * @param shuffle {@code true} if tracks should be picked randomly, else
+   *                {@code false}
    * @since 1.1.0
    */
   public void setShuffle(boolean shuffle) {
@@ -138,8 +147,11 @@ public class Playlist implements Playable {
   }
 
   /**
-   * Sets whether the {@linkplain Playlist} should restart once it reached the end or not.
-   * @param loop {@code true} if the {@linkplain Playlist} should loop, else {@code false}
+   * Sets whether the {@linkplain Playlist} should restart once it reached the end
+   * or not.
+   *
+   * @param loop {@code true} if the {@linkplain Playlist} should loop, else
+   *             {@code false}
    * @since 1.1.0
    */
   public void setLoop(boolean loop) {
@@ -246,7 +258,8 @@ public class Playlist implements Playable {
   }
 
   /**
-   * @return {@code true} if the {@linkplain Playlist} is looping, else {@code false}
+   * @return {@code true} if the {@linkplain Playlist} is looping, else
+   *         {@code false}
    * @since 1.1.0
    */
   public boolean isLooping() {
@@ -254,7 +267,8 @@ public class Playlist implements Playable {
   }
 
   /**
-   * @return {@code true} if the {@linkplain Playlist} is shuffling, else {@code false}
+   * @return {@code true} if the {@linkplain Playlist} is shuffling, else
+   *         {@code false}
    * @since 1.1.0
    */
   public boolean isShuffling() {
@@ -278,6 +292,7 @@ public class Playlist implements Playable {
 
   /**
    * Calls the {@link Audio#close()} method for all tracks in this playlist.
+   *
    * @since 2.0.0
    */
   public void close() {
@@ -286,13 +301,14 @@ public class Playlist implements Playable {
 
   /**
    * Starts the next track.
+   *
    * @since 1.1.0
    */
   public void next() {
     this.stop();
     Audio oldVal = this.currentTrack != -1
-      ? this.tracks.get(this.currentTrack)
-      : null;
+        ? this.tracks.get(this.currentTrack)
+        : null;
     this.currentTrack = this.getNextTrackIndex();
     Audio newVal = this.tracks.get(this.currentTrack);
 
@@ -313,8 +329,8 @@ public class Playlist implements Playable {
     this.pause();
     this.stop();
     Audio oldVal = this.currentTrack != -1
-      ? this.tracks.get(this.currentTrack)
-      : null;
+        ? this.tracks.get(this.currentTrack)
+        : null;
     this.prefferedNextTrack = index;
     this.currentTrack = this.getNextTrackIndex();
     Audio newVal = this.tracks.get(this.currentTrack);
@@ -329,13 +345,14 @@ public class Playlist implements Playable {
 
   /**
    * Starts the previous track.
+   *
    * @since 1.1.0
    */
   public void previous() {
     this.stop();
     Audio oldVal = this.currentTrack != -1
-      ? this.tracks.get(this.currentTrack)
-      : null;
+        ? this.tracks.get(this.currentTrack)
+        : null;
     this.currentTrack = this.getPreviousTrackIndex();
     Audio newVal = this.tracks.get(this.currentTrack);
 
@@ -402,7 +419,8 @@ public class Playlist implements Playable {
   }
 
   /**
-   * @return the index of the track which is currently selected or {@code -1} if no track is selected
+   * @return the index of the track which is currently selected or {@code -1} if
+   *         no track is selected
    * @since 1.1.0
    */
   public int getCurrentTrackIndex() {
@@ -432,20 +450,18 @@ public class Playlist implements Playable {
       Audio audio = this.tracks.get(this.currentTrack);
       return audio != null && audio.isOpen() && audio.isPaused();
     }
-
     return false;
   }
 
   protected void trigger(PlaylistEvent.Type type) {
-    PlaylistEvent event = new PlaylistEvent(this, type);
+    PlaylistEvent event = new PlaylistEvent(this, type, new AudioInfo(getTrack(currentTrack).getResource().getFile()));
     this.listeners.forEach(listener1 -> listener1.update(event));
   }
 
   protected void trigger(
-    PlaylistEvent.Type type,
-    Object oldVal,
-    Object newVal
-  ) {
+      PlaylistEvent.Type type,
+      Object oldVal,
+      Object newVal) {
     PlaylistEvent event = new PlaylistEvent(this, type, oldVal, newVal);
     this.listeners.forEach(listener1 -> listener1.update(event));
   }
