@@ -34,12 +34,10 @@ import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.simple.audio.AbstractAudio;
 import com.jackmeng.simple.audio.AudioException;
-import com.jackmeng.simple.audio.StreamedAudio;
 
 import java.awt.*;
 
 import java.awt.event.*;
-import java.util.concurrent.Callable;
 
 /**
  * This class represents the GUI component collection

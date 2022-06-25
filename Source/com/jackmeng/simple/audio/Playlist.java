@@ -311,7 +311,6 @@ public class Playlist implements Playable {
    */
   public int setTrack(int index) {
     this.pause();
-    int currentTrack = this.getCurrentTrackIndex();
     this.stop();
     Audio oldVal = this.currentTrack != -1
       ? this.tracks.get(this.currentTrack)
@@ -439,7 +438,7 @@ public class Playlist implements Playable {
 
   protected void trigger(PlaylistEvent.Type type) {
     PlaylistEvent event = new PlaylistEvent(this, type);
-    this.listeners.forEach(listener -> listener.update(event));
+    this.listeners.forEach(listener1 -> listener1.update(event));
   }
 
   protected void trigger(
@@ -448,6 +447,6 @@ public class Playlist implements Playable {
     Object newVal
   ) {
     PlaylistEvent event = new PlaylistEvent(this, type, oldVal, newVal);
-    this.listeners.forEach(listener -> listener.update(event));
+    this.listeners.forEach(listener1 -> listener1.update(event));
   }
 }

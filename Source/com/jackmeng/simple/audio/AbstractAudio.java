@@ -103,7 +103,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(File file) throws AudioException {
+  protected AbstractAudio(File file) throws AudioException {
     try {
       this.resource = file.toURI().toURL();
       this.fileFormat =
@@ -122,7 +122,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(Path file) throws AudioException {
+  protected AbstractAudio(Path file) throws AudioException {
     try {
       this.resource = file.toUri().toURL();
       this.fileFormat =
@@ -141,7 +141,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(String zip, String entry) throws AudioException {
+  protected AbstractAudio(String zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip)) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
       this.fileFormat =
@@ -161,7 +161,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(File zip, String entry) throws AudioException {
+  protected AbstractAudio(File zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip)) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
       this.fileFormat =
@@ -181,7 +181,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(Path zip, String entry) throws AudioException {
+  protected AbstractAudio(Path zip, String entry) throws AudioException {
     try (ZipFile zipFile = new ZipFile(zip.toFile())) {
       this.resource = AbstractAudio.extractZipEntry(zipFile, entry);
       this.fileFormat =
@@ -200,7 +200,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(URL url) throws AudioException {
+  protected AbstractAudio(URL url) throws AudioException {
     this.resource = url;
     this.fileFormat =
       FileFormat.getFormatByName(this.resource.toExternalForm());
@@ -215,7 +215,7 @@ public abstract class AbstractAudio implements Audio {
    * @throws AudioException if something is wrong with the resource
    * @since 1.0.0
    */
-  public AbstractAudio(URI uri) throws AudioException {
+  protected AbstractAudio(URI uri) throws AudioException {
     try {
       this.resource = uri.toURL();
       this.fileFormat =
@@ -435,8 +435,8 @@ public abstract class AbstractAudio implements Audio {
   @Override
   public Map<String, Control> getControls() {
     @SuppressWarnings("unchecked")
-    Map<String, Control> controls = (Map<String, Control>) this.controls.clone();
-    return controls;
+    Map<String, Control> controls2 = (Map<String, Control>) this.controls.clone();
+    return controls2;
   }
 
   @Override
