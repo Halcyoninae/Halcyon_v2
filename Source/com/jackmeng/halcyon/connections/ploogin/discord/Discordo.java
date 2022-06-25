@@ -1,8 +1,8 @@
 package com.jackmeng.halcyon.connections.ploogin.discord;
 
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;

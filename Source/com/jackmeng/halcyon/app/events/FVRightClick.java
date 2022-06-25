@@ -26,12 +26,12 @@ import javax.swing.tree.TreePath;
 import com.jackmeng.halcyon.app.components.bottompane.TabTree;
 import com.jackmeng.halcyon.app.components.dialog.AudioInfoDialog;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.constant.StringManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.Wrapper;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 /**
  * This class handles the right click event for any JTree instance.

@@ -23,7 +23,7 @@
  */
 package com.jackmeng.simple.audio;
 
-import com.jackmeng.halcyon.audio.AudioInfo;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 /**
  * Represents a playlist event.

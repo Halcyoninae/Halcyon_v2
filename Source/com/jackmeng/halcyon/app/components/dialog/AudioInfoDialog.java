@@ -19,10 +19,10 @@ import javax.swing.*;
 
 import org.jaudiotagger.tag.FieldKey;
 
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.TimeParser;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 import java.awt.*;
 

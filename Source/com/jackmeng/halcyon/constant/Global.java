@@ -19,8 +19,8 @@ import com.jackmeng.halcyon.app.components.bottompane.BottomPane;
 import com.jackmeng.halcyon.app.components.bottompane.LikeList;
 import com.jackmeng.halcyon.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP;
-import com.jackmeng.halcyon.audio.Player;
 import com.jackmeng.halcyon.connections.resource.ResourceDistributor;
+import com.jackmeng.tailwind.audio.Player;
 
 /**
  * This class holds any public scoped Objects that may be used throughout

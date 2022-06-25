@@ -27,7 +27,7 @@ package com.jackmeng.simple.audio;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.jackmeng.halcyon.audio.AudioInfo;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 /**
  * Stores multiple {@linkplain Audio}s and plays them in a batch.

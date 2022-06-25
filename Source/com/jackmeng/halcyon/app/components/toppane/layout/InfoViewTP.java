@@ -16,7 +16,6 @@
 package com.jackmeng.halcyon.app.components.toppane.layout;
 
 import com.jackmeng.halcyon.Halcyon;
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
@@ -27,6 +26,7 @@ import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.halcyon.utils.DeImage.Directional;
 import com.jackmeng.simple.audio.PlaylistEvent;
 import com.jackmeng.simple.audio.PlaylistListener;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 import de.ralleytn.simple.image.SimpleImage;
 

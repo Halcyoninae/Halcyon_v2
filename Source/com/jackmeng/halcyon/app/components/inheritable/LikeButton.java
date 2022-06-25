@@ -18,8 +18,8 @@ package com.jackmeng.halcyon.app.components.inheritable;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.constant.Global;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

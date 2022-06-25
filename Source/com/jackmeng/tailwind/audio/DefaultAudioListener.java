@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.audio;
+package com.jackmeng.tailwind.audio;
 
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.simple.audio.AudioEvent;

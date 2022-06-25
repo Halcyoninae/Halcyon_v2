@@ -23,7 +23,6 @@ import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.inheritable.LikeButton;
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyon.app.events.AlignSliderWithBar;
-import com.jackmeng.halcyon.audio.AudioInfo;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
@@ -34,6 +33,7 @@ import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.simple.audio.AbstractAudio;
 import com.jackmeng.simple.audio.AudioException;
+import com.jackmeng.tailwind.audio.AudioInfo;
 
 import java.awt.*;
 
