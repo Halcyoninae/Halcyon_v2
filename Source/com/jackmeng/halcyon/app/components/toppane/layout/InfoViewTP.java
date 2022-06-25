@@ -22,12 +22,11 @@ import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
-import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.TimeParser;
-import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.halcyon.utils.DeImage.Directional;
+import com.jackmeng.simple.audio.PlaylistEvent;
+import com.jackmeng.simple.audio.PlaylistListener;
 
 import de.ralleytn.simple.image.SimpleImage;
 
@@ -35,11 +34,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.border.Border;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -56,7 +52,7 @@ import javax.swing.border.Border;
  * @author Jack Meng
  * @since 3.0
  */
-public class InfoViewTP extends JPanel implements ComponentListener {
+public class InfoViewTP extends JPanel implements ComponentListener, PlaylistListener {
 
   /**
    * An extended listener for any classes that want
@@ -69,14 +65,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     void infoView(AudioInfo info);
   }
 
-  private int displayAbleChars = Manager.INFOVIEW_INFODISPLAY_MAX_CHARS;
   private JPanel topPanel, backPanel;
   private transient AudioInfo info;
   private JLabel infoDisplay, artWork;
   private transient ArrayList<InfoViewUpdateListener> listeners;
-  private String ellipsis = "...", infoTitle, infoStart = "<html>", infoEnd = "</html>";
-  private FontMetrics fontMetrics;
-  private int properWidth, ellipsisWidth, insetsHorizontal, borderHorizontal;
+  private String infoTitle;
 
   public InfoViewTP() {
     super();
@@ -170,25 +163,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     // getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
     topPanel.setLayout(new GridLayout(1, 3, 15,
         topPanel.getPreferredSize().height / 2));
-    infoDisplay = new JLabel(infoToString(info, infoTitle)) {
-      @Override
-      public void setFont(Font font) {
-        super.setFont(font);
-        if (fontMetrics != null) {
-          fontMetrics = infoDisplay.getFontMetrics(getFont());
-          calcWidths();
-        }
-      }
-
-      @Override
-      public void setBorder(Border border) {
-        super.setBorder(border);
-        borderHorizontal = border.getBorderInsets(infoDisplay).left + border.getBorderInsets(infoDisplay).right;
-      }
-    };
-    insetsHorizontal = infoDisplay.getInsets().left + getInsets().right;
-    fontMetrics = infoDisplay.getFontMetrics(infoDisplay.getFont());
-    calcWidths();
+    infoDisplay = new JLabel(infoToString(info, infoTitle));
 
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
@@ -203,16 +178,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     add(topPanel);
     add(backPanel);
     topPanel.setOpaque(false);
-  }
-
-  private void calcWidths() {
-    if (infoTitle != null) {
-      properWidth = fontMetrics.stringWidth(infoTitle);
-    }
-
-    if (ellipsis != null) {
-      ellipsisWidth = fontMetrics.stringWidth(ellipsis);
-    }
   }
 
   /**
@@ -368,5 +333,10 @@ public class InfoViewTP extends JPanel implements ComponentListener {
   @Override
   public void componentHidden(ComponentEvent e) {
     // IGNORED
+  }
+
+  @Override
+  public void update(PlaylistEvent event) {
+    setAssets(new File(event.getAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
   }
 }
