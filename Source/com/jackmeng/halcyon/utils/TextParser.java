@@ -42,4 +42,13 @@ public final class TextParser {
   public static String clipText(String str) {
     return str.substring(0, str.length() - 1);
   }
+
+  public static boolean isInteger(String str) {
+    try {
+      Integer.parseInt(str);
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
 }

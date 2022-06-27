@@ -17,7 +17,6 @@ package com.jackmeng.halcyon.app.components.bbloc.buttons;
 
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.app.components.dialog.ConfirmWindow;
-import com.jackmeng.halcyon.app.components.dialog.ConfirmWindow.ConfirmationListener;
 import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders;
 import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.halcyon.constant.Global;

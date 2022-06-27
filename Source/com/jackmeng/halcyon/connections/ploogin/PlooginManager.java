@@ -1,6 +1,5 @@
 package com.jackmeng.halcyon.connections.ploogin;
 
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.global.Pair;
 
 import java.io.File;

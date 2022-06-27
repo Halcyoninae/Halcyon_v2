@@ -61,6 +61,7 @@ public class ProgramResourceManager {
   public static final String KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE = "audio.info.backdrop_gradient_style";
   public static final String KEY_PROGRAM_HIDPI_VALUE = "user.hidpi_value";
   public static final String KEY_USER_DSIABLE_CLI = "user.disable_cli";
+  public static final String KEY_USER_USE_DISCORD_RPC = "user.use_discord_rpc";
 
   public static final Property[] propertiesList = {
       new Property(KEY_USER_DEFAULT_FOLDER, "."),
@@ -76,6 +77,7 @@ public class ProgramResourceManager {
           "focused", "top", "left", "right", "focused"),
       new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", "0.9", "1.1"),
       new Property(KEY_USER_DSIABLE_CLI, "true", "true", "false"),
+      new Property(KEY_USER_USE_DISCORD_RPC, "true", "true", "false"),
   };
 
   public static final String FILE_SLASH = "/";

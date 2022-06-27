@@ -15,8 +15,11 @@
 
 package com.jackmeng.tailwind.audio;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.tailwind.TailwindPlayer;
 

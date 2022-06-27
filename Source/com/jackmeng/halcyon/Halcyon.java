@@ -176,9 +176,11 @@ public class Halcyon {
 
       bgt.run();
       ld.kill();
-      Discordo dp = new Discordo();
-      Global.ifp.addInfoViewUpdateListener(dp);
-      dp.start();
+      if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
+        Discordo dp = new Discordo();
+        Global.ifp.addInfoViewUpdateListener(dp);
+        dp.start();
+      }
       // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);
