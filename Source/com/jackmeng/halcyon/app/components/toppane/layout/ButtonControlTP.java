@@ -254,7 +254,7 @@ public class ButtonControlTP extends JPanel
     progressBar.setIndeterminate(false);
     if (aif != null
         && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
-      new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
+      Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
     }
     aif = info;
     if (!likeButton.isEnabled())
@@ -278,6 +278,7 @@ public class ButtonControlTP extends JPanel
           if (!hasPlayed) {
             Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
             Global.player.play();
+            Debugger.unsafeLog(Global.player);
             hasPlayed = true;
           } else {
             Global.player.getStream().resume();

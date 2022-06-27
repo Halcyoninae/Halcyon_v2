@@ -47,7 +47,6 @@ public class TailwindPlayer implements Audio, Runnable {
   private ExecutorService worker;
   private final Object referencable = new Object();
   private final TailwindEventManager events;
-  private int buffer_size = 4096;
 
   // PUBLIC STATIC UTIL
   public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance";
@@ -57,11 +56,6 @@ public class TailwindPlayer implements Audio, Runnable {
     TailwindDefaultListener tdfl = new TailwindDefaultListener(this);
     events.addStatusUpdateListener(tdfl);
     events.addGenericUpdateListener(tdfl);
-  }
-
-  public TailwindPlayer(int bufferSize) {
-    this();
-    this.buffer_size = bufferSize;
   }
 
   @Override
@@ -77,17 +71,7 @@ public class TailwindPlayer implements Audio, Runnable {
       frameLength = ais.getFrameLength();
 
       if (microsecondLength < 0) {
-        byte[] readableBuffer = new byte[Math.max(buffer_size, 1024)];
-        int read;
-
-        while ((read = ais.read(readableBuffer)) != -1) {
-          frameLength += read;
-        }
-
-        frameLength /= this.ais.getFormat().getFrameSize();
-        ais.close();
-        ais = AudioUtil.getAudioIS(resource.toURI().toURL());
-        assert ais != null;
+        frameLength = ais.getFrameLength();
         microsecondLength = (long) (1000000 *
             (frameLength / ais.getFormat().getFrameRate()));
       }
@@ -328,13 +312,11 @@ public class TailwindPlayer implements Audio, Runnable {
 
       byte[] buffer = new byte[ais.getFormat().getFrameSize()];
       int i;
-
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
             while (playing && !paused && (i = ais.read(buffer)) > -1)
               line.write(buffer, 0, i);
-
             if (!paused) {
               reset();
               playing = false;

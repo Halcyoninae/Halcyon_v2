@@ -15,6 +15,7 @@
 
 package com.jackmeng.tailwind;
 
+import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 import java.util.ArrayList;
@@ -52,21 +53,30 @@ public class TailwindEventManager {
   }
 
   public synchronized void dispatchTimeEvent(long time) {
-    for (TailwindListener.TimeUpdateListener e : timeListeners) {
-      e.trackCurrentTime(time);
-    }
+    Wrapper.async(() -> {
+      for (TailwindListener.TimeUpdateListener e : timeListeners) {
+        e.trackCurrentTime(time);
+      }
+    });
+
   }
 
   public synchronized void dispatchStatusEvent(TailwindStatus status) {
-    for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
-      e.statusUpdate(status);
-    }
+    Wrapper.async(() -> {
+      for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
+        e.statusUpdate(status);
+      }
+    });
+
   }
 
   public synchronized void dispatchGenericEvent(TailwindEvent event) {
-    for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
-      e.genericUpdate(event);
-    }
+    Wrapper.async(() -> {
+      for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
+        e.genericUpdate(event);
+      }
+    });
+
   }
 
 }

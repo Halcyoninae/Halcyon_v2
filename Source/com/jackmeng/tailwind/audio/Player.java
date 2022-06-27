@@ -70,7 +70,6 @@ public class Player {
       audio = new TailwindPlayer();
       this.f = new File(file);
       currentAbsolutePath = file;
-      audio.open(f);
     } catch (Exception e) {
       Debugger.log(e);
     }
@@ -86,7 +85,6 @@ public class Player {
       audio = new TailwindPlayer();
       this.f = f;
       currentAbsolutePath = f.getAbsolutePath();
-      audio.open(f);
     } catch (Exception e) {
       Debugger.log(e);
     }
@@ -147,11 +145,10 @@ public class Player {
    */
   public void setFile(String f) {
     if (audio.isOpen() || audio.isPlaying()) {
-      audio.stop();
       audio.close();
     }
-    this.currentAbsolutePath = f;
     audio.open(new File(f));
+    this.currentAbsolutePath = f;
   }
 
   public String getCurrentFile() {
@@ -181,5 +178,9 @@ public class Player {
     } catch (NullPointerException e) {
       return 0;
     }
+  }
+
+  public String toString() {
+    return "isOpen: " + audio.isOpen() + "\nisPlaying" + audio.isPlaying() + "\nisPaused" + audio.isPaused();
   }
 }
