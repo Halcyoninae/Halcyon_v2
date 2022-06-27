@@ -15,25 +15,19 @@
 
 package com.jackmeng.halcyon.utils;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.io.File;
-import java.io.IOException;
-
-import javax.swing.ImageIcon;
-
 import de.ralleytn.simple.image.DesaturationGrayscaleFilter;
 import de.ralleytn.simple.image.SimpleImage;
 
-import java.awt.Image;
-import java.awt.Graphics2D;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
-import javax.imageio.*;
-
-import java.awt.image.Kernel;
-import java.awt.image.ConvolveOp;
-
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This is a class that modifies images that are fed to it.
@@ -135,7 +129,7 @@ public final class DeImage {
   public static BufferedImage resizeNoDistort(BufferedImage img, int newW, int newH) {
     int w = img.getWidth();
     int h = img.getHeight();
-    BufferedImage dimg = null;
+    BufferedImage dimg;
     if (w > h) {
       dimg = img.getSubimage(w / 2 - h / 2, 0, h, h);
     } else {
@@ -169,7 +163,7 @@ public final class DeImage {
     int h = img.getHeight();
     int newW = (int) (w * scaleFactor);
     int newH = (int) (h * scaleFactor);
-    BufferedImage dimg = null;
+    BufferedImage dimg;
     if (w > h) {
       dimg = img.getSubimage(w / 2 - h / 2, 0, h, h);
     } else {
@@ -181,10 +175,9 @@ public final class DeImage {
   /**
    * Blurs an image using a Gaussian blur.
    * @param srcIMG The image to be blurred.
-   * @param radius The radius of the Gaussian blur.
    * @return BufferedImage The blurred image.
    */
-  public static BufferedImage blurImage(BufferedImage srcIMG, float radius) {
+  public static BufferedImage blurImage(BufferedImage srcIMG) {
     BufferedImage dest = srcIMG;
     ColorModel cm = dest.getColorModel();
     BufferedImage src = new BufferedImage(cm, dest.copyData(dest.getRaster().createCompatibleWritableRaster()),

@@ -29,8 +29,8 @@ import javax.swing.event.ChangeListener;
  * @see javax.swing.JProgressBar
  */
 public class AlignSliderWithBar implements ChangeListener {
-  private JSlider slider;
-  private JProgressBar progressBar;
+  private final JSlider slider;
+  private final JProgressBar progressBar;
 
   /**
    * Constructs the AlignSliderWithBar object instance.

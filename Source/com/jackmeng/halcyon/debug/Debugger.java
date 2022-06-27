@@ -16,7 +16,6 @@
 package com.jackmeng.halcyon.debug;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
-import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.TimeParser;
 
@@ -101,9 +100,9 @@ public class Debugger {
   public static <T> void log(T... o) {
     if (!DISABLE_DEBUGGER) {
       new Thread(() -> {
-        for (int i = 0; i < o.length; i++) {
-          if (o[i] != null) {
-            System.err.println(getLogText() + o[i].toString() + " ");
+        for (T t : o) {
+          if (t != null) {
+            System.err.println(getLogText() + t + " ");
           } else {
             System.err.println(getLogText() + "NULL_CONTENT" + " ");
           }
@@ -134,15 +133,15 @@ public class Debugger {
   @SafeVarargs
   public static <T> void warn(T... o) {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
-      for (int i = 0; i < o.length; i++) {
-        if (o[i] != null) {
-          System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
-              + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + o[i].toString()
-              + CLIStyles.RESET.getColor());
+      for (T t : o) {
+        if (t != null) {
+          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + t
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         } else {
-          System.err.println(CLIStyles.BOLD.getColor() + getWarnText() + CLIStyles.RESET.getColor()
-              + CLIStyles.RED_BG.getColor() + CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
-              + CLIStyles.RESET.getColor());
+          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
     }
@@ -161,15 +160,15 @@ public class Debugger {
   @SafeVarargs
   public static <T> void good(T... o) {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
-      for (int i = 0; i < o.length; i++) {
-        if (o[i] != null) {
-          System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
-              + CLIStyles.GREEN_TXT.getColor() + o[i].toString()
-              + CLIStyles.RESET.getColor());
+      for (T t : o) {
+        if (t != null) {
+          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + t
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         } else {
-          System.err.println(CLIStyles.BOLD.getColor() + getGoodText() + CLIStyles.RESET.getColor()
-              + CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
-              + CLIStyles.RESET.getColor());
+          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
+                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
     }
@@ -184,9 +183,9 @@ public class Debugger {
   @SafeVarargs
   public static <T> void unsafeLog(T... o) {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
-      for (int i = 0; i < o.length; i++) {
-        if (o[i] != null) {
-          System.err.println(getLogText() + o[i].toString() + " ");
+      for (T t : o) {
+        if (t != null) {
+          System.err.println(getLogText() + t + " ");
         } else {
           System.err.println(getLogText() + "NULL_CONTENT" + " ");
         }

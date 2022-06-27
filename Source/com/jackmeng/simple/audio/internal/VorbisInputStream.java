@@ -26,9 +26,10 @@ package com.jackmeng.simple.audio.internal;
 
 import de.jarnbjo.ogg.EndOfOggStreamException;
 import de.jarnbjo.vorbis.VorbisStream;
+
+import javax.sound.sampled.AudioFormat;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.sound.sampled.AudioFormat;
 
 /**
  * Wraps a {@linkplain VorbisStream}.

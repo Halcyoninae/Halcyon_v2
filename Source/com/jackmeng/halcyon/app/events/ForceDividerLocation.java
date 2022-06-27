@@ -15,10 +15,9 @@
 
 package com.jackmeng.halcyon.app.events;
 
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import javax.swing.*;
 
 /**
  * A class with a listener to constantly keep a divider in between a

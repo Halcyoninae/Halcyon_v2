@@ -15,14 +15,6 @@
 
 package com.jackmeng.halcyon.app.events;
 
-import java.awt.event.*;
-import java.io.File;
-
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-
 import com.jackmeng.halcyon.app.components.bottompane.TabTree;
 import com.jackmeng.halcyon.app.components.dialog.AudioInfoDialog;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
@@ -31,7 +23,15 @@ import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.constant.StringManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.Wrapper;
-import com.jackmeng.tailwind.audio.AudioInfo;
+import com.jackmeng.tailwind.AudioInfo;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * This class handles the right click event for any JTree instance.
@@ -94,6 +94,7 @@ public class FVRightClick extends MouseAdapter {
             for (TreePath p : s) {
                 if (p.equals(path)) {
                     isSelected = true;
+                    break;
                 }
             }
         }
@@ -123,7 +124,7 @@ public class FVRightClick extends MouseAdapter {
         JMenuItem audioInfoItem = new JMenuItem("Information");
         audioInfoItem.addActionListener(ev -> {
             try {
-                if (!rcNode.equals(((DefaultTreeModel) t.getModel()).getRoot())) {
+                if (!rcNode.equals(t.getModel().getRoot())) {
                     new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
                 } else {
                     new ErrorWindow("This selected node has no valid audio information.").run();
@@ -169,7 +170,7 @@ public class FVRightClick extends MouseAdapter {
                                                 .getFolderInfo()
                                                 .getAbsolutePath() +
                                                 ProgramResourceManager.FILE_SLASH +
-                                                node.toString()));
+                                                node));
                     }
                 }
             });

@@ -15,18 +15,17 @@
 
 package com.jackmeng.halcyon.app.components.inheritable;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
-
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TabButton extends JPanel {
 
-  public static interface RemoveTabListener {
-    public void onRemoveTab();
+  public interface RemoveTabListener {
+    void onRemoveTab();
   }
 
   private final JTabbedPane parentPane;

@@ -15,15 +15,13 @@
 
 package com.jackmeng.halcyon.app.components.dialog;
 
-import javax.swing.*;
-
-import org.jaudiotagger.tag.FieldKey;
-
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.TimeParser;
-import com.jackmeng.tailwind.audio.AudioInfo;
+import com.jackmeng.tailwind.AudioInfo;
+import org.jaudiotagger.tag.FieldKey;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

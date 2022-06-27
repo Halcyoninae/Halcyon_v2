@@ -15,14 +15,14 @@
 
 package com.jackmeng.halcyon.app;
 
-import javax.swing.UIManager;
-
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.jackmeng.halcyon.app.tasks.DefunctOptimizer;
 import com.jackmeng.halcyon.app.tasks.PingFileView;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+
+import javax.swing.*;
 
 public class ThreadedScheduler {
   public ThreadedScheduler() {

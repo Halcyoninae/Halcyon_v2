@@ -1,5 +1,8 @@
 package com.jackmeng.halcyon.connections.ploogin;
 
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.global.Pair;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -13,21 +16,18 @@ import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
-import com.jackmeng.halcyon.global.Pair;
-
 public class PlooginManager {
-  private static Set<Pair<Class<?>, Ploogin>> ploogins = new HashSet<>();
+  private static final Set<Pair<Class<?>, Ploogin>> ploogins = new HashSet<>();
 
   private static File[] getListOfPlugins() {
     ArrayList<File> files = new ArrayList<>();
-    for (File f : new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-        + ProgramResourceManager.RESOURCE_SUBFOLDERS[2]).listFiles()) {
+    for (File f : java.util.Objects.requireNonNull(new java.io.File(com.jackmeng.halcyon.constant.ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + com.jackmeng.halcyon.constant.ProgramResourceManager.FILE_SLASH
+            + com.jackmeng.halcyon.constant.ProgramResourceManager.RESOURCE_SUBFOLDERS[2]).listFiles())) {
       if (f.getName().endsWith(".jar")) {
         files.add(f);
       }
     }
-    return files.toArray(new File[files.size()]);
+    return files.toArray(new java.io.File[0]);
   }
 
   public static Set<Pair<Class<?>, Ploogin>> getPloogins() {

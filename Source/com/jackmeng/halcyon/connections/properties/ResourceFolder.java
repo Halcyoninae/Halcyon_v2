@@ -15,6 +15,12 @@
 
 package com.jackmeng.halcyon.connections.properties;
 
+import com.jackmeng.halcyon.ProjectManager;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.utils.DeImage;
+
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,13 +30,6 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.awt.image.BufferedImage;
-
-import com.jackmeng.halcyon.ProjectManager;
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
-import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.debug.Program;
-import com.jackmeng.halcyon.utils.DeImage;
 
 /**
  * ResourceFolder is a general class that holds information about
@@ -220,7 +219,7 @@ public class ResourceFolder {
             "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
                 + "\n"
                 + e.getClass() + "\n" + e.toString() + "\n" +
-                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n" + e.getStackTrace() + "\n"
+                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n" + java.util.Arrays.toString(e.getStackTrace()) + "\n"
                 + "Submit an issue by making a PR to the file BUGS at " + ProjectManager.PROJECT_GITHUB_PAGE);
       }
       return null;

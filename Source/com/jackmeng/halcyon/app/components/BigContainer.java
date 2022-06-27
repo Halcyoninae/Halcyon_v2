@@ -37,7 +37,7 @@ import java.awt.*;
  * @author Jack Meng
  * @since 3.0
  */
-public class Tailwind implements Runnable {
+public class BigContainer implements Runnable {
   private JFrame container;
 
   /**
@@ -46,7 +46,7 @@ public class Tailwind implements Runnable {
    *
    * @param mainPane The JSplitPane instance to attach with
    */
-  public Tailwind(JSplitPane mainPane) {
+  public BigContainer(JSplitPane mainPane) {
     mainPane.setBorder(BorderFactory.createEmptyBorder());
     container = new JFrame("Halcyon Beta ~ exoad");
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {

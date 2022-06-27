@@ -13,26 +13,29 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc;
+package com.jackmeng.tailwind;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
-/**
- * A template used for a BBloc button
- *
- * @author Jack Meng
- * @since 3.0
- */
-public interface BBlocButton extends ActionListener {
-  /**
-   * @return The Component representing this BBloc Button
-   */
-  JComponent getComponent();
+public class TailwindDefaultListener implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+  private final TailwindPlayer player;
+
+  public TailwindDefaultListener(TailwindPlayer player) {
+    this.player = player;
+  }
 
   @Override
-  default void actionPerformed(ActionEvent e) {
-    // DO NOTHING
+  public void statusUpdate(TailwindStatus status) {
+    Debugger.warn("[BigContainer] > " + status);
+    if (status.equals(TailwindStatus.END)) {
+      player.close();
+    }
   }
+
+  @Override
+  public void genericUpdate(TailwindEvent event) {
+    Debugger.warn(event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+  }
+
 }

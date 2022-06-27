@@ -15,25 +15,19 @@
 
 package com.jackmeng.halcyon.debug;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadFactory;
-
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
-import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.Wrapper;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Provides a concurrent logging system for the program
@@ -61,14 +55,11 @@ public class Program {
   private static void println(String e) {
     if (executorService == null) {
       executorService = Executors.newCachedThreadPool(
-          new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-              Thread t = new Thread(r);
-              t.setDaemon(true);
-              return t;
-            }
-          });
+              r -> {
+                Thread t = new Thread(r);
+                t.setDaemon(true);
+                return t;
+              });
       executorService.submit(
           new Runnable() {
             @Override
@@ -121,7 +112,7 @@ public class Program {
 
   public static void forcedSavePlaylists() {
     List<String> list = Global.bp.getStrTabs();
-    boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[list.size()]));
+    boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[0]));
     if (!result) {
       Debugger.warn("Failed to save playlists.");
     } else {
@@ -137,13 +128,13 @@ public class Program {
       list.add(f.getAbsolutePath());
     }
     Debugger.warn(list);
-    boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[list.size()]));
+    boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[0]));
     if (!result) {
       Debugger.warn("Failed to save liked tracks.");
     } else {
       Debugger.good("Saved liked tracks.");
     }
-    Debugger.unsafeLog(list.toArray(new String[list.size()]));
+    Debugger.unsafeLog(list.toArray(new String[0]));
   }
 
   public static File[] fetchLikedTracks() {
@@ -166,7 +157,7 @@ public class Program {
           list.add(new File(str));
         }
       }
-      return list.toArray(new File[list.size()]);
+      return list.toArray(new java.io.File[0]);
     } catch (IOException e) {
       ResourceFolder.dispatchLog(e);
       Debugger.warn("Failed to retrieve saved liked tracks. " + e.getLocalizedMessage());
@@ -192,7 +183,7 @@ public class Program {
         String s = sc.nextLine();
         list.add(new FolderInfo(s));
       }
-      return list.toArray(new FolderInfo[list.size()]);
+      return list.toArray(new com.jackmeng.halcyon.utils.FolderInfo[0]);
     } catch (Exception e) {
       ResourceFolder.dispatchLog(e);
       Debugger.warn("Failed to retrieve saved playlists. " + e.getLocalizedMessage());

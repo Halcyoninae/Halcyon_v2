@@ -15,11 +15,11 @@
 
 package com.jackmeng.halcyon.constant;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 
 /**
  * A constant defined class that holds

@@ -15,15 +15,14 @@
 
 package com.jackmeng.halcyon.app.components.bbloc.buttons;
 
-import javax.swing.*;
-
-import java.awt.event.*;
-
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.app.components.info.InformationDialog;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 /**
  * A button that when pressed launches

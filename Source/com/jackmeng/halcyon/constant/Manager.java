@@ -15,7 +15,7 @@
 
 package com.jackmeng.halcyon.constant;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  * A global scope project manager that contains

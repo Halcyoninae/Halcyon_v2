@@ -37,13 +37,14 @@ package com.jackmeng.halcyon.app.components.dialog;
  * @author Jack Meng
  * @since 3.0
  */
-import javax.swing.*;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
   /**

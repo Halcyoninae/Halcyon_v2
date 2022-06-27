@@ -24,11 +24,13 @@
 
 package com.jackmeng.simple.audio;
 
+import com.jackmeng.tailwind.simple.FileFormat;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.Control;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.Control;
 
 // ==== 15.03.2018 | Ralph Niemitz/RalleYTN(ralph.niemitz@gmx.de)
 // -	Moved everything static to AbstractAudio

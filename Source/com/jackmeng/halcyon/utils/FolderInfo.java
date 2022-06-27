@@ -16,9 +16,6 @@
 package com.jackmeng.halcyon.utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * A simple class that inits and holds
@@ -60,6 +57,7 @@ public class FolderInfo {
    */
   public String[] getFilesAsStr() {
     File[] f = new File(absPath).listFiles();
+    assert f != null;
     String[] s = new String[f.length];
     for (int i = 0; i < f.length; i++) {
       s[i] = f[i].getName();
@@ -94,14 +92,15 @@ public class FolderInfo {
    */
   public String[] getFilesAsStr(String... rules) {
     File[] f = new File(absPath).listFiles();
+    assert f != null;
     String[] s = new String[f.length];
     for (int i = 0; i < f.length; i++) {
       if (f[i].isFile()) {
         String curr = f[i].getAbsolutePath();
-        rulesLoop: for (String r : rules) {
+        for (String r : rules) {
           if (curr.endsWith(r)) {
             s[i] = curr;
-            break rulesLoop;
+            break;
           }
         }
       }
@@ -119,10 +118,10 @@ public class FolderInfo {
     for (int i = 0; i < f.length; i++) {
       if (f[i].isFile()) {
         String curr = f[i].getAbsolutePath();
-        rulesLoop: for (String r : rules) {
+        for (String r : rules) {
           if (curr.endsWith(r)) {
             s[i] = f[i];
-            break rulesLoop;
+            break;
           }
         }
       }
@@ -134,6 +133,6 @@ public class FolderInfo {
    * Represents the folder-info object as a string.
    */
   public String toString() {
-    return absPath + "[" + getFilesAsStr() + "]";
+    return absPath + "[" + java.util.Arrays.toString(getFilesAsStr()) + "]";
   }
 }

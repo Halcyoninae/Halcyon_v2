@@ -15,16 +15,15 @@
 
 package com.jackmeng.halcyon.connections.resource;
 
+import com.jackmeng.halcyon.debug.Debugger;
+
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.swing.ImageIcon;
-
-import com.jackmeng.halcyon.debug.Debugger;
-
-import java.io.InputStream;
 
 /**
  * Retrieves resources from the binary resource folder.

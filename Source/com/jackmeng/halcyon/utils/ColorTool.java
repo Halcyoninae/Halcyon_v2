@@ -15,7 +15,7 @@
 
 package com.jackmeng.halcyon.utils;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * A Class to manipulate Color utility

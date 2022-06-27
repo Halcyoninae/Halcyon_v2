@@ -15,14 +15,13 @@
 
 package com.jackmeng.halcyon.utils;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
+
+import javax.swing.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.swing.SwingUtilities;
-
-import com.jackmeng.halcyon.connections.properties.ResourceFolder;
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
 
 /**
  * This class provides a globalized way

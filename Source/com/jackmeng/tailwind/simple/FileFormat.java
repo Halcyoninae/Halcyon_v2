@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-package com.jackmeng.simple.audio;
+package com.jackmeng.tailwind.simple;
 
+import javax.sound.sampled.AudioFileFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sound.sampled.AudioFileFormat;
 
 /**
  * Represents a file format for audio files.

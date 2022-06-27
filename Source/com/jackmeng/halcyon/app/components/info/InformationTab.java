@@ -1,6 +1,6 @@
 package com.jackmeng.halcyon.app.components.info;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface InformationTab {
   String getName();

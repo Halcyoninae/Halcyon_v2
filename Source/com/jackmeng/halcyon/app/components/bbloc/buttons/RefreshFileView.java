@@ -15,15 +15,13 @@
 
 package com.jackmeng.halcyon.app.components.bbloc.buttons;
 
-import javax.swing.JComponent;
-
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Dispatches a call for all of the tabs in the FileList

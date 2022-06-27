@@ -15,10 +15,10 @@
 
 package com.jackmeng.halcyon.app.components.inheritable;
 
-import javax.swing.JFrame;
-
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+
+import javax.swing.*;
 
 /**
  * This class mainly provides the necessary inheritable attributes

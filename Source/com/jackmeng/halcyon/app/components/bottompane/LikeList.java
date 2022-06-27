@@ -22,13 +22,12 @@ import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.debug.Program;
 import com.jackmeng.halcyon.utils.VirtualFolder;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 /**
  * A type of non-removable FileList viewable.
@@ -48,8 +47,8 @@ import javax.swing.tree.DefaultTreeModel;
  * @see com.jackmeng.halcyon.app.components.bottompane.FileList
  */
 public class LikeList extends FileList {
-  private transient VirtualFolder folder;
-  private static RightClickHideItemListener itemListener = new RightClickHideItemListener() {
+  private final transient VirtualFolder folder;
+  private static final RightClickHideItemListener itemListener = new RightClickHideItemListener() {
     @Override
     public void onRemove(String content) {
       Global.ll.unset(content);
@@ -128,7 +127,7 @@ public class LikeList extends FileList {
    * Returns the virtual folder representing
    * this viewport.
    *
-   * @return {@link com.jackmeng.utils.VirtualFolder.}
+   * @return {@link com.jackmeng.utils.VirtualFolder}
    */
   public VirtualFolder getFolder() {
     return folder;

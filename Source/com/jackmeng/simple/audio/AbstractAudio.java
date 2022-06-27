@@ -23,9 +23,15 @@
  */
 package com.jackmeng.simple.audio;
 
+import com.jackmeng.halcyon.utils.Wrapper;
+import com.jackmeng.simple.audio.internal.VorbisInputStream;
+import com.jackmeng.tailwind.simple.FileFormat;
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
 import de.jarnbjo.vorbis.VorbisStream;
+import org.tritonus.share.sampled.file.TAudioFileFormat;
+
+import javax.sound.sampled.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,22 +45,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.BooleanControl;
-import javax.sound.sampled.Control;
-import javax.sound.sampled.EnumControl;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.Mixer;
-import javax.sound.sampled.SourceDataLine;
-import org.tritonus.share.sampled.file.TAudioFileFormat;
-
-import com.jackmeng.halcyon.utils.Wrapper;
-import com.jackmeng.simple.audio.internal.VorbisInputStream;
 
 /**
  * Implements the {@linkplain Audio} and should be extended by all classes

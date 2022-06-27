@@ -15,12 +15,11 @@
 
 package com.jackmeng.halcyon.app.components.toppane;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.app.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP;
 import com.jackmeng.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 

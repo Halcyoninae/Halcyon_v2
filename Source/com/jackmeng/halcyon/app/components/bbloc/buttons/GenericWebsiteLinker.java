@@ -15,15 +15,12 @@
 
 package com.jackmeng.halcyon.app.components.bbloc.buttons;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-
-import java.awt.Desktop;
-
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Creates a BBloc button that opens
@@ -37,7 +34,7 @@ public class GenericWebsiteLinker {
   }
 
   public static class WebsitePage extends JButton implements BBlocButton {
-    private String url;
+    private final String url;
 
     /**
      * Creates a WebSite button

@@ -24,5 +24,5 @@ package com.jackmeng.halcyon.app.tasks;
  * @since 3.0
  */
 public interface ConcurrentTiming {
-  public static final int MAX_TLE = 500;
+  int MAX_TLE = 500;
 }

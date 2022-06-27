@@ -1,14 +1,13 @@
 package com.jackmeng.halcyon.app.components.info.layout;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-
 import com.jackmeng.halcyon.app.components.info.InformationTab;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Manager;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
   private JEditorPane text;

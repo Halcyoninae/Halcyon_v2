@@ -19,7 +19,7 @@ import java.util.List;
  * @since 3.1
  */
 public class VirtualFolder extends FolderInfo {
-  private List<File> list;
+  private final List<File> list;
 
   /**
    * A VirtualFolder takes a varargs of file objects
@@ -38,12 +38,12 @@ public class VirtualFolder extends FolderInfo {
 
   @Override
   public String[] getFilesAsStr() {
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
   @Override
   public File[] getFiles() {
-    return list.toArray(new File[list.size()]);
+    return list.toArray(new java.io.File[0]);
   }
 
   @Override
@@ -83,10 +83,9 @@ public class VirtualFolder extends FolderInfo {
    * themselves.
    *
    * @param f A file to insert.
-   * @return (true || false) if the action was a success
    */
-  public boolean addFile(File f) {
-    return list.add(f);
+  public void addFile(java.io.File f) {
+    list.add(f);
   }
 
   /**

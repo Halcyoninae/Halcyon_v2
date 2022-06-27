@@ -15,11 +15,6 @@
 
 package com.jackmeng.halcyon.app.components.toppane.layout;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.inheritable.LikeButton;
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyon.app.events.AlignSliderWithBar;
@@ -31,13 +26,16 @@ import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.Wrapper;
-import com.jackmeng.simple.audio.AbstractAudio;
-import com.jackmeng.simple.audio.AudioException;
-import com.jackmeng.tailwind.audio.AudioInfo;
+import com.jackmeng.tailwind.AudioInfo;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
-
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * This class represents the GUI component collection
@@ -53,16 +51,18 @@ import java.awt.event.*;
  */
 public class ButtonControlTP extends JPanel
     implements InfoViewUpdateListener, ActionListener, ChangeListener {
-  private JButton playButton;
-  private JButton nextButton;
-  private JButton previousButton;
-  private JButton loopButton;
-  private JButton shuffleButton;
-  private JButton restartButton;
-  private LikeButton likeButton;
-  private JSlider progressSlider, volumeSlider;
-  private JProgressBar progressBar;
-  private JPanel sliders, buttons;
+  private final JButton playButton;
+  private final JButton nextButton;
+  private final JButton previousButton;
+  private final JButton loopButton;
+  private final JButton shuffleButton;
+  private final JButton restartButton;
+  private final LikeButton likeButton;
+  private final JSlider progressSlider;
+  private final JSlider volumeSlider;
+  private final JProgressBar progressBar;
+  private final JPanel sliders;
+  private final JPanel buttons;
   private transient AudioInfo aif;
   private boolean hasPlayed = false;
 
@@ -145,10 +145,10 @@ public class ButtonControlTP extends JPanel
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
     volumeSlider.setBorder(null);
-
-    volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
+    volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 3, 20));
     volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
     volumeSlider.addChangeListener(this);
+    volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
 
     likeButton = new LikeButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_NOLIKE_ICON), 24,
@@ -246,7 +246,7 @@ public class ButtonControlTP extends JPanel
    * if the stream is reset.
    */
   private void assertVolume() {
-    Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
+    Global.player.setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }
 
   @Override
@@ -257,7 +257,7 @@ public class ButtonControlTP extends JPanel
       new Thread(() -> Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))).start();
     }
     aif = info;
-    if(!likeButton.isEnabled())
+    if (!likeButton.isEnabled())
       likeButton.setEnabled(true);
     if (Global.ll.isLiked(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
       likeButton.like();
@@ -277,11 +277,6 @@ public class ButtonControlTP extends JPanel
         if (!Global.player.getStream().isPlaying()) {
           if (!hasPlayed) {
             Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-            try {
-              Global.player.getStream().open();
-            } catch (AudioException e1) {
-              Debugger.log(e1);
-            }
             Global.player.play();
             hasPlayed = true;
           } else {
@@ -344,7 +339,9 @@ public class ButtonControlTP extends JPanel
     if (e.getSource().equals(volumeSlider)) {
       new Thread(() -> {
         try {
-          Global.player.getStream().setVolume(Global.player.convertVolume(volumeSlider.getValue()));
+          Global.player.setVolume(Global.player.convertVolume(volumeSlider.getValue()));
+          volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
+
         } catch (NullPointerException ex) {
           Debugger.log(ex);
         }

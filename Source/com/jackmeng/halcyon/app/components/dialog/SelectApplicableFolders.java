@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyon.app.components.dialog;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.app.components.inheritable.FSVDefault;
+
+import javax.swing.*;
 
 /**
  * This dialog class constructs a simple

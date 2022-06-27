@@ -15,19 +15,19 @@
 
 package com.jackmeng.halcyon.app.components.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.app.components.dialog.ConfirmWindow;
-import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders;
 import com.jackmeng.halcyon.app.components.dialog.ConfirmWindow.ConfirmationListener;
+import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders;
 import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.FileParser;
 
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 /**
@@ -60,26 +60,20 @@ public class AddFolder extends JButton implements BBlocButton {
             if (Global.bp.containsFolder(folder)) {
               new ConfirmWindow(
                   "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
-                  new ConfirmationListener() {
-                    @Override
-                    public void onStatus(boolean status) {
-                      if (status) {
-                        Global.bp.pokeNewFileListTab(folder);
-                      }
-                    }
-                  }).run();
+                      status -> {
+                        if (status) {
+                          com.jackmeng.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
+                        }
+                      }).run();
             } else if (FileParser.isEmptyFolder(new File(folder))
                 || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
               new ConfirmWindow(
                   "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                  new ConfirmationListener() {
-                    @Override
-                    public void onStatus(boolean status) {
-                      if (status) {
-                        Global.bp.pokeNewFileListTab(folder);
-                      }
-                    }
-                  }).run();
+                      status -> {
+                        if (status) {
+                          com.jackmeng.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
+                        }
+                      }).run();
             } else {
               Global.bp.pokeNewFileListTab(folder);
             }

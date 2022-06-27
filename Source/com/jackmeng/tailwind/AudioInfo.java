@@ -13,13 +13,12 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.tailwind.audio;
+package com.jackmeng.tailwind;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
+import com.jackmeng.halcyon.constant.Global;
+import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.utils.DeImage;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -31,12 +30,11 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import com.jackmeng.halcyon.constant.Global;
-import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.utils.DeImage;
-
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class holds information regarding an audio

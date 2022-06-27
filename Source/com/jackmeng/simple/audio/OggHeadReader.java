@@ -24,14 +24,14 @@
 
 package com.jackmeng.simple.audio;
 
+import com.jackmeng.simple.audio.internal.Util;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.jackmeng.simple.audio.internal.Util;
 
 /**
  * Reads the head informations from an Ogg Vorbis file as described <a href="https://xiph.org/vorbis/doc/Vorbis_I_spec.html">here</a>.

@@ -23,9 +23,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class InformationDialog extends JFrame implements Runnable {
-    private JTabbedPane panes;
+    private final JTabbedPane panes;
 
-    private transient InformationTab[] tabs = {
+    private transient final InformationTab[] tabs = {
             new FileFromSourceTab("Program Properties",
                     FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_PROPERTIES_DOCS)),
             new FileFromSourceTab("Legals", FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_DOCS)),

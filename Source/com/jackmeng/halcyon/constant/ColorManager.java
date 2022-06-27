@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyon.constant;
 
-import java.awt.Color;
-
 import com.jackmeng.halcyon.utils.ColorTool;
+
+import java.awt.*;
 
 /**
  * This interface holds constants for any color values that

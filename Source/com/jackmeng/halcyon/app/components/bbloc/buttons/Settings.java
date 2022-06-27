@@ -22,7 +22,6 @@ import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
 
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 
 /**

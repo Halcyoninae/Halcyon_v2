@@ -18,13 +18,11 @@ package com.jackmeng.tailwind.audio;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.TimeParser;
-import com.jackmeng.halcyon.utils.Wrapper;
-import com.jackmeng.simple.audio.AudioException;
-import com.jackmeng.simple.audio.StreamedAudio;
+import com.jackmeng.tailwind.TailwindPlayer;
 
-import java.io.File;
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
+import java.io.File;
 
 /**
  * A simplified version of the {@link com.jackmeng.simple.audio.Audio} interface
@@ -43,9 +41,10 @@ import javax.sound.sampled.FloatControl;
  * @since 3.0
  */
 public class Player {
-  private StreamedAudio audio;
+  private TailwindPlayer audio;
   private String currentAbsolutePath = "";
   private boolean isLooping = false, isPlayListShuffling = false;
+  private File f;
 
   /**
    * Constructs a player with a blank mp3 file
@@ -65,10 +64,11 @@ public class Player {
    */
   public Player(String file) {
     try {
-      audio = new StreamedAudio(new File(file));
-      audio.addAudioListener(new DefaultAudioListener(this));
+      audio = new TailwindPlayer();
+      this.f = new File(file);
       currentAbsolutePath = file;
-    } catch (AudioException e) {
+      audio.open(f);
+    } catch (Exception e) {
       Debugger.log(e);
     }
   }
@@ -80,10 +80,11 @@ public class Player {
    */
   public Player(File f) {
     try {
-      audio = new StreamedAudio(f);
+      audio = new TailwindPlayer();
+      this.f = f;
       currentAbsolutePath = f.getAbsolutePath();
-      audio.addAudioListener(new DefaultAudioListener(this));
-    } catch (AudioException e) {
+      audio.open(f);
+    } catch (Exception e) {
       Debugger.log(e);
     }
   }
@@ -93,15 +94,32 @@ public class Player {
    */
   public void play() {
     try {
-      audio.open();
-    } catch (AudioException e) {
+      audio.open(f);
+    } catch (Exception e) {
       Debugger.log(e);
     }
     audio.play();
   }
 
+  /**
+   * This method should not be used!!
+   *
+   * {@link #play()} handles opening the stream before playing
+   */
+  public void open() {
+    try {
+      audio.open(f);
+    } catch (Exception e) {
+      Debugger.log(e);
+    }
+  }
+
   public void setLooping(boolean b) {
     isLooping = b;
+  }
+
+  public void setVolume(float percent) {
+    audio.setGain(percent);
   }
 
   public boolean isLooping() {
@@ -125,27 +143,19 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
-    this.currentAbsolutePath = f;
     if (audio.isOpen() || audio.isPlaying()) {
       audio.stop();
       audio.close();
     }
-
-    Wrapper.async(() -> {
-      try {
-        this.audio = new StreamedAudio(new File(f));
-      } catch (AudioException e) {
-        e.printStackTrace();
-      }
-    });
-
+    this.currentAbsolutePath = f;
+    audio.open(new File(f));
   }
 
   public String getCurrentFile() {
     return currentAbsolutePath;
   }
 
-  public StreamedAudio getStream() {
+  public TailwindPlayer getStream() {
     return audio;
   }
 

@@ -15,8 +15,9 @@
 
 package com.jackmeng.halcyon.app.events;
 
-import javax.swing.JFrame;
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * This class forces a certain size limit upon a JFrame.

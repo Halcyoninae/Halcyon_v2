@@ -15,10 +15,9 @@
 
 package com.jackmeng.halcyon.app.components.bbloc;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class BBlocView extends JPanel {

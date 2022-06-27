@@ -1,17 +1,10 @@
 package com.jackmeng.halcyon.app.components.dialog;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.utils.Wrapper;
 
+import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class LoadingDialog extends JFrame {
   private JProgressBar bar;

@@ -15,7 +15,7 @@
 
 package com.jackmeng.halcyon.utils;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -40,6 +40,7 @@ public final class FileParser {
   public static File[] parseOnlyAudioFiles(File folder, String[] rules) {
     File[] files = folder.listFiles();
     ArrayList<File> audioFiles = new ArrayList<>();
+    assert files != null;
     for (File f : files) {
       if (f.isFile()) {
         for (String rule : rules) {
@@ -49,7 +50,7 @@ public final class FileParser {
         }
       }
     }
-    return audioFiles.toArray(new File[audioFiles.size()]);
+    return audioFiles.toArray(new java.io.File[0]);
   }
 
   /**
@@ -60,6 +61,7 @@ public final class FileParser {
    */
   public static boolean contains(File folder, String[] rules) {
     File[] files = folder.listFiles();
+    assert files != null;
     for(File f : files) {
       if (f.isFile()) {
         for(String rule : rules) {
@@ -106,6 +108,7 @@ public final class FileParser {
    */
   public static boolean isEmptyFolder(File folder) {
     File[] files = folder.listFiles();
+    assert files != null;
     return files.length == 0;
   }
 }

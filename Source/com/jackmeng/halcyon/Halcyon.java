@@ -16,15 +16,9 @@
 package com.jackmeng.halcyon;
 
 import com.jackmeng.halcyon.app.ThreadedScheduler;
-import com.jackmeng.halcyon.app.components.Tailwind;
 import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
 import com.jackmeng.halcyon.app.components.bbloc.BBlocView;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.AddFolder;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.GenericWebsiteLinker;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.LegalNoticeButton;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.RefreshFileView;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.Settings;
-import com.jackmeng.halcyon.app.components.bottompane.LikeList;
+import com.jackmeng.halcyon.app.components.bbloc.buttons.*;
 import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
 import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
 import com.jackmeng.halcyon.app.components.toppane.TopPane;
@@ -37,10 +31,10 @@ import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.debug.Program;
 import com.jackmeng.halcyon.utils.FolderInfo;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  * <p>
@@ -101,7 +95,7 @@ public class Halcyon {
    * This is the only instance of a variable
    * being placed here.
    */
-  public static Tailwind bgt;
+  public static com.jackmeng.halcyon.app.components.BigContainer bgt;
 
   /**
    * No arguments are taken from the entry point
@@ -148,12 +142,12 @@ public class Halcyon {
               Manager.PROJECTPAGE_BUTTON_TOOLTIP,
               Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
       BBlocView b = new BBlocView();
-      b.addBBlockButtons(bb.toArray(new BBlocButton[bb.size()]));
+      b.addBBlockButtons(bb.toArray(new BBlocButton[0]));
       bottom.add(b);
       bottom.add(Global.bp);
 
       JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-      bgt = new Tailwind(m);
+      bgt = new com.jackmeng.halcyon.app.components.BigContainer(m);
       Global.bp.pokeewFileList(Global.ll);
 
       FolderInfo[] fi = Program.fetchSavedPlayLists();

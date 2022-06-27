@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyon.app.components.dialog;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class ErrorWindow extends JFrame implements Runnable {

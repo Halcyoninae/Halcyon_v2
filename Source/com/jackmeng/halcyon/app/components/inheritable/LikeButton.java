@@ -15,14 +15,12 @@
 
 package com.jackmeng.halcyon.app.components.inheritable;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
 import com.jackmeng.halcyon.constant.Global;
-import com.jackmeng.tailwind.audio.AudioInfo;
+import com.jackmeng.tailwind.AudioInfo;
 
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LikeButton extends JButton implements ActionListener {
   private ImageIcon like, noLike;

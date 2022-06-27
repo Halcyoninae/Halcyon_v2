@@ -22,20 +22,20 @@ import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.halcyon.utils.DeImage.Directional;
+import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.simple.audio.PlaylistEvent;
 import com.jackmeng.simple.audio.PlaylistListener;
-import com.jackmeng.tailwind.audio.AudioInfo;
-
+import com.jackmeng.tailwind.AudioInfo;
 import de.ralleytn.simple.image.SimpleImage;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import javax.swing.*;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -115,14 +115,16 @@ public class InfoViewTP extends JPanel implements ComponentListener, PlaylistLis
         }
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
           original = DeImage.createGradientVertical(original, 255, 0);
-          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("focused")) {
-            original = DeImage.createGradient(original, 255, 0, Directional.BOTTOM);
-          } else if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
-              .equals("left")) {
-            original = DeImage.createGradient(original, 255, 0, Directional.LEFT);
-          } else if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
-              .equals("right")) {
-            original = DeImage.createGradient(original, 255, 0, Directional.RIGHT);
+          switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm.get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+            case "focused":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
+              break;
+            case "left":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
+              break;
+            case "right":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
+              break;
           }
         }
         g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,

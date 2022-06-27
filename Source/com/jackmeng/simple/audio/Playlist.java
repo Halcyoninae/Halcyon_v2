@@ -24,10 +24,10 @@
 
 package com.jackmeng.simple.audio;
 
+import com.jackmeng.tailwind.AudioInfo;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.jackmeng.tailwind.audio.AudioInfo;
 
 /**
  * Stores multiple {@linkplain Audio}s and plays them in a batch.

@@ -15,24 +15,6 @@
 
 package com.jackmeng.halcyon.app.components.bottompane;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.awt.*;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.TreeSelectionModel;
-import javax.swing.tree.DefaultTreeModel;
-
 import com.jackmeng.halcyon.app.events.FVRightClick;
 import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
@@ -40,6 +22,18 @@ import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.VirtualFolder;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
+import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a Pane containing a list of files for only
@@ -145,12 +139,12 @@ public class FileList extends JScrollPane implements TabTree {
     tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    Icon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
-    Icon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
-    Icon leafIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FILE);
-    renderer.setClosedIcon(DeImage.resizeImage((ImageIcon) closedIcon, 16, 16));
-    renderer.setOpenIcon(DeImage.resizeImage((ImageIcon) openIcon, 16, 16));
-    renderer.setLeafIcon(DeImage.resizeImage((ImageIcon) leafIcon, 16, 16));
+    ImageIcon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
+    ImageIcon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
+    ImageIcon leafIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FILE);
+    renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
+    renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
+    renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));
 
     tree.addMouseListener(new FVRightClick(this));
     tree.setCellRenderer(renderer);

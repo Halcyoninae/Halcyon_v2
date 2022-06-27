@@ -15,12 +15,12 @@
 
 package com.jackmeng.halcyon.connections.properties;
 
-import java.util.Properties;
-import java.util.Map;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * This class is localized meaning
@@ -48,10 +48,10 @@ import java.io.IOException;
  */
 public final class PropertiesManager {
   private Map<String, String> map;
-  private Map<String, String[]> allowedProperties;
-  private Properties util;
+  private final Map<String, String[]> allowedProperties;
+  private final Properties util;
   private FileReader fr;
-  private String location;
+  private final String location;
 
   /**
    * Creates a new PropertiesManager instance with the defined rules and
@@ -223,7 +223,7 @@ public final class PropertiesManager {
     if (!new File(location).exists() || !new File(location).isFile()) {
       try {
         new File(location).createNewFile();
-      } catch (IOException e) {
+      } catch (IOException ignored) {
       }
       createWithDefaultVals();
     }

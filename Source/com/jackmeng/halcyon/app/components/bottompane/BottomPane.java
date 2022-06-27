@@ -15,14 +15,12 @@
 
 package com.jackmeng.halcyon.app.components.bottompane;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.app.components.inheritable.TabButton;
 import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.Wrapper;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;

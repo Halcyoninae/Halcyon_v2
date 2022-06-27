@@ -24,6 +24,10 @@
 
 package com.jackmeng.simple.audio;
 
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -31,10 +35,6 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.SourceDataLine;
 
 /**
  * Never loads the entire audio data into the RAM. Good for music and long

@@ -13,26 +13,38 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+package com.jackmeng.tailwind;
 
 /**
- * A template used for a BBloc button
+ * Represents a generic tailwind event
+ * which contains certain things about the most recent
+ * stream.
  *
  * @author Jack Meng
- * @since 3.0
+ * @since 3.1
  */
-public interface BBlocButton extends ActionListener {
+public class TailwindEvent {
   /**
-   * @return The Component representing this BBloc Button
+   * Enum constants that represents
+   * the different status of a stream.
+   *
+   * @author Jack Meng
+   * @since 3.1
    */
-  JComponent getComponent();
+  public enum TailwindStatus {
+    PLAYING, PAUSED, OPEN, CLOSED, END, RESUMED;
+  }
 
-  @Override
-  default void actionPerformed(ActionEvent e) {
-    // DO NOTHING
+  private final AudioInfo current;
+
+  public TailwindEvent(AudioInfo set) {
+    this.current = set;
+  }
+
+  /**
+   * @return The current event's AudioInfo object
+   */
+  public AudioInfo getCurrentAudioInfo() {
+    return current;
   }
 }
