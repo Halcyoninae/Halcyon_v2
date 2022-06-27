@@ -22,10 +22,9 @@ import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.DeImage.Directional;
 import com.jackmeng.halcyon.utils.TimeParser;
-import com.jackmeng.simple.audio.PlaylistEvent;
-import com.jackmeng.simple.audio.PlaylistListener;
+import com.jackmeng.test.PlaylistEvent;
+import com.jackmeng.test.PlaylistListener;
 import com.jackmeng.tailwind.AudioInfo;
 import de.ralleytn.simple.image.SimpleImage;
 
