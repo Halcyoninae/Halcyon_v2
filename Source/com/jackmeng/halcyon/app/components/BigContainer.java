@@ -15,14 +15,13 @@
 
 package com.jackmeng.halcyon.app.components;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyon.app.events.InstantClose;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
