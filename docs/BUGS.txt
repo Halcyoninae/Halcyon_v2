@@ -1,3 +1,8 @@
+{!URGENT!} [***] 26 "Liked Tracks with non ascii chars are not being stored correctly"
+      Detailed description: Non ASCII chars are being replaced with "?"
+      Status: Fixing
+      State: Experimental-Build ~ MP4J
+
 [***] #25 "Error handling for incorrect file type"
       Detailed description: Display a messaeg showing that a selected file is
       not a file type based on it's content. Then delete it from the tree.
@@ -123,12 +128,12 @@
       Status: FIXED
       State: Experimental-Build ~ MP4J
 
-{!URGENT!} [***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
+[!FIXED!] {!URGENT!} [***] #3 "InfoView AudioInfo text disappearing when text length exceeding"
       Detailed Description: Literally the title. Ok literally need to fix this and stress test against anything non-ascii cuz it's goofy
       af trying to fix this; in particular with none ASCII chars
       Potential Fix: Better way to count String length if dealing with UTF-8 or UTF-16 charsets. Another way to fix this issue is
       to resize the text or think of a universal size that works for all UTF-8 Chars.
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] [***] #2 "Folders that have been deleted should also be removed from the attributes view"
