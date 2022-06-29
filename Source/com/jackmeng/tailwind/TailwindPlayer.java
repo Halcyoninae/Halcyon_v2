@@ -15,7 +15,6 @@
 
 package com.jackmeng.tailwind;
 
-import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.tailwind.simple.FileFormat;
 

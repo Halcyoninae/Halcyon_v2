@@ -25,7 +25,6 @@ import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.tailwind.AudioInfo;
 
 import javax.swing.*;
