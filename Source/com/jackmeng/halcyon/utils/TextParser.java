@@ -17,6 +17,9 @@ package com.jackmeng.halcyon.utils;
 
 import java.nio.charset.StandardCharsets;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
+
 /**
  * A utility class for text manipulation
  *
@@ -24,7 +27,8 @@ import java.nio.charset.StandardCharsets;
  * @since 3.0
  */
 public final class TextParser {
-  private TextParser() {}
+  private TextParser() {
+  }
 
   /**
    * Returns a string that has been stripped based on the desired length.
@@ -33,7 +37,7 @@ public final class TextParser {
    *
    * strip("helloworld", 2) --> "he..."
    *
-   * @param str The string to strip
+   * @param str         The string to strip
    * @param validLength The valid length (from 1)
    * @return A string that has been stripped based on the desired length
    */
@@ -55,6 +59,13 @@ public final class TextParser {
   }
 
   public static String parseAsPure(String str) {
-    return new String(str.getBytes(StandardCharsets.UTF_16));
+    return new String(ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16")
+        ? str.getBytes(StandardCharsets.UTF_16)
+        : (ResourceFolder.pm
+            .get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8")
+                ? str.getBytes(StandardCharsets.UTF_8)
+                : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
+                    ? str.getBytes(StandardCharsets.UTF_16LE)
+                    : str.getBytes(StandardCharsets.UTF_16BE))));
   }
 }
