@@ -19,11 +19,13 @@ import com.jackmeng.halcyon.ProjectManager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
+import com.jackmeng.halcyon.utils.TextParser;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -184,7 +186,7 @@ public class ResourceFolder {
     }
     try (FileWriter fw = new FileWriter(f)) {
       for (String str : content) {
-        fw.write(str + "\n");
+        fw.write(TextParser.parseAsPure(str) + "\n");
       }
       fw.flush();
     } catch (IOException e) {

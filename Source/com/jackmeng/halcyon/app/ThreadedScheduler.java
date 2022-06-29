@@ -42,8 +42,8 @@ public class ThreadedScheduler {
    * be init by themselves not here.
    */
   static {
-    System.setProperty("file.encoding", "UTF-8");
-    System.setProperty("sun.jnu.encoding", "UTF-8");
+    System.setProperty("file.encoding", "utf-8");
+    System.setProperty("sun.jnu.encoding", "utf-8");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     System.setOut(null);
     System.setProperty("sun.java2d.uiScale", ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_HIDPI_VALUE));

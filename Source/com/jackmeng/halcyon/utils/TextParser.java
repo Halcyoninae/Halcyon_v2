@@ -15,6 +15,8 @@
 
 package com.jackmeng.halcyon.utils;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * A utility class for text manipulation
  *
@@ -50,5 +52,9 @@ public final class TextParser {
       return false;
     }
     return true;
+  }
+
+  public static String parseAsPure(String str) {
+    return new String(str.getBytes(StandardCharsets.UTF_16));
   }
 }

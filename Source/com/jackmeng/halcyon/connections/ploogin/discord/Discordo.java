@@ -2,6 +2,7 @@ package com.jackmeng.halcyon.connections.ploogin.discord;
 
 import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.tailwind.AudioInfo;
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
@@ -33,7 +34,7 @@ public class Discordo implements InfoViewUpdateListener {
             user -> Debugger.log("Connected to Discord user: " + user.username + "#" + user.discriminator))
         .build();
     DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
-    String b = STATE + title;
+    String b = STATE + TextParser.parseAsPure(title);
     rpc = new DiscordRichPresence.Builder(b)
         .setBigImage("logo", "Halcyon")
         .build();

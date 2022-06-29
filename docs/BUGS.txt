@@ -1,6 +1,6 @@
-{!URGENT!} [***] 26 "Liked Tracks with non ascii chars are not being stored correctly"
+[!FIXED!] {!URGENT!} [***] 26 "Liked Tracks with non ascii chars are not being stored correctly"
       Detailed description: Non ASCII chars are being replaced with "?"
-      Status: Fixing
+      Status: FIXED; all character encoding now handled by TextParser to UTF16 (not LE or BE)
       State: Experimental-Build ~ MP4J
 
 [***] #25 "Error handling for incorrect file type"
