@@ -21,6 +21,7 @@ import com.jackmeng.halcyon.app.tasks.PingFileView;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Program;
 
 import javax.swing.*;
 

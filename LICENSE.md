@@ -1,4 +1,38 @@
+This license documentation contains the following:
+1.pre-requisites
+2. GPL-2.0
+
+BEGIN PREREQUISITES
+
+This program requires that anyone redistributing this program under
+alterable changes must agree to the statements about alteration
+according the following GPL-2.0 license ALONG with the agreement
+to alter the program such that it states the following:
+
+1. Original Vendor Name: Jack Meng
+2. Your Name: ____
+3. Altered Vendor Locale: _____ (ex. New fix etc.)
+4. Version Pre-requisites: ____ (What you changed and what version this was targetted)
+5. Altered Vendor Agreement: y/n
+6. Version Information: ___ (Comments)
+
+This must be made visible in some form in the final program,
+either graphically or via CLI that must be able to shown either by
+user-intent or by automation.
+
+It is against this license to make an alteration such that the above
+information is not visible.
+
+If this pre-requisite is to be updated with other information, you, whom
+alters the original vendor must follow the latest statements and redistribute
+under the most updated statements.
+
+END PREREQUISITES
+
+FINALLY GPL2.0
+
                     GNU GENERAL PUBLIC LICENSE
+
                        Version 2, June 1991
 
  Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
@@ -59,7 +93,7 @@ modification follow.
                     GNU GENERAL PUBLIC LICENSE
    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
 
-  0. This License applies to any program or other work which contains
+  1. This License applies to any program or other work which contains
 a notice placed by the copyright holder saying it may be distributed
 under the terms of this General Public License.  The "Program", below,
 refers to any such program or work, and a "work based on the Program"

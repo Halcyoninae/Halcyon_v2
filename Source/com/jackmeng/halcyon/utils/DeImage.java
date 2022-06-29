@@ -20,6 +20,10 @@ import de.ralleytn.simple.image.SimpleImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.constant.ProgramResourceManager;
+
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -60,7 +64,6 @@ public final class DeImage {
   public static BufferedImage imagetoBI(Image image) {
     BufferedImage bi = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
     Graphics2D big = bi.createGraphics();
-    big.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     big.drawImage(image, 0, 0, null);
     big.dispose();
     return bi;
@@ -202,7 +205,6 @@ public final class DeImage {
     Graphics2D g = rounded.createGraphics();
     g.setColor(color);
     g.setStroke(new BasicStroke(thickness));
-    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
     g.draw(new RoundRectangle2D.Float(0, 0, r.getWidth(), r.getHeight(), arcV, arcH));
     g.drawImage(r, 0, 0, null);
@@ -233,8 +235,6 @@ public final class DeImage {
     BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
     Graphics2D g2d = dimg.createGraphics();
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     g2d.drawImage(tmp, 0, 0, null);
     g2d.dispose();
 
@@ -324,7 +324,7 @@ public final class DeImage {
    */
   public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
     Image img = image.getImage();
-    Image newimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    Image newimg = img.getScaledInstance(width, height, ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true") ? Image.SCALE_FAST : Image.SCALE_AREA_AVERAGING);
     return new ImageIcon(newimg);
   }
 }
