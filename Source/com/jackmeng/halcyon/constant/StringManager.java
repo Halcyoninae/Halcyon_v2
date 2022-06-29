@@ -25,5 +25,5 @@ package com.jackmeng.halcyon.constant;
  * @since 3.0
  */
 public interface StringManager {
-  public static final String JTREE_ROOT_NAME = "Your Playlist(s)";
+  final String JTREE_ROOT_NAME = "Your Playlist(s)";
 }
