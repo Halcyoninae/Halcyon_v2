@@ -1,10 +1,16 @@
-[***] #34 "Migration to new engine"
+[**] #35 "Drop targetting"
+        Detailed Description: When a file or folder is dragged over the program, detect
+        it and do whatever with it according to what type of file it is.
+        Category: Program Dynamic
+        Status: None
+
+[!IMPLEMENTED!] [***] #34 "Migration to new engine"
         Detailed Description: The current engine is made by somebody
         else and is very very inefficient at it's job. It is best to migrate
         to the following decoder library for MP3: https://github.com/delthas/JavaMP3
         and implement my own audio framework directly.
         Category: Potential Optimization
-        Status: Investigating
+        Status: IMPLEMENTED
 
 [*] #33 "Download some resources"
         Detailed Description: If needed, certain things should be downloaded
