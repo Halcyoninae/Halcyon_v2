@@ -145,7 +145,7 @@ public class ButtonControlTP extends JPanel
     volumeSlider = new JSlider(0, 100);
     volumeSlider.setForeground(ColorManager.MAIN_FG_THEME);
     volumeSlider.setBorder(null);
-    volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 3, 20));
+    volumeSlider.setPreferredSize(new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH / 4, 20));
     volumeSlider.setMinimumSize(volumeSlider.getPreferredSize());
     volumeSlider.addChangeListener(this);
     volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
@@ -197,7 +197,7 @@ public class ButtonControlTP extends JPanel
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
     progressSlider.addChangeListener(this);
-    Wrapper.async(() -> {
+    new Thread(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
           progressSlider
@@ -223,7 +223,7 @@ public class ButtonControlTP extends JPanel
           e.printStackTrace();
         }
       }
-    });
+    }).start();
 
     sliders.add(progressSlider);
     sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
@@ -268,6 +268,7 @@ public class ButtonControlTP extends JPanel
       hasPlayed = false;
     }
     progressSlider.setValue(0);
+    progressBar.setString("0:00 / 0:00");
   }
 
   @Override

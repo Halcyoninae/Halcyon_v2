@@ -15,6 +15,7 @@
 
 package com.jackmeng.tailwind;
 
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.tailwind.simple.FileFormat;
 
@@ -32,6 +33,26 @@ import java.util.concurrent.Executors;
  * This framework is licensed under the GPL-2.0 license. If you are to
  * incorporate this in your own program, you must follow the addendums
  * of the GPL-2.0 license.
+ *
+ * This engine is multi-use meaning it is much more efficient for you
+ * to have one instance of this class and use it throughout your program.
+ * Reuse of this player is done by closing and opening again.
+ *
+ * An opening call while it is already opened will cause the stream to close
+ * forcefully. It is suggested for the user to strongly check if the stream
+ * is open beforehand and handle it themselves accordingly, instead of
+ * letting {@link #open(File)} handle it itself.
+ *
+ * A good system to implement is a playlist feature where data is constantly
+ * fed into the player once the old stream ends. This can be done via
+ * listener and by handling the open and play functions accordingly.
+ *
+ * For different circumstances it should be noted that the usage
+ * of an opening buffer is not used and every thing is gathered from
+ * AudioFormat. This results in less overhead and less cpu usage.
+ *
+ * Implementation for different audio formats is provided by the
+ * AudioUtil class.
  *
  * @author Jack Meng
  * @since 3.1
@@ -59,7 +80,10 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   @Override
-  public synchronized void open(File url) {
+  public void open(File url) {
+    if (isOpen() || isPlaying()) {
+      close();
+    }
     try {
       this.resource = url;
       this.format = FileFormat.getFormatByName(this.resource.getName());
@@ -72,8 +96,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
       if (microsecondLength < 0) {
         frameLength = ais.getFrameLength();
-        microsecondLength = (long) (1000000 *
-            (frameLength / ais.getFormat().getFrameRate()));
+        microsecondLength = 1000000L * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
       }
 
       DataLine.Info info = new DataLine.Info(
@@ -90,80 +113,79 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
-  public long getMicrosecondLength() {
+  public synchronized long getMicrosecondLength() {
     return microsecondLength;
   }
 
-  public long getLength() {
-    return getMicrosecondLength() / 1000;
+  public synchronized long getLength() {
+    return microsecondLength / 1000;
   }
 
-  public boolean isPlaying() {
+  public synchronized boolean isPlaying() {
     return playing;
   }
 
-  public boolean isPaused() {
+  public synchronized boolean isPaused() {
     return paused;
   }
 
-  public boolean isOpen() {
+  public synchronized boolean isOpen() {
     return open;
   }
 
-  public long getFrameLength() {
+  public synchronized long getFrameLength() {
     return frameLength;
   }
 
-  public FileFormat getFileFormat() {
+  public synchronized FileFormat getFileFormat() {
     return format;
   }
 
   /**
    * @return The current source data line's position in microsecond
    */
-  public long getPositionMicro() {
+  public synchronized long getPositionMicro() {
     return line.getMicrosecondPosition();
   }
 
-  public long getPosition() {
-    return getPosition() / 1000L;
+  public synchronized long getPosition() {
+    return getPositionMicro() / 1000L;
   }
 
-  public long getLongFramePosition() {
+  public synchronized long getLongFramePosition() {
     return line.getLongFramePosition();
   }
 
-  public boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
+  public synchronized boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
     return events.addGenericUpdateListener(e);
   }
 
-  public boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
+  public synchronized boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
     return events.addStatusUpdateListener(e);
   }
 
-  public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
+  public synchronized boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
     return events.addTimeListener(e);
   }
 
   @Override
-  public synchronized void open(URL url) {
+  public void open(URL url) {
     this.open(new File(url.getFile()));
   }
 
   @Override
-  public synchronized void close() {
+  public void close() {
     if (open) {
       try {
         resetProperties();
         if (line != null) {
           line.flush();
           line.drain();
-          line = null;
+          line.close();
         }
 
         if (ais != null) {
           ais.close();
-          ais = null;
         }
         events.dispatchStatusEvent(TailwindStatus.CLOSED);
       } catch (Exception e) {
@@ -173,13 +195,14 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   @Override
-  public synchronized void play() {
+  public void play() {
     if (playing || paused) {
       stop();
     }
-    worker = Executors.newCachedThreadPool();
+    worker = Executors.newSingleThreadExecutor();
     worker.execute(this);
     playing = true;
+
     events.dispatchStatusEvent(TailwindStatus.PLAYING);
   }
 
@@ -190,25 +213,25 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   @Override
-  public synchronized void setGain(float percent) {
+  public void setGain(float percent) {
     FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
     control.setValue(percent < control.getMinimum() ? control.getMinimum()
         : (Math.min(percent, control.getMaximum())));
   }
 
   @Override
-  public synchronized void setBalance(float balance) {
+  public void setBalance(float balance) {
     FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
     bal.setValue(
         balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
   }
 
   @Override
-  public synchronized void setMute(boolean mute) {
+  public void setMute(boolean mute) {
   }
 
   @Override
-  public synchronized void resume() {
+  public void resume() {
     if (paused) {
       playing = true;
       paused = false;
@@ -221,19 +244,19 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   @Override
-  public synchronized void seek(long millis) {
+  public void seek(long millis) {
     setPosition(millis);
   }
 
   @Override
-  public void setPosition(long millis) {
+  public synchronized void setPosition(long millis) {
     if (open) {
       setFramePosition((long) (ais.getFormat().getFrameSize() / 1000F) * millis);
     }
   }
 
   @Override
-  public synchronized void pause() {
+  public void pause() {
     if (playing && !paused) {
       paused = true;
       playing = false;
@@ -242,7 +265,7 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   @Override
-  public synchronized void stop() {
+  public void stop() {
     playing = false;
     paused = false;
     setPosition(0);

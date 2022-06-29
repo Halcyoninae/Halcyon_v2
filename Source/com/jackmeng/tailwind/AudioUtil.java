@@ -30,8 +30,14 @@ public final class AudioUtil {
       if (target.equals(FileFormat.MP3)) {
         ais = AudioSystem.getAudioInputStream(locale);
         AudioFormat base = ais.getFormat();
-        AudioFormat decode = new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, base.getSampleRate(), 16,
-            base.getChannels(), base.getChannels() * 2, base.getSampleRate(), false);
+        AudioFormat decode = new AudioFormat(
+            AudioFormat.Encoding.PCM_SIGNED,
+            base.getSampleRate(),
+            16,
+            base.getChannels(),
+            base.getChannels() * 2,
+            base.getSampleRate(),
+            false);
         ais = AudioSystem.getAudioInputStream(decode, ais);
         return ais;
       } else if (target.equals(FileFormat.WAV)) {

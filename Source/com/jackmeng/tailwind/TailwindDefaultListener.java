@@ -15,7 +15,6 @@
 
 package com.jackmeng.tailwind;
 
-import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 public class TailwindDefaultListener implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
@@ -27,7 +26,6 @@ public class TailwindDefaultListener implements TailwindListener.StatusUpdateLis
 
   @Override
   public void statusUpdate(TailwindStatus status) {
-    Debugger.warn("[BigContainer] > " + status);
     if (status.equals(TailwindStatus.END)) {
       player.close();
     }
@@ -35,7 +33,6 @@ public class TailwindDefaultListener implements TailwindListener.StatusUpdateLis
 
   @Override
   public void genericUpdate(TailwindEvent event) {
-    Debugger.warn(event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
   }
 
 }

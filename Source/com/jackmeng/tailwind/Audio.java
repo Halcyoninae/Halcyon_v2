@@ -22,6 +22,14 @@ import java.net.URL;
  * An interface that provides implementation for
  * Audio creation to the BigContainer Player classes.
  *
+ * This interface template does not provide every single
+ * method that a player might need; thus, the programmer
+ * must implement their own styles and methods to be used along.
+ *
+ * An example of this implementation is TailwindPlayer
+ *
+ * @see com.jackmeng.tailwind.TailwindPlayer
+ *
  * @author Jack Meng
  * @since 3.1
  */

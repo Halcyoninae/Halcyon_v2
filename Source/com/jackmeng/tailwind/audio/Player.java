@@ -15,11 +15,8 @@
 
 package com.jackmeng.tailwind.audio;
 
-import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.tailwind.TailwindPlayer;
 
@@ -66,13 +63,7 @@ public class Player {
    * @param file The absolute file path leading to the audio track
    */
   public Player(String file) {
-    try {
-      audio = new TailwindPlayer();
-      this.f = new File(file);
-      currentAbsolutePath = file;
-    } catch (Exception e) {
-      Debugger.log(e);
-    }
+    this(new File(file));
   }
 
   /**
@@ -94,11 +85,7 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    try {
-      audio.open(f);
-    } catch (Exception e) {
-      Debugger.log(e);
-    }
+    audio.open(f);
     audio.play();
   }
 
@@ -144,11 +131,9 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
-    if (audio.isOpen() || audio.isPlaying()) {
-      audio.close();
-    }
     audio.open(new File(f));
     this.currentAbsolutePath = f;
+    this.f = new File(f);
   }
 
   public String getCurrentFile() {
@@ -159,7 +144,7 @@ public class Player {
     return audio;
   }
 
-  public synchronized String getStringedTime() {
+  public String getStringedTime() {
     return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
         + TimeParser.fromSeconds((int) audio.getLength() * 1000);
   }
