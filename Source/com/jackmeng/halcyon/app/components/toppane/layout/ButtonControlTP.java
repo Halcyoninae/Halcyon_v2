@@ -234,6 +234,10 @@ public class ButtonControlTP extends JPanel
       public void componentResized(ComponentEvent e) {
         progressSlider.setMaximum(getWidth() - 10);
         progressBar.setMaximum(progressSlider.getMaximum());
+        volumeSlider.setPreferredSize(new Dimension(getPreferredSize().width / 4, 20));
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35, getPreferredSize().height / 6));
+        buttons.revalidate();
+        volumeSlider.revalidate();
       }
     });
 
@@ -252,6 +256,7 @@ public class ButtonControlTP extends JPanel
   @Override
   public void infoView(AudioInfo info) {
     progressBar.setIndeterminate(false);
+    boolean wasPlaying = Global.player.getStream().isPlaying();
     if (aif != null
         && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
       Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
@@ -269,6 +274,9 @@ public class ButtonControlTP extends JPanel
     }
     progressSlider.setValue(0);
     progressBar.setString("0:00 / 0:00");
+    if (wasPlaying) {
+      Global.player.getStream().play();
+    }
   }
 
   @Override
@@ -279,7 +287,6 @@ public class ButtonControlTP extends JPanel
           if (!hasPlayed) {
             Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
             Global.player.play();
-            Debugger.unsafeLog(Global.player);
             hasPlayed = true;
           } else {
             Global.player.getStream().resume();
@@ -330,7 +337,9 @@ public class ButtonControlTP extends JPanel
        * }
        */
     } else if (e.getSource().equals(restartButton)) {
-      // TO BE IMPLEMENTED
+      Global.player.getStream().reset();
+      Global.player.play();
+      assertVolume();
     }
     loopButton.repaint();
     shuffleButton.repaint();

@@ -297,7 +297,7 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
-  private void reset() {
+  public void reset() {
     close();
     open(resource);
   }

@@ -78,6 +78,7 @@ public class FileList extends JScrollPane implements TabTree {
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setBorder(null);
 
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null) {
@@ -106,6 +107,7 @@ public class FileList extends JScrollPane implements TabTree {
     tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
+    getViewport().setBorder(null);
   }
 
   public FileList(FolderInfo info) {
@@ -137,7 +139,7 @@ public class FileList extends JScrollPane implements TabTree {
     tree.setScrollsOnExpand(true);
     tree.setAutoscrolls(true);
     tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-
+    setBorder(null);
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
     ImageIcon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
     ImageIcon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
@@ -150,6 +152,7 @@ public class FileList extends JScrollPane implements TabTree {
     tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
+    getViewport().setBorder(null);
   }
 
   /**

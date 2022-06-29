@@ -85,7 +85,6 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    audio.open(f);
     audio.play();
   }
 
@@ -142,6 +141,10 @@ public class Player {
 
   public TailwindPlayer getStream() {
     return audio;
+  }
+
+  public void absolutePlay() {
+    audio.play();
   }
 
   public String getStringedTime() {

@@ -30,6 +30,7 @@ public class LikeButton extends JButton implements ActionListener {
     this.like = like;
     this.noLike = noLike;
     addActionListener(this);
+    setToolTipText("Like/Unlike");
   }
 
   public void noLike() {

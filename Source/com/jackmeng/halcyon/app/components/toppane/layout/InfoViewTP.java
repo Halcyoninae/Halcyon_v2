@@ -275,7 +275,7 @@ public class InfoViewTP extends JPanel implements ComponentListener, PlaylistLis
         +
         "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
         info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
-        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 7.5px\">" +
+        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
         info.getTag(AudioInfo.KEY_BITRATE) +
         "kpbs," +
         info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
