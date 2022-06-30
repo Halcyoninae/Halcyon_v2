@@ -15,10 +15,10 @@
 
 package com.jackmeng.halcyon.constant;
 
-import com.jackmeng.halcyon.app.components.bottompane.BottomPane;
-import com.jackmeng.halcyon.app.components.bottompane.LikeList;
-import com.jackmeng.halcyon.app.components.toppane.layout.ButtonControlTP;
-import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP;
+import com.jackmeng.cosmos.components.bottompane.BottomPane;
+import com.jackmeng.cosmos.components.bottompane.LikeList;
+import com.jackmeng.cosmos.components.toppane.layout.ButtonControlTP;
+import com.jackmeng.cosmos.components.toppane.layout.InfoViewTP;
 import com.jackmeng.halcyon.connections.resource.ResourceDistributor;
 import com.jackmeng.tailwind.audio.Player;
 

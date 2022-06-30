@@ -13,10 +13,10 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc.buttons;
+package com.jackmeng.cosmos.components.bbloc.buttons;
 
-import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
-import com.jackmeng.halcyon.app.components.inheritable.SettingsPane;
+import com.jackmeng.cosmos.components.bbloc.BBlocButton;
+import com.jackmeng.cosmos.components.inheritable.SettingsPane;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;

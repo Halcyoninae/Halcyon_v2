@@ -69,4 +69,18 @@ public final class TailwindListener {
      */
     void genericUpdate(TailwindEvent event);
   }
+
+  /**
+   * A listener that dispatches information regarding
+   * the current buffer or frame.
+   *
+   * @author Jack Meng
+   * @since 3.1
+   */
+  public interface FrameBufferListener {
+    /**
+     * @param buffer A byte array representing the buffer at the current frame
+     */
+    void frameUpdate(byte[] buffer);
+  }
 }

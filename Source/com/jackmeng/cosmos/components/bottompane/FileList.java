@@ -13,10 +13,10 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bottompane;
+package com.jackmeng.cosmos.components.bottompane;
 
-import com.jackmeng.halcyon.app.events.FVRightClick;
-import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
+import com.jackmeng.cosmos.events.FVRightClick;
+import com.jackmeng.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
@@ -191,7 +191,7 @@ public class FileList extends JScrollPane implements TabTree {
    * 2. If a new file has been added, it will be added into the Tree
    *
    * The detection on if a folder exists or not is up to the parent
-   * BottomPane {@link com.jackmeng.halcyon.app.components.bottompane.BottomPane}.
+   * BottomPane {@link com.jackmeng.cosmos.components.bottompane.BottomPane}.
    */
   public void revalidateFiles() {
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {

@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components;
+package com.jackmeng.cosmos.components;
 
-import com.jackmeng.halcyon.app.events.InstantClose;
+import com.jackmeng.cosmos.events.InstantClose;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
@@ -31,8 +31,8 @@ import java.awt.*;
  * It performs no other tasks but to align the components together
  * in a top-to-bottom fashion.
  *
- * @see com.jackmeng.halcyon.app.components.bottompane.BottomPane
- * @see com.jackmeng.halcyon.app.components.toppane.TopPane
+ * @see com.jackmeng.cosmos.components.bottompane.BottomPane
+ * @see com.jackmeng.cosmos.components.toppane.TopPane
  *
  * @author Jack Meng
  * @since 3.0

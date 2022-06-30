@@ -1,4 +1,4 @@
-package com.jackmeng.halcyon.app.events;
+package com.jackmeng.cosmos.events;
 
 import com.jackmeng.halcyon.Halcyon;
 import com.jackmeng.halcyon.constant.Global;

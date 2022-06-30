@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.dialog;
+package com.jackmeng.cosmos.components.dialog;
 
-import com.jackmeng.halcyon.app.components.inheritable.FSVDefault;
+import com.jackmeng.cosmos.components.inheritable.FSVDefault;
 
 import javax.swing.*;
 

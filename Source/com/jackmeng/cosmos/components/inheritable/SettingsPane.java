@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.inheritable;
+package com.jackmeng.cosmos.components.inheritable;
 
 import javax.swing.*;
 

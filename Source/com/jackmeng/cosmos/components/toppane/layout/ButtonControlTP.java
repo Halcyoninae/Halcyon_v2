@@ -13,11 +13,11 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.toppane.layout;
+package com.jackmeng.cosmos.components.toppane.layout;
 
-import com.jackmeng.halcyon.app.components.inheritable.LikeButton;
-import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
-import com.jackmeng.halcyon.app.events.AlignSliderWithBar;
+import com.jackmeng.cosmos.components.inheritable.LikeButton;
+import com.jackmeng.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.jackmeng.cosmos.events.AlignSliderWithBar;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
@@ -42,7 +42,7 @@ import java.awt.event.ComponentEvent;
  * play, forward, volume.
  *
  * This component is located under the
- * {@link com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP}
+ * {@link com.jackmeng.cosmos.components.toppane.layout.InfoViewTP}
  * component.
  *
  * @author Jack Meng

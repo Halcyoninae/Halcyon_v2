@@ -28,7 +28,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.dialog;
+package com.jackmeng.cosmos.components.dialog;
 
 /**
  * Displays a window that calls for a confirmation

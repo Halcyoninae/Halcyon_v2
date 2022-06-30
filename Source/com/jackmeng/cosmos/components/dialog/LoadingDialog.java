@@ -1,4 +1,4 @@
-package com.jackmeng.halcyon.app.components.dialog;
+package com.jackmeng.cosmos.components.dialog;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;

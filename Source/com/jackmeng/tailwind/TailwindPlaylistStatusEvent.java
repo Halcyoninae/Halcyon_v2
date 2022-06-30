@@ -13,14 +13,8 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.cosmos.components.info;
+package com.jackmeng.tailwind;
 
-import javax.swing.*;
-
-public interface InformationTab {
-  String getName();
-
-  String getToolTip();
-
-  JComponent getComponent();
+public enum TailwindPlaylistStatusEvent {
+  SHUFFLING, NEXT, PREVIOUS, STARTED, FORCE_SET_FILE, STOPPED, EOL, LOOP;
 }

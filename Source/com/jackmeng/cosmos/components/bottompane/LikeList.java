@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bottompane;
+package com.jackmeng.cosmos.components.bottompane;
 
-import com.jackmeng.halcyon.app.events.FVRightClick.RightClickHideItemListener;
+import com.jackmeng.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.debug.Debugger;
@@ -44,7 +44,7 @@ import java.util.List;
  *
  * @author Jack Meng
  * @since 3.1
- * @see com.jackmeng.halcyon.app.components.bottompane.FileList
+ * @see com.jackmeng.cosmos.components.bottompane.FileList
  */
 public class LikeList extends FileList {
   private final transient VirtualFolder folder;

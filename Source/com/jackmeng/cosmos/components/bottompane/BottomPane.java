@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bottompane;
+package com.jackmeng.cosmos.components.bottompane;
 
-import com.jackmeng.halcyon.app.components.inheritable.TabButton;
+import com.jackmeng.cosmos.components.inheritable.TabButton;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.Wrapper;
@@ -149,7 +149,7 @@ public class BottomPane extends JTabbedPane {
    * FileLists and checks if every added folder exists
    * and all of it's sub-files.
    *
-   * @see com.jackmeng.halcyon.app.components.bottompane.FileList#revalidateFiles()
+   * @see com.jackmeng.cosmos.components.bottompane.FileList#revalidateFiles()
    */
   public synchronized void mastRevalidate() {
     List<Integer> needToRemove = new ArrayList<>();

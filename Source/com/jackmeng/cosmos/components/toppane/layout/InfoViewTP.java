@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.toppane.layout;
+package com.jackmeng.cosmos.components.toppane.layout;
 
 import com.jackmeng.halcyon.Halcyon;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
@@ -46,7 +46,7 @@ import java.util.ArrayList;
  *
  * If the user wants to know more about the audio file
  *
- * @see com.jackmeng.halcyon.app.components.dialog.AudioInfoDialog
+ * @see com.jackmeng.cosmos.components.dialog.AudioInfoDialog
  *
  * @author Jack Meng
  * @since 3.0

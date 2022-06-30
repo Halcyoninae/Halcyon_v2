@@ -17,8 +17,10 @@ package com.jackmeng.tailwind.audio;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.tailwind.TailwindPlayer;
+import com.jackmeng.tailwind.TailwindPlaylist;
 
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
@@ -42,6 +44,7 @@ import java.io.File;
  */
 public class Player {
   private TailwindPlayer audio;
+  private TailwindPlaylist playlist;
   private String currentAbsolutePath = "";
   private boolean isLooping = false, isPlayListShuffling = false;
   private File f;
@@ -76,6 +79,7 @@ public class Player {
       audio = new TailwindPlayer();
       this.f = f;
       currentAbsolutePath = f.getAbsolutePath();
+      playlist = new TailwindPlaylist(audio, new FolderInfo(f.getParent()));
     } catch (Exception e) {
       Debugger.log(e);
     }

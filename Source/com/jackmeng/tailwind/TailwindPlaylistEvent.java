@@ -13,14 +13,26 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.cosmos.components.info;
+package com.jackmeng.tailwind;
 
-import javax.swing.*;
+import java.io.File;
 
-public interface InformationTab {
-  String getName();
+import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
-  String getToolTip();
+public class TailwindPlaylistEvent {
+  private File currentTrack;
+  private TailwindStatus status;
 
-  JComponent getComponent();
+  public TailwindPlaylistEvent(File currentTrack, TailwindStatus status) {
+    this.currentTrack = currentTrack;
+    this.status = status;
+  }
+
+  public File getCurrentTrack() {
+    return currentTrack;
+  }
+
+  public TailwindStatus getStatus() {
+    return status;
+  }
 }

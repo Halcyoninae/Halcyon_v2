@@ -13,10 +13,10 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.toppane;
+package com.jackmeng.cosmos.components.toppane;
 
-import com.jackmeng.halcyon.app.components.toppane.layout.ButtonControlTP;
-import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP;
+import com.jackmeng.cosmos.components.toppane.layout.ButtonControlTP;
+import com.jackmeng.cosmos.components.toppane.layout.InfoViewTP;
 import com.jackmeng.halcyon.constant.Manager;
 
 import javax.swing.*;
@@ -30,9 +30,9 @@ import java.awt.*;
  *
  * This pane is very plain and only serving to align the components together
  *
- * @see com.jackmeng.halcyon.app.components.toppane.layout.ButtonControlTP
- * @see com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP
- * @see com.jackmeng.halcyon.app.components.bottompane.BottomPane
+ * @see com.jackmeng.cosmos.components.toppane.layout.ButtonControlTP
+ * @see com.jackmeng.cosmos.components.toppane.layout.InfoViewTP
+ * @see com.jackmeng.cosmos.components.bottompane.BottomPane
  *
  * @author Jack Meng
  * @since 3.0

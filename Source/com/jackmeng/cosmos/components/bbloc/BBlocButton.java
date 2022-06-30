@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc;
+package com.jackmeng.cosmos.components.bbloc;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

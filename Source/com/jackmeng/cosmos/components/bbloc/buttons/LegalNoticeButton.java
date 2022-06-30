@@ -13,10 +13,10 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc.buttons;
+package com.jackmeng.cosmos.components.bbloc.buttons;
 
-import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
-import com.jackmeng.halcyon.app.components.info.InformationDialog;
+import com.jackmeng.cosmos.components.bbloc.BBlocButton;
+import com.jackmeng.cosmos.components.info.InformationDialog;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
@@ -26,7 +26,7 @@ import java.awt.event.ActionEvent;
 
 /**
  * A button that when pressed launches
- * {@link com.jackmeng.halcyon.app.components.info.InformationDialog} which displays
+ * {@link com.jackmeng.cosmos.components.info.InformationDialog} which displays
  * information regarding legal documentation for all libraries and this program.
  *
  * @author Jack Meng

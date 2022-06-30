@@ -20,6 +20,7 @@ import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * A global scoped targeted towards managing multiple
@@ -33,11 +34,13 @@ public class TailwindEventManager {
   private List<TailwindListener.TimeUpdateListener> timeListeners;
   private List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
   private List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
+  private List<TailwindListener.FrameBufferListener> bufferListeners;
 
   public TailwindEventManager() {
     timeListeners = new ArrayList<>();
     statusUpdateListeners = new ArrayList<>();
     genericUpdateListeners = new ArrayList<>();
+    bufferListeners = new Vector<>();
   }
 
   public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
@@ -50,6 +53,26 @@ public class TailwindEventManager {
 
   public boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
     return genericUpdateListeners.add(e);
+  }
+
+  public boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
+    return bufferListeners.add(e);
+  }
+
+  public List<TailwindListener.TimeUpdateListener> getTimeListeners() {
+    return timeListeners;
+  }
+
+  public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
+    return statusUpdateListeners;
+  }
+
+  public List<TailwindListener.GenericUpdateListener> getGenericUpdateListeners() {
+    return genericUpdateListeners;
+  }
+
+  public List<TailwindListener.FrameBufferListener> getFrameBufferListeners() {
+    return bufferListeners;
   }
 
   public synchronized void dispatchTimeEvent(long time) {
@@ -76,7 +99,16 @@ public class TailwindEventManager {
         e.genericUpdate(event);
       }
     });
+  }
 
+  public synchronized void dispatchNewBufferEvent(byte[] buffer) {
+    Wrapper.threadedRun(() -> {
+      synchronized (bufferListeners) {
+        for (TailwindListener.FrameBufferListener e : bufferListeners) {
+          e.frameUpdate(buffer);
+        }
+      }
+    });
   }
 
 }

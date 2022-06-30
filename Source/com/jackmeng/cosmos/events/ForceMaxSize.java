@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.events;
+package com.jackmeng.cosmos.events;
 
 import javax.swing.*;
 import java.awt.event.ComponentEvent;

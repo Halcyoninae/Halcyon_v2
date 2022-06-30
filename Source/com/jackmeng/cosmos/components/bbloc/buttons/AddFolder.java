@@ -13,12 +13,12 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.bbloc.buttons;
+package com.jackmeng.cosmos.components.bbloc.buttons;
 
-import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
-import com.jackmeng.halcyon.app.components.dialog.ConfirmWindow;
-import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders;
-import com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders.FolderSelectedListener;
+import com.jackmeng.cosmos.components.bbloc.BBlocButton;
+import com.jackmeng.cosmos.components.dialog.ConfirmWindow;
+import com.jackmeng.cosmos.components.dialog.SelectApplicableFolders;
+import com.jackmeng.cosmos.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
@@ -32,12 +32,12 @@ import java.io.File;
 /**
  * A BBloc button that handles when a user selects
  * a folder from the
- * {@link com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders} instance.
+ * {@link com.jackmeng.cosmos.components.dialog.SelectApplicableFolders} instance.
  *
  *
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.halcyon.app.components.dialog.SelectApplicableFolders
+ * @see com.jackmeng.cosmos.components.dialog.SelectApplicableFolders
  */
 public class AddFolder extends JButton implements BBlocButton {
   public AddFolder() {

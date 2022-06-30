@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.components.info.layout;
+package com.jackmeng.cosmos.components.info.layout;
 
-import com.jackmeng.halcyon.app.components.info.InformationTab;
+import com.jackmeng.cosmos.components.info.InformationTab;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Manager;
 

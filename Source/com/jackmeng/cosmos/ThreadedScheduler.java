@@ -13,11 +13,11 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app;
+package com.jackmeng.cosmos;
 
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
-import com.jackmeng.halcyon.app.tasks.DefunctOptimizer;
-import com.jackmeng.halcyon.app.tasks.PingFileView;
+import com.jackmeng.cosmos.tasks.DefunctOptimizer;
+import com.jackmeng.cosmos.tasks.PingFileView;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;

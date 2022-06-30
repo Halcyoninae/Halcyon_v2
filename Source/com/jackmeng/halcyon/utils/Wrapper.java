@@ -66,4 +66,9 @@ public final class Wrapper {
       ResourceFolder.dispatchLog(e);
     }
   }
+
+  public static void threadedRun(Runnable run) {
+    ExecutorService es = Executors.newWorkStealingPool();
+    es.submit(run);
+  }
 }

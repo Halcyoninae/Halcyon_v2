@@ -13,11 +13,11 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.events;
+package com.jackmeng.cosmos.events;
 
-import com.jackmeng.halcyon.app.components.bottompane.TabTree;
-import com.jackmeng.halcyon.app.components.dialog.AudioInfoDialog;
-import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
+import com.jackmeng.cosmos.components.bottompane.TabTree;
+import com.jackmeng.cosmos.components.dialog.AudioInfoDialog;
+import com.jackmeng.cosmos.components.dialog.ErrorWindow;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.constant.StringManager;

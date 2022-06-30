@@ -69,7 +69,7 @@ to view the documentation via the prettified way.
 
 The most common naming for class files and classes in general is with endings of "-Manager". These class files contain runtime constants, that either can be modified or are constants. Changing these constants are like changing the properties file for the program. Furthermore, these properties and values are not commented (bc I don't have time) and you should proceed with caution when changing a value.
 
-In all subclasses for the GUI part of the program, all packages will have either an interface named after the package or a class that designates the usage of the package. For example, package `com.jackmeng.halcyon.app.components.bottompane` has a container class called `BottomPane` which signifies it is the main entry point into that package. To put it simply, an entry point class is the only thing that is imported during runtime. The Entry Point class handles everything else that is part of the same package. (IDK)
+In all subclasses for the GUI part of the program, all packages will have either an interface named after the package or a class that designates the usage of the package. For example, package `com.jackmeng.cosmos.components.bottompane` has a container class called `BottomPane` which signifies it is the main entry point into that package. To put it simply, an entry point class is the only thing that is imported during runtime. The Entry Point class handles everything else that is part of the same package. (IDK)
 
 ## Contributing
 

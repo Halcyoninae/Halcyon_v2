@@ -13,10 +13,10 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.tasks;
+package com.jackmeng.cosmos.tasks;
 
 
-import com.jackmeng.halcyon.app.components.bottompane.BottomPane;
+import com.jackmeng.cosmos.components.bottompane.BottomPane;
 
 /**
  * A class designed to constantly ping
@@ -33,7 +33,7 @@ public final class PingFileView implements Runnable {
   /**
    * Calls the default BottomPane Object
    * @param bp the bottompane instance
-   * @see com.jackmeng.halcyon.app.components.bottompane.BottomPane
+   * @see com.jackmeng.cosmos.components.bottompane.BottomPane
    */
   public PingFileView(BottomPane bp) {
     this.bp = bp;

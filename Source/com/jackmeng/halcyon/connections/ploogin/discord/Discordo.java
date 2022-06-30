@@ -1,6 +1,6 @@
 package com.jackmeng.halcyon.connections.ploogin.discord;
 
-import com.jackmeng.halcyon.app.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.jackmeng.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.tailwind.AudioInfo;

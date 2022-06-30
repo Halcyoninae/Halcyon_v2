@@ -15,13 +15,13 @@
 
 package com.jackmeng.halcyon;
 
-import com.jackmeng.halcyon.app.ThreadedScheduler;
-import com.jackmeng.halcyon.app.components.bbloc.BBlocButton;
-import com.jackmeng.halcyon.app.components.bbloc.BBlocView;
-import com.jackmeng.halcyon.app.components.bbloc.buttons.*;
-import com.jackmeng.halcyon.app.components.dialog.ErrorWindow;
-import com.jackmeng.halcyon.app.components.dialog.LoadingDialog;
-import com.jackmeng.halcyon.app.components.toppane.TopPane;
+import com.jackmeng.cosmos.ThreadedScheduler;
+import com.jackmeng.cosmos.components.bbloc.BBlocButton;
+import com.jackmeng.cosmos.components.bbloc.BBlocView;
+import com.jackmeng.cosmos.components.bbloc.buttons.*;
+import com.jackmeng.cosmos.components.dialog.ErrorWindow;
+import com.jackmeng.cosmos.components.dialog.LoadingDialog;
+import com.jackmeng.cosmos.components.toppane.TopPane;
 import com.jackmeng.halcyon.connections.ploogin.discord.Discordo;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
@@ -95,7 +95,7 @@ public class Halcyon {
    * This is the only instance of a variable
    * being placed here.
    */
-  public static com.jackmeng.halcyon.app.components.BigContainer bgt;
+  public static com.jackmeng.cosmos.components.BigContainer bgt;
 
   /**
    * No arguments are taken from the entry point
@@ -148,7 +148,7 @@ public class Halcyon {
         bottom.add(Global.bp);
 
         JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-        bgt = new com.jackmeng.halcyon.app.components.BigContainer(m);
+        bgt = new com.jackmeng.cosmos.components.BigContainer(m);
         Global.bp.pokeewFileList(Global.ll);
 
         FolderInfo[] fi = Program.fetchSavedPlayLists();

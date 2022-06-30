@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.app.tasks;
+package com.jackmeng.cosmos.tasks;
 
 /**
  * This interface manages any constraints for
