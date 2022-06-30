@@ -37,6 +37,24 @@ different runtimes, but for my own side I used Corretto-16-JDK, if you feel like
 
 This program uses a questionable framework that I made / based on. Currently, it is in the stage of optimizations. 
 
+The audio buffer is constantly read (AKA streamed) and then written to a data line. This process is all asynchronous, 
+with synchronization methods provided to certain methods. A streamed method allows this player to not have to waste
+overhead and memory loading everything into memory and then reading.
+
+Synchronization is only provided for getter methods requiring specific resources from the stream. 
+
+Playlist feature or continuous playing feature must be implemented by the user as a subset of the Tailwind player
+or the pre-implemented PlayList class.
+
+The quality of the reading speed is on par; however, the quality may substantially drop when the gain is increased
+to the max or substantially.
+
+The Tailwind Player class is a subset of Audio's interface and contains esoteric methods that must be called directed
+as a Tailwind player instead of an explicit Audio.
+
+Modification of the audio during runtime either intentional or unintentional, wanted or unwanted as per the license is handled by the user. The user in turn
+may file a bug report for this modification or a pull request to fix the issue directly.
+
 ## Current
 
 Currently this program is still in development and is not yet ready for consumer usage,
