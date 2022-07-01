@@ -14,7 +14,7 @@ playing needs.
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
 
 ### Version Info
-This README is updated for the version: 3.1 [For the program]<br>
+This README is updated for the version: 3.2 [For the program]<br>
 This README's constant version is 3.0 [For the iteration]
 
 This program currently has a lot of features yet to be implemented. And with these new additions also bring a lot of new bugs that needs
@@ -61,6 +61,8 @@ Currently this program is still in development and is not yet ready for consumer
 with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEATURES](docs/FEATURES.txt)).
 
 However, improvements upon it's backend audio framework will be needed in order to introduce newer features to the program.
+
+Optimization wise, the program with the forced optimization feature on uses at most 40mb of memory during audio playback; however, if the forced audio playback feature is turned off, memory consumption can be much higher (<150mb).
 
 ## Reading Source Code
 
