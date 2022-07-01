@@ -179,10 +179,6 @@ public class ButtonControlTP extends JPanel
     progressBar.setStringPainted(true);
     progressBar.setString("0:00 / 0:00");
     progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
-    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
-      progressBar.setIndeterminate(true);
-    }
-
     progressBar.setForeground(ColorManager.MAIN_FG_THEME);
     progressBar.setBorder(null);
     progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);

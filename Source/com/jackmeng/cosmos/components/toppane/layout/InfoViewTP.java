@@ -93,49 +93,50 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
       @Override
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        float compositeAlpha = 0.5f;
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+          Graphics2D g2d = (Graphics2D) g;
+          float compositeAlpha = 0.5f;
 
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
-          compositeAlpha = 0.2f;
-        } else {
-          compositeAlpha = 0.6f;
-        }
-        g2d.setComposite(
-            AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER,
-                compositeAlpha));
-
-        BufferedImage original = Global.ifp.getInfo().getArtwork();
-        if (original.getWidth() > backPanel.getWidth()
-            || original.getHeight() > backPanel.getHeight()) {
-          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
-              backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
-        }
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
-          original = DeImage.grayScale(original);
-        }
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
-          original = DeImage.createGradientVertical(original, 255, 0);
-          switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm
-              .get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
-            case "focused":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
-              break;
-            case "left":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
-              break;
-            case "right":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
-              break;
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+            compositeAlpha = 0.2f;
+          } else {
+            compositeAlpha = 0.6f;
           }
-        }
-        g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
-            (backPanel.getSize().height - original.getHeight()) / 2, this);
+          g2d.setComposite(
+              AlphaComposite.getInstance(
+                  AlphaComposite.SRC_OVER,
+                  compositeAlpha));
 
+          BufferedImage original = Global.ifp.getInfo().getArtwork();
+          if (original.getWidth() > backPanel.getWidth()
+              || original.getHeight() > backPanel.getHeight()) {
+            original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
+                backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
+          }
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+            original = DeImage.grayScale(original);
+          }
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+            original = DeImage.createGradientVertical(original, 255, 0);
+            switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm
+                .get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+              case "focused":
+                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
+                break;
+              case "left":
+                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
+                break;
+              case "right":
+                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
+                break;
+            }
+          }
+          g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
+              (backPanel.getSize().height - original.getHeight()) / 2, this);
+        }
       }
     };
     backPanel.setPreferredSize(
@@ -225,9 +226,7 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
         artWork.setIcon(new ImageIcon(bi));
         backPanel.repaint();
       }
-      artWork.setToolTipText(coverIMGToolTip(info));
       infoDisplay.revalidate();
-      revalidate();
       dispatchEvents();
     }
   }
@@ -291,32 +290,6 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
             Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
         +
         "</span></p></body></html>");
-  }
-
-  /**
-   * This internal method handles converting the given track's
-   * artwork into the tooltip information.
-   *
-   * This tooltip information attached to the artwork label
-   * will display the following information:
-   * <ul>
-   * <li>Artwork (RAW)</li>
-   * <li>WIDTH x HEIGHT</li>
-   * </ul>
-   *
-   * Note: this method caches the result into this program's
-   * default external folder.
-   *
-   * @param info The audio track to base off of
-   * @return An HTML string that formats the necessary information for the
-   *         tooltip.
-   */
-  private static String coverIMGToolTip(AudioInfo info) {
-    return ("<html><body><img src=\"" +
-        info.getArtwork().getWidth() +
-        "x" +
-        info.getArtwork().getHeight() +
-        "</p></body></html>");
   }
 
   public AudioInfo getInfo() {

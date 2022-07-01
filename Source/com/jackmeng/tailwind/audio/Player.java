@@ -17,10 +17,8 @@ package com.jackmeng.tailwind.audio;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.utils.FolderInfo;
 import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.tailwind.TailwindPlayer;
-import com.jackmeng.tailwind.TailwindPlaylist;
 
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
@@ -44,7 +42,6 @@ import java.io.File;
  */
 public class Player {
   private TailwindPlayer audio;
-  private TailwindPlaylist playlist;
   private String currentAbsolutePath = "";
   private boolean isLooping = false, isPlayListShuffling = false;
   private File f;
@@ -79,8 +76,6 @@ public class Player {
       audio = new TailwindPlayer();
       this.f = f;
       currentAbsolutePath = f.getAbsolutePath();
-      playlist = new TailwindPlaylist(audio, new FolderInfo(f.getParent()));
-      playlist.setCurrentTrack(f);
     } catch (Exception e) {
       Debugger.log(e);
     }
@@ -90,11 +85,40 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    playlist.start();
+    audio.play();
+  }
+
+  /**
+   * This method should not be used!!
+   *
+   * {@link #play()} handles opening the stream before playing
+   */
+  public void open() {
+    try {
+      audio.open(f);
+    } catch (Exception e) {
+      Debugger.log(e);
+    }
+  }
+
+  public void setLooping(boolean b) {
+    isLooping = b;
   }
 
   public void setVolume(float percent) {
-    playlist.getPlayer().setGain(percent);
+    audio.setGain(percent);
+  }
+
+  public boolean isLooping() {
+    return isLooping;
+  }
+
+  public void setShuffling(boolean b) {
+    isPlayListShuffling = b;
+  }
+
+  public boolean isShuffling() {
+    return isPlayListShuffling;
   }
 
   /**
@@ -106,7 +130,7 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
-    playlist.renewPlaylist(new FolderInfo(new File(f).getParent()));
+    audio.open(new File(f));
     this.currentAbsolutePath = f;
     this.f = new File(f);
   }
@@ -120,16 +144,16 @@ public class Player {
   }
 
   public void absolutePlay() {
-    playlist.start();
+    audio.play();
   }
 
   public String getStringedTime() {
-    return TimeParser.fromSeconds((int) playlist.getPlayer().getPosition() * 1000) + " / "
-        + TimeParser.fromSeconds((int) playlist.getPlayer().getLength() * 1000);
+    return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
+        + TimeParser.fromSeconds((int) audio.getLength() * 1000);
   }
 
   public Control getControl(String key) {
-    return playlist.getPlayer().getControls().get(key);
+    return audio.getControls().get(key);
   }
 
   public float convertVolume(float zeroToHundred) {
@@ -145,6 +169,6 @@ public class Player {
   }
 
   public String toString() {
-    return "isOpen: " + playlist.getPlayer().isOpen() + "\nisPlaying" + playlist.getPlayer().isPlaying() + "\nisPaused" + playlist.getPlayer().isPaused();
+    return "isOpen: " + audio.isOpen() + "\nisPlaying" + audio.isPlaying() + "\nisPaused" + audio.isPaused();
   }
 }

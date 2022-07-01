@@ -40,7 +40,7 @@ public class DefunctOptimizer implements Runnable {
         while (true) {
           Runtime.getRuntime().gc();
           try {
-            Thread.sleep(4000);
+            Thread.sleep(1000);
           } catch (InterruptedException e) {
             e.printStackTrace();
           }

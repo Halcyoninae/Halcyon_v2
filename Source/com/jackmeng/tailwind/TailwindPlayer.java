@@ -74,11 +74,8 @@ public class TailwindPlayer implements Audio, Runnable {
   public TailwindPlayer() {
     events = new TailwindEventManager();
     TailwindDefaultListener tdfl = new TailwindDefaultListener(this);
-    TailwindListenerCLI cli = new TailwindListenerCLI();
     events.addStatusUpdateListener(tdfl);
     events.addGenericUpdateListener(tdfl);
-    events.addStatusUpdateListener(cli);
-    events.addGenericUpdateListener(cli);
   }
 
   @Override
@@ -168,10 +165,6 @@ public class TailwindPlayer implements Audio, Runnable {
 
   public synchronized boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
     return events.addTimeListener(e);
-  }
-
-  public synchronized boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
-    return events.addFrameBufferListener(e);
   }
 
   @Override
@@ -344,10 +337,8 @@ public class TailwindPlayer implements Audio, Runnable {
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
-            while (playing && !paused && (i = ais.read(buffer)) > -1) {
+            while (playing && !paused && (i = ais.read(buffer)) > -1)
               line.write(buffer, 0, i);
-              events.dispatchNewBufferEvent(buffer);
-            }
             if (!paused) {
               reset();
               playing = false;
