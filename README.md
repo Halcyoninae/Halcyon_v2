@@ -14,7 +14,7 @@ playing needs.
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
 
 ### Version Info
-This README is updated for the version: 3.1 [For the program]<br>
+This README is updated for the version: 3.2 [For the program]<br>
 This README's constant version is 3.0 [For the iteration]
 
 This program currently has a lot of features yet to be implemented. And with these new additions also bring a lot of new bugs that needs
