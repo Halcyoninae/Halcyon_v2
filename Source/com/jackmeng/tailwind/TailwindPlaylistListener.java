@@ -16,11 +16,11 @@
 package com.jackmeng.tailwind;
 
 public final class TailwindPlaylistListener {
-  public interface TailwindPlayListUpdateListener {
+  public interface TailwindPlaylistUpdateEvent {
     void playListUpdate(TailwindPlaylistEvent event);
   }
 
   public interface TailwindPlaylistStatusListener {
-    void playListStatusUpdate(TailwindPlaylistStatusListener status);
+    void playListStatusUpdate(TailwindPlaylistStatusEvent status);
   }
 }

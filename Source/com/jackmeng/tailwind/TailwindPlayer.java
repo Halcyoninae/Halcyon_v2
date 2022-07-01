@@ -74,8 +74,11 @@ public class TailwindPlayer implements Audio, Runnable {
   public TailwindPlayer() {
     events = new TailwindEventManager();
     TailwindDefaultListener tdfl = new TailwindDefaultListener(this);
+    TailwindListenerCLI cli = new TailwindListenerCLI();
     events.addStatusUpdateListener(tdfl);
     events.addGenericUpdateListener(tdfl);
+    events.addStatusUpdateListener(cli);
+    events.addGenericUpdateListener(cli);
   }
 
   @Override

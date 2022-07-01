@@ -23,9 +23,12 @@ import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.TimeParser;
-import com.jackmeng.test.PlaylistEvent;
-import com.jackmeng.test.PlaylistListener;
+
+import com.jackmeng.tailwind.TailwindListener;
+
 import com.jackmeng.tailwind.AudioInfo;
+import com.jackmeng.tailwind.TailwindEvent;
+
 import de.ralleytn.simple.image.SimpleImage;
 
 import javax.swing.*;
@@ -51,7 +54,7 @@ import java.util.ArrayList;
  * @author Jack Meng
  * @since 3.0
  */
-public class InfoViewTP extends JPanel implements ComponentListener, PlaylistListener {
+public class InfoViewTP extends JPanel implements ComponentListener, TailwindListener.GenericUpdateListener {
 
   /**
    * An extended listener for any classes that want
@@ -114,15 +117,19 @@ public class InfoViewTP extends JPanel implements ComponentListener, PlaylistLis
         }
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
           original = DeImage.createGradientVertical(original, 255, 0);
-          switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm.get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+          switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm
+              .get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
             case "focused":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
               break;
             case "left":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
               break;
             case "right":
-              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0, com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
               break;
           }
         }
@@ -337,7 +344,7 @@ public class InfoViewTP extends JPanel implements ComponentListener, PlaylistLis
   }
 
   @Override
-  public void update(PlaylistEvent event) {
-    setAssets(new File(event.getAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
+  public void genericUpdate(TailwindEvent event) {
+    setAssets(new File(event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
   }
 }

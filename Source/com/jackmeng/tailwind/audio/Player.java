@@ -80,6 +80,7 @@ public class Player {
       this.f = f;
       currentAbsolutePath = f.getAbsolutePath();
       playlist = new TailwindPlaylist(audio, new FolderInfo(f.getParent()));
+      playlist.setCurrentTrack(f);
     } catch (Exception e) {
       Debugger.log(e);
     }
@@ -89,40 +90,11 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    audio.play();
-  }
-
-  /**
-   * This method should not be used!!
-   *
-   * {@link #play()} handles opening the stream before playing
-   */
-  public void open() {
-    try {
-      audio.open(f);
-    } catch (Exception e) {
-      Debugger.log(e);
-    }
-  }
-
-  public void setLooping(boolean b) {
-    isLooping = b;
+    playlist.start();
   }
 
   public void setVolume(float percent) {
-    audio.setGain(percent);
-  }
-
-  public boolean isLooping() {
-    return isLooping;
-  }
-
-  public void setShuffling(boolean b) {
-    isPlayListShuffling = b;
-  }
-
-  public boolean isShuffling() {
-    return isPlayListShuffling;
+    playlist.getPlayer().setGain(percent);
   }
 
   /**
@@ -134,7 +106,7 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
-    audio.open(new File(f));
+    playlist.renewPlaylist(new FolderInfo(new File(f).getParent()));
     this.currentAbsolutePath = f;
     this.f = new File(f);
   }
@@ -148,16 +120,16 @@ public class Player {
   }
 
   public void absolutePlay() {
-    audio.play();
+    playlist.start();
   }
 
   public String getStringedTime() {
-    return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
-        + TimeParser.fromSeconds((int) audio.getLength() * 1000);
+    return TimeParser.fromSeconds((int) playlist.getPlayer().getPosition() * 1000) + " / "
+        + TimeParser.fromSeconds((int) playlist.getPlayer().getLength() * 1000);
   }
 
   public Control getControl(String key) {
-    return audio.getControls().get(key);
+    return playlist.getPlayer().getControls().get(key);
   }
 
   public float convertVolume(float zeroToHundred) {
@@ -173,6 +145,6 @@ public class Player {
   }
 
   public String toString() {
-    return "isOpen: " + audio.isOpen() + "\nisPlaying" + audio.isPlaying() + "\nisPaused" + audio.isPaused();
+    return "isOpen: " + playlist.getPlayer().isOpen() + "\nisPlaying" + playlist.getPlayer().isPlaying() + "\nisPaused" + playlist.getPlayer().isPaused();
   }
 }

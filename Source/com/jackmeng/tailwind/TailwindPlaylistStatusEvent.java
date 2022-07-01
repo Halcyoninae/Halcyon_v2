@@ -16,5 +16,5 @@
 package com.jackmeng.tailwind;
 
 public enum TailwindPlaylistStatusEvent {
-  SHUFFLING, NEXT, PREVIOUS, STARTED, FORCE_SET_FILE, STOPPED, EOL, LOOP;
+  SHUFFLING, NEXT, PREVIOUS, STARTED, FORCE_SET_FILE, STOPPED, EOL, LOOP, ARMED;
 }

@@ -21,18 +21,12 @@ import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 public class TailwindPlaylistEvent {
   private File currentTrack;
-  private TailwindStatus status;
 
-  public TailwindPlaylistEvent(File currentTrack, TailwindStatus status) {
+  public TailwindPlaylistEvent(File currentTrack) {
     this.currentTrack = currentTrack;
-    this.status = status;
   }
 
   public File getCurrentTrack() {
     return currentTrack;
-  }
-
-  public TailwindStatus getStatus() {
-    return status;
   }
 }
