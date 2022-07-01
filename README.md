@@ -62,6 +62,8 @@ with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEA
 
 However, improvements upon it's backend audio framework will be needed in order to introduce newer features to the program.
 
+Optimization wise, the program with the forced optimization feature on uses at most 40mb of memory during audio playback; however, if the forced audio playback feature is turned off, memory consumption can be much higher (<150mb).
+
 ## Reading Source Code
 
 Many of the Java Class Files contain JavaDoc comments; however, there are no pre-generated JavaDoc and you must generate them by yourself if you are planning
