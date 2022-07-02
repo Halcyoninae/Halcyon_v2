@@ -47,11 +47,19 @@ public class RefreshFileView extends JButton implements BBlocButton {
     addActionListener(this);
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getComponent() {
     return this;
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     Global.bp.mastRevalidate();

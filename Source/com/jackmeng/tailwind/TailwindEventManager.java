@@ -43,38 +43,78 @@ public class TailwindEventManager {
     bufferListeners = new Vector<>();
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
     return timeListeners.add(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
     return statusUpdateListeners.add(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
     return genericUpdateListeners.add(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
     return bufferListeners.add(e);
   }
 
+
+  /**
+   * @return List<TimeUpdateListener>
+   */
   public List<TailwindListener.TimeUpdateListener> getTimeListeners() {
     return timeListeners;
   }
 
+
+  /**
+   * @return List<StatusUpdateListener>
+   */
   public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
     return statusUpdateListeners;
   }
 
+
+  /**
+   * @return List<GenericUpdateListener>
+   */
   public List<TailwindListener.GenericUpdateListener> getGenericUpdateListeners() {
     return genericUpdateListeners;
   }
 
+
+  /**
+   * @return List<FrameBufferListener>
+   */
   public List<TailwindListener.FrameBufferListener> getFrameBufferListeners() {
     return bufferListeners;
   }
 
+
+  /**
+   * @param time
+   */
   public synchronized void dispatchTimeEvent(long time) {
     Wrapper.async(() -> {
       for (TailwindListener.TimeUpdateListener e : timeListeners) {
@@ -84,6 +124,10 @@ public class TailwindEventManager {
 
   }
 
+
+  /**
+   * @param status
+   */
   public synchronized void dispatchStatusEvent(TailwindStatus status) {
     Wrapper.async(() -> {
       for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
@@ -93,6 +137,10 @@ public class TailwindEventManager {
 
   }
 
+
+  /**
+   * @param event
+   */
   public synchronized void dispatchGenericEvent(TailwindEvent event) {
     Wrapper.async(() -> {
       for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
@@ -101,6 +149,10 @@ public class TailwindEventManager {
     });
   }
 
+
+  /**
+   * @param buffer
+   */
   public synchronized void dispatchNewBufferEvent(byte[] buffer) {
     Wrapper.threadedRun(() -> {
       synchronized (bufferListeners) {

@@ -46,6 +46,10 @@ public final class Wrapper {
     }
   }
 
+
+  /**
+   * @param runnable
+   */
   public static void asyncSwingUtil(Runnable runnable) {
     SwingUtilities.invokeLater(runnable);
   }
@@ -67,6 +71,10 @@ public final class Wrapper {
     }
   }
 
+
+  /**
+   * @param run
+   */
   public static void threadedRun(Runnable run) {
     ExecutorService es = Executors.newWorkStealingPool();
     es.submit(run);

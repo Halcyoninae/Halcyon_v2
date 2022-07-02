@@ -110,6 +110,10 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     getContentPane().add(container);
   }
 
+
+  /**
+   * @param status
+   */
   private void dispatchConfirmationEvents(boolean status) {
     for (ConfirmationListener listener : listeners) {
       listener.onStatus(status);
@@ -123,6 +127,10 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     setVisible(true);
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     dispatchConfirmationEvents(e.getSource().equals(confirm));

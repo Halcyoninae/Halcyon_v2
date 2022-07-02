@@ -24,6 +24,10 @@ public class TailwindDefaultListener implements TailwindListener.StatusUpdateLis
     this.player = player;
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if (status.equals(TailwindStatus.END)) {
@@ -31,6 +35,10 @@ public class TailwindDefaultListener implements TailwindListener.StatusUpdateLis
     }
   }
 
+
+  /**
+   * @param event
+   */
   @Override
   public void genericUpdate(TailwindEvent event) {
   }

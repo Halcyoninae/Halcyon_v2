@@ -18,6 +18,10 @@ import java.util.jar.JarFile;
 public class PlooginManager {
   private static final Set<Pair<Class<?>, Ploogin>> ploogins = new HashSet<>();
 
+
+  /**
+   * @return File[]
+   */
   private static File[] getListOfPlugins() {
     ArrayList<File> files = new ArrayList<>();
     for (File f : java.util.Objects.requireNonNull(new java.io.File(com.jackmeng.halcyon.constant.ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + com.jackmeng.halcyon.constant.ProgramResourceManager.FILE_SLASH
@@ -29,10 +33,18 @@ public class PlooginManager {
     return files.toArray(new java.io.File[0]);
   }
 
+
+  /**
+   * @return Set<Pair<Class<?>, Ploogin>>
+   */
   public static Set<Pair<Class<?>, Ploogin>> getPloogins() {
     return ploogins;
   }
 
+
+  /**
+   * @param args
+   */
   public static void main(String... args) {
     File[] list = getListOfPlugins();
     if (list.length > 0) {

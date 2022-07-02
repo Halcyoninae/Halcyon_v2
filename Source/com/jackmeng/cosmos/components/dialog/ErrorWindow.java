@@ -15,11 +15,13 @@
 
 package com.jackmeng.cosmos.components.dialog;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 public class ErrorWindow extends JFrame implements Runnable {
   public ErrorWindow(String content) {
@@ -40,8 +42,14 @@ public class ErrorWindow extends JFrame implements Runnable {
 
   @Override
   public void run() {
-    this.pack();
-    this.setAlwaysOnTop(true);
-    this.setVisible(true);
+    try {
+      SwingUtilities.invokeAndWait(() -> {
+        this.pack();
+        this.setAlwaysOnTop(true);
+        this.setVisible(true);
+      });
+    } catch (InvocationTargetException | InterruptedException e) {
+      ResourceFolder.dispatchLog(e);
+    }
   }
 }

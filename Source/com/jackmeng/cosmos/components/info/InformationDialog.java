@@ -16,19 +16,28 @@
 package com.jackmeng.cosmos.components.info;
 
 import com.jackmeng.cosmos.components.info.layout.FileFromSourceTab;
+import com.jackmeng.cosmos.components.info.layout.SystemTab;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A information dialog that contains text based
+ * interfacing regarding properties.
+ *
+ * @author Jack Meng
+ * @since 3.1
+ */
 public class InformationDialog extends JFrame implements Runnable {
     private final JTabbedPane panes;
 
-    private transient final InformationTab[] tabs = {
+    private final transient InformationTab[] tabs = {
             new FileFromSourceTab("Program Properties",
                     FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_PROPERTIES_DOCS)),
             new FileFromSourceTab("Legals", FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_DOCS)),
+            new SystemTab()
     };
 
     public InformationDialog() {

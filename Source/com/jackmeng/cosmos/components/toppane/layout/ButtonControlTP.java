@@ -59,7 +59,6 @@ public class ButtonControlTP extends JPanel
   private final LikeButton likeButton;
   private final JSlider progressSlider;
   private final JSlider volumeSlider;
-  private final JProgressBar progressBar;
   private final JPanel sliders;
   private final JPanel buttons;
   private transient AudioInfo aif;
@@ -175,22 +174,12 @@ public class ButtonControlTP extends JPanel
     sliders.setMinimumSize(
         new Dimension(Manager.BUTTONCONTROL_MIN_WIDTH, Manager.BUTTONCONTROL_MIN_HEIGHT / 2));
 
-    progressBar = new JProgressBar(0, 100);
-    progressBar.setStringPainted(true);
-    progressBar.setString("0:00 / 0:00");
-    progressBar.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height / 4));
-    progressBar.setForeground(ColorManager.MAIN_FG_THEME);
-    progressBar.setBorder(null);
-    progressBar.setAlignmentX(Component.CENTER_ALIGNMENT);
-
     progressSlider = new JSlider(0, 100);
     progressSlider.setValue(0);
     progressSlider.setFocusable(false);
-
     progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
-    progressSlider.addChangeListener(new AlignSliderWithBar(progressSlider, progressBar));
     progressSlider.addChangeListener(this);
     new Thread(() -> {
       while (true) {
@@ -199,13 +188,6 @@ public class ButtonControlTP extends JPanel
               .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
                   / Global.player.getStream().getLength()));
           progressSlider.setToolTipText(
-              String.format("%d:%02d / %d:%02d",
-                  (int) (Global.player.getStream().getPosition() / 60000),
-                  (int) (Global.player.getStream().getPosition() % 60000) / 1000,
-                  (int) (Global.player.getStream().getLength() / 60000),
-                  (int) (Global.player.getStream().getLength() % 60000) / 1000));
-
-          progressBar.setString(
               String.format("%d:%02d / %d:%02d",
                   (int) (Global.player.getStream().getPosition() / 60000),
                   (int) (Global.player.getStream().getPosition() % 60000) / 1000,
@@ -220,15 +202,13 @@ public class ButtonControlTP extends JPanel
       }
     }).start();
 
-    sliders.add(progressSlider);
-    sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
-    sliders.add(progressBar);
-
+    //sliders.add(progressSlider);
+    //sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
+    //sliders.add(progressBar);
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentResized(ComponentEvent e) {
         progressSlider.setMaximum(getWidth() - 10);
-        progressBar.setMaximum(progressSlider.getMaximum());
         volumeSlider.setPreferredSize(new Dimension(getPreferredSize().width / 4, 20));
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35, getPreferredSize().height / 6));
         buttons.revalidate();
@@ -237,7 +217,8 @@ public class ButtonControlTP extends JPanel
     });
 
     add(buttons);
-    add(sliders);
+    //add(sliders);
+    add(progressSlider);
   }
 
   /**
@@ -248,9 +229,12 @@ public class ButtonControlTP extends JPanel
     Global.player.setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }
 
+
+  /**
+   * @param info
+   */
   @Override
   public void infoView(AudioInfo info) {
-    progressBar.setIndeterminate(false);
     boolean wasPlaying = Global.player.getStream().isPlaying();
     if (aif != null
         && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
@@ -268,12 +252,15 @@ public class ButtonControlTP extends JPanel
       hasPlayed = false;
     }
     progressSlider.setValue(0);
-    progressBar.setString("0:00 / 0:00");
     if (wasPlaying) {
       Global.player.getStream().play();
     }
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource().equals(playButton)) {
@@ -340,6 +327,10 @@ public class ButtonControlTP extends JPanel
     shuffleButton.repaint();
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public synchronized void stateChanged(ChangeEvent e) {
     if (e.getSource().equals(volumeSlider)) {

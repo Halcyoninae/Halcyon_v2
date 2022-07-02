@@ -40,6 +40,10 @@ public class ForceDividerLocation implements PropertyChangeListener {
     max = (int) (threshold + (e.getPreferredSize().getHeight() / 2));
   }
 
+
+  /**
+   * @param evt
+   */
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     if (evt.getPropertyName().equals("dividerLocation")) {

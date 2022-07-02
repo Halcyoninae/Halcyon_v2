@@ -91,10 +91,18 @@ public class TabButton extends JPanel {
     setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
   }
 
+
+  /**
+   * @return CloseTabButton
+   */
   public CloseTabButton getInternalButton() {
     return (CloseTabButton) getComponent(1);
   }
 
+
+  /**
+   * @param listener
+   */
   public void setListener(RemoveTabListener listener) {
     this.listener = listener;
   }

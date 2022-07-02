@@ -42,6 +42,10 @@ public class AlignSliderWithBar implements ChangeListener {
     this.slider = slider;
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void stateChanged(ChangeEvent e) {
     progressBar.setValue(slider.getValue());

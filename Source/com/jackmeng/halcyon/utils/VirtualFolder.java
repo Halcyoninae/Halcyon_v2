@@ -36,16 +36,29 @@ public class VirtualFolder extends FolderInfo {
     this.list = new ArrayList<>(Arrays.asList(files));
   }
 
+
+  /**
+   * @return String[]
+   */
   @Override
   public String[] getFilesAsStr() {
     return list.toArray(new String[0]);
   }
 
+
+  /**
+   * @return File[]
+   */
   @Override
   public File[] getFiles() {
     return list.toArray(new java.io.File[0]);
   }
 
+
+  /**
+   * @param rules
+   * @return String[]
+   */
   @Override
   public String[] getFilesAsStr(String... rules) {
     List<String> buff = new ArrayList<>();
@@ -59,6 +72,11 @@ public class VirtualFolder extends FolderInfo {
     return buff.toArray(new String[buff.size()]);
   }
 
+
+  /**
+   * @param rules
+   * @return File[]
+   */
   @Override
   public File[] getFiles(String... rules) {
     List<File> buff = new ArrayList<>();
@@ -108,6 +126,10 @@ public class VirtualFolder extends FolderInfo {
     return list.remove(f);
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String toString() {
     return "[ VIRTUAL FOLDER @ " + getName() + "-" + list.toString() + " ]";

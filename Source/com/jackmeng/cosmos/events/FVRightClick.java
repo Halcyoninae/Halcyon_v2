@@ -50,6 +50,8 @@ public class FVRightClick extends MouseAdapter {
     }
 
     private TabTree tree;
+    private JTree lastJTree;
+    private int rightClicks = 0;
     private String hideString = "Hide Item";
 
     private RightClickHideItemListener hideTask;
@@ -140,6 +142,10 @@ public class FVRightClick extends MouseAdapter {
 
     }
 
+
+    /**
+     * @param e
+     */
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON3) {
@@ -147,6 +153,10 @@ public class FVRightClick extends MouseAdapter {
         }
     }
 
+
+    /**
+     * @param e
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON3) {
@@ -154,28 +164,61 @@ public class FVRightClick extends MouseAdapter {
         }
     }
 
+
+    /**
+     * @param e
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getButton() == MouseEvent.BUTTON1) {
-            Wrapper.async(() -> {
-                JTree pathTree = (JTree) e.getSource();
-                TreePath path = pathTree.getSelectionPath();
-                if (path != null) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-
-                    if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                        Global.ifp.setAssets(
-                                new File(
-                                        Global.bp.findByTree((JTree) e.getSource())
-                                                .getFolderInfo()
-                                                .getAbsolutePath() +
-                                                ProgramResourceManager.FILE_SLASH +
-                                                node));
-                    }
+            if (lastJTree == null) {
+                lastJTree = (JTree) e.getSource();
+            }
+            if (!lastJTree.equals(e.getSource())) {
+                if (rightClicks == 2) {
+                    Wrapper.async(() -> {
+                        JTree pathTree = (JTree) e.getSource();
+                        TreePath path = pathTree.getSelectionPath();
+                        if (path != null) {
+                            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                            if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                                Global.ifp.setAssets(
+                                        new File(
+                                                Global.bp.findByTree((JTree) e.getSource())
+                                                        .getFolderInfo()
+                                                        .getAbsolutePath() +
+                                                        ProgramResourceManager.FILE_SLASH +
+                                                        node));
+                            }
+                        }
+                        lastJTree = pathTree;
+                    });
+                    rightClicks = 0;
+                } else if (rightClicks == 0 || rightClicks == 1) {
+                    rightClicks++;
                 }
-            });
-
+            } else {
+                Wrapper.async(() -> {
+                    JTree pathTree = (JTree) e.getSource();
+                    TreePath path = pathTree.getSelectionPath();
+                    if (path != null) {
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                            Global.ifp.setAssets(
+                                    new File(
+                                            Global.bp.findByTree((JTree) e.getSource())
+                                                    .getFolderInfo()
+                                                    .getAbsolutePath() +
+                                                    ProgramResourceManager.FILE_SLASH +
+                                                    node));
+                        }
+                    }
+                    lastJTree = pathTree;
+                });
+                rightClicks = 0;
+            }
         }
+
     }
 
 }

@@ -82,10 +82,18 @@ public class Debugger {
     return "[Debug ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
+
+  /**
+   * @return String
+   */
   public static String getWarnText() {
     return "[WARNING ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
+
+  /**
+   * @return String
+   */
   public static String getGoodText() {
     return "SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }

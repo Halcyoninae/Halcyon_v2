@@ -28,6 +28,10 @@ public class Discordo implements InfoViewUpdateListener {
     DiscordRPC.discordUpdatePresence(rpc);
   }
 
+
+  /**
+   * @param title
+   */
   public void set(String title) {
     DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
         .setReadyEventHandler(
@@ -41,6 +45,10 @@ public class Discordo implements InfoViewUpdateListener {
     DiscordRPC.discordUpdatePresence(rpc);
   }
 
+
+  /**
+   * @param info
+   */
   @Override
   public void infoView(AudioInfo info) {
     set(info.getTag(AudioInfo.KEY_MEDIA_TITLE));

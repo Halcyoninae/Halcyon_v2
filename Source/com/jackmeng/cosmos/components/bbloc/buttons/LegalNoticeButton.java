@@ -45,11 +45,19 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
     setContentAreaFilled(false);
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getComponent() {
     return this;
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     new InformationDialog().run();

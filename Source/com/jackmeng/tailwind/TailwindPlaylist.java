@@ -108,6 +108,10 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     events.dispatchStatus(TailwindPlaylistStatusEvent.ARMED);
   }
 
+
+  /**
+   * @param info
+   */
   public void renewPlaylist(FolderInfo info) {
     if (player.isOpen() || player.isPlaying()) {
       player.stop();
@@ -126,30 +130,60 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     player.open(files.get(i));
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addStatusUpdateListener(TailwindPlaylistListener.TailwindPlaylistStatusListener e) {
     return events.addStatusListener(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public boolean addUpdateListener(TailwindPlaylistListener.TailwindPlaylistUpdateEvent e) {
     return events.addUpdateListener(e);
   }
 
+
+  /**
+   * @return File[]
+   */
   public File[] getTracks() {
     return files.toArray(new File[0]);
   }
 
+
+  /**
+   * @return TailwindPlayer
+   */
   public TailwindPlayer getPlayer() {
     return player;
   }
 
+
+  /**
+   * @return FolderInfo
+   */
   public FolderInfo getCurrentFolderInfo() {
     return info;
   }
 
+
+  /**
+   * @return File
+   */
   public File getCurrentTrack() {
     return currentTrack;
   }
 
+
+  /**
+   * @return File[]
+   */
   public File[] getMemory() {
     return memory.toArray(new File[0]);
   }
@@ -180,6 +214,10 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     }
   }
 
+
+  /**
+   * @return File[]
+   */
   public File[] getOriginalTracks() {
     return original.toArray(new File[0]);
   }
@@ -260,6 +298,10 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     }
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if (status.equals(TailwindStatus.END)) {

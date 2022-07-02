@@ -43,6 +43,11 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
     getViewport().add(text);
   }
 
+
+  /**
+   * @param file
+   * @return String
+   */
   public static String getContent(String file) {
     StringBuilder sb = new StringBuilder();
     try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -56,16 +61,28 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
     return sb.toString();
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String getName() {
     return tabName;
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String getToolTip() {
     return "View Legal Information regarding this program.";
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getComponent() {
     return this;

@@ -45,10 +45,20 @@ public final class TextParser {
     return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
   }
 
+
+  /**
+   * @param str
+   * @return String
+   */
   public static String clipText(String str) {
     return str.substring(0, str.length() - 1);
   }
 
+
+  /**
+   * @param str
+   * @return boolean
+   */
   public static boolean isInteger(String str) {
     try {
       Integer.parseInt(str);
@@ -58,6 +68,11 @@ public final class TextParser {
     return true;
   }
 
+
+  /**
+   * @param str
+   * @return String
+   */
   public static String parseAsPure(String str) {
     return new String(ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16")
         ? str.getBytes(StandardCharsets.UTF_16)

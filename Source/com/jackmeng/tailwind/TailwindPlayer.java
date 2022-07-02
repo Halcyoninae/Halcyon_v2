@@ -78,6 +78,10 @@ public class TailwindPlayer implements Audio, Runnable {
     events.addGenericUpdateListener(tdfl);
   }
 
+
+  /**
+   * @param url
+   */
   @Override
   public void open(File url) {
     if (isOpen() || isPlaying()) {
@@ -112,30 +116,58 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
+
+  /**
+   * @return long
+   */
   public synchronized long getMicrosecondLength() {
     return microsecondLength;
   }
 
+
+  /**
+   * @return long
+   */
   public synchronized long getLength() {
     return microsecondLength / 1000;
   }
 
+
+  /**
+   * @return boolean
+   */
   public synchronized boolean isPlaying() {
     return playing;
   }
 
+
+  /**
+   * @return boolean
+   */
   public synchronized boolean isPaused() {
     return paused;
   }
 
+
+  /**
+   * @return boolean
+   */
   public synchronized boolean isOpen() {
     return open;
   }
 
+
+  /**
+   * @return long
+   */
   public synchronized long getFrameLength() {
     return frameLength;
   }
 
+
+  /**
+   * @return FileFormat
+   */
   public synchronized FileFormat getFileFormat() {
     return format;
   }
@@ -147,26 +179,53 @@ public class TailwindPlayer implements Audio, Runnable {
     return line.getMicrosecondPosition();
   }
 
+
+  /**
+   * @return long
+   */
   public synchronized long getPosition() {
     return getPositionMicro() / 1000L;
   }
 
+
+  /**
+   * @return long
+   */
   public synchronized long getLongFramePosition() {
     return line.getLongFramePosition();
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public synchronized boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
     return events.addGenericUpdateListener(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public synchronized boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
     return events.addStatusUpdateListener(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public synchronized boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
     return events.addTimeListener(e);
   }
 
+
+  /**
+   * @param url
+   */
   @Override
   public void open(URL url) {
     this.open(new File(url.getFile()));
@@ -211,6 +270,10 @@ public class TailwindPlayer implements Audio, Runnable {
     open = false;
   }
 
+
+  /**
+   * @param percent
+   */
   @Override
   public void setGain(float percent) {
     FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
@@ -218,13 +281,21 @@ public class TailwindPlayer implements Audio, Runnable {
         : (Math.min(percent, control.getMaximum())));
   }
 
+
+  /**
+   * @param balance
+   */
   @Override
   public void setBalance(float balance) {
     FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
     bal.setValue(
-        balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+        balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())) * 5);
   }
 
+
+  /**
+   * @param mute
+   */
   @Override
   public void setMute(boolean mute) {
   }
@@ -242,11 +313,19 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
+
+  /**
+   * @param millis
+   */
   @Override
   public void seek(long millis) {
     setPosition(millis);
   }
 
+
+  /**
+   * @param millis
+   */
   @Override
   public synchronized void setPosition(long millis) {
     if (open) {
@@ -270,6 +349,10 @@ public class TailwindPlayer implements Audio, Runnable {
     setPosition(0);
   }
 
+
+  /**
+   * @param frame
+   */
   public void setFramePosition(long frame) {
     try {
       if (playing)
@@ -301,6 +384,12 @@ public class TailwindPlayer implements Audio, Runnable {
     open(resource);
   }
 
+
+  /**
+   * @param line
+   * @param table
+   * @return Map<String, Control>
+   */
   private static Map<String, Control> setControls(Line line, Map<String, Control> table) {
     Map<String, Control> temp = new HashMap<>();
     for (Control ctrl : line.getControls()) {
@@ -323,6 +412,10 @@ public class TailwindPlayer implements Audio, Runnable {
     return temp;
   }
 
+
+  /**
+   * @return Map<String, Control>
+   */
   public Map<String, Control> getControls() {
     return controlTable;
   }
@@ -339,6 +432,7 @@ public class TailwindPlayer implements Audio, Runnable {
           try {
             while (playing && !paused && (i = ais.read(buffer)) > -1)
               line.write(buffer, 0, i);
+            buffer = null;
             if (!paused) {
               reset();
               playing = false;

@@ -214,6 +214,10 @@ public class FileList extends JScrollPane implements TabTree {
     }
   }
 
+
+  /**
+   * @param nodeName
+   */
   @Override
   public void remove(String nodeName) {
     try {
@@ -230,6 +234,11 @@ public class FileList extends JScrollPane implements TabTree {
     }
   }
 
+
+  /**
+   * @param node
+   * @return String
+   */
   @Override
   public String getSelectedNode(DefaultMutableTreeNode node) {
     for (File f : fileMap.keySet()) {

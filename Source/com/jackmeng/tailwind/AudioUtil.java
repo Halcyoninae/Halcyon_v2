@@ -23,6 +23,11 @@ import javax.sound.sampled.AudioSystem;
 import java.net.URL;
 
 public final class AudioUtil {
+
+  /**
+   * @param locale
+   * @return AudioInputStream
+   */
   public static AudioInputStream getAudioIS(URL locale) {
     try {
       AudioInputStream ais;

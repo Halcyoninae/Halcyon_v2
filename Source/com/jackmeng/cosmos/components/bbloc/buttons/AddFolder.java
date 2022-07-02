@@ -83,6 +83,10 @@ public class AddFolder extends JButton implements BBlocButton {
     });
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getComponent() {
     return this;

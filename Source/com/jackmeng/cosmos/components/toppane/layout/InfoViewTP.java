@@ -292,30 +292,54 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
         "</span></p></body></html>");
   }
 
+
+  /**
+   * @return AudioInfo
+   */
   public AudioInfo getInfo() {
     return info;
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentResized(ComponentEvent e) {
     backPanel.repaint();
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentMoved(ComponentEvent e) {
     // IGNORED
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentShown(ComponentEvent e) {
     // IGNORED
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentHidden(ComponentEvent e) {
     // IGNORED
   }
 
+
+  /**
+   * @param event
+   */
   @Override
   public void genericUpdate(TailwindEvent event) {
     setAssets(new File(event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));

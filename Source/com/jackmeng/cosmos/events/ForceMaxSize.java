@@ -49,6 +49,10 @@ public class ForceMaxSize implements ComponentListener {
     this.d = MIN_WIDTH;
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentResized(ComponentEvent e) {
     JFrame de = (JFrame) e.getComponent();
@@ -67,15 +71,27 @@ public class ForceMaxSize implements ComponentListener {
 
   }
 
+
+  /**
+   * @param e
+   */
   // UNUSED
   @Override
   public void componentMoved(ComponentEvent e) {
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentShown(ComponentEvent e) {
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void componentHidden(ComponentEvent e) {
   }

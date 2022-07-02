@@ -101,22 +101,42 @@ public class Player {
     }
   }
 
+
+  /**
+   * @param b
+   */
   public void setLooping(boolean b) {
     isLooping = b;
   }
 
+
+  /**
+   * @param percent
+   */
   public void setVolume(float percent) {
     audio.setGain(percent);
   }
 
+
+  /**
+   * @return boolean
+   */
   public boolean isLooping() {
     return isLooping;
   }
 
+
+  /**
+   * @param b
+   */
   public void setShuffling(boolean b) {
     isPlayListShuffling = b;
   }
 
+
+  /**
+   * @return boolean
+   */
   public boolean isShuffling() {
     return isPlayListShuffling;
   }
@@ -135,10 +155,18 @@ public class Player {
     this.f = new File(f);
   }
 
+
+  /**
+   * @return String
+   */
   public String getCurrentFile() {
     return currentAbsolutePath;
   }
 
+
+  /**
+   * @return TailwindPlayer
+   */
   public TailwindPlayer getStream() {
     return audio;
   }
@@ -147,15 +175,29 @@ public class Player {
     audio.play();
   }
 
+
+  /**
+   * @return String
+   */
   public String getStringedTime() {
     return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
         + TimeParser.fromSeconds((int) audio.getLength() * 1000);
   }
 
+
+  /**
+   * @param key
+   * @return Control
+   */
   public Control getControl(String key) {
     return audio.getControls().get(key);
   }
 
+
+  /**
+   * @param zeroToHundred
+   * @return float
+   */
   public float convertVolume(float zeroToHundred) {
     try {
       FloatControl control = (FloatControl) audio
@@ -168,6 +210,10 @@ public class Player {
     }
   }
 
+
+  /**
+   * @return String
+   */
   public String toString() {
     return "isOpen: " + audio.isOpen() + "\nisPlaying" + audio.isPlaying() + "\nisPaused" + audio.isPaused();
   }

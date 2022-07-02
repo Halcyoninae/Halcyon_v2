@@ -177,6 +177,7 @@ public final class DeImage {
 
   /**
    * Blurs an image using a Gaussian blur.
+   *
    * @param srcIMG The image to be blurred.
    * @return BufferedImage The blurred image.
    */
@@ -324,7 +325,7 @@ public final class DeImage {
    */
   public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
     Image img = image.getImage();
-    Image newimg = img.getScaledInstance(width, height, ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true") ? Image.SCALE_FAST : Image.SCALE_AREA_AVERAGING);
+    Image newimg = img.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
     return new ImageIcon(newimg);
   }
 }

@@ -29,14 +29,28 @@ public class TailwindPlaylistEventManager {
     this.updateListeners = new ArrayList<>();
   }
 
+
+  /**
+   * @param listener
+   * @return boolean
+   */
   public boolean addStatusListener(TailwindPlaylistListener.TailwindPlaylistStatusListener listener) {
     return statusListeners.add(listener);
   }
 
+
+  /**
+   * @param listener
+   * @return boolean
+   */
   public boolean addUpdateListener(TailwindPlaylistListener.TailwindPlaylistUpdateEvent listener) {
     return updateListeners.add(listener);
   }
 
+
+  /**
+   * @param event
+   */
   public void dispatchStatus(TailwindPlaylistStatusEvent event) {
     Wrapper.async(() -> {
       for (TailwindPlaylistListener.TailwindPlaylistStatusListener e : statusListeners) {
@@ -45,6 +59,10 @@ public class TailwindPlaylistEventManager {
     });
   }
 
+
+  /**
+   * @param event
+   */
   public void dispatchUpdate(TailwindPlaylistEvent event) {
     Wrapper.async(() -> {
       for (TailwindPlaylistListener.TailwindPlaylistUpdateEvent e : updateListeners) {

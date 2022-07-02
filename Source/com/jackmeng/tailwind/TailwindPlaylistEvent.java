@@ -26,6 +26,10 @@ public class TailwindPlaylistEvent {
     this.currentTrack = currentTrack;
   }
 
+
+  /**
+   * @return File
+   */
   public File getCurrentTrack() {
     return currentTrack;
   }

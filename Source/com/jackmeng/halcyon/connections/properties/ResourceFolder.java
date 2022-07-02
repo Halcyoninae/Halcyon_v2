@@ -195,6 +195,11 @@ public class ResourceFolder {
     return true;
   }
 
+
+  /**
+   * @param fileName
+   * @return File
+   */
   public static File getCacheFile(String fileName) {
     return new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
         + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);

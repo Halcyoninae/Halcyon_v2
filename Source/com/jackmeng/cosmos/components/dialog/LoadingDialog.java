@@ -34,6 +34,10 @@ public class LoadingDialog extends JFrame {
     getContentPane().add(panel);
   }
 
+
+  /**
+   * @param task
+   */
   public void run(Runnable task) {
     this.pack();
     this.setAlwaysOnTop(true);

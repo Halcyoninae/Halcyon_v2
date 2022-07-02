@@ -136,6 +136,10 @@ public class Program {
     Debugger.unsafeLog(list.toArray(new String[0]));
   }
 
+
+  /**
+   * @return File[]
+   */
   public static File[] fetchLikedTracks() {
     if (!ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).isFile()
         || !ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).exists()) {
@@ -164,6 +168,10 @@ public class Program {
     return new File[0];
   }
 
+
+  /**
+   * @return FolderInfo[]
+   */
   public static FolderInfo[] fetchSavedPlayLists() {
     if (!ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).isFile()
         || !ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).exists()) {

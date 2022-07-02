@@ -41,6 +41,10 @@ public class LikeButton extends JButton implements ActionListener {
     setIcon(like);
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (this.getIcon().equals(noLike)) {
