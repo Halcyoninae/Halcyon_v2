@@ -17,14 +17,12 @@ package com.jackmeng.cosmos.components.dialog;
 
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.TimeParser;
 import com.jackmeng.tailwind.AudioInfo;
 import org.jaudiotagger.tag.FieldKey;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
 
 /**
  * This is a window popup that shows information regarding the current

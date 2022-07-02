@@ -21,9 +21,6 @@ import de.ralleytn.simple.image.SimpleImage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import com.jackmeng.halcyon.connections.properties.ResourceFolder;
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
-
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;

@@ -224,6 +224,7 @@ public final class PropertiesManager {
       try {
         new File(location).createNewFile();
       } catch (IOException ignored) {
+        // IGNORED
       }
       createWithDefaultVals();
     }

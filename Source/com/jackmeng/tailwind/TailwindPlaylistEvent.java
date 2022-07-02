@@ -17,7 +17,6 @@ package com.jackmeng.tailwind;
 
 import java.io.File;
 
-import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 public class TailwindPlaylistEvent {
   private File currentTrack;

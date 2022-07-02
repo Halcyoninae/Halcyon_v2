@@ -17,12 +17,9 @@ package com.jackmeng.cosmos.components.toppane.layout;
 
 import com.jackmeng.cosmos.components.inheritable.LikeButton;
 import com.jackmeng.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
-import com.jackmeng.cosmos.events.AlignSliderWithBar;
-import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.tailwind.AudioInfo;
