@@ -85,6 +85,8 @@ Git service every time I want to look at issues.
 This program uses external libraries and framework, and their attributed licenses
 can be found [here](LICENSE.txt).
 
+Any copyright or legals to do with the audio being played is at the expense of the end-user.
+
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
 <img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
