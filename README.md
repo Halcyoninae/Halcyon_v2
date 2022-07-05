@@ -17,7 +17,8 @@ playing needs.
 This README is for version: 3.0 
 This README's constant version is 3.0 [For the iteration]
 
-You can check [VERSION](./VERSION) for everything related to versioning information.
+You can check [VERSION](./VERSION) for everything related to versioning information. (*Also, everything starts at 3.0 because this technically the 3rd
+main iteration of the original project titled: MP4J which went up to 2.0. You can find this project linked above.*)
 
 Note: For every +1.0 version in experimental build, the iteration version goes up by 0.1!
 
