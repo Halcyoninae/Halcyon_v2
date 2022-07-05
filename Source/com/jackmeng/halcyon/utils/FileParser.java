@@ -16,7 +16,11 @@
 package com.jackmeng.halcyon.utils;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+
+import com.jackmeng.halcyon.runtime.TextBOM;
 
 /**
  * A simply utility that helps
@@ -28,14 +32,17 @@ import java.util.ArrayList;
  */
 public final class FileParser {
 
-  private FileParser() {}
+  private FileParser() {
+  }
 
   /**
    * This method parses files with a certain extension.
    *
-   * @param folder The folder to search for, however this parameter must be guaranteed to be a folder and must exist and accessible.
-   * @param rules An array of extensions to search for and compare to.
-   * @return An array of File objects that will be returned of all of the files that match the rules for the specified file extensions.
+   * @param folder The folder to search for, however this parameter must be
+   *               guaranteed to be a folder and must exist and accessible.
+   * @param rules  An array of extensions to search for and compare to.
+   * @return An array of File objects that will be returned of all of the files
+   *         that match the rules for the specified file extensions.
    */
   public static File[] parseOnlyAudioFiles(File folder, String[] rules) {
     File[] files = folder.listFiles();
@@ -55,17 +62,20 @@ public final class FileParser {
 
   /**
    * Returns if a folder contains in any way a file with the specified extension.
-   * @param folder The folder to search for, however this parameter must be guaranteed to be a folder and must exist and accessible.
-   * @param rules An array of extensions to search for and compare to.
-   * @return True if the folder contains a file with the specified extension, false otherwise.
+   *
+   * @param folder The folder to search for, however this parameter must be
+   *               guaranteed to be a folder and must exist and accessible.
+   * @param rules  An array of extensions to search for and compare to.
+   * @return True if the folder contains a file with the specified extension,
+   *         false otherwise.
    */
   public static boolean contains(File folder, String[] rules) {
     File[] files = folder.listFiles();
     assert files != null;
-    for(File f : files) {
+    for (File f : files) {
       if (f.isFile()) {
-        for(String rule : rules) {
-          if(f.getAbsolutePath().endsWith("." + rule)) {
+        for (String rule : rules) {
+          if (f.getAbsolutePath().endsWith("." + rule)) {
             return true;
           }
         }
@@ -76,10 +86,11 @@ public final class FileParser {
 
   /**
    * This method parses a folder's name
+   *
    * @param f The folder to parse
    * @return The name of the folder
    *
-   * Very useless method
+   *         Very useless method
    */
   public static String folderName(String f) {
     return new File(f).getName();
@@ -88,6 +99,7 @@ public final class FileParser {
   /**
    * This method returns a string array of file names from the
    * given varargs of files to parse.
+   *
    * @param files A varargs of files to parse
    * @return A string array of file names
    */
@@ -103,6 +115,7 @@ public final class FileParser {
 
   /**
    * Checks if the folder is empty (void of any files)
+   *
    * @param folder The folder to check
    * @return True if the folder is empty, false otherwise
    */
@@ -110,5 +123,10 @@ public final class FileParser {
     File[] files = folder.listFiles();
     assert files != null;
     return files.length == 0;
+  }
+
+  public static void writeBOM(OutputStream os, String encoding) throws IOException {
+    os.write(encoding.equals("UTF-8") ? TextBOM.UTF8_BOM
+        : (encoding.equals("UTF-16LE") ? TextBOM.UTF16_LE_BOM : TextBOM.UTF16_BE_BOM));
   }
 }

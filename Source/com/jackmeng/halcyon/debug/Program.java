@@ -19,11 +19,17 @@ import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.Wrapper;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,11 +60,11 @@ public class Program {
   private static void println(String e) {
     if (executorService == null) {
       executorService = Executors.newCachedThreadPool(
-              r -> {
-                Thread t = new Thread(r);
-                t.setDaemon(true);
-                return t;
-              });
+          r -> {
+            Thread t = new Thread(r);
+            t.setDaemon(true);
+            return t;
+          });
       executorService.submit(
           new Runnable() {
             @Override
@@ -136,7 +142,6 @@ public class Program {
     Debugger.unsafeLog(list.toArray(new String[0]));
   }
 
-
   /**
    * @return File[]
    */
@@ -153,9 +158,11 @@ public class Program {
       return new File[0];
     }
     Set<File> list = new HashSet<>();
-    try (Scanner sc = new Scanner(ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE))) {
-      while (sc.hasNext()) {
-        String str = sc.nextLine();
+    try (FileInputStream fis = new FileInputStream(ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE))) {
+      BufferedReader br = new BufferedReader(new InputStreamReader(fis, TextParser.getCharset()));
+      while (br.ready()) {
+        String str = br.readLine();
+        Debugger.warn(str);
         if (new File(str).isFile() && new File(str).exists()) {
           list.add(new File(str));
         }
@@ -167,7 +174,6 @@ public class Program {
     }
     return new File[0];
   }
-
 
   /**
    * @return FolderInfo[]
@@ -185,10 +191,13 @@ public class Program {
       return new FolderInfo[0];
     }
     List<FolderInfo> list = new ArrayList<>();
-    try (Scanner sc = new Scanner(ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE))) {
-      while (sc.hasNext()) {
-        String s = sc.nextLine();
-        list.add(new FolderInfo(s));
+    try (FileInputStream fis = new FileInputStream(ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE))) {
+      BufferedReader br = new BufferedReader(new InputStreamReader(fis, TextParser.getCharset()));
+      while (br.ready()) {
+        String str = br.readLine();
+        if (new File(str).exists() && new File(str).isDirectory()) {
+          list.add(new FolderInfo(str));
+        }
       }
       return list.toArray(new com.jackmeng.halcyon.utils.FolderInfo[0]);
     } catch (Exception e) {

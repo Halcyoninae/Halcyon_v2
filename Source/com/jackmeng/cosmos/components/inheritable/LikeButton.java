@@ -41,7 +41,6 @@ public class LikeButton extends JButton implements ActionListener {
     setIcon(like);
   }
 
-
   /**
    * @param e
    */

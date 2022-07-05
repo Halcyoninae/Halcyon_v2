@@ -15,6 +15,7 @@
 
 package com.jackmeng.tailwind;
 
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.tailwind.simple.FileFormat;
 
@@ -61,12 +62,13 @@ public class TailwindPlayer implements Audio, Runnable {
   private SourceDataLine line;
   private FileFormat format;
   private Map<String, Control> controlTable;
-  private boolean open, paused, playing;
+  private boolean open, paused, playing, fadeStop = false;
   private AudioInputStream ais;
   private long microsecondLength, frameLength;
   private ExecutorService worker;
   private final Object referencable = new Object();
   private final TailwindEventManager events;
+  private float currDb = 0F, targetDB = 0F, faderPerStep = 0.1F;
 
   // PUBLIC STATIC UTIL
   public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance";
@@ -77,7 +79,6 @@ public class TailwindPlayer implements Audio, Runnable {
     events.addStatusUpdateListener(tdfl);
     events.addGenericUpdateListener(tdfl);
   }
-
 
   /**
    * @param url
@@ -116,14 +117,12 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
-
   /**
    * @return long
    */
   public synchronized long getMicrosecondLength() {
     return microsecondLength;
   }
-
 
   /**
    * @return long
@@ -132,14 +131,12 @@ public class TailwindPlayer implements Audio, Runnable {
     return microsecondLength / 1000;
   }
 
-
   /**
    * @return boolean
    */
   public synchronized boolean isPlaying() {
     return playing;
   }
-
 
   /**
    * @return boolean
@@ -148,7 +145,6 @@ public class TailwindPlayer implements Audio, Runnable {
     return paused;
   }
 
-
   /**
    * @return boolean
    */
@@ -156,14 +152,12 @@ public class TailwindPlayer implements Audio, Runnable {
     return open;
   }
 
-
   /**
    * @return long
    */
   public synchronized long getFrameLength() {
     return frameLength;
   }
-
 
   /**
    * @return FileFormat
@@ -179,7 +173,6 @@ public class TailwindPlayer implements Audio, Runnable {
     return line.getMicrosecondPosition();
   }
 
-
   /**
    * @return long
    */
@@ -187,14 +180,12 @@ public class TailwindPlayer implements Audio, Runnable {
     return getPositionMicro() / 1000L;
   }
 
-
   /**
    * @return long
    */
   public synchronized long getLongFramePosition() {
     return line.getLongFramePosition();
   }
-
 
   /**
    * @param e
@@ -204,7 +195,6 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addGenericUpdateListener(e);
   }
 
-
   /**
    * @param e
    * @return boolean
@@ -213,7 +203,6 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addStatusUpdateListener(e);
   }
 
-
   /**
    * @param e
    * @return boolean
@@ -221,7 +210,6 @@ public class TailwindPlayer implements Audio, Runnable {
   public synchronized boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
     return events.addTimeListener(e);
   }
-
 
   /**
    * @param url
@@ -270,7 +258,6 @@ public class TailwindPlayer implements Audio, Runnable {
     open = false;
   }
 
-
   /**
    * @param percent
    */
@@ -281,7 +268,6 @@ public class TailwindPlayer implements Audio, Runnable {
         : (Math.min(percent, control.getMaximum())));
   }
 
-
   /**
    * @param balance
    */
@@ -291,7 +277,6 @@ public class TailwindPlayer implements Audio, Runnable {
     bal.setValue(
         balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())) * 5);
   }
-
 
   /**
    * @param mute
@@ -313,7 +298,6 @@ public class TailwindPlayer implements Audio, Runnable {
     }
   }
 
-
   /**
    * @param millis
    */
@@ -321,7 +305,6 @@ public class TailwindPlayer implements Audio, Runnable {
   public void seek(long millis) {
     setPosition(millis);
   }
-
 
   /**
    * @param millis
@@ -348,7 +331,6 @@ public class TailwindPlayer implements Audio, Runnable {
     paused = false;
     setPosition(0);
   }
-
 
   /**
    * @param frame
@@ -384,7 +366,6 @@ public class TailwindPlayer implements Audio, Runnable {
     open(resource);
   }
 
-
   /**
    * @param line
    * @param table
@@ -411,7 +392,6 @@ public class TailwindPlayer implements Audio, Runnable {
     }
     return temp;
   }
-
 
   /**
    * @return Map<String, Control>

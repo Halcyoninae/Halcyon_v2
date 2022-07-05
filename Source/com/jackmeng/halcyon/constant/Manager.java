@@ -84,9 +84,9 @@ public interface Manager {
       + "/buttoncontrol/shuffle_button_pressed.png";
   final String BUTTONCONTROL_LOOP_ICON_PRESSED = RSC_FOLDER_NAME
       + "/buttoncontrol/loop_button_pressed.png";
-
+  final String BBLOC_MINIMIZED_PLAYER = RSC_FOLDER_NAME + "/bbloc/minimize.png";
   final String BBLOC_REFRESH_FILEVIEW_ICON = RSC_FOLDER_NAME + "/bbloc/refresh_icon.png";
-    final String BBLOC_REFRESH_FILEVIEW_ICON_PRESSED = RSC_FOLDER_NAME + "/bbloc/refresh_icon_pressed.png";
+  final String BBLOC_REFRESH_FILEVIEW_ICON_PRESSED = RSC_FOLDER_NAME + "/bbloc/refresh_icon_pressed.png";
 
   final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(
       INFOVIEW_DISK_NO_FILE_LOADED_ICON);

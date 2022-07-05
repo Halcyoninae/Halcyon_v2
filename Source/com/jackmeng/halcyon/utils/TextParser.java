@@ -15,10 +15,12 @@
 
 package com.jackmeng.halcyon.utils;
 
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Debugger;
 
 /**
  * A utility class for text manipulation
@@ -45,7 +47,6 @@ public final class TextParser {
     return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
   }
 
-
   /**
    * @param str
    * @return String
@@ -53,7 +54,6 @@ public final class TextParser {
   public static String clipText(String str) {
     return str.substring(0, str.length() - 1);
   }
-
 
   /**
    * @param str
@@ -68,6 +68,11 @@ public final class TextParser {
     return true;
   }
 
+  public static String getPropertyTextEncodingName() {
+    return ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8") ? "UTF-8"
+        : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le") ? "UTF-16LE"
+            : "UTF-16BE");
+  }
 
   /**
    * @param str
@@ -82,5 +87,11 @@ public final class TextParser {
                 : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
                     ? str.getBytes(StandardCharsets.UTF_16LE)
                     : str.getBytes(StandardCharsets.UTF_16BE))));
+  }
+
+  public static Charset getCharset() {
+    return TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
+              : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
+                  : StandardCharsets.UTF_16BE);
   }
 }

@@ -79,7 +79,7 @@ public class ProgramResourceManager {
       new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", "0.9", "1.1"),
       new Property(KEY_USER_DSIABLE_CLI, "true", "true", "false"),
       new Property(KEY_USER_USE_DISCORD_RPC, "true", "true", "false"),
-      new Property(KEY_USER_CHAR_SET_WRITE_TABLE, "utf16", "utf8", "utf16le", "utf16be"),
+      new Property(KEY_USER_CHAR_SET_WRITE_TABLE,  "utf8", "utf16le", "utf16be"),
   };
 
   public static final String FILE_SLASH = "/";

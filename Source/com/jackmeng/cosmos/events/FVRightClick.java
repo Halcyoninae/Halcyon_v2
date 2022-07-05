@@ -142,7 +142,6 @@ public class FVRightClick extends MouseAdapter {
 
     }
 
-
     /**
      * @param e
      */
@@ -153,7 +152,6 @@ public class FVRightClick extends MouseAdapter {
         }
     }
 
-
     /**
      * @param e
      */
@@ -163,7 +161,6 @@ public class FVRightClick extends MouseAdapter {
             popup(e);
         }
     }
-
 
     /**
      * @param e
@@ -182,13 +179,14 @@ public class FVRightClick extends MouseAdapter {
                         if (path != null) {
                             DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                             if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                                Global.ifp.setAssets(
+                                SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
                                         new File(
                                                 Global.bp.findByTree((JTree) e.getSource())
                                                         .getFolderInfo()
                                                         .getAbsolutePath() +
                                                         ProgramResourceManager.FILE_SLASH +
-                                                        node));
+                                                        node)));
+
                             }
                         }
                         lastJTree = pathTree;
@@ -204,13 +202,13 @@ public class FVRightClick extends MouseAdapter {
                     if (path != null) {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                         if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                            Global.ifp.setAssets(
+                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
                                     new File(
                                             Global.bp.findByTree((JTree) e.getSource())
                                                     .getFolderInfo()
                                                     .getAbsolutePath() +
                                                     ProgramResourceManager.FILE_SLASH +
-                                                    node));
+                                                    node)));
                         }
                     }
                     lastJTree = pathTree;

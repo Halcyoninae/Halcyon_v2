@@ -22,10 +22,11 @@ import com.jackmeng.halcyon.constant.Manager;
 import javax.swing.*;
 import java.awt.*;
 
-
 /**
- * The Halcyon Music Player has two main components for it's main component: A top and a
- * bottom. This class represents the top pane, which contains information regarding the current
+ * The Halcyon Music Player has two main components for it's main component: A
+ * top and a
+ * bottom. This class represents the top pane, which contains information
+ * regarding the current
  * track and any sub-controls to modify playback.
  *
  * This pane is very plain and only serving to align the components together
@@ -42,7 +43,8 @@ public class TopPane extends JPanel {
   /**
    * Two instances of an InfoView and a ButtonControl view
    * are used to construct the Top View object.
-   * @param ifp The InfoView instance to attach with
+   *
+   * @param ifp  The InfoView instance to attach with
    * @param bctp The ButtonControl instance to attach with
    */
   public TopPane(InfoViewTP ifp, ButtonControlTP bctp) {

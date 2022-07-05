@@ -30,10 +30,13 @@ import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.debug.Program;
 import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.utils.TextParser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
@@ -101,8 +104,10 @@ public class Halcyon {
    * No arguments are taken from the entry point
    *
    * @param args Null arguments
+   * @throws UnsupportedEncodingException
    */
   public static void main(String... args) {
+
     if (args.length > 0) {
       if (args[0].equals("-debug")) {
         ProjectManager.DEBUG_PROGRAM = true;
@@ -117,6 +122,8 @@ public class Halcyon {
       }
 
       ResourceFolder.pm.checkAllPropertiesExistence();
+
+      Debugger.good("Loading encoding as: " + TextParser.getPropertyTextEncodingName());
 
       new ThreadedScheduler();
 
@@ -135,6 +142,7 @@ public class Halcyon {
         ArrayList<BBlocButton> bb = new ArrayList<>();
         bb.add(new AddFolder());
         bb.add(new RefreshFileView());
+        bb.add(new MinimizePlayer());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
         bb.add(

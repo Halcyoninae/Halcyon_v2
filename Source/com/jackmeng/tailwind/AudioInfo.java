@@ -187,6 +187,31 @@ public class AudioInfo {
     }
   }
 
+  public boolean hasArtwork() {
+    BufferedImage img = null;
+    try {
+      if (f.getAbsolutePath().endsWith(".mp3")) {
+        MP3File mp = null;
+        try {
+          mp = new MP3File(f);
+        } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
+            | InvalidAudioFrameException e1) {
+          e1.printStackTrace();
+        }
+        if (mp.getTag().getFirstArtwork() != null) {
+          try {
+            img = (BufferedImage) mp.getTag().getFirstArtwork().getImage();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+      return img != null;
+    } catch (NullPointerException e) {
+      return false;
+    }
+  }
+
 
   /**
    * @return BufferedImage

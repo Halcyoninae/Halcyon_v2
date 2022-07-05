@@ -95,6 +95,7 @@ public class ButtonControlTP extends JPanel
     nextButton.setToolTipText("Next track");
     nextButton.setRolloverEnabled(false);
     nextButton.setBorderPainted(false);
+    nextButton.addActionListener(this);
 
     previousButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_BWD_ICON), 24, 24));
@@ -199,22 +200,23 @@ public class ButtonControlTP extends JPanel
       }
     }).start();
 
-    //sliders.add(progressSlider);
-    //sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
-    //sliders.add(progressBar);
+    // sliders.add(progressSlider);
+    // sliders.add(Box.createVerticalStrut(Manager.BUTTONCONTROL_MIN_HEIGHT / 10));
+    // sliders.add(progressBar);
     addComponentListener(new ComponentAdapter() {
       @Override
       public void componentResized(ComponentEvent e) {
         progressSlider.setMaximum(getWidth() - 10);
         volumeSlider.setPreferredSize(new Dimension(getPreferredSize().width / 4, 20));
-        buttons.setLayout(new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35, getPreferredSize().height / 6));
+        buttons.setLayout(
+            new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35, getPreferredSize().height / 6));
         buttons.revalidate();
         volumeSlider.revalidate();
       }
     });
 
     add(buttons);
-    //add(sliders);
+    // add(sliders);
     add(progressSlider);
   }
 
@@ -225,7 +227,6 @@ public class ButtonControlTP extends JPanel
   private void assertVolume() {
     Global.player.setVolume(Global.player.convertVolume(volumeSlider.getValue()));
   }
-
 
   /**
    * @param info
@@ -253,7 +254,6 @@ public class ButtonControlTP extends JPanel
       Global.player.getStream().play();
     }
   }
-
 
   /**
    * @param e
@@ -319,11 +319,12 @@ public class ButtonControlTP extends JPanel
       Global.player.getStream().reset();
       Global.player.play();
       assertVolume();
+    } else if (e.getSource().equals(nextButton)) {
+      Global.player.requestNextTrack();
     }
     loopButton.repaint();
     shuffleButton.repaint();
   }
-
 
   /**
    * @param e

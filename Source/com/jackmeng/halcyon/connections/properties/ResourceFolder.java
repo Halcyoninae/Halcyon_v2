@@ -19,18 +19,26 @@ import com.jackmeng.halcyon.ProjectManager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
+import com.jackmeng.halcyon.utils.FileParser;
 import com.jackmeng.halcyon.utils.TextParser;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import org.w3c.dom.Text;
 
 /**
  * ResourceFolder is a general class that holds information about
@@ -173,28 +181,28 @@ public class ResourceFolder {
   public static boolean cacheFile(String fileName, String[] content) {
     File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
         + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
+    BufferedWriter bw = null;
     try {
-      if (!f.isFile() || !f.exists()) {
-        f.createNewFile();
-      } else {
-        f.delete();
-        f.createNewFile();
-      }
-    } catch (IOException e) {
-      dispatchLog(e);
+      bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),
+          TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
+              : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
+                  : StandardCharsets.UTF_16BE)));
+    } catch (Exception e) {
+      Debugger.warn(e);
+      ResourceFolder.dispatchLog(e);
     }
-    try (FileWriter fw = new FileWriter(f)) {
+    try {
       for (String str : content) {
-        fw.write(TextParser.parseAsPure(str) + "\n");
+        bw.write(str + "\n");
+        bw.flush();
       }
-      fw.flush();
+      bw.close();
     } catch (IOException e) {
-      dispatchLog(e);
-      return false;
+      Debugger.warn(e);
+      ResourceFolder.dispatchLog(e);
     }
     return true;
   }
-
 
   /**
    * @param fileName
@@ -225,7 +233,8 @@ public class ResourceFolder {
             "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
                 + "\n"
                 + e.getClass() + "\n" + e.toString() + "\n" +
-                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n" + java.util.Arrays.toString(e.getStackTrace()) + "\n"
+                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n"
+                + java.util.Arrays.toString(e.getStackTrace()) + "\n"
                 + "Submit an issue by making a PR to the file BUGS at " + ProjectManager.PROJECT_GITHUB_PAGE);
       }
       return null;

@@ -195,19 +195,23 @@ public final class DeImage {
    * Generates a rounded image with borders
    *
    * @param r         The image to be rounded
-   * @param thickness The thickness of the border
+   * @param arc       The arc radius of the rounded corners
+   * @param someColor The Color of the border
    * @return BufferedImage The rounded image
    */
-  public static BufferedImage createRoundedBorder(BufferedImage r, int arcH, int arcV, int thickness, Color color) {
-    BufferedImage rounded = new BufferedImage(r.getWidth(), r.getHeight(), BufferedImage.TYPE_INT_ARGB);
-    Graphics2D g = rounded.createGraphics();
-    g.setColor(color);
-    g.setStroke(new BasicStroke(thickness));
-
-    g.draw(new RoundRectangle2D.Float(0, 0, r.getWidth(), r.getHeight(), arcV, arcH));
-    g.drawImage(r, 0, 0, null);
-    g.dispose();
-    return rounded;
+  public static BufferedImage createRoundedBorder(BufferedImage r, int arc, Color someColor) {
+    int w = r.getWidth();
+    int h = r.getHeight();
+    BufferedImage out = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+    Graphics2D g2 = out.createGraphics();
+    g2.setComposite(AlphaComposite.Src);
+    g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g2.setColor(someColor);
+    g2.fill(new RoundRectangle2D.Float(0, 0, w, h, arc, arc));
+    g2.setComposite(AlphaComposite.SrcAtop);
+    g2.drawImage(r, 0, 0, null);
+    g2.dispose();
+    return out;
   }
 
   /**

@@ -92,7 +92,10 @@ public class Player {
    * This method should not be used!!
    *
    * {@link #play()} handles opening the stream before playing
+   *
+   * @deprecated Unused
    */
+  @Deprecated(forRemoval = true)
   public void open() {
     try {
       audio.open(f);
@@ -131,6 +134,9 @@ public class Player {
    */
   public void setShuffling(boolean b) {
     isPlayListShuffling = b;
+  }
+
+  public void requestNextTrack() {
   }
 
 

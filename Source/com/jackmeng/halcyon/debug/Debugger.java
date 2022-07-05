@@ -15,6 +15,9 @@
 
 package com.jackmeng.halcyon.debug;
 
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.utils.TimeParser;
@@ -26,7 +29,7 @@ import com.jackmeng.halcyon.utils.TimeParser;
  * However the standard console or System.out {@link java.lang.System}.out can
  * be disabled for extraneous logging.
  *
- * This means the program must use System.err.
+ * This means the program must use out.
  *
  * @author Jack Meng
  * @since 3.0
@@ -67,6 +70,15 @@ public class Debugger {
     }
   }
 
+  public static PrintStream out;
+  static {
+    try {
+      out = new PrintStream(System.err, true, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static boolean DISABLE_DEBUGGER = true;
 
   private Debugger() {
@@ -82,14 +94,12 @@ public class Debugger {
     return "[Debug ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
-
   /**
    * @return String
    */
   public static String getWarnText() {
     return "[WARNING ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
-
 
   /**
    * @return String
@@ -110,12 +120,12 @@ public class Debugger {
       new Thread(() -> {
         for (T t : o) {
           if (t != null) {
-            System.err.println(getLogText() + t + " ");
+            out.println(getLogText() + t + " ");
           } else {
-            System.err.println(getLogText() + "NULL_CONTENT" + " ");
+            out.println(getLogText() + "NULL_CONTENT" + " ");
           }
         }
-        System.err.println();
+        out.println();
       }).start();
     } else {
       String[] s = new String[o.length];
@@ -143,13 +153,17 @@ public class Debugger {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
       for (T t : o) {
         if (t != null) {
-          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + t
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
+          out.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + t
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         } else {
-          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
+          out.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_BG.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
     }
@@ -170,13 +184,15 @@ public class Debugger {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
       for (T t : o) {
         if (t != null) {
-          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + t
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
+          out.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + t
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         } else {
-          System.err.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText() + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
-                  + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
+          out.println(com.jackmeng.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
+              + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
     }
@@ -193,12 +209,12 @@ public class Debugger {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
       for (T t : o) {
         if (t != null) {
-          System.err.println(getLogText() + t + " ");
+          out.println(getLogText() + t + " ");
         } else {
-          System.err.println(getLogText() + "NULL_CONTENT" + " ");
+          out.println(getLogText() + "NULL_CONTENT" + " ");
         }
       }
-      System.err.println();
+      out.println();
     }
   }
 }

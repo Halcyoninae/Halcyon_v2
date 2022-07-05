@@ -63,6 +63,10 @@ public class SelectApplicableFolders extends JFileChooser implements Runnable {
     super();
     setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     setAcceptAllFileFilterUsed(false);
+    setApproveButtonText("Add Folder");
+    setApproveButtonToolTipText("Add this folder as a playlist to play from");
+    setDialogTitle("Halcyon ~ Add Playlist");
+    setFileHidingEnabled(false);
   }
 
   /**

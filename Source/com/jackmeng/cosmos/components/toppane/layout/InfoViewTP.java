@@ -17,10 +17,12 @@ package com.jackmeng.cosmos.components.toppane.layout;
 
 import com.jackmeng.halcyon.Halcyon;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.connections.resource.ResourceDistributor;
 import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
 import com.jackmeng.halcyon.utils.TimeParser;
 
@@ -54,7 +56,7 @@ import java.util.ArrayList;
  * @author Jack Meng
  * @since 3.0
  */
-public class InfoViewTP extends JPanel implements ComponentListener, TailwindListener.GenericUpdateListener {
+public class InfoViewTP extends JPanel implements ComponentListener {
 
   /**
    * An extended listener for any classes that want
@@ -72,6 +74,7 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
   private JLabel infoDisplay, artWork;
   private transient ArrayList<InfoViewUpdateListener> listeners;
   private String infoTitle;
+  private boolean artWorkIsDefault = true;
 
   public InfoViewTP() {
     super();
@@ -93,50 +96,48 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
       @Override
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
-          Graphics2D g2d = (Graphics2D) g;
-          float compositeAlpha = 0.5f;
+        Graphics2D g2d = (Graphics2D) g;
+        float compositeAlpha = 0.5f;
 
-          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
-            compositeAlpha = 0.2f;
-          } else {
-            compositeAlpha = 0.6f;
-          }
-          g2d.setComposite(
-              AlphaComposite.getInstance(
-                  AlphaComposite.SRC_OVER,
-                  compositeAlpha));
-
-          BufferedImage original = Global.ifp.getInfo().getArtwork();
-          if (original.getWidth() > backPanel.getWidth()
-              || original.getHeight() > backPanel.getHeight()) {
-            original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
-                backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
-          }
-          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
-            original = DeImage.grayScale(original);
-          }
-          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
-            original = DeImage.createGradientVertical(original, 255, 0);
-            switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm
-                .get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
-              case "focused":
-                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                    com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
-                break;
-              case "left":
-                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                    com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
-                break;
-              case "right":
-                original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                    com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
-                break;
-            }
-          }
-          g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
-              (backPanel.getSize().height - original.getHeight()) / 2, this);
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+          compositeAlpha = 0.2f;
+        } else {
+          compositeAlpha = 0.6f;
         }
+        g2d.setComposite(
+            AlphaComposite.getInstance(
+                AlphaComposite.SRC_OVER,
+                compositeAlpha));
+
+        BufferedImage original = Global.ifp.getInfo().getArtwork();
+        if (original.getWidth() > backPanel.getWidth()
+            || original.getHeight() > backPanel.getHeight()) {
+          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
+              backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
+        }
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+          original = DeImage.grayScale(original);
+        }
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+          original = DeImage.createGradientVertical(original, 255, 0);
+          switch (com.jackmeng.halcyon.connections.properties.ResourceFolder.pm
+              .get(com.jackmeng.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+            case "focused":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.BOTTOM);
+              break;
+            case "left":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.LEFT);
+              break;
+            case "right":
+              original = com.jackmeng.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                  com.jackmeng.halcyon.utils.DeImage.Directional.RIGHT);
+              break;
+          }
+        }
+        g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
+            (backPanel.getSize().height - original.getHeight()) / 2, this);
       }
     };
     backPanel.setPreferredSize(
@@ -154,7 +155,7 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
         bi,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-
+    bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
     artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
     artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -221,12 +222,21 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
 
       }
 
-      if (info.getArtwork() != null) {
+      if (info.hasArtwork()) {
+        Debugger.warn("Artwork found for drawing!");
         BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
+        bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
-        backPanel.repaint();
+        SwingUtilities.invokeLater(backPanel::repaint);
+        artWorkIsDefault = false;
+      } else if(!artWorkIsDefault) {
+        Debugger.warn("Artwork reset!");
+        artWork.setIcon(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        SwingUtilities.invokeLater(backPanel::repaint);
+        artWorkIsDefault = true;
+      } else {
+        Debugger.warn("No artwork found, doing nothing...");
       }
-      infoDisplay.revalidate();
       dispatchEvents();
     }
   }
@@ -292,7 +302,6 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
         "</span></p></body></html>");
   }
 
-
   /**
    * @return AudioInfo
    */
@@ -300,15 +309,13 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
     return info;
   }
 
-
   /**
    * @param e
    */
   @Override
   public void componentResized(ComponentEvent e) {
-    backPanel.repaint();
+    // FOR FUTURE IMPLEMENTATIONS
   }
-
 
   /**
    * @param e
@@ -318,7 +325,6 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
     // IGNORED
   }
 
-
   /**
    * @param e
    */
@@ -327,21 +333,11 @@ public class InfoViewTP extends JPanel implements ComponentListener, TailwindLis
     // IGNORED
   }
 
-
   /**
    * @param e
    */
   @Override
   public void componentHidden(ComponentEvent e) {
     // IGNORED
-  }
-
-
-  /**
-   * @param event
-   */
-  @Override
-  public void genericUpdate(TailwindEvent event) {
-    setAssets(new File(event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
   }
 }

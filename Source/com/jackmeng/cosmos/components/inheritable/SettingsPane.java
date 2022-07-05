@@ -17,7 +17,24 @@ package com.jackmeng.cosmos.components.inheritable;
 
 import javax.swing.*;
 
-public class SettingsPane extends JFrame {
+/**
+ * Literally reads the properties from ResourceFolder's
+ * property manager and determine what to do.
+ *
+ * @author Jack Meng
+ * @since 3.1
+ */
+public class SettingsPane extends JFrame implements Runnable {
   public SettingsPane() {
+  }
+
+  private void ak() {
+    pack();
+    setVisible(true);
+  }
+
+  @Override
+  public void run() {
+    SwingUtilities.invokeLater(this::ak);
   }
 }
