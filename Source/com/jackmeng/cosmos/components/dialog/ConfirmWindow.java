@@ -43,8 +43,7 @@ import com.jackmeng.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
   /**
@@ -106,6 +105,13 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     setResizable(false);
     add(container, BorderLayout.NORTH);
     add(jp, BorderLayout.SOUTH);
+
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        dispatchConfirmationEvents(false);
+      }
+    });
 
     getContentPane().add(container);
   }

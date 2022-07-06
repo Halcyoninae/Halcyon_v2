@@ -19,6 +19,7 @@ import com.jackmeng.cosmos.ThreadedScheduler;
 import com.jackmeng.cosmos.components.bbloc.BBlocButton;
 import com.jackmeng.cosmos.components.bbloc.BBlocView;
 import com.jackmeng.cosmos.components.bbloc.buttons.*;
+import com.jackmeng.cosmos.components.dialog.ConfirmWindow;
 import com.jackmeng.cosmos.components.dialog.ErrorWindow;
 import com.jackmeng.cosmos.components.dialog.LoadingDialog;
 import com.jackmeng.cosmos.components.toppane.TopPane;
@@ -100,33 +101,8 @@ public class Halcyon {
    */
   public static com.jackmeng.cosmos.components.BigContainer bgt;
 
-  /**
-   * No arguments are taken from the entry point
-   *
-   * @param args Null arguments
-   * @throws UnsupportedEncodingException
-   */
-  public static void main(String... args) {
-
-    if (args.length > 0) {
-      if (args[0].equals("-debug")) {
-        ProjectManager.DEBUG_PROGRAM = true;
-        Debugger.DISABLE_DEBUGGER = false;
-      }
-    }
+  private static void run() {
     try {
-      ResourceFolder.checkResourceFolder(
-          ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
-      for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
-        ResourceFolder.createFolder(str);
-      }
-
-      ResourceFolder.pm.checkAllPropertiesExistence();
-
-      Debugger.good("Loading encoding as: " + TextParser.getPropertyTextEncodingName());
-
-      new ThreadedScheduler();
-
       LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
 
       SwingUtilities.invokeLater(() -> {
@@ -192,6 +168,52 @@ public class Halcyon {
           dp.start();
         }
       });
+    } catch (Exception e) {
+      ResourceFolder.dispatchLog(e);
+    }
+  }
+
+  /**
+   * No arguments are taken from the entry point
+   *
+   * @param args Null arguments
+   * @throws UnsupportedEncodingException
+   */
+  public static void main(String... args) {
+
+    if (args.length > 0) {
+      if (args[0].equals("-debug")) {
+        ProjectManager.DEBUG_PROGRAM = true;
+        Debugger.DISABLE_DEBUGGER = false;
+      }
+    }
+    try {
+      ResourceFolder.checkResourceFolder(
+          ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
+      for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
+        ResourceFolder.createFolder(str);
+      }
+
+      ResourceFolder.pm.checkAllPropertiesExistence();
+
+      Debugger.good("Loading encoding as: " + TextParser.getPropertyTextEncodingName());
+      new ThreadedScheduler();
+
+      if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+        new ConfirmWindow(
+            "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
+            new ConfirmWindow.ConfirmationListener() {
+              @Override
+              public void onStatus(boolean status) {
+                if (status)
+                  run();
+                else
+                  System.exit(0);
+              }
+            }).run();
+      } else {
+        run();
+      }
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);
       new ErrorWindow(ex.toString()).run();
