@@ -16,15 +16,8 @@
 package com.jackmeng.tailwind;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
-
-import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.FolderInfo;
-import com.jackmeng.halcyon.utils.VirtualFolder;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 /**

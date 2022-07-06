@@ -229,13 +229,14 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         artWork.setIcon(new ImageIcon(bi));
         SwingUtilities.invokeLater(backPanel::repaint);
         artWorkIsDefault = false;
-      } else if(!artWorkIsDefault) {
+      } else {
         Debugger.warn("Artwork reset!");
-        artWork.setIcon(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        BufferedImage bi = DeImage
+            .resizeNoDistort(DeImage.imageIconToBI(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON), 108, 108);
+        bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
+        artWork.setIcon(new ImageIcon(bi));
         SwingUtilities.invokeLater(backPanel::repaint);
         artWorkIsDefault = true;
-      } else {
-        Debugger.warn("No artwork found, doing nothing...");
       }
       dispatchEvents();
     }

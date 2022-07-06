@@ -15,7 +15,9 @@
 
 package com.jackmeng.tailwind;
 
-import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.cosmos.components.dialog.ErrorWindow;
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.tailwind.simple.FileFormat;
 
@@ -62,16 +64,15 @@ public class TailwindPlayer implements Audio, Runnable {
   private SourceDataLine line;
   private FileFormat format;
   private Map<String, Control> controlTable;
-  private boolean open, paused, playing, fadeStop = false;
+  private boolean open, paused, playing;
   private AudioInputStream ais;
   private long microsecondLength, frameLength;
   private ExecutorService worker;
   private final Object referencable = new Object();
   private final TailwindEventManager events;
-  private float currDb = 0F, targetDB = 0F, faderPerStep = 0.1F;
 
   // PUBLIC STATIC UTIL
-  public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance";
+  public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
 
   public TailwindPlayer() {
     events = new TailwindEventManager();
@@ -113,7 +114,8 @@ public class TailwindPlayer implements Audio, Runnable {
       events.dispatchStatusEvent(TailwindStatus.OPEN);
       events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
     } catch (Exception e) {
-      e.printStackTrace();
+      new ErrorWindow("There was an error reading this file!").run();
+      ResourceFolder.dispatchLog(e);
     }
   }
 
@@ -275,7 +277,13 @@ public class TailwindPlayer implements Audio, Runnable {
   public void setBalance(float balance) {
     FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
     bal.setValue(
-        balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())) * 5);
+        balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+  }
+
+  public void setPan(float pan) {
+    FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
+    ctrl.setValue(
+        pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
   }
 
   /**
@@ -283,6 +291,7 @@ public class TailwindPlayer implements Audio, Runnable {
    */
   @Override
   public void setMute(boolean mute) {
+    throw new UnsupportedOperationException("This method should not be used directly via the Tailwind Implementation!");
   }
 
   @Override
@@ -404,7 +413,6 @@ public class TailwindPlayer implements Audio, Runnable {
   public void run() {
     if (line != null) {
       line.start();
-
       byte[] buffer = new byte[ais.getFormat().getFrameSize()];
       int i;
       while (!worker.isShutdown()) {
@@ -412,7 +420,7 @@ public class TailwindPlayer implements Audio, Runnable {
           try {
             while (playing && !paused && (i = ais.read(buffer)) > -1)
               line.write(buffer, 0, i);
-            buffer = null;
+            Wrapper.async(() -> events.dispatchNewBufferEvent(buffer));
             if (!paused) {
               reset();
               playing = false;

@@ -127,6 +127,7 @@ public class BottomPane extends JTabbedPane {
     add(new File(folder).getName(), list);
     TabButton button = new TabButton(this);
     setTabComponentAt(getTabCount() - 1, button);
+    setToolTipTextAt(getTabCount() - 1, folder);
     tabsMap.put(folder, getTabCount() - 1);
     button.setListener(new TabButton.RemoveTabListener() {
       @Override

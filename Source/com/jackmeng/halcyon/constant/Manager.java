@@ -164,6 +164,7 @@ public interface Manager {
 
   final String SETTINGS_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/settings_normal.png";
   final String SETTINGS_BUTTON_PRESSED_ICON = RSC_FOLDER_NAME + "/bbloc/settings_pressed.png";
+  final String SLIDERS_BUTTON_DEFAULT_ICON = RSC_FOLDER_NAME + "/bbloc/sliders.png";
   final String SETTINGS_BUTTON_TOOLTIP = "Open the settings dialog.";
 
   final String PROJECTPAGE_BUTTON_TOOLTIP = "Visit this project's GitHub page.";

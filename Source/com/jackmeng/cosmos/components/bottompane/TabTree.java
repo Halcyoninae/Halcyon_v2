@@ -37,4 +37,9 @@ public interface TabTree {
    * @return The selected node's name.
    */
   String getSelectedNode(DefaultMutableTreeNode node);
+
+  /**
+   * @return The Path of the absolute tree being represented
+   */
+  String getPath();
 }

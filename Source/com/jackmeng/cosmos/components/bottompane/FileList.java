@@ -79,7 +79,6 @@ public class FileList extends JScrollPane implements TabTree {
     setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
     setBorder(null);
-
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
@@ -111,7 +110,6 @@ public class FileList extends JScrollPane implements TabTree {
   }
 
   public FileList(FolderInfo info) {
-    super();
     this.info = info;
     fileMap = new HashMap<>();
     root = new DefaultMutableTreeNode(info.getName());
@@ -247,5 +245,10 @@ public class FileList extends JScrollPane implements TabTree {
       }
     }
     return "";
+  }
+
+  @Override
+  public String getPath() {
+    return info.getAbsolutePath();
   }
 }

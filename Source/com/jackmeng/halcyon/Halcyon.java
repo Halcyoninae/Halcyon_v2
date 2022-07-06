@@ -142,6 +142,7 @@ public class Halcyon {
         ArrayList<BBlocButton> bb = new ArrayList<>();
         bb.add(new AddFolder());
         bb.add(new RefreshFileView());
+        bb.add(new SlidersControl());
         bb.add(new MinimizePlayer());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
@@ -191,8 +192,6 @@ public class Halcyon {
           dp.start();
         }
       });
-
-      // IGNORED FOR NOW: Global.ifp.addInfoViewUpdateListener(new Discordo());
     } catch (Exception ex) {
       ResourceFolder.dispatchLog(ex);
       new ErrorWindow(ex.toString()).run();

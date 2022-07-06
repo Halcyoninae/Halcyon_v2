@@ -15,35 +15,45 @@
 
 package com.jackmeng.cosmos.components.dialog;
 
+import java.awt.Dimension;
+
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+
+import com.jackmeng.halcyon.Halcyon;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 
-import javax.swing.*;
-import java.awt.*;
+public class StraightTextDialog extends JFrame implements Runnable {
+  private JScrollPane pane;
+  private JEditorPane text;
 
-public class ErrorWindow extends JFrame implements Runnable {
-  public ErrorWindow(String content) {
-    super(Manager.DIALOG_ERROR_WIN_TITLE);
+  public StraightTextDialog(String content) {
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setPreferredSize(new Dimension(Manager.DIALOG_ERROR_MIN_WIDTH, Manager.DIALOG_ERROR_MIN_HEIGHT));
-    setLocationRelativeTo(null);
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    setResizable(false);
-    JTextArea jt = new JTextArea(content);
-    jt.setEditable(false);
-    JScrollPane scrollPane = new JScrollPane(jt);
-    scrollPane.setPreferredSize(new Dimension(Manager.DIALOG_ERROR_MIN_WIDTH, Manager.DIALOG_ERROR_MIN_HEIGHT));
-    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    getContentPane().add(scrollPane);
+    setTitle("Information");
+    setPreferredSize(new Dimension(250, 100));
+    setAutoRequestFocus(true);
+
+    text = new JEditorPane("text/html", content);
+    text.setEditable(false);
+    text.setFocusable(false);
+
+    pane = new JScrollPane(text);
+    pane.setPreferredSize(new Dimension(250, 100));
+    pane.getViewport().setPreferredSize(new Dimension(250, 100));
+
+    setLocationRelativeTo(Halcyon.bgt.getFrame());
+
+    setContentPane(pane);
   }
 
   @Override
   public void run() {
     SwingUtilities.invokeLater(() -> {
-      this.pack();
-      this.setAlwaysOnTop(true);
-      this.setVisible(true);
+      pack();
+      setVisible(true);
     });
   }
 }

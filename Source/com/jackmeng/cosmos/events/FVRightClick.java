@@ -18,6 +18,7 @@ package com.jackmeng.cosmos.events;
 import com.jackmeng.cosmos.components.bottompane.TabTree;
 import com.jackmeng.cosmos.components.dialog.AudioInfoDialog;
 import com.jackmeng.cosmos.components.dialog.ErrorWindow;
+import com.jackmeng.cosmos.components.dialog.StraightTextDialog;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.constant.StringManager;
@@ -106,22 +107,25 @@ public class FVRightClick extends MouseAdapter {
         }
 
         JPopupMenu popup = new JPopupMenu();
-        JMenuItem refreshMenuItem = new JMenuItem(hideString);
-        refreshMenuItem.addActionListener(ev -> {
-            try {
-                DefaultMutableTreeNode parent = (DefaultMutableTreeNode) rcNode.getParent();
-                parent.remove(rcNode);
-                DefaultTreeModel model = (DefaultTreeModel) t.getModel();
-                model.reload();
-                tree.remove(rcNode.toString());
-                if (hideTask != null) {
-                    Debugger.unsafeLog("Dispatching hide_task callable...");
-                    hideTask.onRemove(tree.getSelectedNode(rcNode));
+        JMenuItem refreshMenuItem = null;
+        if (!rcNode.equals(t.getModel().getRoot())) {
+            refreshMenuItem = new JMenuItem(hideString);
+            refreshMenuItem.addActionListener(ev -> {
+                try {
+                    DefaultMutableTreeNode parent = (DefaultMutableTreeNode) rcNode.getParent();
+                    parent.remove(rcNode);
+                    DefaultTreeModel model = (DefaultTreeModel) t.getModel();
+                    model.reload();
+                    tree.remove(rcNode.toString());
+                    if (hideTask != null) {
+                        Debugger.unsafeLog("Dispatching hide_task callable...");
+                        hideTask.onRemove(tree.getSelectedNode(rcNode));
+                    }
+                } catch (NullPointerException excec) {
+                    // IGNORED
                 }
-            } catch (NullPointerException excec) {
-                new ErrorWindow("Hiding the root node is not allowed.").run();
-            }
-        });
+            });
+        }
 
         JMenuItem audioInfoItem = new JMenuItem("Information");
         audioInfoItem.addActionListener(ev -> {
@@ -129,14 +133,15 @@ public class FVRightClick extends MouseAdapter {
                 if (!rcNode.equals(t.getModel().getRoot())) {
                     new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
                 } else {
-                    new ErrorWindow("This selected node has no valid audio information.").run();
+                    new StraightTextDialog(
+                            "<html><body><p><strong>Folder:</strong> " + tree.getPath() + "</p></body></html>").run();
                 }
             } catch (NullPointerException excec) {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
             }
         });
-
-        popup.add(refreshMenuItem);
+        if (refreshMenuItem != null)
+            popup.add(refreshMenuItem);
         popup.add(audioInfoItem);
         popup.show(t, x, y);
 
