@@ -14,8 +14,13 @@ playing needs.
 > Notice: This is not a guide on how to use the program, instead just a simple README for the main repository. A user-guide markdown document will be created later.
 
 ### Version Info
-This README is updated for the version: 3.2 [For the program]<br>
+This README is for version: 3.0 
 This README's constant version is 3.0 [For the iteration]
+
+You can check [VERSION](./VERSION) for everything related to versioning information. (*Also, everything starts at 3.0 because this technically the 3rd
+main iteration of the original project titled: MP4J which went up to 2.0. You can find this project linked above.*)
+
+Note: For every +1.0 version in experimental build, the iteration version goes up by 0.1!
 
 This program currently has a lot of features yet to be implemented. And with these new additions also bring a lot of new bugs that needs
 fixing!
