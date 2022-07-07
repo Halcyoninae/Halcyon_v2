@@ -78,6 +78,8 @@ The most common naming for class files and classes in general is with endings of
 
 In all subclasses for the GUI part of the program, all packages will have either an interface named after the package or a class that designates the usage of the package. For example, package `com.jackmeng.cosmos.components.bottompane` has a container class called `BottomPane` which signifies it is the main entry point into that package. To put it simply, an entry point class is the only thing that is imported during runtime. The Entry Point class handles everything else that is part of the same package. (IDK)
 
+You can also find the JavaDocs here: [here](https://yttrium-terminus.github.io/halcyon/) OR [here](./docs)
+
 ## Contributing
 
 The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](External/BUGS.txt) OR [FEATURES](External/FEATURES.txt) files via a pull request. I will then review it from there.
