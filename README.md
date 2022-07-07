@@ -1,6 +1,6 @@
 # Halcyon (MP4J 3.0)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/09115c9807c64bfbb92e6bc4bc71c48b)](https://www.codacy.com/gh/exoad/halcyon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=exoad/halcyon&amp;utm_campaign=Badge_Grade) [![Codacy Security Scan](https://github.com/exoad/halcyon/actions/workflows/codacy.yml/badge.svg)](https://github.com/exoad/halcyon/actions/workflows/codacy.yml) [![DevSkim](https://github.com/exoad/halcyon/actions/workflows/devskim.yml/badge.svg)](https://github.com/exoad/halcyon/actions/workflows/devskim.yml) [![Codespaces Prebuilds](https://github.com/exoad/halcyon/actions/workflows/codespaces/create_codespaces_prebuilds/badge.svg)](https://github.com/exoad/halcyon/actions/workflows/codespaces/create_codespaces_prebuilds)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/09115c9807c64bfbb92e6bc4bc71c48b)](https://www.codacy.com/gh/exoad/halcyon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=exoad/halcyon&amp;utm_campaign=Badge_Grade) [![DevSkim](https://github.com/exoad/halcyon/actions/workflows/devskim.yml/badge.svg)](https://github.com/exoad/halcyon/actions/workflows/devskim.yml) [![Codespaces Prebuilds](https://github.com/exoad/halcyon/actions/workflows/codespaces/create_codespaces_prebuilds/badge.svg)](https://github.com/exoad/halcyon/actions/workflows/codespaces/create_codespaces_prebuilds) [![pages-build-deployment](https://github.com/Yttrium-Terminus/halcyon/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Yttrium-Terminus/halcyon/actions/workflows/pages/pages-build-deployment)
 
 [![Download Halcyon](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/halcyon4j/files/latest/download)
 
@@ -77,6 +77,8 @@ to view the documentation via the prettified way.
 The most common naming for class files and classes in general is with endings of "-Manager". These class files contain runtime constants, that either can be modified or are constants. Changing these constants are like changing the properties file for the program. Furthermore, these properties and values are not commented (bc I don't have time) and you should proceed with caution when changing a value.
 
 In all subclasses for the GUI part of the program, all packages will have either an interface named after the package or a class that designates the usage of the package. For example, package `com.jackmeng.cosmos.components.bottompane` has a container class called `BottomPane` which signifies it is the main entry point into that package. To put it simply, an entry point class is the only thing that is imported during runtime. The Entry Point class handles everything else that is part of the same package. (IDK)
+
+You can also find the JavaDocs here: [here](https://yttrium-terminus.github.io/halcyon/) OR [here](./docs)
 
 ## Contributing
 
