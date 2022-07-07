@@ -4,7 +4,7 @@
 
 [![Download Halcyon](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/halcyon4j/files/latest/download)
 
-*Copyright (C) 2021-2022 Halcyon (MP4J) to Jack Meng*
+*Copyright (C) 2021-2022 Halcyon (MP4J) to Jack Meng & Yttrium Terminus*
 
 > This is rework of an original project by me [MP4J](https://github.com/Exoad4JVM/mp4j)
 
@@ -91,6 +91,9 @@ This program uses external libraries and framework, and their attributed license
 can be found [here](LICENSE.txt).
 
 Any copyright or legals to do with the audio being played is at the expense of the end-user.
+
+The Yttrium applies to the distribution of this program with Yttrium being a right holder. (This signed to be both Jack Meng & Yttrium to be right holders, 
+no other person or organization is allowed to obtain right holding).
 
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
