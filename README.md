@@ -92,6 +92,9 @@ can be found [here](LICENSE.txt).
 
 Any copyright or legals to do with the audio being played is at the expense of the end-user.
 
+The Yttrium applies to the distribution of this program with Yttrium being a right holder. (This signed to be both Jack Meng & Yttrium to be right holders, 
+no other person or organization is allowed to obtain right holding).
+
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
 <img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
