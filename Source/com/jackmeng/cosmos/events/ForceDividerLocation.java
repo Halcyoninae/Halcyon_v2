@@ -32,7 +32,7 @@ public class ForceDividerLocation implements PropertyChangeListener {
 
   /**
    * @param e The JSplitPane instance
-   * @param threshold The threshold (center+threshold & center-threshold)
+   * @param threshold The threshold (center+threshold and center-threshold)
    */
   public ForceDividerLocation(JSplitPane e, int threshold) {
     this.e = e;

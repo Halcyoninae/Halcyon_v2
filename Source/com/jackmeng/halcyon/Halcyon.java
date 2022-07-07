@@ -47,19 +47,19 @@ import java.util.ArrayList;
  * <br>
  * The Halcyon Music Player is a 3.0 iteration
  * of the original MP4J project, which you can find
- * here: {@linkplain https://github.com/Exoad4JVM/mp4j}.
+ * here: https://github.com/Exoad4JVM/mp4j.
  * However this program iteration is designed to be much
  * more optimized and have a better audio engine with less
  * restrictive licensing towards any end users, including,
  * me being the author of this program.
  * <br>
  * This program is licensed under the GPL-2.0 license:
- * {@linkplain https://www.gnu.org/licenses/gpl-2.0.html}
+ * https://www.gnu.org/licenses/gpl-2.0.html
  * <br>
  * A copy of the license must be attached to all distributions
  * and copies of this program, source code, and associated linked
  * libraries. If you have not received a copy of the license, please
- * contact me at: {@link mailto://jackmeng0814@gmail.com}
+ * contact me at: mailto://jackmeng0814@gmail.com
  *
  * Any external libraries used by this program including the audio
  * engine are licensed separately and are included in this program,
@@ -177,19 +177,19 @@ public class Halcyon {
    * No arguments are taken from the entry point
    *
    * @param args Null arguments
-   * @throws UnsupportedEncodingException
    */
   public static void main(String... args) {
-
     if (args.length > 0) {
       if (args[0].equals("-debug")) {
         ProjectManager.DEBUG_PROGRAM = true;
         Debugger.DISABLE_DEBUGGER = false;
       }
     }
+
     try {
       ResourceFolder.checkResourceFolder(
           ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
+
       for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
         ResourceFolder.createFolder(str);
       }

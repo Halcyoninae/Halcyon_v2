@@ -25,19 +25,12 @@ import javax.sound.sampled.FloatControl;
 import java.io.File;
 
 /**
- * A simplified version of the {@link com.jackmeng.test.Audio} interface
- * and all of it's subsets in order to make it easier to communicate with and
- * utilize
- * in the final program.
- *
  * This simplification is due to some of the methods not being to be needed and
  * to
  * have much more control over the playback library and to make it a global
  * scope player instead of having to reinit everything on something new.
  *
  * @author Jack Meng
- * @see com.jackmeng.test.Audio
- * @see com.jackmeng.test.StreamedAudio
  * @since 3.0
  */
 public class Player {

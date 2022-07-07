@@ -127,7 +127,7 @@ public class LikeList extends FileList {
    * Returns the virtual folder representing
    * this viewport.
    *
-   * @return {@link com.jackmeng.utils.VirtualFolder}
+   * @return {@link com.jackmeng.halcyon.utils.VirtualFolder}
    */
   public VirtualFolder getFolder() {
     return folder;

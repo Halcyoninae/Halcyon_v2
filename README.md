@@ -63,7 +63,7 @@ may file a bug report for this modification or a pull request to fix the issue d
 ## Current
 
 Currently this program is still in development and is not yet ready for consumer usage,
-with yet some missing features and bugs. (Check out [BUGS](docs/BUGS.txt) & [FEATURES](docs/FEATURES.txt)).
+with yet some missing features and bugs. (Check out [BUGS](External/BUGS.txt) & [FEATURES](External/FEATURES.txt)).
 
 However, improvements upon it's backend audio framework will be needed in order to introduce newer features to the program.
 
@@ -80,7 +80,7 @@ In all subclasses for the GUI part of the program, all packages will have either
 
 ## Contributing
 
-The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](docs/BUGS.txt) OR [FEATURES](docs/FEATURES.txt) files via a pull request. I will then review it from there.
+The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](External/BUGS.txt) OR [FEATURES](External/FEATURES.txt) files via a pull request. I will then review it from there.
 
 Why you may ask? It is because adding this PR only feature allows me to better look at the issues on my side without having to pull up GitHub or another
 Git service every time I want to look at issues.

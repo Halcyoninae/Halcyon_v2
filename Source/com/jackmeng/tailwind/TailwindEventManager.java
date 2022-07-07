@@ -81,7 +81,7 @@ public class TailwindEventManager {
 
 
   /**
-   * @return List<TimeUpdateListener>
+   * @return e
    */
   public List<TailwindListener.TimeUpdateListener> getTimeListeners() {
     return timeListeners;
@@ -89,7 +89,7 @@ public class TailwindEventManager {
 
 
   /**
-   * @return List<StatusUpdateListener>
+   * @return e
    */
   public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
     return statusUpdateListeners;
@@ -97,7 +97,7 @@ public class TailwindEventManager {
 
 
   /**
-   * @return List<GenericUpdateListener>
+   * @return e
    */
   public List<TailwindListener.GenericUpdateListener> getGenericUpdateListeners() {
     return genericUpdateListeners;
@@ -105,7 +105,7 @@ public class TailwindEventManager {
 
 
   /**
-   * @return List<FrameBufferListener>
+   * @return e
    */
   public List<TailwindListener.FrameBufferListener> getFrameBufferListeners() {
     return bufferListeners;

@@ -35,7 +35,7 @@ public class PlooginManager {
 
 
   /**
-   * @return Set<Pair<Class<?>, Ploogin>>
+   * @return e
    */
   public static Set<Pair<Class<?>, Ploogin>> getPloogins() {
     return ploogins;

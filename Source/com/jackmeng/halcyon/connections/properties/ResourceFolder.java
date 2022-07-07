@@ -44,12 +44,7 @@ import org.w3c.dom.Text;
  * ResourceFolder is a general class that holds information about
  * the external resource folder.
  *
- * The resource folder is named under the name "halcyon-mp4j" it is
- * a constant viewed in {@link project.constants.ProjectManager}
- *
- * For example, it can read and write to the resource folder,
- * and read properties file using
- * {@link project.connection.resource.PropertiesManager}
+ * The resource folder is named under the name "halcyon-mp4j".
  *
  * @author Jack Meng
  * @since 2.1
@@ -85,7 +80,7 @@ public class ResourceFolder {
   }
 
   /**
-   * Based on the folders needed in {@link project.constants.ProjectManager},
+   * Based on provided folders
    * it checks if these subfolders exists from within the main resource folder.
    *
    * If a folder does not exist, it will be created under the main resource

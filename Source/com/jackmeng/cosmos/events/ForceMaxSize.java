@@ -36,7 +36,6 @@ public class ForceMaxSize implements ComponentListener {
 
   /**
    * Constructs this object instance with the necessary instance variables.
-   * @param c The JFrame instance
    * @param MAX_WIDTH
    * @param MAX_HEIGHT
    * @param MIN_WIDTH

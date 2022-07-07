@@ -28,7 +28,7 @@ import java.util.Map;
  *
  * @author Jack Meng
  * @since 3.0
- * @see com.jackmeng.app.connection.properties.ResourceFolder
+ * @see com.jackmeng.halcyon.connections.properties.ResourceFolder
  */
 public class ProgramResourceManager {
 

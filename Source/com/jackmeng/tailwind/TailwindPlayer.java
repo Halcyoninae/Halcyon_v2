@@ -378,7 +378,7 @@ public class TailwindPlayer implements Audio, Runnable {
   /**
    * @param line
    * @param table
-   * @return Map<String, Control>
+   * @return e
    */
   private static Map<String, Control> setControls(Line line, Map<String, Control> table) {
     Map<String, Control> temp = new HashMap<>();
@@ -403,7 +403,7 @@ public class TailwindPlayer implements Audio, Runnable {
   }
 
   /**
-   * @return Map<String, Control>
+   * @return e
    */
   public Map<String, Control> getControls() {
     return controlTable;
