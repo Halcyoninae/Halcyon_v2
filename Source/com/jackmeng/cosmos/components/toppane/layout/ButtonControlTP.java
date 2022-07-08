@@ -176,6 +176,7 @@ public class ButtonControlTP extends JPanel
     progressSlider.setValue(0);
     progressSlider.setFocusable(false);
     progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
+    progressSlider.setBackground(ColorManager.MAIN_BG_THEME);
     progressSlider.setBorder(null);
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(this);

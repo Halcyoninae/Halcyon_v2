@@ -28,7 +28,8 @@ import java.awt.*;
  * @since 3.0
  */
 public interface ColorManager {
-  final Color MAIN_FG_THEME = ColorTool.hexToRGBA("#FED46D");
-  final String MAIN_FG_STR = "#FED46D";
+  final Color MAIN_FG_THEME = ColorTool.hexToRGBA("#6bedb5");
+  final String MAIN_FG_STR = "#6bedb5";
   final Color BORDER_THEME = ColorTool.hexToRGBA("#5F657D");
+  final Color MAIN_BG_THEME = ColorTool.hexToRGBA("#cef5e6");
 }
