@@ -20,6 +20,8 @@ import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.tailwind.TailwindListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,7 +39,7 @@ import java.awt.*;
  * @author Jack Meng
  * @since 3.0
  */
-public class BigContainer implements Runnable {
+public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
   private JFrame container;
 
   /**
@@ -46,7 +48,7 @@ public class BigContainer implements Runnable {
    *
    * @param mainPane The JSplitPane instance to attach with
    */
-  public BigContainer(JSplitPane mainPane) {
+  public Cosmos(JSplitPane mainPane) {
     mainPane.setBorder(BorderFactory.createEmptyBorder());
     container = new JFrame("Halcyon Beta ~ exoad");
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
@@ -67,9 +69,6 @@ public class BigContainer implements Runnable {
     container.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     container.setMinimumSize(container.getPreferredSize());
-    // container.addComponentListener(
-    // new ForceMaxSize(container, Manager.MAX_WIDTH, Manager.MAX_HEIGHT,
-    // Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
     container.getContentPane().add(mainPane);
 
     container.addWindowListener(new InstantClose());
@@ -90,6 +89,19 @@ public class BigContainer implements Runnable {
     container.pack();
     container.setLocationRelativeTo(null);
     container.setVisible(true);
+  }
+
+  @Override
+  public void statusUpdate(TailwindStatus status) {
+    if (status.equals(TailwindStatus.PLAYING)) {
+      container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_GREEN_LOGO).getImage());
+    } else if (status.equals(TailwindStatus.OPEN)) {
+      container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_BLUE_LOGO).getImage());
+    } else if (status.equals(TailwindStatus.PAUSED)) {
+      container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_RED_LOGO).getImage());
+    } else {
+      container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+    }
   }
 
 }

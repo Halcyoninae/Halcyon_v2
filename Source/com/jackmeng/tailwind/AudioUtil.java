@@ -15,6 +15,7 @@
 
 package com.jackmeng.tailwind;
 
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.AudioFormat;

@@ -99,7 +99,7 @@ public class Halcyon {
    * This is the only instance of a variable
    * being placed here.
    */
-  public static com.jackmeng.cosmos.components.BigContainer bgt;
+  public static com.jackmeng.cosmos.components.Cosmos bgt;
 
   private static void run() {
     try {
@@ -133,7 +133,7 @@ public class Halcyon {
         bottom.add(Global.bp);
 
         JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-        bgt = new com.jackmeng.cosmos.components.BigContainer(m);
+        bgt = new com.jackmeng.cosmos.components.Cosmos(m);
         Global.bp.pokeewFileList(Global.ll);
 
         FolderInfo[] fi = Program.fetchSavedPlayLists();
