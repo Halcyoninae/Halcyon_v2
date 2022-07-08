@@ -104,5 +104,5 @@ no other person or organization is allowed to obtain right holding).
 <img src="External/unknown.png" alt="sc1" width="35%" height="35%" />
 <img src="External/unknown2.png" alt="sc2" width="35%" height="35%" />
 <br>
-*Followign 1 img is from early 3.2*
+*Following 1 img is from early 3.2*
 <img src="External/unknown3.png" alt="sc3" width="35%" height="35%" />
