@@ -178,11 +178,16 @@ public class ButtonControlTP extends JPanel
     progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
     progressSlider.setBackground(ColorManager.MAIN_BG_THEME);
     progressSlider.setBorder(null);
+    progressSlider.putClientProperty("Slider.thumbSize", new java.awt.Dimension(0, 0));
+    progressSlider.putClientProperty("Slider.trackWidth", 15);
+    progressSlider.putClientProperty("Slider.thumBorderWidth", 0);
+    progressSlider.repaint();
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(this);
     new Thread(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
+
           progressSlider
               .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
                   / Global.player.getStream().getLength()));
@@ -192,6 +197,7 @@ public class ButtonControlTP extends JPanel
                   (int) (Global.player.getStream().getPosition() % 60000) / 1000,
                   (int) (Global.player.getStream().getLength() / 60000),
                   (int) (Global.player.getStream().getLength() % 60000) / 1000));
+                  
         }
         try {
           Thread.sleep(30);

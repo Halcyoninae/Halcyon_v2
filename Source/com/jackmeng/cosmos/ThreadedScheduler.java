@@ -19,8 +19,12 @@ import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.jackmeng.cosmos.tasks.DefunctOptimizer;
 import com.jackmeng.cosmos.tasks.PingFileView;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
+import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+
+import java.awt.Color;
 
 import javax.swing.*;
 
@@ -44,7 +48,22 @@ public class ThreadedScheduler {
   static {
     System.setProperty("file.encoding", "utf-8");
     System.setProperty("sun.jnu.encoding", "utf-8");
-    System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
+    System.setProperty("flatlaf.useJetBrainsCustomDecorations", "false");
+    UIManager.put("ScrollBar.thumbArc", 999);
+    UIManager.put("TabbedPane.showTabSeparators", true);
+    UIManager.put("ScrollBar.showButtons", false);
+    UIManager.put("TitlePane.closeHoverBackground", ColorManager.MAIN_FG_THEME);
+    UIManager.put("TitlePane.closePressedBackground", ColorManager.MAIN_FG_THEME);
+    UIManager.put("TitlePane.buttonHoverBackground", ColorManager.MAIN_FG_THEME);
+    UIManager.put("TitlePane.buttonPressedBackground", ColorManager.MAIN_FG_THEME);
+    UIManager.put("TitlePane.closeHoverForeground", ColorManager.MAIN_BG_THEME);
+    UIManager.put("TitlePane.closePressedForeground", ColorManager.MAIN_BG_THEME);
+    UIManager.put("TitlePane.buttonHoverForeground", ColorManager.MAIN_BG_THEME);
+    UIManager.put("TitlePane.buttonPressedForeground", ColorManager.MAIN_BG_THEME);
+    UIManager.put("TitlePane.centerTitle", true);
+    UIManager.put("TitlePane.buttonSize", new java.awt.Dimension(25,20));
+    UIManager.put("TitlePane.unifiedBackground", true);
+    UIManager.put("SplitPaneDivider.gripDotCount", 0);
     System.setOut(null);
     System.setProperty("sun.java2d.uiScale", ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_HIDPI_VALUE));
     UIManager.put("FileChooser.readOnly", true);
