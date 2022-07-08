@@ -99,5 +99,5 @@ no other person or organization is allowed to obtain right holding).
 
 ## Screenshots
 *Note these are not the latest screenshots for the current main branch.*<br>
-<img src="docs/unknown.png" alt="sc1" width="35%" height="35%" />
-<img src="docs/unknown2.png" alt="sc2" width="35%" height="35%" />
+<img src="External/unknown.png" alt="sc1" width="35%" height="35%" />
+<img src="External/unknown2.png" alt="sc2" width="35%" height="35%" />
