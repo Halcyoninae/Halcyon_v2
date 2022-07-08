@@ -1,3 +1,8 @@
+{!URGENT!} [***] #28 "Unable to read URL Format"
+      Detailed Description: UTF encoding
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+
 [**] #27 "Dual kpbs in sub"
       Detailed Description: none
       Status: None
