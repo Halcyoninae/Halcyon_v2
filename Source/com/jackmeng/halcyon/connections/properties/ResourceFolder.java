@@ -176,17 +176,8 @@ public class ResourceFolder {
   public static boolean cacheFile(String fileName, String[] content) {
     File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
         + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
-    BufferedWriter bw = null;
     try {
-      bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),
-          TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
-              : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
-                  : StandardCharsets.UTF_16BE)));
-    } catch (Exception e) {
-      Debugger.warn(e);
-      ResourceFolder.dispatchLog(e);
-    }
-    try {
+      BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)));
       for (String str : content) {
         bw.write(str + "\n");
         bw.flush();

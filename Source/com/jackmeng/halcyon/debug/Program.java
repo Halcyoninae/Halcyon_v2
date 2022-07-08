@@ -123,7 +123,23 @@ public class Program {
     } else {
       Debugger.good("Saved playlists.");
     }
+  }
 
+  public static void createDump(Object... content) {
+    StringBuilder sb = new StringBuilder();
+    for (Object o : content) {
+      sb.append(o.toString());
+    }
+    String s = sb.toString();
+    File f = new File(
+        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/dump_" + System.currentTimeMillis() + "_.halcyon");
+    try {
+      FileWriter fw = new FileWriter(f);
+      fw.write(s);
+      fw.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public static void forcedSaveLikedTracks() {
