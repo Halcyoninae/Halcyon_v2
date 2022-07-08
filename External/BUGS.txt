@@ -1,3 +1,8 @@
+[**] #27 "Dual kpbs in sub"
+      Detailed Description: none
+      Status: None
+      State: Experimental-Build ~ MP4J
+
 [!FIXED!] {!URGENT!} [***] 26 "Liked Tracks with non ascii chars are not being stored correctly"
       Detailed description: Non ASCII chars are being replaced with "?"
       Status: FIXED; all character encoding now handled by TextParser to UTF16 (not LE or BE)
