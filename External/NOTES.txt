@@ -1,0 +1,5 @@
+#2 "Text BOM is not required for saving UTF-8 files"
+- We basically guess the text encoding before we save instead of forcing a BOM
+
+#1 "Text Encoding"
+- Some char encoding of those UTF-8 are displayed incorrectly in VSCode and is not the issue of the program itself.
