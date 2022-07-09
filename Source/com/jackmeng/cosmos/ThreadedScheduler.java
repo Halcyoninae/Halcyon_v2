@@ -25,6 +25,7 @@ import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 
 import java.awt.Color;
+import java.util.logging.LogManager;
 
 import javax.swing.*;
 
@@ -46,8 +47,6 @@ public class ThreadedScheduler {
    * be init by themselves not here.
    */
   static {
-    System.setProperty("file.encoding", "utf-8");
-    System.setProperty("sun.jnu.encoding", "utf-8");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "false");
     UIManager.put("ScrollBar.thumbArc", 999);
     UIManager.put("TabbedPane.showTabSeparators", true);
@@ -67,7 +66,10 @@ public class ThreadedScheduler {
     System.setOut(null);
     System.setProperty("sun.java2d.uiScale", ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_HIDPI_VALUE));
     UIManager.put("FileChooser.readOnly", true);
-
+    System.setProperty("sun.java2d.opengl", "true");
+    System.setProperty("sun.java2d.ddscale", "true");
+    System.setProperty("sun.java2d.translaccel", "true");
+    LogManager.getLogManager().reset();
     try {
       UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
     } catch (Exception e) {

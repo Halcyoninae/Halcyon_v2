@@ -187,17 +187,20 @@ public class ButtonControlTP extends JPanel
     new Thread(() -> {
       while (true) {
         if (Global.player.getStream().isPlaying()) {
-
-          progressSlider
-              .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
-                  / Global.player.getStream().getLength()));
-          progressSlider.setToolTipText(
-              String.format("%d:%02d / %d:%02d",
-                  (int) (Global.player.getStream().getPosition() / 60000),
-                  (int) (Global.player.getStream().getPosition() % 60000) / 1000,
-                  (int) (Global.player.getStream().getLength() / 60000),
-                  (int) (Global.player.getStream().getLength() % 60000) / 1000));
-                  
+          if (Global.player.getStream().getLength() > 0) {
+            progressSlider
+                .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
+                    / Global.player.getStream().getLength()));
+            progressSlider.setToolTipText(
+                String.format("%d:%02d / %d:%02d",
+                    (int) (Global.player.getStream().getPosition() / 60000),
+                    (int) (Global.player.getStream().getPosition() % 60000) / 1000,
+                    (int) (Global.player.getStream().getLength() / 60000),
+                    (int) (Global.player.getStream().getLength() % 60000) / 1000));
+          } else {
+            progressSlider.setValue(0);
+            progressSlider.setToolTipText("0:00 / 0:00");
+          }
         }
         try {
           Thread.sleep(30);

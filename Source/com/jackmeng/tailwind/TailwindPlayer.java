@@ -17,6 +17,7 @@ package com.jackmeng.tailwind;
 
 import com.jackmeng.cosmos.components.dialog.ErrorWindow;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.Wrapper;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.tailwind.simple.FileFormat;
@@ -92,6 +93,7 @@ public class TailwindPlayer implements Audio, Runnable {
     try {
       this.resource = url;
       this.format = FileFormat.getFormatByName(this.resource.getName());
+      Debugger.unsafeLog(resource.toURI().toURL());
       ais = AudioUtil.getAudioIS(resource.toURI().toURL());
       assert ais != null;
       microsecondLength = (long) (1000000 *

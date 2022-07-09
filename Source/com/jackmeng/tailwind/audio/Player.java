@@ -15,6 +15,7 @@
 
 package com.jackmeng.tailwind.audio;
 
+import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.TimeParser;
@@ -23,6 +24,8 @@ import com.jackmeng.tailwind.TailwindPlayer;
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * This simplification is due to some of the methods not being to be needed and
@@ -149,6 +152,7 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
+    Debugger.good(f);
     audio.open(new File(f));
     this.currentAbsolutePath = f;
     this.f = new File(f);

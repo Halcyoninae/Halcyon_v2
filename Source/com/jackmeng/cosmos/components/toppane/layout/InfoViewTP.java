@@ -98,6 +98,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         float compositeAlpha = 0.5f;
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
           compositeAlpha = 0.2f;
@@ -112,7 +113,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         BufferedImage original = Global.ifp.getInfo().getArtwork();
         if (original.getWidth() > backPanel.getWidth()
             || original.getHeight() > backPanel.getHeight()) {
-          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 2, original.getHeight() / 2,
+          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 3, original.getHeight() / 3,
               backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
         }
         if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
@@ -166,11 +167,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         .equals("true")
             ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
             : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
-    // topPanel.setLayout(
-    // new FlowLayout(
-    // FlowLayout.CENTER,
-    // Manager.INFOVIEW_FLOWLAYOUT_HGAP,
-    // getPreferredSize().height / Manager.INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN));
     topPanel.setLayout(new GridLayout(1, 3, 15,
         topPanel.getPreferredSize().height / 2));
     infoDisplay = new JLabel(infoToString(info, infoTitle));

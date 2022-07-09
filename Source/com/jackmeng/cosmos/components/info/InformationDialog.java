@@ -15,6 +15,7 @@
 
 package com.jackmeng.cosmos.components.info;
 
+import com.jackmeng.cosmos.components.info.layout.DebuggerTab;
 import com.jackmeng.cosmos.components.info.layout.FileFromSourceTab;
 import com.jackmeng.cosmos.components.info.layout.SystemTab;
 import com.jackmeng.halcyon.constant.Global;
@@ -37,7 +38,8 @@ public class InformationDialog extends JFrame implements Runnable {
             new FileFromSourceTab("Program Properties",
                     FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_PROPERTIES_DOCS)),
             new FileFromSourceTab("Legals", FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_DOCS)),
-            new SystemTab()
+            new SystemTab(),
+            new DebuggerTab()
     };
 
     public InformationDialog() {

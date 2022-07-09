@@ -17,6 +17,7 @@ package com.jackmeng.halcyon.debug;
 
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
@@ -72,11 +73,7 @@ public class Debugger {
 
   public static PrintStream out;
   static {
-    try {
-      out = new PrintStream(System.err, true, "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    }
+      out = new PrintStream(System.err, true, StandardCharsets.UTF_8);
   }
 
   public static boolean DISABLE_DEBUGGER = true;

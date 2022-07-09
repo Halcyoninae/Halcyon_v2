@@ -1,11 +1,11 @@
-{!URGENT!} [***] #28 "Unable to read URL Format"
+[!FIXED!] {!URGENT!} [***] #28 "Unable to read URL Format"
       Detailed Description: UTF encoding
-      Status: Investigating
+      Status: FIXED; Accidentally removed the SPI dependency
       State: Experimental-Build ~ MP4J
 
-[**] #27 "Dual kpbs in sub"
+[!FIXED!] [**] #27 "Dual kpbs in sub"
       Detailed Description: none
-      Status: None
+      Status: FIXED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] {!URGENT!} [***] 26 "Liked Tracks with non ascii chars are not being stored correctly"
