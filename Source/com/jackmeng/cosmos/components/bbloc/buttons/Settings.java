@@ -16,7 +16,7 @@
 package com.jackmeng.cosmos.components.bbloc.buttons;
 
 import com.jackmeng.cosmos.components.bbloc.BBlocButton;
-import com.jackmeng.cosmos.components.inheritable.SettingsPane;
+import com.jackmeng.cosmos.components.settings.SettingsPane;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.utils.DeImage;
@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
  * @since 3.0
  */
 public class Settings extends JButton implements BBlocButton {
+  private SettingsPane e = new SettingsPane();
   public Settings() {
     setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
     setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
@@ -42,6 +43,7 @@ public class Settings extends JButton implements BBlocButton {
     setBackground(null);
     addActionListener(this);
     setContentAreaFilled(false);
+
   }
 
 
@@ -59,6 +61,6 @@ public class Settings extends JButton implements BBlocButton {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    new SettingsPane();
+    this.e.run();
   }
 }

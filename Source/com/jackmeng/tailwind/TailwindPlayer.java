@@ -199,6 +199,10 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addGenericUpdateListener(e);
   }
 
+  public synchronized boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
+    return events.addFrameBufferListener(e);
+  }
+
   /**
    * @param e
    * @return boolean
@@ -420,9 +424,9 @@ public class TailwindPlayer implements Audio, Runnable {
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
-            while (playing && !paused && (i = ais.read(buffer)) > -1)
+            while (playing && !paused && (i = ais.read(buffer)) > -1) {
               line.write(buffer, 0, i);
-            Wrapper.async(() -> events.dispatchNewBufferEvent(buffer));
+            }
             if (!paused) {
               reset();
               playing = false;

@@ -1,3 +1,10 @@
+[***] #29 "File encoding varies between different dev environments"
+    Detailed Description: VSCode saving liked playlists with special UTF-8 Chars do not work
+    when reading back the data, while IntelliJ does not have this issue as it seems to support
+    the correct encoding.
+    Status: Investigating
+    State: Experimental-Build ~ MP4J
+
 [!FIXED!] {!URGENT!} [***] #28 "Unable to read URL Format"
       Detailed Description: UTF encoding
       Status: FIXED; Accidentally removed the SPI dependency

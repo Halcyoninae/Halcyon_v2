@@ -15,6 +15,7 @@
 
 package com.jackmeng.halcyon.constant;
 
+import com.jackmeng.halcyon.connections.properties.Property;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 
 import java.awt.image.BufferedImage;
@@ -32,23 +33,7 @@ import java.util.Map;
  */
 public class ProgramResourceManager {
 
-  /**
-   * A template class that holds
-   * information on a single property.
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public static class Property {
-    public String propertyName = "", defaultProperty = "";
-    public String[] allowedProperties;
 
-    public Property(String propertyName, String defaultProperty, String... allowedProperties) {
-      this.propertyName = propertyName;
-      this.defaultProperty = defaultProperty;
-      this.allowedProperties = allowedProperties;
-    }
-  }
 
   private ProgramResourceManager() {
   }

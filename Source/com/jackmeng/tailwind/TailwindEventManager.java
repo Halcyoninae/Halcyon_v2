@@ -155,10 +155,8 @@ public class TailwindEventManager {
    */
   public synchronized void dispatchNewBufferEvent(byte[] buffer) {
     Wrapper.threadedRun(() -> {
-      synchronized (bufferListeners) {
         for (TailwindListener.FrameBufferListener e : bufferListeners) {
           e.frameUpdate(buffer);
-        }
       }
     });
   }
