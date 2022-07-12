@@ -1,7 +1,9 @@
-[***] #30 "Along with using ui2DScaling, force no rescaling icons"
+{!URGENT!} [***] #30 "Along with using ui2DScaling, force no rescaling icons"
     Detailed Description: https://stackoverflow.com/questions/65742162/how-to-fix-the-blurry-image-when-i-run-my-java-swing-project
     Status: Investigating
     State: Experimental-Build ~ MP4J
+    Difficulty: Very; Need a lot of implementation to determine proper scaling factors for icons so they look right on all screen
+    form factors.
     Testing: Tested on another computer, the property for hidpi did not change the end result.
 
 [***] #29 "File encoding varies between different dev environments"
