@@ -5,6 +5,9 @@
     and not to a defined size; this factor means that the sizing can be much greater for higher
     resolution. This downplays the fact that the artwork part has to be the most strictly optimized
     part of the program.
+    ;   OK this applies to most modifiable assets such as the artwork display and the artwork backdrop
+    components, which should all fall under this bug report.
+    ;   General optimizations should also be made for the DeImage resizing and grayscaling algorithms
     Status: None
     State: Experimental-Build ~ MP4J
     Difficulty: Decent; Requires a bunch of testing to get the right size to work for all form factors
