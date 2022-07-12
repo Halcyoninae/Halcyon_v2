@@ -1,3 +1,12 @@
+[***] #36 "Refresh Processes"
+        Detailed Description: Instead of just refreshing the file views, refresh
+        other attached processes that might need to be updated on a timed basis.
+        Category: Program Dynamic
+        Difficulty:
+                Implementation: None
+                Optimization: Mediocre
+        Status: none
+
 [**] #35 "Drop targetting"
         Detailed Description: When a file or folder is dragged over the program, detect
         it and do whatever with it according to what type of file it is.
