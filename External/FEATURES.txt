@@ -28,12 +28,12 @@
         Category: Program Dynamic
         Status: none
 
-{BIG-FEATURE} [**] #32 "Unified file type"
+[!NOT-IMPLEMENTING!] {BIG-FEATURE} [**] #32 "Unified file type"
         Detailed Description: *.halcyon files have a top signature detailing
         what file information is being stored and how a global "HalcyonFile"
         would handle such a file.
         Category: Program Dynamic, BIG FEATURE
-        Status: none
+        Status: Not implementing; Unnecessary hassle
 
 {BIG-FEATURE} [***] #31 "Playlist file system instead of single track system"
         Detailed Description: Enables the rest of the button controls
