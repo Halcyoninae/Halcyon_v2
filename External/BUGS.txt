@@ -1,3 +1,25 @@
+[**] #31 "Cropping does not eliminate visual tearing during display"
+    Detailed Description: Especially for artworks with higher resolutions, it is apparent, that
+    the synchronized drawing takes a significant portion drawing in the intended
+    chunk by chunk fashion (to reduce overhead). However, it is simply cropping by a scale factor
+    and not to a defined size; this factor means that the sizing can be much greater for higher
+    resolution. This downplays the fact that the artwork part has to be the most strictly optimized
+    part of the program.
+    Status: None
+    State: Experimental-Build ~ MP4J
+    Difficulty: Decent; Requires a bunch of testing to get the right size to work for all form factors
+        ; Also might require additional checking in between the individual artworks to make sure they are
+        all in the range in which to crop and to perform additional resizing.
+        ; Another problem that comes up with is that the larger the artwork is, the more overhead the
+        program and the DeImage Manipulator will need to take in order to resize the image, especially if
+        we have additional checks in place thus adding time.
+        ; The aforementioned task could be simplified with a direct integer constant and pre-determination
+        or a mask that can be applied onto the image to determine each time if the selected area is allowed.
+        ; Another less optimized way is to cache the artwork and check fo the avaliability of that artwork
+        per run, if that track has been run. However the downside of this is the ease for the user to mess with
+        this and potentially result in messy work (although it is completely at the user's fault).
+    Testing: None Yet.
+
 {!URGENT!} [***] #30 "Along with using ui2DScaling, force no rescaling icons"
     Detailed Description: https://stackoverflow.com/questions/65742162/how-to-fix-the-blurry-image-when-i-run-my-java-swing-project
     Status: Investigating
