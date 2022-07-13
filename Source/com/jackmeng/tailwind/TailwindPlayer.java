@@ -418,13 +418,16 @@ public class TailwindPlayer implements Audio, Runnable {
   @Override
   public void run() {
     if (line != null) {
-      line.start();
       byte[] buffer = new byte[ais.getFormat().getFrameSize()];
       int i;
+      line.start();
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
-            while (playing && !paused && (i = ais.read(buffer)) > -1) {
+            while (playing && !paused && (i = ais.read(buffer)) != -1) {
+              if (paused || !playing) {
+                break;
+              }
               line.write(buffer, 0, i);
             }
             if (!paused) {

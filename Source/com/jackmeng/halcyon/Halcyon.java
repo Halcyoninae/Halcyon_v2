@@ -39,6 +39,7 @@ import java.io.File;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * <p>
@@ -172,7 +173,7 @@ public class Halcyon {
       ResourceFolder.dispatchLog(e);
     }
   }
-
+  
   /**
    * No arguments are taken from the entry point
    *
@@ -205,9 +206,9 @@ public class Halcyon {
             new ConfirmWindow.ConfirmationListener() {
               @Override
               public void onStatus(boolean status) {
-                if (status)
+                if (status) {
                   run();
-                else
+                } else
                   System.exit(0);
               }
             }).run();

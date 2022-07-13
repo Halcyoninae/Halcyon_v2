@@ -23,6 +23,7 @@ import com.jackmeng.halcyon.constant.ColorManager;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.debug.Debugger;
 
 import java.awt.Color;
 import java.util.logging.LogManager;
@@ -47,7 +48,7 @@ public class ThreadedScheduler {
    * be init by themselves not here.
    */
   static {
-    System.setProperty("flatlaf.useJetBrainsCustomDecorations", "false");
+    System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     UIManager.put("ScrollBar.thumbArc", 999);
     UIManager.put("TabbedPane.showTabSeparators", true);
     UIManager.put("ScrollBar.showButtons", false);
@@ -64,17 +65,16 @@ public class ThreadedScheduler {
     UIManager.put("TitlePane.unifiedBackground", true);
     UIManager.put("SplitPaneDivider.gripDotCount", 0);
     System.setOut(null);
-    System.setProperty("sun.java2d.uiScale", ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_HIDPI_VALUE));
     UIManager.put("FileChooser.readOnly", true);
-    System.setProperty("sun.java2d.opengl", "true");
-    System.setProperty("sun.java2d.ddscale", "true");
-    System.setProperty("sun.java2d.translaccel", "true");
     LogManager.getLogManager().reset();
     try {
       UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
     } catch (Exception e) {
       e.printStackTrace();
     }
+    // fix blurriness on high-DPI screens
+    System.setProperty("sun.java2d.opengl", "true");
+    System.setProperty("sun.java2d.uiScale", "0.9");
 
     // PROGRAMMABLE THREADS
     Runnable[] tasks = new Runnable[] {

@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.image.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
@@ -318,6 +319,18 @@ public final class DeImage {
     return img;
   }
 
+  public static ConvolveOp blurFilter(int hRadius, int vRadius) {
+    int width = hRadius * 2 + 1;
+    int height = vRadius * 2 + 1;
+    float weight = 1.0f / (width * height);
+    float[] data = new float[width * height];
+    for (int i = 0; i < data.length; i++) {
+      data[i] = weight;
+    }
+    Kernel k = new Kernel(width, height, data);
+    return new ConvolveOp(k, ConvolveOp.EDGE_NO_OP, null);
+  }
+
   /**
    * @param image  An ImageIcon from a stream.
    * @param width  The width to scale down to
@@ -325,8 +338,8 @@ public final class DeImage {
    * @return ImageIcon A modified image that has been scaled to width and height.
    */
   public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
-    Image img = image.getImage();
-    Image newimg = img.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
-    return new ImageIcon(newimg);
+    BaseMultiResolutionImage mri = new BaseMultiResolutionImage(image.getImage());
+    Image newImg = mri.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    return new ImageIcon(newImg);
   }
 }

@@ -1,3 +1,5 @@
+com.jackmeng.cloudspin
+com.jackmeng.cloudspin.enums
 com.jackmeng.cosmos
 com.jackmeng.cosmos.components
 com.jackmeng.cosmos.components.bbloc
@@ -8,6 +10,8 @@ com.jackmeng.cosmos.components.info
 com.jackmeng.cosmos.components.info.layout
 com.jackmeng.cosmos.components.inheritable
 com.jackmeng.cosmos.components.minimizeplayer
+com.jackmeng.cosmos.components.settings
+com.jackmeng.cosmos.components.settings.tabs.properties
 com.jackmeng.cosmos.components.toppane
 com.jackmeng.cosmos.components.toppane.layout
 com.jackmeng.cosmos.events
@@ -25,4 +29,5 @@ com.jackmeng.halcyon.utils
 com.jackmeng.tailwind
 com.jackmeng.tailwind.audio
 com.jackmeng.tailwind.simple
-com.jackmeng.tailwind.test
+com.jackmeng.test
+com.jackmeng.test.cloudspin
