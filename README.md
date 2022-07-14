@@ -80,6 +80,8 @@ In all subclasses for the GUI part of the program, all packages will have either
 
 You can also find the JavaDocs here: [here](https://yttrium-terminus.github.io/halcyon/) OR [here](./docs)
 
+Do note that I do not constantly build the JavaDocs with each addition of tags `documentation` and are only built when I feel like it. 
+
 ## Contributing
 
 The current state of the repository will not enable the usage of the ISSUEs tab. To contribute, like suggest a feature or report a bug, you must edit the [BUGS](External/BUGS.txt) OR [FEATURES](External/FEATURES.txt) files via a pull request. I will then review it from there.
