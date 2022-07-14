@@ -23,23 +23,20 @@ import com.jackmeng.cosmos.components.dialog.ConfirmWindow;
 import com.jackmeng.cosmos.components.dialog.ErrorWindow;
 import com.jackmeng.cosmos.components.dialog.LoadingDialog;
 import com.jackmeng.cosmos.components.toppane.TopPane;
-import com.jackmeng.halcyon.connections.ploogin.discord.Discordo;
+import com.jackmeng.halcyon.connections.discord.Discordo;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.debug.Program;
-import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.filesystem.PhysicalFolder;
+import com.jackmeng.halcyon.runtime.Program;
 import com.jackmeng.halcyon.utils.TextParser;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * <p>
@@ -137,9 +134,9 @@ public class Halcyon {
         bgt = new com.jackmeng.cosmos.components.Cosmos(m);
         Global.bp.pokeewFileList(Global.ll);
 
-        FolderInfo[] fi = Program.fetchSavedPlayLists();
+        PhysicalFolder[] fi = Program.fetchSavedPlayLists();
         if (fi.length > 0) {
-          for (FolderInfo f : fi) {
+          for (PhysicalFolder f : fi) {
             if (new File(f.getAbsolutePath()).exists() && new File(f.getAbsolutePath()).isDirectory()) {
               Global.bp.pokeNewFileListTab(f.getAbsolutePath());
               Debugger.good("Added playlist: " + f.getAbsolutePath());
@@ -173,7 +170,7 @@ public class Halcyon {
       ResourceFolder.dispatchLog(e);
     }
   }
-  
+
   /**
    * No arguments are taken from the entry point
    *

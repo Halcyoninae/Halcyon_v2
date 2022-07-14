@@ -21,6 +21,7 @@ import java.nio.charset.StandardCharsets;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
+import com.jackmeng.halcyon.runtime.Program;
 import com.jackmeng.halcyon.utils.TimeParser;
 
 /**
@@ -36,6 +37,16 @@ import com.jackmeng.halcyon.utils.TimeParser;
  * @since 3.0
  */
 public class Debugger {
+
+  /**
+   * Represents the styles that can be used with the
+   * CLI interface
+   *
+   * Adapted from an older version
+   *
+   * @since 2.0
+   * @author Jack Meng
+   */
   public enum CLIStyles {
     RED_BG("\u001B[41m"),
     GREEN_BG("\u001B[42m"),
@@ -66,18 +77,34 @@ public class Debugger {
       color = e;
     }
 
+    /**
+     * @return A string formatting code
+     */
     public String getColor() {
       return color;
     }
   }
 
-  public static PrintStream out;
-  static {
-      out = new PrintStream(System.err, true, StandardCharsets.UTF_8);
-  }
+  /**
+   * The designated output stream to be used by
+   * the debugger with attached encoding.
+   */
+  public static PrintStream out = new PrintStream(System.err, true, StandardCharsets.UTF_8);
 
+  /**
+   * A globally modifiable variable (should only be modified
+   * programmatically) to either disable or enable during runtime.
+   *
+   * Reminder: This does not clear the stream if it is called during
+   * runtime; this boolean only stops any further asynced outputstream
+   * that have not reached the stage of a check on the state of this
+   * variable's equality.
+   */
   public static boolean DISABLE_DEBUGGER = true;
 
+  /**
+   * Sad constructor that is ignored :(
+   */
   private Debugger() {
   }
 
@@ -92,14 +119,14 @@ public class Debugger {
   }
 
   /**
-   * @return String
+   * @return String Get's the default warning message header.
    */
   public static String getWarnText() {
     return "[WARNING ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
   /**
-   * @return String
+   * @return String Gets the default success/good message header
    */
   public static String getGoodText() {
     return "SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";

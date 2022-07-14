@@ -1,4 +1,4 @@
-package com.jackmeng.halcyon.utils;
+package com.jackmeng.halcyon.filesystem;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import java.util.List;
  * @author Jack Meng
  * @since 3.1
  */
-public class VirtualFolder extends FolderInfo {
+public class VirtualFolder extends PhysicalFolder {
   private final List<File> list;
 
   /**
@@ -36,28 +36,29 @@ public class VirtualFolder extends FolderInfo {
     this.list = new ArrayList<>(Arrays.asList(files));
   }
 
-
   /**
-   * @return String[]
+   * @return String[] A list of files of their absolute paths in string form
    */
   @Override
   public String[] getFilesAsStr() {
     return list.toArray(new String[0]);
   }
 
-
   /**
-   * @return File[]
+   * @return File[] A list of files of their File object instances (created on
+   *         call)
    */
   @Override
   public File[] getFiles() {
     return list.toArray(new java.io.File[0]);
   }
 
-
   /**
-   * @param rules
-   * @return String[]
+   * Applies a check against the list of avaliable files.
+   *
+   * @param rules A set of rules to be used to compare the ending of the file
+   *              (endsWith)
+   * @return String[] A list of file of their absolute paths in string form
    */
   @Override
   public String[] getFilesAsStr(String... rules) {
@@ -69,25 +70,26 @@ public class VirtualFolder extends FolderInfo {
         }
       }
     }
-    return buff.toArray(new String[buff.size()]);
+    return buff.toArray(new String[0]);
   }
 
-
   /**
-   * @param rules
-   * @return File[]
+   * Applies a check against the list of avaliable files.
+   *
+   * This uses the method {@link #getFilesAsStr(String...)} method
+   * for validation.
+   *
+   * @param rules A set of rules to be used to comapre the ending of the file
+   *              (endsWith)
+   * @return File[] A list of file of their respective absolute paths
    */
   @Override
   public File[] getFiles(String... rules) {
-    List<File> buff = new ArrayList<>();
-    for (File f : list) {
-      for (String rule : rules) {
-        if (f.getAbsolutePath().endsWith(rule)) {
-          buff.add(f);
-        }
-      }
+    List<File> files = new ArrayList<>();
+    for (String str : getFilesAsStr(rules)) {
+      files.add(new File(str));
     }
-    return buff.toArray(new File[buff.size()]);
+    return files.toArray(new File[0]);
   }
 
   /**
@@ -102,7 +104,7 @@ public class VirtualFolder extends FolderInfo {
    *
    * @param f A file to insert.
    */
-  public void addFile(java.io.File f) {
+  public synchronized void addFile(java.io.File f) {
     list.add(f);
   }
 
@@ -122,14 +124,10 @@ public class VirtualFolder extends FolderInfo {
    * @param f The file instance to remove.
    * @return (true || false) if the action was a success
    */
-  public boolean removeFile(File f) {
+  public synchronized boolean removeFile(File f) {
     return list.remove(f);
   }
 
-
-  /**
-   * @return String
-   */
   @Override
   public String toString() {
     return "[ VIRTUAL FOLDER @ " + getName() + "-" + list.toString() + " ]";

@@ -21,8 +21,8 @@ import com.jackmeng.cosmos.components.dialog.SelectApplicableFolders;
 import com.jackmeng.cosmos.components.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.filesystem.FileParser;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.FileParser;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

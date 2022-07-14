@@ -17,7 +17,8 @@ package com.jackmeng.tailwind;
 
 import java.io.File;
 import java.util.Random;
-import com.jackmeng.halcyon.utils.FolderInfo;
+
+import com.jackmeng.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.tailwind.TailwindEvent.TailwindStatus;
 
 /**
@@ -42,13 +43,13 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
    */
   private TailwindPlayer player;
 
-  private FolderInfo info;
+  private PhysicalFolder info;
 
   private File current;
 
   private Random rnd;
 
-  public TailwindPlaylist(FolderInfo info, TailwindPlayer player) {
+  public TailwindPlaylist(PhysicalFolder info, TailwindPlayer player) {
     this.info = info;
     this.player = player;
     rnd = new Random();

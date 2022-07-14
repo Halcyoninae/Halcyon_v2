@@ -17,7 +17,7 @@ package com.jackmeng.cosmos.components.bottompane;
 
 import com.jackmeng.cosmos.components.inheritable.TabButton;
 import com.jackmeng.halcyon.constant.Manager;
-import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyon.utils.Wrapper;
 
 import javax.swing.*;
@@ -122,7 +122,7 @@ public class BottomPane extends JTabbedPane {
    * @param folder An absolute path to a folder.
    */
   public void pokeNewFileListTab(String folder) {
-    FileList list = new FileList(new FolderInfo(folder));
+    FileList list = new FileList(new PhysicalFolder(folder));
     foldersAbsolute.add(new File(folder).getAbsolutePath());
     add(new File(folder).getName(), list);
     TabButton button = new TabButton(this);

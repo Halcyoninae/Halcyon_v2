@@ -13,12 +13,13 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.debug;
+package com.jackmeng.halcyon.runtime;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
-import com.jackmeng.halcyon.utils.FolderInfo;
+import com.jackmeng.halcyon.debug.Debugger;
+import com.jackmeng.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyon.utils.TextParser;
 import com.jackmeng.halcyon.utils.Wrapper;
 
@@ -83,38 +84,11 @@ public class Program {
   }
 
   /**
-   * This function is run before anything in order to ensure that only one
-   * instance of this program is being ran.
+   * Runs a dispatch on the current saved playlists.
    *
-   * A signature is generated from the current time as an 8 digit integer using
-   * the current unix timestamp.
-   *
-   * @deprecated This function is not used anymore and will be moved to a native
-   *             implementation
+   * This method extracts this information from the FileList
+   * object instances.
    */
-  @Deprecated(since = "3.1", forRemoval = true)
-  public static void syncPID() {
-    Wrapper.async(() -> {
-      File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/instance.pid");
-      if (f.exists()) {
-        Debugger.warn(
-            "Only one instance of this program is allowed to be run at any given time.\nIf this is a mistake, please delete the instance.pid from the /bin/ folder in the program's halcyon configuration folder.\nIn most cases this should be handled internally.");
-        System.exit(1);
-      } else {
-        try {
-          f.createNewFile();
-          String s = String.valueOf(System.currentTimeMillis());
-          s = s.substring(s.length() - 8);
-          FileWriter fw = new FileWriter(f);
-          fw.write(s);
-          fw.close();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-      }
-    });
-  }
-
   public static void forcedSavePlaylists() {
     List<String> list = Global.bp.getStrTabs();
     boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[0]));
@@ -125,6 +99,16 @@ public class Program {
     }
   }
 
+  /**
+   * Writes a dump file to the bin folder.
+   *
+   * This is not a serialization byte stream!!!
+   *
+   * This method is typically used for debugging and coverage
+   * telemetry stuffs (idk :/).
+   *
+   * @param content The Objects to dump or content.
+   */
   public static void createDump(Object... content) {
     StringBuilder sb = new StringBuilder();
     for (Object o : content) {
@@ -142,6 +126,10 @@ public class Program {
     }
   }
 
+  /**
+   * Similar to {@link #forcedSavePlaylists()}; instead this calls
+   * for a LikedList extraction and saves to the desired file.
+   */
   public static void forcedSaveLikedTracks() {
     Set<String> list = new HashSet<>();
     Debugger.warn("Now saving liked tracks.");
@@ -159,7 +147,7 @@ public class Program {
   }
 
   /**
-   * @return File[]
+   * @return File[] Returns all of the liked tracks.
    */
   public static File[] fetchLikedTracks() {
     if (!ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).isFile()
@@ -192,9 +180,10 @@ public class Program {
   }
 
   /**
-   * @return FolderInfo[]
+   * @return FolderInfo[] Returns all concurrently stored playlists in the running
+   *         instance.
    */
-  public static FolderInfo[] fetchSavedPlayLists() {
+  public static PhysicalFolder[] fetchSavedPlayLists() {
     if (!ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).isFile()
         || !ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).exists()) {
       Wrapper.safeLog(() -> {
@@ -204,23 +193,23 @@ public class Program {
           // AUTO HANDLED
         }
       }, true);
-      return new FolderInfo[0];
+      return new PhysicalFolder[0];
     }
-    List<FolderInfo> list = new ArrayList<>();
+    List<PhysicalFolder> list = new ArrayList<>();
     try (FileInputStream fis = new FileInputStream(ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE))) {
       BufferedReader br = new BufferedReader(new InputStreamReader(fis, TextParser.getCharset()));
       while (br.ready()) {
         String str = br.readLine();
         if (new File(str).exists() && new File(str).isDirectory()) {
-          list.add(new FolderInfo(str));
+          list.add(new PhysicalFolder(str));
         }
       }
-      return list.toArray(new com.jackmeng.halcyon.utils.FolderInfo[0]);
+      return list.toArray(new com.jackmeng.halcyon.filesystem.PhysicalFolder[0]);
     } catch (Exception e) {
       ResourceFolder.dispatchLog(e);
       Debugger.warn("Failed to retrieve saved playlists. " + e.getLocalizedMessage());
     }
-    return new FolderInfo[0];
+    return new PhysicalFolder[0];
   }
 
   /**

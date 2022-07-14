@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.utils;
+package com.jackmeng.halcyon.filesystem;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +32,9 @@ import com.jackmeng.halcyon.runtime.TextBOM;
  */
 public final class FileParser {
 
+  /**
+   * Irrelevant constructor :(
+   */
   private FileParser() {
   }
 

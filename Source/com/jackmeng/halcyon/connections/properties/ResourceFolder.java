@@ -19,8 +19,6 @@ import com.jackmeng.halcyon.ProjectManager;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
 import com.jackmeng.halcyon.debug.Debugger;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.FileParser;
-import com.jackmeng.halcyon.utils.TextParser;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
@@ -28,17 +26,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import org.w3c.dom.Text;
 
 /**
  * ResourceFolder is a general class that holds information about

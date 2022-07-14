@@ -2,7 +2,7 @@ package com.jackmeng.cosmos.events;
 
 import com.jackmeng.halcyon.Halcyon;
 import com.jackmeng.halcyon.constant.Global;
-import com.jackmeng.halcyon.debug.Program;
+import com.jackmeng.halcyon.runtime.Program;
 
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;

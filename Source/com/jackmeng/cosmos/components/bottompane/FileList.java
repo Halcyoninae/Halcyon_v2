@@ -19,9 +19,9 @@ import com.jackmeng.cosmos.events.FVRightClick;
 import com.jackmeng.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
+import com.jackmeng.halcyon.filesystem.PhysicalFolder;
+import com.jackmeng.halcyon.filesystem.VirtualFolder;
 import com.jackmeng.halcyon.utils.DeImage;
-import com.jackmeng.halcyon.utils.FolderInfo;
-import com.jackmeng.halcyon.utils.VirtualFolder;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -62,13 +62,13 @@ public class FileList extends JScrollPane implements TabTree {
    */
   private Map<File, DefaultMutableTreeNode> fileMap;
 
-  private transient FolderInfo info;
+  private transient PhysicalFolder info;
 
   private DefaultMutableTreeNode root;
 
   public boolean isVirtual;
 
-  public FileList(FolderInfo info, Icon closed, Icon open, Icon leaf, String rightClickHideString, RightClickHideItemListener hideStringTask) {
+  public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString, RightClickHideItemListener hideStringTask) {
     super();
     this.info = info;
     fileMap = new HashMap<>();
@@ -110,7 +110,7 @@ public class FileList extends JScrollPane implements TabTree {
     getViewport().setBorder(null);
   }
 
-  public FileList(FolderInfo info) {
+  public FileList(PhysicalFolder info) {
     this.info = info;
     fileMap = new HashMap<>();
     root = new DefaultMutableTreeNode(info.getName());
@@ -165,7 +165,7 @@ public class FileList extends JScrollPane implements TabTree {
   /**
    * @return A FolderInfo object representing this FileList
    */
-  public FolderInfo getFolderInfo() {
+  public PhysicalFolder getFolderInfo() {
     return info;
   }
 

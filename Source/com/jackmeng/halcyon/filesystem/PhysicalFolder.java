@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyon.utils;
+package com.jackmeng.halcyon.filesystem;
 
 import java.io.File;
 
@@ -24,7 +24,7 @@ import java.io.File;
  * @author Jack Meng
  * @since 3.1
  */
-public class FolderInfo {
+public class PhysicalFolder {
   private String absPath = ".";
 
   /**
@@ -36,7 +36,7 @@ public class FolderInfo {
    *
    * @param absolutePath The path to construct the folder-info object with.
    */
-  public FolderInfo(String absolutePath) {
+  public PhysicalFolder(String absolutePath) {
     this.absPath = absolutePath;
   }
 

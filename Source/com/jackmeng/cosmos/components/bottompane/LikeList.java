@@ -19,8 +19,8 @@ import com.jackmeng.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyon.constant.Global;
 import com.jackmeng.halcyon.constant.Manager;
 import com.jackmeng.halcyon.debug.Debugger;
-import com.jackmeng.halcyon.debug.Program;
-import com.jackmeng.halcyon.utils.VirtualFolder;
+import com.jackmeng.halcyon.filesystem.VirtualFolder;
+import com.jackmeng.halcyon.runtime.Program;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -127,7 +127,7 @@ public class LikeList extends FileList {
    * Returns the virtual folder representing
    * this viewport.
    *
-   * @return {@link com.jackmeng.halcyon.utils.VirtualFolder}
+   * @return {@link com.jackmeng.halcyon.filesystem.VirtualFolder}
    */
   public VirtualFolder getFolder() {
     return folder;

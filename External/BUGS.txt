@@ -1,3 +1,11 @@
+[***] #32 "LikedList instance not being to able have tracks selected for playback"
+      Detailed Description: Tracks that are added into the LikedList view cannot be
+      selected via the right click development??
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+      Difficulty: Decent
+      Testing: None required
+
 [**] #31-CloudSpin "Cropping does not eliminate visual tearing during display"
     Detailed Description: Especially for artworks with higher resolutions, it is apparent, that
     the synchronized drawing takes a significant portion drawing in the intended
