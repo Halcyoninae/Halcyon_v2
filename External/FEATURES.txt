@@ -1,3 +1,14 @@
+[**] #37 "Synchronization of a Virtual Folder"
+        Detailed Description: Provide proper synchronization and atomicity to the 
+        Virtual Folder class.
+                ; For multiple tasks, there should be an independent scheduler
+                that handles doing said task asynchronously if called asynchronously
+        Category: Potential Optimization
+        Difficulty:
+                Implementation: Decent
+                Optimization: None; Self-binding
+        Status: Implementing
+
 [***] #36 "Refresh Processes"
         Detailed Description: Instead of just refreshing the file views, refresh
         other attached processes that might need to be updated on a timed basis.
