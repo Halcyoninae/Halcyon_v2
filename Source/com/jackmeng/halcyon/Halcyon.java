@@ -177,13 +177,6 @@ public class Halcyon {
    * @param args Null arguments
    */
   public static void main(String... args) {
-    if (args.length > 0) {
-      if (args[0].equals("-debug")) {
-        ProjectManager.DEBUG_PROGRAM = true;
-        Debugger.DISABLE_DEBUGGER = false;
-      }
-    }
-
     try {
       ResourceFolder.checkResourceFolder(
           ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
