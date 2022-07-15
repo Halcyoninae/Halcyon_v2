@@ -56,7 +56,7 @@ public class ResourceFolder {
   public static final PropertiesManager pm = new PropertiesManager(ProgramResourceManager.getProgramDefaultProperties(),
       ProgramResourceManager.getAllowedProperties(),
       ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-          + ProgramResourceManager.PROGRAM_RESOURCE_FILE_PROPERTIES);
+          + ProgramResourceManager.PROGRAM_RESOURCE_FILE_PROPERTIES); // FIX????
 
   /**
    * An internal method used to retrieve a random string of letters

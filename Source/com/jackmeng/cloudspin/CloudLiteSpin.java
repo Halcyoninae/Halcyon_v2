@@ -15,7 +15,6 @@
 
 package com.jackmeng.cloudspin;
 
-import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
