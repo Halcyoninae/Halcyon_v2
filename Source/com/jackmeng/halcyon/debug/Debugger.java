@@ -18,6 +18,7 @@ package com.jackmeng.halcyon.debug;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
@@ -219,6 +220,12 @@ public class Debugger {
               + com.jackmeng.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
+    }
+  }
+
+  public static void byteLog(byte ... e) {
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+      out.println(Arrays.toString(e));
     }
   }
 

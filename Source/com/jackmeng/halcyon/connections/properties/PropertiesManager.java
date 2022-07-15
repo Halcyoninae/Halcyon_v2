@@ -48,7 +48,7 @@ import java.util.Properties;
  */
 public final class PropertiesManager {
   private Map<String, String> map;
-  private final Map<String, String[]> allowedProperties;
+  private final Map<String, PropertyValidator> allowedProperties;
   private final Properties util;
   private FileReader fr;
   private final String location;
@@ -71,7 +71,7 @@ public final class PropertiesManager {
    *                          array can be empty (NOT NULL).
    * @param location          The location of the properties file
    */
-  public PropertiesManager(Map<String, String> defaultProperties, Map<String, String[]> allowedProperties,
+  public PropertiesManager(Map<String, String> defaultProperties, Map<String, PropertyValidator> allowedProperties,
       String location) {
     this.map = defaultProperties;
     this.allowedProperties = allowedProperties;
@@ -201,14 +201,10 @@ public final class PropertiesManager {
    */
   public boolean allowed(String key, String value) {
     if (allowedProperties.containsKey(key)) {
-      if (allowedProperties.get(key).length == 0) {
+      if (allowedProperties.get(key) == null) {
         return true;
       }
-      for (String allowedValue : allowedProperties.get(key)) {
-        if (allowedValue.equals(value)) {
-          return true;
-        }
-      }
+      return allowedProperties.get(key).isValid(value);
     }
     return false;
   }

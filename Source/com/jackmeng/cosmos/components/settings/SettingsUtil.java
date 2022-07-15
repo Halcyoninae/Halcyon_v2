@@ -16,7 +16,7 @@ public final class SettingsUtil {
 
     JLabel label = new JLabel(property.propertyName);
 
-    if(property.allowedProperties.length != 0) {
+    if(property.pr != null) {
       JComboBox<String> comboBox = new JComboBox<>();
       for(String allowedProperty : property.allowedProperties) {
         comboBox.addItem(allowedProperty);

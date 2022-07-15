@@ -48,6 +48,7 @@ public class ProgramResourceManager {
   public static final String KEY_USER_DSIABLE_CLI = "user.disable_cli";
   public static final String KEY_USER_USE_DISCORD_RPC = "user.use_discord_rpc";
   public static final String KEY_USER_CHAR_SET_WRITE_TABLE = "user.charset_write_table";
+  public static final String KEY_AUDIO_DEFAULT_BUFFER_SIZE = "audio.buffer_size";
 
   public static final Property[] propertiesList = {
       new Property(KEY_USER_DEFAULT_FOLDER, "."),
@@ -65,6 +66,7 @@ public class ProgramResourceManager {
       new Property(KEY_USER_DSIABLE_CLI, "true", "true", "false"),
       new Property(KEY_USER_USE_DISCORD_RPC, "true", "true", "false"),
       new Property(KEY_USER_CHAR_SET_WRITE_TABLE,  "utf8", "utf16le", "utf16be"),
+      new Property(KEY_AUDIO_DEFAULT_BUFFER_SIZE, "auto"),
   };
 
   public static final String FILE_SLASH = "/";

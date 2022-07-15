@@ -9,12 +9,12 @@ package com.jackmeng.halcyon.connections.properties;
  */
 public class Property {
   public String propertyName = "", defaultProperty = "";
-  public String[] allowedProperties;
+  public PropertyValidator pr;
 
-  public Property(String propertyName, String defaultProperty, String... allowedProperties) {
+  public Property(String propertyName, String defaultProperty, PropertyValidator pr) {
     this.propertyName = propertyName;
     this.defaultProperty = defaultProperty;
-    this.allowedProperties = allowedProperties;
+    this.pr = pr;
   }
 
   public enum PropertyFilterType {

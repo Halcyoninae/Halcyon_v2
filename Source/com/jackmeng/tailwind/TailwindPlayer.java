@@ -25,6 +25,7 @@ import com.jackmeng.tailwind.simple.FileFormat;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -418,7 +419,7 @@ public class TailwindPlayer implements Audio, Runnable {
   @Override
   public void run() {
     if (line != null) {
-      byte[] buffer = new byte[ais.getFormat().getFrameSize()];
+      byte[] buffer = new byte[2048];
       int i;
       line.start();
       while (!worker.isShutdown()) {
@@ -429,6 +430,7 @@ public class TailwindPlayer implements Audio, Runnable {
                 break;
               }
               line.write(buffer, 0, i);
+              Wrapper.async(() -> Debugger.byteLog(buffer));
             }
             if (!paused) {
               reset();
