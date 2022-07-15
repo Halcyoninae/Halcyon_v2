@@ -36,14 +36,28 @@ import java.awt.Color;
  * @since 3.2
  */
 public final class CloudLiteSpin {
+
+  /**
+   * This method will apply a toner on the original image.
+   *
+   * @param img  The original image.
+   * @param tone The tone of the color to shift to.
+   */
   public static void colorTone(BufferedImage img, Color tone) {
     for (int x = 0; x < img.getWidth(); x++) {
       for (int y = 0; y < img.getHeight(); y++) {
-        img.set(x, y, new Color(tone.getRed(), tone.getGreen(), tone.getBlue()));
+        img.setRGB(x, y, tone.getRGB());
       }
     }
   }
 
+  /**
+   * A lite util method to convert an Icon to an Image
+   * preferable for use as a BufferedImage.
+   *
+   * @param icon An Icon to convert.
+   * @return An Image after the conversion.
+   */
   public static Image iconToImage(final Icon icon) {
     if (icon instanceof ImageIcon) {
       return ((ImageIcon) icon).getImage();
