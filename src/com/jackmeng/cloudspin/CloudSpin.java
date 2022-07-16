@@ -22,5 +22,6 @@ import java.awt.image.BufferedImage;
  * @author Jack Meng
  * @since 3.2
  */
-public class CloudSpin {
+public final class CloudSpin {
+    private CloudSpin() {}
 }
