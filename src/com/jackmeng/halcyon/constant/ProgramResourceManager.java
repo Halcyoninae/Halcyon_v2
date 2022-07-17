@@ -16,6 +16,7 @@
 package com.jackmeng.halcyon.constant;
 
 import com.jackmeng.halcyon.connections.properties.Property;
+import com.jackmeng.halcyon.connections.properties.PropertyValidator;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 
 import java.awt.image.BufferedImage;
@@ -88,10 +89,10 @@ public class ProgramResourceManager {
   /**
    * @return The map of the allowed properties
    */
-  public static Map<String, String[]> getAllowedProperties() {
-    Map<String, String[]> properties = new HashMap<>();
+  public static Map<String, PropertyValidator> getAllowedProperties() {
+    Map<String, PropertyValidator> properties = new HashMap<>();
     for (Property p : propertiesList)
-      properties.put(p.propertyName, p.allowedProperties);
+      properties.put(p.propertyName, p.pr);
     return properties;
   }
 
