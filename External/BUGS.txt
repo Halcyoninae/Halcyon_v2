@@ -6,7 +6,7 @@
       Difficulty: Decent
       Testing: None required
 
-[**] #31-CloudSpin "Cropping does not eliminate visual tearing during display"
+[!NOT-FIXING*!] [**] #31-CloudSpin "Cropping does not eliminate visual tearing during display"
     Detailed Description: Especially for artworks with higher resolutions, it is apparent, that
     the synchronized drawing takes a significant portion drawing in the intended
     chunk by chunk fashion (to reduce overhead). However, it is simply cropping by a scale factor
@@ -17,7 +17,7 @@
     components, which should all fall under this bug report.
     ;   General optimizations should also be made for the DeImage resizing and grayscaling algorithms
     ;   This implementation of a new graphics library is entitled CloudSpin
-    Status: Fixing & Implementing
+    Status: Moved to another project as a completely separate library
     State: Experimental-Build ~ MP4J
     Difficulty: Decent; Requires a bunch of testing to get the right size to work for all form factors
         ; Also might require additional checking in between the individual artworks to make sure they are
