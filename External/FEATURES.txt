@@ -1,3 +1,19 @@
+[***] #38 "BBloc Expansion Button"
+        Detailed Description: A button at the end of the BBloc panel that when
+        clicked will open a dialog containing the following:
+                ; A list of extra buttons (GridLayout) that could not be shown
+                (not because of importance) that the user could then click 
+                with their attached processes.
+                ; This could further enable Plugin support for the program, which
+                currently has yet to be implemented. In which the plugin either
+                state a direct interaction for the program, or a direct injection
+                into the program.
+        Category: Program Dynamics
+        Difficulty: 
+                Implementation: Minimal-without plugin support; Decent-with plugin support
+                Optimization: Minimal; Client-Side Dependent
+        Status: None
+
 [**] #37 "Synchronization of a Virtual Folder"
         Detailed Description: Provide proper synchronization and atomicity to the 
         Virtual Folder class.
