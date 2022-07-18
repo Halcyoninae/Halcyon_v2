@@ -1,0 +1,245 @@
+[***] #38 "BBloc Expansion Button"
+        Detailed Description: A button at the end of the BBloc panel that when
+        clicked will open a dialog containing the following:
+                ; A list of extra buttons (GridLayout) that could not be shown
+                (not because of importance) that the user could then click 
+                with their attached processes.
+                ; This could further enable Plugin support for the program, which
+                currently has yet to be implemented. In which the plugin either
+                state a direct interaction for the program, or a direct injection
+                into the program.
+        Category: Program Dynamics
+        Difficulty: 
+                Implementation: Minimal-without plugin support; Decent-with plugin support
+                Optimization: Minimal; Client-Side Dependent
+        Status: None
+
+[**] #37 "Synchronization of a Virtual Folder"
+        Detailed Description: Provide proper synchronization and atomicity to the 
+        Virtual Folder class.
+                ; For multiple tasks, there should be an independent scheduler
+                that handles doing said task asynchronously if called asynchronously
+        Category: Potential Optimization
+        Difficulty:
+                Implementation: Decent
+                Optimization: None; Self-binding
+        Status: Implementing
+
+[***] #36 "Refresh Processes"
+        Detailed Description: Instead of just refreshing the file views, refresh
+        other attached processes that might need to be updated on a timed basis.
+        Category: Program Dynamic
+        Difficulty:
+                Implementation: None
+                Optimization: Mediocre
+        Status: none
+
+[**] #35 "Drop targetting"
+        Detailed Description: When a file or folder is dragged over the program, detect
+        it and do whatever with it according to what type of file it is.
+        Category: Program Dynamic
+        Status: None
+
+[!IMPLEMENTED!] [***] #34 "Migration to new engine"
+        Detailed Description: The current engine is made by somebody
+        else and is very very inefficient at it's job. It is best to migrate
+        to the following decoder library for MP3: https://github.com/delthas/JavaMP3
+        and implement my own audio framework directly.
+        Category: Potential Optimization
+        Status: IMPLEMENTED
+
+[*] #33 "Download some resources"
+        Detailed Description: If needed, certain things should be downloaded
+        afterwards and put into the /user/ folder and cached. This can however
+        means the user must have a constant internet connection.
+        Category: Program Dynamic
+        Status: none
+
+[!NOT-IMPLEMENTING!] {BIG-FEATURE} [**] #32 "Unified file type"
+        Detailed Description: *.halcyon files have a top signature detailing
+        what file information is being stored and how a global "HalcyonFile"
+        would handle such a file.
+        Category: Program Dynamic, BIG FEATURE
+        Status: Not implementing; Unnecessary hassle
+
+{BIG-FEATURE} [***] #31 "Playlist file system instead of single track system"
+        Detailed Description: Enables the rest of the button controls
+        to work properly and alleviate overhead.
+        Category: BIG FEATURE
+        Status: Implementing
+
+[*] #30 "Use an icon to display currently playing track"
+        Detailed Description: None
+        Category: Visual Comfort
+        Status: None
+
+[!IMPLEMENTED] [**] #29 "Save Feature"
+        Detailed Description: Save added playlists on exit
+        Category: Program Dynamic
+        Status: IMPLEMENTED
+
+[!DENIED!] [**] #28 "Disable most image drawings when forced optimization"
+        Detailed Description: Disable the backdrop drawing
+        Category: Forced Optimization
+        Status: Denied, This is a user controlled optimization
+
+[!DENIED!] [*] #27 "Add no gradient property to infoview gradient"
+        Detailed Description: None
+        Category: Visual Comfort
+        Status: Denied, already implemented as a separate property operand
+
+[!PARTIALLY IMPLEMENTED!] [***] #26 "No max size restriction"
+        Detailed Description: None
+        Category: Visual Comfort, Program Dynamic
+        Status: Partial Implementation
+
+[!IMPLEMENTED] [***] #25 "Help page as a set of guides for the program, tabbed window"
+        Detailed Description: Turn the help page into a tabbed window, in which
+        each tab represents an internal HTML resource file that contains the content.
+        Category: Program Dynamic
+        Status: IMPLEMENTED
+
+[!PARTIALLY IMPLEMENTED!] [***] #24 "Lock Single Instance"
+        Detailed Description: Only allow one instance of this program to be run at once. A lock
+        file is temporarily written to local storage contained the serial ID of the current
+        instance. However can be overridden in the properties file.
+        Category: Potential Optimization
+        Status: Partial Implementation for Native Side
+
+[!POSTPONED!] [**] #23 "Native Headless mode"
+        Detailed Description: Add a headless mode for direct CLI interfacing. However, this only
+        applies to audio encoding, decoding, and transcoding. This Headless mode should not be used
+        for directly invoking audio playback. This should be a native implementation that is called
+        upon by JNI if the user decides they want to use this feature; however, the present dynamic
+        linked libraries must be present in order to run the associated functions.
+        Category: Program Dynamic
+        Status: POSTPONED
+
+[!DENIED!] [**] #22 "Serialization of all threads for future processes"
+        Detailed Description: Serialize threads that are needed for audio streaming for future usage
+        as a localized file instead of having to reset the object reference every time.
+        Category: Potential Optimization
+        Status: DENIED
+
+[!IMPLEMENTED!] [**] #21 "Add property setting to have to different gradient, one from the left and one from the top"
+        Detailed Description: Top, left, bottom, right
+        Category: Visual Comfort, Program Dynamic
+        Status: IMPLEMENTED
+
+[***] #20 "Add functionality for next and backward"
+        Detailed Description: Since each FileList is a playlist technically.
+        Category: Implementation
+        Status: Working
+
+[!POSTPONED!] [***] #19 "Plugin Manager and Implementation"
+        Detailed Description: Add a plugin manager interface for the program so users can
+        add on to the program. Use the Discord RPC as a testing platform.
+        Category: Program Dynamic
+        Status: POSTPONED
+
+[!DENIED!] [**] #18 "Add a second Tree to display all of the available playlists"
+        Detailed Description: Add a tree component to the right of BottomPane
+        that displays a list of all of the available playlists
+        Category: User Comfort
+        Status: DENIED; There is already a drop down feature for when the amount of tabs exceed
+
+[!IMPLEMENTED!] [**] #17 "Liked Audio Tracks"
+        Detailed Description: Will be a pinned tab in the Bottom pane tabs view, and will
+        be rendered from a properties file containing liked songs from the heart button from
+        button controls.
+        Category: Program Dynamic
+        Status: IMPLEMENTED
+
+[!DENIED!] [***] #16 "For each file added to a file-list, check if that file can be added"
+        Detailed Description: Make sure each file has the right permissions for the
+        file system and that each of them are actually valid files (by chunk headers)
+        Category: Program Dynamic
+        Status: DENIED; really not needed
+
+[!NOT-IMPLEMENTING!] [**] #15 "Add a scroll bar to the InfoView's artwork label"
+        Detailed Description: Allow the user to scroll through the image horizontally
+        Category: Visual Comfort
+        Status: IGNORED
+
+[!IMPLEMENTED!] [**] #14 "Add an Audio File Info right click menu tab for a MP3 File in a FileList"
+        Detailed Description: Add an option for a pop-up to be shown with the information
+        regarding an audio file in the FVRightClick for a FileList
+        Category: Program Dynamic
+        Status: IMPLEMENTED
+
+[!IMPLEMENTED!] [**] #13 "Even though there is not a forward or backtrack feature yet, change the icons of forward and backward"
+        Detailed Description: Change the icons of forward and backward to be
+        of the standard next file or last file icons and change them to match the
+        color scheme.
+        Category: Visual Comfort
+        Status: IMPLEMENTED
+
+[!IMPLEMENTED!] [***] #12 "Lmao rename BigContainerTest to like something else"
+        Status: IMPLEMENTED
+        Category: Program Dynamic
+
+[!IMPLEMENTED!] [*] #11 "Redesign all of the icons from BBloc Buttons to be consistent"
+        Detailed Description: As the title says
+        Category: Visual Comfort
+        Status: IMPLEMENTED
+
+[***] #10 "Static Layout for infoview"
+        Detailed Description: Prevent the components in InfoView from moving so much
+        whenever new content is repainted on to it.
+        Category: Visual Comfort
+        Status: Implementing
+
+[!IGNORED!] [**] #9 "Based on the implementation of feature #8 and #6"
+        Detailed Description: individual sorting buttons per opened tab view
+        Category: User Comfort
+        Status: IGNORED FOR-NOW
+
+[!IMPLEMENTED!] [**] [VERY BIG FEATURE] #8 "Turn the tab view into a scrollable list for folders"
+        Detailed Description: Instead of using the tabs view as a way to scroll between
+        different tabs, make it a view to display all of the user's selected playlists.
+        Then move the settings tab, etc. to bbloc
+        Category: User Comfort
+        Status: IMPLEMENTED
+        Potential Bugs:
+                -All of the listeners should be updated immediately regarding a closing of
+                a tab
+                -Options button for each tab button: Close, Sort by a-z, properties
+                -Close buttons to close a tab once it has been open instead of being Static
+
+[!IMPLEMENTED!] [**] #7 "Tool Tip popup for when hovering over the image"
+        Detailed Description: Show an expanded view of the current track's Cover Image when the
+        mouse is hovered over the component
+        Category: User Comfort
+        Status: Implemented
+
+[!FORWARDED!] [*] #6 "Sorting methods for File View Tree"
+        Detailed Description: Allow the files in the JTree to be sorted either alphabetically or by size.
+        Category: User Comfort
+        Status: Forwarded to #9
+
+[!POSTPONED!] [***] #5 "Callable function for verifying allowed property in PropertiesManager"
+        Detailed Description: Enables for a much more dynamic approach to validating
+        a file instead of hardcoded strings.
+        Category: Program dynamic
+        Status: POSTPONED; although I did restructure how properties are handled.
+
+[!IMPLEMENTED!] [***] #4 "Update folder option"
+        Detailed Description: Prompt the user if they want to update a node if they added the same folder
+                              with content inside.
+        Category: User Comfort
+        Status: Implemented
+
+[!IGNORED!] [***] #3 "Make global constants for valid resource distribution to stop wasting time on fetching resources"
+        Status: IGNORED
+        Category: Potential Optimization
+
+[!IGNORED!] [**] #2 "Make only one dialog instance of SelectionApplicableFolders be able to be launched at once"
+        Detailed Description: Title only
+        Category: Background Guard
+        Status: IGNORED
+
+[!IMPLEMENTED!] [**] #1 "Ask the user if they would want to proceed with a folder that does not contain any valid audio files"
+        Detailed Description: Show a dialog prompt for when the user has chosen a folder that does not
+        contain any valid audio files.
+        Status: Implemented
+        Category: GUI Guard
