@@ -249,6 +249,10 @@ public class FileList extends JScrollPane implements TabTree {
     return "";
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String getPath() {
     return info.getAbsolutePath();

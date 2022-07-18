@@ -223,6 +223,10 @@ public class Debugger {
     }
   }
 
+
+  /**
+   * @param e
+   */
   public static void byteLog(byte ... e) {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
       out.println(Arrays.toString(e));

@@ -44,16 +44,28 @@ public class AudioSettings extends JScrollPane implements SettingsTabs {
     setViewportView(panel);
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String getTabName() {
     return "Audio";
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String getTabToolTip() {
     return "Audio Settings";
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getTabContent() {
     return this;

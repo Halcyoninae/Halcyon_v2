@@ -68,6 +68,10 @@ public final class TextParser {
     return true;
   }
 
+
+  /**
+   * @return String
+   */
   public static String getPropertyTextEncodingName() {
     return ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8") ? "UTF-8"
         : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le") ? "UTF-16LE"
@@ -89,6 +93,10 @@ public final class TextParser {
                     : str.getBytes(StandardCharsets.UTF_16BE))));
   }
 
+
+  /**
+   * @return Charset
+   */
   public static Charset getCharset() {
     return TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
               : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE

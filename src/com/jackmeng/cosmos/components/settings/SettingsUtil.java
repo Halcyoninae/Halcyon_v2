@@ -10,6 +10,12 @@ import com.jackmeng.halcyon.connections.properties.Property;
 import java.awt.*;
 
 public final class SettingsUtil {
+
+  /**
+   * @param property
+   * @param dim
+   * @return JPanel
+   */
   public static JPanel getPropertyAsComponent(Property property, Dimension dim) {
     JPanel panel = new JPanel();
     panel.setLayout(new FlowLayout(FlowLayout.LEFT));

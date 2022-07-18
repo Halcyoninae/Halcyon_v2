@@ -29,6 +29,14 @@ import com.jackmeng.cloudspin.lib.Blur;
  * @see com.jackmeng.cloudspin.lib.Blur
  */
 public class BlurHash implements Blur {
+
+  /**
+   * @param image
+   * @param _x
+   * @param _y
+   * @param otherParams
+   * @return BufferedImage
+   */
   @Override
   public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
     int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());

@@ -93,6 +93,10 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
     setVisible(true);
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if (status.equals(TailwindStatus.OPEN)) {

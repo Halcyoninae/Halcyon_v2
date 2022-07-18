@@ -20,11 +20,24 @@ import java.io.File;
 import javax.sound.sampled.AudioFormat;
 
 public final class TailwindTranscoder implements Transcoder {
+
+  /**
+   * @param inFormat
+   * @param outFormat
+   * @param inLocale
+   * @param outLocale
+   */
   @Override
   public void transcode(int inFormat, int outFormat, File inLocale, File outLocale) {
 
   }
 
+
+  /**
+   * @param arr
+   * @param shift_n
+   * @return int[]
+   */
   public static int[] byteify(byte[] arr, int shift_n) {
     int[] temp = new int[arr.length / 2];
     for (int i = 0; i < arr.length / 2; i++) {
@@ -33,6 +46,12 @@ public final class TailwindTranscoder implements Transcoder {
     return temp;
   }
 
+
+  /**
+   * @param format
+   * @param time
+   * @return int
+   */
   public static int msToByte(AudioFormat format, int time) {
     return (int) (time * (format.getSampleRate() * format.getChannels() * format.getSampleSizeInBits()) / 8000f);
   }

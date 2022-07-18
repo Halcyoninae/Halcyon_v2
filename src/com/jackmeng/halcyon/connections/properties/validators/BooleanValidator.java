@@ -26,6 +26,11 @@ import com.jackmeng.halcyon.connections.properties.PropertyValidator;
  */
 public class BooleanValidator implements PropertyValidator {
 
+
+  /**
+   * @param propertyValue
+   * @return boolean
+   */
   @Override
   public boolean isValid(String propertyValue) {
     return propertyValue.equalsIgnoreCase("false") || propertyValue.equalsIgnoreCase("true");

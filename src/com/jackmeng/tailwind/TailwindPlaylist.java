@@ -55,10 +55,18 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     rnd = new Random();
   }
 
+
+  /**
+   * @return TailwindPlayer
+   */
   public TailwindPlayer getPlayer() {
     return player;
   }
 
+
+  /**
+   * @param f
+   */
   public void start(File f) {
     player.open(f);
     player.play();
@@ -79,6 +87,10 @@ public class TailwindPlaylist implements TailwindListener.StatusUpdateListener {
     start(f);
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if(status.equals(TailwindStatus.END)) {

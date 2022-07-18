@@ -319,6 +319,12 @@ public final class DeImage {
     return img;
   }
 
+
+  /**
+   * @param hRadius
+   * @param vRadius
+   * @return ConvolveOp
+   */
   public static ConvolveOp blurFilter(int hRadius, int vRadius) {
     int width = hRadius * 2 + 1;
     int height = vRadius * 2 + 1;

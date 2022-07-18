@@ -200,6 +200,11 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addGenericUpdateListener(e);
   }
 
+
+  /**
+   * @param e
+   * @return boolean
+   */
   public synchronized boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
     return events.addFrameBufferListener(e);
   }
@@ -287,6 +292,10 @@ public class TailwindPlayer implements Audio, Runnable {
         balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
   }
 
+
+  /**
+   * @param pan
+   */
   public void setPan(float pan) {
     FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
     ctrl.setValue(

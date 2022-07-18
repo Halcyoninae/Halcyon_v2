@@ -100,6 +100,10 @@ public class SettingsPane extends JFrame implements Runnable, ActionListener {
     SwingUtilities.invokeLater(this::ak);
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if(e.getSource().equals(close)) {

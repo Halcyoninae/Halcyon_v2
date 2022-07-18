@@ -128,6 +128,10 @@ public class VirtualFolder extends PhysicalFolder {
     return list.remove(f);
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String toString() {
     return "[ VIRTUAL FOLDER @ " + getName() + "-" + list.toString() + " ]";

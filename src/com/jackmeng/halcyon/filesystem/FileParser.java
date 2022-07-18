@@ -128,6 +128,12 @@ public final class FileParser {
     return files.length == 0;
   }
 
+
+  /**
+   * @param os
+   * @param encoding
+   * @throws IOException
+   */
   public static void writeBOM(OutputStream os, String encoding) throws IOException {
     os.write(encoding.equals("UTF-8") ? TextBOM.UTF8_BOM
         : (encoding.equals("UTF-16LE") ? TextBOM.UTF16_LE_BOM : TextBOM.UTF16_BE_BOM));

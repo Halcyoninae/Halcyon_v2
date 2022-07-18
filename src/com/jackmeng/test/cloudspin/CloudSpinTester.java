@@ -10,6 +10,11 @@ import com.jackmeng.cloudspin.*;
 import com.jackmeng.test.TesterFrame;
 
 public class CloudSpinTester {
+
+  /**
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
     BufferedImage img = ImageIO.read(new File("Source/com/jackmeng/test/cloudspin/colorwheel.png"));
     JPanel jp = new JPanel() {

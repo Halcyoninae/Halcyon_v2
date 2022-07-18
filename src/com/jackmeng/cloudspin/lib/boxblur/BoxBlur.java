@@ -24,6 +24,14 @@ import com.jackmeng.cloudspin.lib.Blur;
 
 public class BoxBlur implements Blur {
 
+
+  /**
+   * @param image
+   * @param _x
+   * @param _y
+   * @param otherParams
+   * @return BufferedImage
+   */
   @Override
   public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
     BufferedImage mod = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());

@@ -91,6 +91,10 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
     container.setVisible(true);
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if (status.equals(TailwindStatus.PLAYING)) {

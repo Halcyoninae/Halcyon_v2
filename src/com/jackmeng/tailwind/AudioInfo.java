@@ -188,6 +188,10 @@ public class AudioInfo {
     }
   }
 
+
+  /**
+   * @return boolean
+   */
   public boolean hasArtwork() {
     BufferedImage img = null;
     try {

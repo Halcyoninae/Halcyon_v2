@@ -135,11 +135,22 @@ public final class base_83 {
     return new String(buff);
   }
 
+
+  /**
+   * @param val
+   * @return long
+   */
   public static long encodeDC(double[] val) {
     return ((((long) BlurHashChild._as_linear(val[0])) << 16) + (((long) BlurHashChild._as_linear(val[1])) << 8)
         + BlurHashChild._as_linear(val[2]));
   }
 
+
+  /**
+   * @param val
+   * @param m
+   * @return long
+   */
   public static long encodeAC(double[] val, double m) {
     return Math
         .round((Math.floor(Math.max(0, Math.min(18, Math.floor(math.signpow(val[0] / m, 0.5) * 9 + 9.5))))) * 19 * 19
@@ -162,6 +173,12 @@ public final class base_83 {
     return temp;
   }
 
+
+  /**
+   * @param str
+   * @param rMv
+   * @param color
+   */
   public static void decodeAC(String str, double rMv, double[] color) {
     int aV = decode(str);
     int qR = aV / (19 * 19);
@@ -172,6 +189,11 @@ public final class base_83 {
     color[2] = math.signpow((qB - 9.0) / 9.0, 2.0) * rMv;
   }
 
+
+  /**
+   * @param str
+   * @param colors
+   */
   public static void decodeDC(String str, double[] colors) {
     int dV = decode(str);
     colors[0] = BlurHashChild.to_linear(dV >> 16);
@@ -179,6 +201,11 @@ public final class base_83 {
     colors[2] = BlurHashChild.to_linear(dV & 255);
   }
 
+
+  /**
+   * @param c
+   * @return int
+   */
   public static int find(char c) {
     for (int i = 0; i < TABLE.length; i++) {
       if (TABLE[i] == c) {

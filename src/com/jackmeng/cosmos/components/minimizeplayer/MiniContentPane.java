@@ -70,6 +70,10 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     infoLabel.setText(info.getTag(AudioInfo.KEY_MEDIA_TITLE));
   }
 
+
+  /**
+   * @param info
+   */
   @Override
   public void infoView(AudioInfo info) {
     this.info = info;

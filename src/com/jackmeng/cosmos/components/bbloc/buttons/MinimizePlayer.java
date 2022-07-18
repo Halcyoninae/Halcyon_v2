@@ -35,6 +35,10 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     });
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void actionPerformed(ActionEvent e) {
     if (!pressed) {
@@ -43,6 +47,10 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     }
   }
 
+
+  /**
+   * @return JComponent
+   */
   @Override
   public JComponent getComponent() {
     return this;
