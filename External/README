@@ -1,0 +1,52 @@
+OK, you might be here because you might be wondering why no issues on GitHub Jack??? Why only must submit a PR????
+
+Ok first of all, I really dislike the way the issues tab is only a part of GitHub meaning I really don't get to see it
+on my end without some fancy software that I might have to install. The latter is that I have been using this format
+for most if not all my projects. It enables me to view said issues in a very compact list form-factor; without the
+stupid reliance on stuff like "eye-candy" to make it actually workable. 
+
+Now the other reasons is that I can see these stuffs without needing some network connection (guranteeing that I have the latest
+version).
+
+Ok everything clear? (Ok please shut up if you have any silly BS that you comment saying this format is something like "cringie" or "shitty")
+
+[!] ==Submitting a Bug OR a program report==
+> A program report or a bug is something that details something that hinders the software's (s') original intended capability.
+
+To submit one, you submit a PR to the file BUGS.txt with your issue number, which you can find with the latest number in that file;
+note: yes you have to update that number as new reports are accepted and your's isn't (idc)
+
+Then you need 3 mandatory fields you must have to fill out:
+1. Detailed Description
+2. Testing
+3. State
+
+Optional Fields:
+1. Difficulty
+2. Status
+3. Potential Fix
+
+[ Follow other accepted issues' templates to understand what the heck your doing ok? ]
+
+If you have a potential fix to the problem, then you are very well to attach your own solution to your PR; unless I veto your BS.
+
+[!] ==Submitting a Feature Request OR a program improvement==
+> A feature request is something that details something that benefits the program, like maybe accept different frequencies?
+
+A feature request is very similar to a bug report; however key differences:
+1. The file is now called FEATURES.txt
+2. ->
+Mandatory Fields: 
+  1. Detailed Description
+  2. Category [Program Dynamic, Potential Optimization, Visual Comfort]
+Optional Fields:
+  1. Status
+
+Now for the category part, please don't pull some random obscure category out of your ass, just use the ones listed above.
+
+[?] Questions?
+If you have questions, literally just ask me. 
+
+You can submit a blank PR or just email me and I will hopefully respond unless you asked some trivial or rhetorical BS.
+
+Thanks.
