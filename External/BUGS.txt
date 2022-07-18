@@ -1,3 +1,15 @@
+[***] #33 "Proper Error Handling"
+      Extensions: #25
+      Detailed Description: Instead of figuring out a direct way to handle
+      individual errors in a very unoptimized and bloated way, just simply
+      open a dialog that shows the Exception.getMessage().
+            ; This Dialog in turn should only be opened if an exception is
+            deemed at the fault of the user.
+      Status: none
+      State: Experimental-Build ~ MP4J
+      Difficulty: Minimal
+      Testing: Minimal
+
 [***] #32 "LikedList instance not being to able have tracks selected for playback"
       Detailed Description: Tracks that are added into the LikedList view cannot be
       selected via the right click development??
@@ -62,10 +74,10 @@
       Status: FIXED; all character encoding now handled by TextParser to UTF16 (not LE or BE)
       State: Experimental-Build ~ MP4J
 
-[***] #25 "Error handling for incorrect file type"
+[!EXTENDED!] [***] #25 "Error handling for incorrect file type"
       Detailed description: Display a messaeg showing that a selected file is
       not a file type based on it's content. Then delete it from the tree.
-      Status: None
+      Status: EXTENDED
       State: Experimental-Build ~ MP4J
 
 [!FIXED!] {URGENT} [***] #24 "Audio Buffer not reforming on new audio opening"
