@@ -48,6 +48,8 @@ public class ThreadedScheduler {
    * be init by themselves not here.
    */
   static {
+    System.setProperty("flatlaf.useWindowDecorations", "false");
+    System.setProperty("flatlaf.uiScale.enabled", "false");
     System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
     UIManager.put("ScrollBar.thumbArc", 999);
     UIManager.put("TabbedPane.showTabSeparators", true);

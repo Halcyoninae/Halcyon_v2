@@ -18,6 +18,11 @@ package com.jackmeng.halcyon.constant;
 import com.jackmeng.halcyon.connections.properties.Property;
 import com.jackmeng.halcyon.connections.properties.PropertyValidator;
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
+import com.jackmeng.halcyon.connections.properties.validators.BooleanValidator;
+import com.jackmeng.halcyon.connections.properties.validators.DefaultValidator;
+import com.jackmeng.halcyon.connections.properties.validators.DirectoryValidator;
+import com.jackmeng.halcyon.connections.properties.validators.NumericRangeValidator;
+import com.jackmeng.halcyon.connections.properties.validators.StrictValidator;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -33,8 +38,6 @@ import java.util.Map;
  * @see com.jackmeng.halcyon.connections.properties.ResourceFolder
  */
 public class ProgramResourceManager {
-
-
 
   private ProgramResourceManager() {
   }
@@ -52,22 +55,23 @@ public class ProgramResourceManager {
   public static final String KEY_AUDIO_DEFAULT_BUFFER_SIZE = "audio.buffer_size";
 
   public static final Property[] propertiesList = {
-      new Property(KEY_USER_DEFAULT_FOLDER, "."),
+      new Property(KEY_USER_DEFAULT_FOLDER, ".", new DirectoryValidator()),
       new Property(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
-          "true", "true", "false"),
+          "true", new BooleanValidator()),
       new Property(KEY_INFOVIEW_BACKDROP_USE_GREYSCALE,
-          "false", "true", "false"),
+          "false", new BooleanValidator()),
       new Property(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, "true",
-          "true", "false"),
-      new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "true", "true",
-          "false"),
+          new BooleanValidator()),
+      new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "true", new BooleanValidator()),
       new Property(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
-          "focused", "top", "left", "right", "focused"),
-      new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", "0.9", "1.1"),
-      new Property(KEY_USER_DSIABLE_CLI, "true", "true", "false"),
-      new Property(KEY_USER_USE_DISCORD_RPC, "true", "true", "false"),
-      new Property(KEY_USER_CHAR_SET_WRITE_TABLE,  "utf8", "utf16le", "utf16be"),
-      new Property(KEY_AUDIO_DEFAULT_BUFFER_SIZE, "auto"),
+          "focused", new StrictValidator("top", "left", "right",
+              "focused")),
+      new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", new NumericRangeValidator(0.9d, 1.1d, 0.1d)),
+      new Property(KEY_USER_DSIABLE_CLI, "true", new BooleanValidator()),
+      new Property(KEY_USER_USE_DISCORD_RPC, "true", new BooleanValidator()),
+      new Property(KEY_USER_CHAR_SET_WRITE_TABLE, "utf-8", new StrictValidator("utf8", "utf16le",
+          "utf16be")),
+      new Property(KEY_AUDIO_DEFAULT_BUFFER_SIZE, "auto", new DefaultValidator()),
   };
 
   public static final String FILE_SLASH = "/";

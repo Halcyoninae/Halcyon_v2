@@ -20,7 +20,6 @@ import java.nio.charset.StandardCharsets;
 
 import com.jackmeng.halcyon.connections.properties.ResourceFolder;
 import com.jackmeng.halcyon.constant.ProgramResourceManager;
-import com.jackmeng.halcyon.debug.Debugger;
 
 /**
  * A utility class for text manipulation

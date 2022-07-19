@@ -439,7 +439,6 @@ public class TailwindPlayer implements Audio, Runnable {
                 break;
               }
               line.write(buffer, 0, i);
-              Wrapper.async(() -> Debugger.byteLog(buffer));
             }
             if (!paused) {
               reset();

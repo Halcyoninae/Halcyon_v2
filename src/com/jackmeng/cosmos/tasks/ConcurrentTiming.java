@@ -24,5 +24,5 @@ package com.jackmeng.cosmos.tasks;
  * @since 3.0
  */
 public interface ConcurrentTiming {
-  int MAX_TLE = 500;
+  int MAX_TLE = 1500;
 }
