@@ -64,6 +64,15 @@ Hopefully to support:
 * - Video formats that will have
 their audio track separated.
 
+Memory usage usually hovers at 
+around 30-50 mB of memory usage
+no matter the file being played
+back. This is according to Java
+Mission Control, which may differ
+from the actual total memory being
+allocated to the Java VM (maybe
+in the 200mB+)
+
 ----------------------------------
 
 [!] Extern.
