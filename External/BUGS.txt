@@ -1,3 +1,12 @@
+[**] #34 "Chance for concurrent modification for refresh"
+      Detailed Description: If a user manage to properly time themselves
+      with the refresh, which happens every 1 second, the program will
+      hit a concurrent modification exception.
+      Status: None
+      State: Experimental-Build ~ MP4J
+      Difficulty: Decent; To implement a lock system
+      Testing: Minimal
+
 [***] #33 "Proper Error Handling"
       Extensions: #25
       Detailed Description: Instead of figuring out a direct way to handle
