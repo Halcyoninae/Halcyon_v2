@@ -1,3 +1,37 @@
+[***] {INDEPENDENT} #40 "Version Info And Originality Resource API"
+        Detailed Description: Using GitHub Pages in a separate repository,
+        host a Resource API that a separate program will parse and call 
+        upon when needed.
+                ; The server part will host things such as the following:
+                        1. Version Info packages
+                        2. Additional Change Notes
+                        3. Checksums
+                        4. Anything else that the program might need or want.
+                ; A separate program in that same repository to parse those 
+                information in a unified manner and can be called upon by the
+                Halcyon program for parsing.
+                ; The parsing program must also be able to properly handle
+                rate-limitings, incorrect formattings, and also internet
+                connection issues.
+                        1. Most of this could be solve by either bundling
+                        the parser with an initial state that it constantly
+                        updates with if the information it digests are correct.
+                        2. Caching the results separately everytime a successful
+                        request is made.
+                ; The parsing program is not a library bundled with the program,
+                instead should be an independent package that can be called
+                upon by the main program to run and ask for (API).
+                ; The main program should contain two options for this feature:
+                        1. The user may manually disable this feature via the 
+                        settings pane.
+                        2. If a fault is detected by the main program, meaning
+                        that if the packaged resource parser is not found, the
+                        main program shall either fall back to a hard-coded
+                        value or display an error message for missing parser.
+        Category: Program Dynamics
+        Difficulty: Mild
+        Status: Implementing
+
 [**] #39 "Wave Visualization"
         Detailed Description: Either incorporate as the standard miniplayer
         or into a separate player window that show a visualization of the audio
