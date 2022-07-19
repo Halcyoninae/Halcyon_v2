@@ -69,9 +69,9 @@ around 30-50 mB of memory usage
 no matter the file being played
 back. This is according to Java
 Mission Control, which may differ
-from the actual total memory being
-allocated to the Java VM (maybe
-in the 200mB+)
+from the actual committed Java
+Heap which is allocated to the 
+individual Java Processes.
 
 ----------------------------------
 
