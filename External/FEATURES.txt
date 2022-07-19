@@ -1,3 +1,15 @@
+[**] #39 "Wave Visualization"
+        Detailed Description: Either incorporate as the standard miniplayer
+        or into a separate player window that show a visualization of the audio
+        being played.
+                ; This in turn should close the original frame and disable 
+                repaint on teh components.
+                ; Dead Loops (Forever loops) in the main player should be paused
+                until the main player is once again opened.
+        Category: Visual Comfort; Program Dynamics
+        Difficulty: Decent
+        Status: Implementing
+
 [***] #38 "BBloc Expansion Button"
         Detailed Description: A button at the end of the BBloc panel that when
         clicked will open a dialog containing the following:
@@ -33,6 +45,7 @@
                 Implementation: None
                 Optimization: Mediocre
         Status: none
+        Linked Issues: BUG#34
 
 [**] #35 "Drop targetting"
         Detailed Description: When a file or folder is dragged over the program, detect
