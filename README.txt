@@ -106,6 +106,11 @@ them.
     of using something like 
     Object Pascal, C#, C/C++, or
     JavaScript/TypeScript.
+    > Although I knew how to 
+    create apps and audio
+    playback in C & C++, it
+    felt like bigger fun to do it
+    in Java ;)
     
   2. Why not JavaFX?
     > In the section "Extern.", I 
