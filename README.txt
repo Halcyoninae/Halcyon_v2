@@ -193,7 +193,7 @@ Tailwind -> Audio Processors
 [!] MISC                          
                                   
 You can view the JavaDocs here:   
-yttrium-terminus.github.io/halcyon
+halcyoninae.github.io/halcyon
 
 You can read more about submitting
 a FEATURE request or a bug report,
