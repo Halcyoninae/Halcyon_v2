@@ -60,6 +60,9 @@ Hopefully to support:
   4. MP4*
   5. AU
   6. AVI*
+  7. MP2
+  8. AAC
+  9. USAC
 
 * - Video formats that will have
 their audio track separated.
