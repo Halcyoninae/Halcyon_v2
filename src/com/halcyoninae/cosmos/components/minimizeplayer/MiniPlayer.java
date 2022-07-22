@@ -1,9 +1,8 @@
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Global;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;

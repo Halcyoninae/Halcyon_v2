@@ -15,11 +15,6 @@
 
 package com.halcyoninae.cosmos.events;
 
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-
 import com.halcyoninae.cosmos.components.bottompane.TabTree;
 import com.halcyoninae.cosmos.components.dialog.AudioInfoDialog;
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
@@ -31,6 +26,10 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.Wrapper;
 import com.halcyoninae.tailwind.AudioInfo;
 
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;

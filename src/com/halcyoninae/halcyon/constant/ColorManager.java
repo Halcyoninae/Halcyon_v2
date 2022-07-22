@@ -15,9 +15,9 @@
 
 package com.halcyoninae.halcyon.constant;
 
-import java.awt.*;
-
 import com.halcyoninae.halcyon.utils.ColorTool;
+
+import java.awt.*;
 
 /**
  * This interface holds constants for any color values that

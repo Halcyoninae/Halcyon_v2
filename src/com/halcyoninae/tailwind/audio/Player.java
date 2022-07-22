@@ -15,18 +15,14 @@
 
 package com.halcyoninae.tailwind.audio;
 
-import javax.sound.sampled.Control;
-import javax.sound.sampled.FloatControl;
-
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TimeParser;
 import com.halcyoninae.tailwind.TailwindPlayer;
 
+import javax.sound.sampled.Control;
+import javax.sound.sampled.FloatControl;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * This simplification is due to some of the methods not being to be needed and

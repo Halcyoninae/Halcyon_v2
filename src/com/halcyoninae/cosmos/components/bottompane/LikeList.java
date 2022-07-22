@@ -15,9 +15,6 @@
 
 package com.halcyoninae.cosmos.components.bottompane;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-
 import com.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -25,6 +22,8 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.VirtualFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;

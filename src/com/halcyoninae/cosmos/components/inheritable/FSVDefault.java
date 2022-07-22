@@ -15,10 +15,10 @@
 
 package com.halcyoninae.cosmos.components.inheritable;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
+
+import javax.swing.*;
 
 /**
  * This class mainly provides the necessary inheritable attributes

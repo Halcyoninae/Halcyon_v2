@@ -1,11 +1,11 @@
 package com.halcyoninae.cosmos.events;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.runtime.Program;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class InstantClose implements WindowListener {
 

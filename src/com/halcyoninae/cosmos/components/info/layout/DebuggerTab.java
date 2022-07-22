@@ -1,7 +1,5 @@
 package com.halcyoninae.cosmos.components.info.layout;
 
-import javax.swing.JComponent;
-
 import com.halcyoninae.cosmos.components.info.InformationTab;
 import com.halcyoninae.halcyon.constant.Manager;
 

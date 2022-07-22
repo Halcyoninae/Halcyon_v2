@@ -15,11 +15,10 @@
 
 package com.halcyoninae.cosmos.components.inheritable;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.tailwind.AudioInfo;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

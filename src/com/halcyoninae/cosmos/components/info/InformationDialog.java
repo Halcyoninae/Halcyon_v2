@@ -15,14 +15,13 @@
 
 package com.halcyoninae.cosmos.components.info;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.info.layout.DebuggerTab;
 import com.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
 import com.halcyoninae.cosmos.components.info.layout.SystemTab;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

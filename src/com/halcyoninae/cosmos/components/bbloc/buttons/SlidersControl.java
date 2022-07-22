@@ -15,16 +15,16 @@
 
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.dialog.SlidersDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.DeImage;
 
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class SlidersControl extends JButton implements BBlocButton {
   private boolean isPressed;

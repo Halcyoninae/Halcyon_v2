@@ -15,10 +15,6 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import com.halcyoninae.cosmos.components.inheritable.LikeButton;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.halcyoninae.halcyon.constant.ColorManager;
@@ -28,6 +24,9 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.tailwind.AudioInfo;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

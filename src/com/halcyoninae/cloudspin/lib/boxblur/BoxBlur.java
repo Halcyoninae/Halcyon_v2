@@ -15,12 +15,13 @@
 
 package com.halcyoninae.cloudspin.lib.boxblur;
 
-import java.awt.image.*;
-
 import com.halcyoninae.cloudspin.enums.SpeedStyle;
 import com.halcyoninae.cloudspin.lib.Blur;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 
 public class BoxBlur implements Blur {
 

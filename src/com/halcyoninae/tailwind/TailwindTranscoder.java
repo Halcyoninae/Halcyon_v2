@@ -15,9 +15,8 @@
 
 package com.halcyoninae.tailwind;
 
-import java.io.File;
-
 import javax.sound.sampled.AudioFormat;
+import java.io.File;
 
 public final class TailwindTranscoder implements Transcoder {
 

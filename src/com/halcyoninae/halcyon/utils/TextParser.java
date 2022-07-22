@@ -15,11 +15,11 @@
 
 package com.halcyoninae.halcyon.utils;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A utility class for text manipulation

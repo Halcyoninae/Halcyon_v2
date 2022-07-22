@@ -15,8 +15,6 @@
 
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders;
@@ -26,6 +24,7 @@ import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.filesystem.FileParser;
 import com.halcyoninae.halcyon.utils.DeImage;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;

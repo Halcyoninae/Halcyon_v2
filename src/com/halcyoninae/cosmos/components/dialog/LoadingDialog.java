@@ -15,11 +15,10 @@
 
 package com.halcyoninae.cosmos.components.dialog;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class LoadingDialog extends JFrame {

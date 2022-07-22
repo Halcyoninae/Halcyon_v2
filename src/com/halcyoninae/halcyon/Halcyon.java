@@ -15,8 +15,6 @@
 
 package com.halcyoninae.halcyon;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.ThreadedScheduler;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bbloc.BBlocView;
@@ -35,6 +33,7 @@ import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.TextParser;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;

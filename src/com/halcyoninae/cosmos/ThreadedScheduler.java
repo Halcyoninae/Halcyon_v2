@@ -18,17 +18,11 @@ package com.halcyoninae.cosmos;
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.halcyoninae.cosmos.tasks.DefunctOptimizer;
 import com.halcyoninae.cosmos.tasks.PingFileView;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
-import com.halcyoninae.halcyon.debug.Debugger;
-
-import java.awt.Color;
-import java.util.logging.LogManager;
 
 import javax.swing.*;
+import java.util.logging.LogManager;
 
 public class ThreadedScheduler {
   public ThreadedScheduler() {

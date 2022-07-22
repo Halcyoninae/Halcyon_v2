@@ -15,18 +15,15 @@
 
 package com.halcyoninae.tailwind;
 
-import javax.sound.sampled.*;
-
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.halcyon.utils.Wrapper;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.simple.FileFormat;
 
+import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;

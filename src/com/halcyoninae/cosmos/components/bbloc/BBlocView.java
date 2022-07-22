@@ -15,10 +15,9 @@
 
 package com.halcyoninae.cosmos.components.bbloc;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class BBlocView extends JPanel {

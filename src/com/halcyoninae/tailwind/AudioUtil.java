@@ -15,12 +15,11 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.tailwind.simple.FileFormat;
+
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
-
-import com.halcyoninae.tailwind.simple.FileFormat;
-
 import java.net.URL;
 
 public final class AudioUtil {

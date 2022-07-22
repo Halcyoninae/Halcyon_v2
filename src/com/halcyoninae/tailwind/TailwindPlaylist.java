@@ -15,11 +15,11 @@
 
 package com.halcyoninae.tailwind;
 
-import java.io.File;
-import java.util.Random;
-
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
+import java.io.File;
+import java.util.Random;
 
 /**
  * A playlist class that handles playing multiple tracks at once, for example,

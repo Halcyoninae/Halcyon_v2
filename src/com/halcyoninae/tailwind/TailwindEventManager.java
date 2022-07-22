@@ -15,12 +15,12 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.halcyon.utils.Wrapper;
+import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-
-import com.halcyoninae.halcyon.utils.Wrapper;
-import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 /**
  * A global scoped targeted towards managing multiple

@@ -15,10 +15,10 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.halcyon.utils.Wrapper;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.halcyoninae.halcyon.utils.Wrapper;
 
 public class TailwindPlaylistEventManager {
   private List<TailwindPlaylistListener.TailwindPlaylistStatusListener> statusListeners;

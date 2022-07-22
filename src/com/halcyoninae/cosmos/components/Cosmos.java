@@ -15,16 +15,15 @@
 
 package com.halcyoninae.cosmos.components;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.events.InstantClose;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
-import com.halcyoninae.tailwind.TailwindListener;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.halcyoninae.tailwind.TailwindListener;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

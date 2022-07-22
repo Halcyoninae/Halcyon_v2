@@ -15,14 +15,9 @@
 
 package com.halcyoninae.cloudspin;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Color;
 
 
 /**

@@ -15,12 +15,11 @@
 
 package com.halcyoninae.cosmos.components.dialog;
 
-import org.jaudiotagger.tag.FieldKey;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.TimeParser;
 import com.halcyoninae.tailwind.AudioInfo;
+import org.jaudiotagger.tag.FieldKey;
 
 import javax.swing.*;
 import java.awt.*;

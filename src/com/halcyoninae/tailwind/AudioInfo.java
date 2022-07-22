@@ -15,6 +15,10 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.utils.DeImage;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -25,11 +29,6 @@ import org.jaudiotagger.audio.mp3.MP3File;
 import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
-
-import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.halcyon.utils.DeImage;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

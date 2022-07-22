@@ -15,24 +15,19 @@
 
 package com.halcyoninae.halcyon.connections.properties;
 
+import com.halcyoninae.halcyon.ProjectManager;
+import com.halcyoninae.halcyon.constant.ProgramResourceManager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.utils.DeImage;
+
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import com.halcyoninae.halcyon.ProjectManager;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
-import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.halcyon.utils.DeImage;
 
 /**
  * ResourceFolder is a general class that holds information about

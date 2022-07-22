@@ -15,18 +15,14 @@
 
 package com.halcyoninae.halcyon.constant;
 
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.halcyoninae.halcyon.connections.properties.Property;
 import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.connections.properties.validators.BooleanValidator;
-import com.halcyoninae.halcyon.connections.properties.validators.DefaultValidator;
-import com.halcyoninae.halcyon.connections.properties.validators.DirectoryValidator;
-import com.halcyoninae.halcyon.connections.properties.validators.NumericRangeValidator;
-import com.halcyoninae.halcyon.connections.properties.validators.StrictValidator;
+import com.halcyoninae.halcyon.connections.properties.validators.*;
+
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A constant defined class that holds

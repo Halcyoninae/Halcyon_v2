@@ -15,16 +15,12 @@
 
 package com.halcyoninae.cosmos.components.dialog;
 
-import java.awt.Dimension;
-
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class StraightTextDialog extends JFrame implements Runnable {
   private JScrollPane pane;

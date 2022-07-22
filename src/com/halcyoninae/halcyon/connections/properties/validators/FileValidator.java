@@ -15,9 +15,9 @@
 
 package com.halcyoninae.halcyon.connections.properties.validators;
 
-import java.io.File;
-
 import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
+
+import java.io.File;
 
 public class FileValidator implements PropertyValidator {
 

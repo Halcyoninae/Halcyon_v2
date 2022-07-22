@@ -15,21 +15,15 @@
 
 package com.halcyoninae.cosmos.components.dialog;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.tailwind.TailwindListener;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.halcyoninae.tailwind.TailwindListener;
 
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 
 public class SlidersDialog extends JFrame implements Runnable, TailwindListener.StatusUpdateListener {
   private JTabbedPane pane;

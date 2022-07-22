@@ -15,10 +15,9 @@
 
 package com.halcyoninae.halcyon.connections.resource;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.debug.Debugger;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,12 +1,8 @@
 package com.halcyoninae.cosmos.components.settings;
 
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import com.halcyoninae.halcyon.connections.properties.Property;
 
+import javax.swing.*;
 import java.awt.*;
 
 public final class SettingsUtil {

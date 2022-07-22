@@ -1,15 +1,13 @@
 package com.halcyoninae.cosmos.components.settings.tabs.properties;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.settings.SettingsTabs;
-import com.halcyoninae.cosmos.components.settings.SettingsUtil;
 import com.halcyoninae.halcyon.connections.properties.Property;
 import com.halcyoninae.halcyon.connections.properties.Property.PropertyFilterType;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class AudioSettings extends JScrollPane implements SettingsTabs {

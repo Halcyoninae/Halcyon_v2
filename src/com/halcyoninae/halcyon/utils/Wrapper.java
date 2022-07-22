@@ -15,11 +15,10 @@
 
 package com.halcyoninae.halcyon.utils;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 
+import javax.swing.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

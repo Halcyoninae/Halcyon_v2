@@ -19,7 +19,6 @@ import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdat
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TextParser;
 import com.halcyoninae.tailwind.AudioInfo;
-
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;

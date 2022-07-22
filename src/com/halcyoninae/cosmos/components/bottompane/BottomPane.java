@@ -15,13 +15,12 @@
 
 package com.halcyoninae.cosmos.components.bottompane;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.inheritable.TabButton;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.utils.Wrapper;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;

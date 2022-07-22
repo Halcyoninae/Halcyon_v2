@@ -15,12 +15,11 @@
 
 package com.halcyoninae.cosmos.components.info.layout;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.info.InformationTab;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;

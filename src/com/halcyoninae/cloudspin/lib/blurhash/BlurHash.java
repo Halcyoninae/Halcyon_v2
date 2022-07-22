@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cloudspin.lib.blurhash;
 
-import java.awt.image.BufferedImage;
-
 import com.halcyoninae.cloudspin.lib.Blur;
+
+import java.awt.image.BufferedImage;
 
 /**
  * The Main BlurHash Extern Class that provides

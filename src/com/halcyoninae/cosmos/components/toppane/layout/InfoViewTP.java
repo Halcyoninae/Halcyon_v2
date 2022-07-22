@@ -15,13 +15,8 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
-import de.ralleytn.simple.image.SimpleImage;
-
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -30,9 +25,9 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.halcyon.utils.TimeParser;
 import com.halcyoninae.tailwind.AudioInfo;
-import com.halcyoninae.tailwind.TailwindEvent;
-import com.halcyoninae.tailwind.TailwindListener;
+import de.ralleytn.simple.image.SimpleImage;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
