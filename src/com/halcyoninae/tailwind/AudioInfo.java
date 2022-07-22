@@ -178,12 +178,12 @@ public class AudioInfo {
         }
       }
       if (img == null) {
-        return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        return AudioInfo.getDefaultIcon();
       } else {
         return img;
       }
     } catch (NullPointerException e) {
-      return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+      return AudioInfo.getDefaultIcon();
     }
   }
 

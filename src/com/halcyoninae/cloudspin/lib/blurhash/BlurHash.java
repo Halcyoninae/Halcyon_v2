@@ -42,9 +42,11 @@ public class BlurHash implements Blur {
     int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
     String hash = BlurHashChild.enc(pixels, image.getWidth(), image.getHeight(), _x, _y);
     double p = 1.0d;
-    if (otherParams[0] instanceof Double) {
-      if (((Double) otherParams[0]).doubleValue() > 0) {
-        p = ((Double) otherParams[0]).doubleValue();
+    if (otherParams != null) {
+      if (otherParams[0] instanceof Double) {
+        if (((Double) otherParams[0]).doubleValue() > 0) {
+          p = ((Double) otherParams[0]).doubleValue();
+        }
       }
     }
     int[] dec = BlurHashChild.dec(hash, image.getWidth(), image.getHeight(), p);

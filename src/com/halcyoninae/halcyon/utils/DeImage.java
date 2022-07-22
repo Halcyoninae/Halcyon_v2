@@ -286,7 +286,7 @@ public final class DeImage {
       g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
       g2d.dispose();
       return applyMask(img, alphamask, AlphaComposite.DST_IN);
-    } else if (opacityStartDirection == Directional.LEFT) {
+    } else if (opacityStartDirection == Directional.RIGHT) {
       BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2d = alphamask.createGraphics();
       LinearGradientPaint lgp = new LinearGradientPaint(
@@ -298,7 +298,7 @@ public final class DeImage {
       g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
       g2d.dispose();
       return applyMask(img, alphamask, AlphaComposite.DST_IN);
-    } else if (opacityStartDirection == Directional.RIGHT) {
+    } else if (opacityStartDirection == Directional.LEFT) {
       BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
       Graphics2D g2d = alphamask.createGraphics();
       LinearGradientPaint lgp = new LinearGradientPaint(

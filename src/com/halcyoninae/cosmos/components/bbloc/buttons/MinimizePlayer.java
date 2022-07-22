@@ -2,14 +2,13 @@ package com.halcyoninae.cosmos.components.bbloc.buttons;
 
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer;
+import com.halcyoninae.cosmos.components.minimizeplayer.MiniPlayerListener;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class MinimizePlayer extends JButton implements BBlocButton {
   private boolean pressed = false;
@@ -25,14 +24,13 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     setBackground(null);
     addActionListener(this);
     player = new MiniPlayer();
-    player.addWindowListener(new WindowAdapter() {
+    player.setMiniPlayerListener(new MiniPlayerListener() {
       @Override
-      public void windowClosing(WindowEvent e) {
+      public void closingWindow() {
         pressed = false;
       }
     });
   }
-
 
   /**
    * @param e
@@ -44,7 +42,6 @@ public class MinimizePlayer extends JButton implements BBlocButton {
       pressed = true;
     }
   }
-
 
   /**
    * @return JComponent

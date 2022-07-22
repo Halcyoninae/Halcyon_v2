@@ -19,7 +19,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-
 /**
  * This class is used for general graphical manipulation.
  *
@@ -81,5 +80,22 @@ public final class CloudSpin {
             g.dispose();
             return image;
         }
+    }
+
+    public static BufferedImage grabCrop(BufferedImage target, Rectangle w) {
+        int width = 0, height = 0;
+        if(w.getWidth() > target.getWidth() && w.getHeight() > target.getHeight()) {
+            return target;
+        } else {
+            // since the decimals are just stripped it will be fine.
+            width = (int) w.getWidth();
+            height = (int) w.getHeight();
+        }
+        BufferedImage cropped = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = cropped.createGraphics();
+        // crop the image from (x1, y1) to (x2, y2)
+        g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(), (int) (w.getX() + w.getWidth()), (int) (w.getY() + w.getHeight()), null);
+        g.dispose();
+        return cropped;
     }
 }

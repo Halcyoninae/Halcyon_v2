@@ -49,6 +49,7 @@ public class ProgramResourceManager {
   public static final String KEY_USER_USE_DISCORD_RPC = "user.use_discord_rpc";
   public static final String KEY_USER_CHAR_SET_WRITE_TABLE = "user.charset_write_table";
   public static final String KEY_AUDIO_DEFAULT_BUFFER_SIZE = "audio.buffer_size";
+  public static final String KEY_MINI_PLAYER_DEFAULT_BG_ALPHA = "mini.player.default_bg_alpha";
 
   public static final Property[] propertiesList = {
       new Property(KEY_USER_DEFAULT_FOLDER, ".", new DirectoryValidator()),
@@ -65,14 +66,15 @@ public class ProgramResourceManager {
       new Property(KEY_PROGRAM_HIDPI_VALUE, "1.0", new NumericRangeValidator(0.9d, 1.1d, 0.1d)),
       new Property(KEY_USER_DSIABLE_CLI, "true", new BooleanValidator()),
       new Property(KEY_USER_USE_DISCORD_RPC, "true", new BooleanValidator()),
-      new Property(KEY_USER_CHAR_SET_WRITE_TABLE, "utf-8", new StrictValidator("utf8", "utf16le",
+      new Property(KEY_USER_CHAR_SET_WRITE_TABLE, "utf8", new StrictValidator("utf8", "utf16le",
           "utf16be")),
       new Property(KEY_AUDIO_DEFAULT_BUFFER_SIZE, "auto", new DefaultValidator()),
+      new Property(KEY_MINI_PLAYER_DEFAULT_BG_ALPHA, "0.6", new NumericRangeValidator(0.0d, 1.0d, 0.1d))
   };
 
   public static final String FILE_SLASH = "/";
   public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";
-  public static final String PROGRAM_RESOURCE_FILE_PROPERTIES = "halcyon.properties";
+  public static final String PROGRAM_RESOURCE_FILE_PROPERTIES = "conf.halcyon";
   public static final String[] RESOURCE_SUBFOLDERS = { "log", "bin", "user" };
   public static final String DEFAULT_ARTWORK_FILE_NAME = "artwork_cache.png";
 

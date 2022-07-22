@@ -1,6 +1,24 @@
+/*
+ *  Copyright: (C) 2022 name of Jack Meng
+ * Halcyon MP4J is music-playing software.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
+import com.halcyoninae.halcyon.Halcyon;
+import com.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,11 +46,14 @@ import java.awt.geom.RoundRectangle2D;
 public class MiniPlayer extends JFrame implements Runnable {
   private int pX, pY;
   private MiniContentPane pane;
+  private transient MiniPlayerListener listener;
 
   public MiniPlayer() {
     setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
     setUndecorated(true);
+    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     setAutoRequestFocus(true);
+    setFocusable(false);
     pane = new MiniContentPane();
     Global.ifp.addInfoViewUpdateListener(pane);
     setContentPane(pane);
@@ -48,6 +69,7 @@ public class MiniPlayer extends JFrame implements Runnable {
         pX = me.getX();
         pY = me.getY();
       }
+
       @Override
       public void mouseDragged(MouseEvent me) {
         setLocation(getLocation().x + me.getX() - pX,
@@ -61,6 +83,15 @@ public class MiniPlayer extends JFrame implements Runnable {
             getLocation().y + me.getY() - pY);
       }
     });
+    addMouseListener(new MiniPlayerClickMenu(this));
+  }
+
+  public void setMiniPlayerListener(MiniPlayerListener listener) {
+    this.listener = listener;
+  }
+
+  public void pounceListener() {
+    listener.closingWindow();
   }
 
   @Override

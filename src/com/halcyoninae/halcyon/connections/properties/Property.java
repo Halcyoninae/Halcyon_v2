@@ -25,11 +25,13 @@ package com.halcyoninae.halcyon.connections.properties;
 public class Property {
   public String propertyName = "", defaultProperty = "";
   public PropertyValidator pr;
+  public String[] commonProperties;
 
-  public Property(String propertyName, String defaultProperty, PropertyValidator pr) {
+  public Property(String propertyName, String defaultProperty, PropertyValidator pr, String ... commonProperties) {
     this.propertyName = propertyName;
     this.defaultProperty = defaultProperty;
     this.pr = pr;
+    this.commonProperties = commonProperties;
   }
 
   public enum PropertyFilterType {

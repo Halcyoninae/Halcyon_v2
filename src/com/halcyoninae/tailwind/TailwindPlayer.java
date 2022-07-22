@@ -17,6 +17,7 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.simple.FileFormat;
@@ -198,7 +199,6 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addGenericUpdateListener(e);
   }
 
-
   /**
    * @param e
    * @return boolean
@@ -289,7 +289,6 @@ public class TailwindPlayer implements Audio, Runnable {
     bal.setValue(
         balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
   }
-
 
   /**
    * @param pan
@@ -426,7 +425,18 @@ public class TailwindPlayer implements Audio, Runnable {
   @Override
   public void run() {
     if (line != null) {
-      byte[] buffer = new byte[2048];
+      byte[] buffer = new byte[(ais.getFormat().getFrameSize() * 2)];
+      if (!ResourceFolder.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
+        try {
+          buffer = new byte[Integer
+              .parseInt(ResourceFolder.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
+        } catch (Exception e) {
+          new ErrorWindow(
+              "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
+              .run();
+          e.printStackTrace();
+        }
+      }
       int i;
       line.start();
       while (!worker.isShutdown()) {
