@@ -1,3 +1,13 @@
+[***] #35 "Chance for audio player to not kill the executor service"
+      Detailed Description: If the executor service is not killed, but
+      the service is presumed to be killed a new slice of media played
+      even though the media was not killed. Could be the if-else in the
+      while loop for the service.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+      Difficulty: Decent
+      Testing: Decent
+
 [**] #34 "Chance for concurrent modification for refresh"
       Detailed Description: If a user manage to properly time themselves
       with the refresh, which happens every 1 second, the program will
