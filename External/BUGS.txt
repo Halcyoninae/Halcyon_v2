@@ -3,6 +3,9 @@
       the service is presumed to be killed a new slice of media played
       even though the media was not killed. Could be the if-else in the
       while loop for the service.
+            ; Found the cause 7/22, seems to be due to phantom nodes;
+            in which there seems to be clickable dropdowns even though
+            visually there are none for a JTree.
       Status: Investigating
       State: Experimental-Build ~ MP4J
       Difficulty: Decent
