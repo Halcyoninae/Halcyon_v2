@@ -9,7 +9,7 @@ This repository contains the
 source code for the Halcyon Music 
 Player.
 
-Copyright(C)Jack Meng 2023
+Copyright(C)Jack Meng 2021
 
 Licensed under the following:
 
