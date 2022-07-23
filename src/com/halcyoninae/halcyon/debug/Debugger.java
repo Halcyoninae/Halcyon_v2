@@ -24,6 +24,8 @@ import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import javax.swing.SwingUtilities;
+
 /**
  * This is an external class that is called upon for when the
  * program needs something printed the Console.
@@ -248,7 +250,6 @@ public class Debugger {
           out.println(getLogText() + "NULL_CONTENT" + " ");
         }
       }
-      out.println();
     }
   }
 }

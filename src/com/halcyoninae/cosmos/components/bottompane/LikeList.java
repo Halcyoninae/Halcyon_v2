@@ -74,7 +74,6 @@ public class LikeList extends FileList {
    * @param file The file's absolute path to remove from.
    */
   public void unset(String file) {
-    Debugger.unsafeLog(folder.removeFile(new File(file)));
     try {
       for (File f : getFileMap().keySet()) {
         if (f.getAbsolutePath().equals(file)) {

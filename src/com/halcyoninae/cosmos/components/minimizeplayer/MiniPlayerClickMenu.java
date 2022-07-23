@@ -46,7 +46,7 @@ public class MiniPlayerClickMenu extends MouseAdapter {
     menu.add(showBC);
     menu.add(hideBC);
     e.pounceListener();
-    menu.show(e, x, y);
+    menu.show(e, x + 15, y);
   }
 
   /**
@@ -71,7 +71,7 @@ public class MiniPlayerClickMenu extends MouseAdapter {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    if (e.getButton() == MouseEvent.BUTTON1) {
+    if (e.getButton() == MouseEvent.BUTTON3) {
       attempt(e);
     }
   }

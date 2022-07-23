@@ -157,7 +157,7 @@ public final class BlurHashChild {
     public static int[] dec(String blurHash, int width, int height, double punch) {
         int blurHashLength = blurHash.length();
         if (blurHashLength < 6) {
-            throw new IllegalArgumentException("BlurHash must be at least 6 characters long.");
+            throw new IllegalArgumentException("BlurHash must be at least 6 characters long");
         }
         int sizeInfo = base_83.decode(blurHash.substring(0, 1));
         int sizeY = sizeInfo / 9 + 1;

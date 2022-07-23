@@ -15,6 +15,7 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
+import com.halcyoninae.cloudspin.CloudSpinFilters;
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ColorManager;
@@ -90,49 +91,55 @@ public class InfoViewTP extends JPanel implements ComponentListener {
       @Override
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        float compositeAlpha = 0.5f;
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+        if (Halcyon.bgt.getFrame().isVisible()) {
+          Graphics2D g2d = (Graphics2D) g;
+          float compositeAlpha = 0.5f;
+          g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
 
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
-          compositeAlpha = 0.2f;
-        } else {
-          compositeAlpha = 0.6f;
-        }
-        g2d.setComposite(
-            AlphaComposite.getInstance(
-                AlphaComposite.SRC_OVER,
-                compositeAlpha));
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+            compositeAlpha = 0.2f;
+          } else {
+            compositeAlpha = 0.6f;
+          }
+          g2d.setComposite(
+              AlphaComposite.getInstance(
+                  AlphaComposite.SRC_OVER,
+                  compositeAlpha));
 
-        BufferedImage original = Global.ifp.getInfo().getArtwork();
-        if (original.getWidth() > backPanel.getWidth()
-            || original.getHeight() > backPanel.getHeight()) {
-          original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 3, original.getHeight() / 3,
-              backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
-        }
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
-          original = DeImage.grayScale(original);
-        }
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
-          original = DeImage.createGradientVertical(original, 255, 0);
-          switch (com.halcyoninae.halcyon.connections.properties.ResourceFolder.pm
-              .get(com.halcyoninae.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
-            case "focused":
-              original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.halcyoninae.halcyon.utils.DeImage.Directional.BOTTOM);
-              break;
-            case "left":
-              original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.halcyoninae.halcyon.utils.DeImage.Directional.LEFT);
-              break;
-            case "right":
-              original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
-                  com.halcyoninae.halcyon.utils.DeImage.Directional.RIGHT);
-              break;
+          BufferedImage original = Global.ifp.getInfo().getArtwork();
+          if (original.getWidth() > backPanel.getWidth()
+              || original.getHeight() > backPanel.getHeight()) {
+            original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 3, original.getHeight() / 3,
+                backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
+          }
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+            original = DeImage.createGradientVertical(original, 255, 0);
+            switch (com.halcyoninae.halcyon.connections.properties.ResourceFolder.pm
+                .get(com.halcyoninae.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+              case "focused":
+                original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.halcyoninae.halcyon.utils.DeImage.Directional.BOTTOM);
+                break;
+              case "left":
+                original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.halcyoninae.halcyon.utils.DeImage.Directional.LEFT);
+                break;
+              case "right":
+                original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
+                    com.halcyoninae.halcyon.utils.DeImage.Directional.RIGHT);
+                break;
+            }
+          }
+          if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+            g2d.drawImage(original, CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY],
+                (backPanel.getSize().width - original.getWidth()) / 2,
+                (backPanel.getSize().height - original.getHeight()) / 2);
+          } else {
+            g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
+                (backPanel.getSize().height - original.getHeight()) / 2, this);
+
           }
         }
-        g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
-            (backPanel.getSize().height - original.getHeight()) / 2, this);
       }
     };
     backPanel.setPreferredSize(
@@ -143,9 +150,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     info = new AudioInfo();
     BufferedImage bi = DeImage.imageIconToBI(
         Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
-    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
-      bi = DeImage.grayScale(bi);
-    }
     bi = DeImage.resizeNoDistort(
         bi,
         Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,

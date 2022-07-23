@@ -15,8 +15,6 @@
 
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
-import com.halcyoninae.halcyon.Halcyon;
-import com.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
@@ -53,7 +51,7 @@ public class MiniPlayer extends JFrame implements Runnable {
     setUndecorated(true);
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     setAutoRequestFocus(true);
-    setFocusable(false);
+    setFocusable(true);
     pane = new MiniContentPane();
     Global.ifp.addInfoViewUpdateListener(pane);
     setContentPane(pane);
@@ -68,12 +66,14 @@ public class MiniPlayer extends JFrame implements Runnable {
       public void mousePressed(MouseEvent me) {
         pX = me.getX();
         pY = me.getY();
+
       }
 
       @Override
       public void mouseDragged(MouseEvent me) {
         setLocation(getLocation().x + me.getX() - pX,
             getLocation().y + me.getY() - pY);
+
       }
     });
     addMouseMotionListener(new MouseMotionAdapter() {
@@ -81,9 +81,11 @@ public class MiniPlayer extends JFrame implements Runnable {
       public void mouseDragged(MouseEvent me) {
         setLocation(getLocation().x + me.getX() - pX,
             getLocation().y + me.getY() - pY);
+
       }
     });
     addMouseListener(new MiniPlayerClickMenu(this));
+    setResizable(true);
   }
 
   public void setMiniPlayerListener(MiniPlayerListener listener) {

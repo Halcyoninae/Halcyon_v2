@@ -93,7 +93,7 @@ public class TailwindPlayer implements Audio, Runnable {
     try {
       this.resource = url;
       this.format = FileFormat.getFormatByName(this.resource.getName());
-      Debugger.unsafeLog(resource.toURI().toURL());
+      Debugger.unsafeLog("TailwindPlayer> Opening: " + resource.getAbsolutePath());
       ais = AudioUtil.getAudioIS(resource.toURI().toURL());
       assert ais != null;
       microsecondLength = (long) (1000000 *
@@ -257,7 +257,7 @@ public class TailwindPlayer implements Audio, Runnable {
     if (playing || paused) {
       stop();
     }
-    worker = Executors.newSingleThreadExecutor();
+    worker = Executors.newWorkStealingPool();
     worker.execute(this);
     playing = true;
 
@@ -438,7 +438,7 @@ public class TailwindPlayer implements Audio, Runnable {
         }
       }
       int i;
-      line.start();
+      line.start();;
       while (!worker.isShutdown()) {
         if (!paused) {
           try {

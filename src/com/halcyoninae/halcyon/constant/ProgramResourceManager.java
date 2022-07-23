@@ -56,7 +56,7 @@ public class ProgramResourceManager {
       new Property(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
           "true", new BooleanValidator()),
       new Property(KEY_INFOVIEW_BACKDROP_USE_GREYSCALE,
-          "false", new BooleanValidator()),
+          "true", new BooleanValidator()),
       new Property(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, "true",
           new BooleanValidator()),
       new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "true", new BooleanValidator()),

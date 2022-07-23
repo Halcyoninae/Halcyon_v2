@@ -88,18 +88,6 @@ public final class DeImage {
   }
 
   /**
-   * Applies a grayscale to an image.
-   *
-   * @param sourceImage The image to be grayscaled.
-   * @return BufferedImage The grayscaled image.
-   */
-  public static BufferedImage grayScale(BufferedImage sourceImage) {
-    SimpleImage img = new SimpleImage(sourceImage);
-    img = img.filter(new DesaturationGrayscaleFilter());
-    return img.toBufferedImage();
-  }
-
-  /**
    * Writes a BufferedImage to a file.
    *
    * @param r    The BufferedImage to be written.

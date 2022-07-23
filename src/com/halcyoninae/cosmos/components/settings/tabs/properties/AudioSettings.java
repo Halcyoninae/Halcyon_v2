@@ -35,9 +35,6 @@ public class AudioSettings extends JScrollPane implements SettingsTabs {
         i++;
       }
     }
-    Debugger.good(this.i);
-    Debugger.unsafeLog(
-        str[0]);
     this.i++;
     setViewportView(panel);
   }
