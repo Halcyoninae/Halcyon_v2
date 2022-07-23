@@ -135,7 +135,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
   }
 
   private void scheduleRedraw() {
-    bgPanel.repaint();
+    bgPanel.repaint(100);
     mainLabel.setText(getLabelString());
     artLabel.setIcon(
         new ImageIcon(DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));

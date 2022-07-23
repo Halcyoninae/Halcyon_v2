@@ -181,7 +181,6 @@ public class ButtonControlTP extends JPanel
     progressSlider.putClientProperty("Slider.thumbSize", new java.awt.Dimension(0, 0));
     progressSlider.putClientProperty("Slider.trackWidth", 15);
     progressSlider.putClientProperty("Slider.thumBorderWidth", 0);
-    progressSlider.repaint();
     progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
     progressSlider.addChangeListener(this);
     new Thread(() -> {
@@ -332,8 +331,8 @@ public class ButtonControlTP extends JPanel
     } else if (e.getSource().equals(nextButton)) {
       Global.player.requestNextTrack();
     }
-    loopButton.repaint();
-    shuffleButton.repaint();
+    loopButton.repaint(200);
+    shuffleButton.repaint(200);
   }
 
   /**

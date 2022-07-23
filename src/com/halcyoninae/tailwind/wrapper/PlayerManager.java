@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.tailwind.audio;
+package com.halcyoninae.tailwind.wrapper;
 
 import com.halcyoninae.halcyon.constant.Manager;
 

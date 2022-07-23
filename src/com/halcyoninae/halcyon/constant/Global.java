@@ -20,7 +20,7 @@ import com.halcyoninae.cosmos.components.bottompane.LikeList;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.halcyoninae.halcyon.connections.resource.ResourceDistributor;
-import com.halcyoninae.tailwind.audio.Player;
+import com.halcyoninae.tailwind.wrapper.Player;
 
 /**
  * This class holds any public scoped Objects that may be used throughout

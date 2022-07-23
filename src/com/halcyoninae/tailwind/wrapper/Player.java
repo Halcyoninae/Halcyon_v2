@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.tailwind.audio;
+package com.halcyoninae.tailwind.wrapper;
 
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
@@ -29,6 +29,10 @@ import java.io.File;
  * to
  * have much more control over the playback library and to make it a global
  * scope player instead of having to reinit everything on something new.
+ *
+ * 这种简化是由于不需要某些方法，并且至
+ * 对播放库有更多的控制权并使其成为全局
+ * 范围播放器，而不必在新事物上重新启动所有内容。
  *
  * @author Jack Meng
  * @since 3.0
@@ -97,14 +101,12 @@ public class Player {
     }
   }
 
-
   /**
    * @param b
    */
   public void setLooping(boolean b) {
     isLooping = b;
   }
-
 
   /**
    * @param percent
@@ -113,14 +115,12 @@ public class Player {
     audio.setGain(percent);
   }
 
-
   /**
    * @return boolean
    */
   public boolean isLooping() {
     return isLooping;
   }
-
 
   /**
    * @param b
@@ -131,7 +131,6 @@ public class Player {
 
   public void requestNextTrack() {
   }
-
 
   /**
    * @return boolean
@@ -155,14 +154,12 @@ public class Player {
     this.f = new File(f);
   }
 
-
   /**
    * @return String
    */
   public String getCurrentFile() {
     return currentAbsolutePath;
   }
-
 
   /**
    * @return TailwindPlayer
@@ -175,7 +172,6 @@ public class Player {
     audio.play();
   }
 
-
   /**
    * @return String
    */
@@ -184,7 +180,6 @@ public class Player {
         + TimeParser.fromSeconds((int) audio.getLength() * 1000);
   }
 
-
   /**
    * @param key
    * @return Control
@@ -192,7 +187,6 @@ public class Player {
   public Control getControl(String key) {
     return audio.getControls().get(key);
   }
-
 
   /**
    * @param zeroToHundred
@@ -209,7 +203,6 @@ public class Player {
       return 0;
     }
   }
-
 
   /**
    * @return String
