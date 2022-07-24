@@ -57,15 +57,10 @@ Hopefully to support:
   1. OGG (Vorbis)
   2. AIFF
   3. FLAC
-  4. MP4*
-  5. AU
-  6. AVI*
-  7. MP2
-  8. AAC
-  9. USAC
-
-* - Video formats that will have
-their audio track separated.
+  4. AU
+  5. MP2
+  6. AAC
+  7. USAC
 
 Memory usage usually hovers at 
 around 30-50 mB of memory usage
