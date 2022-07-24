@@ -1,3 +1,20 @@
+[**] #41 "Accent Coloring"
+        Detailed Description: Enable a feature for the user to change
+        overall accent color of the buttons and foreground coloring.
+                ; This can be done either automatically if an option for
+                "get color from artwork" is turned on" or the user
+                can enter a constant HEX Color as the accent color
+                ; Have two set of buttons, one the normal tealish
+                buttons which are used if the default color-set is chosen.
+                The other being a gray colored-set that will have their tone 
+                changed.
+                ; The option to cache the produced accent buttons can be 
+                taken into account; if for example, the forced optimization
+                feature is turned on.
+       Category: Visual Comfort; Program Dynamics
+       Difficulty: Mild
+       Status: none
+
 [***] {INDEPENDENT} #40 "Version Info And Originality Resource API"
         Detailed Description: Using GitHub Pages in a separate repository,
         host a Resource API that a library will parse and call 
