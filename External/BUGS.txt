@@ -1,3 +1,16 @@
+[***] #36 "Permanent Removal"
+      Detailed Description: The remove a file from the tree view
+      should be permanent.
+            ; A separate blacklist file should be created where
+            the user can be able to edit that file to whitelist
+            certain files via a settings menu.
+            ; A refresh file view should check if the refreshing via
+            is a valid non-blacklisted file first.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+      Difficulty: Decent
+      Testing: Decent
+
 [***] #35 "Chance for audio player to not kill the executor service"
       Detailed Description: If the executor service is not killed, but
       the service is presumed to be killed a new slice of media played
