@@ -53,14 +53,14 @@ and noodle code that I wrote.
 Currently the program supports:
   1. MP3
   2. WAV
+  3. AIFF & AIFC* (partially tested)
 Hopefully to support:
   1. OGG (Vorbis)
-  2. AIFF
-  3. FLAC
-  4. AU
-  5. MP2
-  6. AAC
-  7. USAC
+  2. FLAC
+  3. AU
+  4. MP2
+  5. AAC
+  6. USAC
 
 Memory usage usually hovers at 
 around 30-50 mB of memory usage
