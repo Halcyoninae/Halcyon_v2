@@ -57,7 +57,7 @@ public interface Manager {
     /// GENERAL RESOURCE LOCATION END
 
     /// GENERAL PROGRAM CONFIGURATION START
-    final String[] ALLOWED_FORMATS = new String[] { "wav", "mp3" };
+    final String[] ALLOWED_FORMATS = new String[] { "wav", "mp3", "aiff", "aif", "aifc" };
     final int TAB_VIEW_MAX_CHAR_LENGTH = 10;
     /// GENERAL PROGRAM CONFIGURATION END
 

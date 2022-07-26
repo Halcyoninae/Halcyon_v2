@@ -45,6 +45,68 @@ public final class TailwindTranscoder implements Transcoder {
     return temp;
   }
 
+  public static int normalize(int bps) {
+    return bps + 7 >> 3;
+  }
+
+  public static float[] f_unpack(byte[] buffer, long[] transfer, float[] samples, int b_, AudioFormat format) {
+    if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED && format.getEncoding() != AudioFormat.Encoding.PCM_UNSIGNED) {
+      return samples;
+    }
+    int bps = format.getSampleSizeInBits();
+    int byps = bps / 8;
+    int nb = normalize(bps);
+
+    if(format.isBigEndian()) {
+      for(int i = 0, k = 0, j; i < b_; i += nb, k++) {
+        transfer[k] = 0L;
+        int minima = i + nb - 1;
+        for(j = 0; j < nb; j++) {
+          transfer[k] |= (buffer[minima - j] & 0xFFL) << (8 * j);
+        }
+      }
+    } else {
+      for (int i = 0, k = 0, j; i < b_; i += nb, k++) {
+        transfer[k] = 0L;
+        for (j = 0; j < nb; j++) {
+          transfer[k] |= (buffer[i + j] & 0xFFL) << (8 * j);
+        }
+      }
+    }
+    long scale = (long) Math.pow(2l, bps - 1d);
+    if(format.getEncoding() == AudioFormat.Encoding.PCM_SIGNED) {
+      long shift = 64l - bps;
+      for(int i = 0; i < transfer.length; i++)
+        transfer[i] = ((transfer[i] << shift) >> shift);
+    } else {
+      for(int i = 0; i < transfer.length; i++) {
+        transfer[i] -= scale;
+      }
+    }
+    for(int i = 0; i < transfer.length; i++) {
+      samples[i] = ((float) transfer[i]) / scale;
+    }
+    return samples;
+  }
+
+  /**
+   * TODO: Make this work >,<
+   * @param samples
+   * @param s_
+   * @param format
+   * @return
+   */
+  public static float[] window_func(float[] samples, int s_, AudioFormat format) {
+    int chnls = format.getChannels();
+    int len = s_ / chnls;
+
+    for(int i = 0, k, j; i < chnls; i++) {
+      for(j = i, k = 0; j < s_; j += chnls) {
+        samples[j] *= Math.sin(Math.PI * (k++) / (len - 1));
+      }
+    }
+    return samples;
+  }
 
   /**
    * @param format

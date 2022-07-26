@@ -15,11 +15,15 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+
+import org.tritonus.sampled.file.AiffAudioFileReader;
+
 import java.net.URL;
 
 public final class AudioUtil {
@@ -46,6 +50,9 @@ public final class AudioUtil {
         ais = AudioSystem.getAudioInputStream(decode, ais);
         return ais;
       } else if (target.equals(FileFormat.WAV)) {
+        ais = AudioSystem.getAudioInputStream(locale);
+        return ais;
+      } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
         ais = AudioSystem.getAudioInputStream(locale);
         return ais;
       }

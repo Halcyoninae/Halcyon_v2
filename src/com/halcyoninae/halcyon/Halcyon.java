@@ -118,6 +118,7 @@ public class Halcyon {
         bb.add(new RefreshFileView());
         bb.add(new SlidersControl());
         bb.add(new MinimizePlayer());
+        bb.add(new WaveFormLinker());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
         bb.add(

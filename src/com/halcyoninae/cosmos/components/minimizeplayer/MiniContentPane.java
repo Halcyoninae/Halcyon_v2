@@ -128,8 +128,8 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
 
   private String getLabelString() {
     return "<html><p style=\"color:" + ColorManager.MAIN_FG_STR + ";font-size:12px\"><b>"
-        + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 18
-            ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 18) + "..."
+        + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28
+            ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 28) + "..."
             : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
         + "</b></p><br><center><p>" + info.getTag(AudioInfo.KEY_MEDIA_ARTIST) + "</p></center></html>";
   }

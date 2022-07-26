@@ -69,8 +69,11 @@ public class TailwindPlayer implements Audio, Runnable {
   private AudioInputStream ais;
   private long microsecondLength, frameLength;
   private ExecutorService worker;
+  private AudioFormat formatAudio;
   private final Object referencable = new Object();
   private final TailwindEventManager events;
+
+  public static final int BUFF_SIZE = 1024;
 
   // PUBLIC STATIC UTIL
   public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
@@ -87,7 +90,7 @@ public class TailwindPlayer implements Audio, Runnable {
    */
   @Override
   public void open(File url) {
-    if (isOpen() || isPlaying()) {
+    if (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))) {
       close();
     }
     try {
@@ -109,6 +112,7 @@ public class TailwindPlayer implements Audio, Runnable {
       DataLine.Info info = new DataLine.Info(
           SourceDataLine.class,
           ais.getFormat());
+      formatAudio = ais.getFormat();
       this.line = (SourceDataLine) AudioSystem.getLine(info);
       this.line.open(ais.getFormat());
       controlTable = TailwindPlayer.setControls(this.line, controlTable);
@@ -140,6 +144,10 @@ public class TailwindPlayer implements Audio, Runnable {
    */
   public synchronized boolean isPlaying() {
     return playing;
+  }
+
+  public synchronized AudioFormat getAudioFormatAbsolute() {
+    return formatAudio;
   }
 
   /**
@@ -223,6 +231,10 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addTimeListener(e);
   }
 
+  public synchronized void addLineListener(LineListener e) {
+    line.addLineListener(e);
+  }
+
   /**
    * @param url
    */
@@ -257,7 +269,7 @@ public class TailwindPlayer implements Audio, Runnable {
     if (playing || paused) {
       stop();
     }
-    worker = Executors.newWorkStealingPool();
+    worker = Executors.newSingleThreadScheduledExecutor();
     worker.execute(this);
     playing = true;
 
@@ -425,7 +437,7 @@ public class TailwindPlayer implements Audio, Runnable {
   @Override
   public void run() {
     if (line != null) {
-      byte[] buffer = new byte[(ais.getFormat().getFrameSize() * 2)];
+      byte[] buffer = null;
       if (!ResourceFolder.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
         try {
           buffer = new byte[Integer
@@ -438,10 +450,18 @@ public class TailwindPlayer implements Audio, Runnable {
         }
       }
       int i;
-      line.start();;
+      int nb = TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits());
+      float[] samples = new float[BUFF_SIZE * formatAudio.getChannels()];
+      long[] transfer = new long[samples.length];
+      if(buffer == null) {
+        buffer = new byte[samples.length * nb];
+      }
+      int d;
+      line.start();
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
+            
             while (playing && !paused && (i = ais.read(buffer)) != -1) {
               if (paused || !playing) {
                 break;

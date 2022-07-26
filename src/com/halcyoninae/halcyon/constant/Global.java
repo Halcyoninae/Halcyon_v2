@@ -19,6 +19,7 @@ import com.halcyoninae.cosmos.components.bottompane.BottomPane;
 import com.halcyoninae.cosmos.components.bottompane.LikeList;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
+import com.halcyoninae.cosmos.components.waveform.WaveForm;
 import com.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.halcyoninae.tailwind.wrapper.Player;
 
@@ -42,4 +43,5 @@ public class Global {
   public static InfoViewTP ifp = new InfoViewTP();
   public static Player player = new Player();
   public static LikeList ll = new LikeList();
+  public static WaveForm waveForm = new WaveForm();
 }

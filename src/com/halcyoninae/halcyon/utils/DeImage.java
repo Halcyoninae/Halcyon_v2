@@ -15,7 +15,6 @@
 
 package com.halcyoninae.halcyon.utils;
 
-import de.ralleytn.simple.image.DesaturationGrayscaleFilter;
 import de.ralleytn.simple.image.SimpleImage;
 
 import javax.imageio.ImageIO;
