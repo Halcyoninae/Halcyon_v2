@@ -42,7 +42,7 @@ public class WaveFormPane extends JFrame implements Runnable {
         setLocation(getLocation().x + me.getX() - pX,
             getLocation().y + me.getY() - pY);
 
-      }-=
+      }
     });
     addMouseListener(new WaveFormClickMenu(this));
     setPreferredSize(new Dimension(WaveFormManager.MIN_WIDTH, WaveFormManager.MIN_HEIGHT));
