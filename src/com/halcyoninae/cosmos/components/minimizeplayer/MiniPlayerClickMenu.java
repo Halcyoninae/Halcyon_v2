@@ -24,6 +24,10 @@ import javax.swing.JPopupMenu;
 
 import com.halcyoninae.halcyon.Halcyon;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class MiniPlayerClickMenu extends MouseAdapter {
   private MiniPlayer e;
 

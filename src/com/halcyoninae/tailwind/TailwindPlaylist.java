@@ -21,6 +21,11 @@ import java.util.List;
 
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ * (Technically 3.1)
+ */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
   private boolean loop = false, autoPlay = false;
   private List<File> history;

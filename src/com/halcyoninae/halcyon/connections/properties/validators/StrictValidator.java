@@ -17,6 +17,10 @@ package com.halcyoninae.halcyon.connections.properties.validators;
 
 import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class StrictValidator implements PropertyValidator {
   public String[] tempaltes;
 

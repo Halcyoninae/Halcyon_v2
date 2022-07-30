@@ -18,6 +18,10 @@ package com.halcyoninae.tailwind;
 import javax.sound.sampled.AudioFormat;
 import java.io.File;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public final class TailwindTranscoder implements Transcoder {
 
   /**
@@ -104,7 +108,6 @@ public final class TailwindTranscoder implements Transcoder {
   }
 
   /**
-   * TODO: Make this work >,<
    * @param samples
    * @param s_
    * @param format

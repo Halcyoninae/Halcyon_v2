@@ -23,6 +23,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class BoxBlur implements Blur {
 
 

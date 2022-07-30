@@ -17,6 +17,10 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class TailwindDefaultListener implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
   private final TailwindPlayer player;
 

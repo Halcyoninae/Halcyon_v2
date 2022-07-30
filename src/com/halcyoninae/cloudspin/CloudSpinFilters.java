@@ -19,6 +19,10 @@ import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorConvertOp;
 import java.awt.color.ColorSpace;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public interface CloudSpinFilters {
   final BufferedImageOp[] filters = {
       new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null),

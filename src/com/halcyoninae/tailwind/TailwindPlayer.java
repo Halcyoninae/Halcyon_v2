@@ -211,7 +211,6 @@ public class TailwindPlayer implements Audio, Runnable {
 
   /**
    * @param e
-   * @return boolean
    */
   public synchronized void setFrameBufferListener(TailwindListener.FrameBufferListener e) {
     events.addFrameBufferListener(e);

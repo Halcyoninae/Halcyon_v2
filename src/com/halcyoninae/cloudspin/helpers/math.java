@@ -15,6 +15,10 @@
 
 package com.halcyoninae.cloudspin.helpers;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public final class math {
   private math() {}
 

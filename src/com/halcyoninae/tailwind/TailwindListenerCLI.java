@@ -18,6 +18,10 @@ package com.halcyoninae.tailwind;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
+/**
+ * @author Jack Meng
+ * @since 3.1
+ */
 public class TailwindListenerCLI
     implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
 

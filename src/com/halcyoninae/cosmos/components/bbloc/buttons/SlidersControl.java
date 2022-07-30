@@ -26,6 +26,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class SlidersControl extends JButton implements BBlocButton {
   private boolean isPressed;
   private SlidersDialog dialog;

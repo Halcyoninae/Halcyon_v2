@@ -15,6 +15,10 @@
 
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public interface MiniPlayerListener {
   void closingWindow();
 }

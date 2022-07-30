@@ -79,7 +79,8 @@ public final class TailwindListener {
    */
   public interface FrameBufferListener {
     /**
-     * @param buffer A byte array representing the buffer at the current frame
+     * @param samples A float array representing the buffer at the current frame
+     * @param s_valid
      */
     void frameUpdate(float[] samples, int s_valid);
   }

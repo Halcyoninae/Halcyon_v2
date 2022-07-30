@@ -41,6 +41,10 @@ import org.xml.sax.SAXException;
 
 import com.halcyoninae.halcyon.debug.Debugger;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class Cacher {
   private File file;
   private Document doc;

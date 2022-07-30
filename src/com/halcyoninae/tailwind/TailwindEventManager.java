@@ -71,7 +71,6 @@ public class TailwindEventManager {
 
   /**
    * @param e
-   * @return boolean
    */
   public void addFrameBufferListener(TailwindListener.FrameBufferListener e) {
     this.bufferListener = e;
@@ -149,7 +148,8 @@ public class TailwindEventManager {
 
 
   /**
-   * @param buffer
+   * @param samples
+   * @param s_
    */
   public synchronized void dispatchNewBufferEvent(float[] samples, int s_) {
     Wrapper.threadedRun(() -> bufferListener.frameUpdate(samples, s_));

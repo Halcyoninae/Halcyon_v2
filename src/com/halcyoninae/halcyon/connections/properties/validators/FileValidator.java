@@ -19,6 +19,10 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
 
 import java.io.File;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class FileValidator implements PropertyValidator {
 
 

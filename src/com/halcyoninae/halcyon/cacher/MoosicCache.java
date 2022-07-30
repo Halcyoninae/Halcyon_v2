@@ -1,3 +1,18 @@
+/*
+ *  Copyright: (C) 2022 name of Jack Meng
+ * Halcyon MP4J is music-playing software.
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.halcyoninae.halcyon.cacher;
 
 import java.io.File;
@@ -18,6 +33,10 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class MoosicCache {
   public static String MOOSIC_DEFAULT_LOCALE = ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
       + ProgramResourceManager.FILE_SLASH
@@ -115,7 +134,7 @@ public class MoosicCache {
 
 
   /**
-   * @return List<String>
+   * @return A list of string
    */
   public List<String> getExcludedTracks() {
     return excludedFiles;
@@ -123,7 +142,7 @@ public class MoosicCache {
 
 
   /**
-   * @return List<String>
+   * @return A list of string
    */
   public List<String> getSavedPlaylists() {
     return savedPlayLists;
@@ -131,7 +150,7 @@ public class MoosicCache {
 
 
   /**
-   * @return Set<String>
+   * @return A Set of String
    */
   public Set<String> getLikedTracks() {
     return likedTracks;

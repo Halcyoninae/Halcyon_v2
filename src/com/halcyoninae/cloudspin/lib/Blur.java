@@ -17,6 +17,10 @@ package com.halcyoninae.cloudspin.lib;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public interface Blur {
 
   /**

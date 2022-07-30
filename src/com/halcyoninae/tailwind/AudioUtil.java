@@ -24,6 +24,10 @@ import javax.sound.sampled.AudioSystem;
 
 import java.net.URL;
 
+/**
+ * @author Jack Meng
+ * @since 3.1
+ */
 public final class AudioUtil {
 
   /**

@@ -15,6 +15,10 @@
 
 package com.halcyoninae.cloudspin.enums;
 
+/**
+ * @author Jack Meng
+ * @since 3.2
+ */
 public enum SpeedStyle {
   SPEED, QUALITY, GENERAL;
 }
