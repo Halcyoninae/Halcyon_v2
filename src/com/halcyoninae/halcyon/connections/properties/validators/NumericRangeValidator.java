@@ -26,6 +26,11 @@ public class NumericRangeValidator implements PropertyValidator {
     this.step = step;
   }
 
+
+  /**
+   * @param propertyValue
+   * @return boolean
+   */
   @Override
   public boolean isValid(String propertyValue) {
     try {

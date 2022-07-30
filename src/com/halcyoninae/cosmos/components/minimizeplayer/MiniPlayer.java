@@ -88,6 +88,10 @@ public class MiniPlayer extends JFrame implements Runnable {
     setResizable(true);
   }
 
+
+  /**
+   * @param listener
+   */
   public void setMiniPlayerListener(MiniPlayerListener listener) {
     this.listener = listener;
   }

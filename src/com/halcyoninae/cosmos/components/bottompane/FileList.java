@@ -19,8 +19,10 @@ import com.halcyoninae.cosmos.events.FVRightClick;
 import com.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.filesystem.VirtualFolder;
+import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;
@@ -122,10 +124,11 @@ public class FileList extends JScrollPane implements TabTree {
     setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
 
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null) {
+      if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
         fileMap.put(f, node);
         root.add(node);
+        Debugger.unsafeLog("Added file: " + f.getAbsolutePath());
       }
     }
 
@@ -195,7 +198,7 @@ public class FileList extends JScrollPane implements TabTree {
    */
   public void revalidateFiles() {
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null && !fileMap.containsKey(f)) {
+      if (f != null && !fileMap.containsKey(f) && !Program.cacher.isExcluded(f.getAbsolutePath())) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
         fileMap.put(f, node);
         root.add(node);
@@ -204,7 +207,7 @@ public class FileList extends JScrollPane implements TabTree {
     }
     List<File> toRemove = new ArrayList<>();
     for (File f : fileMap.keySet()) {
-      if (!f.exists() || !f.isFile()) {
+      if (!f.exists() || !f.isFile() || Program.cacher.isExcluded(f.getAbsolutePath())) {
         ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
         toRemove.add(f);
       }
@@ -256,5 +259,14 @@ public class FileList extends JScrollPane implements TabTree {
   @Override
   public String getPath() {
     return info.getAbsolutePath();
+  }
+
+
+  /**
+   * @return boolean
+   */
+  @Override
+  public boolean isVirtual() {
+    return isVirtual;
   }
 }

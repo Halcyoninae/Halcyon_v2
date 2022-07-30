@@ -15,8 +15,8 @@
 
 package com.halcyoninae.cosmos.tasks;
 
-
 import com.halcyoninae.cosmos.components.bottompane.BottomPane;
+import com.halcyoninae.halcyon.runtime.Program;
 
 /**
  * A class designed to constantly ping
@@ -45,6 +45,8 @@ public final class PingFileView implements Runnable {
       worker = new Thread(() -> {
         while (true) {
           bp.mastRevalidate();
+          Program.cacher.pingLikedTracks();
+          Program.cacher.pingSavedPlaylists();
           try {
             Thread.sleep(ConcurrentTiming.MAX_TLE);
           } catch (InterruptedException e) {

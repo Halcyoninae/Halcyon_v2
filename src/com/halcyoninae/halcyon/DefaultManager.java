@@ -24,9 +24,9 @@ package com.halcyoninae.halcyon;
  * @since 3.0
  * @see com.halcyoninae.halcyon.constant.Manager
  */
-public final class ProjectManager {
+public final class DefaultManager {
 
-  private ProjectManager() {}
+  private DefaultManager() {}
 
   public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";
   public static final String SPOTIFY_PAGE = "https://open.spotify.com/";

@@ -32,7 +32,8 @@ import java.io.File;
 /**
  * A BBloc button that handles when a user selects
  * a folder from the
- * {@link com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders} instance.
+ * {@link com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders}
+ * instance.
  *
  *
  * @author Jack Meng
@@ -56,23 +57,15 @@ public class AddFolder extends JButton implements BBlocButton {
         s.setFolderSelectedListener(new FolderSelectedListener() {
           @Override
           public void folderSelected(String folder) {
-            if (Global.bp.containsFolder(folder)) {
-              new ConfirmWindow(
-                  "This folder seems to already be present in the current playlist listing. Do you still want to add it?",
-                      status -> {
-                        if (status) {
-                          com.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
-                        }
-                      }).run();
-            } else if (FileParser.isEmptyFolder(new File(folder))
+            if (FileParser.isEmptyFolder(new File(folder))
                 || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
               new ConfirmWindow(
                   "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                      status -> {
-                        if (status) {
-                          com.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
-                        }
-                      }).run();
+                  status -> {
+                    if (status) {
+                      com.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
+                    }
+                  }).run();
             } else {
               Global.bp.pokeNewFileListTab(folder);
             }
@@ -82,7 +75,6 @@ public class AddFolder extends JButton implements BBlocButton {
       }
     });
   }
-
 
   /**
    * @return JComponent

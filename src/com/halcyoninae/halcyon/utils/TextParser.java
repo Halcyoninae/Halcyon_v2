@@ -67,7 +67,6 @@ public final class TextParser {
     return true;
   }
 
-
   /**
    * @return String
    */
@@ -92,13 +91,12 @@ public final class TextParser {
                     : str.getBytes(StandardCharsets.UTF_16BE))));
   }
 
-
   /**
    * @return Charset
    */
   public static Charset getCharset() {
     return TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
-              : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
-                  : StandardCharsets.UTF_16BE);
+        : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
+            : StandardCharsets.UTF_16BE);
   }
 }

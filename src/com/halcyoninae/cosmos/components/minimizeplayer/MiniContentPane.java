@@ -126,6 +126,10 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     add(fgPanel);
   }
 
+
+  /**
+   * @return String
+   */
   private String getLabelString() {
     return "<html><p style=\"color:" + ColorManager.MAIN_FG_STR + ";font-size:12px\"><b>"
         + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28

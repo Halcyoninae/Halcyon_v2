@@ -28,8 +28,7 @@ public class InstantClose implements WindowListener {
     if (Global.player.getStream().isOpen() || Global.player.getStream().isPlaying()) {
       Global.player.getStream().close();
     }
-    Program.forcedSavePlaylists();
-    Program.forcedSaveLikedTracks();
+    Program.forceSaveUserConf();
     System.exit(0);
   }
 

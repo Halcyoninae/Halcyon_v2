@@ -15,14 +15,9 @@
 
 package com.halcyoninae.halcyon.runtime;
 
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.cacher.MoosicCache;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
-import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
-import com.halcyoninae.halcyon.utils.TextParser;
-import com.halcyoninae.halcyon.utils.Wrapper;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -42,8 +37,7 @@ import java.util.concurrent.Executors;
 public class Program {
   private static ExecutorService executorService;
 
-  public static String PLAYLISTS_CACHE_FILE = "playlists.halcyon";
-  public static String LIKED_TRACK_CACHE_FILE = "likedtracks.halcyon";
+  public static MoosicCache cacher = new MoosicCache();
 
   /**
    * Different from Debugger's log method, this method is meant for
@@ -80,22 +74,6 @@ public class Program {
   }
 
   /**
-   * Runs a dispatch on the current saved playlists.
-   *
-   * This method extracts this information from the FileList
-   * object instances.
-   */
-  public static void forcedSavePlaylists() {
-    List<String> list = Global.bp.getStrTabs();
-    boolean result = ResourceFolder.cacheFile(PLAYLISTS_CACHE_FILE, list.toArray(new String[0]));
-    if (!result) {
-      Debugger.warn("Failed to save playlists.");
-    } else {
-      Debugger.good("Saved playlists.");
-    }
-  }
-
-  /**
    * Writes a dump file to the bin folder.
    *
    * This is not a serialization byte stream!!!
@@ -122,57 +100,26 @@ public class Program {
     }
   }
 
-  /**
-   * Similar to {@link #forcedSavePlaylists()}; instead this calls
-   * for a LikedList extraction and saves to the desired file.
-   */
-  public static void forcedSaveLikedTracks() {
-    Set<String> list = new HashSet<>();
-    Debugger.warn("Now saving liked tracks.");
-    for (File f : Global.ll.getFolder().getAsListFiles()) {
-      list.add(f.getAbsolutePath());
-    }
-    Debugger.warn(list);
-    boolean result = ResourceFolder.cacheFile(LIKED_TRACK_CACHE_FILE, list.toArray(new String[0]));
-    if (!result) {
-      Debugger.warn("Failed to save liked tracks.");
-    } else {
-      Debugger.good("Saved liked tracks.");
-    }
-    Debugger.unsafeLog(list.toArray(new String[0]));
+  public static void forceSaveUserConf() {
+    cacher.forceSave();
   }
 
   /**
    * @return File[] Returns all of the liked tracks.
    */
   public static File[] fetchLikedTracks() {
-    if (!ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).isFile()
-        || !ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).exists()) {
-      Wrapper.safeLog(() -> {
-        try {
-          ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE).createNewFile();
-        } catch (IOException e) {
-          // AUTO HANDLED
-        }
-      }, true);
+    if(cacher.getLikedTracks().size() == 0) {
       return new File[0];
-    }
-    Set<File> list = new HashSet<>();
-    try (FileInputStream fis = new FileInputStream(ResourceFolder.getCacheFile(LIKED_TRACK_CACHE_FILE))) {
-      BufferedReader br = new BufferedReader(new InputStreamReader(fis, TextParser.getCharset()));
-      while (br.ready()) {
-        String str = br.readLine();
-        Debugger.warn(str);
-        if (new File(str).isFile() && new File(str).exists()) {
-          list.add(new File(str));
+    } else {
+      Set<File> list = new HashSet<>();
+      for(String s : cacher.getLikedTracks()) {
+        File f = new File(s);
+        if(f.isFile() && f.exists()) {
+          list.add(f);
         }
       }
-      return list.toArray(new java.io.File[0]);
-    } catch (IOException e) {
-      ResourceFolder.dispatchLog(e);
-      Debugger.warn("Failed to retrieve saved liked tracks. " + e.getLocalizedMessage());
+      return list.toArray(new File[list.size()]);
     }
-    return new File[0];
   }
 
   /**
@@ -180,32 +127,18 @@ public class Program {
    *         instance.
    */
   public static PhysicalFolder[] fetchSavedPlayLists() {
-    if (!ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).isFile()
-        || !ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).exists()) {
-      Wrapper.safeLog(() -> {
-        try {
-          ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE).createNewFile();
-        } catch (IOException e) {
-          // AUTO HANDLED
-        }
-      }, true);
+    if(cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
       return new PhysicalFolder[0];
-    }
-    List<PhysicalFolder> list = new ArrayList<>();
-    try (FileInputStream fis = new FileInputStream(ResourceFolder.getCacheFile(PLAYLISTS_CACHE_FILE))) {
-      BufferedReader br = new BufferedReader(new InputStreamReader(fis, TextParser.getCharset()));
-      while (br.ready()) {
-        String str = br.readLine();
-        if (new File(str).exists() && new File(str).isDirectory()) {
-          list.add(new PhysicalFolder(str));
+    } else {
+      List<PhysicalFolder> list = new ArrayList<>();
+      for(String s : cacher.getSavedPlaylists()) {
+        File f = new File(s);
+        if(f.isDirectory() && f.exists()) {
+          list.add(new PhysicalFolder(f.getAbsolutePath()));
         }
       }
-      return list.toArray(new com.halcyoninae.halcyon.filesystem.PhysicalFolder[0]);
-    } catch (Exception e) {
-      ResourceFolder.dispatchLog(e);
-      Debugger.warn("Failed to retrieve saved playlists. " + e.getLocalizedMessage());
+      return list.toArray(new PhysicalFolder[list.size()]);
     }
-    return new PhysicalFolder[0];
   }
 
   /**

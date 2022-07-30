@@ -18,6 +18,11 @@ package com.halcyoninae.halcyon.connections.properties.validators;
 import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
 
 public class FloatValidator implements PropertyValidator {
+
+  /**
+   * @param propertyValue
+   * @return boolean
+   */
   @Override
   public boolean isValid(String propertyValue) {
     try {

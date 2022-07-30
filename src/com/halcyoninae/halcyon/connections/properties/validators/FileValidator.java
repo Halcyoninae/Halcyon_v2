@@ -21,6 +21,11 @@ import java.io.File;
 
 public class FileValidator implements PropertyValidator {
 
+
+  /**
+   * @param propertyValue
+   * @return boolean
+   */
   @Override
   public boolean isValid(String propertyValue) {
     return new File(propertyValue).isFile() && new File(propertyValue).exists();

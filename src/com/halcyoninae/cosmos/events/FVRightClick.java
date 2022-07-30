@@ -23,6 +23,7 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.constant.StringManager;
 import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.Wrapper;
 import com.halcyoninae.tailwind.AudioInfo;
 
@@ -117,9 +118,11 @@ public class FVRightClick extends MouseAdapter {
                     DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                     model.reload();
                     tree.remove(rcNode.toString());
+                    Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode.toString());
                     if (hideTask != null) {
-                        Debugger.unsafeLog("Dispatching hide_task callable...");
+                        Debugger.unsafeLog("Dispatching hide_task callable...\nTask for: " + rcNode);
                         hideTask.onRemove(tree.getSelectedNode(rcNode));
+
                     }
                 } catch (NullPointerException excec) {
                     // IGNORED

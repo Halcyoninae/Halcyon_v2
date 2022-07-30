@@ -15,6 +15,7 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
+import com.halcyoninae.cloudspin.CloudSpin;
 import com.halcyoninae.cloudspin.CloudSpinFilters;
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
@@ -91,10 +92,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
       @Override
       public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if (Halcyon.bgt.getFrame().isVisible()) {
+        if (Halcyon.bgt.getFrame().isVisible() && Halcyon.bgt.getFrame().isShowing()) {
           Graphics2D g2d = (Graphics2D) g;
           float compositeAlpha = 0.5f;
           g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+          g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
 
           if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
             compositeAlpha = 0.2f;
@@ -107,11 +109,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                   compositeAlpha));
 
           BufferedImage original = Global.ifp.getInfo().getArtwork();
-          if (original.getWidth() > backPanel.getWidth()
-              || original.getHeight() > backPanel.getHeight()) {
-            original = new SimpleImage(original).crop(new Rectangle(original.getWidth() / 3, original.getHeight() / 3,
-                backPanel.getWidth(), backPanel.getHeight())).toBufferedImage();
-          }
+          original = CloudSpin.grabCrop(original, backPanel.getVisibleRect());
           if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
             original = DeImage.createGradientVertical(original, 255, 0);
             switch (com.halcyoninae.halcyon.connections.properties.ResourceFolder.pm
@@ -131,21 +129,21 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             }
           }
           if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
-            g2d.drawImage(original, CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY],
-                (backPanel.getSize().width - original.getWidth()) / 2,
-                (backPanel.getSize().height - original.getHeight()) / 2);
+            original = CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY].filter(original, original);
+            g2d.drawImage(original, 0, 0, backPanel.getWidth(), backPanel.getHeight(), null);
           } else {
-            g2d.drawImage(original, (backPanel.getSize().width - original.getWidth()) / 2,
-                (backPanel.getSize().height - original.getHeight()) / 2, this);
+            g2d.drawImage(original, 0, 0, backPanel.getWidth(), backPanel.getHeight(),
+                0, 0, original.getWidth(), original.getHeight(), null);
 
           }
         }
       }
     };
     backPanel.setPreferredSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
-    backPanel.setMaximumSize(new Dimension(Manager.INFOVIEW_MAX_WIDTH, Manager.INFOVIEW_MAX_HEIGHT));
+        getPreferredSize());
     backPanel.setOpaque(false);
+    backPanel.setIgnoreRepaint(true);
+    backPanel.setDoubleBuffered(false);
 
     info = new AudioInfo();
     BufferedImage bi = DeImage.imageIconToBI(
@@ -213,7 +211,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 new Dimension(
                     Manager.MAX_WIDTH,
                     Halcyon.bgt.getFrame().getMinimumSize().height));
-
       }
 
       if (info.hasArtwork()) {
@@ -221,7 +218,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
-        SwingUtilities.invokeLater(() -> artWork.repaint(80));
+        artWork.repaint(30);
         artWorkIsDefault = false;
       } else {
         Debugger.warn("Artwork reset!");
@@ -229,10 +226,12 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             .resizeNoDistort(DeImage.imageIconToBI(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON), 108, 108);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
-        SwingUtilities.invokeLater(() -> artWork.repaint(80));
+        artWork.repaint(30);
         artWorkIsDefault = true;
       }
+      backPanel.repaint(100);
       dispatchEvents();
+      System.gc();
     }
   }
 

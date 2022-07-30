@@ -51,6 +51,12 @@ public class ProgramResourceManager {
   public static final String KEY_AUDIO_DEFAULT_BUFFER_SIZE = "audio.buffer_size";
   public static final String KEY_MINI_PLAYER_DEFAULT_BG_ALPHA = "mini.player.default_bg_alpha";
 
+  /**
+   * if false, a loop will disable a shuffle if both are activated.
+   * if true, a loop will be disabled if a shuffle is activated (AKA the shuffle is the master).
+   */
+  public static final String KEY_AUDIO_LOOP_SLAVE = "mini.player.loop_slave";
+
   public static final Property[] propertiesList = {
       new Property(KEY_USER_DEFAULT_FOLDER, ".", new DirectoryValidator()),
       new Property(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
@@ -69,7 +75,7 @@ public class ProgramResourceManager {
       new Property(KEY_USER_CHAR_SET_WRITE_TABLE, "utf8", new StrictValidator("utf8", "utf16le",
           "utf16be")),
       new Property(KEY_AUDIO_DEFAULT_BUFFER_SIZE, "auto", new DefaultValidator()),
-      new Property(KEY_MINI_PLAYER_DEFAULT_BG_ALPHA, "0.6", new NumericRangeValidator(0.0d, 1.0d, 0.1d))
+      new Property(KEY_MINI_PLAYER_DEFAULT_BG_ALPHA, "0.6", new NumericRangeValidator(0.0d, 1.0d, 0.1d)),
   };
 
   public static final String FILE_SLASH = "/";

@@ -4,14 +4,17 @@ import javax.swing.*;
 
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.utils.ColorTool;
+import com.halcyoninae.tailwind.TailwindListener;
 
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.*;
 
-public class WaveForm extends JPanel {
-  private final Path2D.Float[] waves = { new Path2D.Float(), new Path2D.Float(), new Path2D.Float() };
-  private final Object lock = new Object();
+public class WaveForm extends JPanel implements TailwindListener.FrameBufferListener {
+  private Path2D.Float wave = new Path2D.Float();
+  private final transient Object lock = new Object();
   private final transient BufferedImage img = (GraphicsEnvironment.getLocalGraphicsEnvironment()
       .getDefaultScreenDevice()
       .getDefaultConfiguration()
@@ -23,64 +26,102 @@ public class WaveForm extends JPanel {
   }
 
   public void reset() {
-    synchronized(lock) {
+    Graphics2D g2 = img.createGraphics();
+    g2.setBackground(ColorManager.MAIN_BG_THEME);
+    g2.clearRect(0, 0, img.getWidth(), img.getHeight());
+    g2.dispose();
+  }
+
+
+  /**
+   * @param samples
+   */
+  public void make(float[] samples) {
+    if(Global.player.getStream().getAudioFormatAbsolute() != null) {
+      // draw rectangles for each sample
       Graphics2D g2 = img.createGraphics();
       g2.setBackground(ColorManager.MAIN_BG_THEME);
       g2.clearRect(0, 0, img.getWidth(), img.getHeight());
+      g2.setColor(ColorManager.MAIN_FG_THEME);
+      g2.setStroke(new BasicStroke(1));
+      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      for(float f : samples) {
+        float y = (float) (f * img.getHeight() / 2);
+        wave.moveTo(0, y);
+        wave.lineTo(img.getWidth(), y);
+        g2.draw(wave);
+      }
       g2.dispose();
     }
   }
 
-  public void make(float[] samples, int s_) {
+
+  /**
+   * @param samples
+   * @param svalid
+   */
+  public void make(float[] samples, int svalid) {
     if (Global.player.getStream().getAudioFormatAbsolute() != null) {
-      Path2D.Float x = waves[2];
-      waves[2] = waves[1];
-      waves[1] = waves[0];
+      svalid /=4;
+      Path2D.Float main = wave;
       float avg = 0f;
       float hd2 = getHeight() / 2f;
-      int channels = Global.player.getStream().getAudioFormatAbsolute().getChannels();
+      final int chnls = Global.player.getStream().getAudioFormatAbsolute().getChannels();
       int i = 0;
-      while (i < channels && i < s_) {
+      while (i < chnls && i < svalid)
         avg += samples[i++];
-      }
-      avg /= channels;
-      x.reset();
-      x.moveTo(0, hd2 - avg * hd2);
-      int f_ = s_ / channels;
-
-      for (int j, k = 0; i < s_; k++) {
-        avg = 0;
-        for (j = 0; j < channels; j++) {
+      avg /= chnls;
+      main.reset();
+      main.moveTo(0, hd2 - avg * hd2);
+      int fvalid = svalid / chnls;
+      for (int ch, frame = 0; i < svalid; frame++) {
+        avg = 0f;
+        for (ch = 0; ch < chnls; ch++) {
           avg += samples[i++];
         }
-
-        avg /= channels;
-
-        x.lineTo((k / f_ * img.getWidth()), hd2 - avg * hd2);
+        avg /= chnls;
+        main.lineTo(
+            (float) frame / fvalid * img.getWidth(), hd2 - avg * hd2);
       }
+      wave = main;
 
-      waves[0] = x;
+      Graphics2D g2 = img.createGraphics();
+
       synchronized (lock) {
-        Graphics2D g2 = img.createGraphics();
-        g2.setBackground(ColorManager.MAIN_BG_THEME);
+        g2.setBackground(ColorTool.hexToRGBA("#282c34"));
         g2.clearRect(0, 0, img.getWidth(), img.getHeight());
-        g2.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+        g2.setRenderingHint(
+            RenderingHints.KEY_ANTIALIASING,
+            RenderingHints.VALUE_ANTIALIAS_ON);
+
         g2.setPaint(ColorManager.MAIN_FG_THEME);
-        g2.draw(waves[2]);
-        g2.setPaint(Color.WHITE);
-        g2.draw(waves[1]);
-        g2.setPaint(Color.ORANGE);
-        g2.draw(waves[0]);
-        g2.dispose();
+        g2.draw(wave);
       }
+
+      g2.dispose();
     }
   }
 
+
+  /**
+   * @param g
+   */
   @Override
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
-    synchronized(lock) {
+    synchronized (lock) {
       g.drawImage(img, 0, 0, this);
     }
+  }
+
+
+  /**
+   * @param samples
+   * @param s_valid
+   */
+  @Override
+  public void frameUpdate(float[] samples, int s_valid) {
+    make(samples, s_valid);
+    repaint(20);
   }
 }

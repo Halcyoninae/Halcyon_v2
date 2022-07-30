@@ -92,11 +92,11 @@
         Status: none
         Linked Issues: BUG#34
 
-[**] #35 "Drop targetting"
+[!IGNORED!] [**] #35 "Drop targetting"
         Detailed Description: When a file or folder is dragged over the program, detect
         it and do whatever with it according to what type of file it is.
         Category: Program Dynamic
-        Status: None
+        Status: IGNORED; native implementations may be very different across various systems.
 
 [!IMPLEMENTED!] [***] #34 "Migration to new engine"
         Detailed Description: The current engine is made by somebody

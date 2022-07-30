@@ -17,6 +17,7 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
@@ -80,9 +81,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
   public TailwindPlayer() {
     events = new TailwindEventManager();
-    TailwindDefaultListener tdfl = new TailwindDefaultListener(this);
-    events.addStatusUpdateListener(tdfl);
-    events.addGenericUpdateListener(tdfl);
+    events.addStatusUpdateListener(new TailwindDefaultListener(this));
   }
 
   /**
@@ -146,6 +145,9 @@ public class TailwindPlayer implements Audio, Runnable {
     return playing;
   }
 
+  /**
+   * @return AudioFormat
+   */
   public synchronized AudioFormat getAudioFormatAbsolute() {
     return formatAudio;
   }
@@ -211,8 +213,8 @@ public class TailwindPlayer implements Audio, Runnable {
    * @param e
    * @return boolean
    */
-  public synchronized boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
-    return events.addFrameBufferListener(e);
+  public synchronized void setFrameBufferListener(TailwindListener.FrameBufferListener e) {
+    events.addFrameBufferListener(e);
   }
 
   /**
@@ -231,6 +233,9 @@ public class TailwindPlayer implements Audio, Runnable {
     return events.addTimeListener(e);
   }
 
+  /**
+   * @param e
+   */
   public synchronized void addLineListener(LineListener e) {
     line.addLineListener(e);
   }
@@ -450,23 +455,22 @@ public class TailwindPlayer implements Audio, Runnable {
         }
       }
       int i;
-      int nb = TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits());
-      float[] samples = new float[BUFF_SIZE * formatAudio.getChannels()];
-      long[] transfer = new long[samples.length];
-      if(buffer == null) {
-        buffer = new byte[samples.length * nb];
+      if (buffer == null) {
+        buffer = new byte[BUFF_SIZE * formatAudio.getChannels()
+            * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits())];
       }
-      int d;
       line.start();
       while (!worker.isShutdown()) {
         if (!paused) {
           try {
-            
-            while (playing && !paused && (i = ais.read(buffer)) != -1) {
-              if (paused || !playing) {
-                break;
+            if (isOpen()) {
+              while (playing && !paused && (i = ais.read(buffer)) != -1) {
+                if (paused || !playing) {
+                  break;
+                }
+
+                line.write(buffer, 0, i);
               }
-              line.write(buffer, 0, i);
             }
             if (!paused) {
               reset();

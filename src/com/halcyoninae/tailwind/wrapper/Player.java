@@ -19,6 +19,7 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TimeParser;
 import com.halcyoninae.tailwind.TailwindPlayer;
+import com.halcyoninae.tailwind.TailwindPlaylist;
 
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
@@ -38,10 +39,8 @@ import java.io.File;
  * @since 3.0
  */
 public class Player {
-  private TailwindPlayer audio;
+  private TailwindPlaylist audio;
   private String currentAbsolutePath = "";
-  private boolean isLooping = false, isPlayListShuffling = false;
-  private File f;
 
   /**
    * Constructs a player with a blank mp3 file
@@ -70,8 +69,7 @@ public class Player {
    */
   public Player(File f) {
     try {
-      audio = new TailwindPlayer();
-      this.f = f;
+      audio = new TailwindPlaylist();
       currentAbsolutePath = f.getAbsolutePath();
     } catch (Exception e) {
       Debugger.log(e);
@@ -82,30 +80,14 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    audio.play();
-  }
-
-  /**
-   * This method should not be used!!
-   *
-   * {@link #play()} handles opening the stream before playing
-   *
-   * @deprecated Unused
-   */
-  @Deprecated(forRemoval = true)
-  public void open() {
-    try {
-      audio.open(f);
-    } catch (Exception e) {
-      Debugger.log(e);
-    }
+    audio.playlistStart(new File(currentAbsolutePath), false);
   }
 
   /**
    * @param b
    */
   public void setLooping(boolean b) {
-    isLooping = b;
+    audio.setLoop(b);
   }
 
   /**
@@ -119,14 +101,14 @@ public class Player {
    * @return boolean
    */
   public boolean isLooping() {
-    return isLooping;
+    return audio.isLoop();
   }
 
   /**
    * @param b
    */
   public void setShuffling(boolean b) {
-    isPlayListShuffling = b;
+    audio.setAutoPlay(b);
   }
 
   public void requestNextTrack() {
@@ -136,7 +118,7 @@ public class Player {
    * @return boolean
    */
   public boolean isShuffling() {
-    return isPlayListShuffling;
+    return audio.isAutoPlay();
   }
 
   /**
@@ -149,9 +131,8 @@ public class Player {
    */
   public void setFile(String f) {
     Debugger.good(f);
-    audio.open(new File(f));
     this.currentAbsolutePath = f;
-    this.f = new File(f);
+    audio.open(new File(f));
   }
 
   /**

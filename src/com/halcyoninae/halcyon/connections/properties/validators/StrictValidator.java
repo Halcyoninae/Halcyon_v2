@@ -24,6 +24,11 @@ public class StrictValidator implements PropertyValidator {
     this.tempaltes = allowedArgs;
   }
 
+
+  /**
+   * @param propertyValue
+   * @return boolean
+   */
   @Override
   public boolean isValid(String propertyValue) {
     for (String template : tempaltes) {

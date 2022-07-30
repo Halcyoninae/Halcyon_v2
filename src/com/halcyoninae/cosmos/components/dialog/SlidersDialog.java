@@ -51,8 +51,8 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
     });
 
     JSlider panSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, pan);
-    panSlider.setMajorTickSpacing(25);
-    panSlider.setMinorTickSpacing(100 );
+    panSlider.setMajorTickSpacing(10);
+    panSlider.setMinorTickSpacing(100);
     panSlider.setSnapToTicks(true);
     panSlider.setPaintTicks(true);
     panSlider.setToolTipText("Pan Slider: " + panSlider.getValue());
@@ -75,8 +75,7 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
 
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     setTitle("Sliders");
-    setPreferredSize(new Dimension(300, 200));
-    setResizable(false);
+    setPreferredSize(new Dimension(300, 350));
     setAutoRequestFocus(false);
     getContentPane().add(pane);
   }

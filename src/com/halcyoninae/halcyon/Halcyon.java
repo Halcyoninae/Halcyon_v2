@@ -103,7 +103,6 @@ public class Halcyon {
     try {
       LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
 
-      SwingUtilities.invokeLater(() -> {
         new Thread(ld::run).start();
 
         TopPane tp = new TopPane(Global.ifp, Global.bctp);
@@ -118,12 +117,11 @@ public class Halcyon {
         bb.add(new RefreshFileView());
         bb.add(new SlidersControl());
         bb.add(new MinimizePlayer());
-        bb.add(new WaveFormLinker());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
         bb.add(
             GenericWebsiteLinker.getButton(
-                ProjectManager.PROJECT_GITHUB_PAGE,
+                DefaultManager.PROJECT_GITHUB_PAGE,
                 Manager.PROJECTPAGE_BUTTON_TOOLTIP,
                 Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
         BBlocView b = new BBlocView();
@@ -166,7 +164,6 @@ public class Halcyon {
           Global.ifp.addInfoViewUpdateListener(dp);
           dp.start();
         }
-      });
     } catch (Exception e) {
       ResourceFolder.dispatchLog(e);
     }
@@ -180,7 +177,7 @@ public class Halcyon {
   public static void main(String... args) {
     if (args.length > 0) {
       if (args[0].equals("-debug")) {
-        ProjectManager.DEBUG_PROGRAM = true;
+        DefaultManager.DEBUG_PROGRAM = true;
         Debugger.DISABLE_DEBUGGER = false;
       }
     }

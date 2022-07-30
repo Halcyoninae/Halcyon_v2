@@ -45,10 +45,24 @@ public final class TailwindTranscoder implements Transcoder {
     return temp;
   }
 
+
+  /**
+   * @param bps
+   * @return int
+   */
   public static int normalize(int bps) {
     return bps + 7 >> 3;
   }
 
+
+  /**
+   * @param buffer
+   * @param transfer
+   * @param samples
+   * @param b_
+   * @param format
+   * @return float[]
+   */
   public static float[] f_unpack(byte[] buffer, long[] transfer, float[] samples, int b_, AudioFormat format) {
     if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED && format.getEncoding() != AudioFormat.Encoding.PCM_UNSIGNED) {
       return samples;

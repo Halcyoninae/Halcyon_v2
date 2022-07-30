@@ -18,6 +18,7 @@ package com.halcyoninae.cosmos.components.bottompane;
 import com.halcyoninae.cosmos.components.inheritable.TabButton;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
+import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.Wrapper;
 
 import javax.swing.*;
@@ -140,6 +141,7 @@ public class BottomPane extends JTabbedPane {
         }, false);
       }
     });
+    Program.cacher.pingSavedPlaylists();
     this.revalidate();
     tabs.add(list);
   }

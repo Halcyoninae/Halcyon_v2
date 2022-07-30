@@ -12,6 +12,10 @@ public class WaveFormClickMenu extends MouseAdapter {
     this.e = e;
   }
 
+
+  /**
+   * @param ex
+   */
   private void attempt(MouseEvent ex) {
     int x = ex.getX();
     int y = ex.getY();
@@ -52,6 +56,10 @@ public class WaveFormClickMenu extends MouseAdapter {
     }
   }
 
+
+  /**
+   * @param e
+   */
   @Override
   public void mouseClicked(MouseEvent e) {
     if (e.getButton() == MouseEvent.BUTTON3) {

@@ -15,7 +15,7 @@
 
 package com.halcyoninae.halcyon.connections.properties;
 
-import com.halcyoninae.halcyon.ProjectManager;
+import com.halcyoninae.halcyon.DefaultManager;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
@@ -210,7 +210,7 @@ public class ResourceFolder {
                 + e.getClass() + "\n" + e.toString() + "\n" +
                 e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n"
                 + java.util.Arrays.toString(e.getStackTrace()) + "\n"
-                + "Submit an issue by making a PR to the file BUGS at " + ProjectManager.PROJECT_GITHUB_PAGE);
+                + "Submit an issue by making a PR to the file BUGS at " + DefaultManager.PROJECT_GITHUB_PAGE);
       }
       return null;
     });

@@ -20,7 +20,6 @@ import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * A global scoped targeted towards managing multiple
@@ -34,13 +33,12 @@ public class TailwindEventManager {
   private List<TailwindListener.TimeUpdateListener> timeListeners;
   private List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
   private List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
-  private List<TailwindListener.FrameBufferListener> bufferListeners;
+  private TailwindListener.FrameBufferListener bufferListener;
 
   public TailwindEventManager() {
     timeListeners = new ArrayList<>();
     statusUpdateListeners = new ArrayList<>();
     genericUpdateListeners = new ArrayList<>();
-    bufferListeners = new Vector<>();
   }
 
 
@@ -75,8 +73,8 @@ public class TailwindEventManager {
    * @param e
    * @return boolean
    */
-  public boolean addFrameBufferListener(TailwindListener.FrameBufferListener e) {
-    return bufferListeners.add(e);
+  public void addFrameBufferListener(TailwindListener.FrameBufferListener e) {
+    this.bufferListener = e;
   }
 
 
@@ -107,8 +105,8 @@ public class TailwindEventManager {
   /**
    * @return e
    */
-  public List<TailwindListener.FrameBufferListener> getFrameBufferListeners() {
-    return bufferListeners;
+  public TailwindListener.FrameBufferListener getFrameBufferListeners() {
+    return bufferListener;
   }
 
 
@@ -153,12 +151,8 @@ public class TailwindEventManager {
   /**
    * @param buffer
    */
-  public synchronized void dispatchNewBufferEvent(byte[] buffer) {
-    Wrapper.threadedRun(() -> {
-        for (TailwindListener.FrameBufferListener e : bufferListeners) {
-          e.frameUpdate(buffer);
-      }
-    });
+  public synchronized void dispatchNewBufferEvent(float[] samples, int s_) {
+    Wrapper.threadedRun(() -> bufferListener.frameUpdate(samples, s_));
   }
 
 }

@@ -27,6 +27,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public interface TabTree {
   /**
    * Calls the remove function on the JTree instance.
+   *
    * @param nodeName The Node to remove from the tree.
    */
   void remove(String nodeName);
@@ -42,4 +43,12 @@ public interface TabTree {
    * @return The Path of the absolute tree being represented
    */
   String getPath();
+
+  /**
+   * Determines if the tree holds
+   * a virtual folder.
+   *
+   * @return (true || false)
+   */
+  boolean isVirtual();
 }

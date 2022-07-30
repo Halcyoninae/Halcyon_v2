@@ -15,14 +15,12 @@
 
 package com.halcyoninae.tailwind;
 
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-import org.tritonus.sampled.file.AiffAudioFileReader;
 
 import java.net.URL;
 
