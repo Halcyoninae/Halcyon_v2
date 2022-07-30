@@ -96,6 +96,9 @@ public class MiniPlayer extends JFrame implements Runnable {
     this.listener = listener;
   }
 
+  /**
+   * Calls for the listener
+   */
   public void pounceListener() {
     listener.closingWindow();
   }

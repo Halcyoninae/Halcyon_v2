@@ -15,14 +15,19 @@
 
 package com.halcyoninae.tailwind.wrapper;
 
+import com.github.kokorin.jaffree.ffmpeg.FFmpeg;
+import com.halcyoninae.cosmos.components.dialog.LoadingDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TimeParser;
+import com.halcyoninae.tailwind.AudioInfo;
 import com.halcyoninae.tailwind.TailwindPlayer;
 import com.halcyoninae.tailwind.TailwindPlaylist;
 
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
+import javax.swing.SwingUtilities;
+
 import java.io.File;
 
 /**
@@ -80,7 +85,14 @@ public class Player {
    * Starts playing the audio
    */
   public void play() {
-    audio.playlistStart(new File(currentAbsolutePath), false);
+    File f = new File(currentAbsolutePath);
+    if (new AudioInfo(f).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
+      LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>", true);
+      SwingUtilities.invokeLater(ld::run);
+      Debugger.warn("No proper duration metadata found for this audio file...\nLagging to find the frame length.");
+    }
+    audio.open(f);
+    audio.playlistStart(f, false);
   }
 
   /**
@@ -132,7 +144,6 @@ public class Player {
   public void setFile(String f) {
     Debugger.good(f);
     this.currentAbsolutePath = f;
-    audio.open(new File(f));
   }
 
   /**

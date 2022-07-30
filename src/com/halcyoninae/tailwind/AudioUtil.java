@@ -21,7 +21,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-
+import java.io.File;
 import java.net.URL;
 
 /**
@@ -62,5 +62,21 @@ public final class AudioUtil {
       e.printStackTrace();
     }
     return null;
+  }
+
+  /**
+   * This writes an AudioInfo's properties to a file.
+   *
+   * This process writes to a folder and writes the following:
+   * A file with all the attributes
+   * A file with the image artwork
+   *
+   * @since 3.3
+   * @param parentDir The folder to write to.
+   * @param info      The AudioInfo object
+   * @return The File as a directory that has been written to.
+   */
+  public static File writeAudioInfoConfig(File parentDir, AudioInfo info) {
+
   }
 }

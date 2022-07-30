@@ -35,7 +35,6 @@ public class MiniPlayerClickMenu extends MouseAdapter {
     this.e = e;
   }
 
-
   /**
    * @param ex
    */

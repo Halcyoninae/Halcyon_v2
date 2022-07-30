@@ -103,9 +103,26 @@ public class TailwindPlayer implements Audio, Runnable {
               ais.getFormat().getFrameRate()));
       frameLength = ais.getFrameLength();
 
-      if (microsecondLength < 0) {
-        frameLength = ais.getFrameLength();
-        microsecondLength = 1000000L * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
+      if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
+        if (this.microsecondLength < 0) {
+          byte[] buffer = new byte[4096];
+          int readBytes = 0;
+
+          while ((readBytes = this.ais.read(buffer)) != -1) {
+            this.frameLength += readBytes;
+          }
+
+          this.frameLength /= this.ais.getFormat().getFrameSize();
+          this.ais.close();
+          this.ais = AudioUtil.getAudioIS(this.resource.toURI().toURL());
+          this.microsecondLength = (long) (1000000 *
+              (frameLength / this.ais.getFormat().getFrameRate()));
+        }
+      } else {
+        if (microsecondLength < 0) {
+          frameLength = ais.getFrameLength();
+          microsecondLength = 1000000L * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
+        }
       }
 
       DataLine.Info info = new DataLine.Info(
