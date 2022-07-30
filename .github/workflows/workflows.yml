@@ -1,0 +1,16 @@
+name: Default Workflows
+
+on:
+  schedule:
+    -cron: '42 0 * * *'
+
+jobs:
+  defaults:
+    runs-on: ubuntu-latest
+    permissions: write
+    steps:
+      - name: 'Set up latest Oracle JDK 17'
+      uses: oracle-actions/setup-java@v1
+      with:
+        website: oracle.com
+        release: 17
