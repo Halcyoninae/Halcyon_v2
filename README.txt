@@ -23,7 +23,7 @@ Licensed under the following:
 Note: Check /root/VERSION for the
 absolute version info history.
 
-Current Version: 3.2
+Current Version: 3.3
 Current Iteration: 3.0
 
 Version Logic:
