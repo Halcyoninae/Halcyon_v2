@@ -114,8 +114,8 @@ public class Debugger {
    *
    * @return The Header Log text
    */
-  public static String getLogText() {
-    return "[Debug ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
+  public static String getLogText(Class<?> am) {
+    return "[Debug ~ MP4J@" + TimeParser.getLogCurrentTime() + am.getSimpleName() + "] > ";
   }
 
   /**
@@ -129,7 +129,11 @@ public class Debugger {
    * @return String Gets the default success/good message header
    */
   public static String getGoodText() {
-    return "SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
+    return "[SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
+  }
+
+  public static String getDefaultInfoText() {
+    return "[INFO ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
   /**
@@ -144,9 +148,9 @@ public class Debugger {
       new Thread(() -> {
         for (T t : o) {
           if (t != null) {
-            out.println(getLogText() + t + " ");
+            out.println(getLogText(o.getClass()) + t + " ");
           } else {
-            out.println(getLogText() + "NULL_CONTENT" + " ");
+            out.println(getLogText(o.getClass()) + "NULL_CONTENT" + " ");
           }
         }
         out.println();
@@ -246,6 +250,30 @@ public class Debugger {
           out.println(getLogText() + t + " ");
         } else {
           out.println(getLogText() + "NULL_CONTENT" + " ");
+        }
+      }
+    }
+  }
+
+  /**
+   * @since 3.3
+   * @param <T>
+   * @param o
+   */
+  @SafeVarargs
+  public static <T> void info(T ... o) {
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+      for (T t : o) {
+        if (t != null) {
+          out.println(com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BLUE_TXT.getColor() + t
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
+        } else {
+          out.println(com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.RESET.getColor()
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BLUE_TXT.getColor() + "NULL_CONTENT"
+              + com.halcyoninae.halcyon.debug.Debugger.CLIStyles.RESET.getColor());
         }
       }
     }

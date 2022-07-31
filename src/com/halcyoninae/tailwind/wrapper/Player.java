@@ -86,10 +86,14 @@ public class Player {
    */
   public void play() {
     File f = new File(currentAbsolutePath);
-    if (new AudioInfo(f).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
-      LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>", true);
-      SwingUtilities.invokeLater(ld::run);
-      Debugger.warn("No proper duration metadata found for this audio file...\nLagging to find the frame length.");
+    try {
+      if (new AudioInfo(f, false).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
+        LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>", true);
+        SwingUtilities.invokeLater(ld::run);
+        Debugger.warn("No proper duration metadata found for this audio file...\nLagging to find the frame length.");
+      }
+    } catch (Exception e) {
+      // IGNORE
     }
     audio.open(f);
     audio.playlistStart(f, false);

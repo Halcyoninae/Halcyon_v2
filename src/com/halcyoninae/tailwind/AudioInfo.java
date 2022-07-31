@@ -78,6 +78,18 @@ public class AudioInfo {
     initTags();
   }
 
+  public AudioInfo(File f, boolean s)
+      throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
+    this.f = f;
+    AudioFile af = null;
+    af = AudioFileIO.read(f);
+    if (af != null) {
+      t = af.getTag();
+      header = af.getAudioHeader();
+    }
+    initTags();
+  }
+
   /**
    * Constructs the AudioInfo object with the specified file path.
    *
@@ -114,14 +126,19 @@ public class AudioInfo {
    * @param s The string to check
    * @return (true || false) Depending on if the string is empty or not.
    */
-  private boolean checkEmptiness(String s) {
+  public boolean checkEmptiness(String s) {
     return s == null || s.isEmpty();
+  }
+
+  public void forceSet(Map<String, String> forceSetMap) {
+    Debugger.warn("Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
+    this.tags = forceSetMap;
   }
 
   /**
    * Initializes the tags map and adds default values to the map
    */
-  private void defInitTags() {
+  public void defInitTags() {
     tags = new HashMap<>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
     tags.put(KEY_FILE_NAME, "Nothing.mp3");
@@ -139,7 +156,7 @@ public class AudioInfo {
    * Initializes the tags map and adds the appropriate values from the
    * parsed Audio File to the map.
    */
-  private void initTags() {
+  public void initTags() {
     tags = new HashMap<>();
     tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
     tags.put(KEY_FILE_NAME, f.getName());
@@ -187,7 +204,6 @@ public class AudioInfo {
     }
   }
 
-
   /**
    * @return boolean
    */
@@ -215,7 +231,6 @@ public class AudioInfo {
       return false;
     }
   }
-
 
   /**
    * @return BufferedImage
@@ -257,5 +272,23 @@ public class AudioInfo {
     } catch (UnsupportedOperationException e) {
       return "Unsupported";
     }
+  }
+
+  public static boolean checkAudioInfo(AudioInfo info) {
+    try {
+      AudioFileIO.read(new File(info.getTag(KEY_ABSOLUTE_FILE_PATH)));
+      info.getTag(KEY_ABSOLUTE_FILE_PATH);
+      info.getTag(KEY_ALBUM);
+      info.getTag(KEY_BITRATE);
+      info.getTag(KEY_GENRE);
+      info.getTag(KEY_MEDIA_ARTIST);
+      info.getTag(KEY_SAMPLE_RATE);
+      info.getTag(KEY_MEDIA_DURATION);
+      info.getTag(KEY_MEDIA_TITLE);
+      info.getTag(KEY_SAMPLE_RATE);
+    } catch (TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException | IOException e) {
+      return false;
+    }
+    return true;
   }
 }

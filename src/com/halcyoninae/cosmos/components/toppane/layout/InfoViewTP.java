@@ -30,12 +30,22 @@ import com.halcyoninae.tailwind.AudioInfo;
 import de.ralleytn.simple.image.SimpleImage;
 
 import javax.swing.*;
+
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.tag.InvalidFrameException;
+import org.jaudiotagger.tag.TagException;
+
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -165,11 +175,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
     topPanel.setLayout(new GridLayout(1, 3, 15,
         topPanel.getPreferredSize().height / 2));
-    infoDisplay = new JLabel(infoToString(info, infoTitle));
+    infoDisplay = new JLabel(infoToString(info, infoTitle, false));
 
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-    infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE)));
+    infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE), false));
     infoDisplay.setHorizontalTextPosition(SwingConstants.LEADING);
     infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
     infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
@@ -192,15 +202,40 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    */
   public void setAssets(File f) {
     if (f.exists() && f.isFile()) {
-      info = new AudioInfo(f);
-      infoTitle = ResourceFolder.pm.get(
-          ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
-          .equals("true")
-              ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
-              : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
-      infoDisplay.setText(infoToString(info, infoTitle));
-      infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE)));
-
+      boolean beSmart = false;
+      try {
+        info = new AudioInfo(f, false);
+      } catch (InvalidAudioFrameException | CannotReadException | IOException | TagException
+          | ReadOnlyFileException e) {
+        beSmart = true;
+        Map<String, String> defaultMap = new HashMap<>();
+        defaultMap.put(AudioInfo.KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
+        defaultMap.put(AudioInfo.KEY_FILE_NAME, f.getName());
+        defaultMap.put(AudioInfo.KEY_ALBUM, "Unknown");
+        defaultMap.put(AudioInfo.KEY_MEDIA_DURATION, "Unknown");
+        defaultMap.put(AudioInfo.KEY_MEDIA_TITLE, "Unknown");
+        defaultMap.put(AudioInfo.KEY_BITRATE, "Unknown");
+        defaultMap.put(AudioInfo.KEY_SAMPLE_RATE, "Unknown");
+        defaultMap.put(AudioInfo.KEY_ALBUM, "Unknown");
+        defaultMap.put(AudioInfo.KEY_GENRE, "Unknown");
+        defaultMap.put(AudioInfo.KEY_MEDIA_ARTIST, "Unknown");
+        defaultMap.put(AudioInfo.KEY_ARTWORK, "Unknown");
+        info.forceSet(defaultMap);
+      }
+      if (!beSmart) {
+        infoTitle = ResourceFolder.pm.get(
+            ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+            .equals("true")
+                ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+                : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
+        infoDisplay.setText(infoToString(info, infoTitle, false));
+        infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE), false));
+      } else {
+        infoTitle = f.getName();
+        Debugger.warn(">>> " + infoTitle);
+        infoDisplay.setText(infoToString(info, infoTitle, true));
+        infoDisplay.setToolTipText(infoToString(info, infoTitle, true));
+      }
       if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
           artWork.getPreferredSize().width -
           Manager.INFOVIEW_FLOWLAYOUT_HGAP *
@@ -215,7 +250,15 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
       if (info.hasArtwork()) {
         Debugger.warn("Artwork found for drawing!");
-        BufferedImage bi = DeImage.resizeNoDistort(info.getArtwork(), 108, 108);
+        BufferedImage bi = null;
+        if (!beSmart)
+          bi = DeImage.resizeNoDistort(info.getArtwork(), Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+        else
+          bi = DeImage.resizeNoDistort(
+              bi,
+              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
         artWork.repaint(30);
@@ -223,7 +266,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
       } else {
         Debugger.warn("Artwork reset!");
         BufferedImage bi = DeImage
-            .resizeNoDistort(DeImage.imageIconToBI(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON), 108, 108);
+            .resizeNoDistort(DeImage.imageIconToBI(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
+                Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
         artWork.repaint(30);
@@ -243,6 +287,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * other functionalities.
    */
   private void dispatchEvents() {
+    Debugger.warn("InfoView Preparing a dispatch: " + info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
     SwingUtilities.invokeLater(
         () -> {
           for (InfoViewUpdateListener l : listeners) {
@@ -271,28 +316,50 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * <li>Bitrate, SampleRate, and Duration</li>
    * </ul>
    *
-   * @param info The track to generate the information off of
+   * @param info    The track to generate the information off of
+   * @param text    The title of the track
+   * @param beSmart Tells the parser to be smart and guess certain details.
    * @return An HTML string that can be used by html supporting GUI Components to
    *         display the information.
    */
-  private String infoToString(AudioInfo info, String text) {
-    return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
-        +
-        ColorManager.MAIN_FG_STR +
-        ";font-size: 12px;\"><strong>" +
-        text
-        +
-        "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
-        info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
-        "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
-        info.getTag(AudioInfo.KEY_BITRATE) +
-        "kpbs," +
-        info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
-        "kHz," +
-        TimeParser.fromSeconds(
-            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
-        +
-        "</span></p></body></html>");
+  private String infoToString(AudioInfo info, String text, boolean beSmart) {
+    if (!beSmart) {
+      return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
+          +
+          ColorManager.MAIN_FG_STR +
+          ";font-size: 12px;\"><strong>" +
+          text
+          +
+          "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+          info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
+          "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
+          info.getTag(AudioInfo.KEY_BITRATE) +
+          "kpbs," +
+          info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
+          "kHz," +
+          TimeParser.fromSeconds(
+              Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
+          +
+          "</span></p></body></html>");
+    } else {
+      String author = text.contains("-") ? text.split("-", 2)[0] : "Unknown";
+      return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
+          +
+          ColorManager.MAIN_FG_STR +
+          ";font-size: 12px;\"><strong>" +
+          text
+          +
+          "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+          author +
+          "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
+          "Unknown" +
+          "kpbs," +
+          "Unknown" +
+          "kHz," +
+          "N:N:N"
+          +
+          "</span></p></body></html>");
+    }
   }
 
   /**

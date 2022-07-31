@@ -201,7 +201,7 @@ public class TailwindPlayer implements Audio, Runnable {
    * @return The current source data line's position in microsecond
    */
   public synchronized long getPositionMicro() {
-    return line.getMicrosecondPosition();
+    return line != null ? line.getMicrosecondPosition() : 0l;
   }
 
   /**
@@ -480,8 +480,8 @@ public class TailwindPlayer implements Audio, Runnable {
         if (!paused) {
           try {
             if (isOpen()) {
-              while (playing && !paused && (i = ais.read(buffer)) != -1) {
-                if (paused || !playing) {
+              while (playing && !paused && isOpen() && (i = ais.read(buffer)) != -1) {
+                if (paused || !playing || !isOpen()) {
                   break;
                 }
 

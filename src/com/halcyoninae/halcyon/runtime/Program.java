@@ -108,13 +108,13 @@ public class Program {
    * @return File[] Returns all of the liked tracks.
    */
   public static File[] fetchLikedTracks() {
-    if(cacher.getLikedTracks().size() == 0) {
+    if (cacher.getLikedTracks().size() == 0) {
       return new File[0];
     } else {
       Set<File> list = new HashSet<>();
-      for(String s : cacher.getLikedTracks()) {
+      for (String s : cacher.getLikedTracks()) {
         File f = new File(s);
-        if(f.isFile() && f.exists()) {
+        if (f.isFile() && f.exists()) {
           list.add(f);
         }
       }
@@ -127,13 +127,13 @@ public class Program {
    *         instance.
    */
   public static PhysicalFolder[] fetchSavedPlayLists() {
-    if(cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
+    if (cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
       return new PhysicalFolder[0];
     } else {
       List<PhysicalFolder> list = new ArrayList<>();
-      for(String s : cacher.getSavedPlaylists()) {
+      for (String s : cacher.getSavedPlaylists()) {
         File f = new File(s);
-        if(f.isDirectory() && f.exists()) {
+        if (f.isDirectory() && f.exists()) {
           list.add(new PhysicalFolder(f.getAbsolutePath()));
         }
       }

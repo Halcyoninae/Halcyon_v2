@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,9 +58,17 @@ public class MoosicCache {
 
   public void init() {
     cacher = new Cacher(new File(MOOSIC_DEFAULT_LOCALE));
+    /**
+     * If the desired file for the configuration is not found, we will
+     * target a default setting.
+     *
+     * Conditions:
+     * 1. If the file doesn't exist
+     * 2. If the size of the file is zero
+     */
     if (!new File(MOOSIC_DEFAULT_LOCALE).exists() || new File(MOOSIC_DEFAULT_LOCALE).length() == 0
         || !new File(MOOSIC_DEFAULT_LOCALE).isFile()) {
-      Debugger.warn("Incorrect user cache found! >,< Moosic resetting");
+      Debugger.info("Incorrect user cache found! >,< Moosic resetting");
       Map<String, String> content = new HashMap<>();
       content.put(NODE_USER_LIKED_TRACKS, "");
       content.put(NODE_USER_SAVED_PLAYLISTS, "");
@@ -74,7 +83,15 @@ public class MoosicCache {
       savedPlayLists = new ArrayList<>();
       likedTracks = new HashSet<>();
     } else {
-      Debugger.warn("Loading user cache...!! :D The moosic is on!");
+      /**
+       * We try to look up the data from the configuration file if the previous
+       * conditions
+       * are not met, meaning:
+       * 1. File exists
+       * 2. File size is not zero.
+       * However error handling and how data is processed is handled by the user.
+       */
+      Debugger.info("Loading user cache...!! :D The moosic is on!");
       try {
         excludedFiles = cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0] != null ? new ArrayList<>(Arrays.asList(
             cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0].split("\n"))) : new ArrayList<>();
@@ -83,6 +100,7 @@ public class MoosicCache {
             : new ArrayList<>();
         likedTracks = cacher.getContent(NODE_USER_LIKED_TRACKS)[0] != null ? new HashSet<>(Arrays.asList(
             cacher.getContent(NODE_USER_LIKED_TRACKS)[0].split("\n"))) : new HashSet<>();
+        Debugger.info("EF: " + excludedFiles, "SPL: " + savedPlayLists, "LT: " + likedTracks);
       } catch (Exception e) {
         ResourceFolder.dispatchLog(e);
         e.printStackTrace();
@@ -90,7 +108,6 @@ public class MoosicCache {
       }
     }
   }
-
 
   /**
    * @param path
@@ -104,6 +121,7 @@ public class MoosicCache {
     for (File track : Global.ll.getFolder().getAsListFiles()) {
       if (!likedTracks.contains(track.getAbsolutePath())) {
         synchronized (likedTracks) {
+          Debugger.info("Pinging (LT): " + track.getAbsolutePath());
           likedTracks.add(track.getAbsolutePath());
         }
       }
@@ -114,12 +132,12 @@ public class MoosicCache {
     for (String s : Global.bp.getStrTabs()) {
       if (!savedPlayLists.contains(s)) {
         synchronized (savedPlayLists) {
+          Debugger.info("Pinging (SPL): " + s);
           savedPlayLists.add(s);
         }
       }
     }
   }
-
 
   /**
    * @param exclude
@@ -127,11 +145,11 @@ public class MoosicCache {
   public void pingExcludedTracks(String exclude) {
     if (!excludedFiles.contains(exclude)) {
       synchronized (excludedFiles) {
+        Debugger.info("Pinging (ET): " + exclude);
         excludedFiles.add(exclude);
       }
     }
   }
-
 
   /**
    * @return A list of string
@@ -140,14 +158,12 @@ public class MoosicCache {
     return excludedFiles;
   }
 
-
   /**
    * @return A list of string
    */
   public List<String> getSavedPlaylists() {
     return savedPlayLists;
   }
-
 
   /**
    * @return A Set of String
@@ -167,6 +183,7 @@ public class MoosicCache {
     StringBuilder sb3 = new StringBuilder();
     likedTracks.forEach(x -> sb3.append(x).append("\n"));
     content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
+    Debugger.info("Force Saving " + this.getClass().getSimpleName() + "> ", sb1, sb2, sb3);
     try {
       cacher.build(NODE_ROOT, content);
     } catch (TransformerException | ParserConfigurationException e) {
