@@ -152,8 +152,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     backPanel.setPreferredSize(
         getPreferredSize());
     backPanel.setOpaque(false);
-    backPanel.setIgnoreRepaint(true);
-    backPanel.setDoubleBuffered(false);
+    backPanel.setDoubleBuffered(true);
 
     info = new AudioInfo();
     BufferedImage bi = DeImage.imageIconToBI(

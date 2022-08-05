@@ -19,67 +19,111 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 /**
  * @author Jack Meng
  * @since 3.2
- * (Technically 3.1)
+ *        (Technically 3.1)
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
   private boolean loop = false, autoPlay = false;
   private List<File> history;
-  private int indexKeeper = 0;
-  private File currentFile;
+  private int pointer = 0;
+  private File currentFile = new File(".");
 
   public TailwindPlaylist() {
     history = new ArrayList<>();
-    currentFile = null;
     addStatusUpdateListener(this);
   }
 
-  public void playlistStart(File f, boolean autoOpen) {
-    if(isPlaying()) {
+
+  /**
+   * @param f
+   */
+  public void playlistStart(File f) {
+    if (isPlaying()) {
       stop();
     }
-    this.currentFile = f;
-    history.add(f);
-    if(autoOpen) {
+    if (!this.currentFile.getAbsolutePath().equals(f.getAbsolutePath())) {
+      history.add(f);
+      this.currentFile = f;
       open(f);
+      play();
     }
-    play();
-    indexKeeper++;
   }
 
+
+  /**
+   * @param f
+   */
   public void rawPlay(File f) {
     open(f);
     play();
   }
 
   public void backTrack() {
-    if (history.size() > 0) {
-      indexKeeper--;
-      open(history.get(indexKeeper));
+    boolean state = false;
+    if (history.size() > 1 && pointer - 1 >= 0) {
+      Debugger.warn(pointer);
+      pointer -= 1;
+      Debugger.warn(pointer);
+      if (isOpen()) {
+        close();
+      }
+      open(history.get(pointer));
       play();
+      state = true;
     }
+    Debugger.good("Backtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
   }
 
   public void forwardTrack() {
-    if (history.size() > 0) {
-      indexKeeper++;
-      open(history.get(indexKeeper));
+    boolean state = false;
+    if (history.size() > 1 && pointer >= 0 && pointer < history.size() - 1) {
+      Debugger.warn(pointer);
+      pointer += 1;
+      Debugger.warn(pointer);
+      if (isOpen()) {
+        close();
+      }
+      open(history.get(pointer));
       play();
+      state = true;
     }
+    Debugger.good("Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
   }
 
-  public int getIndexKeeper() {
-    return indexKeeper;
+
+  /**
+   * @return List<File>
+   */
+  public List<File> getHistory() {
+    return history;
   }
 
+
+  /**
+   * @return int
+   */
+  public int getpointer() {
+    return pointer;
+  }
+
+
+  /**
+   * @return File
+   */
   public File getCurrentTrack() {
     return currentFile;
   }
 
+
+  /**
+   * @param i
+   * @return File
+   */
   public File getFromHistory(int i) {
     return history.get((i > history.size() ? history.size() : i));
   }
@@ -112,6 +156,10 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
     return autoPlay;
   }
 
+
+  /**
+   * @param status
+   */
   @Override
   public void statusUpdate(TailwindStatus status) {
     if (loop && status.equals(TailwindStatus.END)) {

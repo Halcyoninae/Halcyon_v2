@@ -51,12 +51,11 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
     g2.dispose();
   }
 
-
   /**
    * @param samples
    */
   public void make(float[] samples) {
-    if(Global.player.getStream().getAudioFormatAbsolute() != null) {
+    if (Global.player.getStream().getAudioFormatAbsolute() != null) {
       // draw rectangles for each sample
       Graphics2D g2 = img.createGraphics();
       g2.setBackground(ColorManager.MAIN_BG_THEME);
@@ -64,7 +63,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
       g2.setColor(ColorManager.MAIN_FG_THEME);
       g2.setStroke(new BasicStroke(1));
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      for(float f : samples) {
+      for (float f : samples) {
         float y = (float) (f * img.getHeight() / 2);
         wave.moveTo(0, y);
         wave.lineTo(img.getWidth(), y);
@@ -74,14 +73,13 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
     }
   }
 
-
   /**
    * @param samples
    * @param svalid
    */
   public void make(float[] samples, int svalid) {
     if (Global.player.getStream().getAudioFormatAbsolute() != null) {
-      svalid /=4;
+      svalid /= 4;
       Path2D.Float main = wave;
       float avg = 0f;
       float hd2 = getHeight() / 2f;
@@ -121,7 +119,6 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
     }
   }
 
-
   /**
    * @param g
    */
@@ -132,7 +129,6 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
       g.drawImage(img, 0, 0, this);
     }
   }
-
 
   /**
    * @param samples

@@ -61,6 +61,13 @@ public final class CloudSpin {
         }
     }
 
+
+    /**
+     * @param img
+     * @param mask
+     * @param method
+     * @return BufferedImage
+     */
     public static BufferedImage applyMask(BufferedImage img, BufferedImage mask, int method) {
         BufferedImage maskedImage = null;
         if (img != null) {
@@ -78,6 +85,17 @@ public final class CloudSpin {
         return maskedImage;
     }
 
+
+    /**
+     * @param src
+     * @param startOpacity
+     * @param endOpacity
+     * @param startX
+     * @param startY
+     * @param endX
+     * @param endY
+     * @return BufferedImage
+     */
     public static BufferedImage createGradient(BufferedImage src, int startOpacity, int endOpacity, int startX,
             int startY, int endX, int endY) {
         BufferedImage alphamask = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);

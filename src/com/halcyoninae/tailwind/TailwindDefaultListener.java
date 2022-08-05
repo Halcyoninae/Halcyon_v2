@@ -15,19 +15,20 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
-public class TailwindDefaultListener implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+public class TailwindDefaultListener
+    implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
   private final TailwindPlayer player;
 
   public TailwindDefaultListener(TailwindPlayer player) {
     this.player = player;
   }
-
 
   /**
    * @param status
@@ -37,8 +38,9 @@ public class TailwindDefaultListener implements TailwindListener.StatusUpdateLis
     if (status.equals(TailwindStatus.END)) {
       player.close();
     }
-  }
 
+    Debugger.info(status);
+  }
 
   /**
    * @param event

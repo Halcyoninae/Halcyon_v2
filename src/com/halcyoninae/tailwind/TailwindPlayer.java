@@ -96,7 +96,7 @@ public class TailwindPlayer implements Audio, Runnable {
       this.resource = url;
       this.format = FileFormat.getFormatByName(this.resource.getName());
       Debugger.unsafeLog("TailwindPlayer> Opening: " + resource.getAbsolutePath());
-      ais = AudioUtil.getAudioIS(resource.toURI().toURL());
+      ais = TailwindHelper.getAudioIS(resource.toURI().toURL());
       assert ais != null;
       microsecondLength = (long) (1000000 *
           (ais.getFrameLength() /
@@ -114,7 +114,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
           this.frameLength /= this.ais.getFormat().getFrameSize();
           this.ais.close();
-          this.ais = AudioUtil.getAudioIS(this.resource.toURI().toURL());
+          this.ais = TailwindHelper.getAudioIS(this.resource.toURI().toURL());
           this.microsecondLength = (long) (1000000 *
               (frameLength / this.ais.getFormat().getFrameRate()));
         }

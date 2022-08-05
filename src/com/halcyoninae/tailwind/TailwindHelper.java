@@ -15,7 +15,13 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.tailwind.simple.FileFormat;
+import com.halcyoninae.tailwind.vorbis.VorbisIn;
+
+import de.jarnbjo.ogg.LogicalOggStream;
+import de.jarnbjo.ogg.OnDemandUrlStream;
+import de.jarnbjo.vorbis.VorbisStream;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -28,7 +34,8 @@ import java.net.URL;
  * @author Jack Meng
  * @since 3.1
  */
-public final class AudioUtil {
+public final class TailwindHelper {
+  private static AudioInputStream lastIS = null;
 
   /**
    * @param locale
@@ -50,12 +57,25 @@ public final class AudioUtil {
             base.getSampleRate(),
             false);
         ais = AudioSystem.getAudioInputStream(decode, ais);
+        lastIS = ais;
         return ais;
       } else if (target.equals(FileFormat.WAV)) {
         ais = AudioSystem.getAudioInputStream(locale);
+        lastIS = ais;
         return ais;
       } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
         ais = AudioSystem.getAudioInputStream(locale);
+        lastIS = ais;
+        return ais;
+      } else if (target.equals(FileFormat.OGG)) {
+        LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams().iterator()
+            .next();
+        if (!stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
+          new ErrorWindow("Failed to read this Vorbis (OGG) file...").run();
+          return null;
+        }
+        VorbisIn v = new VorbisIn(new VorbisStream(stream));
+        ais = new AudioInputStream(v, v.getFormat(), -1L);
         return ais;
       }
     } catch (Exception e) {

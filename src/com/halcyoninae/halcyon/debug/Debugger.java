@@ -132,6 +132,10 @@ public class Debugger {
     return "[SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
 
+
+  /**
+   * @return String
+   */
   public static String getDefaultInfoText() {
     return "[INFO ~ MP4J@" + TimeParser.getLogCurrentTime() + "] > ";
   }
@@ -247,9 +251,9 @@ public class Debugger {
     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
       for (T t : o) {
         if (t != null) {
-          out.println(getLogText() + t + " ");
+          out.println(getLogText(o.getClass()) + t + " ");
         } else {
-          out.println(getLogText() + "NULL_CONTENT" + " ");
+          out.println(getLogText(o.getClass()) + "NULL_CONTENT" + " ");
         }
       }
     }

@@ -107,6 +107,7 @@ public class ButtonControlTP extends JPanel
     previousButton.setContentAreaFilled(false);
     previousButton.setRolloverEnabled(false);
     previousButton.setBorderPainted(false);
+    previousButton.addActionListener(this);
 
     restartButton = new JButton(
         DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BUTTONCTRL_RESTART_ICON), 24, 24));
@@ -266,6 +267,10 @@ public class ButtonControlTP extends JPanel
     }
   }
 
+
+  /**
+   * @param isLooping
+   */
   public void callLoopFeatures(boolean isLooping) {
     if (isLooping) {
       loopButton.setIcon(
@@ -277,6 +282,10 @@ public class ButtonControlTP extends JPanel
     }
   }
 
+
+  /**
+   * @param isShuffling
+   */
   public void callShuffleFeatures(boolean isShuffling) {
     if (isShuffling) {
       shuffleButton.setIcon(
@@ -286,8 +295,12 @@ public class ButtonControlTP extends JPanel
     }
   }
 
+
+  /**
+   * @param isLoop
+   */
   private void loopVShuffleDuel(boolean isLoop) {
-    if(isLoop && Global.player.isShuffling()) {
+    if (isLoop && Global.player.isShuffling()) {
       Global.player.setShuffling(false);
       Global.player.setLooping(true);
       callShuffleFeatures(Global.player.isShuffling());
@@ -312,6 +325,7 @@ public class ButtonControlTP extends JPanel
    */
   @Override
   public void actionPerformed(ActionEvent e) {
+    Debugger.info(e.getSource().getClass().getCanonicalName());
     if (e.getSource().equals(playButton)) {
       if (aif != null) {
         if (!Global.player.getStream().isPlaying()) {
@@ -333,6 +347,8 @@ public class ButtonControlTP extends JPanel
       assertVolume();
     } else if (e.getSource().equals(nextButton)) {
       Global.player.requestNextTrack();
+    } else if (e.getSource().equals(previousButton)) {
+      Global.player.requestPreviousTrack();
     } else if (e.getSource().equals(loopButton)) {
       loopVShuffleDuel(true);
     } else if (e.getSource().equals(shuffleButton)) {

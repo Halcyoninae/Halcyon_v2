@@ -1,10 +1,12 @@
 package com.halcyoninae.cosmos.components.info.layout;
 
 import com.halcyoninae.cosmos.components.info.InformationTab;
+import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Member;
 
 /**
  * Creates a tab for the InformationDialog that shows
@@ -15,43 +17,61 @@ import java.awt.*;
  * @since 3.2
  */
 public class DebuggerTab extends JScrollPane implements InformationTab {
-  private JEditorPane info;
+  private JPanel panel;
+  private JLabel memLabel;
+  private String defaultMemLabel = "<html><p><strong>Memory (mB):</strong></p></html>";
 
   public DebuggerTab() {
     setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
     setFocusable(false);
 
-    info = new JEditorPane();
-    info.setEditable(false);
-    info.setContentType("text/html");
-    info.setCaretPosition(0);
+    panel = new JPanel();
+    panel.setPreferredSize(getPreferredSize());
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-    getViewport().add(info);
-    SwingUtilities.invokeLater(this::updateText);
+    /*
+     * Configure the memory display elements
+     * Includes the memory progress bar
+     * Includes the memory text display
+     */
+
+    memLabel = new JLabel(defaultMemLabel + " ");
+
+    JProgressBar memBar = new JProgressBar(0, 5);
+    memBar.setPreferredSize(new Dimension(getPreferredSize().width - 50, 10));
+    memBar.setForeground(ColorManager.MAIN_FG_THEME);
+    memBar.setBackground(ColorManager.MAIN_BG_THEME);
+    memBar.setStringPainted(false);
+    memBar.setBorderPainted(false);
+
+    JPanel memoryContainer = new JPanel();
+    memoryContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
+    memoryContainer.add(memLabel);
+    memoryContainer.add(memBar);
+
+    panel.add(memoryContainer);
+
+    getViewport().add(panel);
 
     new Thread(() -> {
-      while(true) {
-        try {
-          Thread.sleep(100);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
+      while (true) {
+        long total = Runtime.getRuntime().totalMemory();
+        long free = Runtime.getRuntime().freeMemory();
+        synchronized (memLabel) {
+          memLabel.setText("<html><p><strong>Memory (mB):</strong></p></html>" + " " + (total - free) / 1024 / 1024
+              + "/" + total / 1024 / 1024);
+          memLabel.setToolTipText((total - free) / 1024 / 1024
+              + "/" + total / 1024 / 1024);
         }
-        SwingUtilities.invokeLater(this::updateText);
+        memBar.setMaximum(((int) total) / 1024 / 1024);
+        memBar.setValue((int) (total - free) / 1024 / 1024);
+        try {
+          Thread.sleep(50);
+        } catch (InterruptedException e) {
+          // IGNORED
+        }
       }
     }).start();
-  }
-
-  private void updateText() {
-    info.setText("<html><body><p>" + getProperties() + "<html><body><p>");
-  }
-
-  /**
-   * @return String
-   */
-  private String getProperties() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("memory (used/total) mB: " + (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1024 / 1024 + "/" + Runtime.getRuntime().totalMemory() / 1024 / 1024 + "<br>");
-    return sb.toString();
   }
 
   /**

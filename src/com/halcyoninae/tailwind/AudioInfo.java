@@ -130,6 +130,10 @@ public class AudioInfo {
     return s == null || s.isEmpty();
   }
 
+
+  /**
+   * @param forceSetMap
+   */
   public void forceSet(Map<String, String> forceSetMap) {
     Debugger.warn("Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
     this.tags = forceSetMap;
@@ -274,6 +278,11 @@ public class AudioInfo {
     }
   }
 
+
+  /**
+   * @param info
+   * @return boolean
+   */
   public static boolean checkAudioInfo(AudioInfo info) {
     try {
       AudioFileIO.read(new File(info.getTag(KEY_ABSOLUTE_FILE_PATH)));

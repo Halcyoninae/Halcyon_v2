@@ -95,8 +95,7 @@ public class Player {
     } catch (Exception e) {
       // IGNORE
     }
-    audio.open(f);
-    audio.playlistStart(f, false);
+    audio.playlistStart(f);
   }
 
   /**
@@ -128,6 +127,11 @@ public class Player {
   }
 
   public void requestNextTrack() {
+    audio.forwardTrack();
+  }
+
+  public void requestPreviousTrack() {
+    audio.backTrack();
   }
 
   /**
@@ -146,7 +150,6 @@ public class Player {
    * @param f The new file location (absolute path)
    */
   public void setFile(String f) {
-    Debugger.good(f);
     this.currentAbsolutePath = f;
   }
 
