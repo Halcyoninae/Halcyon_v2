@@ -1,3 +1,24 @@
+[***] #43 Audio Info Editor
+        Detailed Description: In the right click menu to reveal
+        more information of an audio track, add a button to open
+        the editor.
+                ; The editor should have the right tools in accordance
+                with the AudioInfo editor check if said property is 
+                supported or not.
+                ; If a property is supported it should be enabled; however,
+                if a property is not supported, it should be grayed out.
+                ; The AudioInfo class must provide necessary checker methods
+                to determine if a file type has the right property rights.
+        Difficulty: Mild
+        Category: Program Dynamics
+        Status: none
+
+[***] #42 "Add OGG Header"
+        Detailed Description: OGG Header reader
+        Category: Program Dynamics
+        Difficulty: Decent
+        Status: None
+
 [**] #41 "Accent Coloring"
         Detailed Description: Enable a feature for the user to change
         overall accent color of the buttons and foreground coloring.
@@ -43,7 +64,7 @@
         Difficulty: Mild
         Status: Implementing
 
-[**] #39 "Wave Visualization"
+[**] {!TEMPORARILY-IGNORED!} #39 "Wave Visualization"
         Detailed Description: Either incorporate as the standard miniplayer
         or into a separate player window that show a visualization of the audio
         being played.
@@ -69,7 +90,7 @@
         Difficulty: 
                 Implementation: Minimal-without plugin support; Decent-with plugin support
                 Optimization: Minimal; Client-Side Dependent
-        Status: None
+        Status: Ignored
 
 [**] #37 "Synchronization of a Virtual Folder"
         Detailed Description: Provide proper synchronization and atomicity to the 
