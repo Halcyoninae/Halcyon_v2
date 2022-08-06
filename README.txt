@@ -25,6 +25,7 @@ absolute version info history.
 
 Current Version: 3.3
 Current Iteration: 3.0
+Current Build Meta: Beta
 
 Version Logic:
   > For each +1 in current version
