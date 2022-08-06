@@ -1,4 +1,4 @@
-[***] #36 "Permanent Removal"
+[!FIXED!] [***] #36 "Permanent Removal"
       Detailed Description: The remove a file from the tree view
       should be permanent.
             ; A separate blacklist file should be created where
@@ -6,12 +6,12 @@
             certain files via a settings menu.
             ; A refresh file view should check if the refreshing via
             is a valid non-blacklisted file first.
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
       Difficulty: Decent
       Testing: Decent
 
-[***] #35 "Chance for audio player to not kill the executor service"
+[!FIXED!] [***] #35 "Chance for audio player to not kill the executor service"
       Detailed Description: If the executor service is not killed, but
       the service is presumed to be killed a new slice of media played
       even though the media was not killed. Could be the if-else in the
@@ -19,7 +19,7 @@
             ; Found the cause 7/22, seems to be due to phantom nodes;
             in which there seems to be clickable dropdowns even though
             visually there are none for a JTree.
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
       Difficulty: Decent
       Testing: Decent
