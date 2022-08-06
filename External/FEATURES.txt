@@ -1,4 +1,4 @@
-[**] #44 Cutify swing components
+[**] #44 Cutify graphics & snipper components
         Detailed Description: (Cringy feature name but whatever) Have the 
         option to make a swing component cute by reducing the overall
         complexity of the component to the literal barebones.
