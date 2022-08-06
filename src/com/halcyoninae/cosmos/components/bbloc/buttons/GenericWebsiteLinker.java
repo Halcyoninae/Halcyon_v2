@@ -29,7 +29,7 @@ import java.awt.*;
  * @author Jack Meng
  * @since 3.0
  */
-public class GenericWebsiteLinker {
+public final class GenericWebsiteLinker {
   private GenericWebsiteLinker() {
   }
 
