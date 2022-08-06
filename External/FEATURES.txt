@@ -1,3 +1,38 @@
+[**] #44 Cutify swing components
+        Detailed Description: (Cringy feature name but whatever) Have the 
+        option to make a swing component cute by reducing the overall
+        complexity of the component to the literal barebones.
+                ; One example is if the infoview top panel is cutified,
+                it will reduce both the amount of times the paint method
+                is called to paint any unorphaned components.
+                ; Orphaning a component is another keypart, in which a 
+                pointer is used to determine whether a swing component is 
+                visible and/or active at a specific period and discard it's 
+                avaliability to the event queue.
+                ; The overall sizing of the component will depend on what happens;
+                one scenario is: reducing the overall complexity and due to
+                the increased work room also scale up every other unorphaned
+                component.
+                ; A widowed component is considered to be a component that has 
+                "lost" its current visibility tag (AKA it is not used but the 
+                fat runtime is being retarded and holding on to it). One scenario
+                is that this widowed component is not needed and inited previously
+                and might be reused at a later time (for optimization purposes ofc).
+                Another scenario is that it is no longer used and is waiting to be
+                orphaned by the pointer.
+                ; A nonessential or an orphaned component that was strictly obstructed
+                by the POINTER is deemed up to be nullified.
+                ; A buffered image can also be cutified along with orphaned in the need
+                to save space. This can be best applied to the redraw mechanism in the 
+                InfoView class-currently suffers from overworked graphics painter.
+                ; The user should be able to turn this off.
+                ; This feature is not an improvement to the defunct optimization promise.
+                Its main objective is to facilitate inactive swing components.
+        Difficulty: Mild
+        Category: Program Dynamics
+        Status: none
+        
+
 [***] #43 Audio Info Editor
         Detailed Description: In the right click menu to reveal
         more information of an audio track, add a button to open
