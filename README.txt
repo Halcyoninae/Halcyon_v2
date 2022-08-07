@@ -214,7 +214,7 @@ with your RE vendor with specifics
     Check with your vendor
     Minimum-Version: 9
   Sys.:
-    Minimum-Program-Memory: 50mB
+    Minimum-Program-Memory: N/A
     CPU: Any 32bit or 64bit
     GPU: Any
     OS: Windows, *NIX 
