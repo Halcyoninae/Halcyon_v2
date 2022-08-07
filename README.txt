@@ -202,5 +202,23 @@ here:
 Note: This is WIP
 
 ----------------------------------
+
+[!] Sys. Requirements
+
+Note: This is not final.
+-> The JVM memory differs from the
+actual memory b/c it allocates a
+certain amount to itself. Check
+with your RE vendor with specifics
+  JVM:
+    Check with your vendor
+    Minimum-Version: 9
+  Sys.:
+    Minimum-Program-Memory: 50mB
+    CPU: Any 32bit or 64bit
+    GPU: Any
+    OS: Windows, *NIX 
+
+----------------------------------
       Made by Jack Meng :)    
 ==================================
