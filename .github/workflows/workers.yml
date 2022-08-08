@@ -6,4 +6,6 @@ jobs:
     - name: Cloning the repository
       uses: actions/checkout@v1
       with:
-        fetch-depth: 5
+        fetch-depth: 
+    - name: SpellCheck
+      uses: igsekor/pyspelling-any@v0.0.2
