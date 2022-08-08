@@ -104,6 +104,7 @@ public class Halcyon {
     public static com.halcyoninae.cosmos.components.Cosmos bgt;
 
     private static void boot_kick_mainUI() {
+        Debugger.warn(System.getProperty("java.class.path"));
         TopPane tp = new TopPane(Global.ifp, Global.bctp);
         Global.ifp.addInfoViewUpdateListener(Global.bctp);
         JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
