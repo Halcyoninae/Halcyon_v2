@@ -24,31 +24,32 @@ import javax.swing.event.ChangeListener;
  * This class aligns a ProgressSlider with a ProgressBar.
  *
  * @author Jack Meng
- * @since 3.0
  * @see javax.swing.JSlider
  * @see javax.swing.JProgressBar
+ * @since 3.0
  */
 public class AlignSliderWithBar implements ChangeListener {
-  private final JSlider slider;
-  private final JProgressBar progressBar;
+    private final JSlider slider;
+    private final JProgressBar progressBar;
 
-  /**
-   * Constructs the AlignSliderWithBar object instance.
-   * @param slider The Slider
-   * @param bar The progress bar
-   */
-  public AlignSliderWithBar(JSlider slider, JProgressBar bar) {
-    this.progressBar = bar;
-    this.slider = slider;
-  }
+    /**
+     * Constructs the AlignSliderWithBar object instance.
+     *
+     * @param slider The Slider
+     * @param bar    The progress bar
+     */
+    public AlignSliderWithBar(JSlider slider, JProgressBar bar) {
+        this.progressBar = bar;
+        this.slider = slider;
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void stateChanged(ChangeEvent e) {
-    progressBar.setValue(slider.getValue());
-  }
+    /**
+     * @param e
+     */
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        progressBar.setValue(slider.getValue());
+    }
 
 }

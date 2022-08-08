@@ -8,5 +8,5 @@ package com.halcyoninae.setup;
  * @since 3.3
  */
 public interface SetupListener {
-  void updateStatus(SetupStatus e);
+    void updateStatus(SetupStatus e);
 }

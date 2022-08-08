@@ -25,27 +25,27 @@ import java.awt.*;
  * @since 3.3
  */
 public class MoreApps extends JFrame implements Runnable {
-  private final JScrollPane jsp;
+    private final JScrollPane jsp;
 
-  public MoreApps() {
-    setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
-    setAlwaysOnTop(true);
-    setUndecorated(true);
+    public MoreApps() {
+        setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
+        setAlwaysOnTop(true);
+        setUndecorated(true);
 
-    jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    setContentPane(jsp);
-  }
-
-  public void addComponent(JComponent ... c) {
-    for(JComponent cc : c) {
+        setContentPane(jsp);
     }
-  }
 
-  @Override
-  public void run() {
-    pack();
-    setLocationRelativeTo(Halcyon.bgt.getFrame());
-    setVisible(true);
-  }
+    public void addComponent(JComponent... c) {
+        for (JComponent cc : c) {
+        }
+    }
+
+    @Override
+    public void run() {
+        pack();
+        setLocationRelativeTo(Halcyon.bgt.getFrame());
+        setVisible(true);
+    }
 }

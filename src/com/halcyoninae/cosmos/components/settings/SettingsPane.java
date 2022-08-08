@@ -34,87 +34,87 @@ import java.awt.event.ActionListener;
  * @since 3.1
  */
 public class SettingsPane extends JFrame implements Runnable, ActionListener {
-  protected static final SettingsTabs[] tabs = {
-    new AudioSettings()
-  };
+    protected static final SettingsTabs[] tabs = {
+            new AudioSettings()
+    };
 
-  private final JTabbedPane pane;
-  private final JPanel aPane;
+    private final JTabbedPane pane;
+    private final JPanel aPane;
     private final JPanel buttons;
-  private final JButton close;
+    private final JButton close;
     private final JButton ok;
     private final JButton apply;
 
-  public SettingsPane() {
-    setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT + 60));
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    setFocusable(false);
-    setMinimumSize(getPreferredSize());
+    public SettingsPane() {
+        setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT + 60));
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setFocusable(false);
+        setMinimumSize(getPreferredSize());
 
-    setTitle("Halcyon Settings ~ exoad");
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setTitle("Halcyon Settings ~ exoad");
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
 
-    pane = new JTabbedPane();
-    pane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
-    pane.setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT));
-    pane.setMinimumSize(pane.getPreferredSize());
-    pane.setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
+        pane = new JTabbedPane();
+        pane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
+        pane.setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT));
+        pane.setMinimumSize(pane.getPreferredSize());
+        pane.setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
 
-    for (SettingsTabs tab : tabs) {
-      pane.addTab(tab.getTabName(), null, tab.getTabContent(), tab.getTabToolTip());
+        for (SettingsTabs tab : tabs) {
+            pane.addTab(tab.getTabName(), null, tab.getTabContent(), tab.getTabToolTip());
+        }
+
+        buttons = new JPanel();
+        buttons.setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, 30));
+        buttons.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+        close = new JButton("Close");
+        close.addActionListener(this);
+
+        ok = new JButton("OK");
+        ok.addActionListener(this);
+
+        apply = new JButton("Apply");
+        apply.addActionListener(this);
+
+        buttons.add(ok);
+        buttons.add(close);
+        buttons.add(apply);
+
+        aPane = new JPanel();
+        aPane.setPreferredSize(getPreferredSize());
+        aPane.setMinimumSize(getMinimumSize());
+        aPane.setLayout(new BorderLayout());
+
+        aPane.add(pane, BorderLayout.NORTH);
+        aPane.add(buttons, BorderLayout.SOUTH);
+
+        getContentPane().add(aPane);
     }
 
-    buttons = new JPanel();
-    buttons.setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, 30));
-    buttons.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-    close = new JButton("Close");
-    close.addActionListener(this);
-
-    ok = new JButton("OK");
-    ok.addActionListener(this);
-
-    apply = new JButton("Apply");
-    apply.addActionListener(this);
-
-    buttons.add(ok);
-    buttons.add(close);
-    buttons.add(apply);
-
-    aPane = new JPanel();
-    aPane.setPreferredSize(getPreferredSize());
-    aPane.setMinimumSize(getMinimumSize());
-    aPane.setLayout(new BorderLayout());
-
-    aPane.add(pane, BorderLayout.NORTH);
-    aPane.add(buttons, BorderLayout.SOUTH);
-
-    getContentPane().add(aPane);
-  }
-
-  private void ak() {
-    pack();
-    setVisible(true);
-  }
-
-  @Override
-  public void run() {
-    SwingUtilities.invokeLater(this::ak);
-  }
-
-
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if(e.getSource().equals(close)) {
-      dispose();
-    } else if (e.getSource().equals(ok)) {
-      ResourceFolder.pm.save();
-      dispose();
-    } else if (e.getSource().equals(apply)) {
-      ResourceFolder.pm.save();
+    private void ak() {
+        pack();
+        setVisible(true);
     }
-  }
+
+    @Override
+    public void run() {
+        SwingUtilities.invokeLater(this::ak);
+    }
+
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(close)) {
+            dispose();
+        } else if (e.getSource().equals(ok)) {
+            ResourceFolder.pm.save();
+            dispose();
+        } else if (e.getSource().equals(apply)) {
+            ResourceFolder.pm.save();
+        }
+    }
 }

@@ -26,13 +26,13 @@ import java.io.File;
 public class DirectoryValidator implements PropertyValidator {
 
 
-  /**
-   * @param propertyValue
-   * @return boolean
-   */
-  @Override
-  public boolean isValid(String propertyValue) {
-    return new File(propertyValue).isDirectory() && new File(propertyValue).exists();
-  }
+    /**
+     * @param propertyValue
+     * @return boolean
+     */
+    @Override
+    public boolean isValid(String propertyValue) {
+        return new File(propertyValue).isDirectory() && new File(propertyValue).exists();
+    }
 
 }

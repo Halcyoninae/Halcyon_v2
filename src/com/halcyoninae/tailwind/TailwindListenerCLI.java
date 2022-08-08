@@ -23,23 +23,23 @@ import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @since 3.1
  */
 public class TailwindListenerCLI
-    implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+        implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
 
-  /**
-   * @param status
-   */
-  @Override
-  public void statusUpdate(TailwindStatus status) {
-    Debugger.warn("TailwindPLAYER> " + status);
-  }
+    /**
+     * @param status
+     */
+    @Override
+    public void statusUpdate(TailwindStatus status) {
+        Debugger.warn("TailwindPLAYER> " + status);
+    }
 
 
-  /**
-   * @param event
-   */
-  @Override
-  public void genericUpdate(TailwindEvent event) {
-    Debugger.warn("TailwindPLAYER> " + event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-  }
+    /**
+     * @param event
+     */
+    @Override
+    public void genericUpdate(TailwindEvent event) {
+        Debugger.warn("TailwindPLAYER> " + event.getCurrentAudioInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+    }
 
 }

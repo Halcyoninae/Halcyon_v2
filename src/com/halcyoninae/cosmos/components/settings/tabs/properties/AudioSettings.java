@@ -29,59 +29,59 @@ import java.awt.*;
  * @since 3.2
  */
 public class AudioSettings extends JScrollPane implements SettingsTabs {
-  private final JPanel panel;
-  private int i = 0;
+    private final JPanel panel;
+    private int i = 0;
 
-  public AudioSettings() {
-    setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT));
-    setMinimumSize(getPreferredSize());
+    public AudioSettings() {
+        setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT));
+        setMinimumSize(getPreferredSize());
 
-    panel = new JPanel();
-    /*
-     * for(Property p : Property.filterProperties("audio",
-     * PropertyFilterType.STARTS_WITH, ProgramResourceManager.propertiesList)) {
-     * panel.add(SettingsUtil.getPropertyAsComponent(p, new
-     * Dimension(Manager.SETTINGS_MIN_WIDTH, 30)));
-     * }
-     */
-    String[] str = new String[ProgramResourceManager.propertiesList.length];
-    int i = 0;
-    for (Property p : Property.filterProperties("audio", PropertyFilterType.STARTS_WITH,
-        ProgramResourceManager.propertiesList)) {
-      if (p != null) {
-        str[i] = p.propertyName;
-        i++;
-      }
+        panel = new JPanel();
+        /*
+         * for(Property p : Property.filterProperties("audio",
+         * PropertyFilterType.STARTS_WITH, ProgramResourceManager.propertiesList)) {
+         * panel.add(SettingsUtil.getPropertyAsComponent(p, new
+         * Dimension(Manager.SETTINGS_MIN_WIDTH, 30)));
+         * }
+         */
+        String[] str = new String[ProgramResourceManager.propertiesList.length];
+        int i = 0;
+        for (Property p : Property.filterProperties("audio", PropertyFilterType.STARTS_WITH,
+                ProgramResourceManager.propertiesList)) {
+            if (p != null) {
+                str[i] = p.propertyName;
+                i++;
+            }
+        }
+        this.i++;
+        setViewportView(panel);
     }
-    this.i++;
-    setViewportView(panel);
-  }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getTabName() {
-    return "Audio";
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getTabName() {
+        return "Audio";
+    }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getTabToolTip() {
-    return "Audio Settings";
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getTabToolTip() {
+        return "Audio Settings";
+    }
 
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getTabContent() {
-    return this;
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getTabContent() {
+        return this;
+    }
 
 }

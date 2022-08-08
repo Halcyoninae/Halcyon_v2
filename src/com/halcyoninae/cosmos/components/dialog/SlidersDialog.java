@@ -26,75 +26,75 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class SlidersDialog extends JFrame implements Runnable, TailwindListener.StatusUpdateListener {
-  private final JTabbedPane pane;
-  private int bal = 50, pan = 50;
+    private final JTabbedPane pane;
+    private int bal = 50, pan = 50;
 
-  public SlidersDialog() {
-    pane = new JTabbedPane();
+    public SlidersDialog() {
+        pane = new JTabbedPane();
 
-    JPanel basicSlidersPane = new JPanel();
-    basicSlidersPane.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 15));
+        JPanel basicSlidersPane = new JPanel();
+        basicSlidersPane.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 15));
 
-    JSlider balanceSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, bal);
-    balanceSlider.setPaintTicks(true);
-    balanceSlider.setSnapToTicks(true);
-    balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
-    balanceSlider.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        if (Global.player.getStream().getControls() != null) {
-          Global.player.getStream().setBalance(balanceSlider.getValue());
-        }
+        JSlider balanceSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, bal);
+        balanceSlider.setPaintTicks(true);
+        balanceSlider.setSnapToTicks(true);
         balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
-        bal = balanceSlider.getValue();
-      }
-    });
+        balanceSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (Global.player.getStream().getControls() != null) {
+                    Global.player.getStream().setBalance(balanceSlider.getValue());
+                }
+                balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
+                bal = balanceSlider.getValue();
+            }
+        });
 
-    JSlider panSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, pan);
-    panSlider.setMajorTickSpacing(10);
-    panSlider.setMinorTickSpacing(100);
-    panSlider.setSnapToTicks(true);
-    panSlider.setPaintTicks(true);
-    panSlider.setToolTipText("Pan Slider: " + panSlider.getValue());
-    panSlider.addChangeListener(new ChangeListener() {
-      @Override
-      public void stateChanged(ChangeEvent e) {
-        if (Global.player.getStream().getControls() != null) {
-          Global.player.getStream().setPan(panSlider.getValue());
-        }
-        panSlider.setToolTipText("Pan Slider: " + panSlider.getValue() + " | "
-            + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
-        pan = panSlider.getValue();
-      }
-    });
+        JSlider panSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, pan);
+        panSlider.setMajorTickSpacing(10);
+        panSlider.setMinorTickSpacing(100);
+        panSlider.setSnapToTicks(true);
+        panSlider.setPaintTicks(true);
+        panSlider.setToolTipText("Pan Slider: " + panSlider.getValue());
+        panSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                if (Global.player.getStream().getControls() != null) {
+                    Global.player.getStream().setPan(panSlider.getValue());
+                }
+                panSlider.setToolTipText("Pan Slider: " + panSlider.getValue() + " | "
+                        + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
+                pan = panSlider.getValue();
+            }
+        });
 
-    basicSlidersPane.add(balanceSlider);
-    basicSlidersPane.add(panSlider);
+        basicSlidersPane.add(balanceSlider);
+        basicSlidersPane.add(panSlider);
 
-    pane.addTab("Basic Sliders", basicSlidersPane);
+        pane.addTab("Basic Sliders", basicSlidersPane);
 
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setTitle("Sliders");
-    setPreferredSize(new Dimension(300, 350));
-    setAutoRequestFocus(false);
-    getContentPane().add(pane);
-  }
-
-  @Override
-  public void run() {
-    pack();
-    setVisible(true);
-  }
-
-
-  /**
-   * @param status
-   */
-  @Override
-  public void statusUpdate(TailwindStatus status) {
-    if (status.equals(TailwindStatus.OPEN)) {
-      Global.player.getStream().setBalance(bal);
-      Global.player.getStream().setPan(pan);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setTitle("Sliders");
+        setPreferredSize(new Dimension(300, 350));
+        setAutoRequestFocus(false);
+        getContentPane().add(pane);
     }
-  }
+
+    @Override
+    public void run() {
+        pack();
+        setVisible(true);
+    }
+
+
+    /**
+     * @param status
+     */
+    @Override
+    public void statusUpdate(TailwindStatus status) {
+        if (status.equals(TailwindStatus.OPEN)) {
+            Global.player.getStream().setBalance(bal);
+            Global.player.getStream().setPan(pan);
+        }
+    }
 }

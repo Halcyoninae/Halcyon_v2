@@ -20,6 +20,6 @@ package com.halcyoninae.cosmos.components.waveform;
  * @since 3.2
  */
 public interface WaveFormManager {
-  int MIN_WIDTH = 460;
-  int MIN_HEIGHT = 250;
+    int MIN_WIDTH = 460;
+    int MIN_HEIGHT = 250;
 }

@@ -22,29 +22,29 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
  * @since 3.2
  */
 public class NumericRangeValidator implements PropertyValidator {
-  private final double step;
+    private final double step;
     private final double min;
     private final double max;
 
-  public NumericRangeValidator(double min, double max, double step) {
-    this.min = min;
-    this.max = max;
-    this.step = step;
-  }
-
-
-  /**
-   * @param propertyValue
-   * @return boolean
-   */
-  @Override
-  public boolean isValid(String propertyValue) {
-    try {
-      double value = Double.parseDouble(propertyValue);
-      return value >= min && value <= max && value % step == 0;
-    } catch (NumberFormatException e) {
-      return false;
+    public NumericRangeValidator(double min, double max, double step) {
+        this.min = min;
+        this.max = max;
+        this.step = step;
     }
-  }
+
+
+    /**
+     * @param propertyValue
+     * @return boolean
+     */
+    @Override
+    public boolean isValid(String propertyValue) {
+        try {
+            double value = Double.parseDouble(propertyValue);
+            return value >= min && value <= max && value % step == 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
 }

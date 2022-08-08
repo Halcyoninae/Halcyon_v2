@@ -23,35 +23,35 @@ package com.halcyoninae.halcyon.global;
  * @since 3.0
  */
 public class Pair<T, E> {
-  public T first;
-  public E second;
+    public T first;
+    public E second;
 
-  /**
-   * Constructs the Pair object
-   *
-   * @param first  First element of T type (generic)
-   * @param second Second element of E type (generic)
-   */
-  public Pair(T first, E second) {
-    this.first = first;
-    this.second = second;
-  }
+    /**
+     * Constructs the Pair object
+     *
+     * @param first  First element of T type (generic)
+     * @param second Second element of E type (generic)
+     */
+    public Pair(T first, E second) {
+        this.first = first;
+        this.second = second;
+    }
 
-  /**
-   * Retrieves the first element
-   *
-   * @return The first element returned as the original T type (generic)
-   */
-  public T getFirst() {
-    return first;
-  }
+    /**
+     * Retrieves the first element
+     *
+     * @return The first element returned as the original T type (generic)
+     */
+    public T getFirst() {
+        return first;
+    }
 
-  /**
-   * Retrieves the second element
-   *
-   * @return The second element returned as the original E type (generic)
-   */
-  public E getSecond() {
-    return second;
-  }
+    /**
+     * Retrieves the second element
+     *
+     * @return The second element returned as the original E type (generic)
+     */
+    public E getSecond() {
+        return second;
+    }
 }

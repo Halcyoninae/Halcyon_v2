@@ -23,64 +23,64 @@ package com.halcyoninae.halcyon.connections.properties;
  * @since 3.1
  */
 public class Property {
-  public String propertyName = "", defaultProperty = "";
-  public PropertyValidator pr;
-  public String[] commonProperties;
+    public String propertyName = "", defaultProperty = "";
+    public PropertyValidator pr;
+    public String[] commonProperties;
 
-  public Property(String propertyName, String defaultProperty, PropertyValidator pr, String ... commonProperties) {
-    this.propertyName = propertyName;
-    this.defaultProperty = defaultProperty;
-    this.pr = pr;
-    this.commonProperties = commonProperties;
-  }
-
-  public enum PropertyFilterType {
-    STARTS_WITH, ENDS_WITH, CONTAINS, EQUALS
-  }
-
-  /**
-   * A method that filters a property based on the filter type.
-   * @param nameTag The name tag to filter
-   * @param type  The filter type
-   * @param properties The properties to filter
-   * @return An array of the allowed filtered content
-   *
-   * @see Property.PropertyFilterType
-   * @since 3.2
-   */
-  public static Property[] filterProperties(String nameTag, PropertyFilterType type, Property ... properties) {
-    Property[] filteredProperties = new Property[properties.length];
-    int i = 0;
-    // use separate to reduce overhead for constantly checking during looping | might change later ;P
-    if(type.equals(PropertyFilterType.STARTS_WITH)) {
-      for(Property property : properties) {
-        if(property.propertyName.startsWith(nameTag)) {
-          filteredProperties[i] = property;
-          i++;
-        }
-      }
-    } else if(type.equals(PropertyFilterType.ENDS_WITH)) {
-      for(Property property : properties) {
-        if(property.propertyName.endsWith(nameTag)) {
-          filteredProperties[i] = property;
-          i++;
-        }
-      }
-    } else if(type.equals(PropertyFilterType.CONTAINS)) {
-      for(Property property : properties) {
-        if(property.propertyName.contains(nameTag)) {
-          filteredProperties[i] = property;
-          i++;
-        }
-      }
-    } else if(type.equals(PropertyFilterType.EQUALS)) {
-      for(Property property : properties) {
-        if(property.propertyName.equals(nameTag)) {
-          filteredProperties[i] = property;
-          i++;
-        }
-      }
+    public Property(String propertyName, String defaultProperty, PropertyValidator pr, String... commonProperties) {
+        this.propertyName = propertyName;
+        this.defaultProperty = defaultProperty;
+        this.pr = pr;
+        this.commonProperties = commonProperties;
     }
-    return filteredProperties;
-  }
+
+    /**
+     * A method that filters a property based on the filter type.
+     *
+     * @param nameTag    The name tag to filter
+     * @param type       The filter type
+     * @param properties The properties to filter
+     * @return An array of the allowed filtered content
+     * @see Property.PropertyFilterType
+     * @since 3.2
+     */
+    public static Property[] filterProperties(String nameTag, PropertyFilterType type, Property... properties) {
+        Property[] filteredProperties = new Property[properties.length];
+        int i = 0;
+        // use separate to reduce overhead for constantly checking during looping | might change later ;P
+        if (type.equals(PropertyFilterType.STARTS_WITH)) {
+            for (Property property : properties) {
+                if (property.propertyName.startsWith(nameTag)) {
+                    filteredProperties[i] = property;
+                    i++;
+                }
+            }
+        } else if (type.equals(PropertyFilterType.ENDS_WITH)) {
+            for (Property property : properties) {
+                if (property.propertyName.endsWith(nameTag)) {
+                    filteredProperties[i] = property;
+                    i++;
+                }
+            }
+        } else if (type.equals(PropertyFilterType.CONTAINS)) {
+            for (Property property : properties) {
+                if (property.propertyName.contains(nameTag)) {
+                    filteredProperties[i] = property;
+                    i++;
+                }
+            }
+        } else if (type.equals(PropertyFilterType.EQUALS)) {
+            for (Property property : properties) {
+                if (property.propertyName.equals(nameTag)) {
+                    filteredProperties[i] = property;
+                    i++;
+                }
+            }
+        }
+        return filteredProperties;
+    }
+
+    public enum PropertyFilterType {
+        STARTS_WITH, ENDS_WITH, CONTAINS, EQUALS
+    }
 }

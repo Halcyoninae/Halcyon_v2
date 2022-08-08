@@ -23,30 +23,30 @@ import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @since 3.2
  */
 public class TailwindDefaultListener
-    implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
-  private final TailwindPlayer player;
+        implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+    private final TailwindPlayer player;
 
-  public TailwindDefaultListener(TailwindPlayer player) {
-    this.player = player;
-  }
-
-  /**
-   * @param status
-   */
-  @Override
-  public void statusUpdate(TailwindStatus status) {
-    if (status.equals(TailwindStatus.END)) {
-      player.close();
+    public TailwindDefaultListener(TailwindPlayer player) {
+        this.player = player;
     }
 
-    Debugger.info(status);
-  }
+    /**
+     * @param status
+     */
+    @Override
+    public void statusUpdate(TailwindStatus status) {
+        if (status.equals(TailwindStatus.END)) {
+            player.close();
+        }
 
-  /**
-   * @param event
-   */
-  @Override
-  public void genericUpdate(TailwindEvent event) {
-  }
+        Debugger.info(status);
+    }
+
+    /**
+     * @param event
+     */
+    @Override
+    public void genericUpdate(TailwindEvent event) {
+    }
 
 }

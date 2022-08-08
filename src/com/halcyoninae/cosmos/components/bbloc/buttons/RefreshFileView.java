@@ -32,36 +32,36 @@ import java.awt.event.ActionEvent;
  */
 public class RefreshFileView extends JButton implements BBlocButton {
 
-  public RefreshFileView() {
-    super(new ImageIcon(DeImage
-        .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16, 16)));
-    setRolloverIcon(new ImageIcon(DeImage
-        .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
-            16)));
-    setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
-    setOpaque(true);
-    setBackground(null);
-    setBorder(null);
-    setDoubleBuffered(true);
-    setContentAreaFilled(false);
-    addActionListener(this);
-  }
+    public RefreshFileView() {
+        super(new ImageIcon(DeImage
+                .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16, 16)));
+        setRolloverIcon(new ImageIcon(DeImage
+                .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
+                        16)));
+        setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
+        setOpaque(true);
+        setBackground(null);
+        setBorder(null);
+        setDoubleBuffered(true);
+        setContentAreaFilled(false);
+        addActionListener(this);
+    }
 
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    Global.bp.mastRevalidate();
-  }
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        Global.bp.mastRevalidate();
+    }
 }

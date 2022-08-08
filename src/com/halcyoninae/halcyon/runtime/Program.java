@@ -38,126 +38,125 @@ import java.util.concurrent.Executors;
  * @since 3.1
  */
 public class Program {
-  private static ExecutorService executorService;
+    public static MoosicCache cacher = new MoosicCache();
+    private static ExecutorService executorService;
 
-  public static MoosicCache cacher = new MoosicCache();
+    /**
+     * Different from Debugger's log method, this method is meant for
+     * printing out messages to the console, however can only
+     * print out a string.
+     * <p>
+     * Asynchronous println t the console.
+     *
+     * @param e A string
+     */
+    private static void println(String e) {
+        if (executorService == null) {
+            executorService = Executors.newCachedThreadPool(
+                    r -> {
+                        Thread t = new Thread(r);
+                        t.setDaemon(true);
+                        return t;
+                    });
+            executorService.submit(
+                    new Runnable() {
+                        @Override
+                        public synchronized void run() {
+                            while (true) {
+                                try {
+                                    wait();
+                                    System.err.println(e);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    });
+        }
+    }
 
-  /**
-   * Different from Debugger's log method, this method is meant for
-   * printing out messages to the console, however can only
-   * print out a string.
-   *
-   * Asynchronous println t the console.
-   *
-   * @param e A string
-   */
-  private static void println(String e) {
-    if (executorService == null) {
-      executorService = Executors.newCachedThreadPool(
-          r -> {
-            Thread t = new Thread(r);
-            t.setDaemon(true);
-            return t;
-          });
-      executorService.submit(
-          new Runnable() {
-            @Override
-            public synchronized void run() {
-              while (true) {
-                try {
-                  wait();
-                  System.err.println(e);
-                } catch (InterruptedException e) {
-                  e.printStackTrace();
+    /**
+     * Writes a dump file to the bin folder.
+     * <p>
+     * This is not a serialization byte stream!!!
+     * <p>
+     * This method is typically used for debugging and coverage
+     * telemetry stuffs (idk :/).
+     *
+     * @param content The Objects to dump or content.
+     */
+    public static void createDump(Object... content) {
+        StringBuilder sb = new StringBuilder();
+        for (Object o : content) {
+            sb.append(o.toString());
+        }
+        String s = sb.toString();
+        File f = new File(
+                ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/dump_" + System.currentTimeMillis() + "_.halcyon");
+        try {
+            FileWriter fw = new FileWriter(f);
+            fw.write(s);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void forceSaveUserConf() {
+        cacher.forceSave();
+    }
+
+    /**
+     * @return File[] Returns all of the liked tracks.
+     */
+    public static File[] fetchLikedTracks() {
+        if (cacher.getLikedTracks().size() == 0) {
+            return new File[0];
+        } else {
+            Set<File> list = new HashSet<>();
+            for (String s : cacher.getLikedTracks()) {
+                File f = new File(s);
+                if (f.isFile() && f.exists()) {
+                    list.add(f);
                 }
-              }
             }
-          });
-    }
-  }
-
-  /**
-   * Writes a dump file to the bin folder.
-   *
-   * This is not a serialization byte stream!!!
-   *
-   * This method is typically used for debugging and coverage
-   * telemetry stuffs (idk :/).
-   *
-   * @param content The Objects to dump or content.
-   */
-  public static void createDump(Object... content) {
-    StringBuilder sb = new StringBuilder();
-    for (Object o : content) {
-      sb.append(o.toString());
-    }
-    String s = sb.toString();
-    File f = new File(
-        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/dump_" + System.currentTimeMillis() + "_.halcyon");
-    try {
-      FileWriter fw = new FileWriter(f);
-      fw.write(s);
-      fw.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  public static void forceSaveUserConf() {
-    cacher.forceSave();
-  }
-
-  /**
-   * @return File[] Returns all of the liked tracks.
-   */
-  public static File[] fetchLikedTracks() {
-    if (cacher.getLikedTracks().size() == 0) {
-      return new File[0];
-    } else {
-      Set<File> list = new HashSet<>();
-      for (String s : cacher.getLikedTracks()) {
-        File f = new File(s);
-        if (f.isFile() && f.exists()) {
-          list.add(f);
+            return list.toArray(new File[list.size()]);
         }
-      }
-      return list.toArray(new File[list.size()]);
     }
-  }
 
-  /**
-   * @return FolderInfo[] Returns all concurrently stored playlists in the running
-   *         instance.
-   */
-  public static PhysicalFolder[] fetchSavedPlayLists() {
-    if (cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
-      return new PhysicalFolder[0];
-    } else {
-      List<PhysicalFolder> list = new ArrayList<>();
-      for (String s : cacher.getSavedPlaylists()) {
-        File f = new File(s);
-        if (f.isDirectory() && f.exists()) {
-          list.add(new PhysicalFolder(f.getAbsolutePath()));
+    /**
+     * @return FolderInfo[] Returns all concurrently stored playlists in the running
+     * instance.
+     */
+    public static PhysicalFolder[] fetchSavedPlayLists() {
+        if (cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
+            return new PhysicalFolder[0];
+        } else {
+            List<PhysicalFolder> list = new ArrayList<>();
+            for (String s : cacher.getSavedPlaylists()) {
+                File f = new File(s);
+                if (f.isDirectory() && f.exists()) {
+                    list.add(new PhysicalFolder(f.getAbsolutePath()));
+                }
+            }
+            return list.toArray(new PhysicalFolder[list.size()]);
         }
-      }
-      return list.toArray(new PhysicalFolder[list.size()]);
     }
-  }
 
-  /**
-   * This main function runs the daemon for system logging
-   *
-   * This is provided under an executor service that runs
-   * async to the main thread in order to log everything made by the
-   * the program.
-   *
-   * This async mechanism is called natively.
-   *
-   * @param args Initial items to log
-   */
-  public static void main(String... args) {
-    for (String arg : args) {
-      println(arg);
+    /**
+     * This main function runs the daemon for system logging
+     * <p>
+     * This is provided under an executor service that runs
+     * async to the main thread in order to log everything made by the
+     * the program.
+     * <p>
+     * This async mechanism is called natively.
+     *
+     * @param args Initial items to log
+     */
+    public static void main(String... args) {
+        for (String arg : args) {
+            println(arg);
+        }
     }
-  }
 }

@@ -25,33 +25,33 @@ import java.util.Random;
  * @since 2.0
  */
 public final class ColorTool {
-  private ColorTool() {
-  }
-
-  /**
-   * Given a hex, it will return a {@link java.awt.Color} Object
-   * representing the color.
-   *
-   * @param hex The hex to convert
-   * @return Color The color object
-   */
-  public static Color hexToRGBA(String hex) {
-    if (!hex.startsWith("#")) {
-      hex = "#" + hex;
+    private ColorTool() {
     }
-    return new Color(
-        Integer.valueOf(hex.substring(1, 3), 16),
-        Integer.valueOf(hex.substring(3, 5), 16),
-        Integer.valueOf(hex.substring(5, 7), 16));
-  }
 
-  /**
-   * Returns a random color
-   *
-   * @return A color object (int8)
-   */
-  public static Color rndColor() {
-    Random r = new Random();
-    return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
-  }
+    /**
+     * Given a hex, it will return a {@link java.awt.Color} Object
+     * representing the color.
+     *
+     * @param hex The hex to convert
+     * @return Color The color object
+     */
+    public static Color hexToRGBA(String hex) {
+        if (!hex.startsWith("#")) {
+            hex = "#" + hex;
+        }
+        return new Color(
+                Integer.valueOf(hex.substring(1, 3), 16),
+                Integer.valueOf(hex.substring(3, 5), 16),
+                Integer.valueOf(hex.substring(5, 7), 16));
+    }
+
+    /**
+     * Returns a random color
+     *
+     * @return A color object (int8)
+     */
+    public static Color rndColor() {
+        Random r = new Random();
+        return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
+    }
 }

@@ -38,10 +38,10 @@ import java.util.*;
 /**
  * Represents a Pane containing a list of files for only
  * one directory. It will not contain any sub-directories.
- *
+ * <p>
  * This file list can contain any file type, but it will be decided
  * beforehand.
- *
+ * <p>
  * This mechanism suggested by FEATURES#8 and deprecated
  * the original tabs mechanism of 3.0.
  *
@@ -49,279 +49,274 @@ import java.util.*;
  * @since 3.1
  */
 public class FileList extends JScrollPane implements TabTree {
-  private final JTree tree;
+    /// FileView Config START
+    public static final String FILEVIEW_ICON_FOLDER_OPEN = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+    public static final String FILEVIEW_ICON_FOLDER_CLOSED = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+    public static final String FILEVIEW_ICON_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf.png";
+    public static final String FILEVIEW_DEFAULT_FOLDER_ICON = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+    public static final String FILEVIEW_ICON_LIKED_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf_like.png";
+    public static final int FILEVIEW_MIN_WIDTH = Manager.MIN_WIDTH - 70;
+    public static final int FILEVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT - 50 / 2;
+    public static final int FILEVIEW_MAX_WIDTH = Manager.MAX_WIDTH - 50;
+    public static final int FILEVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT + 50 / 2 - 40;
+    private final JTree tree;
+    /**
+     * Represents a list of collected files throughout the
+     * current selected folder for this instance of a FileList.
+     * <p>
+     * Parameter 1: {@link java.io.File} A file object representing a file in the
+     * folder.
+     * Parameter 2: {@link javax.swing.tree.DefaultMutableTreeNode} The node
+     * instance of the file as represented on the JTree.
+     */
+    private final Map<File, DefaultMutableTreeNode> fileMap;
+    private final transient PhysicalFolder info;
+    private final DefaultMutableTreeNode root;
+    public boolean isVirtual;
+    /// FileView Config END
 
-  /**
-   * Represents a list of collected files throughout the
-   * current selected folder for this instance of a FileList.
-   *
-   * Parameter 1: {@link java.io.File} A file object representing a file in the
-   * folder.
-   * Parameter 2: {@link javax.swing.tree.DefaultMutableTreeNode} The node
-   * instance of the file as represented on the JTree.
-   */
-  private final Map<File, DefaultMutableTreeNode> fileMap;
-
-  private final transient PhysicalFolder info;
-
-  private final DefaultMutableTreeNode root;
-
-  public boolean isVirtual;
-
-  /// FileView Config START
-  public static final String FILEVIEW_ICON_FOLDER_OPEN = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  public static final String FILEVIEW_ICON_FOLDER_CLOSED = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  public static final String FILEVIEW_ICON_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf.png";
-  public static final String FILEVIEW_DEFAULT_FOLDER_ICON = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-  public static final String FILEVIEW_ICON_LIKED_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf_like.png";
-  public static final int FILEVIEW_MIN_WIDTH = Manager.MIN_WIDTH - 70;
-  public static final int FILEVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT - 50 / 2;
-  public static final int FILEVIEW_MAX_WIDTH = Manager.MAX_WIDTH - 50;
-  public static final int FILEVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT + 50 / 2 - 40;
-  /// FileView Config END
-
-  public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString,
-      RightClickHideItemListener hideStringTask) {
-    super();
-    this.info = info;
-    fileMap = new HashMap<>();
-    root = new DefaultMutableTreeNode(info.getName());
-    isVirtual = info instanceof VirtualFolder;
-    setAutoscrolls(true);
-    setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-    setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
-    setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
-    setBorder(null);
-    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-        fileMap.put(f, node);
-        root.add(node);
-      }
-    }
-
-    tree = new JTree(root);
-    tree.setRootVisible(true);
-    tree.setShowsRootHandles(true);
-    tree.setExpandsSelectedPaths(true);
-    tree.setEditable(false);
-    tree.setRequestFocusEnabled(false);
-    tree.setScrollsOnExpand(true);
-    tree.setAutoscrolls(true);
-    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-
-    DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    renderer.setClosedIcon(DeImage.resizeImage((ImageIcon) closed, 16, 16));
-    renderer.setOpenIcon(DeImage.resizeImage((ImageIcon) open, 16, 16));
-    renderer.setLeafIcon(DeImage.resizeImage((ImageIcon) leaf, 16, 16));
-
-    tree.addMouseListener(new FVRightClick(this, rightClickHideString, hideStringTask));
-    tree.setCellRenderer(renderer);
-
-    getViewport().add(tree);
-  }
-
-  public FileList(PhysicalFolder info) {
-    this.info = info;
-    fileMap = new HashMap<>();
-    root = new DefaultMutableTreeNode(info.getName());
-    isVirtual = info instanceof VirtualFolder;
-    setAutoscrolls(true);
-    setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-    setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
-    setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
-
-    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-        fileMap.put(f, node);
-        root.add(node);
-        Debugger.unsafeLog("Added file: " + f.getAbsolutePath());
-      }
-    }
-
-    tree = new JTree(root);
-    tree.setRootVisible(true);
-    tree.setShowsRootHandles(true);
-    tree.setExpandsSelectedPaths(true);
-    tree.setScrollsOnExpand(true);
-    tree.setEditable(false);
-    tree.setRequestFocusEnabled(false);
-    tree.setScrollsOnExpand(true);
-    tree.setAutoscrolls(true);
-    tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-    setBorder(null);
-    DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    ImageIcon closedIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
-    ImageIcon openIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
-    ImageIcon leafIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FILE);
-    renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
-    renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
-    renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));
-
-    tree.addMouseListener(new FVRightClick(this));
-    tree.setCellRenderer(renderer);
-
-    getViewport().add(tree);
-  }
-
-  /**
-   * @return The JTree representing this viewport.
-   */
-  public JTree getTree() {
-    return tree;
-  }
-
-  /**
-   * @return A FolderInfo object representing this FileList
-   */
-  public PhysicalFolder getFolderInfo() {
-    return info;
-  }
-
-  /**
-   * @return A Node that represents the root node.
-   */
-  public DefaultMutableTreeNode getRoot() {
-    return root;
-  }
-
-  /**
-   * @return Returns the default file map with each File object having a node.
-   */
-  public Map<File, DefaultMutableTreeNode> getFileMap() {
-    return fileMap;
-  }
-
-  /**
-   * This function facilitates reloading the current
-   * folder:
-   *
-   * 1. If a file doesn't exist anymore, it will be removed
-   * 2. If a new file has been added, it will be added into the Tree
-   *
-   * The detection on if a folder exists or not is up to the parent
-   * BottomPane {@link com.halcyoninae.cosmos.components.bottompane.BottomPane}.
-   */
-  public void revalidateFiles() {
-    for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-      if (f != null && !fileMap.containsKey(f) && !Program.cacher.isExcluded(f.getAbsolutePath())) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-        fileMap.put(f, node);
-        root.add(node);
-        ((DefaultTreeModel) tree.getModel()).reload();
-      }
-    }
-    List<File> toRemove = new ArrayList<>();
-    for (File f : fileMap.keySet()) {
-      if (!f.exists() || !f.isFile() || Program.cacher.isExcluded(f.getAbsolutePath())) {
-        ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
-        toRemove.add(f);
-      }
-    }
-    for (File f : toRemove) {
-      fileMap.remove(f);
-    }
-  }
-
-  /**
-   * @param nodeName
-   */
-  @Override
-  public void remove(String nodeName) {
-    try {
-      for (File f : fileMap.keySet()) {
-        if (f.getName().equals(nodeName)) {
-          DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-          model.removeNodeFromParent(fileMap.get(f));
-          model.reload();
-          fileMap.remove(f);
+    public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString,
+                    RightClickHideItemListener hideStringTask) {
+        super();
+        this.info = info;
+        fileMap = new HashMap<>();
+        root = new DefaultMutableTreeNode(info.getName());
+        isVirtual = info instanceof VirtualFolder;
+        setAutoscrolls(true);
+        setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+        setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+        setBorder(null);
+        for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+            if (f != null) {
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+                fileMap.put(f, node);
+                root.add(node);
+            }
         }
-      }
-    } catch (IllegalArgumentException e) {
-      // IGNORE
+
+        tree = new JTree(root);
+        tree.setRootVisible(true);
+        tree.setShowsRootHandles(true);
+        tree.setExpandsSelectedPaths(true);
+        tree.setEditable(false);
+        tree.setRequestFocusEnabled(false);
+        tree.setScrollsOnExpand(true);
+        tree.setAutoscrolls(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+        renderer.setClosedIcon(DeImage.resizeImage((ImageIcon) closed, 16, 16));
+        renderer.setOpenIcon(DeImage.resizeImage((ImageIcon) open, 16, 16));
+        renderer.setLeafIcon(DeImage.resizeImage((ImageIcon) leaf, 16, 16));
+
+        tree.addMouseListener(new FVRightClick(this, rightClickHideString, hideStringTask));
+        tree.setCellRenderer(renderer);
+
+        getViewport().add(tree);
     }
-  }
 
-  /**
-   * @param node
-   * @return String
-   */
-  @Override
-  public String getSelectedNode(DefaultMutableTreeNode node) {
-    for (File f : fileMap.keySet()) {
-      if (fileMap.get(f).equals(node)) {
-        return f.getAbsolutePath();
-      }
+    public FileList(PhysicalFolder info) {
+        this.info = info;
+        fileMap = new HashMap<>();
+        root = new DefaultMutableTreeNode(info.getName());
+        isVirtual = info instanceof VirtualFolder;
+        setAutoscrolls(true);
+        setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+        setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+
+        for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+            if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+                fileMap.put(f, node);
+                root.add(node);
+                Debugger.unsafeLog("Added file: " + f.getAbsolutePath());
+            }
+        }
+
+        tree = new JTree(root);
+        tree.setRootVisible(true);
+        tree.setShowsRootHandles(true);
+        tree.setExpandsSelectedPaths(true);
+        tree.setScrollsOnExpand(true);
+        tree.setEditable(false);
+        tree.setRequestFocusEnabled(false);
+        tree.setScrollsOnExpand(true);
+        tree.setAutoscrolls(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        setBorder(null);
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+        ImageIcon closedIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
+        ImageIcon openIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
+        ImageIcon leafIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FILE);
+        renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
+        renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
+        renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));
+
+        tree.addMouseListener(new FVRightClick(this));
+        tree.setCellRenderer(renderer);
+
+        getViewport().add(tree);
     }
-    return "";
-  }
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getPath() {
-    return info.getAbsolutePath();
-  }
+    /**
+     * @return The JTree representing this viewport.
+     */
+    public JTree getTree() {
+        return tree;
+    }
 
-  /**
-   * @return boolean
-   */
-  @Override
-  public boolean isVirtual() {
-    return isVirtual;
-  }
+    /**
+     * @return A FolderInfo object representing this FileList
+     */
+    public PhysicalFolder getFolderInfo() {
+        return info;
+    }
 
-  @Override
-  public void sort(TabTreeSortMethod e) {
-    synchronized (fileMap) {
-      if (e.equals(TabTreeSortMethod.ALPHABETICAL)) {
-        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+    /**
+     * @return A Node that represents the root node.
+     */
+    public DefaultMutableTreeNode getRoot() {
+        return root;
+    }
+
+    /**
+     * @return Returns the default file map with each File object having a node.
+     */
+    public Map<File, DefaultMutableTreeNode> getFileMap() {
+        return fileMap;
+    }
+
+    /**
+     * This function facilitates reloading the current
+     * folder:
+     * <p>
+     * 1. If a file doesn't exist anymore, it will be removed
+     * 2. If a new file has been added, it will be added into the Tree
+     * <p>
+     * The detection on if a folder exists or not is up to the parent
+     * BottomPane {@link com.halcyoninae.cosmos.components.bottompane.BottomPane}.
+     */
+    public void revalidateFiles() {
+        for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
+            if (f != null && !fileMap.containsKey(f) && !Program.cacher.isExcluded(f.getAbsolutePath())) {
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+                fileMap.put(f, node);
+                root.add(node);
+                ((DefaultTreeModel) tree.getModel()).reload();
+            }
+        }
+        List<File> toRemove = new ArrayList<>();
         for (File f : fileMap.keySet()) {
-          nodes.add(fileMap.get(f));
+            if (!f.exists() || !f.isFile() || Program.cacher.isExcluded(f.getAbsolutePath())) {
+                ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
+                toRemove.add(f);
+            }
         }
-        Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
-          @Override
-          public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
-            return ((String) o1.getUserObject()).compareTo(((String) o2.getUserObject()));
-          }
-        });
-        for (DefaultMutableTreeNode node : nodes) {
-          root.remove(node);
-          root.add(node);
+        for (File f : toRemove) {
+            fileMap.remove(f);
         }
-        ((DefaultTreeModel) tree.getModel()).reload();
-      } else if (e.equals(TabTreeSortMethod.REV_ALPHABETICAL)) {
-        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
-        for (File f : fileMap.keySet()) {
-          nodes.add(fileMap.get(f));
-        }
-        Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
-          @Override
-          public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
-            return ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject()));
-          }
-        });
-        for (DefaultMutableTreeNode node : nodes) {
-          root.remove(node);
-          root.add(node);
-        }
-        ((DefaultTreeModel) tree.getModel()).reload();
-      } else if (e.equals(TabTreeSortMethod.SHUFFLE)) {
-        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
-        for (File f : fileMap.keySet()) {
-          nodes.add(fileMap.get(f));
-        }
-        Collections.shuffle(nodes);
-        for (DefaultMutableTreeNode node : nodes) {
-          root.remove(node);
-          root.add(node);
-        }
-        ((DefaultTreeModel) tree.getModel()).reload();
-      }
     }
-  }
+
+    /**
+     * @param nodeName
+     */
+    @Override
+    public void remove(String nodeName) {
+        try {
+            for (File f : fileMap.keySet()) {
+                if (f.getName().equals(nodeName)) {
+                    DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
+                    model.removeNodeFromParent(fileMap.get(f));
+                    model.reload();
+                    fileMap.remove(f);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            // IGNORE
+        }
+    }
+
+    /**
+     * @param node
+     * @return String
+     */
+    @Override
+    public String getSelectedNode(DefaultMutableTreeNode node) {
+        for (File f : fileMap.keySet()) {
+            if (fileMap.get(f).equals(node)) {
+                return f.getAbsolutePath();
+            }
+        }
+        return "";
+    }
+
+    /**
+     * @return String
+     */
+    @Override
+    public String getPath() {
+        return info.getAbsolutePath();
+    }
+
+    /**
+     * @return boolean
+     */
+    @Override
+    public boolean isVirtual() {
+        return isVirtual;
+    }
+
+    @Override
+    public void sort(TabTreeSortMethod e) {
+        synchronized (fileMap) {
+            if (e.equals(TabTreeSortMethod.ALPHABETICAL)) {
+                List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+                for (File f : fileMap.keySet()) {
+                    nodes.add(fileMap.get(f));
+                }
+                Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
+                    @Override
+                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
+                        return ((String) o1.getUserObject()).compareTo(((String) o2.getUserObject()));
+                    }
+                });
+                for (DefaultMutableTreeNode node : nodes) {
+                    root.remove(node);
+                    root.add(node);
+                }
+                ((DefaultTreeModel) tree.getModel()).reload();
+            } else if (e.equals(TabTreeSortMethod.REV_ALPHABETICAL)) {
+                List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+                for (File f : fileMap.keySet()) {
+                    nodes.add(fileMap.get(f));
+                }
+                Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
+                    @Override
+                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
+                        return ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject()));
+                    }
+                });
+                for (DefaultMutableTreeNode node : nodes) {
+                    root.remove(node);
+                    root.add(node);
+                }
+                ((DefaultTreeModel) tree.getModel()).reload();
+            } else if (e.equals(TabTreeSortMethod.SHUFFLE)) {
+                List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+                for (File f : fileMap.keySet()) {
+                    nodes.add(fileMap.get(f));
+                }
+                Collections.shuffle(nodes);
+                for (DefaultMutableTreeNode node : nodes) {
+                    root.remove(node);
+                    root.add(node);
+                }
+                ((DefaultTreeModel) tree.getModel()).reload();
+            }
+        }
+    }
 }

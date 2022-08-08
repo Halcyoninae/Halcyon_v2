@@ -9,19 +9,19 @@ import java.util.Map;
 
 public class TestXML {
 
-  /**
-   * @param args
-   * @throws Exception
-   */
-  public static void main(String ... args) throws Exception {
-    Cacher cacher = new Cacher(new File("/home/jackm/Code/mp4j-test/src/com/test/test.halcyon"));
-    Map<String, String> content = new HashMap<>();
-    content.put("Amogus", "Sus");
-    content.put("Sus", "sisu\n\n\n\n\n\nsusususufsdfsdfsdfsdfsdfsdfsusuususs");
+    /**
+     * @param args
+     * @throws Exception
+     */
+    public static void main(String... args) throws Exception {
+        Cacher cacher = new Cacher(new File("/home/jackm/Code/mp4j-test/src/com/test/test.halcyon"));
+        Map<String, String> content = new HashMap<>();
+        content.put("Amogus", "Sus");
+        content.put("Sus", "sisu\n\n\n\n\n\nsusususufsdfsdfsdfsdfsdfsdfsusuususs");
 
-    cacher.build("amogus", content);
+        cacher.build("amogus", content);
 
-    Debugger.good(cacher.getContent("Sus"));
+        Debugger.good(cacher.getContent("Sus"));
 
-  }
+    }
 }

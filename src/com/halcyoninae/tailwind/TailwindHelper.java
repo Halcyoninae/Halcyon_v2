@@ -33,68 +33,68 @@ import java.net.URL;
  * @since 3.1
  */
 public final class TailwindHelper {
-  private static AudioInputStream lastIS = null;
+    private static AudioInputStream lastIS = null;
 
-  /**
-   * @param locale
-   * @return AudioInputStream
-   */
-  public static AudioInputStream getAudioIS(URL locale) {
-    try {
-      AudioInputStream ais;
-      FileFormat target = FileFormat.getFormatByName(locale.toExternalForm());
-      if (target.equals(FileFormat.MP3)) {
-        ais = AudioSystem.getAudioInputStream(locale);
-        AudioFormat base = ais.getFormat();
-        AudioFormat decode = new AudioFormat(
-            AudioFormat.Encoding.PCM_SIGNED,
-            base.getSampleRate(),
-            16,
-            base.getChannels(),
-            base.getChannels() * 2,
-            base.getSampleRate(),
-            false);
-        ais = AudioSystem.getAudioInputStream(decode, ais);
-        lastIS = ais;
-        return ais;
-      } else if (target.equals(FileFormat.WAV)) {
-        ais = AudioSystem.getAudioInputStream(locale);
-        lastIS = ais;
-        return ais;
-      } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
-        ais = AudioSystem.getAudioInputStream(locale);
-        lastIS = ais;
-        return ais;
-      } else if (target.equals(FileFormat.OGG)) {
-        LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams().iterator()
-            .next();
-        if (!stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
-          new ErrorWindow("Failed to read this Vorbis (OGG) file...").run();
-          return null;
+    /**
+     * @param locale
+     * @return AudioInputStream
+     */
+    public static AudioInputStream getAudioIS(URL locale) {
+        try {
+            AudioInputStream ais;
+            FileFormat target = FileFormat.getFormatByName(locale.toExternalForm());
+            if (target.equals(FileFormat.MP3)) {
+                ais = AudioSystem.getAudioInputStream(locale);
+                AudioFormat base = ais.getFormat();
+                AudioFormat decode = new AudioFormat(
+                        AudioFormat.Encoding.PCM_SIGNED,
+                        base.getSampleRate(),
+                        16,
+                        base.getChannels(),
+                        base.getChannels() * 2,
+                        base.getSampleRate(),
+                        false);
+                ais = AudioSystem.getAudioInputStream(decode, ais);
+                lastIS = ais;
+                return ais;
+            } else if (target.equals(FileFormat.WAV)) {
+                ais = AudioSystem.getAudioInputStream(locale);
+                lastIS = ais;
+                return ais;
+            } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
+                ais = AudioSystem.getAudioInputStream(locale);
+                lastIS = ais;
+                return ais;
+            } else if (target.equals(FileFormat.OGG)) {
+                LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams().iterator()
+                        .next();
+                if (!stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
+                    new ErrorWindow("Failed to read this Vorbis (OGG) file...").run();
+                    return null;
+                }
+                VorbisIn v = new VorbisIn(new VorbisStream(stream));
+                ais = new AudioInputStream(v, v.getFormat(), -1L);
+                return ais;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        VorbisIn v = new VorbisIn(new VorbisStream(stream));
-        ais = new AudioInputStream(v, v.getFormat(), -1L);
-        return ais;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+        return null;
     }
-    return null;
-  }
 
-  /**
-   * This writes an AudioInfo's properties to a file.
-   *
-   * This process writes to a folder and writes the following:
-   * A file with all the attributes
-   * A file with the image artwork
-   *
-   * @since 3.3
-   * @param parentDir The folder to write to.
-   * @param info      The AudioInfo object
-   * @return The File as a directory that has been written to.
-   */
-  public static File writeAudioInfoConfig(File parentDir, AudioInfo info) {
-  return null;
-  }
+    /**
+     * This writes an AudioInfo's properties to a file.
+     * <p>
+     * This process writes to a folder and writes the following:
+     * A file with all the attributes
+     * A file with the image artwork
+     *
+     * @param parentDir The folder to write to.
+     * @param info      The AudioInfo object
+     * @return The File as a directory that has been written to.
+     * @since 3.3
+     */
+    public static File writeAudioInfoConfig(File parentDir, AudioInfo info) {
+        return null;
+    }
 }

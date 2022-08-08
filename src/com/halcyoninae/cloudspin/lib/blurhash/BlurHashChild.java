@@ -1,17 +1,17 @@
 /*
-*  Copyright: (C) 2022 name of Jack Meng
-* CloudSpin a graphics library for image manipulation is licensed under the following
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 2
-* of the License, or (at your option) any later version.
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-* You should have received a copy of the GNU General Public License
-* along with this program; If not, see <http://www.gnu.org/licenses/>.
-*/
+ *  Copyright: (C) 2022 name of Jack Meng
+ * CloudSpin a graphics library for image manipulation is licensed under the following
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program; If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package com.halcyoninae.cloudspin.lib.blurhash;
 
@@ -20,7 +20,7 @@ import java.util.Arrays;
 /**
  * A low level implementation of the BlurHash
  * algorithm from here: https://blurha.sh/
- *
+ * <p>
  * Original ported from an early version of this
  * program.
  *
@@ -32,11 +32,15 @@ public final class BlurHashChild {
      * Represents the colors;
      */
     static double[] __ll = new double[256];
+
     static {
         for (int i = 0; i < __ll.length; i++) {
             double _m = i / 255.0d;
             __ll[i] = _m <= 0.04045 ? (_m / 12.92) : (Math.pow((_m + 0.055) / 1.055, 2.4));
         }
+    }
+
+    private BlurHashChild() {
     }
 
     /**
@@ -79,9 +83,6 @@ public final class BlurHashChild {
             _l = ~_l;
         }
         return _l < 0 ? 0 : (_l >= 256 ? 255 : _l);
-    }
-
-    private BlurHashChild() {
     }
 
     /**
@@ -148,10 +149,11 @@ public final class BlurHashChild {
 
     /**
      * Decodes the given BlurHash into an array of pixels
+     *
      * @param blurHash The BlurHash to decode (String)
-     * @param width The width of the image
-     * @param height The height of the image
-     * @param punch The punch value of the image; often regarded as the "sharpness" of the image
+     * @param width    The width of the image
+     * @param height   The height of the image
+     * @param punch    The punch value of the image; often regarded as the "sharpness" of the image
      * @return The decoded pixels
      */
     public static int[] dec(String blurHash, int width, int height, double punch) {

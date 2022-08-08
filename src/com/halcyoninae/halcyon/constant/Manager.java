@@ -38,7 +38,7 @@ public interface Manager {
     String RSC_FOLDER_NAME = "resource";
     /// GENERAL RESOURCE LOCATION END
 
-    String[] ALLOWED_FORMATS = new String[] { "wav", "mp3", "aiff", "aif", "aifc", "ogg", "oga" };
+    String[] ALLOWED_FORMATS = new String[]{"wav", "mp3", "aiff", "aif", "aifc", "ogg", "oga"};
 
     /// BEGIN RESOURCE LOCATION FOR ICONS
 

@@ -24,21 +24,21 @@ import javax.swing.*;
  * This class mainly provides the necessary inheritable attributes
  * to the SelectionApplicableFolders
  * {@link com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders} dialog
- *
+ * <p>
  * It should not be run by itself as it only provides assets inherits instead
  * of actual component inheritance.
  *
  * @author Jack Meng
- * @since 3.0
  * @see com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders
  * @see javax.swing.JFrame
+ * @since 3.0
  */
 public class FSVDefault extends JFrame {
 
-  /**
-   * Constructs the inheritable FSVDefault object to be inherited by
-   */
-  public FSVDefault() {
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-  }
+    /**
+     * Constructs the inheritable FSVDefault object to be inherited by
+     */
+    public FSVDefault() {
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+    }
 }

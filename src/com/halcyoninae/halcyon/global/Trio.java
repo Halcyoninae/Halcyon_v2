@@ -24,16 +24,17 @@ package com.halcyoninae.halcyon.global;
  * @since 3.0
  */
 public class Trio<T, E, M> extends Pair<T, E> {
-  public M third;
+    public M third;
 
-  /**
-   * Constructs a trio with the given first and second elements and third elements
-   * @param first The first element which will be found in a Pair data structure
-   * @param second The second element which will also be supered to the extended Pair class
-   * @param third The third element which is held by this child class
-   */
-  public Trio(T first, E second, M third) {
-    super(first, second);
-    this.third = third;
-  }
+    /**
+     * Constructs a trio with the given first and second elements and third elements
+     *
+     * @param first  The first element which will be found in a Pair data structure
+     * @param second The second element which will also be supered to the extended Pair class
+     * @param third  The third element which is held by this child class
+     */
+    public Trio(T first, E second, M third) {
+        super(first, second);
+        this.third = third;
+    }
 }

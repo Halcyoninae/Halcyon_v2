@@ -43,74 +43,74 @@ import java.util.Set;
  * @since 3.2
  */
 public class Cacher {
-  private final File file;
-  private Document doc;
+    private final File file;
+    private Document doc;
 
-  public Cacher(File f) {
-    this.file = f;
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder;
-    try {
-      builder = factory.newDocumentBuilder();
-      doc = builder.parse(this.file);
-    } catch (ParserConfigurationException | SAXException | IOException e) {
-      Debugger.log(e);
-    }
-  }
-
-
-  /**
-   * @param nodeName
-   * @return String[]
-   */
-  public String[] getContent(String nodeName) {
-    List<String> content = new ArrayList<>();
-    NodeList node = doc.getElementsByTagName(nodeName);
-    for (int i = 0; i < node.getLength(); i++) {
-      Node n = node.item(i);
-      if (n.getNodeType() == Node.ELEMENT_NODE) {
-        Element e = (Element) n;
-        content.add(e.getTextContent());
-      }
-    }
-    return content.toArray(new String[content.size()]);
-  }
-
-
-  /**
-   * @param rootName
-   * @param content
-   * @throws TransformerException
-   * @throws ParserConfigurationException
-   */
-  public void build(String rootName, Map<String, String> content)
-      throws TransformerException, ParserConfigurationException {
-    try {
-      file.createNewFile();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder builder = factory.newDocumentBuilder();
-    Document newDoc = builder.newDocument();
-    Element root = newDoc.createElement(rootName);
-    newDoc.appendChild(root);
-    Set<String> keys = content.keySet();
-    for (String key : keys) {
-      Element child = newDoc.createElement(key);
-      child.setTextContent(content.get(key));
-      root.appendChild(child);
+    public Cacher(File f) {
+        this.file = f;
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        try {
+            builder = factory.newDocumentBuilder();
+            doc = builder.parse(this.file);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            Debugger.log(e);
+        }
     }
 
-    try (FileOutputStream fos = new FileOutputStream(file)) {
-      TransformerFactory transformerFactory = TransformerFactory.newInstance();
-      Transformer transformer = transformerFactory.newTransformer();
-      DOMSource source = new DOMSource(newDoc);
-      StreamResult result = new StreamResult(fos);
-      transformer.transform(source, result);
-    } catch (IOException e) {
-      e.printStackTrace();
+
+    /**
+     * @param nodeName
+     * @return String[]
+     */
+    public String[] getContent(String nodeName) {
+        List<String> content = new ArrayList<>();
+        NodeList node = doc.getElementsByTagName(nodeName);
+        for (int i = 0; i < node.getLength(); i++) {
+            Node n = node.item(i);
+            if (n.getNodeType() == Node.ELEMENT_NODE) {
+                Element e = (Element) n;
+                content.add(e.getTextContent());
+            }
+        }
+        return content.toArray(new String[content.size()]);
     }
 
-  }
+
+    /**
+     * @param rootName
+     * @param content
+     * @throws TransformerException
+     * @throws ParserConfigurationException
+     */
+    public void build(String rootName, Map<String, String> content)
+            throws TransformerException, ParserConfigurationException {
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document newDoc = builder.newDocument();
+        Element root = newDoc.createElement(rootName);
+        newDoc.appendChild(root);
+        Set<String> keys = content.keySet();
+        for (String key : keys) {
+            Element child = newDoc.createElement(key);
+            child.setTextContent(content.get(key));
+            root.appendChild(child);
+        }
+
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(newDoc);
+            StreamResult result = new StreamResult(fos);
+            transformer.transform(source, result);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

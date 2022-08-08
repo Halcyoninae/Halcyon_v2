@@ -18,9 +18,9 @@ package com.halcyoninae.cosmos.components.info;
 import javax.swing.*;
 
 public interface InformationTab {
-  String getName();
+    String getName();
 
-  String getToolTip();
+    String getToolTip();
 
-  JComponent getComponent();
+    JComponent getComponent();
 }

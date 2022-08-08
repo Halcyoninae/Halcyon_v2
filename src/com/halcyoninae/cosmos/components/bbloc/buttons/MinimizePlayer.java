@@ -30,44 +30,44 @@ import java.awt.event.ActionEvent;
  * @since 3.2
  */
 public class MinimizePlayer extends JButton implements BBlocButton {
-  private boolean pressed = false;
-  private final MiniPlayer player;
+    private final MiniPlayer player;
+    private boolean pressed = false;
 
-  public MinimizePlayer() {
-    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
-    setToolTipText("Launch the audio player in a mini display form factor");
-    setRolloverEnabled(false);
-    setBorder(null);
-    setOpaque(true);
-    setDoubleBuffered(true);
-    setBackground(null);
-    addActionListener(this);
-    player = new MiniPlayer();
-    player.setMiniPlayerListener(new MiniPlayerListener() {
-      @Override
-      public void closingWindow() {
-        pressed = false;
-      }
-    });
-  }
-
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if (!pressed) {
-      player.run();
-      pressed = true;
+    public MinimizePlayer() {
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
+        setToolTipText("Launch the audio player in a mini display form factor");
+        setRolloverEnabled(false);
+        setBorder(null);
+        setOpaque(true);
+        setDoubleBuffered(true);
+        setBackground(null);
+        addActionListener(this);
+        player = new MiniPlayer();
+        player.setMiniPlayerListener(new MiniPlayerListener() {
+            @Override
+            public void closingWindow() {
+                pressed = false;
+            }
+        });
     }
-  }
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!pressed) {
+            player.run();
+            pressed = true;
+        }
+    }
+
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 
 }

@@ -33,144 +33,143 @@ import java.awt.image.BufferedImage;
  * This class holds all of the components to the main
  * MiniPlayer frame.
  *
- * @see com.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer
- *
  * @author Jack Meng
+ * @see com.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer
  * @since 3.2
  */
 public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
-  private final JPanel bgPanel;
-  private final JPanel fgPanel;
-  private final JPanel topPanel;
-  private final JPanel progressPanel;
-  private final JLabel mainLabel;
-  private final JLabel artLabel;
-  private final JProgressBar progressBar;
-  private transient AudioInfo info;
-  private boolean fDrawn = true;
+    private final JPanel bgPanel;
+    private final JPanel fgPanel;
+    private final JPanel topPanel;
+    private final JPanel progressPanel;
+    private final JLabel mainLabel;
+    private final JLabel artLabel;
+    private final JProgressBar progressBar;
+    private transient AudioInfo info;
+    private boolean fDrawn = true;
 
-  public MiniContentPane() {
-    setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
-    setLayout(new OverlayLayout(this));
-    info = new AudioInfo();
-    bgPanel = new JPanel() {
-      @Override
-      public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (info.hasArtwork() || !fDrawn) {
-          Debugger.warn("Found a new artwork!@MINIPLAYER");
-          Graphics2D g2 = (Graphics2D) g;
-          g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, Float
-              .parseFloat(ResourceFolder.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
-          g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-          BufferedImage last = info.getArtwork();
-          last = DeImage.resize(last, getWidth(), getHeight());
-          g2.drawImage(
-              DeImage.createGradient(MiniDeImage.blurHash(
-                  last, 5,
-                  5), 255, 0, Directional.LEFT),
-              0, 0, null);
-          g2.dispose();
-          fDrawn = true;
-        } else {
-          Debugger.warn("Reusing last artwork!");
-        }
-      }
+    public MiniContentPane() {
+        setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
+        setLayout(new OverlayLayout(this));
+        info = new AudioInfo();
+        bgPanel = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                if (info.hasArtwork() || !fDrawn) {
+                    Debugger.warn("Found a new artwork!@MINIPLAYER");
+                    Graphics2D g2 = (Graphics2D) g;
+                    g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, Float
+                            .parseFloat(ResourceFolder.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
+                    g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+                    BufferedImage last = info.getArtwork();
+                    last = DeImage.resize(last, getWidth(), getHeight());
+                    g2.drawImage(
+                            DeImage.createGradient(MiniDeImage.blurHash(
+                                    last, 5,
+                                    5), 255, 0, Directional.LEFT),
+                            0, 0, null);
+                    g2.dispose();
+                    fDrawn = true;
+                } else {
+                    Debugger.warn("Reusing last artwork!");
+                }
+            }
 
-      @Override
-      public boolean isOptimizedDrawingEnabled() {
-        return false;
-      }
-    };
-    bgPanel.setPreferredSize(getPreferredSize());
-    bgPanel.setOpaque(false);
-    bgPanel.setDoubleBuffered(true);
+            @Override
+            public boolean isOptimizedDrawingEnabled() {
+                return false;
+            }
+        };
+        bgPanel.setPreferredSize(getPreferredSize());
+        bgPanel.setOpaque(false);
+        bgPanel.setDoubleBuffered(true);
 
-    topPanel = new JPanel();
-    topPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height - 15));
-    topPanel.setLayout(new GridLayout(1, 2));
-    topPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-    topPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-    topPanel.setOpaque(false);
+        topPanel = new JPanel();
+        topPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height - 15));
+        topPanel.setLayout(new GridLayout(1, 2));
+        topPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        topPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        topPanel.setOpaque(false);
 
-    mainLabel = new JLabel();
-    mainLabel.setText(getLabelString());
+        mainLabel = new JLabel();
+        mainLabel.setText(getLabelString());
 
-    artLabel = new JLabel(
-        new ImageIcon(DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
-    artLabel.setDoubleBuffered(true);
+        artLabel = new JLabel(
+                new ImageIcon(DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
+        artLabel.setDoubleBuffered(true);
 
-    topPanel.add(artLabel);
-    topPanel.add(mainLabel);
+        topPanel.add(artLabel);
+        topPanel.add(mainLabel);
 
-    progressPanel = new JPanel();
-    progressPanel.setPreferredSize(new Dimension(getPreferredSize().width, 15));
+        progressPanel = new JPanel();
+        progressPanel.setPreferredSize(new Dimension(getPreferredSize().width, 15));
 
-    fgPanel = new JPanel();
-    fgPanel.setPreferredSize(getPreferredSize());
-    fgPanel.setLayout(new BorderLayout());
-    fgPanel.setOpaque(false);
+        fgPanel = new JPanel();
+        fgPanel.setPreferredSize(getPreferredSize());
+        fgPanel.setLayout(new BorderLayout());
+        fgPanel.setOpaque(false);
 
-    progressBar = new JProgressBar();
-    progressBar.setPreferredSize(progressPanel.getPreferredSize());
-    progressBar.setMaximum(500);
-    progressBar.setMinimum(0);
-    progressBar.setOpaque(false);
-    progressBar.setBackground(new Color(0,0,0,50));
-    progressBar.setForeground(ColorManager.MAIN_FG_THEME);
-    new Thread(() -> {
-      while (true) {
-        if (Global.player.getStream().isPlaying()) {
-          if (Global.player.getStream().getLength() > 0) {
-            progressBar
-                .setValue(
-                    (int) (Global.player.getStream().getPosition() * progressBar.getMaximum() / Global.player.getStream().getLength()));
-          } else {
-            progressBar.setValue(0);
-          }
-        }
-        try {
-          Thread.sleep(50);
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    }).start();
-    progressPanel.add(progressBar);
+        progressBar = new JProgressBar();
+        progressBar.setPreferredSize(progressPanel.getPreferredSize());
+        progressBar.setMaximum(500);
+        progressBar.setMinimum(0);
+        progressBar.setOpaque(false);
+        progressBar.setBackground(new Color(0, 0, 0, 50));
+        progressBar.setForeground(ColorManager.MAIN_FG_THEME);
+        new Thread(() -> {
+            while (true) {
+                if (Global.player.getStream().isPlaying()) {
+                    if (Global.player.getStream().getLength() > 0) {
+                        progressBar
+                                .setValue(
+                                        (int) (Global.player.getStream().getPosition() * progressBar.getMaximum() / Global.player.getStream().getLength()));
+                    } else {
+                        progressBar.setValue(0);
+                    }
+                }
+                try {
+                    Thread.sleep(50);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        progressPanel.add(progressBar);
 
-    fgPanel.add(topPanel, BorderLayout.NORTH);
-    fgPanel.add(progressPanel, BorderLayout.SOUTH);
+        fgPanel.add(topPanel, BorderLayout.NORTH);
+        fgPanel.add(progressPanel, BorderLayout.SOUTH);
 
-    add(bgPanel);
-    add(fgPanel);
-  }
+        add(bgPanel);
+        add(fgPanel);
+    }
 
 
-  /**
-   * @return String
-   */
-  private String getLabelString() {
-    return "<html><p style=\"color:" + ColorManager.MAIN_FG_STR + ";font-size:12px\"><b>"
-        + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28
-            ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 28) + "..."
-            : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
-        + "</b></p><br><center><p>" + info.getTag(AudioInfo.KEY_MEDIA_ARTIST) + "</p></center></html>";
-  }
+    /**
+     * @return String
+     */
+    private String getLabelString() {
+        return "<html><p style=\"color:" + ColorManager.MAIN_FG_STR + ";font-size:12px\"><b>"
+                + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28
+                ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 28) + "..."
+                : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
+                + "</b></p><br><center><p>" + info.getTag(AudioInfo.KEY_MEDIA_ARTIST) + "</p></center></html>";
+    }
 
-  private void scheduleRedraw() {
-    bgPanel.repaint(100);
-    mainLabel.setText(getLabelString());
-    artLabel.setIcon(
-        new ImageIcon(DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
-    revalidate();
-  }
+    private void scheduleRedraw() {
+        bgPanel.repaint(100);
+        mainLabel.setText(getLabelString());
+        artLabel.setIcon(
+                new ImageIcon(DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
+        revalidate();
+    }
 
-  /**
-   * @param info
-   */
-  @Override
-  public void infoView(AudioInfo info) {
-    this.info = info;
-    scheduleRedraw();
-  }
+    /**
+     * @param info
+     */
+    @Override
+    public void infoView(AudioInfo info) {
+        this.info = info;
+        scheduleRedraw();
+    }
 }

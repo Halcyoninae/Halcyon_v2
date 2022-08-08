@@ -28,31 +28,31 @@ import java.awt.event.ActionEvent;
  * @since 3.2
  */
 public class WaveFormLinker extends JButton implements BBlocButton {
-  private final WaveFormPane pane;
+    private final WaveFormPane pane;
 
-  public WaveFormLinker() {
-    setPreferredSize(new Dimension(16, 16));
-    addActionListener(this);
-    pane = new WaveFormPane();
-    Global.player.getStream().setFrameBufferListener(Global.waveForm);
-  }
-
-
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    public WaveFormLinker() {
+        setPreferredSize(new Dimension(16, 16));
+        addActionListener(this);
+        pane = new WaveFormPane();
+        Global.player.getStream().setFrameBufferListener(Global.waveForm);
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    SwingUtilities.invokeLater(pane::run);
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
+
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        SwingUtilities.invokeLater(pane::run);
+    }
 
 }

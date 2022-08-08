@@ -24,13 +24,13 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
 public class DefaultValidator implements PropertyValidator {
 
 
-  /**
-   * @param propertyValue
-   * @return boolean
-   */
-  @Override
-  public boolean isValid(String propertyValue) {
-    return true;
-  }
+    /**
+     * @param propertyValue
+     * @return boolean
+     */
+    @Override
+    public boolean isValid(String propertyValue) {
+        return true;
+    }
 
 }

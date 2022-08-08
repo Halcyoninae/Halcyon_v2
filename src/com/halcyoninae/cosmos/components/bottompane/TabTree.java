@@ -25,39 +25,39 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @since 3.1
  */
 public interface TabTree {
-  enum TabTreeSortMethod {
-    ALPHABETICAL, SIZE, SHUFFLE, REV_ALPHABETICAL
-  }
+    /**
+     * Calls the remove function on the JTree instance.
+     *
+     * @param nodeName The Node to remove from the tree.
+     */
+    void remove(String nodeName);
 
-  /**
-   * Calls the remove function on the JTree instance.
-   *
-   * @param nodeName The Node to remove from the tree.
-   */
-  void remove(String nodeName);
+    /**
+     * Gets a String representation of a selected node.
+     *
+     * @return The selected node's name.
+     */
+    String getSelectedNode(DefaultMutableTreeNode node);
 
-  /**
-   * Gets a String representation of a selected node.
-   *
-   * @return The selected node's name.
-   */
-  String getSelectedNode(DefaultMutableTreeNode node);
+    /**
+     * @return The Path of the absolute tree being represented
+     */
+    String getPath();
 
-  /**
-   * @return The Path of the absolute tree being represented
-   */
-  String getPath();
+    /**
+     * Determines if the tree holds
+     * a virtual folder.
+     *
+     * @return (true | | false)
+     */
+    boolean isVirtual();
 
-  /**
-   * Determines if the tree holds
-   * a virtual folder.
-   *
-   * @return (true || false)
-   */
-  boolean isVirtual();
+    /**
+     * Sorts the Tree by some method of mostly (A-Z) alphabetical.
+     */
+    void sort(TabTreeSortMethod e);
 
-  /**
-   * Sorts the Tree by some method of mostly (A-Z) alphabetical.
-   */
-  void sort(TabTreeSortMethod e);
+    enum TabTreeSortMethod {
+        ALPHABETICAL, SIZE, SHUFFLE, REV_ALPHABETICAL
+    }
 }

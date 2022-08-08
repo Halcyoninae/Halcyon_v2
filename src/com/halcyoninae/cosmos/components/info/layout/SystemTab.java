@@ -15,70 +15,70 @@ import java.awt.*;
  * @since 3.2
  */
 public class SystemTab extends JScrollPane implements InformationTab {
-  private final JEditorPane info;
+    private final JEditorPane info;
 
-  public SystemTab() {
-    setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
-    setFocusable(false);
+    public SystemTab() {
+        setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
+        setFocusable(false);
 
-    info = new JEditorPane();
-    info.setEditable(false);
-    info.setContentType("text/html");
-    info.setCaretPosition(0);
+        info = new JEditorPane();
+        info.setEditable(false);
+        info.setContentType("text/html");
+        info.setCaretPosition(0);
 
-    getViewport().add(info);
-    SwingUtilities.invokeLater(this::updateText);
-  }
+        getViewport().add(info);
+        SwingUtilities.invokeLater(this::updateText);
+    }
 
-  private void updateText() {
-    info.setText("<html><body><p>" + getProperties() + "<html><body><p>");
-  }
-
-
-  /**
-   * @return String
-   */
-  private String getProperties() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("JAVA_HOME path: " + System.getProperty("java.home") + "<br>");
-    sb.append("Java Vendor: " + System.getProperty("java.vendor") + "<br");
-    sb.append("Operating System: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " "
-        + System.getProperty("os.version") + "<br>");
-    sb.append("Operating User: " + System.getProperty("user.name") + "<br>");
-    sb.append("Avaliable Processors: " + Runtime.getRuntime().availableProcessors() + "<br>");
-    sb.append("Runtime Version: " + Runtime.version() + "<br>");
-    sb.append("Free Memory: " + Runtime.getRuntime().freeMemory() + "<br>");
-    sb.append("Max Memory: " + Runtime.getRuntime().maxMemory() + "<br>");
-    sb.append("Total Memory: " + Runtime.getRuntime().totalMemory() + "<br>");
-    sb.append("System Env: " + System.getenv().toString() + "<br>");
-    return sb.toString();
-  }
+    private void updateText() {
+        info.setText("<html><body><p>" + getProperties() + "<html><body><p>");
+    }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getName() {
-    return "System";
-  }
+    /**
+     * @return String
+     */
+    private String getProperties() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("JAVA_HOME path: " + System.getProperty("java.home") + "<br>");
+        sb.append("Java Vendor: " + System.getProperty("java.vendor") + "<br");
+        sb.append("Operating System: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " "
+                + System.getProperty("os.version") + "<br>");
+        sb.append("Operating User: " + System.getProperty("user.name") + "<br>");
+        sb.append("Avaliable Processors: " + Runtime.getRuntime().availableProcessors() + "<br>");
+        sb.append("Runtime Version: " + Runtime.version() + "<br>");
+        sb.append("Free Memory: " + Runtime.getRuntime().freeMemory() + "<br>");
+        sb.append("Max Memory: " + Runtime.getRuntime().maxMemory() + "<br>");
+        sb.append("Total Memory: " + Runtime.getRuntime().totalMemory() + "<br>");
+        sb.append("System Env: " + System.getenv().toString() + "<br>");
+        return sb.toString();
+    }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getToolTip() {
-    return "View the machine's information";
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getName() {
+        return "System";
+    }
 
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getToolTip() {
+        return "View the machine's information";
+    }
+
+
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 
 }

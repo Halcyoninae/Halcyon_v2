@@ -25,159 +25,158 @@ import java.util.List;
 /**
  * @author Jack Meng
  * @since 3.2
- *        (Technically 3.1)
+ * (Technically 3.1)
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
-  private boolean loop = false, autoPlay = false;
-  private final List<File> history;
-  private int pointer = 0;
-  private float gain;
-  private File currentFile = new File(".");
+    private final List<File> history;
+    private boolean loop = false, autoPlay = false;
+    private int pointer = 0;
+    private float gain;
+    private File currentFile = new File(".");
 
-  public TailwindPlaylist() {
-    history = new ArrayList<>();
-    addStatusUpdateListener(this);
-    gain = Float.NaN;
-  }
-
-
-  /**
-   * @param f
-   */
-  public void playlistStart(File f) {
-    if (isPlaying()) {
-      stop();
+    public TailwindPlaylist() {
+        history = new ArrayList<>();
+        addStatusUpdateListener(this);
+        gain = Float.NaN;
     }
-    if (!this.currentFile.getAbsolutePath().equals(f.getAbsolutePath())) {
-      history.add(f);
-      this.currentFile = f;
-      open(f);
-      play();
-      if(gain != Float.NaN) {
-        this.setGain(gain);
-      }
+
+
+    /**
+     * @param f
+     */
+    public void playlistStart(File f) {
+        if (isPlaying()) {
+            stop();
+        }
+        if (!this.currentFile.getAbsolutePath().equals(f.getAbsolutePath())) {
+            history.add(f);
+            this.currentFile = f;
+            open(f);
+            play();
+            if (gain != Float.NaN) {
+                this.setGain(gain);
+            }
+        }
     }
-  }
 
 
-  /**
-   * @param f
-   */
-  public void rawPlay(File f) {
-    open(f);
-    play();
-    if (gain != Float.NaN) {
-      this.setGain(gain);
+    /**
+     * @param f
+     */
+    public void rawPlay(File f) {
+        open(f);
+        play();
+        if (gain != Float.NaN) {
+            this.setGain(gain);
+        }
     }
-  }
 
-  public void backTrack() {
-    boolean state = false;
-    if (history.size() > 1 && pointer - 1 >= 0) {
-      Debugger.warn(pointer);
-      pointer -= 1;
-      Debugger.warn(pointer);
-      if (isOpen()) {
-        close();
-      }
-      open(history.get(pointer));
-      play();
-      state = true;
+    public void backTrack() {
+        boolean state = false;
+        if (history.size() > 1 && pointer - 1 >= 0) {
+            Debugger.warn(pointer);
+            pointer -= 1;
+            Debugger.warn(pointer);
+            if (isOpen()) {
+                close();
+            }
+            open(history.get(pointer));
+            play();
+            state = true;
+        }
+        Debugger.good("Backtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
     }
-    Debugger.good("Backtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
-  }
 
-  public void forwardTrack() {
-    boolean state = false;
-    if (history.size() > 1 && pointer >= 0 && pointer < history.size() - 1) {
-      Debugger.warn(pointer);
-      pointer += 1;
-      Debugger.warn(pointer);
-      if (isOpen()) {
-        close();
-      }
-      open(history.get(pointer));
-      play();
-      state = true;
+    public void forwardTrack() {
+        boolean state = false;
+        if (history.size() > 1 && pointer >= 0 && pointer < history.size() - 1) {
+            Debugger.warn(pointer);
+            pointer += 1;
+            Debugger.warn(pointer);
+            if (isOpen()) {
+                close();
+            }
+            open(history.get(pointer));
+            play();
+            state = true;
+        }
+        Debugger.good("Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
     }
-    Debugger.good("Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
-  }
 
-  @Override
-  public void setGain(float gain) {
-    super.setGain(gain);
-    this.gain = gain;
-  }
-
-  /**
-   * @return List<File>
-   */
-  public List<File> getHistory() {
-    return history;
-  }
-
-
-  /**
-   * @return int
-   */
-  public int getpointer() {
-    return pointer;
-  }
-
-
-  /**
-   * @return File
-   */
-  public File getCurrentTrack() {
-    return currentFile;
-  }
-
-
-  /**
-   * @param i
-   * @return File
-   */
-  public File getFromHistory(int i) {
-    return history.get((i > history.size() ? history.size() : i));
-  }
-
-  /**
-   * @param loop
-   */
-  public void setLoop(boolean loop) {
-    this.loop = loop;
-  }
-
-  /**
-   * @return boolean
-   */
-  public boolean isLoop() {
-    return loop;
-  }
-
-  /**
-   * @param autoPlay
-   */
-  public void setAutoPlay(boolean autoPlay) {
-    this.autoPlay = autoPlay;
-  }
-
-  /**
-   * @return boolean
-   */
-  public boolean isAutoPlay() {
-    return autoPlay;
-  }
-
-
-  /**
-   * @param status
-   */
-  @Override
-  public void statusUpdate(TailwindStatus status) {
-    if (loop && status.equals(TailwindStatus.END)) {
-      rawPlay(currentFile);
+    @Override
+    public void setGain(float gain) {
+        super.setGain(gain);
+        this.gain = gain;
     }
-  }
+
+    /**
+     * @return List<File>
+     */
+    public List<File> getHistory() {
+        return history;
+    }
+
+
+    /**
+     * @return int
+     */
+    public int getpointer() {
+        return pointer;
+    }
+
+
+    /**
+     * @return File
+     */
+    public File getCurrentTrack() {
+        return currentFile;
+    }
+
+
+    /**
+     * @param i
+     * @return File
+     */
+    public File getFromHistory(int i) {
+        return history.get((i > history.size() ? history.size() : i));
+    }
+
+    /**
+     * @return boolean
+     */
+    public boolean isLoop() {
+        return loop;
+    }
+
+    /**
+     * @param loop
+     */
+    public void setLoop(boolean loop) {
+        this.loop = loop;
+    }
+
+    /**
+     * @return boolean
+     */
+    public boolean isAutoPlay() {
+        return autoPlay;
+    }
+
+    /**
+     * @param autoPlay
+     */
+    public void setAutoPlay(boolean autoPlay) {
+        this.autoPlay = autoPlay;
+    }
+
+    /**
+     * @param status
+     */
+    @Override
+    public void statusUpdate(TailwindStatus status) {
+        if (loop && status.equals(TailwindStatus.END)) {
+            rawPlay(currentFile);
+        }
+    }
 
 }

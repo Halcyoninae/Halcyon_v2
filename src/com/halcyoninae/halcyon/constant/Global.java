@@ -26,7 +26,7 @@ import com.halcyoninae.tailwind.wrapper.Player;
 /**
  * This class holds any public scoped Objects that may be used throughout
  * the program.
- *
+ * <p>
  * This class eliminates different classes having to hot potato pass
  * difference object instances to each other.
  *
@@ -35,16 +35,17 @@ import com.halcyoninae.tailwind.wrapper.Player;
  */
 public class Global {
 
-  private Global() {}
+    public static final ResourceDistributor rd = new ResourceDistributor();
+    public static BottomPane bp = new BottomPane();
+    public static ButtonControlTP bctp = new ButtonControlTP();
+    public static InfoViewTP ifp = new InfoViewTP();
+    public static Player player = new Player();
+    public static LikeList ll = new LikeList();
+    public static WaveForm waveForm = new WaveForm();
 
-  public static BottomPane bp = new BottomPane();
-  public static final ResourceDistributor rd = new ResourceDistributor();
-  public static ButtonControlTP bctp = new ButtonControlTP();
-  public static InfoViewTP ifp = new InfoViewTP();
-  public static Player player = new Player();
-  static {
-    player.getStream().addStatusUpdateListener(bctp);
-  }
-  public static LikeList ll = new LikeList();
-  public static WaveForm waveForm = new WaveForm();
+    static {
+        player.getStream().addStatusUpdateListener(bctp);
+    }
+    private Global() {
+    }
 }

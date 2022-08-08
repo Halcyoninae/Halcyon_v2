@@ -10,8 +10,8 @@ import java.awt.*;
  * @since 3.3
  */
 public class MoreAppsView extends JPanel {
-  public MoreAppsView() {
-    setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
-    setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
-  }
+    public MoreAppsView() {
+        setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
+        setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
+    }
 }

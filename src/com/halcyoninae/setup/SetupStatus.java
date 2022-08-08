@@ -23,10 +23,10 @@ package com.halcyoninae.setup;
  * @since 3.3
  */
 public enum SetupStatus {
-  /**
-   * Possible values
-   * PASSED: The original setup routine has already passed<br>
-   * NEW: The original setup routine has not been run or is deleted
-   */
-  PASSED, NEW
+    /**
+     * Possible values
+     * PASSED: The original setup routine has already passed<br>
+     * NEW: The original setup routine has not been run or is deleted
+     */
+    PASSED, NEW
 }

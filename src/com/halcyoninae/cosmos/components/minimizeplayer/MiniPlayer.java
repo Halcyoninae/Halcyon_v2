@@ -25,87 +25,86 @@ import java.awt.geom.RoundRectangle2D;
 
 /**
  * This class represents a frame that holds a minimized player.
- *
+ * <p>
  * What is a minimized player?
  * A minimized player is an indirect way to display what is being
  * played, in a very compact form factor. This form factor, however,
  * is not used to directly control the audio instead is maybe to display
  * what is being played without having the main player interface
  * being shown.
- *
+ * <p>
  * This class specifically represents the window
  * part of the miniplayer.
  *
- * @see com.halcyoninae.cosmos.components.minimizeplayer.MiniContentPane
- *
  * @author Jack Meng
+ * @see com.halcyoninae.cosmos.components.minimizeplayer.MiniContentPane
  * @since 3.2
  */
 public class MiniPlayer extends JFrame implements Runnable {
-  private int pX, pY;
-  private final MiniContentPane pane;
-  private transient MiniPlayerListener listener;
+    private final MiniContentPane pane;
+    private int pX, pY;
+    private transient MiniPlayerListener listener;
 
-  public MiniPlayer() {
-    setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
-    setUndecorated(true);
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setAutoRequestFocus(true);
-    setFocusable(true);
-    pane = new MiniContentPane();
-    Global.ifp.addInfoViewUpdateListener(pane);
-    setContentPane(pane);
-    addComponentListener(new ComponentAdapter() {
-      @Override
-      public void componentResized(ComponentEvent e) {
-        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
-      }
-    });
-    addMouseListener(new MouseAdapter() {
-      @Override
-      public void mousePressed(MouseEvent me) {
-        pX = me.getX();
-        pY = me.getY();
+    public MiniPlayer() {
+        setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
+        setUndecorated(true);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setAutoRequestFocus(true);
+        setFocusable(true);
+        pane = new MiniContentPane();
+        Global.ifp.addInfoViewUpdateListener(pane);
+        setContentPane(pane);
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
+            }
+        });
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                pX = me.getX();
+                pY = me.getY();
 
-      }
+            }
 
-      @Override
-      public void mouseDragged(MouseEvent me) {
-        setLocation(getLocation().x + me.getX() - pX,
-            getLocation().y + me.getY() - pY);
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
 
-      }
-    });
-    addMouseMotionListener(new MouseMotionAdapter() {
-      @Override
-      public void mouseDragged(MouseEvent me) {
-        setLocation(getLocation().x + me.getX() - pX,
-            getLocation().y + me.getY() - pY);
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
 
-      }
-    });
-    addMouseListener(new MiniPlayerClickMenu(this));
-    setResizable(true);
-  }
+            }
+        });
+        addMouseListener(new MiniPlayerClickMenu(this));
+        setResizable(true);
+    }
 
 
-  /**
-   * @param listener
-   */
-  public void setMiniPlayerListener(MiniPlayerListener listener) {
-    this.listener = listener;
-  }
+    /**
+     * @param listener
+     */
+    public void setMiniPlayerListener(MiniPlayerListener listener) {
+        this.listener = listener;
+    }
 
-  /**
-   * Calls for the listener
-   */
-  public void pounceListener() {
-    listener.closingWindow();
-  }
+    /**
+     * Calls for the listener
+     */
+    public void pounceListener() {
+        listener.closingWindow();
+    }
 
-  @Override
-  public void run() {
-    pack();
-    setVisible(true);
-  }
+    @Override
+    public void run() {
+        pack();
+        setVisible(true);
+    }
 }

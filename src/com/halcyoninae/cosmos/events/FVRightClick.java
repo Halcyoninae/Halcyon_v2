@@ -38,25 +38,20 @@ import java.io.File;
 
 /**
  * This class handles the right click event for any JTree instance.
- *
+ * <p>
  * This right click menu currently allows the user to hide a node from view.
  *
  * @author Jack Meng
- * @since 3.0
  * @see javax.swing.JTree
  * @see javax.swing.tree.DefaultMutableTreeNode
+ * @since 3.0
  */
 public class FVRightClick extends MouseAdapter {
-
-    public interface RightClickHideItemListener {
-        void onRemove(String content);
-    }
 
     private TabTree tree;
     private JTree lastJTree;
     private int rightClicks = 0;
     private String hideString = "Hide Item";
-
     private RightClickHideItemListener hideTask;
 
     public FVRightClick(TabTree tree, String hideItemString, RightClickHideItemListener hideTask) {
@@ -242,6 +237,10 @@ public class FVRightClick extends MouseAdapter {
             }
         }
 
+    }
+
+    public interface RightClickHideItemListener {
+        void onRemove(String content);
     }
 
 }

@@ -21,16 +21,15 @@ package com.halcyoninae.halcyon;
  * any data. It is similar to Manager
  *
  * @author Jack Meng
- * @since 3.0
  * @see com.halcyoninae.halcyon.constant.Manager
+ * @since 3.0
  */
 public final class DefaultManager {
 
-  private DefaultManager() {}
+    public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";
+    public static final String FILE_SLASH = System.getProperty("file.separator");
+    public static boolean DEBUG_PROGRAM = false;
 
-  public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";
-
-  public static final String FILE_SLASH = System.getProperty("file.separator");
-
-  public static boolean DEBUG_PROGRAM = false;
+    private DefaultManager() {
+    }
 }

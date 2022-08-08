@@ -20,7 +20,7 @@ package com.halcyoninae.cosmos.components.minimizeplayer;
  * @since 3.2
  */
 public interface MiniPlayerManager {
-  int MINI_PLAYER_MIN_WIDTH = 430;
-  int MINI_PLAYER_MIN_HEIGHT = 200;
-  int MINI_PLAYER_BAR_HEIGHT = 25;
+    int MINI_PLAYER_MIN_WIDTH = 430;
+    int MINI_PLAYER_MIN_HEIGHT = 200;
+    int MINI_PLAYER_BAR_HEIGHT = 25;
 }

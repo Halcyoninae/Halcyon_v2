@@ -17,7 +17,7 @@ package com.halcyoninae.halcyon.constant;
 
 /**
  * A simple interface that maintains strings for the program.
- *
+ * <p>
  * This class is planned for the translation of text in the program
  * that are visible to the user.
  *
@@ -25,5 +25,5 @@ package com.halcyoninae.halcyon.constant;
  * @since 3.0
  */
 public interface StringManager {
-  String JTREE_ROOT_NAME = "Your Playlist(s)";
+    String JTREE_ROOT_NAME = "Your Playlist(s)";
 }

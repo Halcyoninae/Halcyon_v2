@@ -21,7 +21,7 @@ import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 /**
  * This class aims to optimize tasks throughout the JVM
  * environment for this application during runtime.
- *
+ * <p>
  * It runs in the background and tries to optimize any
  * tasks that may be running in the background.
  *
@@ -29,23 +29,23 @@ import com.halcyoninae.halcyon.constant.ProgramResourceManager;
  * @since 3.1
  */
 public class DefunctOptimizer implements Runnable {
-  public DefunctOptimizer() {
+    public DefunctOptimizer() {
 
-  }
-
-  @Override
-  public void run() {
-    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
-      new Thread(() -> {
-        while (true) {
-          Runtime.getRuntime().gc();
-          try {
-            Thread.sleep(1000);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      }).start();
     }
-  }
+
+    @Override
+    public void run() {
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
+            new Thread(() -> {
+                while (true) {
+                    Runtime.getRuntime().gc();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+    }
 }

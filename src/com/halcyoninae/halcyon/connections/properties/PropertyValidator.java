@@ -23,9 +23,9 @@ package com.halcyoninae.halcyon.connections.properties;
  */
 public interface PropertyValidator {
 
-  /**
-   * @param propertyValue A value to check
-   * @return (true || false) based on what the implementation decides
-   */
-  boolean isValid(String propertyValue);
+    /**
+     * @param propertyValue A value to check
+     * @return (true | | false) based on what the implementation decides
+     */
+    boolean isValid(String propertyValue);
 }

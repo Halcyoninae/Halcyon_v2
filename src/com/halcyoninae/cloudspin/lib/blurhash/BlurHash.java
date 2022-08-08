@@ -25,34 +25,34 @@ import java.awt.image.BufferedImage;
  * Child Low Level Class
  *
  * @author Jack Meng
- * @since 1.0
  * @see com.halcyoninae.cloudspin.lib.Blur
+ * @since 1.0
  */
 public class BlurHash implements Blur {
 
-  /**
-   * @param image
-   * @param _x
-   * @param _y
-   * @param otherParams
-   * @return BufferedImage
-   */
-  @Override
-  public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
-    int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
-    String hash = BlurHashChild.enc(pixels, image.getWidth(), image.getHeight(), _x, _y);
-    double p = 1.2d;
-    if (otherParams != null) {
-      if (otherParams[0] instanceof Double) {
-        if (((Double) otherParams[0]).doubleValue() > 0) {
-          p = ((Double) otherParams[0]).doubleValue();
+    /**
+     * @param image
+     * @param _x
+     * @param _y
+     * @param otherParams
+     * @return BufferedImage
+     */
+    @Override
+    public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
+        int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+        String hash = BlurHashChild.enc(pixels, image.getWidth(), image.getHeight(), _x, _y);
+        double p = 1.2d;
+        if (otherParams != null) {
+            if (otherParams[0] instanceof Double) {
+                if (((Double) otherParams[0]).doubleValue() > 0) {
+                    p = ((Double) otherParams[0]).doubleValue();
+                }
+            }
         }
-      }
+        int[] dec = BlurHashChild.dec(hash, image.getWidth(), image.getHeight(), p);
+        BufferedImage res = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        res.setRGB(0, 0, image.getWidth(), image.getHeight(), dec, 0, image.getWidth());
+        return res;
     }
-    int[] dec = BlurHashChild.dec(hash, image.getWidth(), image.getHeight(), p);
-    BufferedImage res = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-    res.setRGB(0, 0, image.getWidth(), image.getHeight(), dec, 0, image.getWidth());
-    return res;
-  }
 
 }

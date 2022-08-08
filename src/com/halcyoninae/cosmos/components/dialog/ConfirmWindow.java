@@ -42,110 +42,106 @@ import java.awt.event.WindowEvent;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
-  /// Confirm Config START
-  final int DIALOG_CONFIRM_MIN_WIDTH = 300;
-  final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
+    static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
+    /// Confirm Config START
+    final int DIALOG_CONFIRM_MIN_WIDTH = 300;
+    final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
+    final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
+    final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
+    /// Confirm Config END
+    private final JButton confirm;
+    private final transient ConfirmationListener[] listeners;
 
-  final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
-  final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
+    public ConfirmWindow(String content, ConfirmationListener... listeners) {
+        super(DIALOG_CONFIRM_WIN_TITLE);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        this.listeners = listeners;
+        setPreferredSize(new Dimension(DIALOG_CONFIRM_MIN_WIDTH, DIALOG_CONFIRM_MIN_HEIGHT));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-  static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
-  /// Confirm Config END
+        confirm = new JButton("Confirm");
+        confirm.setAlignmentY(Component.CENTER_ALIGNMENT);
+        confirm.addActionListener(this);
 
-  /**
-   * A listener that is called upon for any classes that
-   * wish to listen in on anything about the update for this confirmation
-   * daemon.
-   *
-   * @author Jack Meng
-   * @since 3.0
-   */
-  public interface ConfirmationListener {
-    /**
-     * Called for a status update for this class.
-     * @param status The status (true || false)
-     */
-    void onStatus(boolean status);
-  }
+        JButton cancel = new JButton("Cancel");
+        cancel.setAlignmentY(Component.CENTER_ALIGNMENT);
+        cancel.addActionListener(this);
 
-  private final JButton confirm;
+        JTextArea prompt = new JTextArea(content);
+        prompt.setLineWrap(true);
+        prompt.setWrapStyleWord(true);
+        prompt.setAlignmentY(Component.CENTER_ALIGNMENT);
+        prompt.setEditable(false);
 
-  private final transient ConfirmationListener[] listeners;
+        JScrollPane container = new JScrollPane(prompt);
+        container.setPreferredSize(
+                new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+        container.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        container.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-  public ConfirmWindow(String content, ConfirmationListener... listeners) {
-    super(DIALOG_CONFIRM_WIN_TITLE);
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    this.listeners = listeners;
-    setPreferredSize(new Dimension(DIALOG_CONFIRM_MIN_WIDTH, DIALOG_CONFIRM_MIN_HEIGHT));
-    setLocationRelativeTo(null);
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        JPanel jp = new JPanel();
+        jp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jp.setPreferredSize(
+                new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+        jp.add(confirm);
+        jp.add(cancel);
 
-    confirm = new JButton("Confirm");
-    confirm.setAlignmentY(Component.CENTER_ALIGNMENT);
-    confirm.addActionListener(this);
+        setLayout(new BorderLayout());
+        setResizable(false);
+        add(container, BorderLayout.NORTH);
+        add(jp, BorderLayout.SOUTH);
 
-    JButton cancel = new JButton("Cancel");
-    cancel.setAlignmentY(Component.CENTER_ALIGNMENT);
-    cancel.addActionListener(this);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                dispatchConfirmationEvents(false);
+            }
+        });
 
-    JTextArea prompt = new JTextArea(content);
-    prompt.setLineWrap(true);
-    prompt.setWrapStyleWord(true);
-    prompt.setAlignmentY(Component.CENTER_ALIGNMENT);
-    prompt.setEditable(false);
-
-    JScrollPane container = new JScrollPane(prompt);
-    container.setPreferredSize(
-        new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
-    container.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    container.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-    JPanel jp = new JPanel();
-    jp.setLayout(new FlowLayout(FlowLayout.CENTER));
-    jp.setPreferredSize(
-        new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
-    jp.add(confirm);
-    jp.add(cancel);
-
-    setLayout(new BorderLayout());
-    setResizable(false);
-    add(container, BorderLayout.NORTH);
-    add(jp, BorderLayout.SOUTH);
-
-    addWindowListener(new WindowAdapter() {
-      @Override
-      public void windowClosing(WindowEvent e) {
-        dispatchConfirmationEvents(false);
-      }
-    });
-
-    getContentPane().add(container);
-  }
-
-
-  /**
-   * @param status
-   */
-  private void dispatchConfirmationEvents(boolean status) {
-    for (ConfirmationListener listener : listeners) {
-      listener.onStatus(status);
+        getContentPane().add(container);
     }
-  }
 
-  @Override
-  public void run() {
-    pack();
-    setAlwaysOnTop(true);
-    setVisible(true);
-  }
+    /**
+     * @param status
+     */
+    private void dispatchConfirmationEvents(boolean status) {
+        for (ConfirmationListener listener : listeners) {
+            listener.onStatus(status);
+        }
+    }
+
+    @Override
+    public void run() {
+        pack();
+        setAlwaysOnTop(true);
+        setVisible(true);
+    }
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        dispatchConfirmationEvents(e.getSource().equals(confirm));
+        dispose();
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    dispatchConfirmationEvents(e.getSource().equals(confirm));
-    dispose();
-  }
+    /**
+     * A listener that is called upon for any classes that
+     * wish to listen in on anything about the update for this confirmation
+     * daemon.
+     *
+     * @author Jack Meng
+     * @since 3.0
+     */
+    public interface ConfirmationListener {
+        /**
+         * Called for a status update for this class.
+         *
+         * @param status The status (true || false)
+         */
+        void onStatus(boolean status);
+    }
 }

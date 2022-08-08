@@ -35,52 +35,51 @@ import java.io.File;
  * {@link com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders}
  * instance.
  *
- *
  * @author Jack Meng
- * @since 3.0
  * @see com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders
+ * @since 3.0
  */
 public class AddFolder extends JButton implements BBlocButton {
-  public AddFolder() {
-    super(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON), 16, 16));
-    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_PRESSED_ICON), 16, 16));
-    setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
-    setOpaque(true);
-    setBackground(null);
-    setBorder(null);
-    setDoubleBuffered(true);
-    setContentAreaFilled(false);
-    addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        SelectApplicableFolders s = new SelectApplicableFolders();
-        s.setFolderSelectedListener(new FolderSelectedListener() {
-          @Override
-          public void folderSelected(String folder) {
-            if (FileParser.isEmptyFolder(new File(folder))
-                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
-              new ConfirmWindow(
-                  "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                  status -> {
-                    if (status) {
-                      com.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
+    public AddFolder() {
+        super(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_PRESSED_ICON), 16, 16));
+        setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
+        setOpaque(true);
+        setBackground(null);
+        setBorder(null);
+        setDoubleBuffered(true);
+        setContentAreaFilled(false);
+        addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SelectApplicableFolders s = new SelectApplicableFolders();
+                s.setFolderSelectedListener(new FolderSelectedListener() {
+                    @Override
+                    public void folderSelected(String folder) {
+                        if (FileParser.isEmptyFolder(new File(folder))
+                                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+                            new ConfirmWindow(
+                                    "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
+                                    status -> {
+                                        if (status) {
+                                            com.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
+                                        }
+                                    }).run();
+                        } else {
+                            Global.bp.pokeNewFileListTab(folder);
+                        }
                     }
-                  }).run();
-            } else {
-              Global.bp.pokeNewFileListTab(folder);
+                });
+                s.run();
             }
-          }
         });
-        s.run();
-      }
-    });
-  }
+    }
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 }

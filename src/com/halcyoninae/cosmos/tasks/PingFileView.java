@@ -22,40 +22,41 @@ import com.halcyoninae.halcyon.runtime.Program;
  * A class designed to constantly ping
  * the file view system in order to alert
  * it of any change.
- *
+ * <p>
  * In order to automatically update the file view
  * system without the user having to update it manually.
  */
 public final class PingFileView implements Runnable {
-  private Thread worker;
-  private final BottomPane bp;
+    private final BottomPane bp;
+    private Thread worker;
 
-  /**
-   * Calls the default BottomPane Object
-   * @param bp the bottompane instance
-   * @see com.halcyoninae.cosmos.components.bottompane.BottomPane
-   */
-  public PingFileView(BottomPane bp) {
-    this.bp = bp;
-  }
-
-  @Override
-  public void run() {
-    if (worker == null) {
-      worker = new Thread(() -> {
-        while (true) {
-          bp.mastRevalidate();
-          Program.cacher.pingLikedTracks();
-          Program.cacher.pingSavedPlaylists();
-          try {
-            Thread.sleep(ConcurrentTiming.MAX_TLE);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-        }
-      });
-      worker.start();
+    /**
+     * Calls the default BottomPane Object
+     *
+     * @param bp the bottompane instance
+     * @see com.halcyoninae.cosmos.components.bottompane.BottomPane
+     */
+    public PingFileView(BottomPane bp) {
+        this.bp = bp;
     }
-  }
+
+    @Override
+    public void run() {
+        if (worker == null) {
+            worker = new Thread(() -> {
+                while (true) {
+                    bp.mastRevalidate();
+                    Program.cacher.pingLikedTracks();
+                    Program.cacher.pingSavedPlaylists();
+                    try {
+                        Thread.sleep(ConcurrentTiming.MAX_TLE);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            worker.start();
+        }
+    }
 
 }

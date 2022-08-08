@@ -30,56 +30,56 @@ import java.awt.*;
  * @since 3.0
  */
 public final class GenericWebsiteLinker {
-  private GenericWebsiteLinker() {
-  }
-
-  public static class WebsitePage extends JButton implements BBlocButton {
-    private final String url;
+    private GenericWebsiteLinker() {
+    }
 
     /**
-     * Creates a WebSite button
+     * The generic implementation constructor
      *
-     * @param tooltip The tooltip for the button
-     * @param ico     The icon of the button
-     * @param url     The url to link to.
+     * @param url
+     * @param tooltip
+     * @param icon
+     * @return
      */
-    public WebsitePage(String tooltip, ImageIcon ico, String url) {
-      super(DeImage.resizeImage(ico, 16, 16));
-      setToolTipText(tooltip);
-      addActionListener(this);
-      setOpaque(true);
-      setBackground(null);
-      setBorder(null);
-      setDoubleBuffered(true);
-      setContentAreaFilled(false);
-      this.url = url;
+    public static BBlocButton getButton(String url, String tooltip, ImageIcon icon) {
+        return new WebsitePage(tooltip, icon, url);
     }
 
-    @Override
-    public JComponent getComponent() {
-      return this;
+    public static class WebsitePage extends JButton implements BBlocButton {
+        private final String url;
+
+        /**
+         * Creates a WebSite button
+         *
+         * @param tooltip The tooltip for the button
+         * @param ico     The icon of the button
+         * @param url     The url to link to.
+         */
+        public WebsitePage(String tooltip, ImageIcon ico, String url) {
+            super(DeImage.resizeImage(ico, 16, 16));
+            setToolTipText(tooltip);
+            addActionListener(this);
+            setOpaque(true);
+            setBackground(null);
+            setBorder(null);
+            setDoubleBuffered(true);
+            setContentAreaFilled(false);
+            this.url = url;
+        }
+
+        @Override
+        public JComponent getComponent() {
+            return this;
+        }
+
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+            try {
+                Desktop.getDesktop().browse(new java.net.URI(url));
+            } catch (Exception ex) {
+                Debugger.log(ex);
+            }
+        }
+
     }
-
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-      try {
-        Desktop.getDesktop().browse(new java.net.URI(url));
-      } catch (Exception ex) {
-        Debugger.log(ex);
-      }
-    }
-
-  }
-
-  /**
-   * The generic implementation constructor
-   *
-   * @param url
-   * @param tooltip
-   * @param icon
-   * @return
-   */
-  public static BBlocButton getButton(String url, String tooltip, ImageIcon icon) {
-    return new WebsitePage(tooltip, icon, url);
-  }
 }

@@ -20,5 +20,5 @@ package com.halcyoninae.cosmos.components.minimizeplayer;
  * @since 3.2
  */
 public interface MiniPlayerListener {
-  void closingWindow();
+    void closingWindow();
 }

@@ -20,32 +20,33 @@ package com.halcyoninae.cloudspin.helpers;
  * @since 3.2
  */
 public final class math {
-  private math() {}
-
-
-  /**
-   * @param arr
-   * @return double
-   */
-  public static double _max(double [][] arr) {
-    double max = arr[0][0];
-    for (int i = 0; i < arr.length; i++) {
-      for (int j = 0; j < arr[i].length; j++) {
-        if (arr[i][j] > max) {
-          max = arr[i][j];
-        }
-      }
+    private math() {
     }
-    return max;
-  }
 
 
-  /**
-   * @param val
-   * @param exp
-   * @return double
-   */
-  public static double signpow(double val, double exp) {
-    return Math.copySign(Math.pow(Math.abs(val), exp), val);
-  }
+    /**
+     * @param arr
+     * @return double
+     */
+    public static double _max(double[][] arr) {
+        double max = arr[0][0];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                if (arr[i][j] > max) {
+                    max = arr[i][j];
+                }
+            }
+        }
+        return max;
+    }
+
+
+    /**
+     * @param val
+     * @param exp
+     * @return double
+     */
+    public static double signpow(double val, double exp) {
+        return Math.copySign(Math.pow(Math.abs(val), exp), val);
+    }
 }

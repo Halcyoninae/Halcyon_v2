@@ -24,113 +24,110 @@ import java.io.File;
  */
 public final class TailwindTranscoder implements Transcoder {
 
-  /**
-   * @param inFormat
-   * @param outFormat
-   * @param inLocale
-   * @param outLocale
-   */
-  @Override
-  public void transcode(int inFormat, int outFormat, File inLocale, File outLocale) {
-
-  }
-
-
-  /**
-   * @param arr
-   * @param shift_n
-   * @return int[]
-   */
-  public static int[] byteify(byte[] arr, int shift_n) {
-    int[] temp = new int[arr.length / 2];
-    for (int i = 0; i < arr.length / 2; i++) {
-      temp[i] = (arr[i * 2] & 0xFF) | (arr[i * 2 + 1] << (shift_n == 0 ? 8 : shift_n));
-    }
-    return temp;
-  }
-
-
-  /**
-   * @param bps
-   * @return int
-   */
-  public static int normalize(int bps) {
-    return bps + 7 >> 3;
-  }
-
-
-  /**
-   * @param buffer
-   * @param transfer
-   * @param samples
-   * @param b_
-   * @param format
-   * @return float[]
-   */
-  public static float[] f_unpack(byte[] buffer, long[] transfer, float[] samples, int b_, AudioFormat format) {
-    if(format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED && format.getEncoding() != AudioFormat.Encoding.PCM_UNSIGNED) {
-      return samples;
-    }
-    int bps = format.getSampleSizeInBits();
-    int byps = bps / 8;
-    int nb = normalize(bps);
-
-    if(format.isBigEndian()) {
-      for(int i = 0, k = 0, j; i < b_; i += nb, k++) {
-        transfer[k] = 0L;
-        int minima = i + nb - 1;
-        for(j = 0; j < nb; j++) {
-          transfer[k] |= (buffer[minima - j] & 0xFFL) << (8 * j);
+    /**
+     * @param arr
+     * @param shift_n
+     * @return int[]
+     */
+    public static int[] byteify(byte[] arr, int shift_n) {
+        int[] temp = new int[arr.length / 2];
+        for (int i = 0; i < arr.length / 2; i++) {
+            temp[i] = (arr[i * 2] & 0xFF) | (arr[i * 2 + 1] << (shift_n == 0 ? 8 : shift_n));
         }
-      }
-    } else {
-      for (int i = 0, k = 0, j; i < b_; i += nb, k++) {
-        transfer[k] = 0L;
-        for (j = 0; j < nb; j++) {
-          transfer[k] |= (buffer[i + j] & 0xFFL) << (8 * j);
+        return temp;
+    }
+
+    /**
+     * @param bps
+     * @return int
+     */
+    public static int normalize(int bps) {
+        return bps + 7 >> 3;
+    }
+
+    /**
+     * @param buffer
+     * @param transfer
+     * @param samples
+     * @param b_
+     * @param format
+     * @return float[]
+     */
+    public static float[] f_unpack(byte[] buffer, long[] transfer, float[] samples, int b_, AudioFormat format) {
+        if (format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED && format.getEncoding() != AudioFormat.Encoding.PCM_UNSIGNED) {
+            return samples;
         }
-      }
-    }
-    long scale = (long) Math.pow(2l, bps - 1d);
-    if(format.getEncoding() == AudioFormat.Encoding.PCM_SIGNED) {
-      long shift = 64l - bps;
-      for(int i = 0; i < transfer.length; i++)
-        transfer[i] = ((transfer[i] << shift) >> shift);
-    } else {
-      for(int i = 0; i < transfer.length; i++) {
-        transfer[i] -= scale;
-      }
-    }
-    for(int i = 0; i < transfer.length; i++) {
-      samples[i] = ((float) transfer[i]) / scale;
-    }
-    return samples;
-  }
+        int bps = format.getSampleSizeInBits();
+        int byps = bps / 8;
+        int nb = normalize(bps);
 
-  /**
-   * @param samples
-   * @param s_
-   * @param format
-   * @return
-   */
-  public static float[] window_func(float[] samples, int s_, AudioFormat format) {
-    int chnls = format.getChannels();
-    int len = s_ / chnls;
-
-    for(int i = 0, k, j; i < chnls; i++) {
-      for(j = i, k = 0; j < s_; j += chnls) {
-        samples[j] *= Math.sin(Math.PI * (k++) / (len - 1));
-      }
+        if (format.isBigEndian()) {
+            for (int i = 0, k = 0, j; i < b_; i += nb, k++) {
+                transfer[k] = 0L;
+                int minima = i + nb - 1;
+                for (j = 0; j < nb; j++) {
+                    transfer[k] |= (buffer[minima - j] & 0xFFL) << (8 * j);
+                }
+            }
+        } else {
+            for (int i = 0, k = 0, j; i < b_; i += nb, k++) {
+                transfer[k] = 0L;
+                for (j = 0; j < nb; j++) {
+                    transfer[k] |= (buffer[i + j] & 0xFFL) << (8 * j);
+                }
+            }
+        }
+        long scale = (long) Math.pow(2l, bps - 1d);
+        if (format.getEncoding() == AudioFormat.Encoding.PCM_SIGNED) {
+            long shift = 64l - bps;
+            for (int i = 0; i < transfer.length; i++)
+                transfer[i] = ((transfer[i] << shift) >> shift);
+        } else {
+            for (int i = 0; i < transfer.length; i++) {
+                transfer[i] -= scale;
+            }
+        }
+        for (int i = 0; i < transfer.length; i++) {
+            samples[i] = ((float) transfer[i]) / scale;
+        }
+        return samples;
     }
-    return samples;
-  }
 
-  /**
-   * @param format
-   * @param time
-   * @return int
-   */
-  public static int msToByte(AudioFormat format, int time) {
-    return (int) (time * (format.getSampleRate() * format.getChannels() * format.getSampleSizeInBits()) / 8000f);
-  }
+    /**
+     * @param samples
+     * @param s_
+     * @param format
+     * @return
+     */
+    public static float[] window_func(float[] samples, int s_, AudioFormat format) {
+        int chnls = format.getChannels();
+        int len = s_ / chnls;
+
+        for (int i = 0, k, j; i < chnls; i++) {
+            for (j = i, k = 0; j < s_; j += chnls) {
+                samples[j] *= Math.sin(Math.PI * (k++) / (len - 1));
+            }
+        }
+        return samples;
+    }
+
+    /**
+     * @param format
+     * @param time
+     * @return int
+     */
+    public static int msToByte(AudioFormat format, int time) {
+        return (int) (time * (format.getSampleRate() * format.getChannels() * format.getSampleSizeInBits()) / 8000f);
+    }
+
+    /**
+     * @param inFormat
+     * @param outFormat
+     * @param inLocale
+     * @param outLocale
+     */
+    @Override
+    public void transcode(int inFormat, int outFormat, File inLocale, File outLocale) {
+
+    }
 }

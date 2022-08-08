@@ -25,5 +25,5 @@ import com.halcyoninae.halcyon.constant.Manager;
  * @since 3.0
  */
 public interface PlayerManager {
-  String BLANK_MP3_FILE = Manager.RSC_FOLDER_NAME + "/audio/blank.mp3";
+    String BLANK_MP3_FILE = Manager.RSC_FOLDER_NAME + "/audio/blank.mp3";
 }

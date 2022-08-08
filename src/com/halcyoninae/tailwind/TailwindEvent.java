@@ -24,27 +24,27 @@ package com.halcyoninae.tailwind;
  * @since 3.1
  */
 public class TailwindEvent {
-  /**
-   * Enum constants that represents
-   * the different status of a stream.
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public enum TailwindStatus {
-    PLAYING, PAUSED, OPEN, CLOSED, END, RESUMED
-  }
+    private final AudioInfo current;
 
-  private final AudioInfo current;
+    public TailwindEvent(AudioInfo set) {
+        this.current = set;
+    }
 
-  public TailwindEvent(AudioInfo set) {
-    this.current = set;
-  }
+    /**
+     * @return The current event's AudioInfo object
+     */
+    public AudioInfo getCurrentAudioInfo() {
+        return current;
+    }
 
-  /**
-   * @return The current event's AudioInfo object
-   */
-  public AudioInfo getCurrentAudioInfo() {
-    return current;
-  }
+    /**
+     * Enum constants that represents
+     * the different status of a stream.
+     *
+     * @author Jack Meng
+     * @since 3.1
+     */
+    public enum TailwindStatus {
+        PLAYING, PAUSED, OPEN, CLOSED, END, RESUMED
+    }
 }

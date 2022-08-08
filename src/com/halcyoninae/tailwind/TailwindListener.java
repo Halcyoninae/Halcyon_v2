@@ -26,62 +26,62 @@ import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @since 3.1
  */
 public final class TailwindListener {
-  /**
-   * A listener to get information and updates
-   * about the current position of the stream.
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public interface TimeUpdateListener {
     /**
-     * @param time The current time in milliseconds
+     * A listener to get information and updates
+     * about the current position of the stream.
+     *
+     * @author Jack Meng
+     * @since 3.1
      */
-    void trackCurrentTime(long time);
-  }
+    public interface TimeUpdateListener {
+        /**
+         * @param time The current time in milliseconds
+         */
+        void trackCurrentTime(long time);
+    }
 
-  /**
-   * A listener to get information regarding
-   * the stream; for example, is the current stream playing, paused, open, or
-   * closed?
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public interface StatusUpdateListener {
     /**
-     * @param status A TailwindStatus object
+     * A listener to get information regarding
+     * the stream; for example, is the current stream playing, paused, open, or
+     * closed?
+     *
+     * @author Jack Meng
+     * @since 3.1
      */
-    void statusUpdate(TailwindStatus status);
-  }
+    public interface StatusUpdateListener {
+        /**
+         * @param status A TailwindStatus object
+         */
+        void statusUpdate(TailwindStatus status);
+    }
 
-  /**
-   * A listener to get information on the current
-   * loaded audio file loaded into the stream.
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public interface GenericUpdateListener {
     /**
-     * @param event A TailwindEvent that holds information regarding the current
-     *              loaded audio file
+     * A listener to get information on the current
+     * loaded audio file loaded into the stream.
+     *
+     * @author Jack Meng
+     * @since 3.1
      */
-    void genericUpdate(TailwindEvent event);
-  }
+    public interface GenericUpdateListener {
+        /**
+         * @param event A TailwindEvent that holds information regarding the current
+         *              loaded audio file
+         */
+        void genericUpdate(TailwindEvent event);
+    }
 
-  /**
-   * A listener that dispatches information regarding
-   * the current buffer or frame.
-   *
-   * @author Jack Meng
-   * @since 3.1
-   */
-  public interface FrameBufferListener {
     /**
-     * @param samples A float array representing the buffer at the current frame
-     * @param s_valid
+     * A listener that dispatches information regarding
+     * the current buffer or frame.
+     *
+     * @author Jack Meng
+     * @since 3.1
      */
-    void frameUpdate(float[] samples, int s_valid);
-  }
+    public interface FrameBufferListener {
+        /**
+         * @param samples A float array representing the buffer at the current frame
+         * @param s_valid
+         */
+        void frameUpdate(float[] samples, int s_valid);
+    }
 }

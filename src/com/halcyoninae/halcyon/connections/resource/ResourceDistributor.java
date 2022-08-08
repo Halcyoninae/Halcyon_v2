@@ -27,10 +27,10 @@ import java.net.URL;
 
 /**
  * Retrieves resources from the binary resource folder.
- *
+ * <p>
  * This resource folder is not located externally and is packed in during
  * compilation to the generated binary.
- *
+ * <p>
  * This class should not be confused with {@link com.halcyoninae.halcyon.connections.properties.ResourceFolder}
  * as that class handles external resources, while this class handles internal resources.
  *
@@ -39,86 +39,90 @@ import java.net.URL;
  */
 public class ResourceDistributor {
 
-  /**
-   * Gets an ImageIcon from the resource folder.
-   * @param path The path to the image
-   * @return ImageIcon The image icon
-   */
-  public ImageIcon getFromAsImageIcon(String path) {
-    try {
-      return new ImageIcon(
-        java.util.Objects.requireNonNull(getClass().getResource(path))
-      );
-    } catch (NullPointerException e) {
-      Debugger.log(
-        "Resource Distributor [IMAGE] was unable to fetch the expected path: " +
-        path +
-        "\nResorted to raw fetching..."
-      );
-      return new ImageIcon(path);
+    /**
+     * Gets an ImageIcon from the resource folder.
+     *
+     * @param path The path to the image
+     * @return ImageIcon The image icon
+     */
+    public ImageIcon getFromAsImageIcon(String path) {
+        try {
+            return new ImageIcon(
+                    java.util.Objects.requireNonNull(getClass().getResource(path))
+            );
+        } catch (NullPointerException e) {
+            Debugger.log(
+                    "Resource Distributor [IMAGE] was unable to fetch the expected path: " +
+                            path +
+                            "\nResorted to raw fetching..."
+            );
+            return new ImageIcon(path);
+        }
     }
-  }
 
-  /**
-   * Gets a standard file from the resource folder.
-   * @param path The path to the file
-   * @return File The file
-   */
-  public File getFromAsFile(String path) {
-    try {
-      return new File(
-          java.util.Objects.requireNonNull(getClass().getResource(path)).getFile());
-    } catch (NullPointerException e) {
-      Debugger.log(
-          "Resource Distributor [FILE] was unable to fetch the expected path: " +
-              path +
-              "\nResorted to raw fetching...");
-      return new File(path);
+    /**
+     * Gets a standard file from the resource folder.
+     *
+     * @param path The path to the file
+     * @return File The file
+     */
+    public File getFromAsFile(String path) {
+        try {
+            return new File(
+                    java.util.Objects.requireNonNull(getClass().getResource(path)).getFile());
+        } catch (NullPointerException e) {
+            Debugger.log(
+                    "Resource Distributor [FILE] was unable to fetch the expected path: " +
+                            path +
+                            "\nResorted to raw fetching...");
+            return new File(path);
+        }
     }
-  }
 
-  /**
-   * Similar to other methods but returns as {@link java.net.URL}
-   * @param path
-   * @return
-   */
-  public URL getFromAsURL(String path) {
-    try {
-      return java.util.Objects.requireNonNull(getClass().getResource(path));
-    } catch (NullPointerException e) {
-      Debugger.log(
-          "Resource Distributor [URL] was unable to fetch the expected path: " +
-              path +
-              "\nResorted to raw fetching...");
-      try {
-        return new URL(path);
-      } catch (MalformedURLException e1) {
-        e1.printStackTrace();
-      }
+    /**
+     * Similar to other methods but returns as {@link java.net.URL}
+     *
+     * @param path
+     * @return
+     */
+    public URL getFromAsURL(String path) {
+        try {
+            return java.util.Objects.requireNonNull(getClass().getResource(path));
+        } catch (NullPointerException e) {
+            Debugger.log(
+                    "Resource Distributor [URL] was unable to fetch the expected path: " +
+                            path +
+                            "\nResorted to raw fetching...");
+            try {
+                return new URL(path);
+            } catch (MalformedURLException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return null;
     }
-    return null;
-  }
 
-  /**
-   * Similar to other methods but returns as {@link java.io.InputStream}
-   * @param path
-   * @return
-   */
-  public InputStream getFromAsStream(String path) {
-    try {
-      return java.util.Objects.requireNonNull(getClass().getResourceAsStream(path));
-    } catch (NullPointerException e) {
-      Debugger.log(
-        "Resource Distributor [STREAM] was unable to fetch the expected path: " +
-        path +
-        "\nResorted to raw fetching..."
-      );
-      try {
-        return new FileInputStream(path);
-      } catch (FileNotFoundException e1) {
-        e1.printStackTrace();
-      }
+    /**
+     * Similar to other methods but returns as {@link java.io.InputStream}
+     *
+     * @param path
+     * @return
+     */
+    public InputStream getFromAsStream(String path) {
+        try {
+            return java.util.Objects.requireNonNull(getClass().getResourceAsStream(path));
+        } catch (NullPointerException e) {
+            Debugger.log(
+                    "Resource Distributor [STREAM] was unable to fetch the expected path: " +
+                            path +
+                            "\nResorted to raw fetching..."
+            );
+            try {
+                return new FileInputStream(path);
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return null;
     }
-    return null;
-  }
 }

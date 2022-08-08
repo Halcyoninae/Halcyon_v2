@@ -36,61 +36,61 @@ import java.util.concurrent.Executors;
  * @author 3.1
  */
 public final class Wrapper {
-  /**
-   * Launches a runnable in an async pool.
-   *
-   * @param runnable The runnable to be launched
-   */
-  public static void async(Runnable runnable) {
-    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
-      ExecutorService threadpool = Executors.newFixedThreadPool(1);
-      threadpool.submit(runnable);
-    } else {
-      CompletableFuture.runAsync(runnable);
+    /**
+     * Launches a runnable in an async pool.
+     *
+     * @param runnable The runnable to be launched
+     */
+    public static void async(Runnable runnable) {
+        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
+            ExecutorService threadpool = Executors.newFixedThreadPool(1);
+            threadpool.submit(runnable);
+        } else {
+            CompletableFuture.runAsync(runnable);
+        }
     }
-  }
 
-  public static void sort(TabTree tree) {
-    File[] f = new File(tree.getPath()).listFiles();
-    Arrays.sort(f, new Comparator<File>() {
-      @Override
-      public int compare(File o1, File o2) {
-        return o1.getName().compareTo(o2.getName());
-      }
-    });
-  }
-
-
-  /**
-   * @param runnable
-   */
-  public static void asyncSwingUtil(Runnable runnable) {
-    SwingUtilities.invokeLater(runnable);
-  }
-
-  /**
-   * Launches a Runnable in a precatched
-   * Exception handler.
-   *
-   * @param runnable The task to run safely on.
-   */
-  public static void safeLog(Runnable runnable, boolean isAsync) {
-    try {
-      if (isAsync)
-        async(runnable);
-      else
-        runnable.run();
-    } catch (Exception e) {
-      ResourceFolder.dispatchLog(e);
+    public static void sort(TabTree tree) {
+        File[] f = new File(tree.getPath()).listFiles();
+        Arrays.sort(f, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
     }
-  }
 
 
-  /**
-   * @param run
-   */
-  public static void threadedRun(Runnable run) {
-    ExecutorService es = Executors.newWorkStealingPool();
-    es.submit(run);
-  }
+    /**
+     * @param runnable
+     */
+    public static void asyncSwingUtil(Runnable runnable) {
+        SwingUtilities.invokeLater(runnable);
+    }
+
+    /**
+     * Launches a Runnable in a precatched
+     * Exception handler.
+     *
+     * @param runnable The task to run safely on.
+     */
+    public static void safeLog(Runnable runnable, boolean isAsync) {
+        try {
+            if (isAsync)
+                async(runnable);
+            else
+                runnable.run();
+        } catch (Exception e) {
+            ResourceFolder.dispatchLog(e);
+        }
+    }
+
+
+    /**
+     * @param run
+     */
+    public static void threadedRun(Runnable run) {
+        ExecutorService es = Executors.newWorkStealingPool();
+        es.submit(run);
+    }
 }

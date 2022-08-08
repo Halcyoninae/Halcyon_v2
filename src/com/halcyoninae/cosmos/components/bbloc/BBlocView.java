@@ -24,7 +24,7 @@ import java.awt.*;
 /**
  * BBloc short for Button Bloc
  * is a view to display a button palette.
- *
+ * <p>
  * These buttons can be used to address certain
  * things regarding the player.
  *
@@ -33,29 +33,29 @@ import java.awt.*;
  */
 public class BBlocView extends JPanel {
 
-  /// BBloc Config START
-  /// B Bloc Size Config START ///
-  final int B_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH - 40;
-  final int B_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
+    /// BBloc Config START
+    /// B Bloc Size Config START ///
+    final int B_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH - 40;
+    final int B_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
 
-  final int B_MAX_WIDTH = B_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
-  final int B_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
-  /// B Bloc Size Config END ///
-  /// BBloc Config END
+    final int B_MAX_WIDTH = B_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
+    final int B_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
+    /// B Bloc Size Config END ///
+    /// BBloc Config END
 
-  public BBlocView() {
-    super();
-    setPreferredSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
-    setMinimumSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
-  }
-
-
-  /**
-   * @param buttons
-   */
-  public void addBBlockButtons(BBlocButton... buttons) {
-    for (BBlocButton b : buttons) {
-      add(b.getComponent());
+    public BBlocView() {
+        super();
+        setPreferredSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
+        setMinimumSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
     }
-  }
+
+
+    /**
+     * @param buttons
+     */
+    public void addBBlockButtons(BBlocButton... buttons) {
+        for (BBlocButton b : buttons) {
+            add(b.getComponent());
+        }
+    }
 }

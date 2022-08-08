@@ -22,24 +22,24 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
  * @since 3.2
  */
 public class StrictValidator implements PropertyValidator {
-  public String[] tempaltes;
+    public String[] tempaltes;
 
-  public StrictValidator(String ... allowedArgs) {
-    this.tempaltes = allowedArgs;
-  }
-
-
-  /**
-   * @param propertyValue
-   * @return boolean
-   */
-  @Override
-  public boolean isValid(String propertyValue) {
-    for (String template : tempaltes) {
-      if (propertyValue.equalsIgnoreCase(template)) {
-        return true;
-      }
+    public StrictValidator(String... allowedArgs) {
+        this.tempaltes = allowedArgs;
     }
-    return false;
-  }
+
+
+    /**
+     * @param propertyValue
+     * @return boolean
+     */
+    @Override
+    public boolean isValid(String propertyValue) {
+        for (String template : tempaltes) {
+            if (propertyValue.equalsIgnoreCase(template)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

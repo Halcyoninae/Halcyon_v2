@@ -34,43 +34,43 @@ import java.awt.event.ActionEvent;
  */
 public class LegalNoticeButton extends JButton implements BBlocButton {
 
-  /// LEGALNOTICEDIALOG Config START
-  public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 500;
-  public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 550;
-  final String LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL = Manager.RSC_FOLDER_NAME + "/bbloc/legals_normal.png";
-  final String LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED = Manager.RSC_FOLDER_NAME + "/bbloc/legals_pressed.png";
-  public static final String LEGAL_NOTICE_DOCS = Manager.RSC_FOLDER_NAME + "/files/LICENSE.html";
-  public static final String LEGAL_NOTICE_PROPERTIES_DOCS = Manager.RSC_FOLDER_NAME + "/files/PROPERTIES_FILE.html";
-  final int LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT = LEGALNOTICEDIALOG_MIN_HEIGHT - 100;
-  /// LEGALNOTICEDIALOG Config END
+    /// LEGALNOTICEDIALOG Config START
+    public static final int LEGALNOTICEDIALOG_MIN_WIDTH = 500;
+    public static final int LEGALNOTICEDIALOG_MIN_HEIGHT = 550;
+    public static final String LEGAL_NOTICE_DOCS = Manager.RSC_FOLDER_NAME + "/files/LICENSE.html";
+    public static final String LEGAL_NOTICE_PROPERTIES_DOCS = Manager.RSC_FOLDER_NAME + "/files/PROPERTIES_FILE.html";
+    final String LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL = Manager.RSC_FOLDER_NAME + "/bbloc/legals_normal.png";
+    final String LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED = Manager.RSC_FOLDER_NAME + "/bbloc/legals_pressed.png";
+    final int LEGALNOTICEDIALOG_SCROLL_PANE_MIN_HEIGHT = LEGALNOTICEDIALOG_MIN_HEIGHT - 100;
+    /// LEGALNOTICEDIALOG Config END
 
-  public LegalNoticeButton() {
-    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
-    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
-    addActionListener(this);
-    setOpaque(true);
-    setBackground(null);
-    setDoubleBuffered(true);
-    setBorder(null);
-    setContentAreaFilled(false);
-  }
-
-
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    public LegalNoticeButton() {
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
+        addActionListener(this);
+        setOpaque(true);
+        setBackground(null);
+        setDoubleBuffered(true);
+        setBorder(null);
+        setContentAreaFilled(false);
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    new InformationDialog().run();
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
+
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        new InformationDialog().run();
+    }
 
 }

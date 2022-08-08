@@ -25,114 +25,114 @@ import java.io.File;
  * @since 3.1
  */
 public class PhysicalFolder {
-  private String absPath = ".";
+    private String absPath = ".";
 
-  /**
-   * Constructs the folder-info object instance with
-   * the specified path.
-   *
-   * Note: this path does not assert that the entered instance is
-   * a folder that exists or the file system has access/permission to.
-   *
-   * @param absolutePath The path to construct the folder-info object with.
-   */
-  public PhysicalFolder(String absolutePath) {
-    this.absPath = absolutePath;
-  }
-
-  /**
-   * Returns the absolute path of the folder-info object.
-   *
-   * @return The absolute path of the folder-info object.
-   */
-  public String getAbsolutePath() {
-    return absPath;
-  }
-
-  /**
-   * Returns the Files (not sub-folders) in the folder-info object
-   * or the folder as the file's names.
-   *
-   * @return A string array
-   */
-  public String[] getFilesAsStr() {
-    File[] f = new File(absPath).listFiles();
-    assert f != null;
-    String[] s = new String[f.length];
-    for (int i = 0; i < f.length; i++) {
-      s[i] = f[i].getName();
+    /**
+     * Constructs the folder-info object instance with
+     * the specified path.
+     * <p>
+     * Note: this path does not assert that the entered instance is
+     * a folder that exists or the file system has access/permission to.
+     *
+     * @param absolutePath The path to construct the folder-info object with.
+     */
+    public PhysicalFolder(String absolutePath) {
+        this.absPath = absolutePath;
     }
-    return s;
-  }
 
-  /**
-   * Returns all of the files within the folder
-   *
-   * @return File array
-   */
-  public File[] getFiles() {
-    return new File(absPath).listFiles();
-  }
+    /**
+     * Returns the absolute path of the folder-info object.
+     *
+     * @return The absolute path of the folder-info object.
+     */
+    public String getAbsolutePath() {
+        return absPath;
+    }
 
-  /**
-   * Get this folder's name
-   *
-   * @return A String
-   */
-  public String getName() {
-    return new File(absPath).getName();
-  }
-
-  /**
-   * Returns an array of String in which each String
-   * represents a file inside the folder (absolute path).
-   *
-   * @param rules An array of extensions to search for and compare to.
-   * @return An array of String
-   */
-  public String[] getFilesAsStr(String... rules) {
-    File[] f = new File(absPath).listFiles();
-    assert f != null;
-    String[] s = new String[f.length];
-    for (int i = 0; i < f.length; i++) {
-      if (f[i].isFile()) {
-        String curr = f[i].getAbsolutePath();
-        for (String r : rules) {
-          if (curr.endsWith(r)) {
-            s[i] = curr;
-            break;
-          }
+    /**
+     * Returns the Files (not sub-folders) in the folder-info object
+     * or the folder as the file's names.
+     *
+     * @return A string array
+     */
+    public String[] getFilesAsStr() {
+        File[] f = new File(absPath).listFiles();
+        assert f != null;
+        String[] s = new String[f.length];
+        for (int i = 0; i < f.length; i++) {
+            s[i] = f[i].getName();
         }
-      }
+        return s;
     }
-    return s;
-  }
 
-  /**
-   * @param rules An array of extensions to search for and compare to.
-   * @return An array of Files with the specified extension.
-   */
-  public File[] getFiles(String... rules) {
-    File[] f = new File(absPath).listFiles();
-    File[] s = new File[f.length];
-    for (int i = 0; i < f.length; i++) {
-      if (f[i].isFile()) {
-        String curr = f[i].getAbsolutePath();
-        for (String r : rules) {
-          if (curr.endsWith(r)) {
-            s[i] = f[i];
-            break;
-          }
+    /**
+     * Returns all of the files within the folder
+     *
+     * @return File array
+     */
+    public File[] getFiles() {
+        return new File(absPath).listFiles();
+    }
+
+    /**
+     * Get this folder's name
+     *
+     * @return A String
+     */
+    public String getName() {
+        return new File(absPath).getName();
+    }
+
+    /**
+     * Returns an array of String in which each String
+     * represents a file inside the folder (absolute path).
+     *
+     * @param rules An array of extensions to search for and compare to.
+     * @return An array of String
+     */
+    public String[] getFilesAsStr(String... rules) {
+        File[] f = new File(absPath).listFiles();
+        assert f != null;
+        String[] s = new String[f.length];
+        for (int i = 0; i < f.length; i++) {
+            if (f[i].isFile()) {
+                String curr = f[i].getAbsolutePath();
+                for (String r : rules) {
+                    if (curr.endsWith(r)) {
+                        s[i] = curr;
+                        break;
+                    }
+                }
+            }
         }
-      }
+        return s;
     }
-    return s;
-  }
 
-  /**
-   * Represents the folder-info object as a string.
-   */
-  public String toString() {
-    return absPath + "[" + java.util.Arrays.toString(getFilesAsStr()) + "]";
-  }
+    /**
+     * @param rules An array of extensions to search for and compare to.
+     * @return An array of Files with the specified extension.
+     */
+    public File[] getFiles(String... rules) {
+        File[] f = new File(absPath).listFiles();
+        File[] s = new File[f.length];
+        for (int i = 0; i < f.length; i++) {
+            if (f[i].isFile()) {
+                String curr = f[i].getAbsolutePath();
+                for (String r : rules) {
+                    if (curr.endsWith(r)) {
+                        s[i] = f[i];
+                        break;
+                    }
+                }
+            }
+        }
+        return s;
+    }
+
+    /**
+     * Represents the folder-info object as a string.
+     */
+    public String toString() {
+        return absPath + "[" + java.util.Arrays.toString(getFilesAsStr()) + "]";
+    }
 }

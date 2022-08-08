@@ -27,34 +27,34 @@ import java.beans.PropertyChangeListener;
  * @since 3.0
  */
 public class ForceDividerLocation implements PropertyChangeListener {
-  private final JSplitPane e;
-  private final int min;
-  private final int max;
+    private final JSplitPane e;
+    private final int min;
+    private final int max;
 
-  /**
-   * @param e The JSplitPane instance
-   * @param threshold The threshold (center+threshold and center-threshold)
-   */
-  public ForceDividerLocation(JSplitPane e, int threshold) {
-    this.e = e;
-    min = (int) ((e.getPreferredSize().getHeight() / 2) - threshold);
-    max = (int) (threshold + (e.getPreferredSize().getHeight() / 2));
-  }
-
-
-  /**
-   * @param evt
-   */
-  @Override
-  public void propertyChange(PropertyChangeEvent evt) {
-    if (evt.getPropertyName().equals("dividerLocation")) {
-      int dividerLoc = e.getDividerLocation();
-      if (dividerLoc < min) {
-        e.setDividerLocation(min);
-      }
-      if (dividerLoc > max) {
-        e.setDividerLocation(max);
-      }
+    /**
+     * @param e         The JSplitPane instance
+     * @param threshold The threshold (center+threshold and center-threshold)
+     */
+    public ForceDividerLocation(JSplitPane e, int threshold) {
+        this.e = e;
+        min = (int) ((e.getPreferredSize().getHeight() / 2) - threshold);
+        max = (int) (threshold + (e.getPreferredSize().getHeight() / 2));
     }
-  }
+
+
+    /**
+     * @param evt
+     */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("dividerLocation")) {
+            int dividerLoc = e.getDividerLocation();
+            if (dividerLoc < min) {
+                e.setDividerLocation(min);
+            }
+            if (dividerLoc > max) {
+                e.setDividerLocation(max);
+            }
+        }
+    }
 }

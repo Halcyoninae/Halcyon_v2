@@ -26,13 +26,13 @@ import java.awt.event.ActionListener;
  * @since 3.0
  */
 public interface BBlocButton extends ActionListener {
-  /**
-   * @return The Component representing this BBloc Button
-   */
-  JComponent getComponent();
+    /**
+     * @return The Component representing this BBloc Button
+     */
+    JComponent getComponent();
 
-  @Override
-  default void actionPerformed(ActionEvent e) {
-    // DO NOTHING
-  }
+    @Override
+    default void actionPerformed(ActionEvent e) {
+        // DO NOTHING
+    }
 }

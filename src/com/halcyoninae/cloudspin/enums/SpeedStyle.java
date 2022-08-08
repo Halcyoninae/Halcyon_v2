@@ -20,5 +20,5 @@ package com.halcyoninae.cloudspin.enums;
  * @since 3.2
  */
 public enum SpeedStyle {
-  SPEED, QUALITY, GENERAL
+    SPEED, QUALITY, GENERAL
 }

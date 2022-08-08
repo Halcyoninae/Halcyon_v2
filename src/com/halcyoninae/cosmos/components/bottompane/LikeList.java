@@ -30,116 +30,116 @@ import java.util.List;
 
 /**
  * A type of non-removable FileList viewable.
- *
+ * <p>
  * This represents the liked tracks the user's
  * liked tracks.
- *
+ * <p>
  * In order to do such, everything here is handled
  * as a "Virtual Folder" meaning that its just
  * a list of folders to keep.
- *
+ * <p>
  * This viewport is static meaning the user
  * cannot close this.
  *
  * @author Jack Meng
- * @since 3.1
  * @see com.halcyoninae.cosmos.components.bottompane.FileList
+ * @since 3.1
  */
 public class LikeList extends FileList {
-  private final transient VirtualFolder folder;
-  private static final RightClickHideItemListener itemListener = new RightClickHideItemListener() {
-    @Override
-    public void onRemove(String content) {
-      Global.ll.unset(content);
-      Debugger.good("Removed: " + content + " " + Global.ll.getFolder().getAsListFiles().contains(new File(content)));
-    }
-  };
-
-  /**
-   * Inits the LikeList object as a child of the FileList
-   * class with a Virtual Folder to represent this viewport.
-   */
-  public LikeList() {
-    super(new VirtualFolder("Liked", Program.fetchLikedTracks()),
-        Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
-        Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
-        Global.rd.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
-    folder = (VirtualFolder) getFolderInfo();
-   }
-
-  /**
-   * Removes a track from the liked list listing.
-   *
-   * @param file The file's absolute path to remove from.
-   */
-  public void unset(String file) {
-    try {
-      for (File f : getFileMap().keySet()) {
-        if (f.getAbsolutePath().equals(file)) {
-          DefaultTreeModel model = (DefaultTreeModel) getTree().getModel();
-          model.removeNodeFromParent(getFileMap().get(f));
-          model.reload();
-          getFileMap().remove(f);
-          return;
+    private static final RightClickHideItemListener itemListener = new RightClickHideItemListener() {
+        @Override
+        public void onRemove(String content) {
+            Global.ll.unset(content);
+            Debugger.good("Removed: " + content + " " + Global.ll.getFolder().getAsListFiles().contains(new File(content)));
         }
-      }
-    } catch (IllegalArgumentException e) {
-      // IGNORE
-    }
-  }
+    };
+    private final transient VirtualFolder folder;
 
-  /**
-   * Adss a track to the liked list listing.
-   *
-   * @param file The file's absolute path to add.
-   */
-  public void set(String file) {
-    if (!folder.getAsListFiles().contains(new File(file))) {
-      DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(file).getName());
-      getFileMap().put(new File(file), node);
-      super.getRoot().add(node);
-      getTree().revalidate();
-      folder.addFile(new File(file));
-      ((DefaultTreeModel) getTree().getModel()).reload();
-      Debugger.good(file + " added");
-    }
-  }
-
-  @Override
-  public void revalidateFiles() {
-    List<File> toRemove = new ArrayList<>();
-    for (File f : getFileMap().keySet()) {
-      if (!f.exists() || !f.isFile()) {
-        ((DefaultTreeModel) getTree().getModel()).removeNodeFromParent(getFileMap().get(f));
-        toRemove.add(f);
-        Debugger.warn("File not found: " + f.getName());
-      }
+    /**
+     * Inits the LikeList object as a child of the FileList
+     * class with a Virtual Folder to represent this viewport.
+     */
+    public LikeList() {
+        super(new VirtualFolder("Liked", Program.fetchLikedTracks()),
+                Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
+                Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
+                Global.rd.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
+        folder = (VirtualFolder) getFolderInfo();
     }
 
-    for (File f : toRemove) {
-      getFileMap().remove(f);
+    /**
+     * Removes a track from the liked list listing.
+     *
+     * @param file The file's absolute path to remove from.
+     */
+    public void unset(String file) {
+        try {
+            for (File f : getFileMap().keySet()) {
+                if (f.getAbsolutePath().equals(file)) {
+                    DefaultTreeModel model = (DefaultTreeModel) getTree().getModel();
+                    model.removeNodeFromParent(getFileMap().get(f));
+                    model.reload();
+                    getFileMap().remove(f);
+                    return;
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            // IGNORE
+        }
     }
-  }
 
-  /**
-   * Returns the virtual folder representing
-   * this viewport.
-   *
-   * @return {@link com.halcyoninae.halcyon.filesystem.VirtualFolder}
-   */
-  public VirtualFolder getFolder() {
-    return folder;
-  }
+    /**
+     * Adss a track to the liked list listing.
+     *
+     * @param file The file's absolute path to add.
+     */
+    public void set(String file) {
+        if (!folder.getAsListFiles().contains(new File(file))) {
+            DefaultMutableTreeNode node = new DefaultMutableTreeNode(new File(file).getName());
+            getFileMap().put(new File(file), node);
+            super.getRoot().add(node);
+            getTree().revalidate();
+            folder.addFile(new File(file));
+            ((DefaultTreeModel) getTree().getModel()).reload();
+            Debugger.good(file + " added");
+        }
+    }
 
-  /**
-   * Checks if a given file is "liked" meaning it
-   * exists in the current virtual folder.
-   *
-   * @param file The file's absolute path
-   * @return (true || false) if the file is contained in the list or not.
-   */
-  public boolean isLiked(String file) {
-    return Arrays.asList(folder.getFiles()).contains(new File(file));
-  }
+    @Override
+    public void revalidateFiles() {
+        List<File> toRemove = new ArrayList<>();
+        for (File f : getFileMap().keySet()) {
+            if (!f.exists() || !f.isFile()) {
+                ((DefaultTreeModel) getTree().getModel()).removeNodeFromParent(getFileMap().get(f));
+                toRemove.add(f);
+                Debugger.warn("File not found: " + f.getName());
+            }
+        }
+
+        for (File f : toRemove) {
+            getFileMap().remove(f);
+        }
+    }
+
+    /**
+     * Returns the virtual folder representing
+     * this viewport.
+     *
+     * @return {@link com.halcyoninae.halcyon.filesystem.VirtualFolder}
+     */
+    public VirtualFolder getFolder() {
+        return folder;
+    }
+
+    /**
+     * Checks if a given file is "liked" meaning it
+     * exists in the current virtual folder.
+     *
+     * @param file The file's absolute path
+     * @return (true | | false) if the file is contained in the list or not.
+     */
+    public boolean isLiked(String file) {
+        return Arrays.asList(folder.getFiles()).contains(new File(file));
+    }
 
 }

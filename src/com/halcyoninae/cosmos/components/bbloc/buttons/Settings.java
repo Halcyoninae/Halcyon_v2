@@ -32,35 +32,36 @@ import java.awt.event.ActionEvent;
  * @since 3.0
  */
 public class Settings extends JButton implements BBlocButton {
-  private final SettingsPane e = new SettingsPane();
-  public Settings() {
-    setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
-    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
-    setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
-    setOpaque(true);
-    setBorder(null);
-    setDoubleBuffered(true);
-    setBackground(null);
-    addActionListener(this);
-    setContentAreaFilled(false);
+    private final SettingsPane e = new SettingsPane();
 
-  }
+    public Settings() {
+        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
+        setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
+        setOpaque(true);
+        setBorder(null);
+        setDoubleBuffered(true);
+        setBackground(null);
+        addActionListener(this);
+        setContentAreaFilled(false);
 
-
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    }
 
 
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    this.e.run();
-  }
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
+
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.e.run();
+    }
 }

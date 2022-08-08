@@ -29,38 +29,38 @@ import java.io.InputStream;
  * @since 3.3
  */
 public class VorbisIn extends InputStream {
-  private final VorbisStream stream;
+    private final VorbisStream stream;
 
-  public VorbisIn(VorbisStream in) {
-    this.stream = in;
-  }
-
-  @Override
-  public int read(byte[] buffer, int offset, int length) throws IOException {
-    try {
-      return this.stream.readPcm(buffer, offset, length);
-    } catch (EndOfOggStreamException e) {
-      // IGNORED
+    public VorbisIn(VorbisStream in) {
+        this.stream = in;
     }
-    return -1;
-  }
 
-  @Override
-  public int read(byte[] buffer) throws IOException {
-    return this.read(buffer, 0, buffer.length);
-  }
+    @Override
+    public int read(byte[] buffer, int offset, int length) throws IOException {
+        try {
+            return this.stream.readPcm(buffer, offset, length);
+        } catch (EndOfOggStreamException e) {
+            // IGNORED
+        }
+        return -1;
+    }
 
-  @Override
-  public int read() throws IOException {
-    return 0;
-  }
+    @Override
+    public int read(byte[] buffer) throws IOException {
+        return this.read(buffer, 0, buffer.length);
+    }
+
+    @Override
+    public int read() throws IOException {
+        return 0;
+    }
 
 
-  /**
-   * @return AudioFormat Return this ogg stream's format
-   */
-  public AudioFormat getFormat() {
-    return new AudioFormat(stream.getIdentificationHeader().getSampleRate(), 16,
-        stream.getIdentificationHeader().getChannels(), true, true);
-  }
+    /**
+     * @return AudioFormat Return this ogg stream's format
+     */
+    public AudioFormat getFormat() {
+        return new AudioFormat(stream.getIdentificationHeader().getSampleRate(), 16,
+                stream.getIdentificationHeader().getChannels(), true, true);
+    }
 }

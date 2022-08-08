@@ -31,46 +31,46 @@ import java.awt.event.WindowEvent;
  * @since 3.2
  */
 public class SlidersControl extends JButton implements BBlocButton {
-  private boolean isPressed;
-  private final SlidersDialog dialog;
+    private final SlidersDialog dialog;
+    private boolean isPressed;
 
-  public SlidersControl() {
-    setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
-    setToolTipText("Open a window to display sliders that can alter certain things");
-    setOpaque(true);
-    setBorder(null);
-    setDoubleBuffered(true);
-    addActionListener(this);
-    setBackground(null);
-    setContentAreaFilled(false);
-    isPressed = false;
-    dialog = new SlidersDialog();
-    dialog.addWindowListener(new WindowAdapter() {
-      @Override
-      public void windowClosing(WindowEvent e) {
+    public SlidersControl() {
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
+        setToolTipText("Open a window to display sliders that can alter certain things");
+        setOpaque(true);
+        setBorder(null);
+        setDoubleBuffered(true);
+        addActionListener(this);
+        setBackground(null);
+        setContentAreaFilled(false);
         isPressed = false;
-      }
-    });
-  }
-
-
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
-
-
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if(!isPressed) {
-      dialog.run();
+        dialog = new SlidersDialog();
+        dialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                isPressed = false;
+            }
+        });
     }
-  }
+
+
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
+
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!isPressed) {
+            dialog.run();
+        }
+    }
 
 }

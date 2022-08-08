@@ -24,7 +24,7 @@ import java.awt.*;
 /**
  * This class represents an error dialog,
  * which is used to display error messages.
- *
+ * <p>
  * It is basically a text dialog.
  *
  * @author Jack Meng
@@ -32,35 +32,34 @@ import java.awt.*;
  */
 public class ErrorWindow extends JFrame implements Runnable {
 
-  /// Error Window Config START
-  final int DIALOG_ERROR_MIN_WIDTH = 300;
-  final int DIALOG_ERROR_MIN_HEIGHT = 150;
+    static final String DIALOG_ERROR_WIN_TITLE = "Exception!";
+    /// Error Window Config START
+    final int DIALOG_ERROR_MIN_WIDTH = 300;
+    final int DIALOG_ERROR_MIN_HEIGHT = 150;
+    /// Error Window Config END
 
-  static final String DIALOG_ERROR_WIN_TITLE = "Exception!";
-  /// Error Window Config END
+    public ErrorWindow(String content) {
+        super(DIALOG_ERROR_WIN_TITLE);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setPreferredSize(new Dimension(DIALOG_ERROR_MIN_WIDTH, DIALOG_ERROR_MIN_HEIGHT));
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        JTextArea jt = new JTextArea(content);
+        jt.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(jt);
+        scrollPane.setPreferredSize(new Dimension(DIALOG_ERROR_MIN_WIDTH, DIALOG_ERROR_MIN_HEIGHT));
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        getContentPane().add(scrollPane);
+    }
 
-  public ErrorWindow(String content) {
-    super(DIALOG_ERROR_WIN_TITLE);
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setPreferredSize(new Dimension(DIALOG_ERROR_MIN_WIDTH, DIALOG_ERROR_MIN_HEIGHT));
-    setLocationRelativeTo(null);
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-    setResizable(false);
-    JTextArea jt = new JTextArea(content);
-    jt.setEditable(false);
-    JScrollPane scrollPane = new JScrollPane(jt);
-    scrollPane.setPreferredSize(new Dimension(DIALOG_ERROR_MIN_WIDTH, DIALOG_ERROR_MIN_HEIGHT));
-    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    getContentPane().add(scrollPane);
-  }
-
-  @Override
-  public void run() {
-    SwingUtilities.invokeLater(() -> {
-      this.pack();
-      this.setAlwaysOnTop(true);
-      this.setVisible(true);
-    });
-  }
+    @Override
+    public void run() {
+        SwingUtilities.invokeLater(() -> {
+            this.pack();
+            this.setAlwaysOnTop(true);
+            this.setVisible(true);
+        });
+    }
 }

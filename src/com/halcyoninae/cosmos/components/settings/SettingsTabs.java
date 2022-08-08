@@ -22,9 +22,9 @@ import javax.swing.*;
  * @since 3.2
  */
 public interface SettingsTabs {
-  String getTabName();
+    String getTabName();
 
-  String getTabToolTip();
+    String getTabToolTip();
 
-  JComponent getTabContent();
+    JComponent getTabContent();
 }

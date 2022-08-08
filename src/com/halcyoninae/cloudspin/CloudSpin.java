@@ -21,9 +21,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * This class is used for general graphical manipulation.
- *
+ * <p>
  * For example taking an image and blurring it.
- *
+ * <p>
  * This package is intended to replace the overburdened
  * {@link com.halcyoninae.halcyon.utils.DeImage}
  * which has been here since 2.0 and features the old burden class style of
@@ -97,14 +97,14 @@ public final class CloudSpin {
      * @return BufferedImage
      */
     public static BufferedImage createGradient(BufferedImage src, int startOpacity, int endOpacity, int startX,
-            int startY, int endX, int endY) {
+                                               int startY, int endX, int endY) {
         BufferedImage alphamask = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = alphamask.createGraphics();
         LinearGradientPaint lgp = new LinearGradientPaint(
                 new Point(startX, startY),
                 new Point(endX, endY),
-                new float[] { 0.0f, 1.0f },
-                new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
+                new float[]{0.0f, 1.0f},
+                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
         g2d.setPaint(lgp);
         g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
         g2d.dispose();

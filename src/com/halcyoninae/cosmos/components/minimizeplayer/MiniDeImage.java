@@ -24,16 +24,17 @@ import java.awt.image.BufferedImage;
  * @since 3.2
  */
 public final class MiniDeImage {
-  private MiniDeImage() {}
+    private MiniDeImage() {
+    }
 
 
-  /**
-   * @param r
-   * @param x
-   * @param y
-   * @return BufferedImage
-   */
-  public static BufferedImage blurHash(BufferedImage r, int x, int y) {
-    return new BlurHash().blur(r, x, y, (Object[]) null); // cast a null???? cmon bruh
-  }
+    /**
+     * @param r
+     * @param x
+     * @param y
+     * @return BufferedImage
+     */
+    public static BufferedImage blurHash(BufferedImage r, int x, int y) {
+        return new BlurHash().blur(r, x, y, (Object[]) null); // cast a null???? cmon bruh
+    }
 }

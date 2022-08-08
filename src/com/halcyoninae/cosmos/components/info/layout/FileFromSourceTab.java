@@ -25,66 +25,66 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
-  private final JEditorPane text;
-  private String tabName = "";
+    private final JEditorPane text;
+    private String tabName = "";
 
-  public FileFromSourceTab(String tabName, String textTab) {
-    setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
-    setFocusable(true);
+    public FileFromSourceTab(String tabName, String textTab) {
+        setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
+        setFocusable(true);
 
-    this.tabName = tabName;
+        this.tabName = tabName;
 
-    text = new JEditorPane();
-    text.setEditable(false);
-    text.setContentType("text/html");
-    text.setText(textTab);
-    text.setCaretPosition(0);
+        text = new JEditorPane();
+        text.setEditable(false);
+        text.setContentType("text/html");
+        text.setText(textTab);
+        text.setCaretPosition(0);
 
-    getViewport().add(text);
-  }
-
-
-  /**
-   * @param file
-   * @return String
-   */
-  public static String getContent(String file) {
-    StringBuilder sb = new StringBuilder();
-    try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-      String line;
-      while ((line = br.readLine()) != null) {
-        sb.append(line);
-      }
-    } catch (Exception e) {
-      ResourceFolder.dispatchLog(e);
+        getViewport().add(text);
     }
-    return sb.toString();
-  }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getName() {
-    return tabName;
-  }
+    /**
+     * @param file
+     * @return String
+     */
+    public static String getContent(String file) {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+        } catch (Exception e) {
+            ResourceFolder.dispatchLog(e);
+        }
+        return sb.toString();
+    }
 
 
-  /**
-   * @return String
-   */
-  @Override
-  public String getToolTip() {
-    return "View Legal Information regarding this program.";
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getName() {
+        return tabName;
+    }
 
 
-  /**
-   * @return JComponent
-   */
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    /**
+     * @return String
+     */
+    @Override
+    public String getToolTip() {
+        return "View Legal Information regarding this program.";
+    }
+
+
+    /**
+     * @return JComponent
+     */
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 }

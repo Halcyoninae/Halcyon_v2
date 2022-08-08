@@ -23,16 +23,16 @@ import java.awt.image.BufferedImage;
  */
 public interface Blur {
 
-  /**
-   * This method will be implemented by all Blurring
-   * classes that will help to blur an image.
-   *
-   * @param image       The image to blur.
-   * @param _x          The x-coordinate of the image.
-   * @param _y          The y-coordinate of the image.
-   * @param otherParams Any other parameters that may be needed by that particular
-   *                    method
-   * @return A BufferedImage created by the blurring method
-   */
-  BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams);
+    /**
+     * This method will be implemented by all Blurring
+     * classes that will help to blur an image.
+     *
+     * @param image       The image to blur.
+     * @param _x          The x-coordinate of the image.
+     * @param _y          The y-coordinate of the image.
+     * @param otherParams Any other parameters that may be needed by that particular
+     *                    method
+     * @return A BufferedImage created by the blurring method
+     */
+    BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams);
 }

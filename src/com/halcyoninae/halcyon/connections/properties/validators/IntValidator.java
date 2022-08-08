@@ -23,18 +23,18 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
  */
 public class IntValidator implements PropertyValidator {
 
-  /**
-   * @param propertyValue
-   * @return boolean
-   */
-  @Override
-  public boolean isValid(String propertyValue) {
-    try {
-      Integer.parseInt(propertyValue);
-      return true;
-    } catch (NumberFormatException e) {
-      return false;
+    /**
+     * @param propertyValue
+     * @return boolean
+     */
+    @Override
+    public boolean isValid(String propertyValue) {
+        try {
+            Integer.parseInt(propertyValue);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
-  }
 
 }

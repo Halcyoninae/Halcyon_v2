@@ -23,33 +23,33 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StraightTextDialog extends JFrame implements Runnable {
-  private final JScrollPane pane;
-  private final JEditorPane text;
+    private final JScrollPane pane;
+    private final JEditorPane text;
 
-  public StraightTextDialog(String content) {
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setTitle("Information");
-    setPreferredSize(new Dimension(250, 100));
-    setAutoRequestFocus(true);
+    public StraightTextDialog(String content) {
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setTitle("Information");
+        setPreferredSize(new Dimension(250, 100));
+        setAutoRequestFocus(true);
 
-    text = new JEditorPane("text/html", content);
-    text.setEditable(false);
-    text.setFocusable(false);
+        text = new JEditorPane("text/html", content);
+        text.setEditable(false);
+        text.setFocusable(false);
 
-    pane = new JScrollPane(text);
-    pane.setPreferredSize(new Dimension(250, 100));
-    pane.getViewport().setPreferredSize(new Dimension(250, 100));
+        pane = new JScrollPane(text);
+        pane.setPreferredSize(new Dimension(250, 100));
+        pane.getViewport().setPreferredSize(new Dimension(250, 100));
 
-    setLocationRelativeTo(Halcyon.bgt.getFrame());
+        setLocationRelativeTo(Halcyon.bgt.getFrame());
 
-    setContentPane(pane);
-  }
+        setContentPane(pane);
+    }
 
-  @Override
-  public void run() {
-    SwingUtilities.invokeLater(() -> {
-      pack();
-      setVisible(true);
-    });
-  }
+    @Override
+    public void run() {
+        SwingUtilities.invokeLater(() -> {
+            pack();
+            setVisible(true);
+        });
+    }
 }

@@ -23,36 +23,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LikeButton extends JButton implements ActionListener {
-  private final ImageIcon like;
+    private final ImageIcon like;
     private final ImageIcon noLike;
 
-  public LikeButton(ImageIcon noLike, ImageIcon like) {
-    super(noLike);
-    this.like = like;
-    this.noLike = noLike;
-    addActionListener(this);
-    setToolTipText("Like/Unlike");
-  }
-
-  public void noLike() {
-    setIcon(noLike);
-  }
-
-  public void like() {
-    setIcon(like);
-  }
-
-  /**
-   * @param e
-   */
-  @Override
-  public void actionPerformed(ActionEvent e) {
-    if (this.getIcon().equals(noLike)) {
-      this.setIcon(like);
-      Global.ll.set(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-    } else {
-      this.setIcon(noLike);
-      Global.ll.unset(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+    public LikeButton(ImageIcon noLike, ImageIcon like) {
+        super(noLike);
+        this.like = like;
+        this.noLike = noLike;
+        addActionListener(this);
+        setToolTipText("Like/Unlike");
     }
-  }
+
+    public void noLike() {
+        setIcon(noLike);
+    }
+
+    public void like() {
+        setIcon(like);
+    }
+
+    /**
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (this.getIcon().equals(noLike)) {
+            this.setIcon(like);
+            Global.ll.set(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+        } else {
+            this.setIcon(noLike);
+            Global.ll.unset(Global.ifp.getInfo().getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+        }
+    }
 }

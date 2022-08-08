@@ -33,123 +33,121 @@ import java.awt.*;
  */
 public class AudioInfoDialog extends JFrame implements Runnable {
 
-  /// AUDIOINFO Window Config START
-  final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
-  final int AUDIOINFO_MIN_WIDTH = 600;
-  final int AUDIOINFO_MIN_HEIGHT = 400;
+    /// AUDIOINFO Window Config START
+    final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
+    final int AUDIOINFO_MIN_WIDTH = 600;
+    final int AUDIOINFO_MIN_HEIGHT = 400;
 
-  final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 2;
+    final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 2;
 
-  final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 100;
-  final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
-  /// AUDIOINFO Window Config END
+    final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 100;
+    final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
+    /// AUDIOINFO Window Config END
 
-  private final JSplitPane mainPane;
-  private final JScrollPane artWorkPanel;
-  private final JPanel artWork;
-  private final JScrollPane infoPanel;
+    private final JSplitPane mainPane;
+    private final JScrollPane artWorkPanel;
+    private final JPanel artWork;
+    private final JScrollPane infoPanel;
 
-  // Non Gui Components
-  private transient AudioInfo info;
+    // Non Gui Components
+    private transient AudioInfo info;
 
-  public AudioInfoDialog(AudioInfo info) {
-    setTitle(AUDIOINFO_WIN_TITLE);
-    setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-    setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    public AudioInfoDialog(AudioInfo info) {
+        setTitle(AUDIOINFO_WIN_TITLE);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-    setPreferredSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
-    setMinimumSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
+        setPreferredSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
+        setMinimumSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
-    artWork = new JPanel() {
-      @Override
-      public synchronized void paint(Graphics g) {
-        super.paint(g);
-        g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2,
-            (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
-      }
-    };
-    artWork.setPreferredSize(new Dimension(info.getArtwork().getWidth(), info.getArtwork().getHeight()));
+        artWork = new JPanel() {
+            @Override
+            public synchronized void paint(Graphics g) {
+                super.paint(g);
+                g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2,
+                        (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
+            }
+        };
+        artWork.setPreferredSize(new Dimension(info.getArtwork().getWidth(), info.getArtwork().getHeight()));
 
-    artWorkPanel = new JScrollPane();
-    artWorkPanel.setViewportView(artWork);
-    artWorkPanel.setBorder(BorderFactory.createEmptyBorder());
-    artWorkPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    artWorkPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    artWorkPanel.setPreferredSize(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
+        artWorkPanel = new JScrollPane();
+        artWorkPanel.setViewportView(artWork);
+        artWorkPanel.setBorder(BorderFactory.createEmptyBorder());
+        artWorkPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        artWorkPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        artWorkPanel.setPreferredSize(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
-    JEditorPane infoText = new JEditorPane();
-    infoText.setEditable(false);
-    infoText.setContentType("text/html");
-    infoText.setText(infoToHtml(info));
+        JEditorPane infoText = new JEditorPane();
+        infoText.setEditable(false);
+        infoText.setContentType("text/html");
+        infoText.setText(infoToHtml(info));
 
-    infoPanel = new JScrollPane();
-    infoPanel.setViewportView(infoText);
-    infoPanel.setBorder(BorderFactory.createEmptyBorder());
-    infoPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    infoPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    infoPanel.setPreferredSize(new Dimension(AUDIOINFO_INFO_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
+        infoPanel = new JScrollPane();
+        infoPanel.setViewportView(infoText);
+        infoPanel.setBorder(BorderFactory.createEmptyBorder());
+        infoPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        infoPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        infoPanel.setPreferredSize(new Dimension(AUDIOINFO_INFO_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
-    mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
-    mainPane.setPreferredSize(getPreferredSize());
-    mainPane.setDividerLocation(AUDIOINFO_DIVIDER_LOCATION);
+        mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
+        mainPane.setPreferredSize(getPreferredSize());
+        mainPane.setDividerLocation(AUDIOINFO_DIVIDER_LOCATION);
 
-    getContentPane().add(mainPane);
-  }
+        getContentPane().add(mainPane);
+    }
 
-  /**
-   * @return This instance's AudioInfo object that is being used to generate the
-   *         compiled information.
-   */
-  public AudioInfo getInfo() {
-    return info;
-  }
+    /**
+     * @param key
+     * @param ti
+     * @return String
+     */
+    private static synchronized String parseAsProperty(String key, String ti) {
+        return "<u><b>" + key + "</b></u>: " + ti + "<br>";
+    }
 
+    /**
+     * @param in
+     * @return String
+     */
+    private static synchronized String infoToHtml(AudioInfo in) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html><body>");
+        sb.append(parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)));
+        sb.append(parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)));
+        sb.append(parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)));
+        sb.append(parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)));
+        sb.append(parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)));
+        sb.append(
+                parseAsProperty("Duration", TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
+        sb.append(parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)));
+        sb.append(parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)));
+        sb.append(parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
+        sb.append(parseAsProperty("BPM", in.getRaw(FieldKey.BPM)));
+        sb.append(parseAsProperty("Track", in.getRaw(FieldKey.TRACK)));
+        sb.append(parseAsProperty("Year", in.getRaw(FieldKey.YEAR)));
+        sb.append(parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)));
+        sb.append(parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)));
+        sb.append(parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)));
+        sb.append(parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)));
+        sb.append(parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)));
+        sb.append("</body></html>");
+        return sb.toString();
+    }
 
-  /**
-   * @param key
-   * @param ti
-   * @return String
-   */
-  private static synchronized String parseAsProperty(String key, String ti) {
-    return "<u><b>" + key + "</b></u>: " + ti + "<br>";
-  }
+    /**
+     * @return This instance's AudioInfo object that is being used to generate the
+     * compiled information.
+     */
+    public AudioInfo getInfo() {
+        return info;
+    }
 
+    @Override
+    public void run() {
+        SwingUtilities.invokeLater(() -> {
+            pack();
+            setVisible(true);
+        });
 
-  /**
-   * @param in
-   * @return String
-   */
-  private static synchronized String infoToHtml(AudioInfo in) {
-    StringBuilder sb = new StringBuilder();
-    sb.append("<html><body>");
-    sb.append(parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)));
-    sb.append(parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)));
-    sb.append(parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)));
-    sb.append(parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)));
-    sb.append(parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)));
-    sb.append(
-        parseAsProperty("Duration", TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
-    sb.append(parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)));
-    sb.append(parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)));
-    sb.append(parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
-    sb.append(parseAsProperty("BPM", in.getRaw(FieldKey.BPM)));
-    sb.append(parseAsProperty("Track", in.getRaw(FieldKey.TRACK)));
-    sb.append(parseAsProperty("Year", in.getRaw(FieldKey.YEAR)));
-    sb.append(parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)));
-    sb.append(parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)));
-    sb.append(parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)));
-    sb.append(parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)));
-    sb.append(parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)));
-    sb.append("</body></html>");
-    return sb.toString();
-  }
-
-  @Override
-  public void run() {
-    SwingUtilities.invokeLater(() -> {
-      pack();
-      setVisible(true);
-    });
-
-  }
+    }
 }

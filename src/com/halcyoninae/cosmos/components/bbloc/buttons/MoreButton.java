@@ -6,9 +6,9 @@ import javax.swing.*;
 
 public class MoreButton extends JButton implements BBlocButton {
 
-  @Override
-  public JComponent getComponent() {
-    return this;
-  }
+    @Override
+    public JComponent getComponent() {
+        return this;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.io.InputStream;
  * This class serves no particular purpose but that
  * it is used when the audio format being detected is
  * incorrect.
- *
+ * <p>
  * This helps to prevent unnecessary NullPointerExceptions
  * being thrown from the stream.
  *
@@ -17,8 +17,8 @@ import java.io.InputStream;
  */
 public class DestructiveAudio extends AudioInputStream {
 
-  public DestructiveAudio(InputStream stream, AudioFormat format, long length) {
-    super(stream, format, length);
-  }
+    public DestructiveAudio(InputStream stream, AudioFormat format, long length) {
+        super(stream, format, length);
+    }
 
 }
