@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
-import java.awt.image.*;
-
 import com.halcyoninae.cloudspin.lib.blurhash.BlurHash;
+
+import java.awt.image.BufferedImage;
 
 /**
  * @author Jack Meng

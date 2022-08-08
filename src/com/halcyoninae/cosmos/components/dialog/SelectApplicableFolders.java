@@ -44,7 +44,7 @@ public class SelectApplicableFolders extends JFileChooser implements Runnable {
      *
      * @param folder The folder that was dispatched by the event
      */
-    public void folderSelected(String folder);
+    void folderSelected(String folder);
   }
 
   private transient FolderSelectedListener fs = null;

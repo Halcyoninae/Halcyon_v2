@@ -35,7 +35,7 @@ public class Property {
   }
 
   public enum PropertyFilterType {
-    STARTS_WITH, ENDS_WITH, CONTAINS, EQUALS;
+    STARTS_WITH, ENDS_WITH, CONTAINS, EQUALS
   }
 
   /**

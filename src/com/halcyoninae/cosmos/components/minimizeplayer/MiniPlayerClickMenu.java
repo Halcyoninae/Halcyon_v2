@@ -15,21 +15,18 @@
 
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
+import com.halcyoninae.halcyon.Halcyon;
+
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-
-import com.halcyoninae.halcyon.Halcyon;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
 public class MiniPlayerClickMenu extends MouseAdapter {
-  private MiniPlayer e;
+  private final MiniPlayer e;
 
   public MiniPlayerClickMenu(MiniPlayer e) {
     this.e = e;

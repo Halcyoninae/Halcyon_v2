@@ -15,10 +15,9 @@
 
 package com.halcyoninae.cosmos.components.moreapps;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.Halcyon;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -26,14 +25,14 @@ import java.awt.*;
  * @since 3.3
  */
 public class MoreApps extends JFrame implements Runnable {
-  private JScrollPane jsp;
+  private final JScrollPane jsp;
 
   public MoreApps() {
     setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
     setAlwaysOnTop(true);
     setUndecorated(true);
 
-    jsp = new JScrollPane(, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     setContentPane(jsp);
   }

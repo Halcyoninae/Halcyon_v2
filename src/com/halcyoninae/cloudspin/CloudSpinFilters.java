@@ -15,18 +15,18 @@
 
 package com.halcyoninae.cloudspin;
 
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorConvertOp;
-import java.awt.color.ColorSpace;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
 public interface CloudSpinFilters {
-  final BufferedImageOp[] filters = {
+  BufferedImageOp[] filters = {
       new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null),
   };
 
-  final int AFF_GREY = 0;
+  int AFF_GREY = 0;
 }

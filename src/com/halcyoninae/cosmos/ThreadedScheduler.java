@@ -15,13 +15,15 @@
 
 package com.halcyoninae.cosmos;
 
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.halcyoninae.cosmos.tasks.DefunctOptimizer;
 import com.halcyoninae.cosmos.tasks.PingFileView;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
+import java.util.Enumeration;
 import java.util.logging.LogManager;
 
 public class ThreadedScheduler {
@@ -63,14 +65,19 @@ public class ThreadedScheduler {
     System.setOut(null);
     UIManager.put("FileChooser.readOnly", true);
     LogManager.getLogManager().reset();
-    try {
-      UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
     // fix blurriness on high-DPI screens
     System.setProperty("sun.java2d.opengl", "true");
     System.setProperty("sun.java2d.uiScale", "0.9");
+
+    // set program font
+    Enumeration<?> e = UIManager.getDefaults().keys();
+    while(e.hasMoreElements()) {
+      Object key = e.nextElement();
+      Object value = UIManager.get(key);
+      if(value instanceof javax.swing.plaf.FontUIResource) {
+        UIManager.put(key, new FontUIResource("Roboto", Font.PLAIN, 13));
+      }
+    }
 
     // PROGRAMMABLE THREADS
     Runnable[] tasks = new Runnable[] {

@@ -15,14 +15,13 @@
 
 package com.halcyoninae.cosmos.components.waveform;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
-import java.awt.event.*;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.*;
+import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 
 /**
  * @author Jack Meng

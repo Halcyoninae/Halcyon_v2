@@ -32,21 +32,33 @@ import java.awt.*;
  * @since 3.1
  */
 public class AudioInfoDialog extends JFrame implements Runnable {
-  private JSplitPane mainPane;
-  private JScrollPane artWorkPanel;
-  private JPanel artWork;
-  private JScrollPane infoPanel;
+
+  /// AUDIOINFO Window Config START
+  final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
+  final int AUDIOINFO_MIN_WIDTH = 600;
+  final int AUDIOINFO_MIN_HEIGHT = 400;
+
+  final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 2;
+
+  final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 100;
+  final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
+  /// AUDIOINFO Window Config END
+
+  private final JSplitPane mainPane;
+  private final JScrollPane artWorkPanel;
+  private final JPanel artWork;
+  private final JScrollPane infoPanel;
 
   // Non Gui Components
   private transient AudioInfo info;
 
   public AudioInfoDialog(AudioInfo info) {
-    setTitle(Manager.AUDIOINFO_WIN_TITLE);
+    setTitle(AUDIOINFO_WIN_TITLE);
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-    setPreferredSize(new Dimension(Manager.AUDIOINFO_MIN_WIDTH, Manager.AUDIOINFO_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.AUDIOINFO_MIN_WIDTH, Manager.AUDIOINFO_MIN_HEIGHT));
+    setPreferredSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
+    setMinimumSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
     artWork = new JPanel() {
       @Override
@@ -63,7 +75,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     artWorkPanel.setBorder(BorderFactory.createEmptyBorder());
     artWorkPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     artWorkPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    artWorkPanel.setPreferredSize(new Dimension(Manager.AUDIOINFO_ARTWORK_PANE_WIDTH, Manager.AUDIOINFO_MIN_HEIGHT));
+    artWorkPanel.setPreferredSize(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
     JEditorPane infoText = new JEditorPane();
     infoText.setEditable(false);
@@ -75,11 +87,11 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     infoPanel.setBorder(BorderFactory.createEmptyBorder());
     infoPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     infoPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-    infoPanel.setPreferredSize(new Dimension(Manager.AUDIOINFO_INFO_PANE_WIDTH, Manager.AUDIOINFO_MIN_HEIGHT));
+    infoPanel.setPreferredSize(new Dimension(AUDIOINFO_INFO_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
     mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
     mainPane.setPreferredSize(getPreferredSize());
-    mainPane.setDividerLocation(Manager.AUDIOINFO_DIVIDER_LOCATION);
+    mainPane.setDividerLocation(AUDIOINFO_DIVIDER_LOCATION);
 
     getContentPane().add(mainPane);
   }

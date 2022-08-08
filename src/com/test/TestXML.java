@@ -1,12 +1,11 @@
 package com.test;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.halcyoninae.halcyon.cacher.Cacher;
 import com.halcyoninae.halcyon.debug.Debugger;
+
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestXML {
 

@@ -15,8 +15,8 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import org.jaudiotagger.audio.AudioFile;
@@ -240,7 +240,7 @@ public class AudioInfo {
    * @return BufferedImage
    */
   public static BufferedImage getDefaultIcon() {
-    return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+    return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(InfoViewTP.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
   }
 
   /**

@@ -25,6 +25,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @since 3.1
  */
 public interface TabTree {
+  enum TabTreeSortMethod {
+    ALPHABETICAL, SIZE, SHUFFLE, REV_ALPHABETICAL
+  }
+
   /**
    * Calls the remove function on the JTree instance.
    *
@@ -51,4 +55,9 @@ public interface TabTree {
    * @return (true || false)
    */
   boolean isVirtual();
+
+  /**
+   * Sorts the Tree by some method of mostly (A-Z) alphabetical.
+   */
+  void sort(TabTreeSortMethod e);
 }

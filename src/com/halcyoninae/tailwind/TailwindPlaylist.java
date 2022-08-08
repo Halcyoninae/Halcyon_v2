@@ -15,12 +15,12 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 /**
  * @author Jack Meng
@@ -29,13 +29,15 @@ import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
   private boolean loop = false, autoPlay = false;
-  private List<File> history;
+  private final List<File> history;
   private int pointer = 0;
+  private float gain;
   private File currentFile = new File(".");
 
   public TailwindPlaylist() {
     history = new ArrayList<>();
     addStatusUpdateListener(this);
+    gain = Float.NaN;
   }
 
 
@@ -51,6 +53,9 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
       this.currentFile = f;
       open(f);
       play();
+      if(gain != Float.NaN) {
+        this.setGain(gain);
+      }
     }
   }
 
@@ -61,6 +66,9 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
   public void rawPlay(File f) {
     open(f);
     play();
+    if (gain != Float.NaN) {
+      this.setGain(gain);
+    }
   }
 
   public void backTrack() {
@@ -95,6 +103,11 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
     Debugger.good("Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
   }
 
+  @Override
+  public void setGain(float gain) {
+    super.setGain(gain);
+    this.gain = gain;
+  }
 
   /**
    * @return List<File>

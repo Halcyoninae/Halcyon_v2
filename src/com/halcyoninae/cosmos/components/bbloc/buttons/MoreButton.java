@@ -1,8 +1,8 @@
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
+
+import javax.swing.*;
 
 public class MoreButton extends JButton implements BBlocButton {
 

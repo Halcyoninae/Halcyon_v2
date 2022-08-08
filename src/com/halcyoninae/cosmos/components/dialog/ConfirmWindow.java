@@ -41,6 +41,17 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
+
+  /// Confirm Config START
+  final int DIALOG_CONFIRM_MIN_WIDTH = 300;
+  final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
+
+  final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
+  final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
+
+  static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
+  /// Confirm Config END
+
   /**
    * A listener that is called upon for any classes that
    * wish to listen in on anything about the update for this confirmation
@@ -57,15 +68,15 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
     void onStatus(boolean status);
   }
 
-  private JButton confirm;
+  private final JButton confirm;
 
-  private transient ConfirmationListener[] listeners;
+  private final transient ConfirmationListener[] listeners;
 
   public ConfirmWindow(String content, ConfirmationListener... listeners) {
-    super(Manager.DIALOG_CONFIRM_WIN_TITLE);
+    super(DIALOG_CONFIRM_WIN_TITLE);
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     this.listeners = listeners;
-    setPreferredSize(new Dimension(Manager.DIALOG_CONFIRM_MIN_WIDTH, Manager.DIALOG_CONFIRM_MIN_HEIGHT));
+    setPreferredSize(new Dimension(DIALOG_CONFIRM_MIN_WIDTH, DIALOG_CONFIRM_MIN_HEIGHT));
     setLocationRelativeTo(null);
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,14 +96,14 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
     JScrollPane container = new JScrollPane(prompt);
     container.setPreferredSize(
-        new Dimension(Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+        new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
     container.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
     container.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     JPanel jp = new JPanel();
     jp.setLayout(new FlowLayout(FlowLayout.CENTER));
     jp.setPreferredSize(
-        new Dimension(Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, Manager.DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+        new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
     jp.add(confirm);
     jp.add(cancel);
 

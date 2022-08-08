@@ -27,7 +27,7 @@ import com.halcyoninae.tailwind.AudioInfo;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 /**
  * This class holds all of the components to the main
@@ -39,9 +39,13 @@ import java.awt.image.*;
  * @since 3.2
  */
 public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
-  private JPanel bgPanel, fgPanel, topPanel, progressPanel;
-  private JLabel mainLabel, artLabel;
-  private JProgressBar progressBar;
+  private final JPanel bgPanel;
+  private final JPanel fgPanel;
+  private final JPanel topPanel;
+  private final JPanel progressPanel;
+  private final JLabel mainLabel;
+  private final JLabel artLabel;
+  private final JProgressBar progressBar;
   private transient AudioInfo info;
   private boolean fDrawn = true;
 

@@ -32,7 +32,7 @@ public class TailwindEvent {
    * @since 3.1
    */
   public enum TailwindStatus {
-    PLAYING, PAUSED, OPEN, CLOSED, END, RESUMED;
+    PLAYING, PAUSED, OPEN, CLOSED, END, RESUMED
   }
 
   private final AudioInfo current;

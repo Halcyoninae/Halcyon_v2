@@ -42,6 +42,9 @@ public class Global {
   public static ButtonControlTP bctp = new ButtonControlTP();
   public static InfoViewTP ifp = new InfoViewTP();
   public static Player player = new Player();
+  static {
+    player.getStream().addStatusUpdateListener(bctp);
+  }
   public static LikeList ll = new LikeList();
   public static WaveForm waveForm = new WaveForm();
 }

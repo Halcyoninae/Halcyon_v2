@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StubAudioInfo extends AudioInfo {
-  private File f;
+  private final File f;
   private Map<String, String> tags;
 
   public StubAudioInfo(File f) {

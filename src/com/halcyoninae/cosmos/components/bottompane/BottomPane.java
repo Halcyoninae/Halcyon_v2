@@ -16,7 +16,6 @@
 package com.halcyoninae.cosmos.components.bottompane;
 
 import com.halcyoninae.cosmos.components.inheritable.TabButton;
-import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.Wrapper;
@@ -36,18 +35,18 @@ import java.util.Map;
  * @since 3.0
  */
 public class BottomPane extends JTabbedPane {
-  private List<FileList> tabs;
+  private final List<FileList> tabs;
   /**
    * Represents an absolute list of folders
    * that have been selected by the user.
    */
-  private ArrayList<String> foldersAbsolute;
+  private final ArrayList<String> foldersAbsolute;
 
   /**
    * Holds a list of folder paths in correspondence with their index
    * in the JTabbedPane.
    */
-  private Map<String, Integer> tabsMap;
+  private final Map<String, Integer> tabsMap;
 
   /**
    * Creates a bottom viewport
@@ -57,8 +56,8 @@ public class BottomPane extends JTabbedPane {
     foldersAbsolute = new ArrayList<>();
     tabsMap = new HashMap<>();
 
-    setPreferredSize(new Dimension(Manager.FILEVIEW_MAX_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setPreferredSize(new Dimension(FileList.FILEVIEW_MAX_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
+    setMinimumSize(new Dimension(FileList.FILEVIEW_MIN_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
     this.tabs = new ArrayList<>();
     setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
   }

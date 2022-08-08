@@ -22,7 +22,9 @@ import com.halcyoninae.halcyon.connections.properties.PropertyValidator;
  * @since 3.2
  */
 public class NumericRangeValidator implements PropertyValidator {
-  private double step, min, max;
+  private final double step;
+    private final double min;
+    private final double max;
 
   public NumericRangeValidator(double min, double max, double step) {
     this.min = min;

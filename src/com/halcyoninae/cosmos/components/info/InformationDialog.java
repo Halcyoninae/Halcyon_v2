@@ -15,6 +15,7 @@
 
 package com.halcyoninae.cosmos.components.info;
 
+import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.layout.DebuggerTab;
 import com.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
 import com.halcyoninae.cosmos.components.info.layout.SystemTab;
@@ -36,8 +37,8 @@ public class InformationDialog extends JFrame implements Runnable {
 
     private final transient InformationTab[] tabs = {
             new FileFromSourceTab("Program Properties",
-                    FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_PROPERTIES_DOCS)),
-            new FileFromSourceTab("Legals", FileFromSourceTab.getContent(Manager.LEGAL_NOTICE_DOCS)),
+                    FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_PROPERTIES_DOCS)),
+            new FileFromSourceTab("Legals", FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_DOCS)),
             new SystemTab(),
             new DebuggerTab()
     };
@@ -45,7 +46,7 @@ public class InformationDialog extends JFrame implements Runnable {
     public InformationDialog() {
         setTitle("Halcyon ~ Information");
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-        setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
+        setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
         setResizable(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(false);

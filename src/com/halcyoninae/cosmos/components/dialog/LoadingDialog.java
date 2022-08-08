@@ -22,7 +22,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoadingDialog extends JFrame {
-  private JProgressBar bar;
+  private final JProgressBar bar;
 
   public LoadingDialog(String text, boolean isImportant) {
     setPreferredSize(new Dimension(400, 200));

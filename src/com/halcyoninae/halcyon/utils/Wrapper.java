@@ -15,10 +15,14 @@
 
 package com.halcyoninae.halcyon.utils;
 
+import com.halcyoninae.cosmos.components.bottompane.TabTree;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 
 import javax.swing.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,6 +48,16 @@ public final class Wrapper {
     } else {
       CompletableFuture.runAsync(runnable);
     }
+  }
+
+  public static void sort(TabTree tree) {
+    File[] f = new File(tree.getPath()).listFiles();
+    Arrays.sort(f, new Comparator<File>() {
+      @Override
+      public int compare(File o1, File o2) {
+        return o1.getName().compareTo(o2.getName());
+      }
+    });
   }
 
 

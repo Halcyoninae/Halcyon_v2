@@ -32,7 +32,7 @@ import java.awt.event.WindowEvent;
  */
 public class SlidersControl extends JButton implements BBlocButton {
   private boolean isPressed;
-  private SlidersDialog dialog;
+  private final SlidersDialog dialog;
 
   public SlidersControl() {
     setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));

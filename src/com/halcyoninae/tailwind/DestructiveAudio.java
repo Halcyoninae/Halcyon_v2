@@ -1,9 +1,8 @@
 package com.halcyoninae.tailwind;
 
-import java.io.InputStream;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
+import java.io.InputStream;
 
 /**
  * This class serves no particular purpose but that

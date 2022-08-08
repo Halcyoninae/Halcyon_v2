@@ -15,6 +15,7 @@
 
 package com.halcyoninae.cosmos.components.toppane;
 
+import com.halcyoninae.cosmos.components.bottompane.FileList;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -40,6 +41,14 @@ import java.awt.*;
  */
 public class TopPane extends JPanel {
 
+  /// TopPane Config START
+  final int TOPPANE_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH;
+  final int TOPPANE_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
+
+  final int TOPPANE_MAX_WIDTH = TOPPANE_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
+  final int TOPPANE_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
+  /// TopPane Config END
+
   /**
    * Two instances of an InfoView and a ButtonControl view
    * are used to construct the Top View object.
@@ -48,8 +57,8 @@ public class TopPane extends JPanel {
    * @param bctp The ButtonControl instance to attach with
    */
   public TopPane(InfoViewTP ifp, ButtonControlTP bctp) {
-    setPreferredSize(new Dimension(Manager.TOPPANE_MIN_WIDTH, Manager.TOPPANE_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.TOPPANE_MIN_WIDTH, Manager.TOPPANE_MIN_HEIGHT));
+    setPreferredSize(new Dimension(TOPPANE_MIN_WIDTH, TOPPANE_MIN_HEIGHT));
+    setMinimumSize(new Dimension(TOPPANE_MIN_WIDTH, TOPPANE_MIN_HEIGHT));
     setLayout(new BorderLayout());
     add(ifp, BorderLayout.PAGE_START);
     add(bctp, BorderLayout.PAGE_END);

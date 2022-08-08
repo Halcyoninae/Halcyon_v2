@@ -23,7 +23,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LikeButton extends JButton implements ActionListener {
-  private ImageIcon like, noLike;
+  private final ImageIcon like;
+    private final ImageIcon noLike;
 
   public LikeButton(ImageIcon noLike, ImageIcon like) {
     super(noLike);

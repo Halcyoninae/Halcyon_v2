@@ -28,8 +28,17 @@ import java.awt.*;
  * @since 3.0
  */
 public interface ColorManager {
-  final Color MAIN_FG_THEME = ColorTool.hexToRGBA("#6bedb5");
-  final String MAIN_FG_STR = "#6bedb5";
-  final Color BORDER_THEME = ColorTool.hexToRGBA("#5F657D");
-  final Color MAIN_BG_THEME = ColorTool.hexToRGBA("#cef5e6");
+  boolean darkMode = true;
+  Color LIGHT_MAIN_FG_THEME = ColorTool.hexToRGBA("#fa9548");
+  String LIGHT_MAIN_FG_STR = "#fa9548";
+  Color LIGHT_MAIN_BG_THEME = ColorTool.hexToRGBA("#f2c29d");
+
+  // stable const
+  Color ONE_DARK_BG = ColorTool.hexToRGBA("#21252B");
+  Color BORDER_THEME = ColorTool.hexToRGBA("#5F657D");
+
+  Color MAIN_FG_THEME = darkMode ? ColorTool.hexToRGBA("#89EDA4") : LIGHT_MAIN_FG_THEME;
+  String MAIN_FG_STR = darkMode ? "#89EDA4" : LIGHT_MAIN_FG_STR;
+  Color MAIN_BG_THEME = darkMode ? ColorTool.hexToRGBA("#cef5e6") : LIGHT_MAIN_BG_THEME;
+
 }

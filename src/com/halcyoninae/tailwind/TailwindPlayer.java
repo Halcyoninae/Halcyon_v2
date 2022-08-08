@@ -17,7 +17,6 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
@@ -26,6 +25,7 @@ import com.halcyoninae.tailwind.simple.FileFormat;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -428,6 +428,7 @@ public class TailwindPlayer implements Audio, Runnable {
    */
   private static Map<String, Control> setControls(Line line, Map<String, Control> table) {
     Map<String, Control> temp = new HashMap<>();
+    Debugger.warn(Arrays.toString(line.getControls()));
     for (Control ctrl : line.getControls()) {
       String t = ctrl.getType().toString();
       if (table != null && table.containsKey(t)) {

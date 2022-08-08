@@ -39,7 +39,7 @@ public final class DeImage {
    * Holds enum constants for the different aspects of the image.
    */
   public enum Directional {
-    TOP, LEFT, RIGHT, BOTTOM;
+    TOP, LEFT, RIGHT, BOTTOM
   }
 
   private DeImage() {

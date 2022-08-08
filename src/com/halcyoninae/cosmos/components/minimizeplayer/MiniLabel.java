@@ -26,12 +26,12 @@ import java.awt.event.ComponentEvent;
  * @since 3.1
  */
 public class MiniLabel extends JLabel {
-  private String textproper;
-  private String ellipsis = "...";
+  private final String textproper;
+  private final String ellipsis = "...";
   private int textproperwidth;
   private FontMetrics fontMetrics;
   private int ellipsisWidth;
-  private int insetsHorizontal;
+  private final int insetsHorizontal;
   private int borderHorizontal;
 
   public MiniLabel(String textstart, String textproper, String textend) {

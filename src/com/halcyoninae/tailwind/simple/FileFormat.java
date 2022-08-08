@@ -79,14 +79,14 @@ public enum FileFormat {
    */
   SND(true, AudioFileFormat.Type.SND, "snd");
 
-  private List<String> associatedFileExtensions;
-  private boolean writingSupported;
-  private AudioFileFormat.Type type;
+  private final List<String> associatedFileExtensions;
+  private final boolean writingSupported;
+  private final AudioFileFormat.Type type;
 
-  private FileFormat(
-    boolean writingSupported,
-    AudioFileFormat.Type type,
-    String... associatedFileExtensions
+  FileFormat(
+          boolean writingSupported,
+          AudioFileFormat.Type type,
+          String... associatedFileExtensions
   ) {
     this.associatedFileExtensions = new ArrayList<>();
     this.writingSupported = writingSupported;

@@ -15,17 +15,15 @@
 
 package com.halcyoninae.cosmos.components.waveform;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.ColorTool;
 import com.halcyoninae.tailwind.TailwindListener;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.geom.Path2D;
+import java.awt.image.BufferedImage;
 
 /**
  * @author Jack Meng
@@ -64,7 +62,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
       g2.setStroke(new BasicStroke(1));
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       for (float f : samples) {
-        float y = (float) (f * img.getHeight() / 2);
+        float y = f * img.getHeight() / 2;
         wave.moveTo(0, y);
         wave.lineTo(img.getWidth(), y);
         g2.draw(wave);

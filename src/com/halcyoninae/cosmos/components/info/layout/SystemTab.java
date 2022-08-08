@@ -1,7 +1,7 @@
 package com.halcyoninae.cosmos.components.info.layout;
 
+import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.InformationTab;
-import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +15,10 @@ import java.awt.*;
  * @since 3.2
  */
 public class SystemTab extends JScrollPane implements InformationTab {
-  private JEditorPane info;
+  private final JEditorPane info;
 
   public SystemTab() {
-    setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
+    setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
     setFocusable(false);
 
     info = new JEditorPane();

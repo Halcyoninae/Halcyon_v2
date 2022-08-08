@@ -1,9 +1,8 @@
 package com.halcyoninae.cosmos.components.moreapps;
 
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.constant.ColorManager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

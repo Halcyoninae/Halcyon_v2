@@ -15,13 +15,12 @@
 
 package com.halcyoninae.tailwind.vorbis;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.sound.sampled.AudioFormat;
-
 import de.jarnbjo.ogg.EndOfOggStreamException;
 import de.jarnbjo.vorbis.VorbisStream;
+
+import javax.sound.sampled.AudioFormat;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Default Vorbis OGG input stream wrapper
@@ -30,7 +29,7 @@ import de.jarnbjo.vorbis.VorbisStream;
  * @since 3.3
  */
 public class VorbisIn extends InputStream {
-  private VorbisStream stream;
+  private final VorbisStream stream;
 
   public VorbisIn(VorbisStream in) {
     this.stream = in;

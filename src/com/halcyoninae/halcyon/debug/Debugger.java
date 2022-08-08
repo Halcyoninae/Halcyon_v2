@@ -71,9 +71,9 @@ public class Debugger {
     WHITE_TXT("\u001B[37m"),
     BLACK_TXT("\u001B[30m");
 
-    private String color;
+    private final String color;
 
-    private CLIStyles(String e) {
+    CLIStyles(String e) {
       color = e;
     }
 

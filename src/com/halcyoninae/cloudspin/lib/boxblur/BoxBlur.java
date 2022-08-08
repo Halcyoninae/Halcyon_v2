@@ -40,7 +40,7 @@ public class BoxBlur implements Blur {
   @Override
   public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
     BufferedImage mod = new BufferedImage(image.getWidth(), image.getHeight(), image.getType());
-    if (((SpeedStyle) otherParams[0]).equals(SpeedStyle.GENERAL)) {
+    if (otherParams[0].equals(SpeedStyle.GENERAL)) {
       for (int row = 0; row < image.getHeight(); row++) {
         for (int col = 0; col < image.getWidth(); col++) {
           int x = col - _x;
@@ -65,7 +65,7 @@ public class BoxBlur implements Blur {
           mod.setRGB(col, row, c.getRGB());
         }
       }
-    } else if (((SpeedStyle) otherParams[0]).equals(SpeedStyle.SPEED)) {
+    } else if (otherParams[0].equals(SpeedStyle.SPEED)) {
       int radius = (int) otherParams[1];
       int size = radius;
       float weight = size * size /radius;

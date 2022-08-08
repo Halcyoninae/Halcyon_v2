@@ -15,16 +15,38 @@
 
 package com.halcyoninae.cosmos.components.bbloc;
 
+import com.halcyoninae.cosmos.components.bottompane.FileList;
 import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * BBloc short for Button Bloc
+ * is a view to display a button palette.
+ *
+ * These buttons can be used to address certain
+ * things regarding the player.
+ *
+ * @author Jack Meng
+ * @since 3.0
+ */
 public class BBlocView extends JPanel {
+
+  /// BBloc Config START
+  /// B Bloc Size Config START ///
+  final int B_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH - 40;
+  final int B_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
+
+  final int B_MAX_WIDTH = B_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
+  final int B_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
+  /// B Bloc Size Config END ///
+  /// BBloc Config END
+
   public BBlocView() {
     super();
-    setPreferredSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.B_MIN_WIDTH, Manager.B_MIN_HEIGHT));
+    setPreferredSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
+    setMinimumSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
   }
 
 

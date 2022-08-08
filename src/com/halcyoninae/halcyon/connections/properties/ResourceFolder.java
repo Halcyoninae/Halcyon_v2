@@ -207,7 +207,7 @@ public class ResourceFolder {
         writeLog("log",
             "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
                 + "\n"
-                + e.getClass() + "\n" + e.toString() + "\n" +
+                + e.getClass() + "\n" + e + "\n" +
                 e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n"
                 + java.util.Arrays.toString(e.getStackTrace()) + "\n"
                 + "Submit an issue by making a PR to the file BUGS at " + DefaultManager.PROJECT_GITHUB_PAGE);

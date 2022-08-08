@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
  */
 public class MinimizePlayer extends JButton implements BBlocButton {
   private boolean pressed = false;
-  private MiniPlayer player;
+  private final MiniPlayer player;
 
   public MinimizePlayer() {
     setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));

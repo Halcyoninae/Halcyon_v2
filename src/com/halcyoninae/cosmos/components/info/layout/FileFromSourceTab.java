@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cosmos.components.info.layout;
 
+import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.InformationTab;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,11 +25,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
-  private JEditorPane text;
+  private final JEditorPane text;
   private String tabName = "";
 
   public FileFromSourceTab(String tabName, String textTab) {
-    setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
+    setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
     setFocusable(true);
 
     this.tabName = tabName;

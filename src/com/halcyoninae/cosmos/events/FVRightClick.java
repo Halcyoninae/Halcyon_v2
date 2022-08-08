@@ -16,6 +16,7 @@
 package com.halcyoninae.cosmos.events;
 
 import com.halcyoninae.cosmos.components.bottompane.TabTree;
+import com.halcyoninae.cosmos.components.bottompane.TabTree.TabTreeSortMethod;
 import com.halcyoninae.cosmos.components.dialog.AudioInfoDialog;
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.components.dialog.StraightTextDialog;
@@ -118,7 +119,7 @@ public class FVRightClick extends MouseAdapter {
                     DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                     model.reload();
                     tree.remove(rcNode.toString());
-                    Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode.toString());
+                    Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode);
                     if (hideTask != null) {
                         Debugger.unsafeLog("Dispatching hide_task callable...\nTask for: " + rcNode);
                         hideTask.onRemove(tree.getSelectedNode(rcNode));
@@ -128,6 +129,17 @@ public class FVRightClick extends MouseAdapter {
                     // IGNORED
                 }
             });
+        }
+        JMenuItem sortAZ = null;
+        JMenuItem sortZA = null;
+        JMenuItem sortShuffle = null;
+        if (rcNode.equals(t.getModel().getRoot())) {
+            sortAZ = new JMenuItem("Sort A-Z");
+            sortAZ.addActionListener(ev -> tree.sort(TabTreeSortMethod.ALPHABETICAL));
+            sortZA = new JMenuItem("Sort Z-A");
+            sortZA.addActionListener(ev -> tree.sort(TabTreeSortMethod.REV_ALPHABETICAL));
+            sortShuffle = new JMenuItem("Sort Shuffle");
+            sortShuffle.addActionListener(ev -> tree.sort(TabTreeSortMethod.SHUFFLE));
         }
 
         JMenuItem audioInfoItem = new JMenuItem("Information");
@@ -143,11 +155,16 @@ public class FVRightClick extends MouseAdapter {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
             }
         });
+
         if (refreshMenuItem != null)
             popup.add(refreshMenuItem);
+        if (sortAZ != null) {
+            popup.add(sortAZ);
+            popup.add(sortZA);
+            popup.add(sortShuffle);
+        }
         popup.add(audioInfoItem);
         popup.show(t, x, y);
-
     }
 
     /**

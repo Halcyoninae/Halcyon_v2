@@ -27,8 +27,9 @@ import java.beans.PropertyChangeListener;
  * @since 3.0
  */
 public class ForceDividerLocation implements PropertyChangeListener {
-  private JSplitPane e;
-  private int min, max;
+  private final JSplitPane e;
+  private final int min;
+  private final int max;
 
   /**
    * @param e The JSplitPane instance

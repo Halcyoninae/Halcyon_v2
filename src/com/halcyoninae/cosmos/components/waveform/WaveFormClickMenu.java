@@ -15,17 +15,18 @@
 
 package com.halcyoninae.cosmos.components.waveform;
 
-import java.awt.event.*;
-import javax.swing.*;
-
 import com.halcyoninae.halcyon.Halcyon;
+
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
 public class WaveFormClickMenu extends MouseAdapter {
-  private WaveFormPane e;
+  private final WaveFormPane e;
 
   public WaveFormClickMenu(WaveFormPane e) {
     this.e = e;

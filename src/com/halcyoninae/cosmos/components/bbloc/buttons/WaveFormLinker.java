@@ -15,21 +15,20 @@
 
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
-import javax.swing.*;
-
-import java.awt.*;
-import java.awt.event.*;
-
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.waveform.WaveFormPane;
 import com.halcyoninae.halcyon.constant.Global;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
 public class WaveFormLinker extends JButton implements BBlocButton {
-  private WaveFormPane pane;
+  private final WaveFormPane pane;
 
   public WaveFormLinker() {
     setPreferredSize(new Dimension(16, 16));

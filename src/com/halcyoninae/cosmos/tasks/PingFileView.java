@@ -28,7 +28,7 @@ import com.halcyoninae.halcyon.runtime.Program;
  */
 public final class PingFileView implements Runnable {
   private Thread worker;
-  private BottomPane bp;
+  private final BottomPane bp;
 
   /**
    * Calls the default BottomPane Object

@@ -26,7 +26,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class SlidersDialog extends JFrame implements Runnable, TailwindListener.StatusUpdateListener {
-  private JTabbedPane pane;
+  private final JTabbedPane pane;
   private int bal = 50, pan = 50;
 
   public SlidersDialog() {

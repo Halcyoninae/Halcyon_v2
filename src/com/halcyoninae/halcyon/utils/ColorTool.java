@@ -16,6 +16,7 @@
 package com.halcyoninae.halcyon.utils;
 
 import java.awt.*;
+import java.util.Random;
 
 /**
  * A Class to manipulate Color utility
@@ -42,5 +43,15 @@ public final class ColorTool {
         Integer.valueOf(hex.substring(1, 3), 16),
         Integer.valueOf(hex.substring(3, 5), 16),
         Integer.valueOf(hex.substring(5, 7), 16));
+  }
+
+  /**
+   * Returns a random color
+   *
+   * @return A color object (int8)
+   */
+  public static Color rndColor() {
+    Random r = new Random();
+    return new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255));
   }
 }

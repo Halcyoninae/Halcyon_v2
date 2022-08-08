@@ -15,6 +15,7 @@
 
 package com.halcyoninae.halcyon;
 
+import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.halcyoninae.cosmos.ThreadedScheduler;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bbloc.BBlocView;
@@ -32,6 +33,9 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.TextParser;
+import com.halcyoninae.setup.Setup;
+import com.halcyoninae.setup.SetupListener;
+import com.halcyoninae.setup.SetupStatus;
 
 import javax.swing.*;
 import java.awt.*;
@@ -99,71 +103,82 @@ public class Halcyon {
    */
   public static com.halcyoninae.cosmos.components.Cosmos bgt;
 
+  private static void boot_kick_mainUI() {
+    TopPane tp = new TopPane(Global.ifp, Global.bctp);
+    Global.ifp.addInfoViewUpdateListener(Global.bctp);
+    JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
+    bottom.setMinimumSize(
+        new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+    bottom.setPreferredSize(
+        new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+    ArrayList<BBlocButton> bb = new ArrayList<>();
+    bb.add(new AddFolder());
+    bb.add(new RefreshFileView());
+    bb.add(new SlidersControl());
+    bb.add(new MinimizePlayer());
+    bb.add(new Settings());
+    bb.add(new LegalNoticeButton());
+    bb.add(
+        GenericWebsiteLinker.getButton(
+            DefaultManager.PROJECT_GITHUB_PAGE,
+            Manager.PROJECTPAGE_BUTTON_TOOLTIP,
+            Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
+    BBlocView b = new BBlocView();
+    b.addBBlockButtons(bb.toArray(new BBlocButton[0]));
+    bottom.add(b);
+    bottom.add(Global.bp);
+
+    JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
+    bgt = new com.halcyoninae.cosmos.components.Cosmos(m);
+    Global.bp.pokeewFileList(Global.ll);
+
+    PhysicalFolder[] fi = Program.fetchSavedPlayLists();
+    if (fi.length > 0) {
+      for (PhysicalFolder f : fi) {
+        if (new File(f.getAbsolutePath()).exists() && new File(f.getAbsolutePath()).isDirectory()) {
+          Global.bp.pokeNewFileListTab(f.getAbsolutePath());
+          Debugger.good("Added playlist: " + f.getAbsolutePath());
+        } else {
+          Debugger.warn("Could not add playlist: " + f.getAbsolutePath());
+        }
+      }
+    }
+
+    File[] files = Program.fetchLikedTracks();
+    if (files.length > 0) {
+      for (File f : files) {
+        if (f.exists() && f.isFile()) {
+          Global.ll.set(f.getAbsolutePath());
+          Debugger.good("Added Liked Track: " + f.getAbsolutePath());
+        } else {
+          Debugger.warn("Could not load liked track: " + f.getAbsolutePath());
+        }
+      }
+    }
+
+    bgt.run();
+
+    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
+      Discordo dp = new Discordo();
+      Global.ifp.addInfoViewUpdateListener(dp);
+      dp.start();
+    }
+  }
+
   private static void run() {
     try {
       LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
 
-        new Thread(ld::run).start();
-
-        TopPane tp = new TopPane(Global.ifp, Global.bctp);
-        Global.ifp.addInfoViewUpdateListener(Global.bctp);
-        JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        bottom.setMinimumSize(
-            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-        bottom.setPreferredSize(
-            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
-        ArrayList<BBlocButton> bb = new ArrayList<>();
-        bb.add(new AddFolder());
-        bb.add(new RefreshFileView());
-        bb.add(new SlidersControl());
-        bb.add(new MinimizePlayer());
-        bb.add(new Settings());
-        bb.add(new LegalNoticeButton());
-        bb.add(
-            GenericWebsiteLinker.getButton(
-                DefaultManager.PROJECT_GITHUB_PAGE,
-                Manager.PROJECTPAGE_BUTTON_TOOLTIP,
-                Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
-        BBlocView b = new BBlocView();
-        b.addBBlockButtons(bb.toArray(new BBlocButton[0]));
-        bottom.add(b);
-        bottom.add(Global.bp);
-
-        JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-        bgt = new com.halcyoninae.cosmos.components.Cosmos(m);
-        Global.bp.pokeewFileList(Global.ll);
-
-        PhysicalFolder[] fi = Program.fetchSavedPlayLists();
-        if (fi.length > 0) {
-          for (PhysicalFolder f : fi) {
-            if (new File(f.getAbsolutePath()).exists() && new File(f.getAbsolutePath()).isDirectory()) {
-              Global.bp.pokeNewFileListTab(f.getAbsolutePath());
-              Debugger.good("Added playlist: " + f.getAbsolutePath());
-            } else {
-              Debugger.warn("Could not add playlist: " + f.getAbsolutePath());
-            }
-          }
+      new Thread(ld::run).start();
+      Setup.addSetupListener(new SetupListener() {
+        @Override
+        public void updateStatus(SetupStatus e) {
+          boot_kick_mainUI();
         }
+      });
+      Setup.main((String[]) null);
 
-        File[] files = Program.fetchLikedTracks();
-        if (files.length > 0) {
-          for (File f : files) {
-            if (f.exists() && f.isFile()) {
-              Global.ll.set(f.getAbsolutePath());
-              Debugger.good("Added Liked Track: " + f.getAbsolutePath());
-            } else {
-              Debugger.warn("Could not load liked track: " + f.getAbsolutePath());
-            }
-          }
-        }
-
-        bgt.run();
-        ld.kill();
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
-          Discordo dp = new Discordo();
-          Global.ifp.addInfoViewUpdateListener(dp);
-          dp.start();
-        }
+      ld.kill();
     } catch (Exception e) {
       ResourceFolder.dispatchLog(e);
     }
@@ -181,7 +196,11 @@ public class Halcyon {
         Debugger.DISABLE_DEBUGGER = false;
       }
     }
-
+    try {
+      UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     try {
       ResourceFolder.checkResourceFolder(
           ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);

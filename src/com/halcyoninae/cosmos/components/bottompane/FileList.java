@@ -32,10 +32,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Represents a Pane containing a list of files for only
@@ -51,7 +49,7 @@ import java.util.Map;
  * @since 3.1
  */
 public class FileList extends JScrollPane implements TabTree {
-  private JTree tree;
+  private final JTree tree;
 
   /**
    * Represents a list of collected files throughout the
@@ -62,15 +60,28 @@ public class FileList extends JScrollPane implements TabTree {
    * Parameter 2: {@link javax.swing.tree.DefaultMutableTreeNode} The node
    * instance of the file as represented on the JTree.
    */
-  private Map<File, DefaultMutableTreeNode> fileMap;
+  private final Map<File, DefaultMutableTreeNode> fileMap;
 
-  private transient PhysicalFolder info;
+  private final transient PhysicalFolder info;
 
-  private DefaultMutableTreeNode root;
+  private final DefaultMutableTreeNode root;
 
   public boolean isVirtual;
 
-  public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString, RightClickHideItemListener hideStringTask) {
+  /// FileView Config START
+  public static final String FILEVIEW_ICON_FOLDER_OPEN = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_FOLDER_CLOSED = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf.png";
+  public static final String FILEVIEW_DEFAULT_FOLDER_ICON = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+  public static final String FILEVIEW_ICON_LIKED_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf_like.png";
+  public static final int FILEVIEW_MIN_WIDTH = Manager.MIN_WIDTH - 70;
+  public static final int FILEVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT - 50 / 2;
+  public static final int FILEVIEW_MAX_WIDTH = Manager.MAX_WIDTH - 50;
+  public static final int FILEVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT + 50 / 2 - 40;
+  /// FileView Config END
+
+  public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString,
+      RightClickHideItemListener hideStringTask) {
     super();
     this.info = info;
     fileMap = new HashMap<>();
@@ -79,8 +90,8 @@ public class FileList extends JScrollPane implements TabTree {
     setAutoscrolls(true);
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-    setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+    setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
     setBorder(null);
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null) {
@@ -109,7 +120,6 @@ public class FileList extends JScrollPane implements TabTree {
     tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
-    getViewport().setBorder(null);
   }
 
   public FileList(PhysicalFolder info) {
@@ -120,8 +130,8 @@ public class FileList extends JScrollPane implements TabTree {
     setAutoscrolls(true);
     setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-    setPreferredSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
-    setMinimumSize(new Dimension(Manager.FILEVIEW_MIN_WIDTH, Manager.FILEVIEW_MIN_HEIGHT));
+    setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+    setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
 
     for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
       if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
@@ -144,9 +154,9 @@ public class FileList extends JScrollPane implements TabTree {
     tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     setBorder(null);
     DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-    ImageIcon closedIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_CLOSED);
-    ImageIcon openIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FOLDER_OPEN);
-    ImageIcon leafIcon = Global.rd.getFromAsImageIcon(Manager.FILEVIEW_ICON_FILE);
+    ImageIcon closedIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
+    ImageIcon openIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
+    ImageIcon leafIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FILE);
     renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
     renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
     renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));
@@ -155,7 +165,6 @@ public class FileList extends JScrollPane implements TabTree {
     tree.setCellRenderer(renderer);
 
     getViewport().add(tree);
-    getViewport().setBorder(null);
   }
 
   /**
@@ -217,7 +226,6 @@ public class FileList extends JScrollPane implements TabTree {
     }
   }
 
-
   /**
    * @param nodeName
    */
@@ -237,7 +245,6 @@ public class FileList extends JScrollPane implements TabTree {
     }
   }
 
-
   /**
    * @param node
    * @return String
@@ -252,7 +259,6 @@ public class FileList extends JScrollPane implements TabTree {
     return "";
   }
 
-
   /**
    * @return String
    */
@@ -261,12 +267,61 @@ public class FileList extends JScrollPane implements TabTree {
     return info.getAbsolutePath();
   }
 
-
   /**
    * @return boolean
    */
   @Override
   public boolean isVirtual() {
     return isVirtual;
+  }
+
+  @Override
+  public void sort(TabTreeSortMethod e) {
+    synchronized (fileMap) {
+      if (e.equals(TabTreeSortMethod.ALPHABETICAL)) {
+        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+        for (File f : fileMap.keySet()) {
+          nodes.add(fileMap.get(f));
+        }
+        Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
+          @Override
+          public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
+            return ((String) o1.getUserObject()).compareTo(((String) o2.getUserObject()));
+          }
+        });
+        for (DefaultMutableTreeNode node : nodes) {
+          root.remove(node);
+          root.add(node);
+        }
+        ((DefaultTreeModel) tree.getModel()).reload();
+      } else if (e.equals(TabTreeSortMethod.REV_ALPHABETICAL)) {
+        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+        for (File f : fileMap.keySet()) {
+          nodes.add(fileMap.get(f));
+        }
+        Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
+          @Override
+          public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
+            return ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject()));
+          }
+        });
+        for (DefaultMutableTreeNode node : nodes) {
+          root.remove(node);
+          root.add(node);
+        }
+        ((DefaultTreeModel) tree.getModel()).reload();
+      } else if (e.equals(TabTreeSortMethod.SHUFFLE)) {
+        List<DefaultMutableTreeNode> nodes = new ArrayList<>();
+        for (File f : fileMap.keySet()) {
+          nodes.add(fileMap.get(f));
+        }
+        Collections.shuffle(nodes);
+        for (DefaultMutableTreeNode node : nodes) {
+          root.remove(node);
+          root.add(node);
+        }
+        ((DefaultTreeModel) tree.getModel()).reload();
+      }
+    }
   }
 }

@@ -30,9 +30,9 @@ import java.util.List;
  * @since 3.1
  */
 public class TailwindEventManager {
-  private List<TailwindListener.TimeUpdateListener> timeListeners;
-  private List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
-  private List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
+  private final List<TailwindListener.TimeUpdateListener> timeListeners;
+  private final List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
+  private final List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
   private TailwindListener.FrameBufferListener bufferListener;
 
   public TailwindEventManager() {

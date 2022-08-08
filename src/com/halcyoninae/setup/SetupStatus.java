@@ -13,13 +13,20 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.components.waveform;
+package com.halcyoninae.setup;
 
 /**
+ * Represents the possible status of the
+ * setup routine process.
+ *
  * @author Jack Meng
- * @since 3.2
+ * @since 3.3
  */
-public interface WaveFormManager {
-  int MIN_WIDTH = 460;
-  int MIN_HEIGHT = 250;
+public enum SetupStatus {
+  /**
+   * Possible values
+   * PASSED: The original setup routine has already passed<br>
+   * NEW: The original setup routine has not been run or is deleted
+   */
+  PASSED, NEW
 }

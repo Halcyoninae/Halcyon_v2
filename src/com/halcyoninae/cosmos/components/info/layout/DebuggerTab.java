@@ -1,12 +1,11 @@
 package com.halcyoninae.cosmos.components.info.layout;
 
+import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.InformationTab;
 import com.halcyoninae.halcyon.constant.ColorManager;
-import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Member;
 
 /**
  * Creates a tab for the InformationDialog that shows
@@ -17,12 +16,12 @@ import java.lang.reflect.Member;
  * @since 3.2
  */
 public class DebuggerTab extends JScrollPane implements InformationTab {
-  private JPanel panel;
-  private JLabel memLabel;
-  private String defaultMemLabel = "<html><p><strong>Memory (mB):</strong></p></html>";
+  private final JPanel panel;
+  private final JLabel memLabel;
+  private final String defaultMemLabel = "<html><p><strong>Memory (mB):</strong></p></html>";
 
   public DebuggerTab() {
-    setPreferredSize(new Dimension(Manager.LEGALNOTICEDIALOG_MIN_WIDTH, Manager.LEGALNOTICEDIALOG_MIN_HEIGHT));
+    setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
     setFocusable(false);
 
     panel = new JPanel();

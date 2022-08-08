@@ -43,7 +43,7 @@ import java.awt.geom.RoundRectangle2D;
  */
 public class MiniPlayer extends JFrame implements Runnable {
   private int pX, pY;
-  private MiniContentPane pane;
+  private final MiniContentPane pane;
   private transient MiniPlayerListener listener;
 
   public MiniPlayer() {

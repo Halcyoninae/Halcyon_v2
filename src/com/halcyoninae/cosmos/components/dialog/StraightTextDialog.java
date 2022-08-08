@@ -23,8 +23,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class StraightTextDialog extends JFrame implements Runnable {
-  private JScrollPane pane;
-  private JEditorPane text;
+  private final JScrollPane pane;
+  private final JEditorPane text;
 
   public StraightTextDialog(String content) {
     setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());

@@ -38,9 +38,12 @@ public class SettingsPane extends JFrame implements Runnable, ActionListener {
     new AudioSettings()
   };
 
-  private JTabbedPane pane;
-  private JPanel aPane, buttons;
-  private JButton close, ok, apply;
+  private final JTabbedPane pane;
+  private final JPanel aPane;
+    private final JPanel buttons;
+  private final JButton close;
+    private final JButton ok;
+    private final JButton apply;
 
   public SettingsPane() {
     setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT + 60));

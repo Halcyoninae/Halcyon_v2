@@ -15,7 +15,6 @@
 
 package com.halcyoninae.tailwind.wrapper;
 
-import com.github.kokorin.jaffree.ffmpeg.FFmpeg;
 import com.halcyoninae.cosmos.components.dialog.LoadingDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
@@ -26,8 +25,7 @@ import com.halcyoninae.tailwind.TailwindPlaylist;
 
 import javax.sound.sampled.Control;
 import javax.sound.sampled.FloatControl;
-import javax.swing.SwingUtilities;
-
+import javax.swing.*;
 import java.io.File;
 
 /**

@@ -20,7 +20,6 @@ import com.halcyoninae.halcyon.connections.properties.Property;
 import com.halcyoninae.halcyon.connections.properties.Property.PropertyFilterType;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.constant.ProgramResourceManager;
-import com.halcyoninae.halcyon.debug.Debugger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +29,7 @@ import java.awt.*;
  * @since 3.2
  */
 public class AudioSettings extends JScrollPane implements SettingsTabs {
-  private JPanel panel;
+  private final JPanel panel;
   private int i = 0;
 
   public AudioSettings() {

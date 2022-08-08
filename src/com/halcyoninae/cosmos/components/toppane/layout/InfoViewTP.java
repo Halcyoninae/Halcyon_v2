@@ -27,16 +27,12 @@ import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.halcyon.utils.TimeParser;
 import com.halcyoninae.tailwind.AudioInfo;
-import de.ralleytn.simple.image.SimpleImage;
-
-import javax.swing.*;
-
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.InvalidFrameException;
 import org.jaudiotagger.tag.TagException;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -71,31 +67,47 @@ public class InfoViewTP extends JPanel implements ComponentListener {
    * @author Jack Meng
    * @since 3.0
    */
-  public static interface InfoViewUpdateListener {
+  public interface InfoViewUpdateListener {
     void infoView(AudioInfo info);
   }
 
-  private JPanel topPanel, backPanel;
+  private final JPanel topPanel;
+  private final JPanel backPanel;
   private transient AudioInfo info;
-  private JLabel infoDisplay, artWork;
-  private transient ArrayList<InfoViewUpdateListener> listeners;
+  private final JLabel infoDisplay;
+  private final JLabel artWork;
+  private final transient ArrayList<InfoViewUpdateListener> listeners;
   private String infoTitle;
   private boolean artWorkIsDefault = true;
+
+  /// InfoView Config START
+  public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = Manager.RSC_FOLDER_NAME + "/infoview/disk.png";
+  final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(
+      INFOVIEW_DISK_NO_FILE_LOADED_ICON);
+  final int INFOVIEW_MIN_WIDTH = Manager.MIN_WIDTH;
+  final int INFOVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
+  final int INFOVIEW_MAX_WIDTH = Manager.MAX_WIDTH;
+  final int INFOVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
+  final int INFOVIEW_INFODISPLAY_MAX_CHARS = 22;
+  final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 108;
+  final int INFOVIEW_FLOWLAYOUT_HGAP = 30;
+  final int INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN = 6;
+  /// InfoView Config END
 
   public InfoViewTP() {
     super();
     listeners = new ArrayList<>();
     setPreferredSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+        new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
     setMinimumSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+        new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
     setOpaque(false);
 
     topPanel = new JPanel();
     topPanel.setPreferredSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+        new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
     topPanel.setMinimumSize(
-        new Dimension(Manager.INFOVIEW_MIN_WIDTH, Manager.INFOVIEW_MIN_HEIGHT));
+        new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
     topPanel.setOpaque(false);
 
     backPanel = new JPanel() {
@@ -156,11 +168,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
     info = new AudioInfo();
     BufferedImage bi = DeImage.imageIconToBI(
-        Global.rd.getFromAsImageIcon(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     bi = DeImage.resizeNoDistort(
         bi,
-        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-        Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+        INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+        INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
     bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
     artWork = new JLabel(new ImageIcon(bi));
     artWork.setBorder(null);
@@ -237,7 +249,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
       }
       if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
           artWork.getPreferredSize().width -
-          Manager.INFOVIEW_FLOWLAYOUT_HGAP *
+          INFOVIEW_FLOWLAYOUT_HGAP *
               2)
           && Halcyon.bgt != null) {
         Halcyon.bgt.getFrame()
@@ -251,13 +263,13 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         Debugger.warn("Artwork found for drawing!");
         BufferedImage bi = null;
         if (!beSmart)
-          bi = DeImage.resizeNoDistort(info.getArtwork(), Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+          bi = DeImage.resizeNoDistort(info.getArtwork(), INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+              INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         else
           bi = DeImage.resizeNoDistort(
               bi,
-              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-              Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+              INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+              INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
         artWork.repaint(30);
@@ -265,8 +277,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
       } else {
         Debugger.warn("Artwork reset!");
         BufferedImage bi = DeImage
-            .resizeNoDistort(DeImage.imageIconToBI(Manager.INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
-                Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, Manager.INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+            .resizeNoDistort(DeImage.imageIconToBI(INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
+                INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
         bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork.setIcon(new ImageIcon(bi));
         artWork.repaint(30);
