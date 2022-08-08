@@ -2,15 +2,15 @@ on: push
 jobs:
   halcyon-deployer:
     runs-on: self-hosted
-    name: IntelliJ
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Check IntelliJ Formatting
-        uses: sidhant92/intellij-format-action@v1
-        with:
-          tool_name: 'IntelliJ Diff'
-          github_token: ${{ secrets.github_token }}
-          fail_on_changes: true
-          path: '.'
-          file_mask: '*.java'
+    - name: Cloning the repository
+      uses: actions/checkout@v1
+      with:
+        fetch-depth: 5
+    - name: Prettify Code
+      uses: lwerner-lshigh/prettier_action_java@v1.1.1
+      with:
+        prettier_options: '--no-semi --write *.java'
+        branch: master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
