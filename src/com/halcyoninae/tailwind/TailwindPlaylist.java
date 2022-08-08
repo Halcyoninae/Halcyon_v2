@@ -110,7 +110,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
     }
 
     /**
-     * @return List<File>
+     * @return return the playlist history
      */
     public List<File> getHistory() {
         return history;

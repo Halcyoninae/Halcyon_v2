@@ -4,6 +4,7 @@ com.halcyoninae.cloudspin.helpers
 com.halcyoninae.cloudspin.lib
 com.halcyoninae.cloudspin.lib.blurhash
 com.halcyoninae.cloudspin.lib.boxblur
+com.halcyoninae.cloudspin.lib.gradient
 com.halcyoninae.cosmos
 com.halcyoninae.cosmos.components
 com.halcyoninae.cosmos.components.bbloc
@@ -14,6 +15,7 @@ com.halcyoninae.cosmos.components.info
 com.halcyoninae.cosmos.components.info.layout
 com.halcyoninae.cosmos.components.inheritable
 com.halcyoninae.cosmos.components.minimizeplayer
+com.halcyoninae.cosmos.components.moreapps
 com.halcyoninae.cosmos.components.settings
 com.halcyoninae.cosmos.components.settings.tabs.properties
 com.halcyoninae.cosmos.components.toppane
@@ -33,7 +35,9 @@ com.halcyoninae.halcyon.filesystem
 com.halcyoninae.halcyon.global
 com.halcyoninae.halcyon.runtime
 com.halcyoninae.halcyon.utils
+com.halcyoninae.setup
 com.halcyoninae.tailwind
 com.halcyoninae.tailwind.simple
+com.halcyoninae.tailwind.vorbis
 com.halcyoninae.tailwind.wrapper
 com.test
