@@ -16,7 +16,6 @@
 package com.halcyoninae.halcyon.connections.properties;
 
 import com.halcyoninae.halcyon.DefaultManager;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 

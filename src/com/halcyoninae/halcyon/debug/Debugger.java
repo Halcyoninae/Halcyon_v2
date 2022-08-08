@@ -15,8 +15,8 @@
 
 package com.halcyoninae.halcyon.debug;
 
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.TimeParser;
 

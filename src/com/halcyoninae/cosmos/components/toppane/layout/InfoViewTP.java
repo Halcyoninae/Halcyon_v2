@@ -18,11 +18,11 @@ package com.halcyoninae.cosmos.components.toppane.layout;
 import com.halcyoninae.cloudspin.CloudSpin;
 import com.halcyoninae.cloudspin.CloudSpinFilters;
 import com.halcyoninae.halcyon.Halcyon;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.halcyon.utils.TimeParser;
@@ -120,7 +120,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
                         original = DeImage.createGradientVertical(original, 255, 0);
                         switch (com.halcyoninae.halcyon.connections.properties.ResourceFolder.pm
-                                .get(com.halcyoninae.halcyon.constant.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+                                .get(com.halcyoninae.halcyon.connections.properties.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
                             case "focused":
                                 original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
                                         com.halcyoninae.halcyon.utils.DeImage.Directional.BOTTOM);

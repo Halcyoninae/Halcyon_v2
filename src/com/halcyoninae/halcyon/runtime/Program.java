@@ -16,7 +16,7 @@
 package com.halcyoninae.halcyon.runtime;
 
 import com.halcyoninae.halcyon.cacher.MoosicCache;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 
 import java.io.File;

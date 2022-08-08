@@ -37,7 +37,6 @@ public class WaveFormLinker extends JButton implements BBlocButton {
         Global.player.getStream().setFrameBufferListener(Global.waveForm);
     }
 
-
     /**
      * @return JComponent
      */
@@ -45,7 +44,6 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     public JComponent getComponent() {
         return this;
     }
-
 
     /**
      * @param e

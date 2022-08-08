@@ -15,8 +15,8 @@
 
 package com.halcyoninae.cosmos.tasks;
 
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 
 /**
  * This class aims to optimize tasks throughout the JVM

@@ -17,6 +17,7 @@ package com.halcyoninae.cosmos.components.toppane.layout;
 
 import com.halcyoninae.cosmos.components.inheritable.LikeButton;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -67,10 +68,11 @@ public class ButtonControlTP extends JPanel
             + "/buttoncontrol/shuffle_button_pressed.png";
     final String BUTTONCONTROL_LOOP_ICON_PRESSED = Manager.RSC_FOLDER_NAME
             + "/buttoncontrol/loop_button_pressed.png";
-    final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
-    final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
+    public static final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
+    public static final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
     final int BUTTONCONTROL_MAX_WIDTH = Manager.MAX_WIDTH;
     final int BUTTONCONTROL_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
+    public static final int BUTTONCONTROL_BOTTOM_TOP_BUDGET = 12;
     private final JButton playButton;
     private final JButton nextButton;
     private final JButton previousButton;
@@ -82,6 +84,7 @@ public class ButtonControlTP extends JPanel
     private final JSlider volumeSlider;
     private final JPanel sliders;
     private final JPanel buttons;
+    private TimeControlSubTP tsp;
     private transient AudioInfo aif;
     private boolean hasPlayed = false, flip = false;
     /// ButtonControl Config END
@@ -242,9 +245,12 @@ public class ButtonControlTP extends JPanel
             }
         }).start();
 
-        // sliders.add(progressSlider);
-        // sliders.add(Box.createVerticalStrut(BUTTONCONTROL_MIN_HEIGHT / 10));
-        // sliders.add(progressBar);
+        tsp = new TimeControlSubTP();
+
+        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 2));
+        sliders.add(progressSlider);
+        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 2));
+        sliders.add(tsp);
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -256,10 +262,10 @@ public class ButtonControlTP extends JPanel
                 volumeSlider.revalidate();
             }
         });
-
+        tsp = new TimeControlSubTP();
         add(buttons);
-        // add(sliders);
-        add(progressSlider);
+        add(sliders);
+
     }
 
     /**

@@ -16,10 +16,10 @@
 package com.halcyoninae.cosmos.components.settings.tabs.properties;
 
 import com.halcyoninae.cosmos.components.settings.SettingsTabs;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.Property;
 import com.halcyoninae.halcyon.connections.properties.Property.PropertyFilterType;
 import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 
 import javax.swing.*;
 import java.awt.*;

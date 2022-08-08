@@ -16,8 +16,8 @@
 package com.halcyoninae.halcyon.utils;
 
 import com.halcyoninae.cosmos.components.bottompane.TabTree;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
-import com.halcyoninae.halcyon.constant.ProgramResourceManager;
 
 import javax.swing.*;
 import java.io.File;

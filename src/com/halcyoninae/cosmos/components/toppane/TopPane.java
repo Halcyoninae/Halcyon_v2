@@ -41,8 +41,8 @@ import java.awt.*;
 public class TopPane extends JPanel {
 
     /// TopPane Config START
-    final int TOPPANE_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH;
-    final int TOPPANE_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
+    public static final int TOPPANE_MIN_WIDTH = Manager.MIN_WIDTH;
+    public static final int TOPPANE_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
 
     final int TOPPANE_MAX_WIDTH = TOPPANE_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
     final int TOPPANE_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
