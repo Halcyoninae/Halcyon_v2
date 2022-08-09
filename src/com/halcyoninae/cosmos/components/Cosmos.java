@@ -126,16 +126,10 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
                 if(e instanceof JLabel) {
                     e.setForeground(theme.getForegroundColor());
                 }
-                e.repaint(10);
-                e.revalidate();
-                e.validate();
                 SwingUtilities.updateComponentTreeUI(e);
             }
-            frame.validate();
             frame.pack();
-            frame.revalidate();
             frame.repaint(30);
-            frame.validate();
         }
         ColorManager.programTheme = theme;
         ColorManager.refreshColors();

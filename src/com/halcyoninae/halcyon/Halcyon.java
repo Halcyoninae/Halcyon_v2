@@ -17,6 +17,7 @@ package com.halcyoninae.halcyon;
 
 import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.halcyoninae.cosmos.ThreadedScheduler;
+import com.halcyoninae.cosmos.components.Cosmos;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bbloc.BBlocView;
 import com.halcyoninae.cosmos.components.bbloc.buttons.*;
@@ -105,7 +106,12 @@ public class Halcyon {
     public static com.halcyoninae.cosmos.components.Cosmos bgt;
 
     private static void boot_kick_mainUI() {
-        Debugger.warn(System.getProperty("java.class.path"));
+        Debugger.info(System.getProperty("java.class.path"));
+        try {
+            Cosmos.refreshUI(ColorManager.programTheme);
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
         TopPane tp = new TopPane(Global.ifp, Global.bctp);
         Global.ifp.addInfoViewUpdateListener(Global.bctp);
         JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);

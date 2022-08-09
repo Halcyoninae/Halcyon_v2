@@ -17,6 +17,7 @@ package com.halcyoninae.cosmos.components.bottompane;
 
 import com.halcyoninae.cosmos.events.FVRightClick;
 import com.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
+import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
@@ -86,6 +87,8 @@ public class FileList extends JScrollPane implements TabTree {
         setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
+        getVerticalScrollBar().setForeground(ColorManager.MAIN_FG_THEME);
+        getHorizontalScrollBar().setForeground(ColorManager.MAIN_FG_THEME);
         setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
         setBorder(null);
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
@@ -127,7 +130,8 @@ public class FileList extends JScrollPane implements TabTree {
         setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         setPreferredSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
         setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
-
+        getVerticalScrollBar().setForeground(ColorManager.MAIN_FG_THEME);
+        getHorizontalScrollBar().setForeground(ColorManager.MAIN_FG_THEME);
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
             if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Main-Class: com.halcyoninae.halcyon.Halcyon
+Class-Path: lib/javazoom-1.0.1.jar lib/javazoom.spi-1.9.5.jar lib/de.jar
+ nbjo-1.0.0.jar lib/jorbis-0.0.17-2.jar lib/jaudiotagger-3.0.1.jar lib/r
+ itonus-all-0.3.7.2.jar lib/flatlaf-1.6.1.jar lib/flatlaf-intellij-theme
+ s-1.6.1.jar lib/nanojson-1.7.jar lib/jaffree-2022.06.03.jar lib/simple-
+ image_v1.1.1.jar lib/discord-rpc.jar
+

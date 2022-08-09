@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.plaf.basic.BasicLookAndFeel;
 
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneLightIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import com.halcyoninae.cosmos.theme.Theme;
 import com.halcyoninae.cosmos.theme.ThemeType;
 import com.halcyoninae.halcyon.utils.ColorTool;
@@ -21,7 +21,7 @@ public class LightGreen implements Theme {
 
   @Override
   public Class<? extends BasicLookAndFeel> getLAF() {
-    return FlatAtomOneLightIJTheme.class;
+    return FlatLightFlatIJTheme.class;
   }
 
   @Override
