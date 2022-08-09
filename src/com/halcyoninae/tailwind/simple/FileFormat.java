@@ -94,8 +94,7 @@ public enum FileFormat {
     FileFormat(
             boolean writingSupported,
             AudioFileFormat.Type type,
-            String... associatedFileExtensions
-    ) {
+            String... associatedFileExtensions) {
         this.associatedFileExtensions = new ArrayList<>();
         this.writingSupported = writingSupported;
         this.type = type;
@@ -107,7 +106,8 @@ public enum FileFormat {
 
     /**
      * @param name name of the file
-     * @return the {@linkplain FileFormat} instance which fits or {@code null} if no file format could be found for that name.
+     * @return the {@linkplain FileFormat} instance which fits or {@code null} if no
+     *         file format could be found for that name.
      * @since 1.0.0
      */
     public static FileFormat getFormatByName(String name) {
@@ -130,7 +130,8 @@ public enum FileFormat {
     }
 
     /**
-     * @return the {@linkplain AudioFileFormat.Type} equivalent to this {@linkplain FileFormat} instance
+     * @return the {@linkplain AudioFileFormat.Type} equivalent to this
+     *         {@linkplain FileFormat} instance
      * @since 1.1.0
      */
     public AudioFileFormat.Type getType() {
@@ -138,7 +139,8 @@ public enum FileFormat {
     }
 
     /**
-     * @return {@code true} if writing for the file format is supported, else {@code false}
+     * @return {@code true} if writing for the file format is supported, else
+     *         {@code false}
      * @since 1.0.0
      */
     public boolean isWritingSupported() {

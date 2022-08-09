@@ -11,7 +11,7 @@
       Detailed Description: Added a visual icon to the pause and
       play state of the player. The button now also listens for the
       player's status.
-      Status: FIXED
+      Status: FIXED; Refixed after a correlation with the RESUME status was fixed.
       State: Experimental-Build ~ MP4J
       Difficulty: None
       Testing: None

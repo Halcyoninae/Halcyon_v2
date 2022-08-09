@@ -377,6 +377,7 @@ public class ButtonControlTP extends JPanel
                     Global.player.getStream().pause();
                 }
             }
+            /*
             if (!flip) {
                 playButton
                         .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
@@ -387,6 +388,7 @@ public class ButtonControlTP extends JPanel
                                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
             }
             flip = !flip;
+            */
         } else if (e.getSource().equals(restartButton)) {
             Global.player.getStream().reset();
             Global.player.play();
@@ -425,13 +427,10 @@ public class ButtonControlTP extends JPanel
     @Override
     public void statusUpdate(TailwindStatus status) {
         Debugger.warn("Got ButtonCtrl: " + status.name());
-        if (status.equals(TailwindStatus.PLAYING)) {
+        if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
             playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
                     PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
-        } else if (status.equals(TailwindStatus.PAUSED)) {
-            playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
-                    PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
-        } else if (status.equals(TailwindStatus.CLOSED) || status.equals(TailwindStatus.END)) {
+        } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED) || status.equals(TailwindStatus.END)) {
             playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                     PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         }

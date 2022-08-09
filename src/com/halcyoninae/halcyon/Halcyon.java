@@ -184,9 +184,7 @@ public class Halcyon {
                     boot_kick_mainUI();
                 }
             });
-
-            Setup.main(Setup.KILL_ARG);
-
+            Setup.main((String[]) null);
             ld.kill();
             d.interrupt();
             d = null;

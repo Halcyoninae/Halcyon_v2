@@ -24,6 +24,8 @@ import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Enumeration;
 import java.util.logging.LogManager;
 
@@ -42,9 +44,10 @@ public class ThreadedScheduler {
      * be init by themselves not here.
      */
     static {
+        System.setOut(new PrintStream(OutputStream.nullOutputStream()));
         System.setProperty("flatlaf.useWindowDecorations", "false");
         System.setProperty("flatlaf.uiScale.enabled", "false");
-        System.setProperty("flatlaf.useJetBrainsCustomDecorations", "true");
+        System.setProperty("flatlaf.useJetBrainsCustomDecorations", "false");
         UIManager.put("ScrollBar.thumbArc", 999);
         UIManager.put("ScrollBar.trackArc", 999);
         UIManager.put("ScrollBar.background", null);
@@ -65,7 +68,6 @@ public class ThreadedScheduler {
         UIManager.put("TitlePane.buttonSize", new java.awt.Dimension(25, 20));
         UIManager.put("TitlePane.unifiedBackground", true);
         UIManager.put("SplitPaneDivider.gripDotCount", 0);
-        System.setOut(null);
         UIManager.put("FileChooser.readOnly", true);
         LogManager.getLogManager().reset();
         // fix blurriness on high-DPI screens

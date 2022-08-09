@@ -41,7 +41,6 @@ public class TailwindEventManager {
         genericUpdateListeners = new ArrayList<>();
     }
 
-
     /**
      * @param e
      * @return boolean
@@ -49,7 +48,6 @@ public class TailwindEventManager {
     public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
         return timeListeners.add(e);
     }
-
 
     /**
      * @param e
@@ -59,7 +57,6 @@ public class TailwindEventManager {
         return statusUpdateListeners.add(e);
     }
 
-
     /**
      * @param e
      * @return boolean
@@ -68,14 +65,12 @@ public class TailwindEventManager {
         return genericUpdateListeners.add(e);
     }
 
-
     /**
      * @param e
      */
     public void addFrameBufferListener(TailwindListener.FrameBufferListener e) {
         this.bufferListener = e;
     }
-
 
     /**
      * @return e
@@ -84,14 +79,12 @@ public class TailwindEventManager {
         return timeListeners;
     }
 
-
     /**
      * @return e
      */
     public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
         return statusUpdateListeners;
     }
-
 
     /**
      * @return e
@@ -100,7 +93,6 @@ public class TailwindEventManager {
         return genericUpdateListeners;
     }
 
-
     /**
      * @return e
      */
@@ -108,44 +100,34 @@ public class TailwindEventManager {
         return bufferListener;
     }
 
-
     /**
      * @param time
      */
     public synchronized void dispatchTimeEvent(long time) {
-        Wrapper.async(() -> {
-            for (TailwindListener.TimeUpdateListener e : timeListeners) {
-                e.trackCurrentTime(time);
-            }
-        });
+        for (TailwindListener.TimeUpdateListener e : timeListeners) {
+            e.trackCurrentTime(time);
+        }
 
     }
-
 
     /**
      * @param status
      */
     public synchronized void dispatchStatusEvent(TailwindStatus status) {
-        Wrapper.async(() -> {
-            for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
-                e.statusUpdate(status);
-            }
-        });
+        for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
+            e.statusUpdate(status);
+        }
 
     }
-
 
     /**
      * @param event
      */
     public synchronized void dispatchGenericEvent(TailwindEvent event) {
-        Wrapper.async(() -> {
-            for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
-                e.genericUpdate(event);
-            }
-        });
+        for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
+            e.genericUpdate(event);
+        }
     }
-
 
     /**
      * @param samples

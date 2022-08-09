@@ -16,8 +16,11 @@
 package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
+import com.halcyoninae.tailwind.flac.FlacIn;
 import com.halcyoninae.tailwind.simple.FileFormat;
 import com.halcyoninae.tailwind.vorbis.VorbisIn;
+
+import de.jarnbjo.flac.FlacStream;
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
 import de.jarnbjo.vorbis.VorbisStream;
@@ -25,6 +28,9 @@ import de.jarnbjo.vorbis.VorbisStream;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
+
+import org.jaudiotagger.audio.ogg.util.OggPageHeader;
+
 import java.io.File;
 import java.net.URL;
 
@@ -62,7 +68,8 @@ public final class TailwindHelper {
                 ais = AudioSystem.getAudioInputStream(locale);
                 return ais;
             } else if (target.equals(FileFormat.OGG)) {
-                LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams().iterator()
+                LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams()
+                        .iterator()
                         .next();
                 if (!stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
                     new ErrorWindow("Failed to read this Vorbis (OGG) file...").run();

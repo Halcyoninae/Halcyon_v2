@@ -302,6 +302,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void close() {
+        Debugger.warn("TailwindPlayer> Closing");
         if (open) {
             try {
                 resetProperties();
@@ -323,10 +324,11 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void play() {
+        Debugger.warn("TailwindPlayer> Playing");
         if (playing || paused) {
             stop();
         }
-        worker = Executors.newSingleThreadScheduledExecutor();
+        worker = Executors.newSingleThreadExecutor();
         worker.execute(this);
         playing = true;
 
@@ -378,6 +380,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void resume() {
+        Debugger.warn("TailwindPlayer> Resuming");
         if (paused) {
             playing = true;
             paused = false;
@@ -387,6 +390,7 @@ public class TailwindPlayer implements Audio, Runnable {
         } else {
             play();
         }
+        events.dispatchStatusEvent(TailwindStatus.RESUMED);
     }
 
     /**
@@ -399,6 +403,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void pause() {
+        Debugger.warn("TailwindPlayer> Pausing");
         if (playing && !paused) {
             paused = true;
             playing = false;
