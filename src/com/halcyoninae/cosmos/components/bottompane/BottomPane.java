@@ -15,7 +15,7 @@
 
 package com.halcyoninae.cosmos.components.bottompane;
 
-import com.halcyoninae.cosmos.components.inheritable.TabButton;
+import com.halcyoninae.cosmos.inheritable.TabButton;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.Wrapper;

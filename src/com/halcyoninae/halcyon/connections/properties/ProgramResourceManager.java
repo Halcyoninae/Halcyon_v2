@@ -46,6 +46,7 @@ public class ProgramResourceManager {
         public static final String KEY_MINI_PLAYER_DEFAULT_BG_ALPHA = "mini.player.default_bg_alpha";
         public static final String KEY_TIME_CONTROL_FAST_WARD_MS_INCREMENT = "time.control.forward_ms_increment";
         public static final String KEY_TIME_CONTROL_BACK_WARD_MS_INCREMENT = "time.control.back_ms_increment";
+        public static final String KEY_USER_PROGRAM_COLOR_THEME = "user.program_color_theme";
 
         /**
          * if false, a loop will disable a shuffle if both are activated.
@@ -77,6 +78,9 @@ public class ProgramResourceManager {
                                         new NumericRangeValidator(1000.0d, 20000.0d, 1.0d)),
                         new Property(KEY_TIME_CONTROL_BACK_WARD_MS_INCREMENT, "5000", new NumericRangeValidator(
                                         1000.0d, 20000.0d, 1.0d)),
+                        new Property(KEY_USER_PROGRAM_COLOR_THEME, "dark_green",
+                                        new StrictValidator("dark_green", "dark_orange", "light_orange",
+                                                        "light_green")),
         };
         public static final String FILE_SLASH = "/";
         public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";

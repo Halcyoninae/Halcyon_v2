@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
-import com.halcyoninae.cosmos.components.inheritable.LikeButton;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
+import com.halcyoninae.cosmos.inheritable.LikeButton;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;

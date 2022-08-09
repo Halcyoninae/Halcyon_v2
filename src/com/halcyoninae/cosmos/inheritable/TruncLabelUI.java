@@ -1,4 +1,4 @@
-package com.halcyoninae.cosmos.components.inheritable;
+package com.halcyoninae.cosmos.inheritable;
 
 import com.halcyoninae.halcyon.debug.Debugger;
 

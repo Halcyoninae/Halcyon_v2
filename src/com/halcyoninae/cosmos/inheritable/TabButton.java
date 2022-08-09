@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.components.inheritable;
+package com.halcyoninae.cosmos.inheritable;
 
 import com.halcyoninae.halcyon.constant.Manager;
 

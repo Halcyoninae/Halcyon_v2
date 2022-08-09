@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cosmos.components.dialog;
 
-import com.halcyoninae.cosmos.components.inheritable.FSVDefault;
-
 import javax.swing.*;
+
+import com.halcyoninae.cosmos.inheritable.FSVDefault;
 
 /**
  * This dialog class constructs a simple

@@ -27,6 +27,7 @@ import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.halcyon.connections.discord.Discordo;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
@@ -170,16 +171,21 @@ public class Halcyon {
         try {
             LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
 
-            new Thread(ld::run).start();
+            Thread d = new Thread(ld::run);
+            d.start();
             Setup.addSetupListener(new SetupListener() {
                 @Override
                 public void updateStatus(SetupStatus e) {
                     boot_kick_mainUI();
                 }
             });
-            Setup.main((String[]) null);
+
+            Setup.main(Setup.KILL_ARG);
 
             ld.kill();
+            d.interrupt();
+            d = null;
+            System.gc();
         } catch (Exception e) {
             ResourceFolder.dispatchLog(e);
         }
@@ -198,7 +204,8 @@ public class Halcyon {
             }
         }
         try {
-            UIManager.setLookAndFeel(FlatOneDarkIJTheme.class.getName());
+            Debugger.warn(ColorManager.programTheme.getClass().getName());
+            UIManager.setLookAndFeel(ColorManager.programTheme.getLAF().getName());
         } catch (Exception e) {
             e.printStackTrace();
         }

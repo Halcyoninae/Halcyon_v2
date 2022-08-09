@@ -15,16 +15,22 @@
 
 package com.halcyoninae.cosmos.components;
 
+import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.events.InstantClose;
+import com.halcyoninae.cosmos.theme.Theme;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.utils.GUITools;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.TailwindListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 /**
  * BigContainer is the main window for the program,
@@ -90,6 +96,50 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
         container.setVisible(true);
     }
 
+    /**
+     * Dispatches an event to update all LAF components
+     * of the current Swing
+     * This implementation is adapted from the original MP4J project
+     *
+     * @param theme The theme to update to
+     * @throws UnsupportedLookAndFeelException If the LAF is not supported
+     * @see com.halcyoninae.cosmos.theme.Theme
+     * @author Jack Meng
+     * @since 3.3
+     */
+    public static void refreshUI(Theme theme) throws UnsupportedLookAndFeelException {
+        try {
+            UIManager.setLookAndFeel(theme.getLAF().getName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+            new ErrorWindow(ex.getMessage()).run();
+            ResourceFolder.dispatchLog(ex);
+        }
+        for(Window frame : java.awt.Frame.getFrames()) {
+            try {
+                SwingUtilities.updateComponentTreeUI(frame);
+            } catch (NullPointerException ex) {
+                // Do nothing bc sometimes swing is bad...
+            }
+
+            for(Component e : GUITools.getAllComponents(frame)) {
+                if(e instanceof JLabel) {
+                    e.setForeground(theme.getForegroundColor());
+                }
+                e.repaint(10);
+                e.revalidate();
+                e.validate();
+                SwingUtilities.updateComponentTreeUI(e);
+            }
+            frame.validate();
+            frame.pack();
+            frame.revalidate();
+            frame.repaint(30);
+            frame.validate();
+        }
+        ColorManager.programTheme = theme;
+        ColorManager.refreshColors();
+    }
 
     /**
      * @param status

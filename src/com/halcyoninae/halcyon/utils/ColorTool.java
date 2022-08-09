@@ -46,6 +46,16 @@ public final class ColorTool {
     }
 
     /**
+     * Convert a color object to a string hex representation.
+     *
+     * @param color The color to convert
+     * @return String The hex representation of the color
+     */
+    public static String rgbTohex(Color color) {
+        return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
+    }
+
+    /**
      * Returns a random color
      *
      * @return A color object (int8)
