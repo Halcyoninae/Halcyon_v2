@@ -117,7 +117,6 @@ public class Debugger {
                 s[i] = t.toString();
                 i++;
             }
-            Program.main(s);
         }
     }
 

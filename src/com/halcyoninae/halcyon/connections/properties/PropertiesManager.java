@@ -72,7 +72,7 @@ public final class PropertiesManager {
      * @param location          The location of the properties file
      */
     public PropertiesManager(Map<String, String> defaultProperties, Map<String, PropertyValidator> allowedProperties,
-                             String location) {
+            String location) {
         this.map = defaultProperties;
         this.allowedProperties = allowedProperties;
         this.location = location;
@@ -112,12 +112,15 @@ public final class PropertiesManager {
      * Creates an empty file with the location given in the constructor.
      */
     private void wipeContents() {
-        try {
-            FileWriter writer = new FileWriter(location);
-            writer.write("");
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        File f = new File(location);
+        if (f.isFile() && f.exists()) {
+            try {
+                FileWriter writer = new FileWriter(location);
+                writer.write("");
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -182,7 +185,7 @@ public final class PropertiesManager {
      *
      * @param key A key to check for
      * @return (true | | false) based on the existence of a key in the properties
-     * file.
+     *         file.
      */
     public boolean contains(String key) {
         return util.containsKey(key);
@@ -245,7 +248,8 @@ public final class PropertiesManager {
             util.setProperty(key, map.get(key));
             save();
         }
-        return util.getProperty(key) == null || !allowed(key, util.getProperty(key)) ? map.get(key) : util.getProperty(key);
+        return util.getProperty(key) == null || !allowed(key, util.getProperty(key)) ? map.get(key)
+                : util.getProperty(key);
     }
 
     /**

@@ -103,7 +103,7 @@ public class ResourceFolder {
      */
     public static void writeLog(String folderName, String f) {
         if (!new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName)
-                .isDirectory()) {
+                .isDirectory() || !new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName).exists()) {
             new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName).mkdir();
         }
         File logFile = new File(

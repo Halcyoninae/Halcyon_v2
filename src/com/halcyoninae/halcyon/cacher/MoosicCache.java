@@ -58,7 +58,7 @@ public class MoosicCache {
          */
         if (!new File(MOOSIC_DEFAULT_LOCALE).exists() || new File(MOOSIC_DEFAULT_LOCALE).length() == 0
                 || !new File(MOOSIC_DEFAULT_LOCALE).isFile()) {
-            Debugger.info("Incorrect user cache found! >,< Moosic resetting");
+            Debugger.warn("Incorrect user cache found! >,< Moosic resetting");
             Map<String, String> content = new HashMap<>();
             content.put(NODE_USER_LIKED_TRACKS, "");
             content.put(NODE_USER_SAVED_PLAYLISTS, "");

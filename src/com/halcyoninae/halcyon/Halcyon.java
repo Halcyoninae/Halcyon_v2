@@ -209,7 +209,6 @@ public class Halcyon {
             }
         }
         try {
-            Debugger.warn(ColorManager.programTheme.getClass().getName());
             UIManager.setLookAndFeel(ColorManager.programTheme.getLAF().getName());
         } catch (Exception e) {
             e.printStackTrace();
