@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: com.halcyoninae.halcyon.Halcyon
-Class-Path: discord-rpc.jar javazoom-1.0.1.jar jaudiotagger-3.0.1.jar na
- nojson-1.7.jar flatlaf-1.6.1.jar simple-image_v1.1.1.jar jaffree-2022.0
- 6.03.jar tritonus-all-0.3.7.2.jar de.jarnbjo-1.0.0.jar flatlaf-intellij
- -themes-1.6.1.jar jorbis-0.0.17-2.jar javazoom.spi-1.9.5.jar
-

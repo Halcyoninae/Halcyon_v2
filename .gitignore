@@ -13,3 +13,4 @@ Source/com/jackmeng/test
 *.halcyon
 /src/com/jackmeng/test/
 *.log
+/manifests
