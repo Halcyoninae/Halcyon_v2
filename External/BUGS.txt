@@ -1,3 +1,11 @@
+[***] #38 "Moosic.Halcyon config file not being correctly checked"
+      Detailed Description: moosic.halcyon is not created if the file
+      does not exist resulting in IOExceptions and more.
+      Status: Investigating
+      State: Experimental-Build ~ MP4J
+      Difficulty: None
+      Testing: Decent
+      
 [!FIXED!] [***] #37 "Play Button Icon Update"
       Detailed Description: Added a visual icon to the pause and 
       play state of the player. The button now also listens for the 
