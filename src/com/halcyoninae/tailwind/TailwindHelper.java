@@ -33,7 +33,6 @@ import java.net.URL;
  * @since 3.1
  */
 public final class TailwindHelper {
-    private static AudioInputStream lastIS = null;
 
     /**
      * @param locale
@@ -55,15 +54,12 @@ public final class TailwindHelper {
                         base.getSampleRate(),
                         false);
                 ais = AudioSystem.getAudioInputStream(decode, ais);
-                lastIS = ais;
                 return ais;
             } else if (target.equals(FileFormat.WAV)) {
                 ais = AudioSystem.getAudioInputStream(locale);
-                lastIS = ais;
                 return ais;
             } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
                 ais = AudioSystem.getAudioInputStream(locale);
-                lastIS = ais;
                 return ais;
             } else if (target.equals(FileFormat.OGG)) {
                 LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams().iterator()

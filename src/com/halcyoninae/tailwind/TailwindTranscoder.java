@@ -58,7 +58,6 @@ public final class TailwindTranscoder implements Transcoder {
             return samples;
         }
         int bps = format.getSampleSizeInBits();
-        int byps = bps / 8;
         int nb = normalize(bps);
 
         if (format.isBigEndian()) {

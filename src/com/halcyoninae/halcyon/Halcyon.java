@@ -15,7 +15,6 @@
 
 package com.halcyoninae.halcyon;
 
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.halcyoninae.cosmos.ThreadedScheduler;
 import com.halcyoninae.cosmos.components.Cosmos;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;

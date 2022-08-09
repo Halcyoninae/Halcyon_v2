@@ -23,14 +23,12 @@ import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.GUITools;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.TailwindListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
 /**
  * BigContainer is the main window for the program,

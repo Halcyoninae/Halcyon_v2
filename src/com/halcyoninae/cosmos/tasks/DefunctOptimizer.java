@@ -29,9 +29,6 @@ import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
  * @since 3.1
  */
 public class DefunctOptimizer implements Runnable {
-    public DefunctOptimizer() {
-
-    }
 
     @Override
     public void run() {
@@ -40,7 +37,7 @@ public class DefunctOptimizer implements Runnable {
                 while (true) {
                     Runtime.getRuntime().gc();
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(600L);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

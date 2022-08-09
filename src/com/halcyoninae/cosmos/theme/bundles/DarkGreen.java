@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.plaf.basic.BasicLookAndFeel;
 
-import com.formdev.flatlaf.intellijthemes.FlatOneDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatAtomOneDarkIJTheme;
 import com.halcyoninae.cosmos.theme.Theme;
 import com.halcyoninae.cosmos.theme.ThemeType;
