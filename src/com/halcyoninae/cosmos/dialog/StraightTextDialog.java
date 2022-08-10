@@ -13,32 +13,43 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.inheritable;
+package com.halcyoninae.cosmos.dialog;
 
+import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
+import java.awt.*;
 
-/**
- * This class mainly provides the necessary inheritable attributes
- * to the SelectionApplicableFolders
- * {@link com.halcyoninae.cosmos.dialog.SelectApplicableFolders} dialog
- * <p>
- * It should not be run by itself as it only provides assets inherits instead
- * of actual component inheritance.
- *
- * @author Jack Meng
- * @see com.halcyoninae.cosmos.dialog.SelectApplicableFolders
- * @see javax.swing.JFrame
- * @since 3.0
- */
-public class FSVDefault extends JFrame {
+public class StraightTextDialog extends JFrame implements Runnable {
+    private final JScrollPane pane;
+    private final JEditorPane text;
 
-    /**
-     * Constructs the inheritable FSVDefault object to be inherited by
-     */
-    public FSVDefault() {
+    public StraightTextDialog(String content) {
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setTitle("Information");
+        setPreferredSize(new Dimension(250, 100));
+        setAutoRequestFocus(true);
+
+        text = new JEditorPane("text/html", content);
+        text.setEditable(false);
+        text.setFocusable(false);
+
+        pane = new JScrollPane(text);
+        pane.setPreferredSize(new Dimension(250, 100));
+        pane.getViewport().setPreferredSize(new Dimension(250, 100));
+
+        setLocationRelativeTo(Halcyon.bgt.getFrame());
+
+        setContentPane(pane);
+    }
+
+    @Override
+    public void run() {
+        SwingUtilities.invokeLater(() -> {
+            pack();
+            setVisible(true);
+        });
     }
 }

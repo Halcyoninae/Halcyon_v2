@@ -15,7 +15,7 @@
 
 package com.halcyoninae.tailwind.wrapper;
 
-import com.halcyoninae.cosmos.components.dialog.LoadingDialog;
+import com.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TimeParser;

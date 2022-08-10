@@ -15,7 +15,6 @@
 
 package com.halcyoninae.halcyon.utils;
 
-import de.ralleytn.simple.image.SimpleImage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -112,19 +111,6 @@ public final class DeImage {
             dimg = img.getSubimage(0, h / 2 - w / 2, w, w);
         }
         return resize(dimg, newW, newH);
-    }
-
-    /**
-     * Scales down an image by a scale factor
-     *
-     * @param src         The image to be scaled down.
-     * @param scaleFactor The scale factor.
-     * @return BufferedImage The scaled down image.
-     */
-    public static BufferedImage scaleDown(BufferedImage src, float scaleFactor) {
-        SimpleImage img = new SimpleImage(src);
-        img = img.scaleByFactor(scaleFactor);
-        return img.toBufferedImage();
     }
 
     /**

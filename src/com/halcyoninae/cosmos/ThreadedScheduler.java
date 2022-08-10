@@ -30,7 +30,7 @@ import java.util.Enumeration;
 import java.util.logging.LogManager;
 
 public class ThreadedScheduler {
-    /**
+    /*
      * Anything that needs initialization should be done here.
      * <br>
      * This init process is done before anything is displayed or run in the program

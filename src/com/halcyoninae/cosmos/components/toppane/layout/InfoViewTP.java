@@ -54,7 +54,7 @@ import java.util.Map;
  * If the user wants to know more about the audio file
  *
  * @author Jack Meng
- * @see com.halcyoninae.cosmos.components.dialog.AudioInfoDialog
+ * @see com.halcyoninae.cosmos.dialog.AudioInfoDialog
  * @since 3.0
  */
 public class InfoViewTP extends JPanel implements ComponentListener {

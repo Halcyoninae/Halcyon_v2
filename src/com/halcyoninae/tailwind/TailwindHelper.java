@@ -15,7 +15,7 @@
 
 package com.halcyoninae.tailwind;
 
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.tailwind.simple.FileFormat;
 import com.halcyoninae.tailwind.vorbis.VorbisIn;
 import de.jarnbjo.ogg.LogicalOggStream;

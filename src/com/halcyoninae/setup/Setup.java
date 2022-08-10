@@ -2,8 +2,8 @@ package com.halcyoninae.setup;
 
 import com.halcyoninae.cloudspin.enums.SpeedStyle;
 import com.halcyoninae.cloudspin.lib.gradient.GradientGenerator;
-import com.halcyoninae.cosmos.components.Cosmos;
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.Cosmos;
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.events.ForceMaxSize;
 import com.halcyoninae.cosmos.special.AttributableButton;
 import com.halcyoninae.cosmos.theme.Theme;

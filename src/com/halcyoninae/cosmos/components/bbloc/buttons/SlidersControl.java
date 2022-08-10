@@ -16,7 +16,7 @@
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
-import com.halcyoninae.cosmos.components.dialog.SlidersDialog;
+import com.halcyoninae.cosmos.dialog.SlidersDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.DeImage;

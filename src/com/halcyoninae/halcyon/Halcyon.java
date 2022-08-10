@@ -15,15 +15,15 @@
 
 package com.halcyoninae.halcyon;
 
+import com.halcyoninae.cosmos.Cosmos;
 import com.halcyoninae.cosmos.ThreadedScheduler;
-import com.halcyoninae.cosmos.components.Cosmos;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bbloc.BBlocView;
 import com.halcyoninae.cosmos.components.bbloc.buttons.*;
-import com.halcyoninae.cosmos.components.dialog.ConfirmWindow;
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
-import com.halcyoninae.cosmos.components.dialog.LoadingDialog;
 import com.halcyoninae.cosmos.components.toppane.TopPane;
+import com.halcyoninae.cosmos.dialog.ConfirmWindow;
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.halcyoninae.halcyon.connections.discord.Discordo;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
@@ -102,7 +102,7 @@ public class Halcyon {
      * This is the only instance of a variable
      * being placed here.
      */
-    public static com.halcyoninae.cosmos.components.Cosmos bgt;
+    public static com.halcyoninae.cosmos.Cosmos bgt;
 
     private static void boot_kick_mainUI() {
         Debugger.info(System.getProperty("java.class.path"));
@@ -136,7 +136,7 @@ public class Halcyon {
         bottom.add(Global.bp);
 
         JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
-        bgt = new com.halcyoninae.cosmos.components.Cosmos(m);
+        bgt = new com.halcyoninae.cosmos.Cosmos(m);
         Global.bp.pokeewFileList(Global.ll);
 
         PhysicalFolder[] fi = Program.fetchSavedPlayLists();

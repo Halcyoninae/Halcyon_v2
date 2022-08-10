@@ -17,9 +17,9 @@ package com.halcyoninae.cosmos.events;
 
 import com.halcyoninae.cosmos.components.bottompane.TabTree;
 import com.halcyoninae.cosmos.components.bottompane.TabTree.TabTreeSortMethod;
-import com.halcyoninae.cosmos.components.dialog.AudioInfoDialog;
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
-import com.halcyoninae.cosmos.components.dialog.StraightTextDialog;
+import com.halcyoninae.cosmos.dialog.AudioInfoDialog;
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.dialog.StraightTextDialog;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.StringManager;

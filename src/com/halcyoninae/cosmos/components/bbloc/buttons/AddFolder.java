@@ -16,9 +16,9 @@
 package com.halcyoninae.cosmos.components.bbloc.buttons;
 
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
-import com.halcyoninae.cosmos.components.dialog.ConfirmWindow;
-import com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders;
-import com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders.FolderSelectedListener;
+import com.halcyoninae.cosmos.dialog.ConfirmWindow;
+import com.halcyoninae.cosmos.dialog.SelectApplicableFolders;
+import com.halcyoninae.cosmos.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.filesystem.FileParser;
@@ -32,11 +32,11 @@ import java.io.File;
 /**
  * A BBloc button that handles when a user selects
  * a folder from the
- * {@link com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders}
+ * {@link com.halcyoninae.cosmos.dialog.SelectApplicableFolders}
  * instance.
  *
  * @author Jack Meng
- * @see com.halcyoninae.cosmos.components.dialog.SelectApplicableFolders
+ * @see com.halcyoninae.cosmos.dialog.SelectApplicableFolders
  * @since 3.0
  */
 public class AddFolder extends JButton implements BBlocButton {

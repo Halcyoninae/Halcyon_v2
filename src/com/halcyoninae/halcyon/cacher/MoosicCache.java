@@ -15,7 +15,7 @@
 
 package com.halcyoninae.halcyon.cacher;
 
-import com.halcyoninae.cosmos.components.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
 import com.halcyoninae.halcyon.constant.Global;
