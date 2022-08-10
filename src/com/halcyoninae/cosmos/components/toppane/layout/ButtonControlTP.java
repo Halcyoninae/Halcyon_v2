@@ -50,6 +50,9 @@ import java.awt.event.ComponentEvent;
  */
 public class ButtonControlTP extends JPanel
         implements InfoViewUpdateListener, ActionListener, ChangeListener, TailwindListener.StatusUpdateListener {
+    public static final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
+    public static final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
+    public static final int BUTTONCONTROL_BOTTOM_TOP_BUDGET = 12;
     /// ButtonControl Config START
     final int PLAY_PAUSE_ICON_SIZE = 40;
     final int OTHER_BUTTONS_SIZE = 24;
@@ -68,11 +71,8 @@ public class ButtonControlTP extends JPanel
             + "/buttoncontrol/shuffle_button_pressed.png";
     final String BUTTONCONTROL_LOOP_ICON_PRESSED = Manager.RSC_FOLDER_NAME
             + "/buttoncontrol/loop_button_pressed.png";
-    public static final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
-    public static final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
     final int BUTTONCONTROL_MAX_WIDTH = Manager.MAX_WIDTH;
     final int BUTTONCONTROL_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
-    public static final int BUTTONCONTROL_BOTTOM_TOP_BUDGET = 12;
     private final JButton playButton;
     private final JButton nextButton;
     private final JButton previousButton;
@@ -86,7 +86,8 @@ public class ButtonControlTP extends JPanel
     private final JPanel buttons;
     private TimeControlSubTP tsp;
     private transient AudioInfo aif;
-    private boolean hasPlayed = false, flip = false;
+    private boolean hasPlayed = false;
+    private final boolean flip = false;
     /// ButtonControl Config END
 
     public ButtonControlTP() {

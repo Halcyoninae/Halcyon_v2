@@ -19,14 +19,10 @@ import com.halcyoninae.halcyon.debug.Debugger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.awt.image.BufferedImage;
 
 /**
  * Retrieves resources from the binary resource folder.
@@ -131,6 +127,7 @@ public class ResourceDistributor {
 
     /**
      * Retrieve a resource as a BufferedImage
+     *
      * @param path The path to the suspected resource
      * @return The BufferedImage or null if not found
      */

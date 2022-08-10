@@ -1,9 +1,7 @@
 package com.halcyoninae.cosmos.special;
 
+import javax.swing.*;
 import java.beans.ConstructorProperties;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
 
 /**
  * A buton that can hold an attribute
@@ -12,29 +10,28 @@ import javax.swing.JButton;
  * @since 3.3
  */
 public class AttributableButton extends JButton {
-  private transient String attribute;
+    private transient String attribute;
 
-  public AttributableButton(Icon icon) {
-    super((String) null, icon);
-  }
+    public AttributableButton(Icon icon) {
+        super(null, icon);
+    }
 
-  @ConstructorProperties({ "text" })
-  public AttributableButton(String text) {
-    super(text, (Icon) null);
-  }
+    @ConstructorProperties({"text"})
+    public AttributableButton(String text) {
+        super(text, null);
+    }
 
-  /**
-   * @param e The attribute to be set
-   */
-  public void setAttribute(String e) {
-    this.attribute = e;
-  }
+    /**
+     * @return The attribute that was set
+     */
+    public String getAttribute() {
+        return attribute;
+    }
 
-  /**
-   *
-   * @return The attribute that was set
-   */
-  public String getAttribute() {
-    return attribute;
-  }
+    /**
+     * @param e The attribute to be set
+     */
+    public void setAttribute(String e) {
+        this.attribute = e;
+    }
 }

@@ -72,7 +72,7 @@ public final class PropertiesManager {
      * @param location          The location of the properties file
      */
     public PropertiesManager(Map<String, String> defaultProperties, Map<String, PropertyValidator> allowedProperties,
-            String location) {
+                             String location) {
         this.map = defaultProperties;
         this.allowedProperties = allowedProperties;
         this.location = location;
@@ -185,7 +185,7 @@ public final class PropertiesManager {
      *
      * @param key A key to check for
      * @return (true | | false) based on the existence of a key in the properties
-     *         file.
+     * file.
      */
     public boolean contains(String key) {
         return util.containsKey(key);

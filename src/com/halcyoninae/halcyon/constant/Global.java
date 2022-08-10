@@ -46,6 +46,7 @@ public class Global {
     static {
         player.getStream().addStatusUpdateListener(bctp);
     }
+
     private Global() {
     }
 }

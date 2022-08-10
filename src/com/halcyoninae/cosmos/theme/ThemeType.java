@@ -7,5 +7,5 @@ package com.halcyoninae.cosmos.theme;
  * @since 3.3
  */
 public enum ThemeType {
-  DARK, LIGHT;
+    DARK, LIGHT
 }

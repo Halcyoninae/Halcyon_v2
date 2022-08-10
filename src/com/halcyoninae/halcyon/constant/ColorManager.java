@@ -30,17 +30,15 @@ import java.awt.*;
  * @since 3.0
  */
 public final class ColorManager {
-    private ColorManager() {}
     public static Theme programTheme = ThemeBundles.getDefaultTheme();
-
     // stable const
     public static Color ONE_DARK_BG = ColorTool.hexToRGBA("#21252B");
     public static Color BORDER_THEME = ColorTool.hexToRGBA("#5F657D");
-
     public static Color MAIN_FG_THEME = programTheme.getForegroundColor();
     public static String MAIN_FG_STR = ColorTool.rgbTohex(programTheme.getForegroundColor());
     public static Color MAIN_BG_THEME = programTheme.getBackgroundColor();
-
+    private ColorManager() {
+    }
 
     public static void refreshColors() {
         MAIN_FG_THEME = programTheme.getForegroundColor();

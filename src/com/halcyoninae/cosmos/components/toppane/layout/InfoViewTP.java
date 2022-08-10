@@ -79,6 +79,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     private transient AudioInfo info;
     private String infoTitle;
     private boolean artWorkIsDefault = true;
+
     public InfoViewTP() {
         super();
         listeners = new ArrayList<>();

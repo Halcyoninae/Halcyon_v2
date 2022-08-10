@@ -79,6 +79,45 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
     }
 
     /**
+     * Dispatches an event to update all LAF components
+     * of the current Swing
+     * This implementation is adapted from the original MP4J project
+     *
+     * @param theme The theme to update to
+     * @throws UnsupportedLookAndFeelException If the LAF is not supported
+     * @author Jack Meng
+     * @see com.halcyoninae.cosmos.theme.Theme
+     * @since 3.3
+     */
+    public static void refreshUI(Theme theme) throws UnsupportedLookAndFeelException {
+        try {
+            UIManager.setLookAndFeel(theme.getLAF().getName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+            new ErrorWindow(ex.getMessage()).run();
+            ResourceFolder.dispatchLog(ex);
+        }
+        for (Window frame : java.awt.Frame.getFrames()) {
+            try {
+                SwingUtilities.updateComponentTreeUI(frame);
+            } catch (NullPointerException ex) {
+                // Do nothing bc sometimes swing is bad...
+            }
+
+            for (Component e : GUITools.getAllComponents(frame)) {
+                if (e instanceof JLabel) {
+                    e.setForeground(theme.getForegroundColor());
+                }
+                SwingUtilities.updateComponentTreeUI(e);
+            }
+            frame.pack();
+            frame.repaint(30);
+        }
+        ColorManager.programTheme = theme;
+        ColorManager.refreshColors();
+    }
+
+    /**
      * Returns the JFrame instance
      *
      * @return The JFrame instance
@@ -92,45 +131,6 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
         container.pack();
         container.setLocationRelativeTo(null);
         container.setVisible(true);
-    }
-
-    /**
-     * Dispatches an event to update all LAF components
-     * of the current Swing
-     * This implementation is adapted from the original MP4J project
-     *
-     * @param theme The theme to update to
-     * @throws UnsupportedLookAndFeelException If the LAF is not supported
-     * @see com.halcyoninae.cosmos.theme.Theme
-     * @author Jack Meng
-     * @since 3.3
-     */
-    public static void refreshUI(Theme theme) throws UnsupportedLookAndFeelException {
-        try {
-            UIManager.setLookAndFeel(theme.getLAF().getName());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-            new ErrorWindow(ex.getMessage()).run();
-            ResourceFolder.dispatchLog(ex);
-        }
-        for(Window frame : java.awt.Frame.getFrames()) {
-            try {
-                SwingUtilities.updateComponentTreeUI(frame);
-            } catch (NullPointerException ex) {
-                // Do nothing bc sometimes swing is bad...
-            }
-
-            for(Component e : GUITools.getAllComponents(frame)) {
-                if(e instanceof JLabel) {
-                    e.setForeground(theme.getForegroundColor());
-                }
-                SwingUtilities.updateComponentTreeUI(e);
-            }
-            frame.pack();
-            frame.repaint(30);
-        }
-        ColorManager.programTheme = theme;
-        ColorManager.refreshColors();
     }
 
     /**

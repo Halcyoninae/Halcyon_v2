@@ -54,13 +54,13 @@ public class Setup extends JFrame implements Runnable {
                     + ProgramResourceManager.FILE_SLASH + "__user.lock");
     public static final String KILL_ARG = "kill";
     private static final transient java.util.List<SetupListener> listener = new ArrayList<>(); // must specify java.util
-                                                                                               // cuz
+    // cuz
     public static boolean SETUP_EXISTS = false;
     private final JPanel content;
-    private AttributableButton[] themeButtons;
     // Java.AWT is stupid and its own
     // List class??!?!??!!?
     private final JLabel welcomeLabel;
+    private final AttributableButton[] themeButtons;
 
     public Setup() {
         setTitle("Setup Routine");
@@ -220,7 +220,7 @@ public class Setup extends JFrame implements Runnable {
      * Any applications that wants to the run a setup routine
      * SHOULD ONLY CALL THE MAIN METHOD.
      * Creating a new Setup object will only gurantee a launch
-     * of the GUI part & can confuse any potential users.
+     * of the GUI part and can confuse any potential users.
      *
      * @param args No arguments are accepted / used in the setup routine
      */

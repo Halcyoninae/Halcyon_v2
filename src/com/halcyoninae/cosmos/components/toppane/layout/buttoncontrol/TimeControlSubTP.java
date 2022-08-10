@@ -15,8 +15,6 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout.buttoncontrol;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.halcyon.constant.Global;
@@ -24,14 +22,15 @@ import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 
-import java.awt.event.*;
-
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class represents the time control buttons
  * below the progress slider.
- *
+ * <p>
  * It is used to manipulate the progress in a controlled
  * fashion.
  *
@@ -39,8 +38,6 @@ import java.awt.*;
  * @since 3.3
  */
 public class TimeControlSubTP extends JPanel implements ActionListener {
-    private JButton fastForward, fastBackward, toEnd, toStart;
-
     /// TimeControl Config START
     final String FAST_FORWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/forward.png";
     final String FAST_BACKWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/backward.png";
@@ -48,6 +45,10 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
     final String TO_START_ICON = Manager.RSC_FOLDER_NAME + "/time_control/start.png";
     final int ICON_SIZING = 18;
     final int TIMECONTROL_HEIGHT = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
+    private final JButton fastForward;
+    private final JButton fastBackward;
+    private final JButton toEnd;
+    private final JButton toStart;
     /// TimeControl Config END
 
     public TimeControlSubTP() {
@@ -105,13 +106,13 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        if(arg0.getSource().equals(toEnd)) {
+        if (arg0.getSource().equals(toEnd)) {
             Debugger.info("> Submitting time control for [toEnd]");
-        } else if(arg0.getSource().equals(toStart)) {
+        } else if (arg0.getSource().equals(toStart)) {
             Debugger.info("> Submitting time control for [toStart]");
-        } else if(arg0.getSource().equals(fastBackward)) {
+        } else if (arg0.getSource().equals(fastBackward)) {
             Debugger.info("> Submitting time control for [fastBackward]");
-        } else if(arg0.getSource().equals(fastForward)) {
+        } else if (arg0.getSource().equals(fastForward)) {
             Debugger.info("> Submitting time control for [fastForward]");
         }
     }
