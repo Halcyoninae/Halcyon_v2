@@ -228,11 +228,12 @@ required.
 Source Root Locale: /src/
 Source Tree:
   com/
-    jackmeng/
+    halcyoninae/
       halcyon/...
       cloudspin/...
       tailwind/...
       cosmos/...
+      setup/...
 
 Halcyon -> Default Running Package
   - Features the default backend
@@ -249,6 +250,10 @@ Tailwind -> Audio Processors
   - Features the audio playback 
     library. This is the second 
     half of the program.
+Setup -> General runner that is
+called to perform a setup routine
+  - First that runs to make sure
+    every required pkg is present
 
 ----------------------------------
                                   
