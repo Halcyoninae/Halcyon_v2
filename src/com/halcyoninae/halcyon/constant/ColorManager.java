@@ -37,6 +37,7 @@ public final class ColorManager {
     public static Color MAIN_FG_THEME = programTheme.getForegroundColor();
     public static String MAIN_FG_STR = ColorTool.rgbTohex(programTheme.getForegroundColor());
     public static Color MAIN_BG_THEME = programTheme.getBackgroundColor();
+    public static Color MAIN_FG_FADED_THEME = ColorTool.brightenColor(MAIN_FG_THEME, 30);
     private ColorManager() {
     }
 

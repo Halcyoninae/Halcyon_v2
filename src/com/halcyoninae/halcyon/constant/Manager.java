@@ -35,7 +35,7 @@ public interface Manager {
     /// BIGCONTAINER Size Config END ///
 
     /// GENERAL RESOURCE LOCATION START
-    String RSC_FOLDER_NAME = "resource";
+    String RSC_FOLDER_NAME = "resources";
     /// GENERAL RESOURCE LOCATION END
 
     String[] ALLOWED_FORMATS = new String[]{"wav", "mp3", "aiff", "aif", "aifc", "ogg", "oga"};

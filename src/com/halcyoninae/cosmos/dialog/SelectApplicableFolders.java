@@ -17,7 +17,11 @@ package com.halcyoninae.cosmos.dialog;
 
 import com.halcyoninae.cosmos.inheritable.FSVDefault;
 
+import java.io.File;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
+import javax.swing.filechooser.FileView;
 
 /**
  * This dialog class constructs a simple
@@ -51,6 +55,15 @@ public class SelectApplicableFolders extends JFileChooser implements Runnable {
         setApproveButtonToolTipText("Add this folder as a playlist to play from");
         setDialogTitle("Halcyon ~ Add Playlist");
         setFileHidingEnabled(false);
+        setMultiSelectionEnabled(false);
+        FileSystemView fsv = FileSystemView.getFileSystemView();
+        setCurrentDirectory(fsv.getHomeDirectory());
+        setFileView(new FileView() {
+            @Override
+            public Icon getIcon(File f) {
+                return FileSystemView.getFileSystemView().getSystemIcon(f);
+            }
+        });
     }
 
     /**

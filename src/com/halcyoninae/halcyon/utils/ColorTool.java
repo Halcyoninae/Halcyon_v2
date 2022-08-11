@@ -55,6 +55,18 @@ public final class ColorTool {
         return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 
+    public static Color brightenColor(Color c, int percent) {
+        int r = c.getRed() + (255 - c.getRed()) * percent / 100;
+        int g = c.getGreen() + (255 - c.getGreen()) * percent / 100;
+        int b = c.getBlue() + (255 - c.getBlue()) * percent / 100;
+        int a = c.getAlpha() - c.getAlpha() * 30 / 100;
+        return new Color(r, g, b, a);
+    }
+
+    public static Color getNullColor() {
+        return new Color(0, 0, 0, 0);
+    }
+
     /**
      * Returns a random color
      *

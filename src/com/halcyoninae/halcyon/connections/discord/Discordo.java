@@ -55,7 +55,7 @@ public class Discordo implements InfoViewUpdateListener {
 
         rpc = new DiscordRichPresence.Builder(STATE
                 + NOTHING_MUSIC)
-                .setBigImage("logo", "Halcyon")
+                .setBigImage("logo", STATE)
                 .build();
         DiscordRPC.discordUpdatePresence(rpc);
     }
@@ -70,9 +70,8 @@ public class Discordo implements InfoViewUpdateListener {
                         user -> Debugger.log("Connected to Discord user: " + user.username + "#" + user.discriminator))
                 .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
-        String b = STATE + TextParser.parseAsPure(title);
-        rpc = new DiscordRichPresence.Builder(b)
-                .setBigImage("logo", "Halcyon")
+        rpc = new DiscordRichPresence.Builder(TextParser.parseAsPure(title))
+                .setBigImage("logo", STATE)
                 .build();
         DiscordRPC.discordUpdatePresence(rpc);
     }

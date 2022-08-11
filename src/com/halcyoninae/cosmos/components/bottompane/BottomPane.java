@@ -16,6 +16,7 @@
 package com.halcyoninae.cosmos.components.bottompane;
 
 import com.halcyoninae.cosmos.inheritable.TabButton;
+import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.Wrapper;
@@ -64,7 +65,7 @@ public class BottomPane extends JTabbedPane {
 
     /**
      * @return list that represents the
-     * FileList tabs.
+     *         FileList tabs.
      */
     public List<FileList> getTabs() {
         return tabs;
@@ -132,12 +133,12 @@ public class BottomPane extends JTabbedPane {
         button.setListener(new TabButton.RemoveTabListener() {
             @Override
             public void onRemoveTab() {
-                Wrapper.safeLog(() -> {
-                    int i = tabsMap.get(folder);
-                    foldersAbsolute.remove(folder);
-                    tabsMap.remove(folder);
-                    tabs.remove(i);
-                }, false);
+                Debugger.warn("Removing tab > " + folder);
+                int i = tabsMap.get(folder);
+                foldersAbsolute.remove(folder);
+                tabsMap.remove(folder);
+                tabs.remove(i);
+                Program.cacher.pingSavedPlaylists();
             }
         });
         Program.cacher.pingSavedPlaylists();

@@ -16,7 +16,6 @@
 package com.halcyoninae.halcyon;
 
 import com.halcyoninae.cosmos.Cosmos;
-import com.halcyoninae.cosmos.ThreadedScheduler;
 import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bbloc.BBlocView;
 import com.halcyoninae.cosmos.components.bbloc.buttons.*;
@@ -24,6 +23,7 @@ import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.dialog.LoadingDialog;
+import com.halcyoninae.cosmos.tasks.ThreadedScheduler;
 import com.halcyoninae.halcyon.connections.discord.Discordo;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ResourceFolder;

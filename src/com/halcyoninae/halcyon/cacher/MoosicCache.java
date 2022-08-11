@@ -114,15 +114,16 @@ public class MoosicCache {
                     Debugger.info("Pinging (LT): " + track.getAbsolutePath());
                     likedTracks.add(track.getAbsolutePath());
                 }
+                
             }
         }
     }
 
     public void pingSavedPlaylists() {
         for (String s : Global.bp.getStrTabs()) {
+            Debugger.warn("Ping (SPL): " + s);
             if (!savedPlayLists.contains(s)) {
                 synchronized (savedPlayLists) {
-                    Debugger.info("Pinging (SPL): " + s);
                     savedPlayLists.add(s);
                 }
             }
