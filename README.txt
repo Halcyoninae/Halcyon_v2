@@ -214,6 +214,20 @@ README (based on their version).
             -MSI
             -EXE
         4. Specific Platform Exec.
+    Dev. Release Exec Types:
+        1. General Archive Bundle
+            -Tarball
+            -Contains archives:
+                -Documetnation
+                -Raw Executables
+                -Sampling Piece
+            -Malimbica API
+
+The dev release exec provides
+the end-user with easier control
+over the specific internals
+of the program and are not made
+for the average end-user.
 
 NOTE: Downloading a FAT-JAR can 
 have extended setup requirements,
