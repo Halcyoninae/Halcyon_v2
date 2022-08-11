@@ -18,6 +18,20 @@ Licensed under the following:
 
 ----------------------------------
 
+[?] Table of Contents
+>
+    Version Info
+    Basic Description
+    Extern.
+    Q&A
+    Building
+    Release & Download
+    Package Layout
+    MISC
+    Sys. Requirements
+<
+----------------------------------
+
 [!] Version Info
 
 Note: Check /root/VERSION for the
@@ -157,6 +171,55 @@ The code struct tree:
       jackmeng
         halcyon
           Halcyon.java -> Main()
+
+----------------------------------
+
+[!] Release & Download
+
+Releases are provided under the
+releases tab in this repository.
+
+All releases & provided downloads
+are provided by the following
+official vendor(s):
+    1. Jack Meng
+    2. Halcyoninae
+    3. Yttrium Terminus
+     
+NOTE: Any downloads and releases
+under any circumstances, whether
+it just be reuploaded are not
+considered official vendors. 
+Official releases are only 
+provided and signed by the above
+vendors.
+Use extern. vendors with caution
+   
+All builds are designed to be an
+archive file which will each 
+contain their respective usage
+README (based on their version).
+
+    Release Exec Types:
+        1. Fat-JAR
+            -A JAR archive file 
+            that contains 
+            everything the
+            program needs.
+        2. General Archive Bundle
+            -ZIP 
+            -Tarball
+        3. Specifc Platform PKG
+            -RPM
+            -MSI
+            -EXE
+        4. Specific Platform Exec.
+
+NOTE: Downloading a FAT-JAR can 
+have extended setup requirements,
+as there might be specific 
+platform dependent pkgs that are
+required.
 
 ----------------------------------
 
