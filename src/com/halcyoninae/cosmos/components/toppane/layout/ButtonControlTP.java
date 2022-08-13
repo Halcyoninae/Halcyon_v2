@@ -87,7 +87,6 @@ public class ButtonControlTP extends JPanel
     private TimeControlSubTP tsp;
     private transient AudioInfo aif;
     private boolean hasPlayed = false;
-    private final boolean flip = false;
     /// ButtonControl Config END
 
     public ButtonControlTP() {

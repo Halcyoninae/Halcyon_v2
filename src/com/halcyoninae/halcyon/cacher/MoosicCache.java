@@ -31,6 +31,7 @@ import java.util.*;
  * @since 3.2
  */
 public class MoosicCache {
+    // MoosicCache Config START
     public static final String NODE_ROOT = "moosic";
     public static final String NODE_USER_LIKED_TRACKS = "likedTracks";
     public static final String NODE_USER_SAVED_PLAYLISTS = "savedPlaylists";
@@ -38,12 +39,15 @@ public class MoosicCache {
     public static String MOOSIC_DEFAULT_LOCALE = ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
             + ProgramResourceManager.FILE_SLASH
             + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + "moosic.halcyon";
+    // MoosicCache Config END
+
     public Cacher cacher;
     private List<String> excludedFiles, savedPlayLists;
     private Set<String> likedTracks;
-    private Object lock = new Object();
+    private Object lock, lock2, lock3;
 
     public MoosicCache() {
+        lock = lock2 = lock3 = new Object();
         init();
     }
 
@@ -110,19 +114,14 @@ public class MoosicCache {
     }
 
     public void pingLikedTracks() {
-        for (File track : Global.ll.getFolder().getAsListFiles()) {
-            if (!likedTracks.contains(track.getAbsolutePath())) {
-                synchronized (likedTracks) {
-                    Debugger.info("Pinging (LT): " + track.getAbsolutePath());
-                    likedTracks.add(track.getAbsolutePath());
-                }
-
-            }
+        synchronized (lock) {
+            likedTracks = new HashSet<>(Arrays.asList(Global.ll.getFolder().getFilesAsStr()));
         }
+
     }
 
     public void pingSavedPlaylists() {
-        synchronized (lock) {
+        synchronized (lock2) {
             savedPlayLists = new ArrayList<>(new HashSet<>(savedPlayLists));
         }
     }
@@ -132,8 +131,7 @@ public class MoosicCache {
      */
     public void pingExcludedTracks(String exclude) {
         if (!excludedFiles.contains(exclude)) {
-            synchronized (excludedFiles) {
-                Debugger.info("Pinging (ET): " + exclude);
+            synchronized (lock3) {
                 excludedFiles.add(exclude);
             }
         }
@@ -171,7 +169,8 @@ public class MoosicCache {
         StringBuilder sb3 = new StringBuilder();
         likedTracks.forEach(x -> sb3.append(x).append("\n"));
         content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
-        Debugger.info("Force Saving " + this.getClass().getSimpleName() + "> ", sb1, sb2, sb3);
+        Debugger.info("Force Saving " + this.getClass().getSimpleName() + " > ", "ET: \n" + sb1.toString(),
+                "SPL: \n" + sb2.toString(), "LT: \n" + sb3.toString());
         try {
             cacher.build(NODE_ROOT, content);
         } catch (TransformerException | ParserConfigurationException e) {
@@ -182,17 +181,17 @@ public class MoosicCache {
     public void forceSaveQuiet() {
         Map<String, String> content = new HashMap<>();
         StringBuilder sb1 = new StringBuilder();
-        for(String s : excludedFiles) {
+        for (String s : excludedFiles) {
             sb1.append(s).append("\n");
         }
         content.put(NODE_USER_EXCLUDED_TRACKS, sb1.toString());
         StringBuilder sb2 = new StringBuilder();
-        for(String s : savedPlayLists) {
+        for (String s : savedPlayLists) {
             sb2.append(s).append("\n");
         }
         content.put(NODE_USER_SAVED_PLAYLISTS, sb2.toString());
         StringBuilder sb3 = new StringBuilder();
-        for(String s : likedTracks) {
+        for (String s : likedTracks) {
             sb3.append(s).append("\n");
         }
         content.put(NODE_USER_LIKED_TRACKS, sb3.toString());

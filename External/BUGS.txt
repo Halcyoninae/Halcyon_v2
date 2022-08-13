@@ -1,10 +1,19 @@
-[***] #39 "LikeList general unsetting"
+[!FIXED!] [***] #40 "Synchronized Virtual Folder"
+    Detailed Description: The retrieval of files from a virtual
+    folder is inconsistent when a permutation operation is done on the
+    virtual folder.
+    Status: FIXED
+    State: Experimental-Build ~ MP4J
+    Difficulty: Decent
+    Testing: Decent
+
+[!FIXED!] [***] #39 "LikeList general unsetting"
     Detailed Description: LikeList retention of virtual file enumeration should
     be restructured as there are currently multiple instances of structures
     holding the virtual files in conflict. This results in FileList seeing the
     files to be in the current folder, in which they are not in relation to the
     LikeList's virtual folder object.
-    Status: Implementing
+    Status: FIXED
     State: Experimental-Build ~ MP4J
     Difficulty: Decent
     Testing: Decent
@@ -74,10 +83,10 @@
       Difficulty: Minimal
       Testing: Minimal
 
-[***] #32 "LikedList instance not being to able have tracks selected for playback"
+[!FIXED!] [***] #32 "LikedList instance not being to able have tracks selected for playback"
       Detailed Description: Tracks that are added into the LikedList view cannot be
       selected via the right click development??
-      Status: Investigating
+      Status: FIXED
       State: Experimental-Build ~ MP4J
       Difficulty: Decent
       Testing: None required
@@ -116,11 +125,11 @@
     form factors.
     Testing: Tested on another computer, the property for hidpi did not change the end result.
 
-[***] #29 "File encoding varies between different dev environments"
+[!IGNORED!] [***] #29 "File encoding varies between different dev environments"
     Detailed Description: VSCode saving liked playlists with special UTF-8 Chars do not work
     when reading back the data, while IntelliJ does not have this issue as it seems to support
     the correct encoding.
-    Status: Investigating
+    Status: IGNORED
     State: Experimental-Build ~ MP4J
 
 [!FIXED!] {!URGENT!} [***] #28 "Unable to read URL Format"

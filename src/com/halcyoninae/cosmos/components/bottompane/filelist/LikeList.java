@@ -52,12 +52,11 @@ public class LikeList extends FileList {
         @Override
         public void onRemove(String content) {
             Global.ll.unset(content);
-            Debugger.good(
-                    "Removed: " + content + " " + Global.ll.getFolder().getAsListFiles().contains(new File(content)));
+            Program.cacher.pingLikedTracks();
+
         }
     };
-    private final transient VirtualFolder folder;
-    private final transient Map<DefaultMutableTreeNode, String> nodeMaps;
+    private transient VirtualFolder folder;
 
     /**
      * Inits the LikeList object as a child of the FileList
@@ -69,18 +68,6 @@ public class LikeList extends FileList {
                 Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
                 Global.rd.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
         folder = (VirtualFolder) getFolderInfo();
-        nodeMaps = new HashMap<>();
-        Debugger.warn("FILE_MAP_ABS: " + Arrays.toString(Program.fetchLikedTracks()));
-        for (File f : getFileMap().keySet()) {
-            nodeMaps.put(getFileMap().get(f), f.getAbsolutePath());
-        }
-        Debugger.warn("LikeList NodeMap: " + nodeMaps);
-    }
-
-    public Map<DefaultMutableTreeNode, String> getDictionary() {
-        Debugger.warn("LikeList: " + Arrays.toString(folder.getFiles()));
-        Debugger.warn("LikeList NodeMap: " + nodeMaps);
-        return nodeMaps;
     }
 
     /**
@@ -92,22 +79,22 @@ public class LikeList extends FileList {
         try {
             Debugger.warn("Requesting Unset: " + file);
             for (File f : getFileMap().keySet()) {
-                Debugger.good(f.getAbsolutePath());
                 if (f.getAbsolutePath().equals(file)) {
+                    getFileMap().remove(f);
+                    folder.removeFile(f);
+                    Debugger.info(folder);
                     DefaultTreeModel model = (DefaultTreeModel) getTree().getModel();
                     model.removeNodeFromParent(getFileMap().get(f));
                     model.reload();
-                    getFileMap().remove(f);
-                    nodeMaps.remove(getFileMap().get(f));
-                    folder.removeFile(f);
+                    Debugger.good("Checking FileMap: " + getFileMap().get(f));
+                    Debugger.warn(folder.removeFile(f));
                     Debugger.warn("UNSET: " + f.getAbsolutePath());
-                    return;
+                    break;
                 }
             }
         } catch (IllegalArgumentException e) {
-            // IGNORE
+            e.printStackTrace();
         }
-        Debugger.unsafeLog(folder.getAsListFiles() + "\n" + nodeMaps.toString());
     }
 
     /**
@@ -124,8 +111,7 @@ public class LikeList extends FileList {
             getTree().revalidate();
             folder.addFile(new File(file));
             ((DefaultTreeModel) getTree().getModel()).reload();
-            nodeMaps.put(node, file);
-            Debugger.warn(getDictionary().toString());
+            Debugger.info(folder);
         }
 
     }

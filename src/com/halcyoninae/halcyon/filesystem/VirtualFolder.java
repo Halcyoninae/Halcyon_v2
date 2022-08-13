@@ -56,12 +56,16 @@ public class VirtualFolder extends PhysicalFolder {
      */
     @Override
     public String[] getFilesAsStr() {
-        return list.toArray(new String[0]);
+        String[] str = new String[getFiles().length];
+        for (int i = 0; i < str.length; i++) {
+            str[i] = getFiles()[i].getAbsolutePath();
+        }
+        return str;
     }
 
     /**
      * @return File[] A list of files of their File object instances (created on
-     * call)
+     *         call)
      */
     @Override
     public File[] getFiles() {
@@ -101,8 +105,12 @@ public class VirtualFolder extends PhysicalFolder {
     @Override
     public File[] getFiles(String... rules) {
         List<File> files = new ArrayList<>();
-        for (String str : getFilesAsStr(rules)) {
-            files.add(new File(str));
+        for (File str : getFiles()) {
+            for (String r : rules) {
+                if (str.getAbsolutePath().endsWith(r)) {
+                    files.add(str);
+                }
+            }
         }
         return files.toArray(new File[0]);
     }
@@ -142,7 +150,6 @@ public class VirtualFolder extends PhysicalFolder {
     public synchronized boolean removeFile(File f) {
         return list.remove(f);
     }
-
 
     /**
      * @return String

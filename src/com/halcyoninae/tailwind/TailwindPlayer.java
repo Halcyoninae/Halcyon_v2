@@ -90,7 +90,6 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     private static Map<String, Control> setControls(Line line, Map<String, Control> table) {
         Map<String, Control> temp = new HashMap<>();
-        Debugger.warn(Arrays.toString(line.getControls()));
         for (Control ctrl : line.getControls()) {
             String t = ctrl.getType().toString();
             if (table != null && table.containsKey(t)) {

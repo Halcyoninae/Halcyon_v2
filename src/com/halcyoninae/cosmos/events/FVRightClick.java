@@ -15,6 +15,7 @@
 
 package com.halcyoninae.cosmos.events;
 
+import com.halcyoninae.halcyon.filesystem.*;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree.TabTreeSortMethod;
@@ -114,16 +115,10 @@ public class FVRightClick extends MouseAdapter {
                     DefaultTreeModel model = (DefaultTreeModel) t.getModel();
                     model.reload();
                     tree.remove(rcNode.toString());
-                    Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode);
-                    if (hideTask != null) {
-                        if (tree.isVirtual()) {
-                            Debugger.info("Removing Virtual: " + ((LikeList) tree.getFileList()).getDictionary().get(rcNode));
-                            hideTask.onRemove(((LikeList) tree.getFileList()).getDictionary().get(rcNode));
-                        }
-                    } else {
-                        Debugger.info("Removing Physical: " + tree.getSelectedNode(rcNode));
-                        hideTask.onRemove(tree.getSelectedNode(rcNode));
-                    }
+                    Debugger.info("Removing Physical: " + tree.getSelectedNode(rcNode));
+                    hideTask.onRemove(tree.getSelectedNode(rcNode));
+                    if (hideTask == null)
+                        Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode);
                 } catch (NullPointerException excec) {
                     // IGNORED
 
@@ -203,25 +198,22 @@ public class FVRightClick extends MouseAdapter {
                     TreePath path = pathTree.getSelectionPath();
                     if (path != null) {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-                        if (!tree.isVirtual()) {
-                            if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                                SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
-                                        new File(
-                                                Global.bp.findByTree((JTree) e.getSource())
-                                                        .getFolderInfo()
-                                                        .getAbsolutePath() +
-                                                        ProgramResourceManager.FILE_SLASH +
-                                                        node)));
+                        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                            File f = null;
+                            if (tree.isVirtual()) {
+                                f = new File(node.toString());
+                            } else {
+                                f = new File(
+                                        Global.bp.findByTree((JTree) e.getSource())
+                                                .getFolderInfo()
+                                                .getAbsolutePath() +
+                                                ProgramResourceManager.FILE_SLASH +
+                                                node);
+                            }
+                            File f2 = f;
+                            Debugger.info(f2);
 
-                            }
-                        } else {
-                            if (!node.toString().equals(tree.getRootNameTree())) {
-                                Debugger.info("Dispatching a virtual: "
-                                        + ((LikeList) tree.getFileList()).getDictionary().get(node));
-                                SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
-                                        new File(
-                                                ((LikeList) tree.getFileList()).getDictionary().get(node))));
-                            }
+                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(f2));
                         }
                     }
                     lastJTree = pathTree;
@@ -234,25 +226,23 @@ public class FVRightClick extends MouseAdapter {
                 TreePath path = pathTree.getSelectionPath();
                 if (path != null) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-                    if (!tree.isVirtual()) {
-                        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
-                                    new File(
-                                            Global.bp.findByTree((JTree) e.getSource())
-                                                    .getFolderInfo()
-                                                    .getAbsolutePath() +
-                                                    ProgramResourceManager.FILE_SLASH +
-                                                    node)));
+                    if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                        File f = null;
+                        if (tree.isVirtual()) {
+                            f = new File(node.toString());
+                        } else {
+                            f = new File(
+                                    Global.bp.findByTree((JTree) e.getSource())
+                                            .getFolderInfo()
+                                            .getAbsolutePath() +
+                                            ProgramResourceManager.FILE_SLASH +
+                                            node);
                         }
-                    } else {
-                        if (!node.toString().equals(tree.getRootNameTree())) {
-                            Debugger.info("Dispatching a virtual: "
-                                    + ((LikeList) tree.getFileList()).getDictionary().get(node));
-                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
-                                    new File(
-                                            ((LikeList) tree.getFileList()).getDictionary().get(node))));
-                        }
+                        File f2 = f;
+                        Debugger.info(f2);
+                        SwingUtilities.invokeLater(() -> Global.ifp.setAssets(f2));
                     }
+
                 }
                 lastJTree = pathTree;
                 rightClicks = 0;

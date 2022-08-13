@@ -77,7 +77,7 @@ public class FileList extends JScrollPane implements TabTree {
     /// FileView Config END
 
     public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString,
-                    RightClickHideItemListener hideStringTask) {
+            RightClickHideItemListener hideStringTask) {
         super();
         this.info = info;
         fileMap = new HashMap<>();
@@ -91,13 +91,13 @@ public class FileList extends JScrollPane implements TabTree {
         getHorizontalScrollBar().setForeground(ColorManager.MAIN_FG_THEME);
         setMinimumSize(new Dimension(FILEVIEW_MIN_WIDTH, FILEVIEW_MIN_HEIGHT));
         setBorder(null);
+        Debugger.warn(info);
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
             if (f != null) {
-                DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
+                DefaultMutableTreeNode node = new DefaultMutableTreeNode(isVirtual ? f.getAbsolutePath() : f.getName());
                 fileMap.put(f, node);
                 root.add(node);
-                Debugger.unsafeLog("Added Virtual file: " + f.getAbsolutePath());
-
+                node.setParent(root);
             }
         }
 
@@ -139,7 +139,7 @@ public class FileList extends JScrollPane implements TabTree {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
                 fileMap.put(f, node);
                 root.add(node);
-                Debugger.unsafeLog("Added file: " + f.getAbsolutePath());
+                node.setParent(root);
             }
         }
 
@@ -217,7 +217,8 @@ public class FileList extends JScrollPane implements TabTree {
         }
         List<File> toRemove = new ArrayList<>();
         for (File f : fileMap.keySet()) {
-            if (!f.exists() || !f.isFile() || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
+            if (!f.exists() || !f.isFile()
+                    || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
                 ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
                 toRemove.add(f);
             }
