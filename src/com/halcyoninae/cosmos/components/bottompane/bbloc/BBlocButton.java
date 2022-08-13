@@ -13,16 +13,26 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.tasks;
+package com.halcyoninae.cosmos.components.bottompane.bbloc;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
- * This interface manages any constraints for
- * the concurrent tasks that must be performed
- * while the program is running.
+ * A template used for a BBloc button
  *
  * @author Jack Meng
  * @since 3.0
  */
-public interface ConcurrentTiming {
-    final int MAX_TLE = 2000;
+public interface BBlocButton extends ActionListener {
+    /**
+     * @return The Component representing this BBloc Button
+     */
+    JComponent getComponent();
+
+    @Override
+    default void actionPerformed(ActionEvent e) {
+        // DO NOTHING
+    }
 }

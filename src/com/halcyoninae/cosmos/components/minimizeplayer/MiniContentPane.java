@@ -17,7 +17,7 @@ package com.halcyoninae.cosmos.components.minimizeplayer;
 
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
@@ -60,7 +60,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
                     Debugger.warn("Found a new artwork!@MINIPLAYER");
                     Graphics2D g2 = (Graphics2D) g;
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, Float
-                            .parseFloat(ResourceFolder.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
+                            .parseFloat(ExternalResource.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
                     g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                     BufferedImage last = info.getArtwork();
                     last = DeImage.resize(last, getWidth(), getHeight());

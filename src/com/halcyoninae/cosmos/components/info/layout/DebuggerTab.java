@@ -1,6 +1,6 @@
 package com.halcyoninae.cosmos.components.info.layout;
 
-import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.InformationTab;
 import com.halcyoninae.halcyon.constant.ColorManager;
 

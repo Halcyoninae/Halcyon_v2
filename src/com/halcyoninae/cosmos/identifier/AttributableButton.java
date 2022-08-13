@@ -1,4 +1,4 @@
-package com.halcyoninae.cosmos.special;
+package com.halcyoninae.cosmos.identifier;
 
 import javax.swing.*;
 import java.beans.ConstructorProperties;

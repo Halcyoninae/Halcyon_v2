@@ -1,3 +1,14 @@
+[***] #39 "LikeList general unsetting"
+    Detailed Description: LikeList retention of virtual file enumeration should
+    be restructured as there are currently multiple instances of structures
+    holding the virtual files in conflict. This results in FileList seeing the
+    files to be in the current folder, in which they are not in relation to the
+    LikeList's virtual folder object.
+    Status: Implementing
+    State: Experimental-Build ~ MP4J
+    Difficulty: Decent
+    Testing: Decent
+
 [!FIXED!] [***] #38 "Moosic.Halcyon config file not being correctly checked"
       Detailed Description: moosic.halcyon is not created if the file
       does not exist resulting in IOExceptions and more.

@@ -28,5 +28,11 @@ public interface CloudSpinFilters {
             new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null),
     };
 
+    final float[] BLUR_KERNEL = {
+            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
+            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
+            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f)
+    };
+
     int AFF_GREY = 0;
 }

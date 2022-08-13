@@ -16,7 +16,7 @@
 package com.halcyoninae.cosmos.tasks;
 
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 
 /**
  * This class aims to optimize tasks throughout the JVM
@@ -32,7 +32,7 @@ public class DefunctOptimizer implements Runnable {
 
     @Override
     public void run() {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
             new Thread(() -> {
                 while (true) {
                     Runtime.getRuntime().gc();

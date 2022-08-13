@@ -15,7 +15,7 @@
 
 package com.halcyoninae.cosmos.components.toppane;
 
-import com.halcyoninae.cosmos.components.bottompane.FileList;
+import com.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.halcyoninae.halcyon.constant.Manager;

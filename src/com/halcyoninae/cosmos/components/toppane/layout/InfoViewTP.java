@@ -19,7 +19,7 @@ import com.halcyoninae.cloudspin.CloudSpin;
 import com.halcyoninae.cloudspin.CloudSpinFilters;
 import com.halcyoninae.halcyon.Halcyon;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -106,7 +106,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                     g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
 
-                    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
                         compositeAlpha = 0.2f;
                     } else {
                         compositeAlpha = 0.6f;
@@ -118,9 +118,9 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
                     BufferedImage original = Global.ifp.getInfo().getArtwork();
                     original = CloudSpin.grabCrop(original, backPanel.getVisibleRect());
-                    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
                         original = DeImage.createGradientVertical(original, 255, 0);
-                        switch (com.halcyoninae.halcyon.connections.properties.ResourceFolder.pm
+                        switch (com.halcyoninae.halcyon.connections.properties.ExternalResource.pm
                                 .get(com.halcyoninae.halcyon.connections.properties.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
                             case "focused":
                                 original = com.halcyoninae.halcyon.utils.DeImage.createGradient(original, 255, 0,
@@ -136,7 +136,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                                 break;
                         }
                     }
-                    if (ResourceFolder.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
                         original = CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY].filter(original, original);
                         g2d.drawImage(original, 0, 0, backPanel.getWidth(), backPanel.getHeight(), null);
                     } else {
@@ -165,7 +165,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         artWork.setHorizontalAlignment(SwingConstants.CENTER);
         artWork.setVerticalAlignment(SwingConstants.CENTER);
 
-        infoTitle = ResourceFolder.pm.get(
+        infoTitle = ExternalResource.pm.get(
                         ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
                 .equals("true")
                 ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
@@ -221,7 +221,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 info.forceSet(defaultMap);
             }
             if (!beSmart) {
-                infoTitle = ResourceFolder.pm.get(
+                infoTitle = ExternalResource.pm.get(
                                 ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
                         .equals("true")
                         ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)

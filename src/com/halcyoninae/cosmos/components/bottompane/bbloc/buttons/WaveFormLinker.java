@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.components.bbloc.buttons;
+package com.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.waveform.WaveFormPane;
 import com.halcyoninae.halcyon.constant.Global;
 

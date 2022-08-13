@@ -15,17 +15,18 @@
 
 package com.halcyoninae.cosmos.events;
 
-import com.halcyoninae.cosmos.components.bottompane.TabTree;
-import com.halcyoninae.cosmos.components.bottompane.TabTree.TabTreeSortMethod;
+import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
+import com.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
+import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree.TabTreeSortMethod;
 import com.halcyoninae.cosmos.dialog.AudioInfoDialog;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.dialog.StraightTextDialog;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.StringManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.runtime.Program;
-import com.halcyoninae.halcyon.utils.Wrapper;
 import com.halcyoninae.tailwind.AudioInfo;
 
 import javax.swing.*;
@@ -116,13 +117,19 @@ public class FVRightClick extends MouseAdapter {
                     tree.remove(rcNode.toString());
                     Program.cacher.pingExcludedTracks(tree.getPath() + "/" + rcNode);
                     if (hideTask != null) {
-                        Debugger.unsafeLog("Dispatching hide_task callable...\nTask for: " + rcNode);
+                        if (tree.isVirtual()) {
+                            Debugger.info("Removing Virtual: " + ((LikeList) tree.getFileList()).getDictionary().get(rcNode));
+                            hideTask.onRemove(((LikeList) tree.getFileList()).getDictionary().get(rcNode));
+                        }
+                    } else {
+                        Debugger.info("Removing Physical: " + tree.getSelectedNode(rcNode));
                         hideTask.onRemove(tree.getSelectedNode(rcNode));
-
                     }
                 } catch (NullPointerException excec) {
                     // IGNORED
+
                 }
+
             });
         }
         JMenuItem sortAZ = null;
@@ -193,11 +200,11 @@ public class FVRightClick extends MouseAdapter {
             }
             if (!lastJTree.equals(e.getSource())) {
                 if (rightClicks == 2) {
-                    Wrapper.async(() -> {
-                        JTree pathTree = (JTree) e.getSource();
-                        TreePath path = pathTree.getSelectionPath();
-                        if (path != null) {
-                            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                    JTree pathTree = (JTree) e.getSource();
+                    TreePath path = pathTree.getSelectionPath();
+                    if (path != null) {
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                        if (!tree.isVirtual()) {
                             if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
                                 SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
                                         new File(
@@ -208,19 +215,27 @@ public class FVRightClick extends MouseAdapter {
                                                         node)));
 
                             }
+                        } else {
+                            if (!node.toString().equals(tree.getRootNameTree())) {
+                                Debugger.info("Dispatching a virtual: "
+                                        + ((LikeList) tree.getFileList()).getDictionary().get(node));
+                                SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
+                                        new File(
+                                                ((LikeList) tree.getFileList()).getDictionary().get(node))));
+                            }
                         }
-                        lastJTree = pathTree;
-                    });
+                    }
+                    lastJTree = pathTree;
                     rightClicks = 0;
                 } else if (rightClicks == 0 || rightClicks == 1) {
                     rightClicks++;
                 }
             } else {
-                Wrapper.async(() -> {
-                    JTree pathTree = (JTree) e.getSource();
-                    TreePath path = pathTree.getSelectionPath();
-                    if (path != null) {
-                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                JTree pathTree = (JTree) e.getSource();
+                TreePath path = pathTree.getSelectionPath();
+                if (path != null) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                    if (!tree.isVirtual()) {
                         if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
                             SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
                                     new File(
@@ -230,9 +245,17 @@ public class FVRightClick extends MouseAdapter {
                                                     ProgramResourceManager.FILE_SLASH +
                                                     node)));
                         }
+                    } else {
+                        if (!node.toString().equals(tree.getRootNameTree())) {
+                            Debugger.info("Dispatching a virtual: "
+                                    + ((LikeList) tree.getFileList()).getDictionary().get(node));
+                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(
+                                    new File(
+                                            ((LikeList) tree.getFileList()).getDictionary().get(node))));
+                        }
                     }
-                    lastJTree = pathTree;
-                });
+                }
+                lastJTree = pathTree;
                 rightClicks = 0;
             }
         }

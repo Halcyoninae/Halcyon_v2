@@ -40,7 +40,7 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 public class Discordo implements InfoViewUpdateListener {
 
     protected static final String PROJECT_ID = "989355331761086475";
-    private static final String STATE = "Listening to\n ", NOTHING_MUSIC = "Nothing";
+    private static final String STATE = "Halcyon\n ", NOTHING_MUSIC = "Nothing";
     protected static DiscordRichPresence rpc;
 
     /**

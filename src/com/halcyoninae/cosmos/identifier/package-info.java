@@ -6,4 +6,4 @@
  * @author Jack Meng
  * @since 3.3
  */
-package com.halcyoninae.cosmos.special;
+package com.halcyoninae.cosmos.identifier;

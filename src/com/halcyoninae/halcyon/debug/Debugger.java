@@ -16,7 +16,7 @@
 package com.halcyoninae.halcyon.debug;
 
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.utils.TimeParser;
 
 import java.io.PrintStream;
@@ -131,7 +131,7 @@ public class Debugger {
      */
     @SafeVarargs
     public static <T> void warn(T... o) {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
             for (T t : o) {
                 if (t != null) {
                     out.println(com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getWarnText()
@@ -162,7 +162,7 @@ public class Debugger {
      */
     @SafeVarargs
     public static <T> void good(T... o) {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
             for (T t : o) {
                 if (t != null) {
                     out.println(com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()
@@ -183,7 +183,7 @@ public class Debugger {
      * @param e
      */
     public static void byteLog(byte... e) {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
             out.println(Arrays.toString(e));
         }
     }
@@ -196,7 +196,7 @@ public class Debugger {
      */
     @SafeVarargs
     public static <T> void unsafeLog(T... o) {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
             for (T t : o) {
                 if (t != null) {
                     out.println(getLogText(o.getClass()) + t + " ");
@@ -214,7 +214,7 @@ public class Debugger {
      */
     @SafeVarargs
     public static <T> void info(T... o) {
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_DSIABLE_CLI).equals("false")) {
             for (T t : o) {
                 if (t != null) {
                     out.println(com.halcyoninae.halcyon.debug.Debugger.CLIStyles.BOLD.getColor() + getGoodText()

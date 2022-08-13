@@ -17,7 +17,7 @@ package com.halcyoninae.halcyon.cacher;
 
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 
@@ -41,6 +41,7 @@ public class MoosicCache {
     public Cacher cacher;
     private List<String> excludedFiles, savedPlayLists;
     private Set<String> likedTracks;
+    private Object lock = new Object();
 
     public MoosicCache() {
         init();
@@ -66,7 +67,7 @@ public class MoosicCache {
             try {
                 cacher.build(NODE_ROOT, content);
             } catch (TransformerException | ParserConfigurationException e) {
-                ResourceFolder.dispatchLog(e);
+                ExternalResource.dispatchLog(e);
                 e.printStackTrace();
             }
             excludedFiles = new ArrayList<>();
@@ -85,14 +86,15 @@ public class MoosicCache {
             try {
                 excludedFiles = cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0] != null ? new ArrayList<>(Arrays.asList(
                         cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0].split("\n"))) : new ArrayList<>();
-                savedPlayLists = cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0] != null ? new ArrayList<>(Arrays.asList(
-                        cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0].split("\n")))
+                savedPlayLists = cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0] != null
+                        ? new ArrayList<>(Arrays.asList(
+                                cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0].split("\n")))
                         : new ArrayList<>();
                 likedTracks = cacher.getContent(NODE_USER_LIKED_TRACKS)[0] != null ? new HashSet<>(Arrays.asList(
                         cacher.getContent(NODE_USER_LIKED_TRACKS)[0].split("\n"))) : new HashSet<>();
                 Debugger.info("EF: " + excludedFiles, "SPL: " + savedPlayLists, "LT: " + likedTracks);
             } catch (Exception e) {
-                ResourceFolder.dispatchLog(e);
+                ExternalResource.dispatchLog(e);
                 e.printStackTrace();
                 new ErrorWindow(e.getMessage()).run();
             }
@@ -114,19 +116,14 @@ public class MoosicCache {
                     Debugger.info("Pinging (LT): " + track.getAbsolutePath());
                     likedTracks.add(track.getAbsolutePath());
                 }
-                
+
             }
         }
     }
 
     public void pingSavedPlaylists() {
-        for (String s : Global.bp.getStrTabs()) {
-            Debugger.warn("Ping (SPL): " + s);
-            if (!savedPlayLists.contains(s)) {
-                synchronized (savedPlayLists) {
-                    savedPlayLists.add(s);
-                }
-            }
+        synchronized (lock) {
+            savedPlayLists = new ArrayList<>(new HashSet<>(savedPlayLists));
         }
     }
 
@@ -175,6 +172,30 @@ public class MoosicCache {
         likedTracks.forEach(x -> sb3.append(x).append("\n"));
         content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
         Debugger.info("Force Saving " + this.getClass().getSimpleName() + "> ", sb1, sb2, sb3);
+        try {
+            cacher.build(NODE_ROOT, content);
+        } catch (TransformerException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void forceSaveQuiet() {
+        Map<String, String> content = new HashMap<>();
+        StringBuilder sb1 = new StringBuilder();
+        for(String s : excludedFiles) {
+            sb1.append(s).append("\n");
+        }
+        content.put(NODE_USER_EXCLUDED_TRACKS, sb1.toString());
+        StringBuilder sb2 = new StringBuilder();
+        for(String s : savedPlayLists) {
+            sb2.append(s).append("\n");
+        }
+        content.put(NODE_USER_SAVED_PLAYLISTS, sb2.toString());
+        StringBuilder sb3 = new StringBuilder();
+        for(String s : likedTracks) {
+            sb3.append(s).append("\n");
+        }
+        content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
         try {
             cacher.build(NODE_ROOT, content);
         } catch (TransformerException | ParserConfigurationException e) {

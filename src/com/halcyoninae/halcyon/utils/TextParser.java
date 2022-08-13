@@ -16,7 +16,7 @@
 package com.halcyoninae.halcyon.utils;
 
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -71,8 +71,8 @@ public final class TextParser {
      * @return String
      */
     public static String getPropertyTextEncodingName() {
-        return ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8") ? "UTF-8"
-                : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le") ? "UTF-16LE"
+        return ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8") ? "UTF-8"
+                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le") ? "UTF-16LE"
                 : "UTF-16BE");
     }
 
@@ -81,12 +81,12 @@ public final class TextParser {
      * @return String
      */
     public static String parseAsPure(String str) {
-        return new String(ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16")
+        return new String(ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16")
                 ? str.getBytes(StandardCharsets.UTF_16)
-                : (ResourceFolder.pm
+                : (ExternalResource.pm
                 .get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8")
                 ? str.getBytes(StandardCharsets.UTF_8)
-                : (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
+                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
                 ? str.getBytes(StandardCharsets.UTF_16LE)
                 : str.getBytes(StandardCharsets.UTF_16BE))));
     }

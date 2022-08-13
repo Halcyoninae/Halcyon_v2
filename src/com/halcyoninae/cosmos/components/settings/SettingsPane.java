@@ -16,7 +16,7 @@
 package com.halcyoninae.cosmos.components.settings;
 
 import com.halcyoninae.cosmos.components.settings.tabs.properties.AudioSettings;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -111,10 +111,10 @@ public class SettingsPane extends JFrame implements Runnable, ActionListener {
         if (e.getSource().equals(close)) {
             dispose();
         } else if (e.getSource().equals(ok)) {
-            ResourceFolder.pm.save();
+            ExternalResource.pm.save();
             dispose();
         } else if (e.getSource().equals(apply)) {
-            ResourceFolder.pm.save();
+            ExternalResource.pm.save();
         }
     }
 }

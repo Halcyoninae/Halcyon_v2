@@ -15,9 +15,9 @@
 
 package com.halcyoninae.cosmos.components.info.layout;
 
-import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.InformationTab;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +56,7 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
                 sb.append(line);
             }
         } catch (Exception e) {
-            ResourceFolder.dispatchLog(e);
+            ExternalResource.dispatchLog(e);
         }
         return sb.toString();
     }

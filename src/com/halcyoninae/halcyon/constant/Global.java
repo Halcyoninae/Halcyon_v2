@@ -16,7 +16,8 @@
 package com.halcyoninae.halcyon.constant;
 
 import com.halcyoninae.cosmos.components.bottompane.BottomPane;
-import com.halcyoninae.cosmos.components.bottompane.LikeList;
+import com.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
+import com.halcyoninae.cosmos.components.moreapps.MoreApps;
 import com.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.halcyoninae.cosmos.components.waveform.WaveForm;
@@ -42,6 +43,7 @@ public class Global {
     public static Player player = new Player();
     public static LikeList ll = new LikeList();
     public static WaveForm waveForm = new WaveForm();
+    public static MoreApps moreApps = new MoreApps();
 
     static {
         player.getStream().addStatusUpdateListener(bctp);

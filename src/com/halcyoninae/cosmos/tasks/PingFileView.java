@@ -48,6 +48,7 @@ public final class PingFileView implements Runnable {
                     bp.mastRevalidate();
                     Program.cacher.pingLikedTracks();
                     Program.cacher.pingSavedPlaylists();
+                    new Thread(Program.cacher::forceSaveQuiet).start();
                     try {
                         Thread.sleep(ConcurrentTiming.MAX_TLE);
                     } catch (InterruptedException e) {

@@ -27,7 +27,7 @@ import java.util.Map;
  * the properties file for the program config.
  *
  * @author Jack Meng
- * @see com.halcyoninae.halcyon.connections.properties.ResourceFolder
+ * @see com.halcyoninae.halcyon.connections.properties.ExternalResource
  * @since 3.0
  */
 public class ProgramResourceManager {
@@ -118,7 +118,7 @@ public class ProgramResourceManager {
      * @return The string representing the location of the image (ABSOLUTE PATH)
      */
     public static String writeBufferedImageToBin(BufferedImage img) {
-        return ResourceFolder.writeBufferedImageCacheFile(
+        return ExternalResource.writeBufferedImageCacheFile(
                 img,
                 RESOURCE_SUBFOLDERS[1],
                 DEFAULT_ARTWORK_FILE_NAME);

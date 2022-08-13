@@ -30,7 +30,7 @@ import java.net.URL;
  * This resource folder is not located externally and is packed in during
  * compilation to the generated binary.
  * <p>
- * This class should not be confused with {@link com.halcyoninae.halcyon.connections.properties.ResourceFolder}
+ * This class should not be confused with {@link com.halcyoninae.halcyon.connections.properties.ExternalResource}
  * as that class handles external resources, while this class handles internal resources.
  *
  * @author Jack Meng

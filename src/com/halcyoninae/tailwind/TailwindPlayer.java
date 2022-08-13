@@ -17,7 +17,7 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.simple.FileFormat;
@@ -62,9 +62,10 @@ import java.util.concurrent.Executors;
  * @since 3.1
  */
 public class TailwindPlayer implements Audio, Runnable {
-    public static final int BUFF_SIZE = 1024;
-    // PUBLIC STATIC UTIL
+    // PUBLIC STATIC UTIL START
+    public static final int MAGIC_NUMBER = 1024;
     public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
+    // PUBLIC STATIC UTIL END
     private final Object referencable = new Object();
     private final TailwindEventManager events;
     private File resource;
@@ -131,7 +132,7 @@ public class TailwindPlayer implements Audio, Runnable {
 
             if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
                 if (this.microsecondLength < 0) {
-                    byte[] buffer = new byte[4096];
+                    byte[] buffer = new byte[MAGIC_NUMBER];
                     int readBytes = 0;
 
                     while ((readBytes = this.ais.read(buffer)) != -1) {
@@ -163,7 +164,7 @@ public class TailwindPlayer implements Audio, Runnable {
             events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
         } catch (Exception e) {
             new ErrorWindow("There was an error reading this file!").run();
-            ResourceFolder.dispatchLog(e);
+            ExternalResource.dispatchLog(e);
         }
     }
 
@@ -463,10 +464,10 @@ public class TailwindPlayer implements Audio, Runnable {
     public void run() {
         if (line != null) {
             byte[] buffer = null;
-            if (!ResourceFolder.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
+            if (!ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
                 try {
                     buffer = new byte[Integer
-                            .parseInt(ResourceFolder.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
+                            .parseInt(ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
                 } catch (Exception e) {
                     new ErrorWindow(
                             "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
@@ -476,7 +477,7 @@ public class TailwindPlayer implements Audio, Runnable {
             }
             int i;
             if (buffer == null) {
-                buffer = new byte[BUFF_SIZE * formatAudio.getChannels()
+                buffer = new byte[MAGIC_NUMBER * formatAudio.getChannels()
                         * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits())];
             }
             line.start();

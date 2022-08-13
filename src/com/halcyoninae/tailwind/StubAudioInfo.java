@@ -4,6 +4,12 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a faked AudioInfo object.
+ *
+ * @author Jack Meng
+ * @since 3.3
+ */
 public class StubAudioInfo extends AudioInfo {
     private final File f;
     private Map<String, String> tags;

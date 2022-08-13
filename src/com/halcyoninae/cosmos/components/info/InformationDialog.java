@@ -15,7 +15,7 @@
 
 package com.halcyoninae.cosmos.components.info;
 
-import com.halcyoninae.cosmos.components.bbloc.buttons.LegalNoticeButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.halcyoninae.cosmos.components.info.layout.DebuggerTab;
 import com.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
 import com.halcyoninae.cosmos.components.info.layout.SystemTab;

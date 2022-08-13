@@ -26,8 +26,19 @@ package com.halcyoninae.halcyon;
  */
 public final class DefaultManager {
 
-    public static final String PROJECT_GITHUB_PAGE = "https://github.com/Exoad4JVM/mp4j";
+    /**
+     * Represents the GitHub Project URL
+     */
+    public static final String PROJECT_GITHUB_PAGE = "https://github.com/Halcyoninae/Halcyon";
+
+    /**
+     * The default FILE_SLASH component to use.
+     */
     public static final String FILE_SLASH = System.getProperty("file.separator");
+
+    /**
+     * If the program should turn on every possible debugging option.
+     */
     public static boolean DEBUG_PROGRAM = false;
 
     private DefaultManager() {

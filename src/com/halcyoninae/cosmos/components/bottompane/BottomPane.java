@@ -15,11 +15,11 @@
 
 package com.halcyoninae.cosmos.components.bottompane;
 
+import com.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.halcyoninae.cosmos.inheritable.TabButton;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
-import com.halcyoninae.halcyon.utils.Wrapper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,11 +37,6 @@ import java.util.Map;
  */
 public class BottomPane extends JTabbedPane {
     private final List<FileList> tabs;
-    /**
-     * Represents an absolute list of folders
-     * that have been selected by the user.
-     */
-    private final ArrayList<String> foldersAbsolute;
 
     /**
      * Holds a list of folder paths in correspondence with their index
@@ -54,7 +49,6 @@ public class BottomPane extends JTabbedPane {
      */
     public BottomPane() {
         super();
-        foldersAbsolute = new ArrayList<>();
         tabsMap = new HashMap<>();
 
         setPreferredSize(new Dimension(FileList.FILEVIEW_MAX_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
@@ -93,14 +87,14 @@ public class BottomPane extends JTabbedPane {
      * @return (true | | false) if said folder is within the list.
      */
     public boolean containsFolder(String folderAbsoluteStr) {
-        return foldersAbsolute.contains(folderAbsoluteStr);
+        return Program.cacher.getSavedPlaylists().contains(folderAbsoluteStr);
     }
 
     /**
      * @return A List of String representsin the tabs with the different names.
      */
     public List<String> getStrTabs() {
-        return foldersAbsolute;
+        return Program.cacher.getSavedPlaylists();
     }
 
     /**
@@ -112,7 +106,7 @@ public class BottomPane extends JTabbedPane {
      *
      * @param plain A File List Component
      */
-    public void pokeewFileList(FileList plain) {
+    public void pokeNewFileListTab(FileList plain) {
         add(plain.getFolderInfo().getName(), plain);
         tabs.add(plain);
     }
@@ -124,7 +118,7 @@ public class BottomPane extends JTabbedPane {
      */
     public void pokeNewFileListTab(String folder) {
         FileList list = new FileList(new PhysicalFolder(folder));
-        foldersAbsolute.add(new File(folder).getAbsolutePath());
+        Program.cacher.getSavedPlaylists().add(new File(folder).getAbsolutePath());
         add(new File(folder).getName(), list);
         TabButton button = new TabButton(this);
         setTabComponentAt(getTabCount() - 1, button);
@@ -135,7 +129,7 @@ public class BottomPane extends JTabbedPane {
             public void onRemoveTab() {
                 Debugger.warn("Removing tab > " + folder);
                 int i = tabsMap.get(folder);
-                foldersAbsolute.remove(folder);
+                Program.cacher.getSavedPlaylists().remove(folder);
                 tabsMap.remove(folder);
                 tabs.remove(i);
                 Program.cacher.pingSavedPlaylists();
@@ -151,7 +145,7 @@ public class BottomPane extends JTabbedPane {
      * FileLists and checks if every added folder exists
      * and all of it's sub-files.
      *
-     * @see com.halcyoninae.cosmos.components.bottompane.FileList#revalidateFiles()
+     * @see com.halcyoninae.cosmos.components.bottompane.filelist.FileList#revalidateFiles()
      */
     public synchronized void mastRevalidate() {
         List<Integer> needToRemove = new ArrayList<>();
@@ -162,7 +156,7 @@ public class BottomPane extends JTabbedPane {
                         || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
                     removeTabAt(i);
                     needToRemove.add(i);
-                    foldersAbsolute.remove(l.getFolderInfo().getAbsolutePath());
+                    Program.cacher.getSavedPlaylists().remove(l.getFolderInfo().getAbsolutePath());
                     tabsMap.remove(l.getFolderInfo().getAbsolutePath());
                 } else {
                     l.revalidateFiles();

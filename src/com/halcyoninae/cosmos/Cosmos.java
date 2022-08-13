@@ -19,7 +19,7 @@ import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.events.InstantClose;
 import com.halcyoninae.cosmos.theme.Theme;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -54,7 +54,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
     public Cosmos(JSplitPane mainPane) {
         mainPane.setBorder(BorderFactory.createEmptyBorder());
         container = new JFrame("Halcyon Beta ~ exoad");
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
             container.setUndecorated(true);
             container = new JFrame("Halcyon Beta ~ exoad") {
                 @Override
@@ -95,7 +95,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             ex.printStackTrace();
             new ErrorWindow(ex.getMessage()).run();
-            ResourceFolder.dispatchLog(ex);
+            ExternalResource.dispatchLog(ex);
         }
         for (Window frame : java.awt.Frame.getFrames()) {
             try {

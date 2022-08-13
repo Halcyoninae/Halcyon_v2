@@ -65,7 +65,6 @@ public class MiniPlayer extends JFrame implements Runnable {
             public void mousePressed(MouseEvent me) {
                 pX = me.getX();
                 pY = me.getY();
-
             }
 
             @Override

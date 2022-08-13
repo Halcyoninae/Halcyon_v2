@@ -21,6 +21,12 @@ import com.halcyoninae.halcyon.constant.Manager;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a buffering dialog
+ *
+ * @author Jack Meng
+ * @since 3.1
+ */
 public class LoadingDialog extends JFrame {
     private final JProgressBar bar;
 

@@ -16,35 +16,135 @@
 package com.halcyoninae.cosmos.components.moreapps;
 
 import com.halcyoninae.halcyon.Halcyon;
+import com.halcyoninae.halcyon.constant.ColorManager;
+import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * @author Jack Meng
  * @since 3.3
  */
 public class MoreApps extends JFrame implements Runnable {
-    private final JScrollPane jsp;
+    private JScrollPane jsp;
+    private static final int maxCols = 5;
+    private int colIndex = 0;
+    private GridLayout gl;
+    private int pX, pY;
 
     public MoreApps() {
         setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
-        setAlwaysOnTop(true);
         setUndecorated(true);
+        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setFocusable(true);
+        setAutoRequestFocus(true);
 
-        jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        jsp.setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
 
-        setContentPane(jsp);
+        gl = new GridLayout(1, maxCols);
+
+        jsp.getViewport().setLayout(gl);
+        getContentPane().add(jsp);
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                pX = me.getX();
+                pY = me.getY();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
+            }
+        });
+
+        jsp.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                pX = me.getX();
+                pY = me.getY();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
+            }
+        });
+
+        jsp.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                pX = me.getX();
+                pY = me.getY();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
+            }
+        });
+        jsp.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                setLocation(getLocation().x + me.getX() - pX,
+                        getLocation().y + me.getY() - pY);
+            }
+        });
+        setResizable(true);
     }
 
+    /**
+     * This method will dynamically allocate the necessary space for
+     * the individual component cells.
+     *
+     * All elements will be resized to fit the correct cell size!!!
+     *
+     * @param c Components to add to the screen.
+     */
     public void addComponent(JComponent... c) {
         for (JComponent cc : c) {
+            cc.setPreferredSize(
+                    new Dimension(MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT, MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT));
+            cc.setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
+            if (colIndex % maxCols == 0) {
+                Debugger.info("Adding a component: " + cc.getClass().getCanonicalName() + " to row a new row");
+                gl.setRows(gl.getRows() + 1);
+                jsp.getViewport().revalidate();
+                jsp.getViewport().repaint();
+                jsp.getViewport().add(cc);
+            } else {
+                Debugger.info("Adding a component: " + cc.getClass().getCanonicalName() + " to row the last row");
+                jsp.getViewport().add(cc);
+            }
+            colIndex++;
+            Debugger.warn("MoreApps (ColIndex): " + colIndex);
         }
     }
 
     @Override
     public void run() {
         pack();
+        try {
+            setOpacity(0.6f);
+        } catch (UnsupportedOperationException e) {
+            Debugger.warn("Failing setting Opacity for MoreApps dialog");
+        }
         setLocationRelativeTo(Halcyon.bgt.getFrame());
         setVisible(true);
     }

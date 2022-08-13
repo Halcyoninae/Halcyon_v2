@@ -17,6 +17,7 @@ package com.halcyoninae.halcyon.runtime;
 
 import com.halcyoninae.halcyon.cacher.MoosicCache;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 
 import java.io.File;
@@ -130,6 +131,7 @@ public class Program {
      */
     public static PhysicalFolder[] fetchSavedPlayLists() {
         if (cacher.getSavedPlaylists().size() == 0 || cacher.getSavedPlaylists() == null) {
+            Debugger.warn("SPL_Condition: " + 0);
             return new PhysicalFolder[0];
         } else {
             List<PhysicalFolder> list = new ArrayList<>();

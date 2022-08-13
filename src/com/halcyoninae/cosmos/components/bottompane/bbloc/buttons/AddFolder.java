@@ -13,9 +13,9 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.components.bbloc.buttons;
+package com.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.SelectApplicableFolders;
 import com.halcyoninae.cosmos.dialog.SelectApplicableFolders.FolderSelectedListener;

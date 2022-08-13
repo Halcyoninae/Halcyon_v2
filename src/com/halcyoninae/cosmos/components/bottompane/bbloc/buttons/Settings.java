@@ -13,44 +13,38 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.components.bbloc.buttons;
+package com.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
-import com.halcyoninae.cosmos.dialog.SlidersDialog;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
+import com.halcyoninae.cosmos.components.settings.SettingsPane;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 /**
+ * A representation of a deprecated SettingsView class
+ * which used to be in the bottom tabs view pane.
+ *
  * @author Jack Meng
- * @since 3.2
+ * @since 3.0
  */
-public class SlidersControl extends JButton implements BBlocButton {
-    private final SlidersDialog dialog;
-    private boolean isPressed;
+public class Settings extends JButton implements BBlocButton {
+    private final SettingsPane e = new SettingsPane();
 
-    public SlidersControl() {
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
-        setToolTipText("Open a window to display sliders that can alter certain things");
+    public Settings() {
+        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
+        setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
         setOpaque(true);
         setBorder(null);
         setDoubleBuffered(true);
-        addActionListener(this);
         setBackground(null);
+        addActionListener(this);
         setContentAreaFilled(false);
-        isPressed = false;
-        dialog = new SlidersDialog();
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                isPressed = false;
-            }
-        });
+
     }
 
 
@@ -68,9 +62,6 @@ public class SlidersControl extends JButton implements BBlocButton {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (!isPressed) {
-            dialog.run();
-        }
+        this.e.run();
     }
-
 }

@@ -5,11 +5,11 @@ import com.halcyoninae.cloudspin.lib.gradient.GradientGenerator;
 import com.halcyoninae.cosmos.Cosmos;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.events.ForceMaxSize;
-import com.halcyoninae.cosmos.special.AttributableButton;
+import com.halcyoninae.cosmos.identifier.AttributableButton;
 import com.halcyoninae.cosmos.theme.Theme;
 import com.halcyoninae.cosmos.theme.ThemeBundles;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -189,7 +189,7 @@ public class Setup extends JFrame implements Runnable {
                         Cosmos.refreshUI(ThemeBundles.searchFor(t.getAttribute()));
                     } catch (UnsupportedLookAndFeelException e1) {
                         new ErrorWindow(e1.getMessage()).run();
-                        ResourceFolder.dispatchLog(e1);
+                        ExternalResource.dispatchLog(e1);
                     }
                 }
             });

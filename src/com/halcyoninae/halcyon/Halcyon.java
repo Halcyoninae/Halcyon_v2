@@ -16,17 +16,16 @@
 package com.halcyoninae.halcyon;
 
 import com.halcyoninae.cosmos.Cosmos;
-import com.halcyoninae.cosmos.components.bbloc.BBlocButton;
-import com.halcyoninae.cosmos.components.bbloc.BBlocView;
-import com.halcyoninae.cosmos.components.bbloc.buttons.*;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.halcyoninae.cosmos.tasks.ThreadedScheduler;
 import com.halcyoninae.halcyon.connections.discord.Discordo;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.connections.properties.ResourceFolder;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
@@ -42,6 +41,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * <p>
@@ -97,15 +97,11 @@ import java.util.ArrayList;
  * @see com.halcyoninae.halcyon.constant.Global
  * @since 3.0
  */
-public class Halcyon {
-    /**
-     * This is the only instance of a variable
-     * being placed here.
-     */
+public final class Halcyon {
+
     public static com.halcyoninae.cosmos.Cosmos bgt;
 
     private static void boot_kick_mainUI() {
-        Debugger.info(System.getProperty("java.class.path"));
         try {
             Cosmos.refreshUI(ColorManager.programTheme);
         } catch (UnsupportedLookAndFeelException e) {
@@ -125,11 +121,6 @@ public class Halcyon {
         bb.add(new MinimizePlayer());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
-        bb.add(
-                GenericWebsiteLinker.getButton(
-                        DefaultManager.PROJECT_GITHUB_PAGE,
-                        Manager.PROJECTPAGE_BUTTON_TOOLTIP,
-                        Global.rd.getFromAsImageIcon(Manager.GITHUB_LOGO_LIGHT)));
         BBlocView b = new BBlocView();
         b.addBBlockButtons(bb.toArray(new BBlocButton[0]));
         bottom.add(b);
@@ -137,9 +128,10 @@ public class Halcyon {
 
         JSplitPane m = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tp, bottom);
         bgt = new com.halcyoninae.cosmos.Cosmos(m);
-        Global.bp.pokeewFileList(Global.ll);
+        Global.bp.pokeNewFileListTab(Global.ll);
 
         PhysicalFolder[] fi = Program.fetchSavedPlayLists();
+        Debugger.warn("SPL_REC: " + Arrays.toString(Program.fetchLikedTracks()));
         if (fi.length > 0) {
             for (PhysicalFolder f : fi) {
                 if (new File(f.getAbsolutePath()).exists() && new File(f.getAbsolutePath()).isDirectory()) {
@@ -151,21 +143,9 @@ public class Halcyon {
             }
         }
 
-        File[] files = Program.fetchLikedTracks();
-        if (files.length > 0) {
-            for (File f : files) {
-                if (f.exists() && f.isFile()) {
-                    Global.ll.set(f.getAbsolutePath());
-                    Debugger.good("Added Liked Track: " + f.getAbsolutePath());
-                } else {
-                    Debugger.warn("Could not load liked track: " + f.getAbsolutePath());
-                }
-            }
-        }
-
         bgt.run();
 
-        if (ResourceFolder.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
+        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
             Discordo dp = new Discordo();
             Global.ifp.addInfoViewUpdateListener(dp);
             dp.start();
@@ -174,10 +154,6 @@ public class Halcyon {
 
     private static void run() {
         try {
-            LoadingDialog ld = new LoadingDialog("Starting the program!\nPlease be patient.", true);
-
-            Thread d = new Thread(ld::run);
-            d.start();
             Setup.addSetupListener(new SetupListener() {
                 @Override
                 public void updateStatus(SetupStatus e) {
@@ -185,12 +161,8 @@ public class Halcyon {
                 }
             });
             Setup.main((String[]) null);
-            ld.kill();
-            d.interrupt();
-            d = null;
-            System.gc();
         } catch (Exception e) {
-            ResourceFolder.dispatchLog(e);
+            ExternalResource.dispatchLog(e);
         }
     }
 
@@ -212,19 +184,19 @@ public class Halcyon {
             e.printStackTrace();
         }
         try {
-            ResourceFolder.checkResourceFolder(
+            ExternalResource.checkResourceFolder(
                     ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 
             for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
-                ResourceFolder.createFolder(str);
+                ExternalResource.createFolder(str);
             }
 
-            ResourceFolder.pm.checkAllPropertiesExistence();
+            ExternalResource.pm.checkAllPropertiesExistence();
 
             Debugger.good("Loading encoding as: " + TextParser.getPropertyTextEncodingName());
             new ThreadedScheduler();
 
-            if (ResourceFolder.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+            if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
                 new ConfirmWindow(
                         "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
                         new ConfirmWindow.ConfirmationListener() {
@@ -240,8 +212,8 @@ public class Halcyon {
                 run();
             }
         } catch (Exception ex) {
-            ResourceFolder.dispatchLog(ex);
             new ErrorWindow(ex.toString()).run();
+            ExternalResource.dispatchLog(ex);
         }
     }
 }
