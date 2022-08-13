@@ -1,5 +1,5 @@
 /*
- *  Copyright: (C) 2022 name of Jack Meng
+ *  Copyright: (C) 2022 MP4J Jack Meng
  * Halcyon MP4J is music-playing software.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

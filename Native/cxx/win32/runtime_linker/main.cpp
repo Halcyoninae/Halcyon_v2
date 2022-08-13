@@ -1,5 +1,5 @@
 /*
- *  Copyright: (C) 2022 name of Jack Meng
+ *  Copyright: (C) 2022 MP4J Jack Meng
  * Halcyon MP4J is music-playing software.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,7 +32,7 @@
 #include "__win32_halcyon.hpp"
 
 const std::string LICENSE_PRINTABLE =
-    "(C) 2022 name of Jack Meng\n Halcyon MP4J is music-playing software.\n "
+    "(C) 2022 MP4J Jack Meng\n Halcyon MP4J is music-playing software.\n "
     "This program is free software; you can redistribute it and/or\n "
     "modify it under the terms of the GNU General Public License\n as "
     "published by the Free Software Foundation; either version 2\n of the "

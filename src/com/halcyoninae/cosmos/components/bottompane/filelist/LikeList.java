@@ -1,5 +1,5 @@
 /*
- *  Copyright: (C) 2022 name of Jack Meng
+ *  Copyright: (C) 2022 MP4J Jack Meng
  * Halcyon MP4J is music-playing software.
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -70,7 +70,7 @@ public class LikeList extends FileList {
                 Global.rd.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
         folder = (VirtualFolder) getFolderInfo();
         nodeMaps = new HashMap<>();
-        Debugger.warn("FILE_MAP_ABS: " + folder.getAsListFiles());
+        Debugger.warn("FILE_MAP_ABS: " + Arrays.toString(Program.fetchLikedTracks()));
         for (File f : getFileMap().keySet()) {
             nodeMaps.put(getFileMap().get(f), f.getAbsolutePath());
         }

@@ -1,5 +1,5 @@
 /*
- *  Copyright: (C) 2022 name of Jack Meng
+ *  Copyright: (C) 2022 MP4J Jack Meng
  * CloudSpin a graphics library for image manipulation is licensed under the following
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
