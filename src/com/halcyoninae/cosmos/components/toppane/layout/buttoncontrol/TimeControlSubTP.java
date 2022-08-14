@@ -43,8 +43,10 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
     final String FAST_BACKWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/backward.png";
     final String TO_END_ICON = Manager.RSC_FOLDER_NAME + "/time_control/end.png";
     final String TO_START_ICON = Manager.RSC_FOLDER_NAME + "/time_control/start.png";
+    public static long INTERVAL_TIMING_MILLISECONDS = 10000L;
     final int ICON_SIZING = 18;
-    final int TIMECONTROL_HEIGHT = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
+    final int TIMECONTROL_HEIGHT = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT
+            - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
     private final JButton fastForward;
     private final JButton fastBackward;
     private final JButton toEnd;
@@ -112,8 +114,10 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
             Debugger.info("> Submitting time control for [toStart]");
         } else if (arg0.getSource().equals(fastBackward)) {
             Debugger.info("> Submitting time control for [fastBackward]");
+            Global.player.getStream().seekTo(-INTERVAL_TIMING_MILLISECONDS);
         } else if (arg0.getSource().equals(fastForward)) {
             Debugger.info("> Submitting time control for [fastForward]");
+            Global.player.getStream().seekTo(INTERVAL_TIMING_MILLISECONDS);
         }
     }
 }

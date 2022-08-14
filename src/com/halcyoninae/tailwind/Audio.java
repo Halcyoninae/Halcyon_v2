@@ -83,10 +83,13 @@ public interface Audio {
 
     /**
      * Similar to {@link #setPosition(long)}
+     * but will provide additional safety
+     * checks to make sure the time being seeked to
+     * is not out of reach. (EOF)
      *
      * @param millis
      */
-    void seek(long millis);
+    void seekTo(long millis);
 
     /**
      * @param millis Moves the buffer reader to the millis frame

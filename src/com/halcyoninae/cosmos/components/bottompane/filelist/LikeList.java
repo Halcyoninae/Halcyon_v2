@@ -26,9 +26,7 @@ import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A type of non-removable FileList viewable.

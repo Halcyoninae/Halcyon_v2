@@ -25,7 +25,6 @@ import com.halcyoninae.tailwind.simple.FileFormat;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -74,7 +73,7 @@ public class TailwindPlayer implements Audio, Runnable {
     private Map<String, Control> controlTable;
     private boolean open, paused, playing;
     private AudioInputStream ais;
-    private long microsecondLength, frameLength;
+    private long microsecondLength, frameLength, milliPos;
     private ExecutorService worker;
     private AudioFormat formatAudio;
 
@@ -147,7 +146,8 @@ public class TailwindPlayer implements Audio, Runnable {
             } else {
                 if (microsecondLength < 0) {
                     frameLength = ais.getFrameLength();
-                    microsecondLength = 1000000L * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
+                    microsecondLength = 1000000L
+                            * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
                 }
             }
 
@@ -224,17 +224,31 @@ public class TailwindPlayer implements Audio, Runnable {
     }
 
     /**
-     * @return The current source data line's position in microsecond
+     * Defaults to the SourceDataLine's microsecond
+     * position.
+     *
+     * NOTE: This method does not take into account any
+     * time seeking etc and only takes into account the time
+     * since the line was opened.
+     *
+     * @return The microsecond position.
      */
-    public synchronized long getPositionMicro() {
-        return line != null ? line.getMicrosecondPosition() : 0l;
+    public synchronized long getMicrosecondPosition() {
+        return line != null ? line.getMicrosecondPosition() : 0L;
     }
 
     /**
-     * @return long
+     * Does not use the internal SourceDataLine's microsecond
+     * positioning.
+     *
+     * NOTE: This method does not gurantee absolute precision;
+     * however, it does take into account any time modifications
+     * including seeking.
+     *
+     * @return long The millisecond position
      */
     public synchronized long getPosition() {
-        return getPositionMicro() / 1000L;
+        return milliPos;
     }
 
     /**
@@ -243,12 +257,16 @@ public class TailwindPlayer implements Audio, Runnable {
     @Override
     public synchronized void setPosition(long millis) {
         if (open) {
-            setFramePosition((long) (ais.getFormat().getFrameSize() / 1000F) * millis);
+            setFramePosition((long) (ais.getFormat().getFrameRate() / 1000F) * millis);
+            Debugger.warn("MILLIPOS_POST: " + milliPos + " | MODDER: " + millis);
         }
     }
 
     /**
-     * @return long
+     * Uses the line's frame position to determine where the current
+     * pointer is.
+     *
+     * @return long Frame Position from the DataLine
      */
     public synchronized long getLongFramePosition() {
         return line.getLongFramePosition();
@@ -331,7 +349,6 @@ public class TailwindPlayer implements Audio, Runnable {
         worker = Executors.newSingleThreadExecutor();
         worker.execute(this);
         playing = true;
-
         events.dispatchStatusEvent(TailwindStatus.PLAYING);
     }
 
@@ -375,7 +392,8 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void setMute(boolean mute) {
-        throw new UnsupportedOperationException("This method should not be used directly via the Tailwind Implementation!");
+        throw new UnsupportedOperationException(
+                "This method should not be used directly via the Tailwind Implementation!");
     }
 
     @Override
@@ -394,11 +412,28 @@ public class TailwindPlayer implements Audio, Runnable {
     }
 
     /**
-     * @param millis
+     * This method provides a safety check upon the given
+     * time to seek.
+     *
+     * @param millis The milliseconds to skip
      */
     @Override
-    public void seek(long millis) {
-        setPosition(millis);
+    public void seekTo(long millis) {
+        if (open) {
+            long time = getPosition() + millis;
+            Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
+                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L);
+            if (time < 0) {
+                setPosition(0);
+                Debugger.warn("Time lower bound exceed");
+            } else if (time > getMicrosecondLength() / 1000L) {
+                setPosition(getMicrosecondLength() / 1000L);
+                Debugger.warn("Time upper bound exceed");
+            } else {
+                setPosition(time);
+                Debugger.good("Time bound good");
+            }
+        }
     }
 
     @Override
@@ -407,8 +442,8 @@ public class TailwindPlayer implements Audio, Runnable {
         if (playing && !paused) {
             paused = true;
             playing = false;
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
-        events.dispatchStatusEvent(TailwindStatus.PAUSED);
     }
 
     @Override
@@ -438,10 +473,8 @@ public class TailwindPlayer implements Audio, Runnable {
             }
 
             if (paused) {
-                line.start();
                 resume();
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }

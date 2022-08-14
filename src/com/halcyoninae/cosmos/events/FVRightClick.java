@@ -15,9 +15,7 @@
 
 package com.halcyoninae.cosmos.events;
 
-import com.halcyoninae.halcyon.filesystem.*;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
-import com.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree.TabTreeSortMethod;
 import com.halcyoninae.cosmos.dialog.AudioInfoDialog;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;

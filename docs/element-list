@@ -6,11 +6,10 @@ com.halcyoninae.cloudspin.lib.blurhash
 com.halcyoninae.cloudspin.lib.boxblur
 com.halcyoninae.cloudspin.lib.gradient
 com.halcyoninae.cosmos
-com.halcyoninae.cosmos.components
-com.halcyoninae.cosmos.components.bbloc
-com.halcyoninae.cosmos.components.bbloc.buttons
 com.halcyoninae.cosmos.components.bottompane
-com.halcyoninae.cosmos.components.dialog
+com.halcyoninae.cosmos.components.bottompane.bbloc
+com.halcyoninae.cosmos.components.bottompane.bbloc.buttons
+com.halcyoninae.cosmos.components.bottompane.filelist
 com.halcyoninae.cosmos.components.info
 com.halcyoninae.cosmos.components.info.layout
 com.halcyoninae.cosmos.components.minimizeplayer
@@ -21,7 +20,9 @@ com.halcyoninae.cosmos.components.toppane
 com.halcyoninae.cosmos.components.toppane.layout
 com.halcyoninae.cosmos.components.toppane.layout.buttoncontrol
 com.halcyoninae.cosmos.components.waveform
+com.halcyoninae.cosmos.dialog
 com.halcyoninae.cosmos.events
+com.halcyoninae.cosmos.identifier
 com.halcyoninae.cosmos.inheritable
 com.halcyoninae.cosmos.special
 com.halcyoninae.cosmos.tasks
