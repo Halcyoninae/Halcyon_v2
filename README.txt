@@ -73,7 +73,7 @@ Currently the program supports:
 Hopefully to support:
   1. FLAC
   2. AU
-  3. MP2
+  3. MP2 (Partial support)
   4. AAC
   5. USAC
 
