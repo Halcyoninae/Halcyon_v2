@@ -1,3 +1,4 @@
+<html><pre>
 This license documentation contains the following:
 1.pre-requisites
 2. GPL-2.0
@@ -371,3 +372,4 @@ proprietary programs.  If your program is a subroutine library, you may
 consider it more useful to permit linking proprietary applications with the
 library.  If this is what you want to do, use the GNU Lesser General
 Public License instead of this License.
+</pre></html>
