@@ -297,9 +297,9 @@ with your RE vendor with specifics
     Minimum-Version: 9
   Sys.:
     Minimum-Program-Memory: N/A
-    CPU: Any 32bit or 64bit
+    CPU: 32bit / 64bit
     GPU: Any
-    OS: Windows, *NIX 
+    OS: Win32,MacOS,Linux
 
 ----------------------------------
       Made by Jack Meng :)    
