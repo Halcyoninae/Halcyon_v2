@@ -54,7 +54,7 @@ with the following aspects in
 mind:
   1. Simplicity for the user
   2. Absolute Optimizations
-  3. Maximum User Control
+  3. Maximum User Control of Flow
   4. Easy API (if to be used as a
      library)
   5. A no cluster user interface
