@@ -17,7 +17,7 @@ package com.halcyoninae.cosmos.special;
 
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * Represents a special component type that features
@@ -28,7 +28,7 @@ import java.awt.Dimension;
  * @since 3.3
  */
 public class BlurFrame extends JFrame {
-    private JPanel contentPanelDefault;
+    private final JPanel contentPanelDefault;
 
     public BlurFrame(Dimension size) {
         LayerUI<JComponent> layerUI = new BlurLayer();

@@ -15,8 +15,8 @@
 
 package com.halcyoninae.halcyon.debug;
 
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.utils.TimeParser;
 
 import java.io.PrintStream;

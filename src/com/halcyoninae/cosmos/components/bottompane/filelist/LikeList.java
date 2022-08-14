@@ -54,7 +54,7 @@ public class LikeList extends FileList {
 
         }
     };
-    private transient VirtualFolder folder;
+    private final transient VirtualFolder folder;
 
     /**
      * Inits the LikeList object as a child of the FileList

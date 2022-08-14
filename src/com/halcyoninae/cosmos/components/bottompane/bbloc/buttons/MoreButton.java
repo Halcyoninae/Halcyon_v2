@@ -15,14 +15,15 @@
 
 package com.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.utils.DeImage;
 
-import java.awt.event.*;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * BBloc Entry button to launch the MoreApps

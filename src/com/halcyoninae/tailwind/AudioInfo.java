@@ -35,6 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class holds information regarding an audio
@@ -48,10 +49,10 @@ import java.util.Map;
  * @since 3.0
  */
 public class AudioInfo {
-    public static final String KEY_ABSOLUTE_FILE_PATH = "absFilePath", KEY_FILE_NAME = "fileName",
-            KEY_MEDIA_DURATION = "mediaDur", KEY_MEDIA_TITLE = "mediaTitle", KEY_BITRATE = "mediaBitRate",
-            KEY_SAMPLE_RATE = "mediaSRate", KEY_ALBUM = "mediaAlbum", KEY_GENRE = "mediaGenre",
-            KEY_MEDIA_ARTIST = "mediaArtist", KEY_ARTWORK = "mediaSpecial", KEY_TRACK = "mediaTrack";
+    public static final String KEY_ABSOLUTE_FILE_PATH = "a", KEY_FILE_NAME = "f",
+            KEY_MEDIA_DURATION = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
+            KEY_SAMPLE_RATE = "mS", KEY_ALBUM = "mA", KEY_GENRE = "mG",
+            KEY_MEDIA_ARTIST = "mAr", KEY_ARTWORK = "mArt", KEY_TRACK = "mTr";
     private File f;
     private Map<String, String> tags;
     private Tag t;
@@ -142,7 +143,8 @@ public class AudioInfo {
             info.getTag(KEY_MEDIA_DURATION);
             info.getTag(KEY_MEDIA_TITLE);
             info.getTag(KEY_SAMPLE_RATE);
-        } catch (TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException | IOException e) {
+        } catch (TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException
+                | IOException e) {
             return false;
         }
         return true;
@@ -162,7 +164,8 @@ public class AudioInfo {
      * @param forceSetMap
      */
     public void forceSet(Map<String, String> forceSetMap) {
-        Debugger.warn("Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
+        Debugger.warn(
+                "Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
         this.tags = forceSetMap;
     }
 
@@ -192,12 +195,14 @@ public class AudioInfo {
         tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
         tags.put(KEY_FILE_NAME, f.getName());
         tags.put(KEY_MEDIA_DURATION, header.getTrackLength() + "");
-        tags.put(KEY_MEDIA_TITLE, checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
+        tags.put(KEY_MEDIA_TITLE,
+                checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
         tags.put(KEY_BITRATE, header.getBitRate() + "");
         tags.put(KEY_SAMPLE_RATE, header.getSampleRate() + "");
         tags.put(KEY_ALBUM, checkEmptiness(t.getFirst(FieldKey.ALBUM)) ? "Unknown" : t.getFirst(FieldKey.ALBUM));
         tags.put(KEY_GENRE, checkEmptiness(t.getFirst(FieldKey.GENRE)) ? "Unknown" : t.getFirst(FieldKey.GENRE));
-        tags.put(KEY_MEDIA_ARTIST, checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
+        tags.put(KEY_MEDIA_ARTIST,
+                checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
     }
 
     /**
@@ -267,7 +272,7 @@ public class AudioInfo {
      * Returns the map of tags to the Audio file
      *
      * @return A Map of String, String representing the parsed tags from the audio
-     * file.
+     *         file.
      */
     public Map<String, String> getTags() {
         return tags;
@@ -296,5 +301,30 @@ public class AudioInfo {
         } catch (UnsupportedOperationException e) {
             return "Unsupported";
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof AudioInfo audioInfo))
+            return false;
+
+        if (!f.equals(audioInfo.f))
+            return false;
+        if (!Objects.equals(tags, audioInfo.tags))
+            return false;
+        if (!Objects.equals(t, audioInfo.t))
+            return false;
+        return Objects.equals(header, audioInfo.header);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = f.hashCode();
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (t != null ? t.hashCode() : 0);
+        result = 31 * result + (header != null ? header.hashCode() : 0);
+        return result;
     }
 }

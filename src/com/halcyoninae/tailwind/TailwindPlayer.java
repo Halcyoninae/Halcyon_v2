@@ -16,8 +16,8 @@
 package com.halcyoninae.tailwind;
 
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.simple.FileFormat;
@@ -27,6 +27,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -110,7 +111,14 @@ public class TailwindPlayer implements Audio, Runnable {
     }
 
     /**
-     * @param url
+     * Note: This method does not check the exact validity of a file.
+     *
+     * Opens the line for reading and playback.
+     *
+     * This method will try its best to handle missing media length
+     * by manually reading per frame-which may take time.
+     *
+     * @param url Open a resource from a file
      */
     @Override
     public void open(File url) {
@@ -168,28 +176,29 @@ public class TailwindPlayer implements Audio, Runnable {
     }
 
     /**
-     * @return long
+     * @return long Returns the length of the media file in MicroSeconds
      */
     public synchronized long getMicrosecondLength() {
         return microsecondLength;
     }
 
     /**
-     * @return long
+     * @return long Returns the length of the media file in MilliSeconds
      */
     public synchronized long getLength() {
         return microsecondLength / 1000;
     }
 
     /**
-     * @return boolean
+     * @return boolean (true || false) if the stream is detected to be playing
      */
     public synchronized boolean isPlaying() {
         return playing;
     }
 
     /**
-     * @return AudioFormat
+     * @return AudioFormat Get the absolute audio format obj representing the
+     *         current stream
      */
     public synchronized AudioFormat getAudioFormatAbsolute() {
         return formatAudio;
@@ -550,4 +559,61 @@ public class TailwindPlayer implements Audio, Runnable {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof TailwindPlayer that))
+            return false;
+
+        if (open != that.open)
+            return false;
+        if (paused != that.paused)
+            return false;
+        if (playing != that.playing)
+            return false;
+        if (microsecondLength != that.microsecondLength)
+            return false;
+        if (frameLength != that.frameLength)
+            return false;
+        if (milliPos != that.milliPos)
+            return false;
+        if (!referencable.equals(that.referencable))
+            return false;
+        if (!Objects.equals(events, that.events))
+            return false;
+        if (!Objects.equals(resource, that.resource))
+            return false;
+        if (!Objects.equals(line, that.line))
+            return false;
+        if (format != that.format)
+            return false;
+        if (!Objects.equals(controlTable, that.controlTable))
+            return false;
+        if (!Objects.equals(ais, that.ais))
+            return false;
+        if (!Objects.equals(worker, that.worker))
+            return false;
+        return Objects.equals(formatAudio, that.formatAudio);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = referencable.hashCode();
+        result = 31 * result + (events != null ? events.hashCode() : 0);
+        result = 31 * result + (resource != null ? resource.hashCode() : 0);
+        result = 31 * result + (line != null ? line.hashCode() : 0);
+        result = 31 * result + (format != null ? format.hashCode() : 0);
+        result = 31 * result + (controlTable != null ? controlTable.hashCode() : 0);
+        result = 31 * result + (open ? 1 : 0);
+        result = 31 * result + (paused ? 1 : 0);
+        result = 31 * result + (playing ? 1 : 0);
+        result = 31 * result + (ais != null ? ais.hashCode() : 0);
+        result = 31 * result + (int) (microsecondLength ^ (microsecondLength >>> 32));
+        result = 31 * result + (int) (frameLength ^ (frameLength >>> 32));
+        result = 31 * result + (int) (milliPos ^ (milliPos >>> 32));
+        result = 31 * result + (worker != null ? worker.hashCode() : 0);
+        result = 31 * result + (formatAudio != null ? formatAudio.hashCode() : 0);
+        return result;
+    }
 }

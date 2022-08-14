@@ -54,4 +54,11 @@ public class Pair<T, E> {
     public E getSecond() {
         return second;
     }
+
+    public int getHashCode() {
+        int hash = 17;
+        hash = 31 * hash + first.hashCode();
+        hash = 31 * hash + second.hashCode();
+        return hash;
+    }
 }

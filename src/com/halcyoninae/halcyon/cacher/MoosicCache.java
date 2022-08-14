@@ -16,8 +16,8 @@
 package com.halcyoninae.halcyon.cacher;
 
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 
@@ -44,7 +44,9 @@ public class MoosicCache {
     public Cacher cacher;
     private List<String> excludedFiles, savedPlayLists;
     private Set<String> likedTracks;
-    private Object lock, lock2, lock3;
+    private final Object lock;
+    private final Object lock2;
+    private final Object lock3;
 
     public MoosicCache() {
         lock = lock2 = lock3 = new Object();
@@ -169,8 +171,8 @@ public class MoosicCache {
         StringBuilder sb3 = new StringBuilder();
         likedTracks.forEach(x -> sb3.append(x).append("\n"));
         content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
-        Debugger.info("Force Saving " + this.getClass().getSimpleName() + " > ", "ET: \n" + sb1.toString(),
-                "SPL: \n" + sb2.toString(), "LT: \n" + sb3.toString());
+        Debugger.info("Force Saving " + this.getClass().getSimpleName() + " > ", "ET: \n" + sb1,
+                "SPL: \n" + sb2, "LT: \n" + sb3);
         try {
             cacher.build(NODE_ROOT, content);
         } catch (TransformerException | ParserConfigurationException e) {

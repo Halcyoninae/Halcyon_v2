@@ -24,5 +24,5 @@ package com.halcyoninae.cosmos.tasks;
  * @since 3.0
  */
 public interface ConcurrentTiming {
-    final int MAX_TLE = 2000;
+    int MAX_TLE = 2000;
 }

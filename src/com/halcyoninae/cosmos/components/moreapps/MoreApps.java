@@ -23,17 +23,19 @@ import com.halcyoninae.halcyon.debug.Debugger;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 /**
  * @author Jack Meng
  * @since 3.3
  */
 public class MoreApps extends JFrame implements Runnable {
-    private JScrollPane jsp;
+    private final JScrollPane jsp;
     private static final int maxCols = 5;
     private int colIndex = 0;
-    private GridLayout gl;
+    private final GridLayout gl;
     private int pX, pY;
 
     public MoreApps() {

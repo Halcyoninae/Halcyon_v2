@@ -15,8 +15,8 @@
 
 package com.halcyoninae.halcyon.utils;
 
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

@@ -17,11 +17,10 @@ package com.halcyoninae.cosmos.dialog;
 
 import com.halcyoninae.cosmos.inheritable.FSVDefault;
 
-import java.io.File;
-
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileView;
+import java.io.File;
 
 /**
  * This dialog class constructs a simple

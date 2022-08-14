@@ -15,13 +15,15 @@
 
 package com.halcyoninae.cosmos.special;
 
-import javax.swing.*;
-import javax.swing.plaf.LayerUI;
-
 import com.halcyoninae.cloudspin.CloudSpinFilters;
 
-import java.awt.image.*;
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 
 /**
  * Blur Frame UI
@@ -31,7 +33,7 @@ import java.awt.*;
  */
 public class BlurLayer extends LayerUI<JComponent> {
     private transient BufferedImage bufferImage;
-    private transient BufferedImageOp image;
+    private final transient BufferedImageOp image;
 
     public BlurLayer() {
 
