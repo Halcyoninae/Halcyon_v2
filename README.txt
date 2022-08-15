@@ -1,7 +1,7 @@
 ====== Halcyon Music Player ======
 
 A simplistic robust music player,
-without any hidden snippets.
+with full feature transparency.
 
 ----------------------------------
 
