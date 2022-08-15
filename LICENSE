@@ -1,4 +1,9 @@
+Standard Yttrium Open Source 1.0 (MODIFIED) License
+
 Copyright (C) Jack Meng 2022
+
+Note: This is a modified version of the original license, found here:
+https://github.com/Yttrium-Terminus/license/blob/5f7e476ff6158402672bd6100001408ebd8d83ed/LICENSE-1.0
 
 Please read this licensing carefully.
 Any modification in any means including the usage of the program by any end-user is considered the agreement to this EULA and licensing. Your agreement to the EULA states that you acknowledge and pledge the following:
@@ -33,6 +38,9 @@ The distribution of any subsiding plugins, addons, and/or assets for the program
 All forms of the program including decompiled source code, binaries, link libraries, text files, and resource files must be recognizable and have distinct representation of their origin. If in the form of non-binary, the file MUST contain this same exact license header.
 
 It is prohibited to distribute this program in the hopes for financial gains either casually, governmentally, or educationally.
+
+All types of linking this software to another either dynamic, static, or directly are under
+the preservation of this license (without classpath exception of any kind).
 
 > Source Code >
 Any modification to the original Source Code MUST be stated with clarity and shall not be mixed with other notices.
