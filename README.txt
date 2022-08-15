@@ -13,8 +13,8 @@ Copyright(C)Jack Meng 2021
 
 Licensed under the following:
 
-1. Source Code: Yttrium
-2. EULA & Binaries: Yttrium
+1. Source Code: Standard-Yttrium
+2. EULA & Binaries: Standard
 
 ----------------------------------
 
