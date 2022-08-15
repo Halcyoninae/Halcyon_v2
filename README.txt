@@ -13,7 +13,7 @@ Copyright(C)Jack Meng 2021
 
 Licensed under the following:
 
-1. Source Code: GPL-2.0
+1. Source Code: Yttrium
 2. EULA & Binaries: Yttrium
 
 ----------------------------------
