@@ -1,4 +1,6 @@
-Copyright (C) Yttrium Terminus 2022-2023
+<html><pre>
+
+Copyright (C) Jack Meng 2022
 
 Please read this licensing carefully.
 Any modification in any means including the usage of the program by any end-user is considered the agreement to this EULA and licensing. Your agreement to the EULA states that you acknowledge and pledge the following:
@@ -46,3 +48,5 @@ Distribution of source code must be made PUBLICLY with the following:
 2. Modifications to the original documented
 3. Your information regarding your acknowledgement to this license
 4. A copy of the original source code.
+
+</pre></html>
