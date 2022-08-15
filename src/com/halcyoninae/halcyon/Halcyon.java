@@ -15,10 +15,24 @@
 
 package com.halcyoninae.halcyon;
 
+import java.awt.Dimension;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.swing.JSplitPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import com.halcyoninae.cosmos.Cosmos;
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.AddFolder;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.MinimizePlayer;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.RefreshFileView;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.Settings;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.SlidersControl;
 import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
@@ -29,19 +43,15 @@ import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.halcyoninae.halcyon.constant.ColorManager;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.CLIStyles;
 import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.debug.TConstr;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.TextParser;
 import com.halcyoninae.setup.Setup;
 import com.halcyoninae.setup.SetupListener;
 import com.halcyoninae.setup.SetupStatus;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * <p>
@@ -144,12 +154,6 @@ public final class Halcyon {
         }
 
         bgt.run();
-
-        if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
-            Discordo dp = new Discordo();
-            Global.ifp.addInfoViewUpdateListener(dp);
-            dp.start();
-        }
     }
 
     private static void run() {
@@ -158,6 +162,15 @@ public final class Halcyon {
                 @Override
                 public void updateStatus(SetupStatus e) {
                     boot_kick_mainUI();
+
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
+                        Debugger.alert(new TConstr(CLIStyles.CYAN_TXT, "Loading the almighty Discord RPC ;3"));
+                        Discordo dp = new Discordo();
+                        Global.ifp.addInfoViewUpdateListener(dp);
+                        dp.start();
+                    } else {
+                        Debugger.warn("Amogus");
+                    }
                 }
             });
             Setup.main((String[]) null);

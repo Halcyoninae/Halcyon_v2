@@ -16,9 +16,12 @@
 package com.halcyoninae.halcyon.connections.discord;
 
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
+import com.halcyoninae.halcyon.debug.CLIStyles;
 import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.debug.TConstr;
 import com.halcyoninae.halcyon.utils.TextParser;
 import com.halcyoninae.tailwind.AudioInfo;
+
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
@@ -49,7 +52,9 @@ public class Discordo implements InfoViewUpdateListener {
     public void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
                 .setReadyEventHandler(
-                        user -> Debugger.good("Connected to Discord user: " + user.username + "#" + user.discriminator))
+                        user -> Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.BOLD, CLIStyles.MAGENTA_BG },
+                                "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
+                                        + user.userId)))
                 .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
 
@@ -60,14 +65,15 @@ public class Discordo implements InfoViewUpdateListener {
         DiscordRPC.discordUpdatePresence(rpc);
     }
 
-
     /**
      * @param title A title to dispatch as
      */
     public void set(String title) {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
                 .setReadyEventHandler(
-                        user -> Debugger.log("Connected to Discord user: " + user.username + "#" + user.discriminator))
+                        user -> Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.BOLD, CLIStyles.MAGENTA_BG },
+                                "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
+                                        + user.userId)))
                 .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
         rpc = new DiscordRichPresence.Builder(TextParser.parseAsPure(title))
@@ -75,7 +81,6 @@ public class Discordo implements InfoViewUpdateListener {
                 .build();
         DiscordRPC.discordUpdatePresence(rpc);
     }
-
 
     /**
      * @param info
