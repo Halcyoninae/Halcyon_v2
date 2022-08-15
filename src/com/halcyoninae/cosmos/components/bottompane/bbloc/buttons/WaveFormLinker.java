@@ -18,6 +18,8 @@ package com.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.waveform.WaveFormPane;
 import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,13 +30,16 @@ import java.awt.event.ActionEvent;
  * @since 3.2
  */
 public class WaveFormLinker extends JButton implements BBlocButton {
-    private final WaveFormPane pane;
+    private WaveFormPane pane;
 
     public WaveFormLinker() {
+        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
+        setBorder(BorderFactory.createEmptyBorder());
         setPreferredSize(new Dimension(16, 16));
         addActionListener(this);
-        pane = new WaveFormPane();
-        Global.player.getStream().setFrameBufferListener(Global.waveForm);
+        setToolTipText("WaveForm display Currently Unavailable due to technical issues");
+        setEnabled(false);
     }
 
     /**
@@ -51,6 +56,7 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(pane::run);
+        Global.waveForm.setVisibility(true);
     }
 
 }

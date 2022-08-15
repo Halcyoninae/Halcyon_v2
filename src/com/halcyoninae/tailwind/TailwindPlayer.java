@@ -349,6 +349,30 @@ public class TailwindPlayer implements Audio, Runnable {
         }
     }
 
+    /**
+     * Fades out the audio until the audio dies.
+     *
+     *
+     * NOTE: This method does not automatically take care
+     * of draining and closing the current line and stream.
+     *
+     * @param time Time in milliseconds for this action to take
+     *             place in.
+     */
+    public void fadeOut(int time) {
+        if (line != null) {
+            FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
+            if (control.getUpdatePeriod() != -1) {
+                control.shift(
+                        control.getValue(),
+                        control.getMinimum(), time * 1000);
+            } else {
+                Debugger.info("Automatic Updates Not Supported");
+                // later i will implement this
+            }
+        }
+    }
+
     @Override
     public void play() {
         Debugger.warn("TailwindPlayer> Playing");
@@ -375,6 +399,9 @@ public class TailwindPlayer implements Audio, Runnable {
         FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
         control.setValue(percent < control.getMinimum() ? control.getMinimum()
                 : (Math.min(percent, control.getMaximum())));
+        if (((int) control.getValue()) == ((int) control.getMaximum())) {
+            Debugger.good(">3< Earrape Mode! Let's go!");
+        }
     }
 
     /**
@@ -449,6 +476,7 @@ public class TailwindPlayer implements Audio, Runnable {
     public void pause() {
         Debugger.warn("TailwindPlayer> Pausing");
         if (playing && !paused) {
+            fadeOut(800);
             paused = true;
             playing = false;
             events.dispatchStatusEvent(TailwindStatus.PAUSED);
@@ -517,6 +545,11 @@ public class TailwindPlayer implements Audio, Runnable {
                 }
             }
             int i;
+            /*
+             * int nb = TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits());
+             * float[] samples = new float[MAGIC_NUMBER * formatAudio.getChannels()];
+             * long[] transfer = new long[samples.length];
+             */
             if (buffer == null) {
                 buffer = new byte[MAGIC_NUMBER * formatAudio.getChannels()
                         * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits())];
@@ -530,7 +563,6 @@ public class TailwindPlayer implements Audio, Runnable {
                                 if (paused || !playing || !isOpen()) {
                                     break;
                                 }
-
                                 line.write(buffer, 0, i);
                             }
                         }

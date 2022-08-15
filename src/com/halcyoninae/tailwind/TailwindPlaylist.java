@@ -23,9 +23,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * A sort of wrapper for the default TailwindPlayer class.
+ *
+ * This media player is intended to be constantly fed a list
+ * of media to play and can then keep track of what it had played.
+ *
  * @author Jack Meng
  * @since 3.2
- * (Technically 3.1)
+ *        (Technically 3.1)
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
     private final List<File> history;
@@ -40,7 +45,6 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
         gain = Float.NaN;
     }
 
-
     /**
      * @param f
      */
@@ -52,23 +56,22 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
             history.add(f);
             this.currentFile = f;
             open(f);
-            play();
             if (gain != Float.NaN) {
                 this.setGain(gain);
             }
+            play();
         }
     }
-
 
     /**
      * @param f
      */
     public void rawPlay(File f) {
         open(f);
-        play();
         if (gain != Float.NaN) {
             this.setGain(gain);
         }
+        play();
     }
 
     public void backTrack() {
@@ -100,7 +103,8 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
             play();
             state = true;
         }
-        Debugger.good("Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
+        Debugger.good(
+                "Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
     }
 
     @Override
@@ -116,7 +120,6 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
         return history;
     }
 
-
     /**
      * @return int
      */
@@ -124,14 +127,12 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
         return pointer;
     }
 
-
     /**
      * @return File
      */
     public File getCurrentTrack() {
         return currentFile;
     }
-
 
     /**
      * @param i
@@ -179,4 +180,15 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
         }
     }
 
+    @Override
+    public boolean equals(Object arg) {
+        return arg.hashCode() == super.hashCode();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (history == null ? history.hashCode() : 0);
+        return result;
+    }
 }

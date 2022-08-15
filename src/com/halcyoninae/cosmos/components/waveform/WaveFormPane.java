@@ -19,9 +19,10 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.RoundRectangle2D;
 
 /**
  * @author Jack Meng
@@ -32,13 +33,7 @@ public class WaveFormPane extends JFrame implements Runnable {
 
     public WaveFormPane() {
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
-        setUndecorated(true);
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 15, 15));
-            }
-        });
+
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -61,6 +56,45 @@ public class WaveFormPane extends JFrame implements Runnable {
                         getLocation().y + me.getY() - pY);
 
             }
+        });
+        addWindowListener(new WindowListener() {
+
+            @Override
+            public void windowOpened(WindowEvent e) {
+                Global.waveForm.setVisibility(true);
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                Global.waveForm.setVisibility(false);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                Global.waveForm.setVisibility(false);
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+                Global.waveForm.setVisibility(false);
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+                Global.waveForm.setVisibility(true);
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+                Global.waveForm.setVisibility(true);
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                Global.waveForm.setVisibility(false);
+            }
+
         });
         addMouseListener(new WaveFormClickMenu(this));
         setPreferredSize(new Dimension(WaveFormManager.MIN_WIDTH, WaveFormManager.MIN_HEIGHT));

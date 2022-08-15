@@ -44,6 +44,7 @@ import java.io.File;
 public class Player {
     private TailwindPlaylist audio;
     private String currentAbsolutePath = "";
+    private float lastGain = 0.0F;
 
     /**
      * Constructs a player with a blank mp3 file
@@ -86,9 +87,11 @@ public class Player {
         File f = new File(currentAbsolutePath);
         try {
             if (new AudioInfo(f, false).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
-                LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>", true);
+                LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>",
+                        true);
                 SwingUtilities.invokeLater(ld::run);
-                Debugger.warn("No proper duration metadata found for this audio file...\nLagging to find the frame length.");
+                Debugger.warn(
+                        "No proper duration metadata found for this audio file...\nLagging to find the frame length.");
             }
         } catch (Exception e) {
             // IGNORE
@@ -101,6 +104,7 @@ public class Player {
      */
     public void setVolume(float percent) {
         audio.setGain(percent);
+        lastGain = ((FloatControl) audio.getControls().get(TailwindPlayer.MASTER_GAIN_STR)).getValue();
     }
 
     /**

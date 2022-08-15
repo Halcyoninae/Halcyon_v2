@@ -42,7 +42,8 @@ public class Global {
     public static InfoViewTP ifp = new InfoViewTP();
     public static Player player = new Player();
     public static LikeList ll = new LikeList();
-    public static WaveForm waveForm = new WaveForm();
+    public static WaveForm waveForm = null; // SHOULD NOT BE USED AT THE MOMENT, this feature currently needs a lot more
+                                            // optimizations
     public static MoreApps moreApps = new MoreApps();
 
     static {
