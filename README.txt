@@ -3,7 +3,7 @@
 A simplistic robust music player,
 with full feature transparency.
 
-----------------------------------
+==================================
 
 This repository contains the 
 source code for the Halcyon Music 
@@ -333,7 +333,7 @@ with your RE vendor with specifics
     CPU: 32bit / 64bit
     GPU: Any
     OS: Win32,MacOS,Linux
-
-----------------------------------
+    
+==================================
       Made by Jack Meng :)    
 ==================================
