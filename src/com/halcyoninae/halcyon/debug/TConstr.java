@@ -49,7 +49,7 @@ public class TConstr {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Arrays.asList(start).forEach(x -> sb.append(x.getColor()));
-        sb.append(payload.toString() + CLIStyles.RESET.getColor());
+        Arrays.asList(payload).forEach(x -> sb.append(x.first.toString()));
         return sb.toString();
     }
 }

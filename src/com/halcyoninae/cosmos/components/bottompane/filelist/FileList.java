@@ -15,6 +15,25 @@
 
 package com.halcyoninae.cosmos.components.bottompane.filelist;
 
+import java.awt.Dimension;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JScrollPane;
+import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
+
 import com.halcyoninae.cosmos.events.FVRightClick;
 import com.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.halcyoninae.halcyon.constant.ColorManager;
@@ -25,16 +44,6 @@ import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.filesystem.VirtualFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.DeImage;
-
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeSelectionModel;
-import java.awt.*;
-import java.io.File;
-import java.util.List;
-import java.util.*;
 
 /**
  * Represents a Pane containing a list of files for only

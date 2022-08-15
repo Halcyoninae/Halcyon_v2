@@ -15,16 +15,15 @@
 
 package com.halcyoninae.halcyon.debug;
 
-import com.halcyoninae.halcyon.DefaultManager;
-import com.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.utils.TimeParser;
-
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import javax.lang.model.type.NullType;
+
+import com.halcyoninae.halcyon.DefaultManager;
+import com.halcyoninae.halcyon.utils.TextParser;
+import com.halcyoninae.halcyon.utils.TimeParser;
 
 /**
  * This is an external class that is called upon for when the
@@ -70,7 +69,7 @@ public class Debugger {
      * @return The Header Log text
      */
     public static String getLogText(Class<?> am) {
-        return "[DEBUG ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + am.getSimpleName() + "] > ";
+        return "[LOG ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
     }
 
     /**
@@ -78,7 +77,7 @@ public class Debugger {
      * @return String Get's the default warning message header.
      */
     public static String getWarnText(Class<?> am) {
-        return "[WARNING ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + am.getSimpleName() + "] > ";
+        return "[WRN ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
     }
 
     /**
@@ -86,7 +85,7 @@ public class Debugger {
      * @return String Gets the default success/good message header
      */
     public static String getGoodText(Class<?> am) {
-        return "[SUCCESS ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + am.getSimpleName() + "] > ";
+        return "[SCS ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
     }
 
     /**
@@ -96,7 +95,7 @@ public class Debugger {
      * @return
      */
     public static String getProgramText(Class<?> am) {
-        return "[PROGRAM ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + am.getSimpleName() + "] > ";
+        return "[PGM ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
     }
 
     /**
@@ -104,7 +103,7 @@ public class Debugger {
      * @return String
      */
     public static String getDefaultInfoText(Class<?> am) {
-        return "[INFO ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + am.getSimpleName() + "] > ";
+        return "[INF ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
     }
 
     /**
@@ -154,15 +153,13 @@ public class Debugger {
                     out.println(
                             CLIStyles.BOLD.getColor() + getWarnText(t.getClass())
                                     + CLIStyles.RESET.getColor()
-                                    + CLIStyles.RED_BG.getColor()
-                                    + CLIStyles.RED_TXT.getColor() + t
+                                    + CLIStyles.YELLOW_TXT.getColor() + t
                                     + CLIStyles.RESET.getColor());
                 } else {
                     out.println(CLIStyles.BOLD.getColor()
                             + getWarnText(NullType.class)
                             + CLIStyles.RESET.getColor()
-                            + CLIStyles.RED_BG.getColor()
-                            + CLIStyles.RED_TXT.getColor() + "NULL_CONTENT"
+                            + CLIStyles.YELLOW_TXT.getColor() + "NULL_CONTENT"
                             + CLIStyles.RESET.getColor());
                 }
             }
@@ -255,16 +252,15 @@ public class Debugger {
     }
 
     /**
-     * 
+     *
      * @param t
      */
     public static void alert(TConstr... t) {
         if (!DefaultManager.DEBUG_PROGRAM) {
             for (TConstr x : t) {
                 if (x != null) {
-                    out.println(CLIStyles.BOLD.getColor() + getProgramText(
-                            NullType.class)
-                            + CLIStyles.RESET.getColor() + x.toString() + CLIStyles.RESET.getColor());
+                    out.println(CLIStyles.BOLD.getColor() + getProgramText(x.getClass()) + CLIStyles.RESET.getColor()
+                            + x.toString() + CLIStyles.RESET.getColor());
                 } else {
                     out.println(CLIStyles.BOLD.getColor() + getProgramText(
                             NullType.class)
