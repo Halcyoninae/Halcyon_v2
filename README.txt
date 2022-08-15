@@ -13,7 +13,7 @@ Copyright(C)Jack Meng 2021
 
 Licensed under the following:
 
-1. Source Code: Standard-Yttrium
+1. Source Code: GPL OR Vendor
 2. EULA & Binaries: Standard
 
 ----------------------------------
@@ -23,6 +23,7 @@ Licensed under the following:
     Version Info
     Basic Description
     Extern.
+    Legals
     Q&A
     Building
     Release & Download
@@ -112,6 +113,35 @@ party libraries that I will try
 and minimize the usage of and
 fully find alternatives and adopt
 them.
+
+----------------------------------
+
+[!] Legals
+  
+Legals refer to licensing of this
+software and all other third 
+party libraries and software that
+are bundled with it.
+
+This program's source code is 
+provided under: Standard GPL2.0
+(WITHOUT CLASSPATH EXCEPTION)
+
+However, if you are to distribute
+any pre-built binaries of any 
+kind are subject to the standard:
+VENDOR_LICENSE.
+    > See File: VENDOR_LICENSE
+
+The software's own license can
+be viewed from the file:
+    1. LICENSE.md
+
+Licenses for any third parties:
+    1. LICENSE.txt
+
+Standard Vendor Licensing:
+    1. VENDOR_LICENSE
 
 ----------------------------------
 
