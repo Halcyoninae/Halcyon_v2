@@ -15,9 +15,9 @@
 
 package com.halcyoninae.halcyon.debug;
 
-import java.util.Arrays;
-
 import com.halcyoninae.halcyon.global.TObject;
+
+import java.util.Arrays;
 
 /**
  * Custom Alert Debugger TextConstructor

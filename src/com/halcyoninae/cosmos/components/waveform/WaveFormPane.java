@@ -19,8 +19,6 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.event.*;
 

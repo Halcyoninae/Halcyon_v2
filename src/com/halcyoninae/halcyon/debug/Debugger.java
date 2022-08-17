@@ -15,15 +15,14 @@
 
 package com.halcyoninae.halcyon.debug;
 
-import java.io.PrintStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-
-import javax.lang.model.type.NullType;
-
 import com.halcyoninae.halcyon.DefaultManager;
 import com.halcyoninae.halcyon.utils.TextParser;
 import com.halcyoninae.halcyon.utils.TimeParser;
+
+import javax.lang.model.type.NullType;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 /**
  * This is an external class that is called upon for when the

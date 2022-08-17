@@ -15,24 +15,10 @@
 
 package com.halcyoninae.halcyon;
 
-import java.awt.Dimension;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import javax.swing.JSplitPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import com.halcyoninae.cosmos.Cosmos;
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.AddFolder;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.MinimizePlayer;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.RefreshFileView;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.Settings;
-import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.SlidersControl;
+import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
@@ -52,6 +38,12 @@ import com.halcyoninae.halcyon.utils.TextParser;
 import com.halcyoninae.setup.Setup;
 import com.halcyoninae.setup.SetupListener;
 import com.halcyoninae.setup.SetupStatus;
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * <p>
