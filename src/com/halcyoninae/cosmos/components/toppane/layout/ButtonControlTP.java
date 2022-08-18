@@ -15,6 +15,23 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
 import com.halcyoninae.cosmos.inheritable.LikeButton;
@@ -26,15 +43,6 @@ import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.tailwind.AudioInfo;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.TailwindListener;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 /**
  * This class represents the GUI component collection
@@ -78,7 +86,6 @@ public class ButtonControlTP extends JPanel
     private final JButton previousButton;
     private final JButton loopButton;
     private final JButton shuffleButton;
-    private final JButton restartButton;
     private final LikeButton likeButton;
     private final JSlider progressSlider;
     private final JSlider volumeSlider;
@@ -137,17 +144,6 @@ public class ButtonControlTP extends JPanel
         previousButton.setBorderPainted(false);
         previousButton.addActionListener(this);
 
-        restartButton = new JButton(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_RESTART_ICON),
-                        OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
-        restartButton.setBackground(null);
-        restartButton.setBorder(null);
-        restartButton.setContentAreaFilled(false);
-        restartButton.setToolTipText("Restart");
-        restartButton.setRolloverEnabled(false);
-        restartButton.setBorderPainted(false);
-        restartButton.addActionListener(this);
-
         loopButton = new JButton(
                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
                         OTHER_BUTTONS_SIZE,
@@ -193,7 +189,6 @@ public class ButtonControlTP extends JPanel
         likeButton.setContentAreaFilled(false);
 
         buttons.add(volumeSlider);
-        buttons.add(restartButton);
         buttons.add(shuffleButton);
         buttons.add(previousButton);
         buttons.add(playButton);
@@ -257,7 +252,8 @@ public class ButtonControlTP extends JPanel
                 progressSlider.setMaximum(getWidth() - 10);
                 volumeSlider.setPreferredSize(new Dimension(getPreferredSize().width / 4, 20));
                 buttons.setLayout(
-                        new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35, getPreferredSize().height / 6));
+                        new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35,
+                                getPreferredSize().height / 6));
                 buttons.revalidate();
                 volumeSlider.revalidate();
             }
@@ -282,7 +278,8 @@ public class ButtonControlTP extends JPanel
     @Override
     public void infoView(AudioInfo info) {
         if (aif != null
-                && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH).equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
+                && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)
+                        .equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
             Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
         }
         aif = info;
@@ -378,21 +375,19 @@ public class ButtonControlTP extends JPanel
                 }
             }
             /*
-            if (!flip) {
-                playButton
-                        .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
-                                PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
-            } else {
-                playButton
-                        .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
-                                PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
-            }
-            flip = !flip;
-            */
-        } else if (e.getSource().equals(restartButton)) {
-            Global.player.getStream().reset();
-            Global.player.play();
-            assertVolume();
+             * if (!flip) {
+             * playButton
+             * .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(
+             * BUTTONCTRL_PAUSE_PLAY_ICON),
+             * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+             * } else {
+             * playButton
+             * .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(
+             * BUTTONCTRL_PLAY_PAUSE_ICON),
+             * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+             * }
+             * flip = !flip;
+             */
         } else if (e.getSource().equals(nextButton)) {
             Global.player.requestNextTrack();
         } else if (e.getSource().equals(previousButton)) {
@@ -430,7 +425,8 @@ public class ButtonControlTP extends JPanel
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
             playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
                     PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
-        } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED) || status.equals(TailwindStatus.END)) {
+        } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED)
+                || status.equals(TailwindStatus.END)) {
             playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                     PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         }
