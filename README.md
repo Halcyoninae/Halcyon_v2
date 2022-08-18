@@ -1,3 +1,4 @@
+<html><style>pre { text-align: center; align-self: center; }</style><pre>
 ====== Halcyon Music Player ======
 
 A simplistic robust music player,
@@ -337,3 +338,4 @@ with your RE vendor with specifics
 ==================================
       Made by Jack Meng :)    
 ==================================
+</pre></html>
