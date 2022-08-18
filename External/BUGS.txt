@@ -1,3 +1,13 @@
+[**] #41 "Loop feature runs over the last buffer"
+    Detailed Description: The loop feature does not restart the current
+    buffer and insteads kind of overwrites the old buffer resulting in 
+    stuttering and overall awful performance. This is mostly apparent
+    on lower-end hardware.
+    Status: None
+    State: Experimental-Build ~ MP4J
+    Difficulty: Minimal
+    Testing: Minimal
+
 [!FIXED!] [***] #40 "Synchronized Virtual Folder"
     Detailed Description: The retrieval of files from a virtual
     folder is inconsistent when a permutation operation is done on the
