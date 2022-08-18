@@ -1,11 +1,5 @@
 <html>
-<style>
-pre {
-    text-align: center;
-    align-self: center;
-}
-</style>
-<pre>
+<pre style="text-align:center;">
 ====== Halcyon Music Player ======
 
 A simplistic robust music player,
