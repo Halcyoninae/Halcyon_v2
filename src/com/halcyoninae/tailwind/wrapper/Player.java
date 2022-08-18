@@ -15,18 +15,19 @@
 
 package com.halcyoninae.tailwind.wrapper;
 
+import java.io.File;
+
+import javax.sound.sampled.Control;
+import javax.sound.sampled.FloatControl;
+import javax.swing.SwingUtilities;
+
 import com.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.TimeParser;
-import com.halcyoninae.tailwind.AudioInfo;
 import com.halcyoninae.tailwind.TailwindPlayer;
 import com.halcyoninae.tailwind.TailwindPlaylist;
-
-import javax.sound.sampled.Control;
-import javax.sound.sampled.FloatControl;
-import javax.swing.*;
-import java.io.File;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * This simplification is due to some of the methods not being to be needed and

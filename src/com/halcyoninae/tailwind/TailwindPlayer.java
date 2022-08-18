@@ -15,14 +15,6 @@
 
 package com.halcyoninae.tailwind;
 
-import com.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
-import com.halcyoninae.tailwind.simple.FileFormat;
-
-import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -30,6 +22,26 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.BooleanControl;
+import javax.sound.sampled.Control;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.EnumControl;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.Line;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.SourceDataLine;
+
+import com.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.halcyoninae.tailwind.simple.FileFormat;
 
 /**
  * The official adapted audio framework for the Halcyon Program.

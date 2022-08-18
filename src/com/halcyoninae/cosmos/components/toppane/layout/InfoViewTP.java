@@ -15,6 +15,33 @@
 
 package com.halcyoninae.cosmos.components.toppane.layout;
 
+import java.awt.AlphaComposite;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.OverlayLayout;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import org.jaudiotagger.audio.exceptions.CannotReadException;
+import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
+import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
+import org.jaudiotagger.tag.TagException;
+
 import com.halcyoninae.cloudspin.CloudSpin;
 import com.halcyoninae.cloudspin.CloudSpinFilters;
 import com.halcyoninae.halcyon.Halcyon;
@@ -26,22 +53,7 @@ import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.halcyon.utils.TimeParser;
-import com.halcyoninae.tailwind.AudioInfo;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.TagException;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -54,7 +66,7 @@ import java.util.Map;
  * If the user wants to know more about the audio file
  *
  * @author Jack Meng
- * @see com.halcyoninae.cosmos.dialog.AudioInfoDialog
+ * @see com.halcyoninae.tailwind.audioinfo.AudioInfoDialog
  * @since 3.0
  */
 public class InfoViewTP extends JPanel implements ComponentListener {
@@ -76,6 +88,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     private final JLabel infoDisplay;
     private final JLabel artWork;
     private final transient ArrayList<InfoViewUpdateListener> listeners;
+    private BufferedImage backPanelArt;
     private transient AudioInfo info;
     private String infoTitle;
     private boolean artWorkIsDefault = true;
@@ -106,7 +119,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                     g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
 
-                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE).equals("top")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
+                            .equals("top")) {
                         compositeAlpha = 0.2f;
                     } else {
                         compositeAlpha = 0.6f;
@@ -118,7 +132,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
                     BufferedImage original = Global.ifp.getInfo().getArtwork();
                     original = CloudSpin.grabCrop(original, backPanel.getVisibleRect());
-                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT).equals("true")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT)
+                            .equals("true")) {
                         original = DeImage.createGradientVertical(original, 255, 0);
                         switch (com.halcyoninae.halcyon.connections.properties.ExternalResource.pm
                                 .get(com.halcyoninae.halcyon.connections.properties.ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
@@ -136,7 +151,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                                 break;
                         }
                     }
-                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE).equals("true")) {
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE)
+                            .equals("true")) {
                         original = CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY].filter(original, original);
                         g2d.drawImage(original, 0, 0, backPanel.getWidth(), backPanel.getHeight(), null);
                     } else {
@@ -144,6 +160,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                                 0, 0, original.getWidth(), original.getHeight(), null);
 
                     }
+                    g2d.dispose();
                 }
             }
         };
@@ -166,10 +183,10 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         artWork.setVerticalAlignment(SwingConstants.CENTER);
 
         infoTitle = ExternalResource.pm.get(
-                        ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+                ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
                 .equals("true")
-                ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
-                : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
+                        ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+                        : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
         topPanel.setLayout(new GridLayout(1, 3, 15,
                 topPanel.getPreferredSize().height / 2));
         infoDisplay = new JLabel(infoToString(info, infoTitle, false));
@@ -219,20 +236,22 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 defaultMap.put(AudioInfo.KEY_MEDIA_ARTIST, "Unknown");
                 defaultMap.put(AudioInfo.KEY_ARTWORK, "Unknown");
                 info.forceSet(defaultMap);
+                Debugger.warn("Using beSmart toolkit...");
             }
             if (!beSmart) {
                 infoTitle = ExternalResource.pm.get(
-                                ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
+                        ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
                         .equals("true")
-                        ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
-                        : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
+                                ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
+                                : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
                 infoDisplay.setText(infoToString(info, infoTitle, false));
                 infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE), false));
+                Debugger.info("Using nonSmart (no guessing) toolkit. Phew!");
             } else {
                 infoTitle = f.getName();
-                Debugger.warn(">>> " + infoTitle);
                 infoDisplay.setText(infoToString(info, infoTitle, true));
                 infoDisplay.setToolTipText(infoToString(info, infoTitle, true));
+                Debugger.warn("Using beSmart (guessing) toolkit. Got: " + infoTitle);
             }
             if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
                     artWork.getPreferredSize().width -
@@ -318,7 +337,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * @param text    The title of the track
      * @param beSmart Tells the parser to be smart and guess certain details.
      * @return An HTML string that can be used by html supporting GUI Components to
-     * display the information.
+     *         display the information.
      */
     private String infoToString(AudioInfo info, String text, boolean beSmart) {
         if (!beSmart) {
@@ -328,7 +347,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     ";font-size: 12px;\"><strong>" +
                     text
                     +
-                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
+                    +
                     info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
                     "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
                     info.getTag(AudioInfo.KEY_BITRATE) +
@@ -347,7 +367,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     ";font-size: 12px;\"><strong>" +
                     text
                     +
-                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">" +
+                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
+                    +
                     author +
                     "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
                     "Unknown" +

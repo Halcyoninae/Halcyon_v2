@@ -110,6 +110,7 @@ public class Setup extends JFrame implements Runnable {
                                 200, 0, Directional.TOP),
                         0, 0, null);
                 g2.dispose();
+                g.dispose();
             }
         };
         welcomePanelBack.setPreferredSize(welcomePanel.getPreferredSize());

@@ -13,20 +13,39 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.cosmos.dialog;
+package com.halcyoninae.tailwind.audioinfo;
 
-import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.constant.Manager;
-import com.halcyoninae.halcyon.utils.TimeParser;
-import com.halcyoninae.tailwind.AudioInfo;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.awt.event.*;
+
+import javax.swing.BorderFactory;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
 import org.jaudiotagger.tag.FieldKey;
 
-import javax.swing.*;
-import java.awt.*;
+import com.halcyoninae.cloudspin.CloudSpin;
+import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.utils.TimeParser;
 
 /**
  * This is a window popup that shows information regarding the current
  * track by using the AudioInfo class.
+ *
+ * This is non resusable and a new instance must be initiated on every
+ * AudioInfo launch.
  *
  * @author Jack Meng
  * @since 3.1
@@ -38,37 +57,69 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     final int AUDIOINFO_MIN_WIDTH = 600;
     final int AUDIOINFO_MIN_HEIGHT = 400;
 
-    final int AUDIOINFO_DIVIDER_LOCATION = AUDIOINFO_MIN_WIDTH / 2;
-
-    final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 100;
-    final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH / 2;
+    final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 200;
+    final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 150;
     /// AUDIOINFO Window Config END
 
     private final JSplitPane mainPane;
     private final JScrollPane artWorkPanel;
     private final JPanel artWork;
     private final JScrollPane infoPanel;
+    private final JPopupMenu rightClickArtwork;
+    private final JMenuItem rightClickArtworkShowBig;
 
-    // Non Gui Components
+    // Transient Components
+    private transient boolean toOpenArtwork = true;
+    private transient AudioInfoArtworkDialog aiad;
+    private transient BufferedImage img;
     private transient AudioInfo info;
 
     public AudioInfoDialog(AudioInfo info) {
         setTitle(AUDIOINFO_WIN_TITLE);
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
         setPreferredSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
         setMinimumSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
+        aiad = new AudioInfoArtworkDialog(info);
+        aiad.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                toOpenArtwork = true;
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                toOpenArtwork = true;
+            }
+
+        });
+
+        rightClickArtwork = new JPopupMenu();
+        rightClickArtworkShowBig = new JMenuItem("View Artwork");
+        rightClickArtworkShowBig.setToolTipText("View the artwork in a bigger window");
+        rightClickArtworkShowBig.addActionListener(x -> {
+            if (toOpenArtwork) {
+                SwingUtilities.invokeLater(aiad::run);
+                toOpenArtwork = false;
+            } else {
+                Debugger.warn("Already launched an Artwork Viewport, not running another!!");
+            }
+        });
+
+        img = CloudSpin.resizeToFitViewport(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT),
+                info.getArtwork());
+
         artWork = new JPanel() {
             @Override
-            public synchronized void paint(Graphics g) {
+            public void paint(Graphics g) {
                 super.paint(g);
-                g.drawImage(info.getArtwork(), (artWork.getWidth() - info.getArtwork().getWidth()) / 2,
-                        (artWork.getHeight() - info.getArtwork().getHeight()) / 2, this);
+                g.drawImage(img, (artWork.getWidth() - img.getWidth()) / 2, (artWork.getHeight() - img.getHeight()) / 2,
+                        rootPane);
+                g.dispose();
             }
         };
-        artWork.setPreferredSize(new Dimension(info.getArtwork().getWidth(), info.getArtwork().getHeight()));
+        artWork.setDoubleBuffered(true);
 
         artWorkPanel = new JScrollPane();
         artWorkPanel.setViewportView(artWork);
@@ -76,6 +127,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         artWorkPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         artWorkPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         artWorkPanel.setPreferredSize(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
+        artWorkPanel.setMinimumSize(artWorkPanel.getPreferredSize());
 
         JEditorPane infoText = new JEditorPane();
         infoText.setEditable(false);
@@ -91,7 +143,22 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
         mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
         mainPane.setPreferredSize(getPreferredSize());
-        mainPane.setDividerLocation(AUDIOINFO_DIVIDER_LOCATION);
+
+        rightClickArtwork.add(rightClickArtworkShowBig);
+
+        artWorkPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON3)
+                    rightClickArtwork.show(artWork, e.getX() + 10, e.getY());
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (e.getButton() == MouseEvent.BUTTON3)
+                    rightClickArtwork.show(artWork, e.getX() + 10, e.getY());
+            }
+        });
 
         getContentPane().add(mainPane);
     }
@@ -118,7 +185,8 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         sb.append(parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)));
         sb.append(parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)));
         sb.append(
-                parseAsProperty("Duration", TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
+                parseAsProperty("Duration",
+                        TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
         sb.append(parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)));
         sb.append(parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)));
         sb.append(parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
@@ -136,7 +204,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
     /**
      * @return This instance's AudioInfo object that is being used to generate the
-     * compiled information.
+     *         compiled information.
      */
     public AudioInfo getInfo() {
         return info;
@@ -146,8 +214,9 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     public void run() {
         SwingUtilities.invokeLater(() -> {
             pack();
+            setLocationByPlatform(true);
             setVisible(true);
+            artWork.repaint(20);
         });
-
     }
 }

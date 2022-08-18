@@ -15,9 +15,20 @@
 
 package com.halcyoninae.cosmos.events;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree.TabTreeSortMethod;
-import com.halcyoninae.cosmos.dialog.AudioInfoDialog;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.halcyoninae.cosmos.dialog.StraightTextDialog;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
@@ -25,15 +36,8 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.StringManager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.runtime.Program;
-import com.halcyoninae.tailwind.AudioInfo;
-
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.halcyoninae.tailwind.audioinfo.AudioInfoDialog;
 
 /**
  * This class handles the right click event for any JTree instance.

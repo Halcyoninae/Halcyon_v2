@@ -15,6 +15,23 @@
 
 package com.halcyoninae.cosmos.components.minimizeplayer;
 
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.OverlayLayout;
+
 import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
@@ -23,11 +40,7 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
 import com.halcyoninae.halcyon.utils.DeImage.Directional;
-import com.halcyoninae.tailwind.AudioInfo;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * This class holds all of the components to the main
@@ -74,6 +87,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
                 } else {
                     Debugger.warn("Reusing last artwork!");
                 }
+                g.dispose();
             }
 
             @Override

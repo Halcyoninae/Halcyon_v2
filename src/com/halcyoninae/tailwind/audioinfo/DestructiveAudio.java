@@ -13,34 +13,28 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.tailwind;
+package com.halcyoninae.tailwind.audioinfo;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
 
 /**
- * Represents a faked AudioInfo object.
+ * This class serves no particular purpose but that
+ * it is used when the audio format being detected is
+ * incorrect.
+ * <p>
+ * This helps to prevent unnecessary NullPointerExceptions
+ * being thrown from the stream.
  *
  * @author Jack Meng
  * @since 3.3
  */
-public class StubAudioInfo extends AudioInfo {
-    private final File f;
-    private Map<String, String> tags;
+public class DestructiveAudio extends AudioInputStream {
 
-    public StubAudioInfo(File f) {
-        this.f = f;
-        initTags();
+    public DestructiveAudio(InputStream stream, AudioFormat format, long length) {
+        super(stream, format, length);
     }
 
-    public StubAudioInfo(String str) {
-        this(new File(str));
-    }
-
-    @Override
-    public void initTags() {
-        tags = new HashMap<>();
-        tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
-    }
 }

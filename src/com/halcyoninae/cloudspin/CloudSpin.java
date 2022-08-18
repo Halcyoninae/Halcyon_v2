@@ -15,9 +15,18 @@
 
 package com.halcyoninae.cloudspin;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.LinearGradientPaint;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  * This class is used for general graphical manipulation.
@@ -153,5 +162,24 @@ public final class CloudSpin {
                 (int) (w.getY() + w.getHeight()), null);
         g.dispose();
         return cropped;
+    }
+
+    /**
+     * 
+     * @param viewport
+     * @param src
+     * @return
+     */
+    public static BufferedImage resizeToFitViewport(Dimension viewport, BufferedImage src) {
+        double widthRatio = (double) viewport.width / (double) src.getWidth();
+        double heightRatio = (double) viewport.height / (double) src.getHeight();
+        double ratio = Math.min(widthRatio, heightRatio);
+        int width = (int) (src.getWidth() * ratio);
+        int height = (int) (src.getHeight() * ratio);
+        BufferedImage resized = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = resized.createGraphics();
+        g.drawImage(src, 0, 0, width, height, null);
+        g.dispose();
+        return resized;
     }
 }

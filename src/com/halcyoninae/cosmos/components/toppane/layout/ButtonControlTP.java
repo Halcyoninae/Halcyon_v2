@@ -29,6 +29,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -40,9 +41,9 @@ import com.halcyoninae.halcyon.constant.Global;
 import com.halcyoninae.halcyon.constant.Manager;
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.halcyon.utils.DeImage;
-import com.halcyoninae.tailwind.AudioInfo;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.halcyoninae.tailwind.TailwindListener;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * This class represents the GUI component collection
@@ -75,6 +76,7 @@ public class ButtonControlTP extends JPanel
     final String BUTTONCTRL_LIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
     final String BUTTONCTRL_NOLIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
     final String BUTTONCTRL_RESTART_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
+    final String BUTTONCTRL_INFORMATION_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/information_button.png";
     final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED = Manager.RSC_FOLDER_NAME
             + "/buttoncontrol/shuffle_button_pressed.png";
     final String BUTTONCONTROL_LOOP_ICON_PRESSED = Manager.RSC_FOLDER_NAME
@@ -86,19 +88,19 @@ public class ButtonControlTP extends JPanel
     private final JButton previousButton;
     private final JButton loopButton;
     private final JButton shuffleButton;
+    private final JButton informationButton;
     private final LikeButton likeButton;
     private final JSlider progressSlider;
     private final JSlider volumeSlider;
     private final JPanel sliders;
     private final JPanel buttons;
     private TimeControlSubTP tsp;
-    private transient AudioInfo aif;
+    private transient AudioInfo aif = new AudioInfo();
     private boolean hasPlayed = false;
     /// ButtonControl Config END
 
     public ButtonControlTP() {
         super();
-        aif = null;
         setPreferredSize(new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT));
         setMinimumSize(new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT));
         setOpaque(false);
@@ -121,6 +123,16 @@ public class ButtonControlTP extends JPanel
         playButton.setContentAreaFilled(false);
         playButton.setRolloverEnabled(false);
         playButton.setBorderPainted(false);
+
+        informationButton = new JButton(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
+                OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+        informationButton.setBackground(null);
+        informationButton.setBorder(null);
+        informationButton.setContentAreaFilled(false);
+        informationButton.setToolTipText("View the current track's information");
+        informationButton.setRolloverEnabled(false);
+        informationButton.setBorderPainted(false);
+        informationButton.addActionListener(this);
 
         nextButton = new JButton(
                 DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
@@ -189,6 +201,7 @@ public class ButtonControlTP extends JPanel
         likeButton.setContentAreaFilled(false);
 
         buttons.add(volumeSlider);
+        buttons.add(informationButton);
         buttons.add(shuffleButton);
         buttons.add(previousButton);
         buttons.add(playButton);
@@ -396,9 +409,10 @@ public class ButtonControlTP extends JPanel
             loopVShuffleDuel(true);
         } else if (e.getSource().equals(shuffleButton)) {
             loopVShuffleDuel(false);
+        } else if (e.getSource().equals(informationButton)) {
+            SwingUtilities.invokeLater(() -> aif.launchAsDialog().run());
         }
-        loopButton.repaint(200);
-        shuffleButton.repaint(200);
+
     }
 
     /**

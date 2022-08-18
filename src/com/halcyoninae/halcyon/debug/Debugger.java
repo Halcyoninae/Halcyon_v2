@@ -67,24 +67,24 @@ public class Debugger {
      * @param am
      * @return The Header Log text
      */
-    public static String getLogText(Class<?> am) {
-        return "[LOG ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
+    public static String getLogText() {
+        return "[LOG ~ MP4J@" + TimeParser.getLogCurrentTime() + "]$ Halcyon > ";
     }
 
     /**
      * @param am
      * @return String Get's the default warning message header.
      */
-    public static String getWarnText(Class<?> am) {
-        return "[WRN ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
+    public static String getWarnText() {
+        return "[WRN ~ MP4J@" + TimeParser.getLogCurrentTime() + "]$ Halcyon > ";
     }
 
     /**
      * @param am
      * @return String Gets the default success/good message header
      */
-    public static String getGoodText(Class<?> am) {
-        return "[SCS ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
+    public static String getGoodText() {
+        return "[SCS ~ MP4J@" + TimeParser.getLogCurrentTime() + "]$ Halcyon > ";
     }
 
     /**
@@ -93,16 +93,16 @@ public class Debugger {
      * @param am
      * @return
      */
-    public static String getProgramText(Class<?> am) {
-        return "[PGM ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
+    public static String getProgramText() {
+        return "[PGM ~ MP4J@" + TimeParser.getLogCurrentTime() + "]$ Halcyon > ";
     }
 
     /**
      * @param am
      * @return String
      */
-    public static String getDefaultInfoText(Class<?> am) {
-        return "[INF ~ MP4J@" + TimeParser.getLogCurrentTime() + "@" + TextParser.strip(am.getSimpleName(), 5) + "] > ";
+    public static String getDefaultInfoText() {
+        return "[INF ~ MP4J@" + TimeParser.getLogCurrentTime() + "]$ Halcyon > ";
     }
 
     /**
@@ -117,9 +117,9 @@ public class Debugger {
             new Thread(() -> {
                 for (T t : o) {
                     if (t != null) {
-                        out.println(getLogText(o.getClass()) + t + " ");
+                        out.println(getLogText() + t + " ");
                     } else {
-                        out.println(getLogText(o.getClass()) + "NULL_CONTENT" + " ");
+                        out.println(getLogText() + "NULL_CONTENT" + " ");
                     }
                 }
                 out.println();
@@ -150,13 +150,13 @@ public class Debugger {
             for (T t : o) {
                 if (t != null) {
                     out.println(
-                            CLIStyles.BOLD.getColor() + getWarnText(t.getClass())
+                            CLIStyles.BOLD.getColor() + getWarnText()
                                     + CLIStyles.RESET.getColor()
                                     + CLIStyles.YELLOW_TXT.getColor() + t
                                     + CLIStyles.RESET.getColor());
                 } else {
                     out.println(CLIStyles.BOLD.getColor()
-                            + getWarnText(NullType.class)
+                            + getWarnText()
                             + CLIStyles.RESET.getColor()
                             + CLIStyles.YELLOW_TXT.getColor() + "NULL_CONTENT"
                             + CLIStyles.RESET.getColor());
@@ -181,13 +181,12 @@ public class Debugger {
             for (T t : o) {
                 if (t != null) {
                     out.println(
-                            CLIStyles.BOLD.getColor() + getGoodText(t.getClass())
+                            CLIStyles.BOLD.getColor() + getGoodText()
                                     + CLIStyles.RESET.getColor()
                                     + CLIStyles.GREEN_TXT.getColor() + t
                                     + CLIStyles.RESET.getColor());
                 } else {
-                    out.println(CLIStyles.BOLD.getColor() + getGoodText(
-                            NullType.class)
+                    out.println(CLIStyles.BOLD.getColor() + getGoodText()
                             + CLIStyles.RESET.getColor()
                             + CLIStyles.GREEN_TXT.getColor() + "NULL_CONTENT"
                             + CLIStyles.RESET.getColor());
@@ -216,9 +215,9 @@ public class Debugger {
         if (!DefaultManager.DEBUG_PROGRAM) {
             for (T t : o) {
                 if (t != null) {
-                    out.println(getLogText(o.getClass()) + t + " ");
+                    out.println(CLIStyles.BOLD.getColor() + getLogText() + CLIStyles.RESET.getColor() + t + " ");
                 } else {
-                    out.println(getLogText(o.getClass()) + "NULL_CONTENT" + " ");
+                    out.println(getLogText() + "NULL_CONTENT" + " ");
                 }
             }
         }
@@ -235,13 +234,12 @@ public class Debugger {
             for (T t : o) {
                 if (t != null) {
                     out.println(
-                            CLIStyles.BOLD.getColor() + getGoodText(t.getClass())
+                            CLIStyles.BOLD.getColor() + getGoodText()
                                     + CLIStyles.RESET.getColor()
                                     + CLIStyles.BLUE_TXT.getColor() + t
                                     + CLIStyles.RESET.getColor());
                 } else {
-                    out.println(CLIStyles.BOLD.getColor() + getGoodText(
-                            NullType.class)
+                    out.println(CLIStyles.BOLD.getColor() + getGoodText()
                             + CLIStyles.RESET.getColor()
                             + CLIStyles.BLUE_TXT.getColor() + "NULL_CONTENT"
                             + CLIStyles.RESET.getColor());
@@ -258,11 +256,10 @@ public class Debugger {
         if (!DefaultManager.DEBUG_PROGRAM) {
             for (TConstr x : t) {
                 if (x != null) {
-                    out.println(CLIStyles.BOLD.getColor() + getProgramText(x.getClass()) + CLIStyles.RESET.getColor()
+                    out.println(CLIStyles.BOLD.getColor() + getProgramText() + CLIStyles.RESET.getColor()
                             + x.toString() + CLIStyles.RESET.getColor());
                 } else {
-                    out.println(CLIStyles.BOLD.getColor() + getProgramText(
-                            NullType.class)
+                    out.println(CLIStyles.BOLD.getColor() + getProgramText()
                             + CLIStyles.RESET.getColor()
                             + CLIStyles.BLUE_TXT.getColor() + "NULL_CONTENT"
                             + CLIStyles.RESET.getColor());

@@ -15,6 +15,8 @@
 
 package com.halcyoninae.tailwind;
 
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
+
 /**
  * Represents a generic tailwind event
  * which contains certain things about the most recent

@@ -13,12 +13,15 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.halcyoninae.tailwind;
+package com.halcyoninae.tailwind.audioinfo;
 
-import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
-import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.halcyon.debug.Debugger;
-import com.halcyoninae.halcyon.utils.DeImage;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -30,12 +33,12 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import com.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
+import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.halcyon.debug.CLIStyles;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.debug.TConstr;
+import com.halcyoninae.halcyon.utils.DeImage;
 
 /**
  * This class holds information regarding an audio
@@ -290,7 +293,7 @@ public class AudioInfo {
 
     /**
      * Returns the value raw from the
-     * tagger.
+     * tagger. Checking is done to avoid any type of exceptions
      *
      * @param key A FieldKey object representing the desired value to seek for.
      * @return The value of the key.
@@ -298,9 +301,15 @@ public class AudioInfo {
     public String getRaw(FieldKey key) {
         try {
             return checkEmptiness(t.getFirst(key)) ? "Unknown" : t.getFirst(key);
-        } catch (UnsupportedOperationException e) {
+        } catch (UnsupportedOperationException | NullPointerException e) {
             return "Unsupported";
         }
+    }
+
+    public AudioInfoDialog launchAsDialog() {
+        Debugger.alert(new TConstr(CLIStyles.MAGENTA_TXT,
+                "Launching current AudioInfo"));
+        return new AudioInfoDialog(this);
     }
 
     @Override

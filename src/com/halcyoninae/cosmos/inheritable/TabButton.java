@@ -99,6 +99,7 @@ public class TabButton extends JPanel {
             g2.setColor(Color.WHITE);
             g2.drawLine(3, 3, getWidth() - 3, getHeight() - 3);
             g2.drawLine(getWidth() - 3, 3, 3, getHeight() - 3);
+            g2.dispose();
         }
 
         @Override

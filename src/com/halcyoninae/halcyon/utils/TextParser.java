@@ -20,6 +20,7 @@ import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 /**
  * A utility class for text manipulation
@@ -44,6 +45,19 @@ public final class TextParser {
      */
     public static String strip(String str, int validLength) {
         return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
+    }
+
+    public static String fulfill(String str, int validLength) {
+        return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..."
+                : str.length() < validLength ? str + getCopies(validLength, " ") : str : "";
+    }
+
+    public static String getCopies(int n, String s) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i <= n; i++) {
+            str.append(s);
+        }
+        return str.toString();
     }
 
     /**
@@ -72,8 +86,9 @@ public final class TextParser {
      */
     public static String getPropertyTextEncodingName() {
         return ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8") ? "UTF-8"
-                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le") ? "UTF-16LE"
-                : "UTF-16BE");
+                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
+                        ? "UTF-16LE"
+                        : "UTF-16BE");
     }
 
     /**
@@ -84,11 +99,12 @@ public final class TextParser {
         return new String(ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16")
                 ? str.getBytes(StandardCharsets.UTF_16)
                 : (ExternalResource.pm
-                .get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8")
-                ? str.getBytes(StandardCharsets.UTF_8)
-                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf16le")
-                ? str.getBytes(StandardCharsets.UTF_16LE)
-                : str.getBytes(StandardCharsets.UTF_16BE))));
+                        .get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE).equals("utf8")
+                                ? str.getBytes(StandardCharsets.UTF_8)
+                                : (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_CHAR_SET_WRITE_TABLE)
+                                        .equals("utf16le")
+                                                ? str.getBytes(StandardCharsets.UTF_16LE)
+                                                : str.getBytes(StandardCharsets.UTF_16BE))));
     }
 
     /**
@@ -97,6 +113,6 @@ public final class TextParser {
     public static Charset getCharset() {
         return TextParser.getPropertyTextEncodingName().equals("UTF-8") ? StandardCharsets.UTF_8
                 : (TextParser.getPropertyTextEncodingName().equals("UTF-16LE") ? StandardCharsets.UTF_16LE
-                : StandardCharsets.UTF_16BE);
+                        : StandardCharsets.UTF_16BE);
     }
 }

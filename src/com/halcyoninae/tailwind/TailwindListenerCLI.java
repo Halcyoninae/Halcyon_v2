@@ -17,6 +17,7 @@ package com.halcyoninae.tailwind;
 
 import com.halcyoninae.halcyon.debug.Debugger;
 import com.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * @author Jack Meng

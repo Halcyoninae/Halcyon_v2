@@ -15,12 +15,14 @@
 
 package com.halcyoninae.cosmos.inheritable;
 
-import com.halcyoninae.halcyon.constant.Global;
-import com.halcyoninae.tailwind.AudioInfo;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import com.halcyoninae.halcyon.constant.Global;
+import com.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 public class LikeButton extends JButton implements ActionListener {
     private final ImageIcon like;
