@@ -16,9 +16,74 @@
 package com.halcyoninae.cosmos.icon;
 
 import java.awt.image.BufferedImage;
+import java.awt.Color;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import com.halcyoninae.cloudspin.CloudSpin;
+import com.halcyoninae.halcyon.constant.ColorManager;
+import com.halcyoninae.halcyon.constant.Manager;
+import com.halcyoninae.halcyon.debug.Debugger;
+import com.halcyoninae.halcyon.filesystem.FileParser;
+import com.halcyoninae.halcyon.utils.ColorTool;
 
 public class IconHandler {
-    public static BufferedImage getAsHue() {
-        return null;
+    public static String RSCLocale = Manager.RSC_FOLDER_NAME;
+    private Color themeColor;
+    private Map<String, BufferedImage> icons;
+    private String[] temp;
+
+    public IconHandler(String[] acceptableRuleSets) {
+        themeColor = ColorManager.MAIN_FG_THEME;
+        this.temp = acceptableRuleSets;
+    }
+
+    public void load() throws IOException{
+        load(RSCLocale, temp);
+        temp = null;
+    }
+
+    private static Map<String, BufferedImage> load(String locale, String[] acceptableRuleSets) throws IOException {
+        Map<String, BufferedImage> map = new HashMap<>();
+        if (!FileParser.checkDirExistence(locale)) {
+            map = null;
+        } else {
+            for (File f : new File(locale).listFiles(new FilenameFilter() {
+                @Override
+                public boolean accept(File current, String name) {
+                    return new File(current, name).isDirectory();
+                }
+            })) {
+                for (File x : f.listFiles()) {
+                    for (String str : acceptableRuleSets) {
+                        if (x.getAbsolutePath().endsWith(str)) {
+                            map.put(x.getName().toLowerCase(), ImageIO.read(x));
+                        }
+                    }
+                }
+            }
+        }
+
+        return map;
+    }
+
+    public void setColorTheme(Color c) {
+        this.themeColor = c;
+    }
+
+    public Color getThemeColor() {
+        return themeColor;
+    }
+
+    public ImageIcon request(String key) {
+        return icons.get(key) == null ? new ImageIcon(CloudSpin.createUnknownIMG())
+                : new ImageIcon(CloudSpin.hueImageUnsafe(icons.get(key), ColorTool.colorBreakDown(themeColor)));
     }
 }

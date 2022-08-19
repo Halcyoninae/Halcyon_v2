@@ -18,6 +18,7 @@ package com.halcyoninae.halcyon.utils;
 import com.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+import com.halcyoninae.halcyon.debug.Debugger;
 
 import javax.swing.*;
 import java.io.File;
@@ -43,7 +44,7 @@ public final class Wrapper {
      */
     public static void async(Runnable runnable) {
         if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
-            ExecutorService threadpool = Executors.newFixedThreadPool(1);
+            ExecutorService threadpool = Executors.newSingleThreadExecutor();
             threadpool.submit(runnable);
         } else {
             CompletableFuture.runAsync(runnable);

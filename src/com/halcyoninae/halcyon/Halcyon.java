@@ -22,6 +22,7 @@ import com.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.halcyoninae.cosmos.components.toppane.TopPane;
 import com.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.halcyoninae.cosmos.icon.IconHandler;
 import com.halcyoninae.cosmos.tasks.ThreadedScheduler;
 import com.halcyoninae.halcyon.connections.discord.Discordo;
 import com.halcyoninae.halcyon.connections.properties.ExternalResource;
@@ -35,6 +36,7 @@ import com.halcyoninae.halcyon.debug.TConstr;
 import com.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.halcyoninae.halcyon.runtime.Program;
 import com.halcyoninae.halcyon.utils.TextParser;
+import com.halcyoninae.halcyon.utils.Wrapper;
 import com.halcyoninae.setup.Setup;
 import com.halcyoninae.setup.SetupListener;
 import com.halcyoninae.setup.SetupStatus;
@@ -42,6 +44,7 @@ import com.halcyoninae.setup.SetupStatus;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -103,7 +106,7 @@ public final class Halcyon {
 
     public static com.halcyoninae.cosmos.Cosmos bgt;
 
-    private static void boot_kick_mainUI() {
+    public static void boot_kick_mainUI() {
         try {
             Cosmos.refreshUI(ColorManager.programTheme);
         } catch (UnsupportedLookAndFeelException e) {
@@ -153,15 +156,14 @@ public final class Halcyon {
             Setup.addSetupListener(new SetupListener() {
                 @Override
                 public void updateStatus(SetupStatus e) {
-                    boot_kick_mainUI();
-
+                    SwingUtilities.invokeLater(Halcyon::boot_kick_mainUI);
                     if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
                         Debugger.alert(new TConstr(CLIStyles.CYAN_TXT, "Loading the almighty Discord RPC ;3"));
                         Discordo dp = new Discordo();
                         Global.ifp.addInfoViewUpdateListener(dp);
                         dp.start();
                     } else {
-                        Debugger.warn("Amogus");
+                        Debugger.warn("Not starting the Discord RPC :3 okie doke!");
                     }
                 }
             });
@@ -189,16 +191,23 @@ public final class Halcyon {
             e.printStackTrace();
         }
         try {
+            IconHandler ico = new IconHandler(new String[] { "png" });
+
+            Wrapper.async(() -> {
+                try {
+                    ico.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
             ExternalResource.checkResourceFolder(
                     ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 
             for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
                 ExternalResource.createFolder(str);
             }
+            Wrapper.async(ExternalResource.pm::checkAllPropertiesExistence);
 
-            ExternalResource.pm.checkAllPropertiesExistence();
-
-            Debugger.good("Loading encoding as: " + TextParser.getPropertyTextEncodingName());
             new ThreadedScheduler();
 
             if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {

@@ -24,6 +24,7 @@ import java.awt.LinearGradientPaint;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.awt.image.WritableRaster;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -61,6 +62,7 @@ public final class CloudSpin {
      *
      * @param img  The original image.
      * @param tone The tone of the color to shift to.
+     * @deprecated Not used and defunct AF
      */
     public static void colorTone(BufferedImage img, Color tone) {
         for (int x = 0; x < img.getWidth(); x++) {
@@ -69,7 +71,6 @@ public final class CloudSpin {
             }
         }
     }
-
 
     /**
      * @param img
@@ -94,7 +95,6 @@ public final class CloudSpin {
         return maskedImage;
     }
 
-
     /**
      * @param src
      * @param startOpacity
@@ -106,14 +106,14 @@ public final class CloudSpin {
      * @return BufferedImage
      */
     public static BufferedImage createGradient(BufferedImage src, int startOpacity, int endOpacity, int startX,
-                                               int startY, int endX, int endY) {
+            int startY, int endX, int endY) {
         BufferedImage alphamask = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = alphamask.createGraphics();
         LinearGradientPaint lgp = new LinearGradientPaint(
                 new Point(startX, startY),
                 new Point(endX, endY),
-                new float[]{0.0f, 1.0f},
-                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+                new float[] { 0.0f, 1.0f },
+                new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
         g2d.setPaint(lgp);
         g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
         g2d.dispose();
@@ -165,7 +165,54 @@ public final class CloudSpin {
     }
 
     /**
-     * 
+     * Applies a specific hue upon the image.
+     * This method tries to preserve the pixel's original Alpha, however
+     * depending on the given hue, this is not guranteed.
+     *
+     * This method will not return anything, use the same object as you passed in
+     * by reference.
+     *
+     * This method will perform bound checks upon the hue and will only take
+     * the first 3 elements
+     *
+     * @author Jack Meng
+     * @since 3.3
+     * @param image A desired image to alter (java.awt.image.BufferedImage)
+     * @param hue   A Color to shift the pixels to (int[]). Where hue[0] is RED,
+     *              hue[1] is GREEN, and hue[2] is BLUE
+     */
+    public static void hueImage(BufferedImage image, int[] color) {
+        image.setAccelerationPriority(1);
+        WritableRaster raster = image.getRaster();
+        for (int i = 0; i < raster.getWidth(); i++) {
+            for (int j = 0; j < raster.getHeight(); j++) {
+                for (int d = 0; d < 3; d++) {
+                    raster.setSample(i, j, d, color[d]);
+                }
+            }
+        }
+    }
+
+    public static BufferedImage hueImageUnsafe(BufferedImage img, int[] color) {
+        hueImage(img, color);
+        return img;
+    }
+
+    public static BufferedImage createUnknownIMG() {
+        BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = img.createGraphics();
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0, 0, 16, 16);
+        g2.fillRect(16, 16, 16, 16);
+        g2.setColor(Color.MAGENTA);
+        g2.fillRect(0, 16, 16, 16);
+        g2.fillRect(16, 0, 16, 16);
+        g2.dispose();
+        return img;
+    }
+
+    /**
+     *
      * @param viewport
      * @param src
      * @return

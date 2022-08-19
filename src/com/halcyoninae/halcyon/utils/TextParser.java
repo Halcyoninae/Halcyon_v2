@@ -20,6 +20,7 @@ import com.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**

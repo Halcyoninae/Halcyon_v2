@@ -63,6 +63,10 @@ public final class ColorTool {
         return new Color(r, g, b, a);
     }
 
+    public static int[] colorBreakDown(Color c) {
+        return new int[] { c.getRed(), c.getGreen(), c.getBlue() };
+    }
+
     public static Color getNullColor() {
         return new Color(0, 0, 0, 0);
     }
