@@ -1,5 +1,5 @@
 @rem Copyright: (C) 2022 MP4J Jack Meng
-@rem Halcyon MP4J is music-playing software.
+@rem Halcyon MP4J is a music player designed openly.
 @rem This program is free software; you can redistribute it and/or
 @rem modify it under the terms of the GNU General Public License
 @rem as published by the Free Software Foundation; either version 2

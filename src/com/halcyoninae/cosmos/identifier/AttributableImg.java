@@ -1,6 +1,6 @@
 /*
  *  Copyright: (C) 2022 MP4J Jack Meng
- * Halcyon MP4J is a music player designed openly.
+ * Halcyon MP4J is a music player designed openly..
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
@@ -13,12 +13,24 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * This package represents the Tailwind Audio Framework
- * used by the GUI player.
- * This is not independent from the main program.
- *
- * @author Jack Meng
- * @since 3.1
- */
-package com.halcyoninae.tailwind;
+package com.halcyoninae.cosmos.identifier;
+
+import java.awt.image.*;
+
+public class AttributableImg extends BufferedImage {
+    private String attributableTab;
+
+    public AttributableImg(int width, int height, int imageType, String attributableTag) {
+        super(width, height, imageType);
+        this.attributableTab = attributableTag;
+    }
+
+    public String getAttribute() {
+        return attributableTab;
+    }
+
+    public void setAttribute(String str) {
+        this.attributableTab = str;
+    }
+
+}
