@@ -30,7 +30,6 @@ import javax.swing.ImageIcon;
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.filesystem.FileParser;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 
@@ -64,7 +63,7 @@ public class IconHandler {
                 for (File x : f.listFiles()) {
                     for (String str : acceptableRuleSets) {
                         if (x.getAbsolutePath().endsWith(str)) {
-                            map.put(x.getName().toLowerCase(), ImageIO.read(x));
+                            map.put(x.getName(), ImageIO.read(x));
                         }
                     }
                 }

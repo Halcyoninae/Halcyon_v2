@@ -43,20 +43,22 @@ public final class PingFileView implements Runnable {
     @Override
     public void run() {
         if (worker == null) {
-            worker = new Thread(() -> {
-                while (true) {
-                    bp.mastRevalidate();
-                    Program.cacher.pingLikedTracks();
-                    Program.cacher.pingSavedPlaylists();
-                    new Thread(Program.cacher::forceSaveQuiet).start();
-                    try {
-                        Thread.sleep(ConcurrentTiming.MAX_TLE);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            worker.start();
+            /*
+             * worker = new Thread(() -> {
+             * while (true) {
+             * bp.mastRevalidate();
+             * Program.cacher.pingLikedTracks();
+             * Program.cacher.pingSavedPlaylists();
+             * Program.cacher.forceSaveQuiet();
+             * try {
+             * Thread.sleep(ConcurrentTiming.MAX_TLE);
+             * } catch (InterruptedException e) {
+             * e.printStackTrace();
+             * }
+             * }
+             * });
+             * worker.start();
+             */
         }
     }
 

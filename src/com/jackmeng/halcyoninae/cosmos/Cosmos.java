@@ -73,7 +73,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
         container.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
         container.setMinimumSize(container.getPreferredSize());
-        container.getContentPane().add(mainPane);
+        container.setContentPane(mainPane);
         container.addWindowListener(new InstantClose());
     }
 

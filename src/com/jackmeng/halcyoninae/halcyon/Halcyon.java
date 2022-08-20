@@ -37,7 +37,6 @@ import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
-import com.jackmeng.halcyoninae.halcyon.utils.TextParser;
 import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.setup.Setup;
 import com.jackmeng.halcyoninae.setup.SetupListener;
@@ -194,20 +193,19 @@ public final class Halcyon {
         try {
             IconHandler ico = new IconHandler(new String[] { "png" });
 
-            Wrapper.async(() -> {
-                try {
-                    ico.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
+            try {
+                ico.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             ExternalResource.checkResourceFolder(
                     ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 
             for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
                 ExternalResource.createFolder(str);
             }
-            Wrapper.async(ExternalResource.pm::checkAllPropertiesExistence);
+            ExternalResource.pm.checkAllPropertiesExistence();
 
             new ThreadedScheduler();
 

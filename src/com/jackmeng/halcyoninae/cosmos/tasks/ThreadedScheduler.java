@@ -93,7 +93,7 @@ public class ThreadedScheduler {
         };
 
         for (Runnable t : tasks) {
-            new Thread(t).start();
+            t.run();
         }
 
     }

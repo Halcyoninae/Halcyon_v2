@@ -164,6 +164,20 @@ public final class CloudSpin {
         return cropped;
     }
 
+    public static void grabCropSafe(BufferedImage target, Rectangle w) {
+        int width = 0, height = 0;
+        if (w.getWidth() > target.getWidth() && w.getHeight() > target.getHeight()) {
+            return;
+        } else {
+            width = (int) w.getWidth();
+            height = (int) w.getHeight();
+        }
+        Graphics2D g = target.createGraphics();
+        g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(), (int) (w.getX() + w.getWidth()),
+                (int) (w.getY() + w.getHeight()), null);
+        g.dispose();
+    }
+
     /**
      * Applies a specific hue upon the image.
      * This method tries to preserve the pixel's original Alpha, however

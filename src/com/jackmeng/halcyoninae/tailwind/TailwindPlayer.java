@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -391,7 +392,7 @@ public class TailwindPlayer implements Audio, Runnable {
         if (playing || paused) {
             stop();
         }
-        worker = Executors.newSingleThreadExecutor();
+        worker = Executors.newFixedThreadPool(2);
         worker.execute(this);
         playing = true;
         events.dispatchStatusEvent(TailwindStatus.PLAYING);
@@ -572,9 +573,6 @@ public class TailwindPlayer implements Audio, Runnable {
                     try {
                         if (isOpen()) {
                             while (playing && !paused && isOpen() && (i = ais.read(buffer)) != -1) {
-                                if (paused || !playing || !isOpen()) {
-                                    break;
-                                }
                                 line.write(buffer, 0, i);
                             }
                         }
@@ -582,6 +580,7 @@ public class TailwindPlayer implements Audio, Runnable {
                             reset();
                             playing = false;
                             worker.shutdown();
+                            worker.awaitTermination(75L, TimeUnit.MILLISECONDS);
                             events.dispatchStatusEvent(TailwindStatus.END);
                         }
                     } catch (Exception e) {

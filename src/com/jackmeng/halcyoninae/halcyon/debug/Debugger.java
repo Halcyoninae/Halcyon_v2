@@ -15,10 +15,8 @@
 
 package com.jackmeng.halcyoninae.halcyon.debug;
 
-import javax.lang.model.type.NullType;
 
 import com.jackmeng.halcyoninae.halcyon.DefaultManager;
-import com.jackmeng.halcyoninae.halcyon.utils.TextParser;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 
 import java.io.PrintStream;
@@ -115,7 +113,6 @@ public class Debugger {
     @SafeVarargs
     public static <T> void log(T... o) {
         if (!DISABLE_DEBUGGER) {
-            new Thread(() -> {
                 for (T t : o) {
                     if (t != null) {
                         out.println(getLogText() + t + " ");
@@ -124,7 +121,6 @@ public class Debugger {
                     }
                 }
                 out.println();
-            }).start();
         } else {
             String[] s = new String[o.length];
             int i = 0;

@@ -20,7 +20,6 @@ import javax.swing.*;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
 import java.io.File;
 import java.util.Arrays;
@@ -44,12 +43,7 @@ public final class Wrapper {
      * @param runnable The runnable to be launched
      */
     public static void async(Runnable runnable) {
-        if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
-            ExecutorService threadpool = Executors.newSingleThreadExecutor();
-            threadpool.submit(runnable);
-        } else {
-            CompletableFuture.runAsync(runnable);
-        }
+        new Thread(runnable).start();
     }
 
     public static void sort(TabTree tree) {
