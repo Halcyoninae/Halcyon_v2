@@ -15,11 +15,11 @@
 
 package com.jackmeng.halcyoninae.halcyon.constant;
 
-import java.awt.*;
-
 import com.jackmeng.halcyoninae.cosmos.theme.Theme;
 import com.jackmeng.halcyoninae.cosmos.theme.ThemeBundles;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+
+import java.awt.*;
 
 /**
  * This interface holds constants for any color values that

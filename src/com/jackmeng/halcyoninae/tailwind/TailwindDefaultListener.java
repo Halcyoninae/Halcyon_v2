@@ -22,13 +22,8 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @author Jack Meng
  * @since 3.2
  */
-public class TailwindDefaultListener
+public record TailwindDefaultListener(TailwindPlayer player)
         implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
-    private final TailwindPlayer player;
-
-    public TailwindDefaultListener(TailwindPlayer player) {
-        this.player = player;
-    }
 
     /**
      * @param status

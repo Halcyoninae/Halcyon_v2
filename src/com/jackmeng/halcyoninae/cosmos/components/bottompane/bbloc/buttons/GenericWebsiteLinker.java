@@ -15,12 +15,11 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

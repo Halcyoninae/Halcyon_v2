@@ -15,12 +15,12 @@
 
 package com.jackmeng.halcyoninae.cosmos.events;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
+
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /**
  * An event handler to handle any events

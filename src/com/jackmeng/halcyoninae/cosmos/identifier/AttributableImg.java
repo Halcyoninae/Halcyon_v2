@@ -15,7 +15,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.identifier;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
 
 public class AttributableImg extends BufferedImage {
     private String attributableTab;

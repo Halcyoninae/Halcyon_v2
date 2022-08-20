@@ -15,13 +15,12 @@
 
 package com.jackmeng.halcyoninae.halcyon.cacher;
 
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -74,7 +73,7 @@ public class Cacher {
                 content.add(e.getTextContent());
             }
         }
-        return content.toArray(new String[content.size()]);
+        return content.toArray(new String[0]);
     }
 
 

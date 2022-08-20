@@ -15,12 +15,6 @@
 
 package com.jackmeng.halcyoninae.tailwind.wrapper;
 
-import java.io.File;
-
-import javax.sound.sampled.Control;
-import javax.sound.sampled.FloatControl;
-import javax.swing.SwingUtilities;
-
 import com.jackmeng.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
@@ -28,6 +22,11 @@ import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindPlayer;
 import com.jackmeng.halcyoninae.tailwind.TailwindPlaylist;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+
+import javax.sound.sampled.Control;
+import javax.sound.sampled.FloatControl;
+import javax.swing.*;
+import java.io.File;
 
 /**
  * This simplification is due to some of the methods not being to be needed and
@@ -45,7 +44,6 @@ import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 public class Player {
     private TailwindPlaylist audio;
     private String currentAbsolutePath = "";
-    private float lastGain = 0.0F;
 
     /**
      * Constructs a player with a blank mp3 file
@@ -105,7 +103,7 @@ public class Player {
      */
     public void setVolume(float percent) {
         audio.setGain(percent);
-        lastGain = ((FloatControl) audio.getControls().get(TailwindPlayer.MASTER_GAIN_STR)).getValue();
+        float lastGain = ((FloatControl) audio.getControls().get(TailwindPlayer.MASTER_GAIN_STR)).getValue();
     }
 
     /**

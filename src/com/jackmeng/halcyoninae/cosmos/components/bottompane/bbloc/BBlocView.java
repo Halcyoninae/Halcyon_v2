@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

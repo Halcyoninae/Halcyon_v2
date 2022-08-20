@@ -1,11 +1,10 @@
 package com.jackmeng.halcyoninae.cosmos.components.info.layout;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.InformationTab;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

@@ -15,13 +15,12 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.toppane;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

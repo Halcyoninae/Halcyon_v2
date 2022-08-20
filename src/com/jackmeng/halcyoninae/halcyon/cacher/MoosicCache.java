@@ -15,15 +15,14 @@
 
 package com.jackmeng.halcyoninae.halcyon.cacher;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-
 import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.util.*;
 
@@ -56,7 +55,7 @@ public class MoosicCache {
 
     public void init() {
         cacher = new Cacher(new File(MOOSIC_DEFAULT_LOCALE));
-        /**
+        /*
          * If the desired file for the configuration is not found, we will
          * target a default setting.
          *
@@ -81,7 +80,7 @@ public class MoosicCache {
             savedPlayLists = new ArrayList<>();
             likedTracks = new HashSet<>();
         } else {
-            /**
+            /*
              * We try to look up the data from the configuration file if the previous
              * conditions
              * are not met, meaning:

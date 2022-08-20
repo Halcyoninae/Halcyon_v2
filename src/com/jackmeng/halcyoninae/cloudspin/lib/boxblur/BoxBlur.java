@@ -15,13 +15,13 @@
 
 package com.jackmeng.halcyoninae.cloudspin.lib.boxblur;
 
+import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
+import com.jackmeng.halcyoninae.cloudspin.lib.Blur;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
-
-import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
-import com.jackmeng.halcyoninae.cloudspin.lib.Blur;
 
 /**
  * @author Jack Meng
@@ -67,13 +67,12 @@ public class BoxBlur implements Blur {
             }
         } else if (otherParams[0].equals(SpeedStyle.SPEED)) {
             int radius = (int) otherParams[1];
-            int size = radius;
-            float weight = size * size / radius;
-            float[] kernel = new float[size * size];
-            for (int i = 0; i < size * size; i++) {
+            float weight = radius * radius / ((float) radius);
+            float[] kernel = new float[radius * radius];
+            for (int i = 0; i < radius * radius; i++) {
                 kernel[i] = weight;
             }
-            Kernel k = new Kernel(size, size, kernel);
+            Kernel k = new Kernel(radius, radius, kernel);
             // fill the edges with blurring as well
             RenderingHints r = new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
             r.add(new RenderingHints(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR));

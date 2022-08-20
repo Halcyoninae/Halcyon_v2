@@ -16,7 +16,6 @@
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
-import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 
 /**
  * A class designed to constantly ping

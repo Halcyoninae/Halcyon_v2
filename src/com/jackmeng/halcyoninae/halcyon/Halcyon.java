@@ -15,8 +15,6 @@
 
 package com.jackmeng.halcyoninae.halcyon;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.Cosmos;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
@@ -37,11 +35,11 @@ import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
-import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.setup.Setup;
 import com.jackmeng.halcyoninae.setup.SetupListener;
 import com.jackmeng.halcyoninae.setup.SetupStatus;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -153,18 +151,15 @@ public final class Halcyon {
 
     private static void run() {
         try {
-            Setup.addSetupListener(new SetupListener() {
-                @Override
-                public void updateStatus(SetupStatus e) {
-                    SwingUtilities.invokeLater(Halcyon::boot_kick_mainUI);
-                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
-                        Debugger.alert(new TConstr(CLIStyles.CYAN_TXT, "Loading the almighty Discord RPC ;3"));
-                        Discordo dp = new Discordo();
-                        Global.ifp.addInfoViewUpdateListener(dp);
-                        dp.start();
-                    } else {
-                        Debugger.warn("Not starting the Discord RPC :3 okie doke!");
-                    }
+            Setup.addSetupListener(e -> {
+                SwingUtilities.invokeLater(Halcyon::boot_kick_mainUI);
+                if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_USE_DISCORD_RPC).equals("true")) {
+                    Debugger.alert(new TConstr(CLIStyles.CYAN_TXT, "Loading the almighty Discord RPC ;3"));
+                    Discordo dp = new Discordo();
+                    Global.ifp.addInfoViewUpdateListener(dp);
+                    dp.start();
+                } else {
+                    Debugger.warn("Not starting the Discord RPC :3 okie doke!");
                 }
             });
             Setup.main((String[]) null);
@@ -212,15 +207,12 @@ public final class Halcyon {
             if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
                 new ConfirmWindow(
                         "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
-                        new ConfirmWindow.ConfirmationListener() {
-                            @Override
-                            public void onStatus(boolean status) {
-                                if (status) {
-                                    run();
-                                } else
-                                    System.exit(0);
-                            }
-                        }).run();
+                    status -> {
+                        if (status) {
+                            run();
+                        } else
+                            System.exit(0);
+                    }).run();
             } else {
                 run();
             }

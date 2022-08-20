@@ -15,12 +15,11 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.info.layout;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.InformationTab;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;

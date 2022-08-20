@@ -15,14 +15,13 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.jackmeng.halcyoninae.cosmos.inheritable.TabButton;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -125,16 +124,13 @@ public class BottomPane extends JTabbedPane {
         setTabComponentAt(getTabCount() - 1, button);
         setToolTipTextAt(getTabCount() - 1, folder);
         tabsMap.put(folder, getTabCount() - 1);
-        button.setListener(new TabButton.RemoveTabListener() {
-            @Override
-            public void onRemoveTab() {
-                Debugger.warn("Removing tab > " + folder);
-                int i = tabsMap.get(folder);
-                Program.cacher.getSavedPlaylists().remove(folder);
-                tabsMap.remove(folder);
-                tabs.remove(i);
-                Program.cacher.pingSavedPlaylists();
-            }
+        button.setListener(() -> {
+            Debugger.warn("Removing tab > " + folder);
+            int i = tabsMap.get(folder);
+            Program.cacher.getSavedPlaylists().remove(folder);
+            tabsMap.remove(folder);
+            tabs.remove(i);
+            Program.cacher.pingSavedPlaylists();
         });
         Program.cacher.pingSavedPlaylists();
         this.revalidate();

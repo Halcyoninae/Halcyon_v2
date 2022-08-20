@@ -15,11 +15,11 @@
 
 package com.jackmeng.halcyoninae.halcyon.utils;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A utility class for text manipulation
@@ -52,11 +52,7 @@ public final class TextParser {
     }
 
     public static String getCopies(int n, String s) {
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i <= n; i++) {
-            str.append(s);
-        }
-        return str.toString();
+        return String.valueOf(s).repeat(Math.max(0, n + 1));
     }
 
     /**

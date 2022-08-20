@@ -15,23 +15,21 @@
 
 package com.jackmeng.halcyoninae.cosmos.dialog;
 
+import com.jackmeng.halcyoninae.halcyon.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.halcyoninae.tailwind.TailwindListener;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.tailwind.TailwindListener;
-import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
-
 import java.awt.*;
 
 public class SlidersDialog extends JFrame implements Runnable, TailwindListener.StatusUpdateListener {
-    private final JTabbedPane pane;
     private int bal = 50, pan = 50;
 
     public SlidersDialog() {
-        pane = new JTabbedPane();
+        JTabbedPane pane = new JTabbedPane();
 
         JPanel basicSlidersPane = new JPanel();
         basicSlidersPane.setLayout(new FlowLayout(FlowLayout.LEADING, 10, 15));
@@ -40,15 +38,12 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
         balanceSlider.setPaintTicks(true);
         balanceSlider.setSnapToTicks(true);
         balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
-        balanceSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (Global.player.getStream().getControls() != null) {
-                    Global.player.getStream().setBalance(balanceSlider.getValue());
-                }
-                balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
-                bal = balanceSlider.getValue();
+        balanceSlider.addChangeListener(e -> {
+            if (Global.player.getStream().getControls() != null) {
+                Global.player.getStream().setBalance(balanceSlider.getValue());
             }
+            balanceSlider.setToolTipText("Balance Slider: " + balanceSlider.getValue());
+            bal = balanceSlider.getValue();
         });
 
         JSlider panSlider = new JSlider(SwingConstants.VERTICAL, 0, 100, pan);
@@ -57,16 +52,13 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
         panSlider.setSnapToTicks(true);
         panSlider.setPaintTicks(true);
         panSlider.setToolTipText("Pan Slider: " + panSlider.getValue());
-        panSlider.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                if (Global.player.getStream().getControls() != null) {
-                    Global.player.getStream().setPan(panSlider.getValue());
-                }
-                panSlider.setToolTipText("Pan Slider: " + panSlider.getValue() + " | "
-                        + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
-                pan = panSlider.getValue();
+        panSlider.addChangeListener(e -> {
+            if (Global.player.getStream().getControls() != null) {
+                Global.player.getStream().setPan(panSlider.getValue());
             }
+            panSlider.setToolTipText("Pan Slider: " + panSlider.getValue() + " | "
+                    + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
+            pan = panSlider.getValue();
         });
 
         basicSlidersPane.add(balanceSlider);

@@ -15,32 +15,17 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
-import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GridLayout;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.OverlayLayout;
-
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
-import com.jackmeng.halcyoninae.halcyon.utils.DeImage.Directional;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * This class holds all of the components to the main
@@ -52,12 +37,8 @@ import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
  */
 public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     private final JPanel bgPanel;
-    private final JPanel fgPanel;
-    private final JPanel topPanel;
-    private final JPanel progressPanel;
     private final JLabel mainLabel;
     private final JLabel artLabel;
-    private final JProgressBar progressBar;
     private transient AudioInfo info;
     private boolean fDrawn = true;
     private transient BufferedImage bg;
@@ -101,7 +82,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         bgPanel.setIgnoreRepaint(true);
         bgPanel.setDoubleBuffered(false);
 
-        topPanel = new JPanel();
+        JPanel topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(getPreferredSize().width, getPreferredSize().height - 15));
         topPanel.setLayout(new GridLayout(1, 2));
         topPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -119,15 +100,15 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         topPanel.add(artLabel);
         topPanel.add(mainLabel);
 
-        progressPanel = new JPanel();
+        JPanel progressPanel = new JPanel();
         progressPanel.setPreferredSize(new Dimension(getPreferredSize().width, 15));
 
-        fgPanel = new JPanel();
+        JPanel fgPanel = new JPanel();
         fgPanel.setPreferredSize(getPreferredSize());
         fgPanel.setLayout(new BorderLayout());
         fgPanel.setOpaque(false);
 
-        progressBar = new JProgressBar();
+        JProgressBar progressBar = new JProgressBar();
         progressBar.setPreferredSize(progressPanel.getPreferredSize());
         progressBar.setMaximum(500);
         progressBar.setMinimum(0);

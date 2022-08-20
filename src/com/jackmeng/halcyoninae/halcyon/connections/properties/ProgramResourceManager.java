@@ -15,11 +15,11 @@
 
 package com.jackmeng.halcyoninae.halcyon.connections.properties;
 
+import com.jackmeng.halcyoninae.halcyon.connections.properties.validators.*;
+
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.jackmeng.halcyoninae.halcyon.connections.properties.validators.*;
 
 /**
  * A constant defined class that holds

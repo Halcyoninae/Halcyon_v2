@@ -15,12 +15,12 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 /**
  * A sort of wrapper for the default TailwindPlayer class.
@@ -56,7 +56,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
             history.add(f);
             this.currentFile = f;
             open(f);
-            if (gain != Float.NaN) {
+            if (!Float.isNaN(gain)) {
                 this.setGain(gain);
             }
             play();
@@ -68,7 +68,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
      */
     public void rawPlay(File f) {
         open(f);
-        if (gain != Float.NaN) {
+        if (!Float.isNaN(gain)) {
             this.setGain(gain);
         }
         play();
@@ -139,7 +139,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
      * @return File
      */
     public File getFromHistory(int i) {
-        return history.get((i > history.size() ? history.size() : i));
+        return history.get((Math.min(i, history.size())));
     }
 
     /**

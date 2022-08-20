@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
@@ -42,7 +41,6 @@ import java.awt.geom.RoundRectangle2D;
  * @since 3.2
  */
 public class MiniPlayer extends JFrame implements Runnable {
-    private final MiniContentPane pane;
     private int pX, pY;
     private transient MiniPlayerListener listener;
 
@@ -52,7 +50,7 @@ public class MiniPlayer extends JFrame implements Runnable {
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setAutoRequestFocus(true);
         setFocusable(true);
-        pane = new MiniContentPane();
+        MiniContentPane pane = new MiniContentPane();
         Global.ifp.addInfoViewUpdateListener(pane);
         setContentPane(pane);
         addComponentListener(new ComponentAdapter() {

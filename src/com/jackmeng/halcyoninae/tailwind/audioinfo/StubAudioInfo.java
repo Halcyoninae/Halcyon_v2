@@ -27,7 +27,6 @@ import java.util.Map;
  */
 public class StubAudioInfo extends AudioInfo {
     private final File f;
-    private Map<String, String> tags;
 
     public StubAudioInfo(File f) {
         this.f = f;
@@ -40,7 +39,7 @@ public class StubAudioInfo extends AudioInfo {
 
     @Override
     public void initTags() {
-        tags = new HashMap<>();
+        Map<String, String> tags = new HashMap<>();
         tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
     }
 }

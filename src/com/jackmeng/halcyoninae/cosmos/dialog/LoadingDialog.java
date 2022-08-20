@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.dialog;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -29,7 +28,6 @@ import java.awt.*;
  * @since 3.1
  */
 public class LoadingDialog extends JFrame {
-    private final JProgressBar bar;
 
     public LoadingDialog(String text, boolean isImportant) {
         setPreferredSize(new Dimension(400, 200));
@@ -46,7 +44,7 @@ public class LoadingDialog extends JFrame {
         JLabel label = new JLabel(text);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(label);
-        bar = new JProgressBar();
+        JProgressBar bar = new JProgressBar();
         bar.setPreferredSize(new Dimension(400, 20));
         bar.setStringPainted(true);
         bar.setString("Loading...");
@@ -64,7 +62,7 @@ public class LoadingDialog extends JFrame {
         this.pack();
         this.setAlwaysOnTop(true);
         this.setVisible(true);
-        new Thread(task::run);
+        new Thread(task);
     }
 
     public void run() {

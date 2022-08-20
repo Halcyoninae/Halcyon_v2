@@ -15,8 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.cosmos.events.InstantClose;
 import com.jackmeng.halcyoninae.cosmos.theme.Theme;
@@ -26,9 +24,10 @@ import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.GUITools;
-import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

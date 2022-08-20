@@ -15,24 +15,19 @@
 
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
-import java.awt.image.BufferedImage;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-
 import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class AudioInfoArtworkDialog extends JFrame implements Runnable {
-    private JPanel drawable;
+    private final JPanel drawable;
 
-    private transient BufferedImage img;
-    private transient AudioInfo info;
+    private final transient BufferedImage img;
+    private final transient AudioInfo info;
 
     public AudioInfoArtworkDialog(AudioInfo info) {
         super("Halcyon ~ Artwork Viewer | 0x0");

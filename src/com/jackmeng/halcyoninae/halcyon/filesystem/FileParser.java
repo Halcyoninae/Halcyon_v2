@@ -15,12 +15,12 @@
 
 package com.jackmeng.halcyoninae.halcyon.filesystem;
 
+import com.jackmeng.halcyoninae.halcyon.runtime.TextBOM;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
-
-import com.jackmeng.halcyoninae.halcyon.runtime.TextBOM;
 
 /**
  * A simply utility that helps

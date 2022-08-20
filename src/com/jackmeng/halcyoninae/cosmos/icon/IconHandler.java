@@ -15,23 +15,22 @@
 
 package com.jackmeng.halcyoninae.cosmos.icon;
 
-import java.awt.image.BufferedImage;
-import java.awt.Color;
-
-import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.filesystem.FileParser;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class IconHandler {
     public static String RSCLocale = Manager.RSC_FOLDER_NAME;
@@ -49,18 +48,13 @@ public class IconHandler {
         temp = null;
     }
 
-    private static Map<String, BufferedImage> load(String locale, String[] acceptableRuleSets) throws IOException {
+    private static void load(String locale, String[] acceptableRuleSets) throws IOException {
         Map<String, BufferedImage> map = new HashMap<>();
         if (!FileParser.checkDirExistence(locale)) {
             map = null;
         } else {
-            for (File f : new File(locale).listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File current, String name) {
-                    return new File(current, name).isDirectory();
-                }
-            })) {
-                for (File x : f.listFiles()) {
+            for (File f : Objects.requireNonNull(new File(locale).listFiles((current, name) -> new File(current, name).isDirectory()))) {
+                for (File x : Objects.requireNonNull(f.listFiles())) {
                     for (String str : acceptableRuleSets) {
                         if (x.getAbsolutePath().endsWith(str)) {
                             map.put(x.getName(), ImageIO.read(x));
@@ -70,7 +64,6 @@ public class IconHandler {
             }
         }
 
-        return map;
     }
 
     public void setColorTheme(Color c) {

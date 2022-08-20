@@ -15,12 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist;
 
-import javax.swing.*;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeCellRenderer;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeSelectionModel;
-
 import com.jackmeng.halcyoninae.cosmos.events.FVRightClick;
 import com.jackmeng.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
@@ -32,6 +26,11 @@ import com.jackmeng.halcyoninae.halcyon.filesystem.VirtualFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.io.File;
 import java.util.List;
@@ -287,12 +286,7 @@ public class FileList extends JScrollPane implements TabTree {
                 for (File f : fileMap.keySet()) {
                     nodes.add(fileMap.get(f));
                 }
-                Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
-                    @Override
-                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
-                        return ((String) o1.getUserObject()).compareTo(((String) o2.getUserObject()));
-                    }
-                });
+                nodes.sort(Comparator.comparing(o -> ((String) o.getUserObject())));
                 for (DefaultMutableTreeNode node : nodes) {
                     root.remove(node);
                     root.add(node);
@@ -303,12 +297,7 @@ public class FileList extends JScrollPane implements TabTree {
                 for (File f : fileMap.keySet()) {
                     nodes.add(fileMap.get(f));
                 }
-                Collections.sort(nodes, new Comparator<DefaultMutableTreeNode>() {
-                    @Override
-                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
-                        return ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject()));
-                    }
-                });
+                nodes.sort((o1, o2) -> ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject())));
                 for (DefaultMutableTreeNode node : nodes) {
                     root.remove(node);
                     root.add(node);

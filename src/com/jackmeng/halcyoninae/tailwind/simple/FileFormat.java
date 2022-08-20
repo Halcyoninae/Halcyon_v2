@@ -26,6 +26,7 @@ package com.jackmeng.halcyoninae.tailwind.simple;
 
 import javax.sound.sampled.AudioFileFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -99,9 +100,7 @@ public enum FileFormat {
         this.writingSupported = writingSupported;
         this.type = type;
 
-        for (String extension : associatedFileExtensions) {
-            this.associatedFileExtensions.add(extension);
-        }
+        Collections.addAll(this.associatedFileExtensions, associatedFileExtensions);
     }
 
     /**

@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyoninae.halcyon.debug;
 
-import java.util.Arrays;
-
 import com.jackmeng.halcyoninae.halcyon.global.TObject;
+
+import java.util.Arrays;
 
 /**
  * Custom Alert Debugger TextConstructor
@@ -29,8 +29,8 @@ import com.jackmeng.halcyoninae.halcyon.global.TObject;
  * @since 3.3
  */
 public class TConstr {
-    private TObject<?>[] payload;
-    private CLIStyles[] start;
+    private final TObject<?>[] payload;
+    private final CLIStyles[] start;
 
     @SafeVarargs
     public <T> TConstr(CLIStyles[] start, T... payload) {

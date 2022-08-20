@@ -51,10 +51,10 @@ public final class BlurHashChild {
      */
     public static double max(double[][] val) {
         double max = 0;
-        for (int i = 0; i < val.length; i++) {
-            for (int j = 0; j < val[i].length; j++) {
-                if (val[i][j] > max) {
-                    max = val[i][j];
+        for (double[] doubles : val) {
+            for (double aDouble : doubles) {
+                if (aDouble > max) {
+                    max = aDouble;
                 }
             }
         }
@@ -123,7 +123,7 @@ public final class BlurHashChild {
         int factorsLength = factors.length;
         char[] hash = new char[4 + 2 * factorsLength];
 
-        long sizeFlag = componentX + componentY * 9l - 10;
+        long sizeFlag = componentX + componentY * 9L - 10;
         base_83.encode(sizeFlag, 1, hash, 0);
 
         double maximumValue;

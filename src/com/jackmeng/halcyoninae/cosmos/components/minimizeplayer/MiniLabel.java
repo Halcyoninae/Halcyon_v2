@@ -64,9 +64,7 @@ public class MiniLabel extends JLabel {
             textproperwidth = fontMetrics.stringWidth(textproper);
         }
 
-        if (ellipsis != null) {
-            ellipsisWidth = fontMetrics.stringWidth(ellipsis);
-        }
+        ellipsisWidth = fontMetrics.stringWidth(ellipsis);
     }
 
     /**

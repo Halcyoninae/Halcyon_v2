@@ -1,8 +1,7 @@
 package com.jackmeng.halcyoninae.cloudspin.lib.hinter;
 
-import java.awt.image.BufferedImage;
-
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public final class GradientImg {
     public static final int TOP = 0;

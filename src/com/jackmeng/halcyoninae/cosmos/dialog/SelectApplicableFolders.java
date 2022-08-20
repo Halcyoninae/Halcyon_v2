@@ -15,12 +15,11 @@
 
 package com.jackmeng.halcyoninae.cosmos.dialog;
 
+import com.jackmeng.halcyoninae.cosmos.inheritable.FSVDefault;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.filechooser.FileView;
-
-import com.jackmeng.halcyoninae.cosmos.inheritable.FSVDefault;
-
 import java.io.File;
 
 /**

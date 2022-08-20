@@ -15,14 +15,13 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.settings;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.settings.tabs.properties.AudioSettings;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

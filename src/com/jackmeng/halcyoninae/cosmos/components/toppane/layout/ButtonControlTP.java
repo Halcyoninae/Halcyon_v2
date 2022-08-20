@@ -15,24 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.toppane.layout;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
 import com.jackmeng.halcyoninae.cosmos.inheritable.LikeButton;
@@ -41,9 +23,18 @@ import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
-import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * This class represents the GUI component collection
@@ -92,9 +83,7 @@ public class ButtonControlTP extends JPanel
     private final LikeButton likeButton;
     private final JSlider progressSlider;
     private final JSlider volumeSlider;
-    private final JPanel sliders;
     private final JPanel buttons;
-    private TimeControlSubTP tsp;
     private transient AudioInfo aif = new AudioInfo();
     private boolean hasPlayed = false;
     /// ButtonControl Config END
@@ -209,7 +198,7 @@ public class ButtonControlTP extends JPanel
         buttons.add(loopButton);
         buttons.add(likeButton);
 
-        sliders = new JPanel();
+        JPanel sliders = new JPanel();
         sliders.setLayout(new BoxLayout(sliders, BoxLayout.Y_AXIS));
         sliders.setPreferredSize(
                 new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
@@ -253,7 +242,7 @@ public class ButtonControlTP extends JPanel
             }
         }).start();
 
-        tsp = new TimeControlSubTP();
+        TimeControlSubTP tsp = new TimeControlSubTP();
 
         sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 2));
         sliders.add(progressSlider);

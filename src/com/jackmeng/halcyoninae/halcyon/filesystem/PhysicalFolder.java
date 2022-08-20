@@ -114,6 +114,7 @@ public class PhysicalFolder {
      */
     public File[] getFiles(String... rules) {
         File[] f = new File(absPath).listFiles();
+        assert f != null;
         File[] s = new File[f.length];
         for (int i = 0; i < f.length; i++) {
             if (f[i].isFile()) {

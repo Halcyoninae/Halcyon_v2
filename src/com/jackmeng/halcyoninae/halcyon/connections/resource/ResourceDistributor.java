@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.halcyon.connections.resource;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.MalformedURLException;

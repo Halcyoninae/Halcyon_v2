@@ -15,6 +15,11 @@
 
 package com.jackmeng.halcyoninae.halcyon.runtime;
 
+import com.jackmeng.halcyoninae.halcyon.cacher.MoosicCache;
+import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,11 +29,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import com.jackmeng.halcyoninae.halcyon.cacher.MoosicCache;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 
 /**
  * Provides a concurrent logging system for the program
@@ -121,7 +121,7 @@ public class Program {
                     list.add(f);
                 }
             }
-            return list.toArray(new File[list.size()]);
+            return list.toArray(new File[0]);
         }
     }
 
@@ -141,7 +141,7 @@ public class Program {
                     list.add(new PhysicalFolder(f.getAbsolutePath()));
                 }
             }
-            return list.toArray(new PhysicalFolder[list.size()]);
+            return list.toArray(new PhysicalFolder[0]);
         }
     }
 

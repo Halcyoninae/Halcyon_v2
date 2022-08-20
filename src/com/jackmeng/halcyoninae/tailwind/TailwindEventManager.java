@@ -15,11 +15,11 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A global scoped targeted towards managing multiple

@@ -23,5 +23,5 @@ package com.jackmeng.halcyoninae.cosmos.components.waveform;
  * @since 3.3
  */
 enum WaveFormStyle {
-    LINE_GRAPH, BAR_GRAPH;
+    LINE_GRAPH, BAR_GRAPH
 }

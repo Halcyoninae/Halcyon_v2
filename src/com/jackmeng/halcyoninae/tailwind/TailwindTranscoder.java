@@ -76,9 +76,9 @@ public final class TailwindTranscoder implements Transcoder {
                 }
             }
         }
-        long scale = (long) Math.pow(2l, bps - 1d);
+        long scale = (long) Math.pow(2L, bps - 1d);
         if (format.getEncoding() == AudioFormat.Encoding.PCM_SIGNED) {
-            long shift = 64l - bps;
+            long shift = 64L - bps;
             for (int i = 0; i < transfer.length; i++)
                 transfer[i] = ((transfer[i] << shift) >> shift);
         } else {

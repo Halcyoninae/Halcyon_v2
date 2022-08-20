@@ -15,10 +15,9 @@
 
 package com.jackmeng.halcyoninae.cosmos.inheritable;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

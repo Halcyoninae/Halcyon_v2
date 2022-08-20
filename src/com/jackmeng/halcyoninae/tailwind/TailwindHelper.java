@@ -15,21 +15,19 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import java.io.File;
-import java.net.URL;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-
 import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 import com.jackmeng.halcyoninae.tailwind.vorbis.VorbisIn;
-
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
 import de.jarnbjo.vorbis.VorbisStream;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import java.io.File;
+import java.net.URL;
 
 /**
  * @author Jack Meng

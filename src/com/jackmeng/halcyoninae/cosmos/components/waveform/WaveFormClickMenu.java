@@ -15,10 +15,9 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.waveform;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 
+import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

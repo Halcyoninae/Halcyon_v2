@@ -15,10 +15,9 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.settings;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.connections.properties.Property;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**

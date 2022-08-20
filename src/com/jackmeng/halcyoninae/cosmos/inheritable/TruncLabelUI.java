@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.inheritable;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicLabelUI;
-
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicLabelUI;
 import java.awt.*;
 
 public class TruncLabelUI extends BasicLabelUI {

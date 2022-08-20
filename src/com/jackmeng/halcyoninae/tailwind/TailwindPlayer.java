@@ -15,6 +15,15 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
+import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
+
+import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
@@ -23,26 +32,6 @@ import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.BooleanControl;
-import javax.sound.sampled.Control;
-import javax.sound.sampled.DataLine;
-import javax.sound.sampled.EnumControl;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.Line;
-import javax.sound.sampled.LineListener;
-import javax.sound.sampled.SourceDataLine;
-
-import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
-import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 
 /**
  * The official adapted audio framework for the Halcyon Program.
@@ -152,7 +141,7 @@ public class TailwindPlayer implements Audio, Runnable {
             if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
                 if (this.microsecondLength < 0) {
                     byte[] buffer = new byte[MAGIC_NUMBER];
-                    int readBytes = 0;
+                    int readBytes;
 
                     while ((readBytes = this.ais.read(buffer)) != -1) {
                         this.frameLength += readBytes;
@@ -161,6 +150,7 @@ public class TailwindPlayer implements Audio, Runnable {
                     this.frameLength /= this.ais.getFormat().getFrameSize();
                     this.ais.close();
                     this.ais = TailwindHelper.getAudioIS(this.resource.toURI().toURL());
+                    assert this.ais != null;
                     this.microsecondLength = (long) (1000000 *
                             (frameLength / this.ais.getFormat().getFrameRate()));
                 }

@@ -1,10 +1,10 @@
 package com.jackmeng.halcyoninae.cloudspin.lib.gradient;
 
+import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
-import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
 
 /**
  * A gradient generator meant to generate some interesting
@@ -43,20 +43,18 @@ public final class GradientGenerator {
         // number, maybe...
         int x2 = r.nextInt(requiredDim.width);
         if (lock) {
-            stupid:
             while (x2 == x) {
                 x2 = r.nextInt(requiredDim.width);
                 if (x2 != x)
-                    break stupid;
+                    break;
             }
         }
         int y2 = r.nextInt(requiredDim.height);
         if (lock) {
-            stupid2:
             while (y2 == y) {
                 y2 = r.nextInt(requiredDim.height);
                 if (y2 != y)
-                    break stupid2;
+                    break;
             }
         }
         GradientPaint gp = new GradientPaint(x, y, yi, x2, y2, er, true);

@@ -15,19 +15,10 @@
 
 package com.jackmeng.halcyoninae.cloudspin;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.LinearGradientPaint;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 /**
  * This class is used for general graphical manipulation.
@@ -192,7 +183,7 @@ public final class CloudSpin {
      * @author Jack Meng
      * @since 3.3
      * @param image A desired image to alter (java.awt.image.BufferedImage)
-     * @param hue   A Color to shift the pixels to (int[]). Where hue[0] is RED,
+     * @param color   A Color to shift the pixels to (int[]). Where hue[0] is RED,
      *              hue[1] is GREEN, and hue[2] is BLUE
      */
     public static void hueImage(BufferedImage image, int[] color) {

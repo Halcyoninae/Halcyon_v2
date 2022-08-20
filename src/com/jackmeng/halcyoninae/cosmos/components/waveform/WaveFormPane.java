@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.waveform;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 

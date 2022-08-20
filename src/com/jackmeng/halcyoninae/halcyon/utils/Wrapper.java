@@ -15,16 +15,13 @@
 
 package com.jackmeng.halcyoninae.halcyon.utils;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 
+import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -48,12 +45,8 @@ public final class Wrapper {
 
     public static void sort(TabTree tree) {
         File[] f = new File(tree.getPath()).listFiles();
-        Arrays.sort(f, new Comparator<File>() {
-            @Override
-            public int compare(File o1, File o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+        assert f != null;
+        Arrays.sort(f, Comparator.comparing(File::getName));
     }
 
 

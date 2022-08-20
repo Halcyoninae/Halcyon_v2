@@ -15,11 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.special;
 
-import javax.swing.*;
-import javax.swing.plaf.LayerUI;
-
 import com.jackmeng.halcyoninae.cloudspin.CloudSpinFilters;
 
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;

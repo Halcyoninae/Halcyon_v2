@@ -15,15 +15,13 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer;
-import com.jackmeng.halcyoninae.cosmos.components.minimizeplayer.MiniPlayerListener;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -44,12 +42,7 @@ public class MinimizePlayer extends JButton implements BBlocButton {
         setBackground(null);
         addActionListener(this);
         player = new MiniPlayer();
-        player.setMiniPlayerListener(new MiniPlayerListener() {
-            @Override
-            public void closingWindow() {
-                pressed = false;
-            }
-        });
+        player.setMiniPlayerListener(() -> pressed = false);
     }
 
     /**

@@ -15,15 +15,14 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-
 import com.jackmeng.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.filesystem.VirtualFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,13 +46,10 @@ import java.util.List;
  * @since 3.1
  */
 public class LikeList extends FileList {
-    private static final RightClickHideItemListener itemListener = new RightClickHideItemListener() {
-        @Override
-        public void onRemove(String content) {
-            Global.ll.unset(content);
-            Program.cacher.pingLikedTracks();
+    private static final RightClickHideItemListener itemListener = content -> {
+        Global.ll.unset(content);
+        Program.cacher.pingLikedTracks();
 
-        }
     };
     private final transient VirtualFolder folder;
 

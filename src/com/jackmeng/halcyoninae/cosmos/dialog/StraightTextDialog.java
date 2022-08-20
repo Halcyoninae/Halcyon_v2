@@ -15,17 +15,14 @@
 
 package com.jackmeng.halcyoninae.cosmos.dialog;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class StraightTextDialog extends JFrame implements Runnable {
-    private final JScrollPane pane;
-    private final JEditorPane text;
 
     public StraightTextDialog(String content) {
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
@@ -33,11 +30,11 @@ public class StraightTextDialog extends JFrame implements Runnable {
         setPreferredSize(new Dimension(250, 100));
         setAutoRequestFocus(true);
 
-        text = new JEditorPane("text/html", content);
+        JEditorPane text = new JEditorPane("text/html", content);
         text.setEditable(false);
         text.setFocusable(false);
 
-        pane = new JScrollPane(text);
+        JScrollPane pane = new JScrollPane(text);
         pane.setPreferredSize(new Dimension(250, 100));
         pane.getViewport().setPreferredSize(new Dimension(250, 100));
 

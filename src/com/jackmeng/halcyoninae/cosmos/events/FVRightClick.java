@@ -15,18 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos.events;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.File;
-
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JTree;
-import javax.swing.SwingUtilities;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreePath;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree.TabTreeSortMethod;
 import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
@@ -38,6 +26,14 @@ import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfoDialog;
+
+import javax.swing.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * This class handles the right click event for any JTree instance.
@@ -229,7 +225,7 @@ public class FVRightClick extends MouseAdapter {
                 if (path != null) {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                     if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                        File f = null;
+                        File f;
                         if (tree.isVirtual()) {
                             f = new File(node.toString());
                         } else {

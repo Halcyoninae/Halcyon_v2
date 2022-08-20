@@ -1,10 +1,9 @@
 package com.jackmeng.halcyoninae.cosmos.components.info.layout;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.InformationTab;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -41,17 +40,16 @@ public class SystemTab extends JScrollPane implements InformationTab {
      */
     private String getProperties() {
         StringBuilder sb = new StringBuilder();
-        sb.append("JAVA_HOME path: " + System.getProperty("java.home") + "<br>");
-        sb.append("Java Vendor: " + System.getProperty("java.vendor") + "<br");
-        sb.append("Operating System: " + System.getProperty("os.name") + " " + System.getProperty("os.arch") + " "
-                + System.getProperty("os.version") + "<br>");
-        sb.append("Operating User: " + System.getProperty("user.name") + "<br>");
-        sb.append("Avaliable Processors: " + Runtime.getRuntime().availableProcessors() + "<br>");
-        sb.append("Runtime Version: " + Runtime.version() + "<br>");
-        sb.append("Free Memory: " + Runtime.getRuntime().freeMemory() + "<br>");
-        sb.append("Max Memory: " + Runtime.getRuntime().maxMemory() + "<br>");
-        sb.append("Total Memory: " + Runtime.getRuntime().totalMemory() + "<br>");
-        sb.append("System Env: " + System.getenv().toString() + "<br>");
+        sb.append("JAVA_HOME path: ").append(System.getProperty("java.home")).append("<br>");
+        sb.append("Java Vendor: ").append(System.getProperty("java.vendor")).append("<br");
+        sb.append("Operating System: ").append(System.getProperty("os.name")).append(" ").append(System.getProperty("os.arch")).append(" ").append(System.getProperty("os.version")).append("<br>");
+        sb.append("Operating User: ").append(System.getProperty("user.name")).append("<br>");
+        sb.append("Avaliable Processors: ").append(Runtime.getRuntime().availableProcessors()).append("<br>");
+        sb.append("Runtime Version: ").append(Runtime.version()).append("<br>");
+        sb.append("Free Memory: ").append(Runtime.getRuntime().freeMemory()).append("<br>");
+        sb.append("Max Memory: ").append(Runtime.getRuntime().maxMemory()).append("<br>");
+        sb.append("Total Memory: ").append(Runtime.getRuntime().totalMemory()).append("<br>");
+        sb.append("System Env: ").append(System.getenv().toString()).append("<br>");
         return sb.toString();
     }
 

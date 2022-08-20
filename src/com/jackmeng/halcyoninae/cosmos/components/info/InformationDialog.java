@@ -15,8 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.info;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.layout.DebuggerTab;
 import com.jackmeng.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
@@ -24,6 +22,7 @@ import com.jackmeng.halcyoninae.cosmos.components.info.layout.SystemTab;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -34,15 +33,6 @@ import java.awt.*;
  * @since 3.1
  */
 public class InformationDialog extends JFrame implements Runnable {
-    private final JTabbedPane panes;
-
-    private final transient InformationTab[] tabs = {
-            new FileFromSourceTab("Program Properties",
-                    FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_PROPERTIES_DOCS)),
-            new FileFromSourceTab("Legals", FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_DOCS)),
-            new SystemTab(),
-            new DebuggerTab()
-    };
 
     public InformationDialog() {
         setTitle("Halcyon ~ Information");
@@ -54,9 +44,16 @@ public class InformationDialog extends JFrame implements Runnable {
 
         setLocationRelativeTo(null);
 
-        panes = new JTabbedPane();
+        JTabbedPane panes = new JTabbedPane();
         panes.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
 
+        InformationTab[] tabs = {
+            new FileFromSourceTab("Program Properties",
+                FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_PROPERTIES_DOCS)),
+            new FileFromSourceTab("Legals", FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_DOCS)),
+            new SystemTab(),
+            new DebuggerTab()
+        };
         for (InformationTab tab : tabs) {
             panes.addTab(tab.getName(), tab.getComponent());
         }

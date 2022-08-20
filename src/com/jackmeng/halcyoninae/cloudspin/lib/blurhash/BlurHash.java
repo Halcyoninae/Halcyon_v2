@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyoninae.cloudspin.lib.blurhash;
 
-import java.awt.image.BufferedImage;
-
 import com.jackmeng.halcyoninae.cloudspin.lib.Blur;
+
+import java.awt.image.BufferedImage;
 
 /**
  * The Main BlurHash Extern Class that provides
@@ -44,8 +44,8 @@ public class BlurHash implements Blur {
         double p = 1.2d;
         if (otherParams != null) {
             if (otherParams[0] instanceof Double) {
-                if (((Double) otherParams[0]).doubleValue() > 0) {
-                    p = ((Double) otherParams[0]).doubleValue();
+                if ((Double) otherParams[0] > 0) {
+                    p = (Double) otherParams[0];
                 }
             }
         }

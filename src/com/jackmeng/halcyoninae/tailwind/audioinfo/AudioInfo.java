@@ -15,13 +15,12 @@
 
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-
+import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
+import com.jackmeng.halcyoninae.halcyon.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
+import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -33,12 +32,12 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
-import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
-import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * This class holds information regarding an audio
@@ -84,7 +83,7 @@ public class AudioInfo {
     public AudioInfo(File f, boolean s)
             throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
         this.f = f;
-        AudioFile af = null;
+        AudioFile af;
         af = AudioFileIO.read(f);
         if (af != null) {
             t = af.getTag();
@@ -225,6 +224,7 @@ public class AudioInfo {
                         | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
+                assert mp != null;
                 if (mp.getTag().getFirstArtwork() != null) {
                     try {
                         img = (BufferedImage) mp.getTag().getFirstArtwork().getImage();
@@ -233,11 +233,7 @@ public class AudioInfo {
                     }
                 }
             }
-            if (img == null) {
-                return AudioInfo.getDefaultIcon();
-            } else {
-                return img;
-            }
+            return Objects.requireNonNullElseGet(img, AudioInfo::getDefaultIcon);
         } catch (NullPointerException e) {
             return AudioInfo.getDefaultIcon();
         }
@@ -257,6 +253,7 @@ public class AudioInfo {
                         | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
+                assert mp != null;
                 if (mp.getTag().getFirstArtwork() != null) {
                     try {
                         img = (BufferedImage) mp.getTag().getFirstArtwork().getImage();

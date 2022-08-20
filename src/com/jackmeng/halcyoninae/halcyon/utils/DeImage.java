@@ -23,6 +23,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * This is a class that modifies images that are fed to it.
@@ -141,16 +142,13 @@ public final class DeImage {
      * @return BufferedImage The blurred image.
      */
     public static BufferedImage blurImage(BufferedImage srcIMG) {
-        BufferedImage dest = srcIMG;
-        ColorModel cm = dest.getColorModel();
-        BufferedImage src = new BufferedImage(cm, dest.copyData(dest.getRaster().createCompatibleWritableRaster()),
-                cm.isAlphaPremultiplied(), null).getSubimage(0, 0, dest.getWidth(), dest.getHeight());
+        ColorModel cm = srcIMG.getColorModel();
+        BufferedImage src = new BufferedImage(cm, srcIMG.copyData(srcIMG.getRaster().createCompatibleWritableRaster()),
+                cm.isAlphaPremultiplied(), null).getSubimage(0, 0, srcIMG.getWidth(), srcIMG.getHeight());
         float[] matrix = new float[400];
-        for (int i = 0; i < matrix.length; i++) {
-            matrix[i] = 1f / matrix.length;
-        }
-        new ConvolveOp(new Kernel(20, 20, matrix), ConvolveOp.EDGE_NO_OP, null).filter(src, dest);
-        return dest;
+        Arrays.fill(matrix, 1f / matrix.length);
+        new ConvolveOp(new Kernel(20, 20, matrix), ConvolveOp.EDGE_NO_OP, null).filter(src, srcIMG);
+        return srcIMG;
     }
 
     /**
@@ -290,9 +288,7 @@ public final class DeImage {
         int height = vRadius * 2 + 1;
         float weight = 1.0f / (width * height);
         float[] data = new float[width * height];
-        for (int i = 0; i < data.length; i++) {
-            data[i] = weight;
-        }
+        Arrays.fill(data, weight);
         Kernel k = new Kernel(width, height, data);
         return new ConvolveOp(k, ConvolveOp.EDGE_NO_OP, null);
     }

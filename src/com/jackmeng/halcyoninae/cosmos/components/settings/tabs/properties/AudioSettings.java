@@ -15,14 +15,13 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.settings.tabs.properties;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.settings.SettingsTabs;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.Property;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.Property.PropertyFilterType;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -30,14 +29,13 @@ import java.awt.*;
  * @since 3.2
  */
 public class AudioSettings extends JScrollPane implements SettingsTabs {
-    private final JPanel panel;
     private int i = 0;
 
     public AudioSettings() {
         setPreferredSize(new Dimension(Manager.SETTINGS_MIN_WIDTH, Manager.SETTINGS_MIN_HEIGHT));
         setMinimumSize(getPreferredSize());
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         /*
          * for(Property p : Property.filterProperties("audio",
          * PropertyFilterType.STARTS_WITH, ProgramResourceManager.propertiesList)) {

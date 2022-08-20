@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyoninae.halcyon.connections.properties.validators;
 
-import java.io.File;
-
 import com.jackmeng.halcyoninae.halcyon.connections.properties.PropertyValidator;
+
+import java.io.File;
 
 /**
  * @author Jack Meng

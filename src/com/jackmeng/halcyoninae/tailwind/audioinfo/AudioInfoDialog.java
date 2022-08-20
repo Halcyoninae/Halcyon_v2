@@ -15,30 +15,20 @@
 
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.awt.event.*;
-
-import javax.swing.BorderFactory;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
-
-import org.jaudiotagger.tag.FieldKey;
-
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
+import org.jaudiotagger.tag.FieldKey;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 
 /**
  * This is a window popup that shows information regarding the current
@@ -61,17 +51,13 @@ public class AudioInfoDialog extends JFrame implements Runnable {
     final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 150;
     /// AUDIOINFO Window Config END
 
-    private final JSplitPane mainPane;
-    private final JScrollPane artWorkPanel;
     private final JPanel artWork;
-    private final JScrollPane infoPanel;
     private final JPopupMenu rightClickArtwork;
-    private final JMenuItem rightClickArtworkShowBig;
 
     // Transient Components
     private transient boolean toOpenArtwork = true;
-    private transient AudioInfoArtworkDialog aiad;
-    private transient BufferedImage img;
+    private final transient AudioInfoArtworkDialog aiad;
+    private final transient BufferedImage img;
     private transient AudioInfo info;
 
     public AudioInfoDialog(AudioInfo info) {
@@ -96,11 +82,11 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         });
 
         rightClickArtwork = new JPopupMenu();
-        rightClickArtworkShowBig = new JMenuItem("View Artwork");
+        JMenuItem rightClickArtworkShowBig = new JMenuItem("View Artwork");
         rightClickArtworkShowBig.setToolTipText("View the artwork in a bigger window");
         rightClickArtworkShowBig.addActionListener(x -> {
             if (toOpenArtwork) {
-                SwingUtilities.invokeLater(aiad::run);
+                SwingUtilities.invokeLater(aiad);
                 toOpenArtwork = false;
             } else {
                 Debugger.warn("Already launched an Artwork Viewport, not running another!!");
@@ -121,7 +107,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         };
         artWork.setDoubleBuffered(true);
 
-        artWorkPanel = new JScrollPane();
+        JScrollPane artWorkPanel = new JScrollPane();
         artWorkPanel.setViewportView(artWork);
         artWorkPanel.setBorder(BorderFactory.createEmptyBorder());
         artWorkPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -134,14 +120,14 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         infoText.setContentType("text/html");
         infoText.setText(infoToHtml(info));
 
-        infoPanel = new JScrollPane();
+        JScrollPane infoPanel = new JScrollPane();
         infoPanel.setViewportView(infoText);
         infoPanel.setBorder(BorderFactory.createEmptyBorder());
         infoPanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         infoPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         infoPanel.setPreferredSize(new Dimension(AUDIOINFO_INFO_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT));
 
-        mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
+        JSplitPane mainPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, artWorkPanel, infoPanel);
         mainPane.setPreferredSize(getPreferredSize());
 
         rightClickArtwork.add(rightClickArtworkShowBig);
@@ -177,29 +163,26 @@ public class AudioInfoDialog extends JFrame implements Runnable {
      * @return String
      */
     private static synchronized String infoToHtml(AudioInfo in) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("<html><body>");
-        sb.append(parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)));
-        sb.append(parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)));
-        sb.append(parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)));
-        sb.append(parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)));
-        sb.append(parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)));
-        sb.append(
-                parseAsProperty("Duration",
-                        TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))));
-        sb.append(parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)));
-        sb.append(parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)));
-        sb.append(parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)));
-        sb.append(parseAsProperty("BPM", in.getRaw(FieldKey.BPM)));
-        sb.append(parseAsProperty("Track", in.getRaw(FieldKey.TRACK)));
-        sb.append(parseAsProperty("Year", in.getRaw(FieldKey.YEAR)));
-        sb.append(parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)));
-        sb.append(parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)));
-        sb.append(parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)));
-        sb.append(parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)));
-        sb.append(parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)));
-        sb.append("</body></html>");
-        return sb.toString();
+        return "<html><body>" +
+            parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)) +
+            parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)) +
+            parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)) +
+            parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)) +
+            parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)) +
+            parseAsProperty("Duration",
+                TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))) +
+            parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)) +
+            parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)) +
+            parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)) +
+            parseAsProperty("BPM", in.getRaw(FieldKey.BPM)) +
+            parseAsProperty("Track", in.getRaw(FieldKey.TRACK)) +
+            parseAsProperty("Year", in.getRaw(FieldKey.YEAR)) +
+            parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)) +
+            parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)) +
+            parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)) +
+            parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)) +
+            parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)) +
+            "</body></html>";
     }
 
     /**

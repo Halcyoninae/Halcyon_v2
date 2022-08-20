@@ -15,8 +15,6 @@
 
 package com.jackmeng.halcyoninae.setup;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
 import com.jackmeng.halcyoninae.cloudspin.lib.gradient.GradientGenerator;
 import com.jackmeng.halcyoninae.cosmos.Cosmos;
@@ -35,6 +33,7 @@ import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage.Directional;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +42,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class runs a setup routine everytime
@@ -73,10 +73,6 @@ public class Setup extends JFrame implements Runnable {
     // cuz
     public static boolean SETUP_EXISTS = false;
     private final JPanel content;
-    // Java.AWT is stupid and its own
-    // List class??!?!??!!?
-    private final JLabel welcomeLabel;
-    private final AttributableButton[] themeButtons;
 
     public Setup() {
         setTitle("Setup Routine");
@@ -143,8 +139,10 @@ public class Setup extends JFrame implements Runnable {
 
         });
 
-        welcomeLabel = new JLabel(
-                "<html><p style=\"font-size:18px;\"><strong>Welcome :3</strong></p><p style=\"font-size:10px;color:#a6a6a6;\">Let's get started</p></html>");
+        // Java.AWT is stupid and its own
+        // List class??!?!??!!?
+        JLabel welcomeLabel = new JLabel(
+            "<html><p style=\"font-size:18px;\"><strong>Welcome :3</strong></p><p style=\"font-size:10px;color:#a6a6a6;\">Let's get started</p></html>");
         welcomeLabel.setPreferredSize(welcomePanel.getPreferredSize());
         welcomeLabel.setForeground(ColorManager.MAIN_FG_THEME);
         welcomeLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -156,21 +154,15 @@ public class Setup extends JFrame implements Runnable {
         buttonsCtrl.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         JButton okButton = new JButton("Moosic!");
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                fireListeners();
-                dispose();
-            }
+        okButton.addActionListener(e -> {
+            fireListeners();
+            dispose();
         });
 
         JButton cancel = new JButton("Quit");
-        cancel.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                Debugger.warn("Failing setup... [0]");
-                System.exit(0);
-            }
+        cancel.addActionListener(arg0 -> {
+            Debugger.warn("Failing setup... [0]");
+            System.exit(0);
         });
 
         buttonsCtrl.add(okButton);
@@ -191,7 +183,7 @@ public class Setup extends JFrame implements Runnable {
         Theme[] themes = ThemeBundles.getThemes();
         JPanel themePanel = new JPanel();
         themePanel.setPreferredSize(contentPanelBack.getPreferredSize());
-        themeButtons = new AttributableButton[themes.length];
+        AttributableButton[] themeButtons = new AttributableButton[themes.length];
         themePanel.setLayout(new GridLayout(themes.length + 1, 1));
         themePanel.add(themeLabel);
         for (int i = 0; i < themeButtons.length; i++) {
@@ -199,15 +191,12 @@ public class Setup extends JFrame implements Runnable {
             themeButtons[i].setAttribute(themes[i].getCanonicalName());
             themePanel.add(themeButtons[i]);
             AttributableButton t = themeButtons[i];
-            t.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    try {
-                        Cosmos.refreshUI(ThemeBundles.searchFor(t.getAttribute()));
-                    } catch (UnsupportedLookAndFeelException e1) {
-                        new ErrorWindow(e1.getMessage()).run();
-                        ExternalResource.dispatchLog(e1);
-                    }
+            t.addActionListener(e -> {
+                try {
+                    Cosmos.refreshUI(ThemeBundles.searchFor(t.getAttribute()));
+                } catch (UnsupportedLookAndFeelException e1) {
+                    new ErrorWindow(e1.getMessage()).run();
+                    ExternalResource.dispatchLog(e1);
                 }
             });
         }
@@ -228,9 +217,7 @@ public class Setup extends JFrame implements Runnable {
     }
 
     public static void addSetupListener(SetupListener... listeners) {
-        for (SetupListener e : listeners) {
-            listener.add(e);
-        }
+        Collections.addAll(listener, listeners);
     }
 
     /**

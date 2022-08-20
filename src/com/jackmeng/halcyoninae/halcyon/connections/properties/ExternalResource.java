@@ -15,6 +15,10 @@
 
 package com.jackmeng.halcyoninae.halcyon.connections.properties;
 
+import com.jackmeng.halcyoninae.halcyon.DefaultManager;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.text.DateFormat;
@@ -23,10 +27,6 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import com.jackmeng.halcyoninae.halcyon.DefaultManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
 /**
  * ResourceFolder is a general class that holds information about
@@ -205,7 +205,7 @@ public class ExternalResource {
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                 StringBuilder sbt = new StringBuilder();
                 for(StackTraceElement ste : e.getStackTrace()) {
-                    sbt.append(ste.toString() + "\n");
+                    sbt.append(ste.toString()).append("\n");
                 }
                 writeLog("log",
                         "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)

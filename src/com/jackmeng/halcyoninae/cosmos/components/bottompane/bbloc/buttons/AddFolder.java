@@ -15,19 +15,15 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.jackmeng.halcyoninae.cosmos.dialog.SelectApplicableFolders;
-import com.jackmeng.halcyoninae.cosmos.dialog.SelectApplicableFolders.FolderSelectedListener;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.filesystem.FileParser;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
 import java.io.File;
 
 /**
@@ -50,29 +46,23 @@ public class AddFolder extends JButton implements BBlocButton {
         setBorder(null);
         setDoubleBuffered(true);
         setContentAreaFilled(false);
-        addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SelectApplicableFolders s = new SelectApplicableFolders();
-                s.setFolderSelectedListener(new FolderSelectedListener() {
-                    @Override
-                    public void folderSelected(String folder) {
-                        if (FileParser.isEmptyFolder(new File(folder))
-                                || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
-                            new ConfirmWindow(
-                                    "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                                    status -> {
-                                        if (status) {
-                                            com.jackmeng.halcyoninae.halcyon.constant.Global.bp.pokeNewFileListTab(folder);
-                                        }
-                                    }).run();
-                        } else {
-                            Global.bp.pokeNewFileListTab(folder);
-                        }
-                    }
-                });
-                s.run();
-            }
+        addActionListener(e -> {
+            SelectApplicableFolders s = new SelectApplicableFolders();
+            s.setFolderSelectedListener(folder -> {
+                if (FileParser.isEmptyFolder(new File(folder))
+                        || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+                    new ConfirmWindow(
+                            "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
+                            status -> {
+                                if (status) {
+                                    Global.bp.pokeNewFileListTab(folder);
+                                }
+                            }).run();
+                } else {
+                    Global.bp.pokeNewFileListTab(folder);
+                }
+            });
+            s.run();
         });
     }
 
