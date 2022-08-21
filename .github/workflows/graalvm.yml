@@ -19,4 +19,5 @@ jobs:
         run: |
           java -version
           native-image --version
-          native-image -jar lib/discord-rpc.jar imgscaler
+          javac test/graalvm/HelloWorld.java
+          native-image test/graalvm/HelloWorld
