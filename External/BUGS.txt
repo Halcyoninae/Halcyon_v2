@@ -1,3 +1,10 @@
+[***] #42 "DeImage Optimizations"
+    Detailed Description: This is a reminder
+    Status: None
+    State: Experimental-Build ~ MP4J
+    Difficulty: Decent
+    Testing: Decent
+
 [**] #41 "Loop feature runs over the last buffer"
     Detailed Description: The loop feature does not restart the current
     buffer and insteads kind of overwrites the old buffer resulting in 
