@@ -22,6 +22,8 @@ import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -44,6 +46,8 @@ public class BottomPane extends JTabbedPane {
      */
     private final Map<String, Integer> tabsMap;
 
+    private TitledBorder t = BorderFactory.createTitledBorder("Playlists");
+
     /**
      * Creates a bottom viewport
      */
@@ -55,6 +59,17 @@ public class BottomPane extends JTabbedPane {
         setMinimumSize(new Dimension(FileList.FILEVIEW_MIN_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
         this.tabs = new ArrayList<>();
         setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
+        setBorder(t);
+        addChangeListener(x -> {
+            if (getTabComponentAt(getSelectedIndex()) != null) {
+                t.setTitle((getSelectedIndex() + 1) + " | " + (getTabComponentAt(getSelectedIndex()).getName() == null ? " "
+                        : new File(getTabComponentAt(
+                                getSelectedIndex()).getName()).getName()) + " | " + getTabComponentAt(
+                                        getSelectedIndex()).getName() + "");
+            } else {
+                t.setTitle("Playlist");
+            }
+        });
     }
 
     /**
@@ -121,6 +136,7 @@ public class BottomPane extends JTabbedPane {
         Program.cacher.getSavedPlaylists().add(new File(folder).getAbsolutePath());
         add(new File(folder).getName(), list);
         TabButton button = new TabButton(this);
+        button.setName(folder);
         setTabComponentAt(getTabCount() - 1, button);
         setToolTipTextAt(getTabCount() - 1, folder);
         tabsMap.put(folder, getTabCount() - 1);

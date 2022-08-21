@@ -33,8 +33,7 @@ public record TailwindDefaultListener(TailwindPlayer player)
         if (status.equals(TailwindStatus.END)) {
             player.close();
         }
-
-        Debugger.info(status);
+        Debugger.crit("Tailwind STATUS_REC: " + status);
     }
 
     /**

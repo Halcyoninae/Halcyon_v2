@@ -41,6 +41,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
 
     public TailwindPlaylist() {
         history = new ArrayList<>();
+        setDynamicAllocation(true); // for optimal performance
         addStatusUpdateListener(this);
         gain = Float.NaN;
     }
@@ -178,17 +179,5 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
         if (loop && status.equals(TailwindStatus.END)) {
             rawPlay(currentFile);
         }
-    }
-
-    @Override
-    public boolean equals(Object arg) {
-        return arg.hashCode() == super.hashCode();
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (history == null ? history.hashCode() : 0);
-        return result;
     }
 }

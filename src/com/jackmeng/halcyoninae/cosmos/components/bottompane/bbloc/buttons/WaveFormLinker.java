@@ -56,7 +56,6 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     @Override
     public void actionPerformed(ActionEvent e) {
         SwingUtilities.invokeLater(pane::run);
-        Global.waveForm.setVisibility(true);
     }
 
 }

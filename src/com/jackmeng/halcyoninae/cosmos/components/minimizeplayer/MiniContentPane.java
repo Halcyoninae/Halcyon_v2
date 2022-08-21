@@ -15,17 +15,22 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
+import com.jackmeng.halcyoninae.cloudspin.lib.hinter.GradientImg;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Numerical;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This class holds all of the components to the main
@@ -39,31 +44,37 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     private final JPanel bgPanel;
     private final JLabel mainLabel;
     private final JLabel artLabel;
+    private final JProgressBar progressBar;
     private transient AudioInfo info;
     private boolean fDrawn = true;
+    private ExecutorService timeKeeper;
     private transient BufferedImage bg;
 
     public MiniContentPane() {
         setPreferredSize(
                 new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setLayout(new OverlayLayout(this));
+        setOpaque(false);
         info = new AudioInfo();
         bgPanel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
-                super.paintComponent(g);
                 if (info.hasArtwork() || !fDrawn && bg != null) {
-                    Debugger.warn("Found a new artwork!@MINIPLAYER" + " | Composite: " + Float
-                            .parseFloat(
-                                    ExternalResource.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA)));
                     Graphics2D g2 = (Graphics2D) g;
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, Float
-                            .parseFloat(
-                                    ExternalResource.pm.get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
+                            .parseFloat(ExternalResource.pm
+                                    .get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA)) > 0.5F ? 1.0F - Float
+                                            .parseFloat(
+                                                    ExternalResource.pm.get(
+                                                            ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))
+                                            : Float
+                                                    .parseFloat(
+                                                            ExternalResource.pm.get(
+                                                                    ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
                     g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                     g2.drawImage(
                             bg,
-                            0, 0, null);
+                            getInsets().left, getInsets().top, null);
                     g2.dispose();
                     fDrawn = true;
                 } else {
@@ -79,7 +90,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         };
         bgPanel.setPreferredSize(getPreferredSize());
         bgPanel.setOpaque(false);
-        bgPanel.setIgnoreRepaint(true);
+        bgPanel.setIgnoreRepaint(false);
         bgPanel.setDoubleBuffered(false);
 
         JPanel topPanel = new JPanel();
@@ -95,7 +106,6 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         artLabel = new JLabel(
                 new ImageIcon(
                         DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
-        artLabel.setDoubleBuffered(true);
 
         topPanel.add(artLabel);
         topPanel.add(mainLabel);
@@ -108,12 +118,15 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         fgPanel.setLayout(new BorderLayout());
         fgPanel.setOpaque(false);
 
-        JProgressBar progressBar = new JProgressBar();
+        progressBar = new JProgressBar();
         progressBar.setPreferredSize(progressPanel.getPreferredSize());
-        progressBar.setMaximum(500);
+        progressBar.setMaximum(250);
         progressBar.setMinimum(0);
+        progressBar.setValue(0);
+        progressBar.setBackground(new Color(1,1,1, 130));
         progressBar.setOpaque(false);
-        progressBar.setBackground(new Color(0, 0, 0, 50));
+        progressBar.setAutoscrolls(false);
+        progressBar.setBorderPainted(false);
         progressBar.setForeground(ColorManager.MAIN_FG_THEME);
         progressPanel.add(progressBar);
 
@@ -122,14 +135,38 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
 
         add(bgPanel);
         add(fgPanel);
+        _init_time();
+    }
+
+    private void _init_time() {
+        timeKeeper = Executors.newFixedThreadPool(1);
+        timeKeeper.execute(() -> {
+            while (true) {
+                if (this.isShowing() || this.isVisible()) {
+                    progressBar.setValue((int) (Numerical.__safe_divide(
+                            Global.player.getStream().getPosition() * (double) progressBar
+                                    .getMaximum(),
+                            Global.player.getStream().getLength())));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        // IGNORED.
+                    }
+                }
+            }
+        });
     }
 
     private void __refresh_draw_bg_img_() {
         BufferedImage img = null;
         if (info.hasArtwork()) {
-            img = MiniDeImage.blurHash(DeImage.resize(info.getArtwork(), getWidth(), getHeight()), 3, 4);
+            img = MiniDeImage.blurHash(DeImage.resize(info.getArtwork(), (int) bgPanel.getPreferredSize().getWidth(),
+                    (int) bgPanel.getPreferredSize().getHeight()), 4, 4);
         }
         bg = img;
+        if (bg != null) {
+            bg.setAccelerationPriority(1F);
+        }
     }
 
     /**
@@ -145,7 +182,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
 
     private void scheduleRedraw() {
         __refresh_draw_bg_img_();
-        bgPanel.repaint(50);
+        repaint(40);
         mainLabel.setText(getLabelString());
         artLabel.setIcon(
                 new ImageIcon(
@@ -158,6 +195,8 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     @Override
     public void infoView(AudioInfo info) {
         this.info = info;
-        scheduleRedraw();
+        if (this.isVisible() || this.isShowing() || this.getParent().isVisible()) {
+            scheduleRedraw();
+        }
     }
 }

@@ -59,44 +59,43 @@ public class WaveFormPane extends JFrame implements Runnable {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                Global.waveForm.setVisibility(true);
+
             }
 
             @Override
             public void windowClosing(WindowEvent e) {
-                Global.waveForm.setVisibility(false);
+
             }
 
             @Override
             public void windowClosed(WindowEvent e) {
-                Global.waveForm.setVisibility(false);
+
             }
 
             @Override
             public void windowIconified(WindowEvent e) {
-                Global.waveForm.setVisibility(false);
+
             }
 
             @Override
             public void windowDeiconified(WindowEvent e) {
-                Global.waveForm.setVisibility(true);
+
             }
 
             @Override
             public void windowActivated(WindowEvent e) {
-                Global.waveForm.setVisibility(true);
+
 
             }
 
             @Override
             public void windowDeactivated(WindowEvent e) {
-                Global.waveForm.setVisibility(false);
+
             }
 
         });
         addMouseListener(new WaveFormClickMenu(this));
         setPreferredSize(new Dimension(WaveFormManager.MIN_WIDTH, WaveFormManager.MIN_HEIGHT));
-        getContentPane().add(Global.waveForm);
     }
 
     @Override

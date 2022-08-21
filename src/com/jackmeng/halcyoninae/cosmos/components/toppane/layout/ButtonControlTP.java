@@ -23,6 +23,7 @@ import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
@@ -35,6 +36,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * This class represents the GUI component collection
@@ -78,11 +81,13 @@ public class ButtonControlTP extends JPanel
     private final JButton nextButton;
     private final JButton previousButton;
     private final JButton loopButton;
+    private transient ExecutorService timeKeeper;
     private final JButton shuffleButton;
     private final JButton informationButton;
     private final LikeButton likeButton;
     private final JSlider progressSlider;
     private final JSlider volumeSlider;
+    private final TimeControlSubTP tsp;
     private final JPanel buttons;
     private transient AudioInfo aif = new AudioInfo();
     private boolean hasPlayed = false;
@@ -211,43 +216,40 @@ public class ButtonControlTP extends JPanel
         progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
         progressSlider.setBackground(ColorManager.MAIN_BG_THEME);
         progressSlider.setBorder(null);
-        progressSlider.putClientProperty("Slider.thumbSize", new java.awt.Dimension(0, 0));
-        progressSlider.putClientProperty("Slider.trackWidth", 15);
-        progressSlider.putClientProperty("Slider.thumBorderWidth", 0);
         progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         progressSlider.addChangeListener(this);
-        new Thread(() -> {
+
+        tsp = new TimeControlSubTP();
+
+        timeKeeper = Executors.newSingleThreadExecutor();
+        timeKeeper.submit(() -> {
             while (true) {
                 if (Global.player.getStream().isPlaying()) {
                     if (Global.player.getStream().getLength() > 0) {
                         progressSlider
                                 .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
                                         / Global.player.getStream().getLength()));
-                        progressSlider.setToolTipText(
-                                String.format("%d:%02d / %d:%02d",
-                                        (int) (Global.player.getStream().getPosition() / 60000),
-                                        (int) (Global.player.getStream().getPosition() % 60000) / 1000,
-                                        (int) (Global.player.getStream().getLength() / 60000),
-                                        (int) (Global.player.getStream().getLength() % 60000) / 1000));
+
+                        tsp.setTimeText(TimeParser.fromMillis(Global.player.getStream().getPosition()));
+
                     } else {
                         progressSlider.setValue(0);
-                        progressSlider.setToolTipText("0:00 / 0:00");
+                        tsp.setTimeText("00:00:00");
                     }
                 }
                 try {
-                    Thread.sleep(30);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
 
-        TimeControlSubTP tsp = new TimeControlSubTP();
-
-        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 2));
+        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 5));
         sliders.add(progressSlider);
-        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 2));
+        sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 5));
         sliders.add(tsp);
+
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -260,7 +262,6 @@ public class ButtonControlTP extends JPanel
                 volumeSlider.revalidate();
             }
         });
-        tsp = new TimeControlSubTP();
         add(buttons);
         add(sliders);
 
@@ -300,6 +301,7 @@ public class ButtonControlTP extends JPanel
             hasPlayed = false;
         }
         progressSlider.setValue(0);
+        tsp.setTimeText("00:00:00");
     }
 
     /**
@@ -424,7 +426,6 @@ public class ButtonControlTP extends JPanel
 
     @Override
     public void statusUpdate(TailwindStatus status) {
-        Debugger.warn("Got ButtonCtrl: " + status.name());
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
             playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
                     PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));

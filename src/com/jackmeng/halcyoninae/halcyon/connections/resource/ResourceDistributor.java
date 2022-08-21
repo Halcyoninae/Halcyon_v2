@@ -50,11 +50,7 @@ public class ResourceDistributor {
                     java.util.Objects.requireNonNull(getClass().getResource(path))
             );
         } catch (NullPointerException e) {
-            Debugger.log(
-                    "Resource Distributor [IMAGE] was unable to fetch the expected path: " +
-                            path +
-                            "\nResorted to raw fetching..."
-            );
+
             return new ImageIcon(path);
         }
     }
@@ -70,10 +66,7 @@ public class ResourceDistributor {
             return new File(
                     java.util.Objects.requireNonNull(getClass().getResource(path)).getFile());
         } catch (NullPointerException e) {
-            Debugger.log(
-                    "Resource Distributor [FILE] was unable to fetch the expected path: " +
-                            path +
-                            "\nResorted to raw fetching...");
+
             return new File(path);
         }
     }
@@ -88,10 +81,7 @@ public class ResourceDistributor {
         try {
             return java.util.Objects.requireNonNull(getClass().getResource(path));
         } catch (NullPointerException e) {
-            Debugger.log(
-                    "Resource Distributor [URL] was unable to fetch the expected path: " +
-                            path +
-                            "\nResorted to raw fetching...");
+
             try {
                 return new URL(path);
             } catch (MalformedURLException e1) {
@@ -111,11 +101,7 @@ public class ResourceDistributor {
         try {
             return java.util.Objects.requireNonNull(getClass().getResourceAsStream(path));
         } catch (NullPointerException e) {
-            Debugger.log(
-                    "Resource Distributor [STREAM] was unable to fetch the expected path: " +
-                            path +
-                            "\nResorted to raw fetching..."
-            );
+
             try {
                 return new FileInputStream(path);
             } catch (FileNotFoundException e1) {
@@ -135,11 +121,7 @@ public class ResourceDistributor {
         try {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
-            Debugger.log(
-                    "Resource Distributor [BUFFERED IMAGE] was unable to fetch the expected path: " +
-                            path +
-                            "\nResorted to raw fetching..."
-            );
+
         }
         return null;
     }

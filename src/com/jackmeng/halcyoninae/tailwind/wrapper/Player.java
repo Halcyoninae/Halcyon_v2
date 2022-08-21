@@ -103,7 +103,6 @@ public class Player {
      */
     public void setVolume(float percent) {
         audio.setGain(percent);
-        float lastGain = ((FloatControl) audio.getControls().get(TailwindPlayer.MASTER_GAIN_STR)).getValue();
     }
 
     /**

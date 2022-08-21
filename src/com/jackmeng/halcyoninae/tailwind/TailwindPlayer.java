@@ -69,20 +69,30 @@ public class TailwindPlayer implements Audio, Runnable {
     public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
     private final Object referencable = new Object();
+    private final Object timeRef = new Object();
     private final TailwindEventManager events;
     private File resource;
+    private int my_magic_number = MAGIC_NUMBER;
     private SourceDataLine line;
     private FileFormat format;
     private Map<String, Control> controlTable;
     private boolean open, paused, playing;
     private AudioInputStream ais;
     private long microsecondLength, frameLength, milliPos;
-    private ExecutorService worker;
+    private ExecutorService worker, timeWorker;
     private AudioFormat formatAudio;
 
     public TailwindPlayer() {
         events = new TailwindEventManager();
         events.addStatusUpdateListener(new TailwindDefaultListener(this));
+    }
+
+    public void setDynamicAllocation(boolean s) {
+        my_magic_number = s ? -1 : MAGIC_NUMBER;
+    }
+
+    public boolean isDyanmicAllocated() {
+        return my_magic_number >= 4;
     }
 
     /**
@@ -128,6 +138,7 @@ public class TailwindPlayer implements Audio, Runnable {
             close();
         }
         try {
+            milliPos = 0L;
             this.resource = url;
             this.format = FileFormat.getFormatByName(this.resource.getName());
             Debugger.unsafeLog("TailwindPlayer> Opening: " + resource.getAbsolutePath());
@@ -270,7 +281,6 @@ public class TailwindPlayer implements Audio, Runnable {
     public synchronized void setPosition(long millis) {
         if (open) {
             setFramePosition((long) (ais.getFormat().getFrameRate() / 1000F) * millis);
-            Debugger.warn("MILLIPOS_POST: " + milliPos + " | MODDER: " + millis);
         }
     }
 
@@ -332,7 +342,6 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void close() {
-        Debugger.warn("TailwindPlayer> Closing");
         if (open) {
             try {
                 resetProperties();
@@ -341,7 +350,6 @@ public class TailwindPlayer implements Audio, Runnable {
                     line.drain();
                     line.close();
                 }
-
                 if (ais != null) {
                     ais.close();
                 }
@@ -378,20 +386,52 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void play() {
-        Debugger.warn("TailwindPlayer> Playing");
         if (playing || paused) {
             stop();
         }
-        worker = Executors.newFixedThreadPool(2);
+        worker = Executors.newSingleThreadExecutor();
         worker.execute(this);
+        timeWorker = Executors.newSingleThreadExecutor();
+        timeWorker.execute(() -> {
+            while (!timeWorker.isShutdown()) {
+                if (!paused) {
+                    if (isOpen()) {
+                        while (isPlaying() && !isPaused() && isOpen()) {
+                            milliPos += 25;
+                            try {
+                                Thread.sleep(25L);
+                            } catch (InterruptedException e) {
+                                // DO NOTHING
+                            }
+                        }
+                    } else {
+                        timeWorker.shutdown();
+                        milliPos = 0L;
+                    }
+                } else {
+                    while (paused) {
+                        try {
+                            synchronized (timeRef) {
+                                timeRef.wait();
+                            }
+                        } catch (InterruptedException e) {
+                            // IGNORE
+                        }
+                    }
+                }
+            }
+
+        });
         playing = true;
         events.dispatchStatusEvent(TailwindStatus.PLAYING);
+
     }
 
     private void resetProperties() {
         playing = false;
         paused = false;
         open = false;
+        milliPos = 0L;
     }
 
     /**
@@ -437,7 +477,6 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void resume() {
-        Debugger.warn("TailwindPlayer> Resuming");
         if (paused) {
             playing = true;
             paused = false;
@@ -454,21 +493,35 @@ public class TailwindPlayer implements Audio, Runnable {
      * This method provides a safety check upon the given
      * time to seek.
      *
+     * This method takes the current position of the
+     * stream and adds the given millis parameter to
+     * that time and resume play from there.
+     *
+     * If the method is called with -2, the stream will
+     * skip to the beginning (essentially restarting the
+     * stream); while -1 as a parameter
+     * will skip to the of the stream (essentially closing
+     * the stream).
+     *
      * @param millis The milliseconds to skip
      */
     @Override
     public void seekTo(long millis) {
-        if (open) {
+        if (open || playing) {
             long time = getPosition() + millis;
             Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
-                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L);
-            if (time < 0) {
+                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\nFrame Length: "
+                    + getFrameLength() + "Frame Pos: " + getLongFramePosition());
+            if (time < 0 || millis == -2) {
+                milliPos = 0L;
                 setPosition(0);
                 Debugger.warn("Time lower bound exceed");
-            } else if (time > getMicrosecondLength() / 1000L) {
+            } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
+                milliPos = getMicrosecondLength() / 1000L;
                 setPosition(getMicrosecondLength() / 1000L);
                 Debugger.warn("Time upper bound exceed");
             } else {
+                milliPos = time;
                 setPosition(time);
                 Debugger.good("Time bound good");
             }
@@ -479,7 +532,6 @@ public class TailwindPlayer implements Audio, Runnable {
     public void pause() {
         Debugger.warn("TailwindPlayer> Pausing");
         if (playing && !paused) {
-            fadeOut(800);
             paused = true;
             playing = false;
             events.dispatchStatusEvent(TailwindStatus.PAUSED);
@@ -501,7 +553,7 @@ public class TailwindPlayer implements Audio, Runnable {
             if (playing)
                 pause();
 
-            if (frame < frameLength)
+            if (frame <= frameLength)
                 reset();
 
             byte[] buffer = new byte[ais.getFormat().getFrameSize()];
@@ -511,6 +563,7 @@ public class TailwindPlayer implements Audio, Runnable {
                 ais.read(buffer);
                 curr++;
             }
+            Debugger.warn("Skipped frames: " + curr);
 
             if (paused) {
                 resume();
@@ -554,15 +607,18 @@ public class TailwindPlayer implements Audio, Runnable {
              * long[] transfer = new long[samples.length];
              */
             if (buffer == null) {
-                buffer = new byte[MAGIC_NUMBER * formatAudio.getChannels()
-                        * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits())];
+                buffer = new byte[(my_magic_number == -1
+                        ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
+                        : MAGIC_NUMBER * formatAudio.getChannels()
+                                * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
+                Debugger.warn("Tailwind_buffer_size: " + buffer.length);
             }
             line.start();
             while (!worker.isShutdown()) {
                 if (!paused) {
                     try {
                         if (isOpen()) {
-                            while (playing && !paused && isOpen() && (i = ais.read(buffer)) != -1) {
+                            while (playing && !paused && isOpen() && (i = ais.read(buffer)) > -1) {
                                 line.write(buffer, 0, i);
                             }
                         }
@@ -570,8 +626,9 @@ public class TailwindPlayer implements Audio, Runnable {
                             reset();
                             playing = false;
                             worker.shutdown();
-                            worker.awaitTermination(75L, TimeUnit.MILLISECONDS);
+                            worker.awaitTermination(25L, TimeUnit.MILLISECONDS);
                             events.dispatchStatusEvent(TailwindStatus.END);
+                            Debugger.warn("=========TailwindPlayer STOP=========");
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -592,61 +649,4 @@ public class TailwindPlayer implements Audio, Runnable {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof TailwindPlayer that))
-            return false;
-
-        if (open != that.open)
-            return false;
-        if (paused != that.paused)
-            return false;
-        if (playing != that.playing)
-            return false;
-        if (microsecondLength != that.microsecondLength)
-            return false;
-        if (frameLength != that.frameLength)
-            return false;
-        if (milliPos != that.milliPos)
-            return false;
-        if (!referencable.equals(that.referencable))
-            return false;
-        if (!Objects.equals(events, that.events))
-            return false;
-        if (!Objects.equals(resource, that.resource))
-            return false;
-        if (!Objects.equals(line, that.line))
-            return false;
-        if (format != that.format)
-            return false;
-        if (!Objects.equals(controlTable, that.controlTable))
-            return false;
-        if (!Objects.equals(ais, that.ais))
-            return false;
-        if (!Objects.equals(worker, that.worker))
-            return false;
-        return Objects.equals(formatAudio, that.formatAudio);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = referencable.hashCode();
-        result = 31 * result + (events != null ? events.hashCode() : 0);
-        result = 31 * result + (resource != null ? resource.hashCode() : 0);
-        result = 31 * result + (line != null ? line.hashCode() : 0);
-        result = 31 * result + (format != null ? format.hashCode() : 0);
-        result = 31 * result + (controlTable != null ? controlTable.hashCode() : 0);
-        result = 31 * result + (open ? 1 : 0);
-        result = 31 * result + (paused ? 1 : 0);
-        result = 31 * result + (playing ? 1 : 0);
-        result = 31 * result + (ais != null ? ais.hashCode() : 0);
-        result = 31 * result + (int) (microsecondLength ^ (microsecondLength >>> 32));
-        result = 31 * result + (int) (frameLength ^ (frameLength >>> 32));
-        result = 31 * result + (int) (milliPos ^ (milliPos >>> 32));
-        result = 31 * result + (worker != null ? worker.hashCode() : 0);
-        result = 31 * result + (formatAudio != null ? formatAudio.hashCode() : 0);
-        return result;
-    }
 }

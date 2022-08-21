@@ -18,6 +18,7 @@ package com.jackmeng.halcyoninae.halcyon.utils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A utility class that provides methods for parsing time.
@@ -53,5 +54,14 @@ public final class TimeParser {
         int minute = (seconds % 3600) / 60;
         int second = seconds % 60;
         return String.format("%02d:%02d:%02d", hour, minute, second);
+    }
+
+    public static String fromMillis(long millis) {
+        return String.format("%02d:%02d:%02d",
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
     }
 }

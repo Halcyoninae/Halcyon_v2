@@ -308,29 +308,4 @@ public class AudioInfo {
                 "Launching current AudioInfo"));
         return new AudioInfoDialog(this);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof AudioInfo audioInfo))
-            return false;
-
-        if (!f.equals(audioInfo.f))
-            return false;
-        if (!Objects.equals(tags, audioInfo.tags))
-            return false;
-        if (!Objects.equals(t, audioInfo.t))
-            return false;
-        return Objects.equals(header, audioInfo.header);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = f.hashCode();
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
-        result = 31 * result + (t != null ? t.hashCode() : 0);
-        result = 31 * result + (header != null ? header.hashCode() : 0);
-        return result;
-    }
 }

@@ -15,11 +15,14 @@
 
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
+import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -30,11 +33,11 @@ public class AudioInfoArtworkDialog extends JFrame implements Runnable {
     private final transient AudioInfo info;
 
     public AudioInfoArtworkDialog(AudioInfo info) {
-        super("Halcyon ~ Artwork Viewer | 0x0");
         this.info = info;
         this.img = info.getArtwork();
         setTitle("Halcyon ~ Artwork Viewer | " + img.getWidth() + "x" + img.getHeight());
         setIconImage(img);
+
 
         setPreferredSize(new Dimension(600, 400));
         setSize(getPreferredSize());
@@ -54,6 +57,7 @@ public class AudioInfoArtworkDialog extends JFrame implements Runnable {
         jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         add(jsp);
+
     }
 
     public AudioInfo getAudioInfo() {

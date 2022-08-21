@@ -34,16 +34,14 @@ import com.jackmeng.halcyoninae.tailwind.wrapper.Player;
  * @author Jack Meng
  * @since 3.0
  */
-public class Global {
+public final class Global {
 
-    public static final ResourceDistributor rd = new ResourceDistributor();
+    public static ResourceDistributor rd = new ResourceDistributor();
     public static BottomPane bp = new BottomPane();
     public static ButtonControlTP bctp = new ButtonControlTP();
     public static InfoViewTP ifp = new InfoViewTP();
     public static Player player = new Player();
     public static LikeList ll = new LikeList();
-    public static WaveForm waveForm = null; // SHOULD NOT BE USED AT THE MOMENT, this feature currently needs a lot more
-                                            // optimizations
     public static MoreApps moreApps = new MoreApps();
 
     static {

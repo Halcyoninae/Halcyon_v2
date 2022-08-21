@@ -22,6 +22,7 @@ import com.jackmeng.halcyoninae.tailwind.vorbis.VorbisIn;
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
 import de.jarnbjo.vorbis.VorbisStream;
+import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;

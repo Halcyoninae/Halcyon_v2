@@ -197,6 +197,19 @@ public class Debugger {
         }
     }
 
+    @SafeVarargs
+    public static <T> void crit(T ... o) {
+        if (!DefaultManager.DEBUG_PROGRAM) {
+            for (T t : o) {
+                out.println(
+                        CLIStyles.BOLD.getColor() + getGoodText()
+                                + CLIStyles.RESET.getColor()
+                                + CLIStyles.RED_TXT.getColor() + Objects.requireNonNullElse(t, "NULL_CONTENT")
+                                + CLIStyles.RESET.getColor());
+            }
+        }
+    }
+
     /**
      * @param <T>
      * @param o

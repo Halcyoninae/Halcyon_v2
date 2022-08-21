@@ -19,6 +19,9 @@ import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
 import javax.swing.*;
+
+import org.jogamp.glg2d.GLG2DCanvas;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
