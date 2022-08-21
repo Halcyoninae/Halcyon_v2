@@ -17,4 +17,4 @@ jobs:
         run: |
           java -version
           native-image --version
-          native-image -jar ./lib/imgscaler.jar imgscaler
+          native-image -jar ./lib/discord-rpc.jar imgscaler
