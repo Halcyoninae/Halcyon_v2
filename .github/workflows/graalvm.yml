@@ -7,6 +7,8 @@ jobs:
   setup-graalvm-ce:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout-repo
+        uses: actions/checkout@v3
       - name: setup-graalvm-ce
         uses: rinx/setup-graalvm-ce@v0.0.5
         with:
