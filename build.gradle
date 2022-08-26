@@ -1,0 +1,13 @@
+plugins
+{
+    id 'application'
+}
+repositories
+{
+    mavenCentral()
+}
+
+application
+{
+    mainClass = 'com.jackmeng.halcyoninae.halcyon.Halcyon'
+}
