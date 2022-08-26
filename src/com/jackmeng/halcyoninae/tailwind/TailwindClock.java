@@ -15,7 +15,7 @@ public class TailwindClock implements Runnable, TailwindListener.StatusUpdateLis
 
     @Override
     public void statusUpdate(TailwindStatus status) {
-        if()
+        // TO BE IMPLEMENTED
     }
 
 }
