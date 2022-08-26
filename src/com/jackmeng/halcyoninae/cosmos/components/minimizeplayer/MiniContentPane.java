@@ -15,7 +15,6 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
-import com.jackmeng.halcyoninae.cloudspin.lib.hinter.GradientImg;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
@@ -47,7 +46,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     private final JProgressBar progressBar;
     private transient AudioInfo info;
     private boolean fDrawn = true;
-    private ExecutorService timeKeeper;
+    private transient ExecutorService timeKeeper;
     private transient BufferedImage bg;
 
     public MiniContentPane() {

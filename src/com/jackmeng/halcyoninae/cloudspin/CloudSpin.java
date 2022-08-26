@@ -17,12 +17,10 @@ package com.jackmeng.halcyoninae.cloudspin;
 
 import javax.swing.*;
 
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
-import java.util.Arrays;
 
 /**
  * This class is used for general graphical manipulation.

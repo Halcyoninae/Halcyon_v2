@@ -24,8 +24,6 @@ import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EtchedBorder;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
