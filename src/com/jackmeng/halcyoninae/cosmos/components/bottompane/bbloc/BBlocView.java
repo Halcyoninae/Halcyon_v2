@@ -49,13 +49,20 @@ public class BBlocView extends JPanel {
         setMinimumSize(new Dimension(B_MIN_WIDTH, B_MIN_HEIGHT));
     }
 
-
     /**
-     * @param buttons
+     * Attempts to add an N amount of BBlocButton implementations
+     * to the current BBloc container.
+     *
+     * @param buttons A Vararg of BBloc Buttons
+     * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton
+     * @since 3.0
+     * @author Jack Meng
      */
     public void addBBlockButtons(BBlocButton... buttons) {
-        for (BBlocButton b : buttons) {
-            add(b.getComponent());
+        if (buttons.length > 0) {
+            for (BBlocButton b : buttons) {
+                add(b.getComponent());
+            }
         }
     }
 }

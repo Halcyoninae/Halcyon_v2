@@ -48,7 +48,8 @@ public class MiniPlayer extends JFrame implements Runnable {
     private transient MiniPlayerListener listener;
 
     public MiniPlayer() {
-        setPreferredSize(new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
+        setPreferredSize(
+                new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setUndecorated(true);
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setAutoRequestFocus(true);
@@ -88,16 +89,17 @@ public class MiniPlayer extends JFrame implements Runnable {
         setResizable(true);
     }
 
-
     /**
-     * @param listener
+     * Only one listener is allowed per miniplayer.
+     *
+     * @param listener A Listener implementation or anonymous class.
      */
     public void setMiniPlayerListener(MiniPlayerListener listener) {
         this.listener = listener;
     }
 
     /**
-     * Calls for the listener
+     * Calls for the listener that the window is closing.
      */
     public void pounceListener() {
         listener.closingWindow();

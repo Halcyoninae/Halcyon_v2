@@ -27,8 +27,13 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
+ * A BBloc button that opens a dialog for the user to manipulate certain things
+ * about the audio stream. For example, the user can manipulate PAN, VOLUME,
+ * etc..
+ *
  * @author Jack Meng
  * @since 3.2
+ * @see com.jackmeng.halcyoninae.cosmos.dialog.SlidersDialog
  */
 public class SlidersControl extends JButton implements BBlocButton {
     private final SlidersDialog dialog;
@@ -53,7 +58,6 @@ public class SlidersControl extends JButton implements BBlocButton {
         });
     }
 
-
     /**
      * @return JComponent
      */
@@ -61,7 +65,6 @@ public class SlidersControl extends JButton implements BBlocButton {
     public JComponent getComponent() {
         return this;
     }
-
 
     /**
      * @param e

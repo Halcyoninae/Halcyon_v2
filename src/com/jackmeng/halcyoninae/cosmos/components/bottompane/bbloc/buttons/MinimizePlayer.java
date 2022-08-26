@@ -25,8 +25,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
+ * This BBloc container button is used to launch a miniplayer.
+ * This button also keeps track of whether the given component (miniplayer)
+ * has been closed before allowing another instance to be run; a lock is used to
+ * keep the user from randomly opening multiple instances of a miniplayer.
+ *
  * @author Jack Meng
  * @since 3.2
+ * @see com.jackmeng.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer
  */
 public class MinimizePlayer extends JButton implements BBlocButton {
     private final MiniPlayer player;

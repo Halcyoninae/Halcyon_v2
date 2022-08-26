@@ -24,12 +24,30 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+/**
+ * This is a special tab that can be used to write pure text to.
+ * The programmar can also decide to use the builtin {@link #getContent(String)}
+ * method to read the contents of a file.
+ * All content can be in HTML or standard TEXT
+ *
+ * @author Jack Meng
+ * @since 3.2
+ */
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
     private final JEditorPane text;
     private String tabName = "";
 
+    /**
+     * Two arguments are accepted in the construction of this custom tab.
+     *
+     * @param tabName The preferred tab name (should be kept at a small length)
+     * @param textTab The content of the tab {@link #getContent(String)}
+     *
+     * @see #getContent(String)
+     */
     public FileFromSourceTab(String tabName, String textTab) {
-        setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
+        setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH,
+                LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
         setFocusable(true);
 
         this.tabName = tabName;
@@ -43,10 +61,13 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
         getViewport().add(text);
     }
 
-
     /**
-     * @param file
-     * @return String
+     * If the user decides to read from a file, this method should be used
+     * to grab the content of the file. This method should be only used
+     * in the constructor of this GUI object.
+     *
+     * @param file A String representing the file location
+     * @return String The content of the file in the native encoding.
      */
     public static String getContent(String file) {
         StringBuilder sb = new StringBuilder();
@@ -61,7 +82,6 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
         return sb.toString();
     }
 
-
     /**
      * @return String
      */
@@ -70,7 +90,6 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
         return tabName;
     }
 
-
     /**
      * @return String
      */
@@ -78,7 +97,6 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
     public String getToolTip() {
         return "View Legal Information regarding this program.";
     }
-
 
     /**
      * @return JComponent

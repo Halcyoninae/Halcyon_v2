@@ -40,7 +40,9 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
     private File currentFile = new File(".");
 
     public TailwindPlaylist() {
+        super(false);
         history = new ArrayList<>();
+        setForceCloseOnOpen(false);
         setDynamicAllocation(true); // for optimal performance
         addStatusUpdateListener(this);
         gain = Float.NaN;
@@ -68,6 +70,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
      * @param f
      */
     public void rawPlay(File f) {
+        close();
         open(f);
         if (!Float.isNaN(gain)) {
             this.setGain(gain);
@@ -178,6 +181,9 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
     public void statusUpdate(TailwindStatus status) {
         if (loop && status.equals(TailwindStatus.END)) {
             rawPlay(currentFile);
+        } else if (status.equals(TailwindStatus.END)) {
+            stop();
+            close();
         }
     }
 }

@@ -15,12 +15,17 @@
 
 package com.jackmeng.halcyoninae.cosmos.inheritable;
 
+import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
+import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 public class TabButton extends JPanel {
 
@@ -44,8 +49,10 @@ public class TabButton extends JPanel {
         };
 
         add(label);
-        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
+        label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 3));
         add(new CloseTabButton());
+        add(Box.createHorizontalStrut(4));
+        add(new MoreActionsButton());
         setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
     }
 
@@ -84,9 +91,8 @@ public class TabButton extends JPanel {
             setContentAreaFilled(false);
             setFocusable(false);
             setBorder(null);
-            setBorder(null);
             setBorderPainted(false);
-            setRolloverEnabled(false);
+            setRolloverEnabled(true);
             addActionListener(this);
         }
 
@@ -110,5 +116,53 @@ public class TabButton extends JPanel {
                 dispatchRemoveEvent();
             }
         }
+    }
+
+    public class MoreActionsButton extends JButton implements ActionListener {
+
+        public MoreActionsButton() {
+            setPreferredSize(new Dimension(Manager.BUTTON_STD_ICON_WIDTH_N_HEIGHT, Manager.BUTTON_STD_ICON_WIDTH_N_HEIGHT));
+            setToolTipText("More Playlist Actions");
+            setUI(getUI());
+            setBorder(null);
+            setContentAreaFilled(false);
+            setRolloverEnabled(true);
+            setBorderPainted(false);
+            addActionListener(this);
+        }
+
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2 = (Graphics2D) g;
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2.setStroke(new BasicStroke(1));
+            g2.setColor(Color.WHITE);
+            int i = 3, last_loc = 0;
+            while(i-- >0) {
+                g2.fillOval(last_loc, this.getHeight() / 2 - 1, 3, 3);
+                last_loc += 5;
+            }
+            g2.dispose();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JPopupMenu popMenu = new JPopupMenu("Playlist Actions");
+            JMenuItem openInExplorer = new JMenuItem("Open In File Explorer");
+            openInExplorer.addActionListener(x -> {
+                try {
+                    Desktop.getDesktop().open(new File(parentPane.getToolTipTextAt(parentPane.indexOfTabComponent(TabButton.this))));
+                } catch (IOException e1) {
+                    ExternalResource.dispatchLog(e1);
+                    new ErrorWindow("Failed to open this playlist in the native file explorer.\n" + e1.getMessage());
+                    Debugger.crit(e1.getLocalizedMessage());
+                }
+            });
+
+            popMenu.add(openInExplorer);
+            popMenu.show(this, TabButton.this.getX(), TabButton.this.getY());
+        }
+
     }
 }

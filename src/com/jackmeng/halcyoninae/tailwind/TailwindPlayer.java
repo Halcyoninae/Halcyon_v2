@@ -19,16 +19,19 @@ import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.*;
+
+import org.jogamp.glg2d.GLG2DCanvas;
+
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -66,7 +69,7 @@ import java.util.concurrent.TimeUnit;
 public class TailwindPlayer implements Audio, Runnable {
     // PUBLIC STATIC UTIL START
     public static final int MAGIC_NUMBER = 1024;
-    public static String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
+    public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
     private final Object referencable = new Object();
     private final Object timeRef = new Object();
@@ -76,19 +79,28 @@ public class TailwindPlayer implements Audio, Runnable {
     private SourceDataLine line;
     private FileFormat format;
     private Map<String, Control> controlTable;
-    private boolean open, paused, playing;
+    private boolean open, paused, playing, forceClose;
     private AudioInputStream ais;
     private long microsecondLength, frameLength, milliPos;
-    private ExecutorService worker, timeWorker;
+    private ExecutorService worker;
     private AudioFormat formatAudio;
 
-    public TailwindPlayer() {
+    public TailwindPlayer(boolean useAutoClose) {
         events = new TailwindEventManager();
-        events.addStatusUpdateListener(new TailwindDefaultListener(this));
+        if(useAutoClose)
+            events.addStatusUpdateListener(new TailwindDefaultListener(this));
     }
 
     public void setDynamicAllocation(boolean s) {
         my_magic_number = s ? -1 : MAGIC_NUMBER;
+    }
+
+    public void setForceCloseOnOpen(boolean s) {
+        this.forceClose = s;
+    }
+
+    public boolean isForceCloseOnOpen() {
+        return forceClose;
     }
 
     public boolean isDyanmicAllocated() {
@@ -134,8 +146,11 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void open(File url) {
-        if (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))) {
+        if(isForceCloseOnOpen() && (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))))
             close();
+        if(!isForceCloseOnOpen() && (isOpen() || isPlaying()
+                || (worker != null && (!worker.isShutdown() || !worker.isTerminated())))) {
+            return;
         }
         try {
             milliPos = 0L;
@@ -184,7 +199,7 @@ public class TailwindPlayer implements Audio, Runnable {
             events.dispatchStatusEvent(TailwindStatus.OPEN);
             events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
         } catch (Exception e) {
-            new ErrorWindow("There was an error reading this file!").run();
+            new ErrorWindow("There was an error reading this file!\n" + e.getMessage()).run();
             ExternalResource.dispatchLog(e);
         }
     }
@@ -345,6 +360,9 @@ public class TailwindPlayer implements Audio, Runnable {
         if (open) {
             try {
                 resetProperties();
+                if(!worker.isShutdown()) {
+                    worker.shutdown();
+                }
                 if (line != null) {
                     line.flush();
                     line.drain();
@@ -391,15 +409,16 @@ public class TailwindPlayer implements Audio, Runnable {
         }
         worker = Executors.newSingleThreadExecutor();
         worker.execute(this);
-        timeWorker = Executors.newSingleThreadExecutor();
+
+        ExecutorService timeWorker = Executors.newSingleThreadExecutor();
         timeWorker.execute(() -> {
             while (!timeWorker.isShutdown()) {
                 if (!paused) {
-                    if (isOpen()) {
+                    if (open) {
                         while (isPlaying() && !isPaused() && isOpen()) {
-                            milliPos += 25;
+                            milliPos += 5;
                             try {
-                                Thread.sleep(25L);
+                                Thread.sleep(5L);
                             } catch (InterruptedException e) {
                                 // DO NOTHING
                             }
@@ -508,22 +527,21 @@ public class TailwindPlayer implements Audio, Runnable {
     @Override
     public void seekTo(long millis) {
         if (open || playing) {
-            long time = getPosition() + millis;
+            long time = getPosition() + millis ;
             Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
-                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\nFrame Length: "
-                    + getFrameLength() + "Frame Pos: " + getLongFramePosition());
+                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n" + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time) + "\nCurrent Time" + TimeParser.fromMillis(milliPos));
             if (time < 0 || millis == -2) {
                 milliPos = 0L;
                 setPosition(0);
-                Debugger.warn("Time lower bound exceed");
+                Debugger.warn("FAULT: Lower bound exceeded for parameter: " + millis + "(ms)");
             } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
                 milliPos = getMicrosecondLength() / 1000L;
                 setPosition(getMicrosecondLength() / 1000L);
-                Debugger.warn("Time upper bound exceed");
+                Debugger.warn("FAULT: Upper bound exceeded for parameter: " + millis + "(ms)");
             } else {
                 milliPos = time;
                 setPosition(time);
-                Debugger.good("Time bound good");
+                Debugger.good("OK: Bound checked. Skipping: " + millis);
             }
         }
     }
@@ -541,8 +559,14 @@ public class TailwindPlayer implements Audio, Runnable {
     @Override
     public void stop() {
         playing = false;
-        paused = false;
+        if(paused) {
+            synchronized(referencable) {
+                referencable.notifyAll();
+            }
+            paused = false;
+        }
         setPosition(0);
+        events.dispatchStatusEvent(TailwindStatus.CLOSED);
     }
 
     /**

@@ -16,9 +16,13 @@
 package com.jackmeng.halcyoninae.cloudspin;
 
 import javax.swing.*;
+
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
+import java.util.Arrays;
 
 /**
  * This class is used for general graphical manipulation.
@@ -137,7 +141,7 @@ public final class CloudSpin {
      * @param w
      * @return BufferedImage
      */
-    public static BufferedImage grabCrop(BufferedImage target, Rectangle w) {
+    public static BufferedImage grabCrop(BufferedImage target, Rectangle w, int... points) {
         int width = 0, height = 0;
         if (w.getWidth() > target.getWidth() && w.getHeight() > target.getHeight()) {
             return target;
@@ -149,9 +153,17 @@ public final class CloudSpin {
         BufferedImage cropped = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = cropped.createGraphics();
         // crop the image from (x1, y1) to (x2, y2)
-        g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(), (int) (w.getX() + w.getWidth()),
-                (int) (w.getY() + w.getHeight()), null);
-        g.dispose();
+        if (points != null && points.length > 0) {
+            g.drawImage(target, points[0], points[1], width, height, (int) w.getX(), (int) w.getY(),
+                    (int) (w.getX() + w.getWidth()),
+                    (int) (w.getY() + w.getHeight()), null);
+            g.dispose();
+        } else {
+            g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(),
+                    (int) (w.getX() + w.getWidth()),
+                    (int) (w.getY() + w.getHeight()), null);
+            g.dispose();
+        }
         return cropped;
     }
 
@@ -183,7 +195,7 @@ public final class CloudSpin {
      * @author Jack Meng
      * @since 3.3
      * @param image A desired image to alter (java.awt.image.BufferedImage)
-     * @param color   A Color to shift the pixels to (int[]). Where hue[0] is RED,
+     * @param color A Color to shift the pixels to (int[]). Where hue[0] is RED,
      *              hue[1] is GREEN, and hue[2] is BLUE
      */
     public static void hueImage(BufferedImage image, int[] color) {

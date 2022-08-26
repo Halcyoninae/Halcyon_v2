@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyoninae.tailwind.vorbis;
+package com.jackmeng.halcyoninae.tailwind.containers.vorbis;
 
 import de.jarnbjo.ogg.EndOfOggStreamException;
 import de.jarnbjo.vorbis.VorbisStream;

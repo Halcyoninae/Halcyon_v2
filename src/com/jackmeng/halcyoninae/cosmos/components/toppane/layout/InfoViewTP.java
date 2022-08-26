@@ -30,6 +30,7 @@ import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
@@ -70,20 +71,24 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     final int INFOVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
     final int INFOVIEW_MAX_WIDTH = Manager.MAX_WIDTH;
     final int INFOVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
-    final int INFOVIEW_INFODISPLAY_MAX_CHARS = 22;
     final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 108;
     final int INFOVIEW_FLOWLAYOUT_HGAP = 30;
     final int INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN = 6;
     /// InfoView Config END
 
-    private final JPanel backPanel;
-    private final JLabel infoDisplay;
+    private final JPanel backPanel, infoDisplay;
+    /**
+     * Label 1 : Title Label
+     * Label 2 : Author Label
+     * Label 3 : Misc Label
+     */
+    private final JLabel[] infoDisplayers;
     private final JLabel artWork;
     private final transient ArrayList<InfoViewUpdateListener> listeners;
     private transient BufferedImage backPanelArt;
     private transient AudioInfo info;
     private String infoTitle;
-    private boolean artWorkIsDefault = true, disable_backpanel = true;
+    private boolean artWorkIsDefault = true, disable_backpanel = false;
 
     public InfoViewTP() {
         super();
@@ -111,34 +116,26 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     if (Halcyon.bgt.getFrame().isVisible() && Halcyon.bgt.getFrame().isShowing()
                             && backPanelArt != null) {
                         Graphics2D g2d = (Graphics2D) g;
-                        float compositeAlpha;
-                        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
-                        g2d.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING,
-                                RenderingHints.VALUE_COLOR_RENDER_SPEED);
-
-                        if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
-                                .equals("top")) {
-                            compositeAlpha = 0.2f;
-                        } else {
-                            compositeAlpha = 0.6f;
-                        }
+                        float compositeAlpha = ExternalResource.pm
+                                .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
+                                .equals("top") ? 0.2F : 0.5F;
                         g2d.setComposite(
                                 AlphaComposite.getInstance(
-                                        AlphaComposite.SRC_OVER,
+                                        AlphaComposite.SRC_OVER, // SRC_OVER could be optimized as XOR will not work
                                         compositeAlpha));
                         g2d.drawImage(CloudSpin.grabCrop(backPanelArt, backPanel.getVisibleRect()), 0, 0,
-                                backPanel.getWidth(), backPanel.getHeight(), null);
+                                topPanel.getWidth(), backPanel.getHeight(), this);
                         g2d.dispose();
                     }
                 }
             };
             __refresh_draw_bg_img(true);
-
         }
 
         backPanel.setPreferredSize(
                 getPreferredSize());
         backPanel.setOpaque(false);
+        backPanel.setIgnoreRepaint(true);
 
         BufferedImage bi = DeImage.imageIconToBI(
                 Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
@@ -146,7 +143,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 bi,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-        bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
         artWork = new JLabel(new ImageIcon(bi));
         artWork.setBorder(null);
         artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -159,14 +155,28 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                         : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
         topPanel.setLayout(new GridLayout(1, 3, 15,
                 topPanel.getPreferredSize().height / 2));
-        infoDisplay = new JLabel(infoToString(info, infoTitle, false));
 
-        infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-        infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
-        infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE), false));
-        infoDisplay.setHorizontalTextPosition(SwingConstants.LEADING);
-        infoDisplay.setHorizontalAlignment(SwingConstants.CENTER);
-        infoDisplay.setVerticalAlignment(SwingConstants.CENTER);
+        infoDisplay = new JPanel();
+        infoDisplay.setLayout(new BoxLayout(infoDisplay, BoxLayout.Y_AXIS));
+        infoDisplay.setOpaque(false);
+
+        infoDisplayers = new JLabel[] { new JLabel("Nothing Playing"), new JLabel("No One"), new JLabel(
+                "??kbps,??kHZ,N:N:N") };
+        infoDisplayers[0].setForeground(ColorManager.MAIN_FG_THEME);
+        infoDisplayers[0].setFont(new Font(getFont().getName(), Font.BOLD, 18));
+        infoDisplayers[1].setForeground(ColorManager.MAIN_BG_THEME);
+        infoDisplayers[1].setFont(new Font(getFont().getName(), Font.ITALIC, 13));
+        infoDisplayers[2].setForeground(Color.WHITE);
+        infoDisplayers[2].setFont(getFont().deriveFont(11F));
+        infoDisplay.add(Box.createVerticalGlue());
+        for (JLabel f : infoDisplayers) {
+            f.setOpaque(false);
+            f.setAlignmentX(Component.LEFT_ALIGNMENT);
+            infoDisplay.add(f, BorderLayout.CENTER);
+        }
+        infoDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
+        infoDisplay.add(Box.createVerticalGlue());
+
         topPanel.add(artWork);
         topPanel.add(infoDisplay);
         addComponentListener(this);
@@ -177,40 +187,47 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     }
 
     /**
-     * WARNING: Does not call a refresh of the backpanel art which may
-     * result in artifacts being left behind when calling a redraw.
+     * Schedules a drawing event on the SWT to update the background image
+     * of the backdrop.
+     *
+     * @param draw_as_first Determines if the drawing should perform as if it is the
+     *                      first time being drawn
      */
     private void __refresh_draw_bg_img(boolean draw_as_first) {
-        if (!disable_backpanel) {
-            Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.GREEN_BG, CLIStyles.WHITE_TXT },
-                    "Defaulting a new background image."));
-            BufferedImage img = info.getArtwork();
-            if (!draw_as_first && info.hasArtwork()) {
-                img = CloudSpin.grabCrop(img,
-                        new Rectangle(0, 0, img.getWidth(), this.getPreferredSize().height));
-                if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT)
-                        .equals("true")) {
-                    img = GradientImg.createGradientFade(img, 255, 0, GradientImg.TOP);
+        SwingUtilities.invokeLater(() -> {
+            if (!disable_backpanel) {
+                Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.GREEN_BG, CLIStyles.WHITE_TXT },
+                        "Defaulting a new background image."));
+                BufferedImage img = info.getArtwork();
+                if (!draw_as_first && info.hasArtwork()) {
+                    img = CloudSpin.grabCrop(img,
+                            new Rectangle(this.getVisibleRect().x, this.getVisibleRect().y, img.getWidth(),
+                                    this.getPreferredSize().height));
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GRADIENT)
+                            .equals("true")) {
+                        img = GradientImg.createGradientFade(img, 255, 0, GradientImg.TOP);
 
-                    img = switch (ExternalResource.pm
-                            .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
-                        case "focused" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.BOTTOM);
-                        case "left" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.LEFT);
-                        case "right" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.RIGHT);
-                        default -> img;
-                    };
+                        img = switch (ExternalResource.pm
+                                .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)) {
+                            case "focused" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.BOTTOM);
+                            case "left" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.LEFT);
+                            case "right" -> GradientImg.createGradientFade(img, 255, 0, GradientImg.RIGHT);
+                            default -> img;
+                        };
+                    }
+
+                    if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE)
+                            .equals("true")) {
+                        img = CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY].filter(img, img);
+                    }
+                } else {
+                    img = null;
                 }
 
-                if (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_USE_GREYSCALE)
-                        .equals("true")) {
-                    img = CloudSpinFilters.filters[CloudSpinFilters.AFF_GREY].filter(img, img);
-                }
-            } else {
-                img = null;
+                backPanelArt = img;
+                backPanel.repaint(50L);
             }
-
-            backPanelArt = img;
-        }
+        });
     }
 
     /**
@@ -249,13 +266,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                         .equals("true")
                                 ? info.getTag(AudioInfo.KEY_MEDIA_TITLE)
                                 : new File(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)).getName();
-                infoDisplay.setText(infoToString(info, infoTitle, false));
-                infoDisplay.setToolTipText(infoToString(info, info.getTag(AudioInfo.KEY_MEDIA_TITLE), false));
+                infoToString(info, infoTitle, false);
                 Debugger.info("Using nonSmart (no guessing) toolkit. Phew!");
             } else {
                 infoTitle = f.getName();
-                infoDisplay.setText(infoToString(info, infoTitle, true));
-                infoDisplay.setToolTipText(infoToString(info, infoTitle, true));
+                infoToString(info, infoTitle, true);
                 Debugger.warn("Using beSmart (guessing) toolkit. Got: " + infoTitle);
             }
             if (infoDisplay.getPreferredSize().width >= (getPreferredSize().width -
@@ -267,38 +282,12 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                         .setSize(
                                 new Dimension(
                                         Manager.MAX_WIDTH,
+
                                         Halcyon.bgt.getFrame().getMinimumSize().height));
             }
-
-            if (info.hasArtwork()) {
-                Debugger.warn("Artwork found for drawing!");
-                BufferedImage bi = null;
-                if (!beSmart)
-                    bi = DeImage.resizeNoDistort(info.getArtwork(), INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                else {
-                    bi = DeImage.resizeNoDistort(
-                            bi,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                }
-                bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
-                artWork.setIcon(new ImageIcon(bi));
-                artWork.repaint(30);
-                artWorkIsDefault = false;
-            } else {
-                Debugger.warn("Artwork reset!");
-                BufferedImage bi = DeImage
-                        .resizeNoDistort(DeImage.imageIconToBI(INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
-                                INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                bi = DeImage.createRoundedBorder(bi, 20, ColorManager.BORDER_THEME);
-                artWork.setIcon(new ImageIcon(bi));
-                artWork.repaint(30);
-                artWorkIsDefault = true;
-            }
+            __reset_artwork_lowicon(beSmart);
             if (!disable_backpanel) {
                 __refresh_draw_bg_img(false);
-                backPanel.repaint(100);
             }
             __dispatch_();
             System.gc();
@@ -313,10 +302,39 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * other functionalities.
      */
     private void __dispatch_() {
-        Debugger.warn("InfoView Preparing a dispatch: " + info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-        for (InfoViewUpdateListener l : listeners) {
-            l.infoView(info);
-        }
+        SwingUtilities.invokeLater(() -> {
+            Debugger.warn("InfoView Preparing a dispatch: " + info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
+            for (InfoViewUpdateListener l : listeners) {
+                l.infoView(info);
+            }
+        });
+    }
+
+    private void __reset_artwork_lowicon(final boolean beSmart) {
+        SwingUtilities.invokeLater(() -> {
+            if (info.hasArtwork()) {
+                Debugger.warn("Artwork found for drawing!");
+                BufferedImage bi = null;
+                if (!beSmart)
+                    bi = DeImage.resizeNoDistort(info.getArtwork(), INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+                else {
+                    bi = DeImage.resizeNoDistort(
+                            bi,
+                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+                }
+                artWork.setIcon(new ImageIcon(bi));
+                artWorkIsDefault = false;
+            } else {
+                Debugger.warn("Artwork reset!");
+                BufferedImage bi = DeImage
+                        .resizeNoDistort(DeImage.imageIconToBI(INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
+                                INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+                artWork.setIcon(new ImageIcon(bi));
+                artWorkIsDefault = true;
+            }
+        });
     }
 
     /**
@@ -342,49 +360,59 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * @param info    The track to generate the information off of
      * @param text    The title of the track
      * @param beSmart Tells the parser to be smart and guess certain details.
-     * @return An HTML string that can be used by html supporting GUI Components to
-     *         display the information.
      */
-    private String infoToString(AudioInfo info, String text, boolean beSmart) {
+    private void infoToString(AudioInfo info, String text, boolean beSmart) {
         if (!beSmart) {
-            return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
-                    +
-                    ColorManager.MAIN_FG_STR +
-                    ";font-size: 12px;\"><strong>" +
-                    text
-                    +
-                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
-                    +
-                    info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
-                    "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
-                    info.getTag(AudioInfo.KEY_BITRATE) +
-                    "kpbs," +
-                    info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
+            infoDisplay.setToolTipText(
+                    "<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
+                            +
+                            ColorManager.MAIN_FG_STR +
+                            ";font-size: 12px;\"><nobr><strong>" +
+                            text
+                            +
+                            "</strong></nobr></span></p><p style=\"text-align: left;\"><span style=\"color: "
+                            + ColorManager.MAIN_BG_STR + ";font-size: 10px\">"
+                            +
+                            info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
+                            "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
+                            info.getTag(AudioInfo.KEY_BITRATE) +
+                            "kbps," +
+                            info.getTag(AudioInfo.KEY_SAMPLE_RATE) +
+                            "kHz," +
+                            TimeParser.fromSeconds(
+                                    Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
+                            +
+                            "</span></p></body></html>");
+            infoDisplayers[1].setText(info.getTag(AudioInfo.KEY_MEDIA_ARTIST));
+            infoDisplayers[2].setText(info.getTag(AudioInfo.KEY_BITRATE) + "kbps," +
                     "kHz," +
                     TimeParser.fromSeconds(
-                            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION)))
-                    +
-                    "</span></p></body></html>");
+                            Integer.parseInt(info.getTag(AudioInfo.KEY_MEDIA_DURATION))));
         } else {
             String author = text.contains("-") ? text.split("-", 2)[0] : "Unknown";
-            return ("<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
-                    +
-                    ColorManager.MAIN_FG_STR +
-                    ";font-size: 12px;\"><strong>" +
-                    text
-                    +
-                    "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 10px\">"
-                    +
-                    author +
-                    "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
-                    "Unknown" +
-                    "kpbs," +
-                    "Unknown" +
-                    "kHz," +
-                    "N:N:N"
-                    +
-                    "</span></p></body></html>");
+            infoDisplay.setToolTipText(
+                    "<html><body style=\"font-family='Trebuchet MS';\"><p style=\"text-align: left;\"><span style=\"color: "
+                            +
+                            ColorManager.MAIN_FG_STR +
+                            ";font-size: 12px;\"><strong>" +
+                            text
+                            +
+                            "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: "
+                            + ColorManager.MAIN_BG_STR + ";font-size: 10px\">"
+                            +
+                            author +
+                            "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
+                            "Unknown" +
+                            "kbps," +
+                            "Unknown" +
+                            "kHz," +
+                            "N:N:N"
+                            +
+                            "</span></p></body></html>");
+            infoDisplayers[1].setText(author);
+            infoDisplayers[2].setText("??kbps,??kHZ,N:N:N");
         }
+        infoDisplayers[0].setText(text);
     }
 
     /**

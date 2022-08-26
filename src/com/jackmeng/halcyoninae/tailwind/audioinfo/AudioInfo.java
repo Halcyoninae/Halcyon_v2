@@ -180,7 +180,7 @@ public class AudioInfo {
         tags.put(KEY_FILE_NAME, "Nothing.mp3");
         tags.put(KEY_MEDIA_DURATION, "0");
         tags.put(KEY_MEDIA_TITLE, "Nothing");
-        tags.put(KEY_BITRATE, "0kpbs");
+        tags.put(KEY_BITRATE, "0kbps");
         tags.put(KEY_SAMPLE_RATE, "0.0khz");
         tags.put(KEY_ALBUM, "");
         tags.put(KEY_GENRE, "");

@@ -15,14 +15,15 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.jackmeng.halcyoninae.tailwind.containers.flac.FlacIn;
+import com.jackmeng.halcyoninae.tailwind.containers.vorbis.VorbisIn;
 import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
-import com.jackmeng.halcyoninae.tailwind.vorbis.VorbisIn;
+
+import de.jarnbjo.flac.FlacStream;
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;
 import de.jarnbjo.vorbis.VorbisStream;
-import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -67,13 +68,15 @@ public final class TailwindHelper {
                 LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams()
                         .iterator()
                         .next();
-                if (!stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
-                    new ErrorWindow("Failed to read this Vorbis (OGG) file...").run();
-                    return null;
+                if (stream.getFormat().equals(LogicalOggStream.FORMAT_FLAC)) {
+                    FlacIn v = new FlacIn(new FlacStream(stream));
+                    ais = new AudioInputStream(v, v.getFormat(), -1L);
+                    return ais;
+                } else if (stream.getFormat().equals(LogicalOggStream.FORMAT_VORBIS)) {
+                    VorbisIn v = new VorbisIn(new VorbisStream(stream));
+                    ais = new AudioInputStream(v, v.getFormat(), -1L);
+                    return ais;
                 }
-                VorbisIn v = new VorbisIn(new VorbisStream(stream));
-                ais = new AudioInputStream(v, v.getFormat(), -1L);
-                return ais;
             }
         } catch (Exception e) {
             e.printStackTrace();

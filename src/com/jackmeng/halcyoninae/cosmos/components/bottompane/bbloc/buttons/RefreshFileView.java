@@ -25,7 +25,9 @@ import java.awt.event.ActionEvent;
 
 /**
  * Dispatches a call for all of the tabs in the FileList
- * to be refreshed.
+ * to be refreshed. This button is shown to the user
+ * if an automatic refresh call could not make it in time for a
+ * refresh.
  *
  * @author Jack Meng
  * @since 3.0
@@ -34,9 +36,11 @@ public class RefreshFileView extends JButton implements BBlocButton {
 
     public RefreshFileView() {
         super(new ImageIcon(DeImage
-                .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16, 16)));
+                .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16,
+                        16)));
         setRolloverIcon(new ImageIcon(DeImage
-                .resize(DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
+                .resize(DeImage
+                        .imageIconToBI(Global.rd.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
                         16)));
         setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
         setOpaque(true);
@@ -47,7 +51,6 @@ public class RefreshFileView extends JButton implements BBlocButton {
         addActionListener(this);
     }
 
-
     /**
      * @return JComponent
      */
@@ -55,7 +58,6 @@ public class RefreshFileView extends JButton implements BBlocButton {
     public JComponent getComponent() {
         return this;
     }
-
 
     /**
      * @param e

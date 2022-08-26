@@ -56,6 +56,12 @@ public final class TimeParser {
         return String.format("%02d:%02d:%02d", hour, minute, second);
     }
 
+    /**
+     * Converts a time of milliseconds into a String form "HH:MM:SS" where H
+     * represents HOURS, M represents MINUTES, and S represents SECONDS
+     * @param millis A primitive long representing milliseconds
+     * @return A String representing the long milliseconds in a pretty format
+     */
     public static String fromMillis(long millis) {
         return String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(millis),

@@ -37,49 +37,49 @@ public final class Wrapper {
     /**
      * Launches a runnable in an async pool.
      *
+     * This method should only be used for non-infinite
+     * runnables, and should only be used for one time
+     * or simple loops.
+     *
+     * If a complex task is needed, especially with GUI,
+     * a Job implementation should be used.
+     *
+     * @see com.jackmeng.halcyoninae.halcyon.worker.Job
      * @param runnable The runnable to be launched
+     * @since 3.1
+     * @author Jack Meng
      */
     public static void async(Runnable runnable) {
         new Thread(runnable).start();
     }
 
+    /**
+     * Attempts to sort a standard TabTree implementation.
+     * A TabTree is a master interface that holds information regarding
+     * a single GUI playlist.
+     *
+     * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree
+     * @param tree A TabTree implementation with valid File listings.
+     * @author Jack Meng
+     * @since 3.3
+     */
     public static void sort(TabTree tree) {
         File[] f = new File(tree.getPath()).listFiles();
         assert f != null;
         Arrays.sort(f, Comparator.comparing(File::getName));
     }
 
-
     /**
-     * @param runnable
-     */
-    public static void asyncSwingUtil(Runnable runnable) {
-        SwingUtilities.invokeLater(runnable);
-    }
-
-    /**
-     * Launches a Runnable in a precatched
-     * Exception handler.
+     * Uses an ExecutorService managed Threadpool to run a
+     * particular task. See the documentation of {@link #async(Runnable)}
+     * for the exact documentations as the overall usage are the same.
      *
-     * @param runnable The task to run safely on.
-     */
-    public static void safeLog(Runnable runnable, boolean isAsync) {
-        try {
-            if (isAsync)
-                async(runnable);
-            else
-                runnable.run();
-        } catch (Exception e) {
-            ExternalResource.dispatchLog(e);
-        }
-    }
-
-
-    /**
-     * @param run
+     * @param run A runnable or an anonymous class can be used for this implementation
+     * @author Jack Meng
+     * @since 3.2
      */
     public static void threadedRun(Runnable run) {
-        ExecutorService es = Executors.newWorkStealingPool();
+        ExecutorService es = Executors.newSingleThreadExecutor();
         es.submit(run);
     }
 }

@@ -15,14 +15,19 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
+import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import java.awt.*;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.Enumeration;
@@ -63,7 +68,8 @@ public class ThreadedScheduler {
         UIManager.put("TitlePane.closePressedForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
         UIManager.put("TitlePane.buttonHoverForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
         UIManager.put("TitlePane.buttonPressedForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
-        UIManager.put("Component.focusedBorderColor", ColorTool.getNullColor()); // takes a generic java.awt.Color object
+        UIManager.put("Component.focusedBorderColor", ColorTool.getNullColor()); // takes a generic java.awt.Color
+                                                                                 // object
         UIManager.put("Component.focusColor", ColorTool.getNullColor()); // takes a generic java.awt.Color object
         UIManager.put("TitlePane.centerTitle", true);
         UIManager.put("TitlePane.buttonSize", new java.awt.Dimension(25, 20));
@@ -86,7 +92,7 @@ public class ThreadedScheduler {
         }
 
         // PROGRAMMABLE THREADS
-        Runnable[] tasks = new Runnable[]{
+        Runnable[] tasks = new Runnable[] {
                 new PingFileView(Global.bp),
                 new DefunctOptimizer(),
         };

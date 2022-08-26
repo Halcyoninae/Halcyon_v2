@@ -63,10 +63,21 @@ public final class ColorTool {
         return new Color(r, g, b, a);
     }
 
+    /**
+     * Returns an integer array representing the standard RED GREEN BLUE
+     * colors. Where arr[0]:RED arr[1]:GREEN arr[2]:BLUE. Alpha is not
+     * represented
+     * @param c A Color object (java.awt.Color)
+     * @return An integer array of length 3
+     */
     public static int[] colorBreakDown(Color c) {
         return new int[] { c.getRed(), c.getGreen(), c.getBlue() };
     }
 
+    /**
+     * Get a color with 0 RED GREEN BLUE ALPHA
+     * @return A Color object (java.awt.Color)
+     */
     public static Color getNullColor() {
         return new Color(0, 0, 0, 0);
     }

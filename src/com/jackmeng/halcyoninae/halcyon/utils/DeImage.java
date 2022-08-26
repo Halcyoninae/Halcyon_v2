@@ -193,7 +193,7 @@ public final class DeImage {
      * @return BufferedImage The resized BufferedImage
      */
     public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
+        Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_AREA_AVERAGING);
         BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2d = dimg.createGraphics();
@@ -301,7 +301,7 @@ public final class DeImage {
      */
     public static ImageIcon resizeImage(ImageIcon image, int width, int height) {
         BaseMultiResolutionImage mri = new BaseMultiResolutionImage(image.getImage());
-        Image newImg = mri.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        Image newImg = mri.getScaledInstance(width, height, Image.SCALE_AREA_AVERAGING);
         return new ImageIcon(newImg);
     }
 
