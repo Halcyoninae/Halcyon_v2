@@ -15,8 +15,6 @@
 
 package com.jackmeng.halcyoninae.halcyon.connections.resource;
 
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;

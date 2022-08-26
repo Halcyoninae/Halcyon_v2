@@ -21,8 +21,6 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 
 public class SlidersDialog extends JFrame implements Runnable, TailwindListener.StatusUpdateListener {

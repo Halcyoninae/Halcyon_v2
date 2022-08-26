@@ -20,7 +20,6 @@ import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
 import com.jackmeng.halcyoninae.cosmos.components.moreapps.MoreApps;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
-import com.jackmeng.halcyoninae.cosmos.components.waveform.WaveForm;
 import com.jackmeng.halcyoninae.halcyon.connections.resource.ResourceDistributor;
 import com.jackmeng.halcyoninae.tailwind.wrapper.Player;
 

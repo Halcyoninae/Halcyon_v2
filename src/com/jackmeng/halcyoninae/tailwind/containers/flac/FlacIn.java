@@ -1,12 +1,11 @@
 package com.jackmeng.halcyoninae.tailwind.containers.flac;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import de.jarnbjo.flac.FlacStream;
 import de.jarnbjo.ogg.EndOfOggStreamException;
 
 import javax.sound.sampled.AudioFormat;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class FlacIn extends InputStream {
     private final FlacStream stream;

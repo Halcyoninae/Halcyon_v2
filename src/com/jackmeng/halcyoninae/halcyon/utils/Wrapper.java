@@ -16,9 +16,7 @@
 package com.jackmeng.halcyoninae.halcyon.utils;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 
-import javax.swing.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;

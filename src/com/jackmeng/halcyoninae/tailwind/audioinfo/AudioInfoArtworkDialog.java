@@ -15,14 +15,11 @@
 
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

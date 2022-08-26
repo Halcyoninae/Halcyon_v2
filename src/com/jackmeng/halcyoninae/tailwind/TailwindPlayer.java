@@ -25,9 +25,6 @@ import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.*;
-
-import org.jogamp.glg2d.GLG2DCanvas;
-
 import java.io.File;
 import java.net.URL;
 import java.util.HashMap;

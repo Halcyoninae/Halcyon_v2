@@ -1,8 +1,8 @@
 package com.jackmeng.halcyoninae.tailwind;
 
-import java.util.concurrent.ExecutorService;
-
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+
+import java.util.concurrent.ExecutorService;
 
 public class TailwindClock implements Runnable, TailwindListener.StatusUpdateListener {
     private ExecutorService worker;

@@ -36,8 +36,6 @@ import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.setup.Setup;
-import com.jackmeng.halcyoninae.setup.SetupListener;
-import com.jackmeng.halcyoninae.setup.SetupStatus;
 
 import javax.swing.*;
 import java.awt.*;

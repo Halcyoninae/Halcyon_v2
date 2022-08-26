@@ -19,7 +19,6 @@ import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.containers.flac.FlacIn;
 import com.jackmeng.halcyoninae.tailwind.containers.vorbis.VorbisIn;
 import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
-
 import de.jarnbjo.flac.FlacStream;
 import de.jarnbjo.ogg.LogicalOggStream;
 import de.jarnbjo.ogg.OnDemandUrlStream;

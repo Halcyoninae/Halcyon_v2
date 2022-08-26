@@ -16,8 +16,6 @@
 package com.jackmeng.halcyoninae.cloudspin;
 
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
