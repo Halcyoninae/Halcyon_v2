@@ -89,6 +89,17 @@ from the actual committed Java
 Heap which is allocated to the 
 individual Java Processes.
 
+The program will allow for 
+multiple audio API integrations.
+By default, the program must
+support the standard Java Sound
+abstraction (Tailwind) along
+with the Tritonus Open Java
+Sound API. The JavaFX media 
+platform shall only be required
+if the "com.sun.media" package
+is present.
+
 Along with everything else, the 
 program features its own image
 manipulation library, filesystem 
@@ -201,12 +212,13 @@ Pre-req:
 Default testing kit:
   > JavaJDK -> 11+
   > JavaJRE -> 11+
+  > JavaFX -> 12+
 
 The code struct tree:
 (src/com/jackmeng/halcyon/...)
   src -> Source Root
     com
-      jackmeng
+      jackmeng/halcyoninae
         halcyon
           Halcyon.java -> Main()
 
