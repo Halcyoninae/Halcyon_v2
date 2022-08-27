@@ -92,8 +92,9 @@ individual Java Processes.
 
 Along with everything else, the 
 program features its own image
-manipulation library along with a
-custom file system API.
+manipulation library, filesystem 
+API, and custom GUI components
+that can be used.
 
 ----------------------------------
 
