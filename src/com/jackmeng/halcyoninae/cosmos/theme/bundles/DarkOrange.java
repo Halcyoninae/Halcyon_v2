@@ -33,31 +33,55 @@ import java.awt.*;
  */
 public class DarkOrange implements Theme {
 
+
+    /**
+     * @return Class<? extends BasicLookAndFeel>
+     */
     @Override
     public Class<? extends BasicLookAndFeel> getLAF() {
         return FlatAtomOneDarkIJTheme.class;
     }
 
+
+    /**
+     * @return Color
+     */
     @Override
     public Color getBackgroundColor() {
         return ColorTool.hexToRGBA("#f2c29d");
     }
 
+
+    /**
+     * @return Color
+     */
     @Override
     public Color getForegroundColor() {
         return ColorTool.hexToRGBA("#fa9548");
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String getThemeName() {
         return "Dark Orange";
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String getCanonicalName() {
         return "dark_orange";
     }
 
+
+    /**
+     * @return ThemeType
+     */
     @Override
     public ThemeType getThemeType() {
         return ThemeType.DARK;

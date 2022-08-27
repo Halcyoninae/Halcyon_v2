@@ -27,6 +27,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -35,18 +36,28 @@ public class IconHandler {
     public static String RSCLocale = Manager.RSC_FOLDER_NAME;
     private Color themeColor;
     private Map<String, BufferedImage> icons;
-    private String[] temp;
+    private WeakReference<String[]> temp;
 
     public IconHandler(String[] acceptableRuleSets) {
         themeColor = ColorManager.MAIN_FG_THEME;
-        this.temp = acceptableRuleSets;
+        this.temp = new WeakReference<>(acceptableRuleSets);
     }
 
+
+    /**
+     * @throws IOException
+     */
     public void load() throws IOException{
-        load(RSCLocale, temp);
+        load(RSCLocale, temp.get());
         temp = null;
     }
 
+
+    /**
+     * @param locale
+     * @param acceptableRuleSets
+     * @throws IOException
+     */
     private static void load(String locale, String[] acceptableRuleSets) throws IOException {
         Map<String, BufferedImage> map = new HashMap<>();
         if (!FileParser.checkDirExistence(locale)) {
@@ -65,14 +76,27 @@ public class IconHandler {
 
     }
 
+
+    /**
+     * @param c
+     */
     public void setColorTheme(Color c) {
         this.themeColor = c;
     }
 
+
+    /**
+     * @return Color
+     */
     public Color getThemeColor() {
         return themeColor;
     }
 
+
+    /**
+     * @param key
+     * @return ImageIcon
+     */
     public ImageIcon request(String key) {
         return icons.get(key) == null ? new ImageIcon(CloudSpin.createUnknownIMG())
                 : new ImageIcon(CloudSpin.hueImageUnsafe(icons.get(key), ColorTool.colorBreakDown(themeColor)));

@@ -25,10 +25,18 @@ public class AttributableImg extends BufferedImage {
         this.attributableTab = attributableTag;
     }
 
+
+    /**
+     * @return String
+     */
     public String getAttribute() {
         return attributableTab;
     }
 
+
+    /**
+     * @param str
+     */
     public void setAttribute(String str) {
         this.attributableTab = str;
     }

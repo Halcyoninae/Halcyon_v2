@@ -14,6 +14,18 @@ public final class GradientImg {
     private GradientImg() {
     }
 
+
+    /**
+     * @param img
+     * @param p1x
+     * @param p1y
+     * @param p2x
+     * @param p2y
+     * @param matrix
+     * @param s_o
+     * @param e_o
+     * @return BufferedImage
+     */
     private static BufferedImage __modify_matrix_alphamask_(BufferedImage img, int p1x, int p1y, int p2x, int p2y,
             float[] matrix, int s_o, int e_o) {
         if (img != null && matrix.length > 0) {
@@ -29,6 +41,12 @@ public final class GradientImg {
         return img;
     }
 
+
+    /**
+     * @param img
+     * @param img2
+     * @return BufferedImage
+     */
     private static BufferedImage __apply_img_source_top_(BufferedImage img, BufferedImage img2) {
         if (img != null) {
             int width = img2.getWidth();
@@ -46,6 +64,14 @@ public final class GradientImg {
         return null;
     }
 
+
+    /**
+     * @param img
+     * @param startOpacity
+     * @param endOpacity
+     * @param directionFade
+     * @return BufferedImage
+     */
     public static BufferedImage createGradientFade(BufferedImage img, int startOpacity, int endOpacity,
             int directionFade) {
         if (img != null) {

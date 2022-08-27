@@ -18,6 +18,7 @@ package com.jackmeng.halcyoninae.tailwind;
 import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,9 +31,9 @@ import java.util.List;
  * @since 3.1
  */
 public class TailwindEventManager {
-    private final List<TailwindListener.TimeUpdateListener> timeListeners;
-    private final List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
-    private final List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
+    private final List<WeakReference<TailwindListener.TimeUpdateListener>> timeListeners;
+    private final List<WeakReference<TailwindListener.StatusUpdateListener>> statusUpdateListeners;
+    private final List<WeakReference<TailwindListener.GenericUpdateListener>> genericUpdateListeners;
     private TailwindListener.FrameBufferListener bufferListener;
 
     public TailwindEventManager() {
@@ -46,7 +47,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
-        return timeListeners.add(e);
+        return timeListeners.add(new WeakReference<>(e));
     }
 
     /**
@@ -54,7 +55,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
-        return statusUpdateListeners.add(e);
+        return statusUpdateListeners.add(new WeakReference<>(e));
     }
 
     /**
@@ -62,7 +63,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
-        return genericUpdateListeners.add(e);
+        return genericUpdateListeners.add(new WeakReference<>(e));
     }
 
     /**
@@ -75,21 +76,21 @@ public class TailwindEventManager {
     /**
      * @return e
      */
-    public List<TailwindListener.TimeUpdateListener> getTimeListeners() {
+    public List<WeakReference<TailwindListener.TimeUpdateListener>> getTimeListeners() {
         return timeListeners;
     }
 
     /**
      * @return e
      */
-    public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
+    public List<WeakReference<TailwindListener.StatusUpdateListener>> getStatusUpdateListeners() {
         return statusUpdateListeners;
     }
 
     /**
      * @return e
      */
-    public List<TailwindListener.GenericUpdateListener> getGenericUpdateListeners() {
+    public List<WeakReference<TailwindListener.GenericUpdateListener>> getGenericUpdateListeners() {
         return genericUpdateListeners;
     }
 
@@ -104,8 +105,8 @@ public class TailwindEventManager {
      * @param time
      */
     public synchronized void dispatchTimeEvent(long time) {
-        for (TailwindListener.TimeUpdateListener e : timeListeners) {
-            e.trackCurrentTime(time);
+        for (WeakReference<TailwindListener.TimeUpdateListener> e : timeListeners) {
+            e.get().trackCurrentTime(time);
         }
 
     }
@@ -114,8 +115,8 @@ public class TailwindEventManager {
      * @param status
      */
     public synchronized void dispatchStatusEvent(TailwindStatus status) {
-        for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
-            e.statusUpdate(status);
+        for (WeakReference<TailwindListener.StatusUpdateListener> e : statusUpdateListeners) {
+            e.get().statusUpdate(status);
         }
 
     }
@@ -124,8 +125,8 @@ public class TailwindEventManager {
      * @param event
      */
     public synchronized void dispatchGenericEvent(TailwindEvent event) {
-        for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
-            e.genericUpdate(event);
+        for (WeakReference<TailwindListener.GenericUpdateListener> e : genericUpdateListeners) {
+            e.get().genericUpdate(event);
         }
     }
 

@@ -111,6 +111,10 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
                 "Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
     }
 
+
+    /**
+     * @param gain
+     */
     @Override
     public void setGain(float gain) {
         super.setGain(gain);

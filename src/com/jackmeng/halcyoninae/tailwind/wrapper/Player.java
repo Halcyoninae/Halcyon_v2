@@ -33,6 +33,7 @@ import java.io.File;
  * to
  * have much more control over the playback library and to make it a global
  * scope player instead of having to reinit everything on something new.
+ * 
  * <p>
  * 这种简化是由于不需要某些方法，并且至
  * 对播放库有更多的控制权并使其成为全局

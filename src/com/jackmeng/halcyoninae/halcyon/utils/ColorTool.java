@@ -55,6 +55,12 @@ public final class ColorTool {
         return String.format("#%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue());
     }
 
+
+    /**
+     * @param c
+     * @param percent
+     * @return Color
+     */
     public static Color brightenColor(Color c, int percent) {
         int r = c.getRed() + (255 - c.getRed()) * percent / 100;
         int g = c.getGreen() + (255 - c.getGreen()) * percent / 100;

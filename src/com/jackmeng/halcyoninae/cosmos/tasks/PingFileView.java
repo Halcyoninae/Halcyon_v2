@@ -15,6 +15,8 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
+import java.util.concurrent.ExecutorService;
+
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
 
 /**
@@ -27,7 +29,7 @@ import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
  */
 public final class PingFileView implements Runnable {
     private final BottomPane bp;
-    private Thread worker;
+    private ExecutorService worker;
 
     /**
      * Calls the default BottomPane Object

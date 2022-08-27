@@ -23,7 +23,7 @@ package com.jackmeng.halcyoninae.halcyon.connections.properties;
  * @since 3.1
  */
 public class Property {
-    public String propertyName = "", defaultProperty = "";
+    public String propertyName, defaultProperty;
     public PropertyValidator pr;
     public String[] commonProperties;
 

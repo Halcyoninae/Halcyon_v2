@@ -128,6 +128,11 @@ public final class FileParser {
         return files.length == 0;
     }
 
+
+    /**
+     * @param locale
+     * @return boolean
+     */
     public static boolean checkDirExistence(String locale) {
         File f = new File(locale);
         return f.isDirectory() && f.exists();

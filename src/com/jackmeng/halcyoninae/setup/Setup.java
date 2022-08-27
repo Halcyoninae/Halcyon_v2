@@ -214,6 +214,10 @@ public class Setup extends JFrame implements Runnable {
         listener.forEach(x -> x.updateStatus(SETUP_EXISTS ? SetupStatus.PASSED : SetupStatus.NEW));
     }
 
+
+    /**
+     * @param listeners
+     */
     public static void addSetupListener(SetupListener... listeners) {
         Collections.addAll(listener, listeners);
     }

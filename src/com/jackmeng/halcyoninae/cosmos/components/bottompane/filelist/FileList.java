@@ -33,6 +33,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.*;
 
@@ -70,7 +71,7 @@ public class FileList extends JScrollPane implements TabTree {
      * Parameter 2: {@link javax.swing.tree.DefaultMutableTreeNode} The node
      * instance of the file as represented on the JTree.
      */
-    private final Map<File, DefaultMutableTreeNode> fileMap;
+    private final WeakReference<Map<File, DefaultMutableTreeNode>> fileMap;
     private final transient PhysicalFolder info;
     private final DefaultMutableTreeNode root;
     public boolean isVirtual;
@@ -80,7 +81,7 @@ public class FileList extends JScrollPane implements TabTree {
             RightClickHideItemListener hideStringTask) {
         super();
         this.info = info;
-        fileMap = new HashMap<>();
+        fileMap = new WeakReference<>(new HashMap<>());
         root = new DefaultMutableTreeNode(info.getName());
         isVirtual = info instanceof VirtualFolder;
         setAutoscrolls(true);
@@ -95,7 +96,7 @@ public class FileList extends JScrollPane implements TabTree {
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
             if (f != null) {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(isVirtual ? f.getAbsolutePath() : f.getName());
-                fileMap.put(f, node);
+                fileMap.get().put(f, node);
                 root.add(node);
                 node.setParent(root);
             }
@@ -124,7 +125,7 @@ public class FileList extends JScrollPane implements TabTree {
 
     public FileList(PhysicalFolder info) {
         this.info = info;
-        fileMap = new HashMap<>();
+        fileMap = new WeakReference<>(new HashMap<>());
         root = new DefaultMutableTreeNode(info.getName());
         isVirtual = info instanceof VirtualFolder;
         setAutoscrolls(true);
@@ -137,7 +138,7 @@ public class FileList extends JScrollPane implements TabTree {
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
             if (f != null && !Program.cacher.isExcluded(f.getAbsolutePath())) {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-                fileMap.put(f, node);
+                fileMap.get().put(f, node);
                 root.add(node);
                 node.setParent(root);
             }
@@ -193,7 +194,7 @@ public class FileList extends JScrollPane implements TabTree {
      * @return Returns the default file map with each File object having a node.
      */
     public Map<File, DefaultMutableTreeNode> getFileMap() {
-        return fileMap;
+        return fileMap.get();
     }
 
     /**
@@ -208,23 +209,23 @@ public class FileList extends JScrollPane implements TabTree {
      */
     public void revalidateFiles() {
         for (File f : info.getFiles(Manager.ALLOWED_FORMATS)) {
-            if (f != null && !fileMap.containsKey(f) && !Program.cacher.isExcluded(f.getAbsolutePath())) {
+            if (f != null && !fileMap.get().containsKey(f) && !Program.cacher.isExcluded(f.getAbsolutePath())) {
                 DefaultMutableTreeNode node = new DefaultMutableTreeNode(f.getName());
-                fileMap.put(f, node);
+                fileMap.get().put(f, node);
                 root.add(node);
                 ((DefaultTreeModel) tree.getModel()).reload();
             }
         }
         List<File> toRemove = new ArrayList<>();
-        for (File f : fileMap.keySet()) {
+        for (File f : fileMap.get().keySet()) {
             if (!f.exists() || !f.isFile()
-                    || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
-                ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
+                    || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get().get(f).getParent() != null) {
+                ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get().get(f));
                 toRemove.add(f);
             }
         }
         for (File f : toRemove) {
-            fileMap.remove(f);
+            fileMap.get().remove(f);
         }
     }
 
@@ -235,12 +236,12 @@ public class FileList extends JScrollPane implements TabTree {
     public void remove(String nodeName) {
         try {
             Debugger.warn(nodeName);
-            for (File f : fileMap.keySet()) {
+            for (File f : fileMap.get().keySet()) {
                 if (f.getName().equals(nodeName)) {
                     DefaultTreeModel model = (DefaultTreeModel) tree.getModel();
-                    model.removeNodeFromParent(fileMap.get(f));
+                    model.removeNodeFromParent(fileMap.get().get(f));
                     model.reload();
-                    fileMap.remove(f);
+                    fileMap.get().remove(f);
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -254,8 +255,8 @@ public class FileList extends JScrollPane implements TabTree {
      */
     @Override
     public String getSelectedNode(DefaultMutableTreeNode node) {
-        for (File f : fileMap.keySet()) {
-            if (fileMap.get(f).equals(node)) {
+        for (File f : fileMap.get().keySet()) {
+            if (fileMap.get().get(f).equals(node)) {
                 return f.getAbsolutePath();
             }
         }
@@ -278,13 +279,17 @@ public class FileList extends JScrollPane implements TabTree {
         return isVirtual;
     }
 
+
+    /**
+     * @param e
+     */
     @Override
     public void sort(TabTreeSortMethod e) {
         synchronized (fileMap) {
             if (e.equals(TabTreeSortMethod.ALPHABETICAL)) {
                 List<DefaultMutableTreeNode> nodes = new ArrayList<>();
-                for (File f : fileMap.keySet()) {
-                    nodes.add(fileMap.get(f));
+                for (File f : fileMap.get().keySet()) {
+                    nodes.add(fileMap.get().get(f));
                 }
                 nodes.sort(Comparator.comparing(o -> ((String) o.getUserObject())));
                 for (DefaultMutableTreeNode node : nodes) {
@@ -294,8 +299,8 @@ public class FileList extends JScrollPane implements TabTree {
                 ((DefaultTreeModel) tree.getModel()).reload();
             } else if (e.equals(TabTreeSortMethod.REV_ALPHABETICAL)) {
                 List<DefaultMutableTreeNode> nodes = new ArrayList<>();
-                for (File f : fileMap.keySet()) {
-                    nodes.add(fileMap.get(f));
+                for (File f : fileMap.get().keySet()) {
+                    nodes.add(fileMap.get().get(f));
                 }
                 nodes.sort((o1, o2) -> ((String) o2.getUserObject()).compareTo(((String) o1.getUserObject())));
                 for (DefaultMutableTreeNode node : nodes) {
@@ -305,8 +310,8 @@ public class FileList extends JScrollPane implements TabTree {
                 ((DefaultTreeModel) tree.getModel()).reload();
             } else if (e.equals(TabTreeSortMethod.SHUFFLE)) {
                 List<DefaultMutableTreeNode> nodes = new ArrayList<>();
-                for (File f : fileMap.keySet()) {
-                    nodes.add(fileMap.get(f));
+                for (File f : fileMap.get().keySet()) {
+                    nodes.add(fileMap.get().get(f));
                 }
                 Collections.shuffle(nodes);
                 for (DefaultMutableTreeNode node : nodes) {
@@ -318,6 +323,10 @@ public class FileList extends JScrollPane implements TabTree {
         }
     }
 
+
+    /**
+     * @return FileList
+     */
     @Override
     public FileList getFileList() {
         return this;

@@ -303,6 +303,10 @@ public class AudioInfo {
         }
     }
 
+
+    /**
+     * @return AudioInfoDialog
+     */
     public AudioInfoDialog launchAsDialog() {
         Debugger.alert(new TConstr(CLIStyles.MAGENTA_TXT,
                 "Launching current AudioInfo"));

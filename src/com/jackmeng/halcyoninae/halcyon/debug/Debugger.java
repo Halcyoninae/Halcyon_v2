@@ -197,6 +197,10 @@ public class Debugger {
         }
     }
 
+
+    /**
+     * @param o
+     */
     @SafeVarargs
     public static <T> void crit(T ... o) {
         if (!DefaultManager.DEBUG_PROGRAM) {

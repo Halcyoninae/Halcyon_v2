@@ -80,8 +80,6 @@ public class Cacher {
     /**
      * @param rootName
      * @param content
-     * @throws TransformerException
-     * @throws ParserConfigurationException
      */
     public void build(String rootName, Map<String, String> content)
             throws TransformerException, ParserConfigurationException {

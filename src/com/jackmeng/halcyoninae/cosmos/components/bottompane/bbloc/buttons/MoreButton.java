@@ -74,11 +74,19 @@ public class MoreButton extends JButton implements BBlocButton {
         });
     }
 
+
+    /**
+     * @return JComponent
+     */
     @Override
     public JComponent getComponent() {
         return this;
     }
 
+
+    /**
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if(!isPressed) {

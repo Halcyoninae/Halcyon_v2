@@ -147,6 +147,10 @@ public class LikeList extends FileList {
         return Arrays.asList(folder.getFiles()).contains(new File(file));
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String getRootNameTree() {
         return "Liked";

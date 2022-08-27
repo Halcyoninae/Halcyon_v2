@@ -424,6 +424,10 @@ public class ButtonControlTP extends JPanel
         }
     }
 
+
+    /**
+     * @param status
+     */
     @Override
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {

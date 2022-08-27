@@ -46,11 +46,23 @@ public final class TextParser {
         return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..." : str : "";
     }
 
+
+    /**
+     * @param str
+     * @param validLength
+     * @return String
+     */
     public static String fulfill(String str, int validLength) {
         return str != null ? str.length() > validLength ? str.substring(0, validLength) + "..."
                 : str.length() < validLength ? str + getCopies(validLength, " ") : str : "";
     }
 
+
+    /**
+     * @param n
+     * @param s
+     * @return String
+     */
     public static String getCopies(int n, String s) {
         return String.valueOf(s).repeat(Math.max(0, n + 1));
     }

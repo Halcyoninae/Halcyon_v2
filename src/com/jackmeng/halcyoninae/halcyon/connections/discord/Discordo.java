@@ -42,7 +42,7 @@ import net.arikia.dev.drpc.DiscordRichPresence;
 public class Discordo implements InfoViewUpdateListener {
 
     protected final String PROJECT_ID = "989355331761086475";
-    private final String STATE = "Halcyon\n ", NOTHING_MUSIC = "Nothing";
+    private final String STATE = "Halcyon\n ";
     protected DiscordRichPresence rpc;
 
     /**
@@ -57,6 +57,7 @@ public class Discordo implements InfoViewUpdateListener {
                 .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
 
+        String NOTHING_MUSIC = "Nothing";
         rpc = new DiscordRichPresence.Builder(STATE
                 + NOTHING_MUSIC)
                 .setBigImage("disk", STATE)

@@ -309,6 +309,10 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         });
     }
 
+
+    /**
+     * @param beSmart
+     */
     private void __reset_artwork_lowicon(final boolean beSmart) {
         SwingUtilities.invokeLater(() -> {
             if (info.hasArtwork()) {

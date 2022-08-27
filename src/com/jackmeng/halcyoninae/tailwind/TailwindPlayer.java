@@ -27,6 +27,7 @@ import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -63,7 +64,7 @@ import java.util.concurrent.TimeUnit;
  * @author Jack Meng
  * @since 3.1
  */
-public class TailwindPlayer implements Audio, Runnable {
+public class TailwindPlayer implements Audio {
     // PUBLIC STATIC UTIL START
     public static final int MAGIC_NUMBER = 1024;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
@@ -74,6 +75,7 @@ public class TailwindPlayer implements Audio, Runnable {
     private File resource;
     private int my_magic_number = MAGIC_NUMBER;
     private SourceDataLine line;
+    private TailwindPipelineMethod pipeline;
     private FileFormat format;
     private Map<String, Control> controlTable;
     private boolean open, paused, playing, forceClose;
@@ -84,22 +86,63 @@ public class TailwindPlayer implements Audio, Runnable {
 
     public TailwindPlayer(boolean useAutoClose) {
         events = new TailwindEventManager();
-        if(useAutoClose)
+        pipeline = TailwindPipelineMethod.DEFAULT_;
+        if (useAutoClose)
             events.addStatusUpdateListener(new TailwindDefaultListener(this));
     }
 
+
+    /**
+     * @param s
+     */
     public void setDynamicAllocation(boolean s) {
         my_magic_number = s ? -1 : MAGIC_NUMBER;
     }
 
+
+    /**
+     * @return TailwindPipelineMethod
+     */
+    public synchronized TailwindPipelineMethod getPipelineMethod() {
+        return pipeline;
+    }
+
+
+    /**
+     * @return boolean
+     */
+    public synchronized boolean isDefaultPipeline() {
+        return pipeline.equals(TailwindPipelineMethod.DEFAULT_);
+    }
+
+
+    /**
+     * @param pipeline
+     */
+    public synchronized void setPipelineMethod(TailwindPipelineMethod pipeline) {
+        this.pipeline = pipeline;
+    }
+
+
+    /**
+     * @param s
+     */
     public void setForceCloseOnOpen(boolean s) {
         this.forceClose = s;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isForceCloseOnOpen() {
         return forceClose;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isDyanmicAllocated() {
         return my_magic_number >= 4;
     }
@@ -109,26 +152,29 @@ public class TailwindPlayer implements Audio, Runnable {
      * @param table
      * @return e
      */
-    private static Map<String, Control> setControls(Line line, Map<String, Control> table) {
-        Map<String, Control> temp = new HashMap<>();
-        for (Control ctrl : line.getControls()) {
-            String t = ctrl.getType().toString();
-            if (table != null && table.containsKey(t)) {
-                Control old = table.get(t);
-                if (ctrl instanceof FloatControl && old instanceof FloatControl) {
-                    ((FloatControl) ctrl).setValue(
-                            ((FloatControl) ctrl).getValue());
-                } else if (ctrl instanceof BooleanControl) {
-                    ((BooleanControl) ctrl).setValue(
-                            ((BooleanControl) ctrl).getValue());
-                } else if (ctrl instanceof EnumControl) {
-                    ((EnumControl) ctrl).setValue(
-                            ((EnumControl) ctrl).getValue());
+    private Map<String, Control> setControls(Line line, Map<String, Control> table) {
+        if (isDefaultPipeline()) {
+            Map<String, Control> temp = new HashMap<>();
+            for (Control ctrl : line.getControls()) {
+                String t = ctrl.getType().toString();
+                if (table != null && table.containsKey(t)) {
+                    Control old = table.get(t);
+                    if (ctrl instanceof FloatControl && old instanceof FloatControl) {
+                        ((FloatControl) ctrl).setValue(
+                                ((FloatControl) ctrl).getValue());
+                    } else if (ctrl instanceof BooleanControl) {
+                        ((BooleanControl) ctrl).setValue(
+                                ((BooleanControl) ctrl).getValue());
+                    } else if (ctrl instanceof EnumControl) {
+                        ((EnumControl) ctrl).setValue(
+                                ((EnumControl) ctrl).getValue());
+                    }
                 }
+                temp.put(ctrl.getType().toString(), ctrl);
             }
-            temp.put(ctrl.getType().toString(), ctrl);
+            return temp;
         }
-        return temp;
+        return Collections.emptyMap();
     }
 
     /**
@@ -143,61 +189,64 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void open(File url) {
-        if(isForceCloseOnOpen() && (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))))
+        if (isForceCloseOnOpen()
+                && (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))))
             close();
-        if(!isForceCloseOnOpen() && (isOpen() || isPlaying()
+        if (!isForceCloseOnOpen() && (isOpen() || isPlaying()
                 || (worker != null && (!worker.isShutdown() || !worker.isTerminated())))) {
             return;
         }
-        try {
-            milliPos = 0L;
-            this.resource = url;
-            this.format = FileFormat.getFormatByName(this.resource.getName());
-            Debugger.unsafeLog("TailwindPlayer> Opening: " + resource.getAbsolutePath());
-            ais = TailwindHelper.getAudioIS(resource.toURI().toURL());
-            assert ais != null;
-            microsecondLength = (long) (1000000 *
-                    (ais.getFrameLength() /
-                            ais.getFormat().getFrameRate()));
-            frameLength = ais.getFrameLength();
+        if (isDefaultPipeline()) {
+            try {
+                milliPos = 0L;
+                this.resource = url;
+                this.format = FileFormat.getFormatByName(this.resource.getName());
+                Debugger.unsafeLog("TailwindPlayer> Opening: " + resource.getAbsolutePath());
+                ais = TailwindHelper.getAudioIS(resource.toURI().toURL());
+                assert ais != null;
+                microsecondLength = (long) (1000000 *
+                        (ais.getFrameLength() /
+                                ais.getFormat().getFrameRate()));
+                frameLength = ais.getFrameLength();
 
-            if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
-                if (this.microsecondLength < 0) {
-                    byte[] buffer = new byte[MAGIC_NUMBER];
-                    int readBytes;
+                if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
+                    if (this.microsecondLength < 0) {
+                        byte[] buffer = new byte[MAGIC_NUMBER];
+                        int readBytes;
 
-                    while ((readBytes = this.ais.read(buffer)) != -1) {
-                        this.frameLength += readBytes;
+                        while ((readBytes = this.ais.read(buffer)) != -1) {
+                            this.frameLength += readBytes;
+                        }
+
+                        this.frameLength /= this.ais.getFormat().getFrameSize();
+                        this.ais.close();
+                        this.ais = TailwindHelper.getAudioIS(this.resource.toURI().toURL());
+                        assert this.ais != null;
+                        this.microsecondLength = (long) (1000000 *
+                                (frameLength / this.ais.getFormat().getFrameRate()));
                     }
+                } else {
+                    if (microsecondLength < 0) {
+                        frameLength = ais.getFrameLength();
+                        microsecondLength = 1000000L
+                                * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
+                    }
+                }
 
-                    this.frameLength /= this.ais.getFormat().getFrameSize();
-                    this.ais.close();
-                    this.ais = TailwindHelper.getAudioIS(this.resource.toURI().toURL());
-                    assert this.ais != null;
-                    this.microsecondLength = (long) (1000000 *
-                            (frameLength / this.ais.getFormat().getFrameRate()));
-                }
-            } else {
-                if (microsecondLength < 0) {
-                    frameLength = ais.getFrameLength();
-                    microsecondLength = 1000000L
-                            * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
-                }
+                DataLine.Info info = new DataLine.Info(
+                        SourceDataLine.class,
+                        ais.getFormat());
+                formatAudio = ais.getFormat();
+                this.line = (SourceDataLine) AudioSystem.getLine(info);
+                this.line.open(ais.getFormat());
+                controlTable = setControls(this.line, controlTable);
+                this.open = true;
+                events.dispatchStatusEvent(TailwindStatus.OPEN);
+                events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
+            } catch (Exception e) {
+                new ErrorWindow("There was an error reading this file!\n" + e.getMessage()).run();
+                ExternalResource.dispatchLog(e);
             }
-
-            DataLine.Info info = new DataLine.Info(
-                    SourceDataLine.class,
-                    ais.getFormat());
-            formatAudio = ais.getFormat();
-            this.line = (SourceDataLine) AudioSystem.getLine(info);
-            this.line.open(ais.getFormat());
-            controlTable = TailwindPlayer.setControls(this.line, controlTable);
-            this.open = true;
-            events.dispatchStatusEvent(TailwindStatus.OPEN);
-            events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
-        } catch (Exception e) {
-            new ErrorWindow("There was an error reading this file!\n" + e.getMessage()).run();
-            ExternalResource.dispatchLog(e);
         }
     }
 
@@ -269,7 +318,9 @@ public class TailwindPlayer implements Audio, Runnable {
      * @return The microsecond position.
      */
     public synchronized long getMicrosecondPosition() {
-        return line != null ? line.getMicrosecondPosition() : 0L;
+        return isDefaultPipeline()
+                ? (line != null ? line.getMicrosecondPosition() : 0L)
+                : 0L;
     }
 
     /**
@@ -291,7 +342,7 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public synchronized void setPosition(long millis) {
-        if (open) {
+        if (isDefaultPipeline() && isOpen()) {
             setFramePosition((long) (ais.getFormat().getFrameRate() / 1000F) * millis);
         }
     }
@@ -303,7 +354,7 @@ public class TailwindPlayer implements Audio, Runnable {
      * @return long Frame Position from the DataLine
      */
     public synchronized long getLongFramePosition() {
-        return line.getLongFramePosition();
+        return isDefaultPipeline() ? line.getLongFramePosition() : 0L;
     }
 
     /**
@@ -354,23 +405,25 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void close() {
-        if (open) {
-            try {
-                resetProperties();
-                if(!worker.isShutdown()) {
-                    worker.shutdown();
+        if (isDefaultPipeline()) {
+            if (open) {
+                try {
+                    resetProperties();
+                    if (!worker.isShutdown()) {
+                        worker.shutdown();
+                    }
+                    if (line != null) {
+                        line.flush();
+                        line.drain();
+                        line.close();
+                    }
+                    if (ais != null) {
+                        ais.close();
+                    }
+                    events.dispatchStatusEvent(TailwindStatus.CLOSED);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (line != null) {
-                    line.flush();
-                    line.drain();
-                    line.close();
-                }
-                if (ais != null) {
-                    ais.close();
-                }
-                events.dispatchStatusEvent(TailwindStatus.CLOSED);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -386,15 +439,17 @@ public class TailwindPlayer implements Audio, Runnable {
      *             place in.
      */
     public void fadeOut(int time) {
-        if (line != null) {
-            FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
-            if (control.getUpdatePeriod() != -1) {
-                control.shift(
-                        control.getValue(),
-                        control.getMinimum(), time * 1000);
-            } else {
-                Debugger.info("Automatic Updates Not Supported");
-                // later i will implement this
+        if (isDefaultPipeline()) {
+            if (line != null) {
+                FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
+                if (control.getUpdatePeriod() != -1) {
+                    control.shift(
+                            control.getValue(),
+                            control.getMinimum(), time * 1000);
+                } else {
+                    Debugger.info("Automatic Updates Not Supported");
+                    // later i will implement this
+                }
             }
         }
     }
@@ -402,42 +457,44 @@ public class TailwindPlayer implements Audio, Runnable {
     @Override
     public void play() {
         if (playing || paused) {
-            stop();
+            pause();
         }
-        worker = Executors.newSingleThreadExecutor();
-        worker.execute(this);
+        if (isDefaultPipeline()) {
+            worker = Executors.newSingleThreadExecutor();
+            worker.execute(this.new StandardPipeLine());
 
-        ExecutorService timeWorker = Executors.newSingleThreadExecutor();
-        timeWorker.execute(() -> {
-            while (!timeWorker.isShutdown()) {
-                if (!paused) {
-                    if (open) {
-                        while (isPlaying() && !isPaused() && isOpen()) {
-                            milliPos += 5;
-                            try {
-                                Thread.sleep(5L);
-                            } catch (InterruptedException e) {
-                                // DO NOTHING
+            ExecutorService timeWorker = Executors.newSingleThreadExecutor();
+            timeWorker.execute(() -> {
+                while (!timeWorker.isShutdown()) {
+                    if (!paused) {
+                        if (open) {
+                            while (isPlaying() && !isPaused() && isOpen()) {
+                                milliPos += 5;
+                                try {
+                                    Thread.sleep(5L);
+                                } catch (InterruptedException e) {
+                                    // DO NOTHING
+                                }
                             }
+                        } else {
+                            timeWorker.shutdown();
+                            milliPos = 0L;
                         }
                     } else {
-                        timeWorker.shutdown();
-                        milliPos = 0L;
-                    }
-                } else {
-                    while (paused) {
-                        try {
-                            synchronized (timeRef) {
-                                timeRef.wait();
+                        while (paused) {
+                            try {
+                                synchronized (timeRef) {
+                                    timeRef.wait();
+                                }
+                            } catch (InterruptedException e) {
+                                // IGNORE
                             }
-                        } catch (InterruptedException e) {
-                            // IGNORE
                         }
                     }
                 }
-            }
 
-        });
+            });
+        }
         playing = true;
         events.dispatchStatusEvent(TailwindStatus.PLAYING);
 
@@ -455,11 +512,13 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void setGain(float percent) {
-        FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
-        control.setValue(percent < control.getMinimum() ? control.getMinimum()
-                : (Math.min(percent, control.getMaximum())));
-        if (((int) control.getValue()) == ((int) control.getMaximum())) {
-            Debugger.good(">3< Earrape Mode! Let's go!");
+        if (isDefaultPipeline()) {
+            FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
+            control.setValue(percent < control.getMinimum() ? control.getMinimum()
+                    : (Math.min(percent, control.getMaximum())));
+            if (((int) control.getValue()) == ((int) control.getMaximum())) {
+                Debugger.good(">3< Earrape Mode! Let's go!");
+            }
         }
     }
 
@@ -468,18 +527,22 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void setBalance(float balance) {
-        FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
-        bal.setValue(
-                balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+        if (isDefaultPipeline()) {
+            FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
+            bal.setValue(
+                    balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+        }
     }
 
     /**
      * @param pan
      */
     public void setPan(float pan) {
-        FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
-        ctrl.setValue(
-                pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
+        if (isDefaultPipeline()) {
+            FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
+            ctrl.setValue(
+                    pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
+        }
     }
 
     /**
@@ -493,14 +556,16 @@ public class TailwindPlayer implements Audio, Runnable {
 
     @Override
     public void resume() {
-        if (paused) {
-            playing = true;
-            paused = false;
-            synchronized (referencable) {
-                referencable.notifyAll();
+        if (isDefaultPipeline()) {
+            if (paused) {
+                playing = true;
+                paused = false;
+                synchronized (referencable) {
+                    referencable.notifyAll();
+                }
+            } else {
+                play();
             }
-        } else {
-            play();
         }
         events.dispatchStatusEvent(TailwindStatus.RESUMED);
     }
@@ -523,46 +588,54 @@ public class TailwindPlayer implements Audio, Runnable {
      */
     @Override
     public void seekTo(long millis) {
-        if (open || playing) {
-            long time = getPosition() + millis ;
-            Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
-                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n" + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time) + "\nCurrent Time" + TimeParser.fromMillis(milliPos));
-            if (time < 0 || millis == -2) {
-                milliPos = 0L;
-                setPosition(0);
-                Debugger.warn("FAULT: Lower bound exceeded for parameter: " + millis + "(ms)");
-            } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
-                milliPos = getMicrosecondLength() / 1000L;
-                setPosition(getMicrosecondLength() / 1000L);
-                Debugger.warn("FAULT: Upper bound exceeded for parameter: " + millis + "(ms)");
-            } else {
-                milliPos = time;
-                setPosition(time);
-                Debugger.good("OK: Bound checked. Skipping: " + millis);
+        if (isDefaultPipeline()) {
+            if (open || playing) {
+                long time = getPosition() + millis;
+                Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
+                        + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n"
+                        + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time)
+                        + "\nCurrent Time"
+                        + TimeParser.fromMillis(milliPos));
+                if (time < 0 || millis == -2) {
+                    milliPos = 0L;
+                    setPosition(0);
+                    Debugger.warn("FAULT: Lower bound exceeded for parameter: " + millis + "(ms)");
+                } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
+                    milliPos = getMicrosecondLength() / 1000L;
+                    setPosition(getMicrosecondLength() / 1000L);
+                    Debugger.warn("FAULT: Upper bound exceeded for parameter: " + millis + "(ms)");
+                } else {
+                    milliPos = time;
+                    setPosition(time);
+                    Debugger.good("OK: Bound checked. Skipping: " + millis);
+                }
             }
         }
     }
 
     @Override
     public void pause() {
-        Debugger.warn("TailwindPlayer> Pausing");
-        if (playing && !paused) {
-            paused = true;
-            playing = false;
-            events.dispatchStatusEvent(TailwindStatus.PAUSED);
+        if (isDefaultPipeline()) {
+            if (playing && !paused) {
+                paused = true;
+                playing = false;
+                events.dispatchStatusEvent(TailwindStatus.PAUSED);
+            }
         }
     }
 
     @Override
     public void stop() {
-        playing = false;
-        if(paused) {
-            synchronized(referencable) {
-                referencable.notifyAll();
+        if (isDefaultPipeline()) {
+            playing = false;
+            if (paused) {
+                synchronized (referencable) {
+                    referencable.notifyAll();
+                }
+                paused = false;
             }
-            paused = false;
+            setPosition(0);
         }
-        setPosition(0);
         events.dispatchStatusEvent(TailwindStatus.CLOSED);
     }
 
@@ -570,27 +643,29 @@ public class TailwindPlayer implements Audio, Runnable {
      * @param frame
      */
     public void setFramePosition(long frame) {
-        try {
-            if (playing)
-                pause();
+        if (isDefaultPipeline()) {
+            try {
+                if (playing)
+                    pause();
 
-            if (frame <= frameLength)
-                reset();
+                if (frame <= frameLength)
+                    reset();
 
-            byte[] buffer = new byte[ais.getFormat().getFrameSize()];
-            long curr = 0L;
+                byte[] buffer = new byte[ais.getFormat().getFrameSize()];
+                long curr = 0L;
 
-            while (curr < frame) {
-                ais.read(buffer);
-                curr++;
+                while (curr < frame) {
+                    ais.read(buffer);
+                    curr++;
+                }
+                Debugger.warn("Skipped frames: " + curr);
+
+                if (paused) {
+                    resume();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            Debugger.warn("Skipped frames: " + curr);
-
-            if (paused) {
-                resume();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -606,67 +681,70 @@ public class TailwindPlayer implements Audio, Runnable {
         return controlTable;
     }
 
-    @Override
-    public void run() {
-        if (line != null) {
-            byte[] buffer = null;
-            if (!ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
-                try {
-                    buffer = new byte[Integer
-                            .parseInt(ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
-                } catch (Exception e) {
-                    new ErrorWindow(
-                            "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
-                            .run();
-                    e.printStackTrace();
-                }
-            }
-            int i;
-            /*
-             * int nb = TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits());
-             * float[] samples = new float[MAGIC_NUMBER * formatAudio.getChannels()];
-             * long[] transfer = new long[samples.length];
-             */
-            if (buffer == null) {
-                buffer = new byte[(my_magic_number == -1
-                        ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
-                        : MAGIC_NUMBER * formatAudio.getChannels()
-                                * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
-                Debugger.warn("Tailwind_buffer_size: " + buffer.length);
-            }
-            line.start();
-            while (!worker.isShutdown()) {
-                if (!paused) {
+    public class StandardPipeLine implements Runnable {
+        @Override
+        public void run() {
+            if (line != null) {
+                byte[] buffer = null;
+                if (!ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
                     try {
-                        if (isOpen()) {
-                            while (playing && !paused && isOpen() && (i = ais.read(buffer)) > -1) {
-                                line.write(buffer, 0, i);
-                            }
-                        }
-                        if (!paused) {
-                            reset();
-                            playing = false;
-                            worker.shutdown();
-                            worker.awaitTermination(25L, TimeUnit.MILLISECONDS);
-                            events.dispatchStatusEvent(TailwindStatus.END);
-                            Debugger.warn("=========TailwindPlayer STOP=========");
-                        }
+                        buffer = new byte[Integer
+                                .parseInt(
+                                        ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
                     } catch (Exception e) {
+                        new ErrorWindow(
+                                "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
+                                .run();
                         e.printStackTrace();
                     }
-                } else {
-                    while (paused) {
+                }
+                int i;
+                /*
+                 * int nb = TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits());
+                 * float[] samples = new float[MAGIC_NUMBER * formatAudio.getChannels()];
+                 * long[] transfer = new long[samples.length];
+                 */
+                if (buffer == null) {
+                    buffer = new byte[(my_magic_number == -1
+                            ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
+                            : MAGIC_NUMBER * formatAudio.getChannels()
+                                    * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
+                    Debugger.warn("Tailwind_buffer_size: " + buffer.length);
+                }
+                line.start();
+                while (!worker.isShutdown()) {
+                    if (!paused) {
                         try {
-                            synchronized (referencable) {
-                                referencable.wait();
+                            if (isOpen()) {
+                                while (playing && !paused && isOpen() && (i = ais.read(buffer)) > -1) {
+                                    line.write(buffer, 0, i);
+                                }
                             }
-                        } catch (InterruptedException e) {
+                            if (!paused) {
+                                reset();
+                                playing = false;
+                                worker.shutdown();
+                                worker.awaitTermination(25L, TimeUnit.MILLISECONDS);
+                                events.dispatchStatusEvent(TailwindStatus.END);
+                                Debugger.warn("=========TailwindPlayer STOP=========");
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
+                        }
+                    } else {
+                        while (paused) {
+                            try {
+                                synchronized (referencable) {
+                                    referencable.wait();
+                                }
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
-            }
 
+            }
         }
     }
 

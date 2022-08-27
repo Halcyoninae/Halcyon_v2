@@ -14,6 +14,14 @@ public class FlacIn extends InputStream {
         this.stream = s;
     }
 
+
+    /**
+     * @param buffer
+     * @param offset
+     * @param length
+     * @return int
+     * @throws IOException
+     */
     @Override
     public int read(byte[] buffer, int offset, int length) throws IOException {
         try {
@@ -24,11 +32,22 @@ public class FlacIn extends InputStream {
         return -1;
     }
 
+
+    /**
+     * @param buffer
+     * @return int
+     * @throws IOException
+     */
     @Override
     public int read(byte[] buffer) throws IOException {
         return this.read(buffer, 0, buffer.length);
     }
 
+
+    /**
+     * @return int
+     * @throws IOException
+     */
     @Override
     public int read() throws IOException {
         return 0;

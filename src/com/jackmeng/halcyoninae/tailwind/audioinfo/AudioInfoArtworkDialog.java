@@ -57,10 +57,18 @@ public class AudioInfoArtworkDialog extends JFrame implements Runnable {
 
     }
 
+
+    /**
+     * @return AudioInfo
+     */
     public AudioInfo getAudioInfo() {
         return info;
     }
 
+
+    /**
+     * @return BufferedImage
+     */
     public BufferedImage getViewportArtwork() {
         return img;
     }

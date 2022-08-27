@@ -3,7 +3,6 @@ package com.jackmeng.halcyoninae.tailwind;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
 import java.util.concurrent.ExecutorService;
-
 public class TailwindClock implements Runnable, TailwindListener.StatusUpdateListener {
     private ExecutorService worker;
     private long time = 0L;
@@ -13,6 +12,10 @@ public class TailwindClock implements Runnable, TailwindListener.StatusUpdateLis
     public void run() {
     }
 
+
+    /**
+     * @param status
+     */
     @Override
     public void statusUpdate(TailwindStatus status) {
         // TO BE IMPLEMENTED

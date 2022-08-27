@@ -40,6 +40,11 @@ public class BlurLayer extends LayerUI<JComponent> {
         image = new ConvolveOp(new Kernel(3, 3, CloudSpinFilters.BLUR_KERNEL), ConvolveOp.EDGE_NO_OP, null);
     }
 
+
+    /**
+     * @param g
+     * @param c
+     */
     @Override
     public void paint(Graphics g, JComponent c) {
         int w = c.getWidth();

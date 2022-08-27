@@ -46,6 +46,10 @@ public class TConstr {
         this.start = new CLIStyles[] { start };
     }
 
+
+    /**
+     * @return String
+     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         Arrays.asList(start).forEach(x -> sb.append(x.getColor()));

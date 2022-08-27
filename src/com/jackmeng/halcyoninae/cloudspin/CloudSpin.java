@@ -55,6 +55,7 @@ public final class CloudSpin {
      * @param tone The tone of the color to shift to.
      * @deprecated Not used and defunct AF
      */
+    @Deprecated(forRemoval = true)
     public static void colorTone(BufferedImage img, Color tone) {
         for (int x = 0; x < img.getWidth(); x++) {
             for (int y = 0; y < img.getHeight(); y++) {
@@ -138,7 +139,7 @@ public final class CloudSpin {
      * @return BufferedImage
      */
     public static BufferedImage grabCrop(BufferedImage target, Rectangle w, int... points) {
-        int width = 0, height = 0;
+        int width, height;
         if (w.getWidth() > target.getWidth() && w.getHeight() > target.getHeight()) {
             return target;
         } else {
@@ -163,8 +164,13 @@ public final class CloudSpin {
         return cropped;
     }
 
+
+    /**
+     * @param target
+     * @param w
+     */
     public static void grabCropSafe(BufferedImage target, Rectangle w) {
-        int width = 0, height = 0;
+        int width, height;
         if (w.getWidth() > target.getWidth() && w.getHeight() > target.getHeight()) {
             return;
         } else {
@@ -206,11 +212,21 @@ public final class CloudSpin {
         }
     }
 
+
+    /**
+     * @param img
+     * @param color
+     * @return BufferedImage
+     */
     public static BufferedImage hueImageUnsafe(BufferedImage img, int[] color) {
         hueImage(img, color);
         return img;
     }
 
+
+    /**
+     * @return BufferedImage
+     */
     public static BufferedImage createUnknownIMG() {
         BufferedImage img = new BufferedImage(32, 32, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = img.createGraphics();

@@ -112,10 +112,18 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         add(toEnd);
     }
 
+
+    /**
+     * @param str
+     */
     public void setTimeText(String str) {
         timeLabel.setText(str);
     }
 
+
+    /**
+     * @param arg0
+     */
     @Override
     public void actionPerformed(ActionEvent arg0) {
         if (arg0.getSource().equals(toEnd)) {

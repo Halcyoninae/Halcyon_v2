@@ -53,10 +53,18 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
         setDoubleBuffered(true);
     }
 
+
+    /**
+     * @param vis
+     */
     public void setVisibility(boolean vis) {
         fakeVis = vis;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isFakeVisible() {
         return fakeVis;
     }
