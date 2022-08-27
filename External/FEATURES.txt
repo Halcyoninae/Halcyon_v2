@@ -1,3 +1,13 @@
+[***] #45 Multiple Audio Engine support
+    Detailed Description: Allow for far more control over how audio is processed
+    For example, the user can use Tritnous or the Java Sound API to play audio,
+    or implement JavaFX's media player into the program so users can easily
+    play audio if one engine is not supported on one's platform.
+    Difficulty: Mild
+    Testing: A lot
+    Category: Program Dynamics | Potential Optimization
+    Status: Working On
+
 [**] #44 Cutify graphics & sniffer components
         Detailed Description: (Cringy feature name but whatever) Have the 
         option to make a swing component cute by reducing the overall
