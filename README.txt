@@ -90,6 +90,11 @@ from the actual committed Java
 Heap which is allocated to the 
 individual Java Processes.
 
+Along with everything else, the 
+program features its own image
+manipulation library along with a
+custom file system API.
+
 ----------------------------------
 
 [!] Extern.
