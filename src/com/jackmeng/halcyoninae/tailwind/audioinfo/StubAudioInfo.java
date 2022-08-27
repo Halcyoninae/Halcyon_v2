@@ -18,6 +18,7 @@ package com.jackmeng.halcyoninae.tailwind.audioinfo;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * Represents a faked AudioInfo object.
@@ -39,7 +40,7 @@ public class StubAudioInfo extends AudioInfo {
 
     @Override
     public void initTags() {
-        Map<String, String> tags = new HashMap<>();
+        Map<String, String> tags = new WeakHashMap<>();
         tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
     }
 }

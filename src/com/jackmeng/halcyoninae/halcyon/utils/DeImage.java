@@ -23,7 +23,6 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * This is a class that modifies images that are fed to it.
@@ -133,22 +132,6 @@ public final class DeImage {
             dimg = img.getSubimage(0, h / 2 - w / 2, w, w);
         }
         return resize(dimg, newW, newH);
-    }
-
-    /**
-     * Blurs an image using a Gaussian blur.
-     *
-     * @param srcIMG The image to be blurred.
-     * @return BufferedImage The blurred image.
-     */
-    public static BufferedImage blurImage(BufferedImage srcIMG) {
-        ColorModel cm = srcIMG.getColorModel();
-        BufferedImage src = new BufferedImage(cm, srcIMG.copyData(srcIMG.getRaster().createCompatibleWritableRaster()),
-                cm.isAlphaPremultiplied(), null).getSubimage(0, 0, srcIMG.getWidth(), srcIMG.getHeight());
-        float[] matrix = new float[400];
-        Arrays.fill(matrix, 1f / matrix.length);
-        new ConvolveOp(new Kernel(20, 20, matrix), ConvolveOp.EDGE_NO_OP, null).filter(src, srcIMG);
-        return srcIMG;
     }
 
     /**
@@ -276,21 +259,6 @@ public final class DeImage {
             return applyMask(img, alphamask, AlphaComposite.DST_IN);
         }
         return img;
-    }
-
-    /**
-     * @param hRadius
-     * @param vRadius
-     * @return ConvolveOp
-     */
-    public static ConvolveOp blurFilter(int hRadius, int vRadius) {
-        int width = hRadius * 2 + 1;
-        int height = vRadius * 2 + 1;
-        float weight = 1.0f / (width * height);
-        float[] data = new float[width * height];
-        Arrays.fill(data, weight);
-        Kernel k = new Kernel(width, height, data);
-        return new ConvolveOp(k, ConvolveOp.EDGE_NO_OP, null);
     }
 
     /**

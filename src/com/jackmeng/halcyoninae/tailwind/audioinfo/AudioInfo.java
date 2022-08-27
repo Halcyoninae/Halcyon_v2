@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
 
 /**
  * This class holds information regarding an audio
@@ -175,7 +176,7 @@ public class AudioInfo {
      * Initializes the tags map and adds default values to the map
      */
     public void defInitTags() {
-        tags = new HashMap<>();
+        tags = new WeakHashMap<>();
         tags.put(KEY_ABSOLUTE_FILE_PATH, "Nowhere");
         tags.put(KEY_FILE_NAME, "Nothing.mp3");
         tags.put(KEY_MEDIA_DURATION, "0");
@@ -193,7 +194,7 @@ public class AudioInfo {
      * parsed Audio File to the map.
      */
     public void initTags() {
-        tags = new HashMap<>();
+        tags = new WeakHashMap<>();
         tags.put(KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
         tags.put(KEY_FILE_NAME, f.getName());
         tags.put(KEY_MEDIA_DURATION, header.getTrackLength() + "");

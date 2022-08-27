@@ -178,7 +178,7 @@ public class Setup extends JFrame implements Runnable {
 
         JLabel themeLabel = new JLabel(
                 "<html><p style=\"font-size:9px;\"><strong>Preferred Color Theme:</strong></p></html>");
-        Theme[] themes = ThemeBundles.getThemes();
+        Theme[] themes = ThemeBundles.getThemes().get();
         JPanel themePanel = new JPanel();
         themePanel.setPreferredSize(contentPanelBack.getPreferredSize());
         AttributableButton[] themeButtons = new AttributableButton[themes.length];

@@ -33,6 +33,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ import java.util.Set;
  */
 public class Cacher {
     private final File file;
-    private Document doc;
+    private SoftReference<Document> doc;
 
     public Cacher(File f) {
         this.file = f;
@@ -52,7 +53,7 @@ public class Cacher {
         DocumentBuilder builder;
         try {
             builder = factory.newDocumentBuilder();
-            doc = builder.parse(this.file);
+            doc = new SoftReference<>(builder.parse(this.file));
         } catch (ParserConfigurationException | SAXException | IOException e) {
             Debugger.log(e);
         }
@@ -65,7 +66,7 @@ public class Cacher {
      */
     public String[] getContent(String nodeName) {
         List<String> content = new ArrayList<>();
-        NodeList node = doc.getElementsByTagName(nodeName);
+        NodeList node = doc.get().getElementsByTagName(nodeName);
         for (int i = 0; i < node.getLength(); i++) {
             Node n = node.item(i);
             if (n.getNodeType() == Node.ELEMENT_NODE) {

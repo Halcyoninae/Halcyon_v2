@@ -21,6 +21,7 @@ import java.awt.image.BufferedImage;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * A constant defined class that holds
@@ -55,7 +56,7 @@ public class ProgramResourceManager {
      * is the master).
      */
     public static final String KEY_AUDIO_LOOP_SLAVE = "mini.player.loop_slave";
-    public static final WeakReference<Property[]> propertiesList = new WeakReference<>(new Property[] {
+    public static final Property[] propertiesList = new Property[] {
             new Property(KEY_USER_DEFAULT_FOLDER, ".", new DirectoryValidator()),
             new Property(KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER,
                     "true", new BooleanValidator()),
@@ -82,7 +83,7 @@ public class ProgramResourceManager {
             new Property(KEY_USER_PROGRAM_COLOR_THEME, "dark_green",
                     new StrictValidator("dark_green", "dark_orange", "light_orange",
                             "light_green")),
-    });
+    };
     public static final String FILE_SLASH = "/";
     public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";
     public static final String PROGRAM_RESOURCE_FILE_PROPERTIES = "conf.halcyon";
@@ -96,8 +97,8 @@ public class ProgramResourceManager {
      * @return The Map of default properties
      */
     public static Map<String, String> getProgramDefaultProperties() {
-        Map<String, String> properties = new HashMap<>();
-        for (Property p : propertiesList.get())
+        Map<String, String> properties = new WeakHashMap<>();
+        for (Property p : propertiesList)
             properties.put(p.propertyName, p.defaultProperty);
         return properties;
     }
@@ -106,8 +107,8 @@ public class ProgramResourceManager {
      * @return The map of the allowed properties
      */
     public static Map<String, PropertyValidator> getAllowedProperties() {
-        Map<String, PropertyValidator> properties = new HashMap<>();
-        for (Property p : propertiesList.get())
+        Map<String, PropertyValidator> properties = new WeakHashMap<>();
+        for (Property p : propertiesList)
             properties.put(p.propertyName, p.pr);
         return properties;
     }

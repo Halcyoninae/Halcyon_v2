@@ -42,9 +42,11 @@ import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 /**
  * This class sits on the most upper part of the GUI frame.
@@ -83,7 +85,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      */
     private final JLabel[] infoDisplayers;
     private final JLabel artWork;
-    private final transient ArrayList<InfoViewUpdateListener> listeners;
+    private final transient SoftReference<ArrayList<InfoViewUpdateListener>> listeners;
     private transient BufferedImage backPanelArt;
     private transient AudioInfo info;
     private String infoTitle;
@@ -92,7 +94,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     public InfoViewTP() {
         super();
         info = new AudioInfo();
-        listeners = new ArrayList<>();
+        listeners = new SoftReference<>(new ArrayList<>());
         setPreferredSize(
                 new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
         setMinimumSize(
@@ -135,6 +137,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 getPreferredSize());
         backPanel.setOpaque(false);
         backPanel.setIgnoreRepaint(true);
+        backPanel.setDoubleBuffered(true);
 
         BufferedImage bi = DeImage.imageIconToBI(
                 Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
@@ -146,6 +149,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         artWork.setBorder(null);
         artWork.setHorizontalAlignment(SwingConstants.CENTER);
         artWork.setVerticalAlignment(SwingConstants.CENTER);
+        artWork.setDoubleBuffered(true);
 
         infoTitle = ExternalResource.pm.get(
                 ProgramResourceManager.KEY_USE_MEDIA_TITLE_AS_INFOVIEW_HEADER)
@@ -245,7 +249,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             } catch (InvalidAudioFrameException | CannotReadException | IOException | TagException
                     | ReadOnlyFileException e) {
                 beSmart = true;
-                Map<String, String> defaultMap = new HashMap<>();
+                Map<String, String> defaultMap = new WeakHashMap<>();
                 defaultMap.put(AudioInfo.KEY_ABSOLUTE_FILE_PATH, f.getAbsolutePath());
                 defaultMap.put(AudioInfo.KEY_FILE_NAME, f.getName());
                 defaultMap.put(AudioInfo.KEY_ALBUM, "Unknown");
@@ -303,7 +307,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     private void __dispatch_() {
         SwingUtilities.invokeLater(() -> {
             Debugger.warn("InfoView Preparing a dispatch: " + info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-            for (InfoViewUpdateListener l : listeners) {
+            for (InfoViewUpdateListener l : listeners.get()) {
                 l.infoView(info);
             }
         });
@@ -347,7 +351,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * @param l A listener that can be called
      */
     public void addInfoViewUpdateListener(InfoViewUpdateListener l) {
-        listeners.add(l);
+        listeners.get().add(l);
     }
 
     /**

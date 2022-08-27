@@ -25,6 +25,7 @@ import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.ref.WeakReference;
 import java.util.Enumeration;
 import java.util.logging.LogManager;
 
@@ -87,12 +88,12 @@ public class ThreadedScheduler {
         }
 
         // PROGRAMMABLE THREADS
-        Runnable[] tasks = new Runnable[] {
+        WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[] {
                 new PingFileView(Global.bp),
                 new DefunctOptimizer(),
-        };
+        });
 
-        for (Runnable t : tasks) {
+        for (Runnable t : tasks.get()) {
             t.run();
         }
 

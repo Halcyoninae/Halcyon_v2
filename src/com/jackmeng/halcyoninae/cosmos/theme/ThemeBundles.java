@@ -15,6 +15,8 @@
 
 package com.jackmeng.halcyoninae.cosmos.theme;
 
+import java.lang.ref.WeakReference;
+
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.DarkGreen;
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.DarkOrange;
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.LightGreen;
@@ -46,13 +48,13 @@ public final class ThemeBundles {
      *
      * @return An array representing the available themes.
      */
-    public static Theme[] getThemes() {
-        return new Theme[]{
+    public static WeakReference<Theme[]> getThemes() {
+        return new WeakReference<>(new Theme[]{
                 new DarkGreen(),
                 new DarkOrange(),
                 new LightGreen(),
                 new LightOrange()
-        };
+        });
     }
 
     /**
@@ -62,7 +64,7 @@ public final class ThemeBundles {
      * @return The theme with the given canonical name, or the default if not found.
      */
     public static Theme searchFor(String canonicalName) {
-        for (Theme theme : getThemes()) {
+        for (Theme theme : getThemes().get()) {
             if (theme.getCanonicalName().equals(canonicalName)) {
                 return theme;
             }
@@ -74,9 +76,9 @@ public final class ThemeBundles {
      * @return All of the available canonical names from the available themes.
      */
     public static String[] getCanonicNames() {
-        String[] canonicNames = new String[getThemes().length];
-        for (int i = 0; i < getThemes().length; i++)
-            canonicNames[i] = getThemes()[i].getCanonicalName();
+        String[] canonicNames = new String[getThemes().get().length];
+        for (int i = 0; i < getThemes().get().length; i++)
+            canonicNames[i] = getThemes().get()[i].getCanonicalName();
         return canonicNames;
     }
 }

@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -154,7 +155,7 @@ public class TailwindPlayer implements Audio {
      */
     private Map<String, Control> setControls(Line line, Map<String, Control> table) {
         if (isDefaultPipeline()) {
-            Map<String, Control> temp = new HashMap<>();
+            Map<String, Control> temp = new WeakHashMap<>();
             for (Control ctrl : line.getControls()) {
                 String t = ctrl.getType().toString();
                 if (table != null && table.containsKey(t)) {

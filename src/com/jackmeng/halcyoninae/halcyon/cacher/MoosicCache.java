@@ -66,7 +66,7 @@ public class MoosicCache {
         if (!new File(MOOSIC_DEFAULT_LOCALE).exists() || new File(MOOSIC_DEFAULT_LOCALE).length() == 0
                 || !new File(MOOSIC_DEFAULT_LOCALE).isFile()) {
             Debugger.warn("Incorrect user cache found! >,< Moosic resetting");
-            Map<String, String> content = new HashMap<>();
+            Map<String, String> content = new WeakHashMap<>();
             content.put(NODE_USER_LIKED_TRACKS, "");
             content.put(NODE_USER_SAVED_PLAYLISTS, "");
             content.put(NODE_USER_EXCLUDED_TRACKS, "");
@@ -161,7 +161,7 @@ public class MoosicCache {
     }
 
     public void forceSave() {
-        Map<String, String> content = new HashMap<>();
+        Map<String, String> content = new WeakHashMap<>();
         StringBuilder sb1 = new StringBuilder();
         excludedFiles.forEach(x -> sb1.append(x).append("\n"));
         content.put(NODE_USER_EXCLUDED_TRACKS, sb1.toString());
@@ -181,7 +181,7 @@ public class MoosicCache {
     }
 
     public void forceSaveQuiet() {
-        Map<String, String> content = new HashMap<>();
+        Map<String, String> content = new WeakHashMap<>();
         StringBuilder sb1 = new StringBuilder();
         for (String s : excludedFiles) {
             sb1.append(s).append("\n");
