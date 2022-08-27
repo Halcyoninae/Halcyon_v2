@@ -65,7 +65,7 @@ public class VirtualFolder extends PhysicalFolder {
 
     /**
      * @return File[] A list of files of their File object instances (created on
-     *         call)
+     * call)
      */
     @Override
     public File[] getFiles() {

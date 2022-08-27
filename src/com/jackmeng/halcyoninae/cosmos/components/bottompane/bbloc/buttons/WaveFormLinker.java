@@ -31,8 +31,8 @@ import java.awt.event.ActionEvent;
  * the audio being played through the audio device
  *
  * @author Jack Meng
- * @since 3.2
  * @see com.jackmeng.halcyoninae.cosmos.components.waveform.WaveForm
+ * @since 3.2
  */
 public class WaveFormLinker extends JButton implements BBlocButton {
     private WaveFormPane pane;
@@ -40,7 +40,7 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     public WaveFormLinker() {
         setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
         setRolloverIcon(DeImage.resizeImage(
-                Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
+            Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
         setBorder(BorderFactory.createEmptyBorder());
         setPreferredSize(new Dimension(16, 16));
         addActionListener(this);

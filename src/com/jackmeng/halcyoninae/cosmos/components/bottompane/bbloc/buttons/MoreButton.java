@@ -89,7 +89,7 @@ public class MoreButton extends JButton implements BBlocButton {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!isPressed) {
+        if (!isPressed) {
             Global.moreApps.run();
             isPressed = true;
         } else {

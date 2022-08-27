@@ -25,13 +25,13 @@ import java.awt.image.ColorConvertOp;
  */
 public interface CloudSpinFilters {
     BufferedImageOp[] filters = {
-            new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null),
+        new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null),
     };
 
     float[] BLUR_KERNEL = {
-            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
-            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
-            (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f)
+        (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
+        (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f),
+        (1.0f / 9.0f), (1.0f / 9.0f), (1.0f / 9.0f)
     };
 
     int AFF_GREY = 0;

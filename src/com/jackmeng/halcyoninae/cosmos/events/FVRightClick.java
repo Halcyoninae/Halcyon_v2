@@ -143,7 +143,7 @@ public class FVRightClick extends MouseAdapter {
                     new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
                 } else {
                     new StraightTextDialog(
-                            "<html><body><p><strong>Folder:</strong> " + tree.getPath() + "</p></body></html>").run();
+                        "<html><body><p><strong>Folder:</strong> " + tree.getPath() + "</p></body></html>").run();
                 }
             } catch (NullPointerException excec) {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
@@ -202,11 +202,11 @@ public class FVRightClick extends MouseAdapter {
                                 f = new File(node.toString());
                             } else {
                                 f = new File(
-                                        Global.bp.findByTree((JTree) e.getSource())
-                                                .getFolderInfo()
-                                                .getAbsolutePath() +
-                                                ProgramResourceManager.FILE_SLASH +
-                                                node);
+                                    Global.bp.findByTree((JTree) e.getSource())
+                                        .getFolderInfo()
+                                        .getAbsolutePath() +
+                                        ProgramResourceManager.FILE_SLASH +
+                                        node);
                             }
                             File f2 = f;
                             Debugger.info(f2);
@@ -230,11 +230,11 @@ public class FVRightClick extends MouseAdapter {
                             f = new File(node.toString());
                         } else {
                             f = new File(
-                                    Global.bp.findByTree((JTree) e.getSource())
-                                            .getFolderInfo()
-                                            .getAbsolutePath() +
-                                            ProgramResourceManager.FILE_SLASH +
-                                            node);
+                                Global.bp.findByTree((JTree) e.getSource())
+                                    .getFolderInfo()
+                                    .getAbsolutePath() +
+                                    ProgramResourceManager.FILE_SLASH +
+                                    node);
                         }
                         File f2 = f;
                         Debugger.info(f2);

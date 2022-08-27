@@ -37,16 +37,15 @@ public class MoosicCache {
     public static final String NODE_USER_SAVED_PLAYLISTS = "savedPlaylists";
     public static final String NODE_USER_EXCLUDED_TRACKS = "excludedTracks";
     public static String MOOSIC_DEFAULT_LOCALE = ProgramResourceManager.PROGRAM_RESOURCE_FOLDER
-            + ProgramResourceManager.FILE_SLASH
-            + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + "moosic.halcyon";
+        + ProgramResourceManager.FILE_SLASH
+        + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + "moosic.halcyon";
     // MoosicCache Config END
-
-    public Cacher cacher;
-    private List<String> excludedFiles, savedPlayLists;
-    private Set<String> likedTracks;
     private final Object lock;
     private final Object lock2;
     private final Object lock3;
+    public Cacher cacher;
+    private List<String> excludedFiles, savedPlayLists;
+    private Set<String> likedTracks;
 
     public MoosicCache() {
         lock = lock2 = lock3 = new Object();
@@ -64,7 +63,7 @@ public class MoosicCache {
          * 2. If the size of the file is zero
          */
         if (!new File(MOOSIC_DEFAULT_LOCALE).exists() || new File(MOOSIC_DEFAULT_LOCALE).length() == 0
-                || !new File(MOOSIC_DEFAULT_LOCALE).isFile()) {
+            || !new File(MOOSIC_DEFAULT_LOCALE).isFile()) {
             Debugger.warn("Incorrect user cache found! >,< Moosic resetting");
             Map<String, String> content = new WeakHashMap<>();
             content.put(NODE_USER_LIKED_TRACKS, "");
@@ -91,13 +90,13 @@ public class MoosicCache {
             Debugger.info("Loading user cache...!! :D The moosic is on!");
             try {
                 excludedFiles = cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0] != null ? new ArrayList<>(Arrays.asList(
-                        cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0].split("\n"))) : new ArrayList<>();
+                    cacher.getContent(NODE_USER_EXCLUDED_TRACKS)[0].split("\n"))) : new ArrayList<>();
                 savedPlayLists = cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0] != null
-                        ? new ArrayList<>(Arrays.asList(
-                                cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0].split("\n")))
-                        : new ArrayList<>();
+                    ? new ArrayList<>(Arrays.asList(
+                    cacher.getContent(NODE_USER_SAVED_PLAYLISTS)[0].split("\n")))
+                    : new ArrayList<>();
                 likedTracks = cacher.getContent(NODE_USER_LIKED_TRACKS)[0] != null ? new HashSet<>(Arrays.asList(
-                        cacher.getContent(NODE_USER_LIKED_TRACKS)[0].split("\n"))) : new HashSet<>();
+                    cacher.getContent(NODE_USER_LIKED_TRACKS)[0].split("\n"))) : new HashSet<>();
                 Debugger.info("EF: " + excludedFiles, "SPL: " + savedPlayLists, "LT: " + likedTracks);
             } catch (Exception e) {
                 ExternalResource.dispatchLog(e);
@@ -172,7 +171,7 @@ public class MoosicCache {
         likedTracks.forEach(x -> sb3.append(x).append("\n"));
         content.put(NODE_USER_LIKED_TRACKS, sb3.toString());
         Debugger.info("Force Saving " + this.getClass().getSimpleName() + " > ", "ET: \n" + sb1,
-                "SPL: \n" + sb2, "LT: \n" + sb3);
+            "SPL: \n" + sb2, "LT: \n" + sb3);
         try {
             cacher.build(NODE_ROOT, content);
         } catch (TransformerException | ParserConfigurationException e) {

@@ -46,7 +46,7 @@ public class AudioSettings extends JScrollPane implements SettingsTabs {
         String[] str = new String[ProgramResourceManager.propertiesList.length];
         int i = 0;
         for (Property p : Property.filterProperties("audio", PropertyFilterType.STARTS_WITH,
-                ProgramResourceManager.propertiesList)) {
+            ProgramResourceManager.propertiesList)) {
             if (p != null) {
                 str[i] = p.propertyName;
                 i++;

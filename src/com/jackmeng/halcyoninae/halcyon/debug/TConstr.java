@@ -21,7 +21,7 @@ import java.util.Arrays;
 
 /**
  * Custom Alert Debugger TextConstructor
- *
+ * <p>
  * This class is read only once all its
  * attributes has been set (via the constructor)
  *
@@ -42,8 +42,8 @@ public class TConstr {
     }
 
     public <T> TConstr(CLIStyles start, T payload) {
-        this.payload = new TObject[] { new TObject<>(payload) };
-        this.start = new CLIStyles[] { start };
+        this.payload = new TObject[]{new TObject<>(payload)};
+        this.start = new CLIStyles[]{start};
     }
 
 

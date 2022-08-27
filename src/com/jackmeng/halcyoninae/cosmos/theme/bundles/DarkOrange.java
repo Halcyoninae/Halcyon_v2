@@ -35,7 +35,7 @@ public class DarkOrange implements Theme {
 
 
     /**
-     * @return Class<? extends BasicLookAndFeel>
+     * @return
      */
     @Override
     public Class<? extends BasicLookAndFeel> getLAF() {

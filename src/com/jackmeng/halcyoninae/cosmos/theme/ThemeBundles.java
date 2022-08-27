@@ -15,12 +15,12 @@
 
 package com.jackmeng.halcyoninae.cosmos.theme;
 
-import java.lang.ref.WeakReference;
-
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.DarkGreen;
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.DarkOrange;
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.LightGreen;
 import com.jackmeng.halcyoninae.cosmos.theme.bundles.LightOrange;
+
+import java.lang.ref.WeakReference;
 
 /**
  * A helper class to deal with all the available themes in the bundles.
@@ -50,10 +50,10 @@ public final class ThemeBundles {
      */
     public static WeakReference<Theme[]> getThemes() {
         return new WeakReference<>(new Theme[]{
-                new DarkGreen(),
-                new DarkOrange(),
-                new LightGreen(),
-                new LightOrange()
+            new DarkGreen(),
+            new DarkOrange(),
+            new LightGreen(),
+            new LightOrange()
         });
     }
 

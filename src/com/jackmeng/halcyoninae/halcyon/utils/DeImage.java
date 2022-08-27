@@ -20,7 +20,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.*;
+import java.awt.image.BaseMultiResolutionImage;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -198,10 +199,10 @@ public final class DeImage {
         BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = alphamask.createGraphics();
         LinearGradientPaint lgp = new LinearGradientPaint(
-                new Point(0, 0),
-                new Point(0, alphamask.getHeight()),
-                new float[]{0, 1},
-                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+            new Point(0, 0),
+            new Point(0, alphamask.getHeight()),
+            new float[]{0, 1},
+            new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
         g2d.setPaint(lgp);
         g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
         g2d.dispose();
@@ -225,10 +226,10 @@ public final class DeImage {
             BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = alphamask.createGraphics();
             LinearGradientPaint lgp = new LinearGradientPaint(
-                    new Point(0, alphamask.getHeight()),
-                    new Point(0, 0),
-                    new float[]{0, 1},
-                    new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+                new Point(0, alphamask.getHeight()),
+                new Point(0, 0),
+                new float[]{0, 1},
+                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
             g2d.setPaint(lgp);
             g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
             g2d.dispose();
@@ -237,10 +238,10 @@ public final class DeImage {
             BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = alphamask.createGraphics();
             LinearGradientPaint lgp = new LinearGradientPaint(
-                    new Point(0, alphamask.getHeight() / 2),
-                    new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
-                    new float[]{0, 1},
-                    new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+                new Point(0, alphamask.getHeight() / 2),
+                new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
+                new float[]{0, 1},
+                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
             g2d.setPaint(lgp);
             g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
             g2d.dispose();
@@ -249,10 +250,10 @@ public final class DeImage {
             BufferedImage alphamask = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g2d = alphamask.createGraphics();
             LinearGradientPaint lgp = new LinearGradientPaint(
-                    new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
-                    new Point(0, alphamask.getHeight() / 2),
-                    new float[]{0, 1},
-                    new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+                new Point(alphamask.getWidth(), alphamask.getHeight() / 2),
+                new Point(0, alphamask.getHeight() / 2),
+                new float[]{0, 1},
+                new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
             g2d.setPaint(lgp);
             g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
             g2d.dispose();

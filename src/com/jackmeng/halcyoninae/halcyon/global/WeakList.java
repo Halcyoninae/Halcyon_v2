@@ -28,13 +28,13 @@ import java.util.ListIterator;
  * management
  *
  * @author Jack Meng
- * @since 3.3
  * @see java.lang.ref.WeakReference
  * @see java.lang.ref.ReferenceQueue
+ * @since 3.3
  */
 public class WeakList<T> extends ArrayList<WeakReference<T>> {
     private static final long serialVersionUID = 2L;
-    private transient ReferenceQueue<T> q = new ReferenceQueue<>();
+    private final transient ReferenceQueue<T> q = new ReferenceQueue<>();
 
     public WeakList() {
         super();
@@ -42,7 +42,7 @@ public class WeakList<T> extends ArrayList<WeakReference<T>> {
 
     public synchronized void kick() {
         Reference<? extends T> r;
-        while((r = q.poll()) != null) {
+        while ((r = q.poll()) != null) {
             remove(r);
         }
     }
@@ -95,7 +95,7 @@ public class WeakList<T> extends ArrayList<WeakReference<T>> {
     }
 
     @Override
-    public <X>X[] toArray(X[] a) {
+    public <X> X[] toArray(X[] a) {
         kick();
         return super.toArray(a);
     }

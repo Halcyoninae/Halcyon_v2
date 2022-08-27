@@ -24,7 +24,7 @@ import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
  * @since 3.1
  */
 public class TailwindListenerCLI
-        implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+    implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
 
     /**
      * @param status

@@ -46,7 +46,7 @@ public class MiniPlayer extends JFrame implements Runnable {
 
     public MiniPlayer() {
         setPreferredSize(
-                new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
+            new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setUndecorated(true);
         setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setAutoRequestFocus(true);
@@ -70,7 +70,7 @@ public class MiniPlayer extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
 
             }
         });
@@ -78,7 +78,7 @@ public class MiniPlayer extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
 
             }
         });

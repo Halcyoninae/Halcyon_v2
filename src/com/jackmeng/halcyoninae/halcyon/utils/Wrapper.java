@@ -34,18 +34,18 @@ import java.util.concurrent.Executors;
 public final class Wrapper {
     /**
      * Launches a runnable in an async pool.
-     *
+     * <p>
      * This method should only be used for non-infinite
      * runnables, and should only be used for one time
      * or simple loops.
-     *
+     * <p>
      * If a complex task is needed, especially with GUI,
      * a Job implementation should be used.
      *
-     * @see com.jackmeng.halcyoninae.halcyon.worker.Job
      * @param runnable The runnable to be launched
-     * @since 3.1
      * @author Jack Meng
+     * @see com.jackmeng.halcyoninae.halcyon.worker.Job
+     * @since 3.1
      */
     public static void async(Runnable runnable) {
         new Thread(runnable).start();
@@ -56,9 +56,9 @@ public final class Wrapper {
      * A TabTree is a master interface that holds information regarding
      * a single GUI playlist.
      *
-     * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree
      * @param tree A TabTree implementation with valid File listings.
      * @author Jack Meng
+     * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.TabTree
      * @since 3.3
      */
     public static void sort(TabTree tree) {

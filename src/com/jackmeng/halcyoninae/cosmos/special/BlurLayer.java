@@ -32,8 +32,8 @@ import java.awt.image.Kernel;
  * @since 3.3
  */
 public class BlurLayer extends LayerUI<JComponent> {
-    private transient BufferedImage bufferImage;
     private final transient BufferedImageOp image;
+    private transient BufferedImage bufferImage;
 
     public BlurLayer() {
 

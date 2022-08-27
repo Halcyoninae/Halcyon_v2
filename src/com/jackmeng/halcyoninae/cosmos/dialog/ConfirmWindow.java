@@ -76,14 +76,14 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
         JScrollPane container = new JScrollPane(prompt);
         container.setPreferredSize(
-                new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+            new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
         container.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         container.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
         JPanel jp = new JPanel();
         jp.setLayout(new FlowLayout(FlowLayout.CENTER));
         jp.setPreferredSize(
-                new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
+            new Dimension(DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH, DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT));
         jp.add(confirm);
         jp.add(cancel);
 

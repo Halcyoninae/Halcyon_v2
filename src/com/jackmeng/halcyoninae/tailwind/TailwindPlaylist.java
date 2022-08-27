@@ -24,13 +24,13 @@ import java.util.List;
 
 /**
  * A sort of wrapper for the default TailwindPlayer class.
- *
+ * <p>
  * This media player is intended to be constantly fed a list
  * of media to play and can then keep track of what it had played.
  *
  * @author Jack Meng
  * @since 3.2
- *        (Technically 3.1)
+ * (Technically 3.1)
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
     private final List<File> history;
@@ -108,7 +108,7 @@ public class TailwindPlaylist extends TailwindPlayer implements TailwindListener
             state = true;
         }
         Debugger.good(
-                "Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
+            "Forwardtrack marked (" + state + ")...\nPointer Information: " + pointer + " | " + history.size());
     }
 
 

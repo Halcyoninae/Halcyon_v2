@@ -93,9 +93,9 @@ public enum FileFormat {
     private final AudioFileFormat.Type type;
 
     FileFormat(
-            boolean writingSupported,
-            AudioFileFormat.Type type,
-            String... associatedFileExtensions) {
+        boolean writingSupported,
+        AudioFileFormat.Type type,
+        String... associatedFileExtensions) {
         this.associatedFileExtensions = new ArrayList<>();
         this.writingSupported = writingSupported;
         this.type = type;
@@ -114,8 +114,8 @@ public enum FileFormat {
 
         if (name.contains(".") && !name.endsWith(".")) {
             String extension = name
-                    .substring(name.lastIndexOf('.') + 1)
-                    .toLowerCase();
+                .substring(name.lastIndexOf('.') + 1)
+                .toLowerCase();
 
             for (FileFormat format : FileFormat.values()) {
                 if (format.getAssociatedExtensions().contains(extension)) {

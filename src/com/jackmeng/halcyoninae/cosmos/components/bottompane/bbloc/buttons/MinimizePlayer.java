@@ -31,8 +31,8 @@ import java.awt.event.ActionEvent;
  * keep the user from randomly opening multiple instances of a miniplayer.
  *
  * @author Jack Meng
- * @since 3.2
  * @see com.jackmeng.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer
+ * @since 3.2
  */
 public class MinimizePlayer extends JButton implements BBlocButton {
     private final MiniPlayer player;

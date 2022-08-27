@@ -42,10 +42,13 @@ com.jackmeng.halcyoninae.halcyon.filesystem
 com.jackmeng.halcyoninae.halcyon.global
 com.jackmeng.halcyoninae.halcyon.runtime
 com.jackmeng.halcyoninae.halcyon.utils
+com.jackmeng.halcyoninae.halcyon.worker
+com.jackmeng.halcyoninae.halcyon.worker.jobs
 com.jackmeng.halcyoninae.setup
 com.jackmeng.halcyoninae.tailwind
 com.jackmeng.halcyoninae.tailwind.audioinfo
+com.jackmeng.halcyoninae.tailwind.containers.flac
+com.jackmeng.halcyoninae.tailwind.containers.vorbis
 com.jackmeng.halcyoninae.tailwind.simple
-com.jackmeng.halcyoninae.tailwind.vorbis
 com.jackmeng.halcyoninae.tailwind.wrapper
 com.jackmeng.test

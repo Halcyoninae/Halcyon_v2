@@ -51,7 +51,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
 
     public MiniContentPane() {
         setPreferredSize(
-                new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
+            new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setLayout(new OverlayLayout(this));
         setOpaque(false);
         info = new AudioInfo();
@@ -61,19 +61,19 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
                 if (info.hasArtwork() || !fDrawn && bg != null) {
                     Graphics2D g2 = (Graphics2D) g;
                     g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, Float
-                            .parseFloat(ExternalResource.pm
-                                    .get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA)) > 0.5F ? 1.0F - Float
-                                            .parseFloat(
-                                                    ExternalResource.pm.get(
-                                                            ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))
-                                            : Float
-                                                    .parseFloat(
-                                                            ExternalResource.pm.get(
-                                                                    ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
+                        .parseFloat(ExternalResource.pm
+                            .get(ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA)) > 0.5F ? 1.0F - Float
+                        .parseFloat(
+                            ExternalResource.pm.get(
+                                ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))
+                        : Float
+                        .parseFloat(
+                            ExternalResource.pm.get(
+                                ProgramResourceManager.KEY_MINI_PLAYER_DEFAULT_BG_ALPHA))));
                     g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                     g2.drawImage(
-                            bg,
-                            getInsets().left, getInsets().top, null);
+                        bg,
+                        getInsets().left, getInsets().top, null);
                     g2.dispose();
                     fDrawn = true;
                 } else {
@@ -103,8 +103,8 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         mainLabel.setText(getLabelString());
 
         artLabel = new JLabel(
-                new ImageIcon(
-                        DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
+            new ImageIcon(
+                DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
 
         topPanel.add(artLabel);
         topPanel.add(mainLabel);
@@ -122,7 +122,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         progressBar.setMaximum(250);
         progressBar.setMinimum(0);
         progressBar.setValue(0);
-        progressBar.setBackground(new Color(1,1,1, 130));
+        progressBar.setBackground(new Color(1, 1, 1, 130));
         progressBar.setOpaque(false);
         progressBar.setAutoscrolls(false);
         progressBar.setBorderPainted(false);
@@ -143,9 +143,9 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
             while (true) {
                 if (this.isShowing() || this.isVisible()) {
                     progressBar.setValue((int) (Numerical.__safe_divide(
-                            Global.player.getStream().getPosition() * (double) progressBar
-                                    .getMaximum(),
-                            Global.player.getStream().getLength())));
+                        Global.player.getStream().getPosition() * (double) progressBar
+                            .getMaximum(),
+                        Global.player.getStream().getLength())));
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
@@ -160,7 +160,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         BufferedImage img = null;
         if (info.hasArtwork()) {
             img = MiniDeImage.blurHash(DeImage.resize(info.getArtwork(), (int) bgPanel.getPreferredSize().getWidth(),
-                    (int) bgPanel.getPreferredSize().getHeight()), 4, 4);
+                (int) bgPanel.getPreferredSize().getHeight()), 4, 4);
         }
         bg = img;
         if (bg != null) {
@@ -173,10 +173,10 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
      */
     private String getLabelString() {
         return "<html><p style=\"color:" + ColorManager.MAIN_FG_STR + ";font-size:12px\"><b>"
-                + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28
-                        ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 28) + "..."
-                        : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
-                + "</b></p><br><center><p>" + info.getTag(AudioInfo.KEY_MEDIA_ARTIST) + "</p></center></html>";
+            + (info.getTag(AudioInfo.KEY_MEDIA_TITLE).length() > 28
+            ? info.getTag(AudioInfo.KEY_MEDIA_TITLE).substring(0, 28) + "..."
+            : info.getTag(AudioInfo.KEY_MEDIA_TITLE))
+            + "</b></p><br><center><p>" + info.getTag(AudioInfo.KEY_MEDIA_ARTIST) + "</p></center></html>";
     }
 
     private void scheduleRedraw() {
@@ -184,8 +184,8 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
         repaint(40);
         mainLabel.setText(getLabelString());
         artLabel.setIcon(
-                new ImageIcon(
-                        DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
+            new ImageIcon(
+                DeImage.createRoundedBorder(DeImage.resizeNoDistort(info.getArtwork(), 128, 128), 10, null)));
     }
 
     /**

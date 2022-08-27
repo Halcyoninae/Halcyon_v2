@@ -39,15 +39,15 @@ import java.awt.event.ActionListener;
  * @since 3.3
  */
 public class TimeControlSubTP extends JPanel implements ActionListener {
+    public static long INTERVAL_TIMING_MILLISECONDS = 10000L;
     /// TimeControl Config START
     final String FAST_FORWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/forward.png";
     final String FAST_BACKWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/backward.png";
     final String TO_END_ICON = Manager.RSC_FOLDER_NAME + "/time_control/end.png";
     final String TO_START_ICON = Manager.RSC_FOLDER_NAME + "/time_control/start.png";
-    public static long INTERVAL_TIMING_MILLISECONDS = 10000L;
     final int ICON_SIZING = 18;
     final int TIMECONTROL_HEIGHT = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT
-            - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
+        - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
     private final JButton fastForward;
     private final JButton fastBackward;
     private final JButton toEnd;
@@ -57,7 +57,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
 
     public TimeControlSubTP() {
         setPreferredSize(
-                new Dimension(TopPane.TOPPANE_MIN_WIDTH, TIMECONTROL_HEIGHT / 5));
+            new Dimension(TopPane.TOPPANE_MIN_WIDTH, TIMECONTROL_HEIGHT / 5));
         setMinimumSize(getPreferredSize());
         setOpaque(false);
         setLayout(new GridLayout(1, 5));
@@ -68,9 +68,9 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         fastForward = new JButton();
         fastForward.setLayout(new BorderLayout());
         fastForward.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(FAST_FORWARD_ICON), ICON_SIZING, ICON_SIZING));
+            DeImage.resizeImage(Global.rd.getFromAsImageIcon(FAST_FORWARD_ICON), ICON_SIZING, ICON_SIZING));
         fastForward.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
-                TIMECONTROL_HEIGHT / 5));
+            TIMECONTROL_HEIGHT / 5));
         fastForward.setMaximumSize(fastForward.getPreferredSize());
         fastForward.setBorder(null);
         fastForward.setBackground(null);
@@ -79,9 +79,9 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         fastBackward = new JButton();
         fastBackward.setLayout(new BorderLayout());
         fastBackward.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(FAST_BACKWARD_ICON), ICON_SIZING, ICON_SIZING));
+            DeImage.resizeImage(Global.rd.getFromAsImageIcon(FAST_BACKWARD_ICON), ICON_SIZING, ICON_SIZING));
         fastBackward.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
-                TIMECONTROL_HEIGHT / 5));
+            TIMECONTROL_HEIGHT / 5));
         fastBackward.setMaximumSize(fastBackward.getPreferredSize());
         fastBackward.setBorder(null);
         fastBackward.setBackground(null);
@@ -90,7 +90,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         toEnd = new JButton();
         toEnd.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(TO_END_ICON), ICON_SIZING, ICON_SIZING));
         toEnd.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
-                TIMECONTROL_HEIGHT / 5));
+            TIMECONTROL_HEIGHT / 5));
         toEnd.setMaximumSize(toEnd.getPreferredSize());
         toEnd.setBorder(null);
         toEnd.setBackground(null);
@@ -99,7 +99,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         toStart = new JButton();
         toStart.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(TO_START_ICON), ICON_SIZING, ICON_SIZING));
         toStart.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
-                TIMECONTROL_HEIGHT / 5));
+            TIMECONTROL_HEIGHT / 5));
         toStart.setMaximumSize(toStart.getPreferredSize());
         toStart.setBorder(null);
         toStart.setBackground(null);

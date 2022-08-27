@@ -63,9 +63,9 @@ import java.util.Collections;
  */
 public class Setup extends JFrame implements Runnable {
     public static final File MAIN_LOCK_USER_SETUP = new File(
-            ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-                    + ProgramResourceManager.RESOURCE_SUBFOLDERS[2]
-                    + ProgramResourceManager.FILE_SLASH + "__user.lock");
+        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
+            + ProgramResourceManager.RESOURCE_SUBFOLDERS[2]
+            + ProgramResourceManager.FILE_SLASH + "__user.lock");
     public static final String KILL_ARG = "kill";
     private static final transient java.util.List<SetupListener> listener = new ArrayList<>(); // must specify java.util
     // cuz
@@ -78,7 +78,7 @@ public class Setup extends JFrame implements Runnable {
         setPreferredSize(new Dimension(350, 400));
         setResizable(true);
         addComponentListener(new ForceMaxSize(getPreferredSize().width, getPreferredSize().height,
-                getPreferredSize().width, getPreferredSize().height));
+            getPreferredSize().width, getPreferredSize().height));
 
         content = new JPanel();
         content.setPreferredSize(getPreferredSize());
@@ -95,15 +95,15 @@ public class Setup extends JFrame implements Runnable {
                 super.paintComponent(g);
                 Graphics2D g2 = (Graphics2D) g;
                 g2.setComposite(
-                        AlphaComposite.getInstance(
-                                AlphaComposite.SRC_OVER,
-                                0.5f));
+                    AlphaComposite.getInstance(
+                        AlphaComposite.SRC_OVER,
+                        0.5f));
                 g2.drawImage(
-                        DeImage.createGradient(
-                                GradientGenerator.make(SpeedStyle.QUALITY, welcomePanel.getPreferredSize(),
-                                        ColorTool.rndColor(), ColorTool.rndColor(), false),
-                                200, 0, Directional.TOP),
-                        0, 0, null);
+                    DeImage.createGradient(
+                        GradientGenerator.make(SpeedStyle.QUALITY, welcomePanel.getPreferredSize(),
+                            ColorTool.rndColor(), ColorTool.rndColor(), false),
+                        200, 0, Directional.TOP),
+                    0, 0, null);
                 g2.dispose();
                 g.dispose();
             }
@@ -177,7 +177,7 @@ public class Setup extends JFrame implements Runnable {
         contentPanelBack.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         JLabel themeLabel = new JLabel(
-                "<html><p style=\"font-size:9px;\"><strong>Preferred Color Theme:</strong></p></html>");
+            "<html><p style=\"font-size:9px;\"><strong>Preferred Color Theme:</strong></p></html>");
         Theme[] themes = ThemeBundles.getThemes().get();
         JPanel themePanel = new JPanel();
         themePanel.setPreferredSize(contentPanelBack.getPreferredSize());
@@ -288,7 +288,7 @@ public class Setup extends JFrame implements Runnable {
     public void run() {
         pack();
         setLocation((Toolkit.getDefaultToolkit().getScreenSize().width - this.getPreferredSize().width) / 2,
-                (Toolkit.getDefaultToolkit().getScreenSize().height - this.getPreferredSize().height) / 2);
+            (Toolkit.getDefaultToolkit().getScreenSize().height - this.getPreferredSize().height) / 2);
         setVisible(true);
         Debugger.warn("Running setup routine...");
     }

@@ -139,7 +139,7 @@ public class TabButton extends JPanel {
             g2.setStroke(new BasicStroke(1));
             g2.setColor(Color.WHITE);
             int i = 3, last_loc = 0;
-            while(i-- >0) {
+            while (i-- > 0) {
                 g2.fillOval(last_loc, this.getHeight() / 2 - 1, 3, 3);
                 last_loc += 5;
             }

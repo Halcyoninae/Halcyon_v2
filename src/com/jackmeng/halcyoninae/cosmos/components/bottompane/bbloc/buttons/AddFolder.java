@@ -50,14 +50,14 @@ public class AddFolder extends JButton implements BBlocButton {
             SelectApplicableFolders s = new SelectApplicableFolders();
             s.setFolderSelectedListener(folder -> {
                 if (FileParser.isEmptyFolder(new File(folder))
-                        || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
+                    || !FileParser.contains(new File(folder), Manager.ALLOWED_FORMATS)) {
                     new ConfirmWindow(
-                            "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
-                            status -> {
-                                if (status) {
-                                    Global.bp.pokeNewFileListTab(folder);
-                                }
-                            }).run();
+                        "This folder seems to be empty or does not seem to contain any Audio Files. Would you like to add this folder?",
+                        status -> {
+                            if (status) {
+                                Global.bp.pokeNewFileListTab(folder);
+                            }
+                        }).run();
                 } else {
                     Global.bp.pokeNewFileListTab(folder);
                 }

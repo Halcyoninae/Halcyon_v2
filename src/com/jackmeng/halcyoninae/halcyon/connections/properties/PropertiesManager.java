@@ -249,7 +249,7 @@ public final class PropertiesManager {
             save();
         }
         return util.getProperty(key) == null || !allowed(key, util.getProperty(key)) ? map.get(key)
-                : util.getProperty(key);
+            : util.getProperty(key);
     }
 
     /**

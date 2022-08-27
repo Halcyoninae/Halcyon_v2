@@ -33,7 +33,7 @@ import java.io.File;
  * to
  * have much more control over the playback library and to make it a global
  * scope player instead of having to reinit everything on something new.
- * 
+ *
  * <p>
  * 这种简化是由于不需要某些方法，并且至
  * 对播放库有更多的控制权并使其成为全局
@@ -88,10 +88,10 @@ public class Player {
         try {
             if (new AudioInfo(f, false).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
                 LoadingDialog ld = new LoadingDialog("<html><p>No duration metadata found<br>Seeking...</p></html>",
-                        true);
+                    true);
                 SwingUtilities.invokeLater(ld::run);
                 Debugger.warn(
-                        "No proper duration metadata found for this audio file...\nLagging to find the frame length.");
+                    "No proper duration metadata found for this audio file...\nLagging to find the frame length.");
             }
         } catch (Exception e) {
             // IGNORE
@@ -177,7 +177,7 @@ public class Player {
      */
     public String getStringedTime() {
         return TimeParser.fromSeconds((int) audio.getPosition() * 1000) + " / "
-                + TimeParser.fromSeconds((int) audio.getLength() * 1000);
+            + TimeParser.fromSeconds((int) audio.getLength() * 1000);
     }
 
     /**
@@ -195,8 +195,8 @@ public class Player {
     public float convertVolume(float zeroToHundred) {
         try {
             FloatControl control = (FloatControl) audio
-                    .getControls()
-                    .get("Master Gain");
+                .getControls()
+                .get("Master Gain");
             float range = control.getMaximum() - control.getMinimum();
             return (zeroToHundred / 100.0f) * range + control.getMinimum();
         } catch (NullPointerException e) {

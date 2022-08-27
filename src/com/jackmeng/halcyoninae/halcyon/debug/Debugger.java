@@ -109,10 +109,10 @@ public class Debugger {
     @SafeVarargs
     public static <T> void log(T... o) {
         if (!DISABLE_DEBUGGER) {
-                for (T t : o) {
-                    out.println(getLogText() + Objects.requireNonNullElse(t, "NULL_CONTENT") + " ");
-                }
-                out.println();
+            for (T t : o) {
+                out.println(getLogText() + Objects.requireNonNullElse(t, "NULL_CONTENT") + " ");
+            }
+            out.println();
         } else {
             String[] s = new String[o.length];
             int i = 0;
@@ -202,14 +202,14 @@ public class Debugger {
      * @param o
      */
     @SafeVarargs
-    public static <T> void crit(T ... o) {
+    public static <T> void crit(T... o) {
         if (!DefaultManager.DEBUG_PROGRAM) {
             for (T t : o) {
                 out.println(
-                        CLIStyles.BOLD.getColor() + getGoodText()
-                                + CLIStyles.RESET.getColor()
-                                + CLIStyles.RED_TXT.getColor() + Objects.requireNonNullElse(t, "NULL_CONTENT")
-                                + CLIStyles.RESET.getColor());
+                    CLIStyles.BOLD.getColor() + getGoodText()
+                        + CLIStyles.RESET.getColor()
+                        + CLIStyles.RED_TXT.getColor() + Objects.requireNonNullElse(t, "NULL_CONTENT")
+                        + CLIStyles.RESET.getColor());
             }
         }
     }
@@ -233,7 +233,6 @@ public class Debugger {
     }
 
     /**
-     *
      * @param t
      */
     public static void alert(TConstr... t) {
@@ -241,12 +240,12 @@ public class Debugger {
             for (TConstr x : t) {
                 if (x != null) {
                     out.println(CLIStyles.BOLD.getColor() + getProgramText() + CLIStyles.RESET.getColor()
-                            + x + CLIStyles.RESET.getColor());
+                        + x + CLIStyles.RESET.getColor());
                 } else {
                     out.println(CLIStyles.BOLD.getColor() + getProgramText()
-                            + CLIStyles.RESET.getColor()
-                            + CLIStyles.BLUE_TXT.getColor() + "NULL_CONTENT"
-                            + CLIStyles.RESET.getColor());
+                        + CLIStyles.RESET.getColor()
+                        + CLIStyles.BLUE_TXT.getColor() + "NULL_CONTENT"
+                        + CLIStyles.RESET.getColor());
                 }
             }
         }

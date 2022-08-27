@@ -20,11 +20,11 @@ import java.util.concurrent.Callable;
 /**
  * A Job is a master concurrency model, which each can hold
  * a finite amount of workers all helping to achieve a TASK.
- *
+ * <p>
  * A job is similar to standard Threads or CompletableFutures,
  * but are more oriented towards SWT or single threaded applications.
  * It also allows for much control over the content being run and updated.
- *
+ * <p>
  * In regards to the Halcyon Music Player, an ImageJob is used to
  * modify images without blocking the SWT and EventQueue. The modified
  * image will be automatically referenced once they are done.
@@ -37,7 +37,7 @@ public interface Job extends Runnable {
      * Quit the current job being run.
      * The current job's content and runnable is
      * completely nulled and is not kept.
-     *
+     * <p>
      * HOWEVER: The above retention method is
      * up to the programmer's own intentions.
      */
@@ -78,7 +78,7 @@ public interface Job extends Runnable {
      * immediately do any of the following: quit the current task, add this task
      * to the queue, start this task if there are none running, and/or quit
      * the last job and pick up this.
-     *
+     * <p>
      * This is used mainly to tell the job queue that a new task
      * may be needed to be added but no gurantees shall be made
      * in order to reduce the current task experiencing any overhead.
@@ -92,7 +92,7 @@ public interface Job extends Runnable {
     /**
      * Similar to {@link #setTask(Runnable)} but the user may wish to
      * use a standard Callable implementation.
-     *
+     * <p>
      * Once again, this method makes no gurantees of the following:
      * quiting the current task, adding this task to the queue, start this
      * task if there are none running, and/or quit the current task and readily
@@ -111,9 +111,9 @@ public interface Job extends Runnable {
      * {@link #failCurrentTask()}
      * and will return true or false based on the status.
      *
-     * @return (true || false) A true is returned if the task was able to be failed
-     *         and has been failed. A false is returned if the task is unable to
-     *         be checked, failed, and/or be present
+     * @return (true | | false) A true is returned if the task was able to be failed
+     * and has been failed. A false is returned if the task is unable to
+     * be checked, failed, and/or be present
      */
     boolean __current_task_fail();
 
@@ -123,12 +123,12 @@ public interface Job extends Runnable {
      * if the current implementation allows for reference retention of the tasks
      * that have been ran previously in order
      * to quickly pick them up if the implementation calls for such a method.
-     *
+     * <p>
      * This method must be concrete and provide exact readings on whether the job
      * can do so.
      *
-     * @return (true || false) Whether the job supports retention of task
-     *         references.
+     * @return (true | | false) Whether the job supports retention of task
+     * references.
      */
     boolean __is_retainable();
 
@@ -140,19 +140,19 @@ public interface Job extends Runnable {
      * owning 2 workers which can lead to concurrency issues in which the
      * implementation
      * itself must check for, which in turn causes overhead.
-     *
+     * <p>
      * This method is primarily used with {@link #setTask(Callable)},
      * {@link #setTask(Runnable)}, {@link #restartJob()}, {@link #quit()}
      * to force a job from the queue to be picked up. However once again, due to the
      * concurrency model, no such gurantees are made in any
      * way.
-     *
+     * <p>
      * Although no gurantee can be made, one can provide native implementations to
      * allow for much more specific controls over the flow.
      *
      * @param default_fail_runner An anonymous that can be called if the task was
      *                            failed either due to an exception, or a premature
-     *                            end (aka {@link #wait()}
+     *                            end
      * @param original_task       The task to run which is the main task that is
      *                            asked for
      */

@@ -83,7 +83,7 @@ public class Cacher {
      * @param content
      */
     public void build(String rootName, Map<String, String> content)
-            throws TransformerException, ParserConfigurationException {
+        throws TransformerException, ParserConfigurationException {
         try {
             file.createNewFile();
         } catch (IOException e) {

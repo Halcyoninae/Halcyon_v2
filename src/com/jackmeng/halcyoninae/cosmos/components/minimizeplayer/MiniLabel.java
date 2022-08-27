@@ -47,8 +47,8 @@ public class MiniLabel extends JLabel {
                 if (textproperwidth > availablewidth - (insetsHorizontal + borderHorizontal)) {
                     String clippedtextproper = textproper;
                     while (clippedtextproper.length() > 0
-                            && fontMetrics.stringWidth(clippedtextproper) + ellipsisWidth > availablewidth
-                            - (insetsHorizontal + borderHorizontal)) {
+                        && fontMetrics.stringWidth(clippedtextproper) + ellipsisWidth > availablewidth
+                        - (insetsHorizontal + borderHorizontal)) {
                         clippedtextproper = clipText(clippedtextproper);
                     }
                     setText(textstart + clippedtextproper + ellipsis + textend);

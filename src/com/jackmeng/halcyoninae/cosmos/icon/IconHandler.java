@@ -43,16 +43,6 @@ public class IconHandler {
         this.temp = new WeakReference<>(acceptableRuleSets);
     }
 
-
-    /**
-     * @throws IOException
-     */
-    public void load() throws IOException{
-        load(RSCLocale, temp.get());
-        temp = null;
-    }
-
-
     /**
      * @param locale
      * @param acceptableRuleSets
@@ -76,6 +66,13 @@ public class IconHandler {
 
     }
 
+    /**
+     * @throws IOException
+     */
+    public void load() throws IOException {
+        load(RSCLocale, temp.get());
+        temp = null;
+    }
 
     /**
      * @param c
@@ -99,6 +96,6 @@ public class IconHandler {
      */
     public ImageIcon request(String key) {
         return icons.get(key) == null ? new ImageIcon(CloudSpin.createUnknownIMG())
-                : new ImageIcon(CloudSpin.hueImageUnsafe(icons.get(key), ColorTool.colorBreakDown(themeColor)));
+            : new ImageIcon(CloudSpin.hueImageUnsafe(icons.get(key), ColorTool.colorBreakDown(themeColor)));
     }
 }

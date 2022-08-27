@@ -50,18 +50,18 @@ public class Discordo implements InfoViewUpdateListener {
      */
     public void start() {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
-                .setReadyEventHandler(
-                        user -> Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.BOLD, CLIStyles.MAGENTA_BG },
-                                "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
-                                        + user.userId)))
-                .build();
+            .setReadyEventHandler(
+                user -> Debugger.alert(new TConstr(new CLIStyles[]{CLIStyles.BOLD, CLIStyles.MAGENTA_BG},
+                    "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
+                        + user.userId)))
+            .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
 
         String NOTHING_MUSIC = "Nothing";
         rpc = new DiscordRichPresence.Builder(STATE
-                + NOTHING_MUSIC)
-                .setBigImage("disk", STATE)
-                .build();
+            + NOTHING_MUSIC)
+            .setBigImage("disk", STATE)
+            .build();
         DiscordRPC.discordUpdatePresence(rpc);
     }
 
@@ -70,15 +70,15 @@ public class Discordo implements InfoViewUpdateListener {
      */
     public void set(String title) {
         DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
-                .setReadyEventHandler(
-                        user -> Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.BOLD, CLIStyles.MAGENTA_BG },
-                                "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
-                                        + user.userId)))
-                .build();
+            .setReadyEventHandler(
+                user -> Debugger.alert(new TConstr(new CLIStyles[]{CLIStyles.BOLD, CLIStyles.MAGENTA_BG},
+                    "Launching Discord for user: " + user.username + "#" + user.discriminator + " | ID: "
+                        + user.userId)))
+            .build();
         DiscordRPC.discordInitialize(PROJECT_ID, handlers, true);
         rpc = new DiscordRichPresence.Builder(TextParser.parseAsPure(title))
-                .setBigImage("disk", STATE)
-                .build();
+            .setBigImage("disk", STATE)
+            .build();
         DiscordRPC.discordUpdatePresence(rpc);
     }
 

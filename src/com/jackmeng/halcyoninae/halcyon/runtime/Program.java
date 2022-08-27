@@ -54,25 +54,25 @@ public class Program {
     private static void println(String e) {
         if (executorService == null) {
             executorService = Executors.newCachedThreadPool(
-                    r -> {
-                        Thread t = new Thread(r);
-                        t.setDaemon(true);
-                        return t;
-                    });
+                r -> {
+                    Thread t = new Thread(r);
+                    t.setDaemon(true);
+                    return t;
+                });
             executorService.submit(
-                    new Runnable() {
-                        @Override
-                        public synchronized void run() {
-                            while (true) {
-                                try {
-                                    wait();
-                                    System.err.println(e);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
+                new Runnable() {
+                    @Override
+                    public synchronized void run() {
+                        while (true) {
+                            try {
+                                wait();
+                                System.err.println(e);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
                         }
-                    });
+                    }
+                });
         }
     }
 
@@ -93,7 +93,7 @@ public class Program {
         }
         String s = sb.toString();
         File f = new File(
-                ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/dump_" + System.currentTimeMillis() + "_.halcyon");
+            ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/bin/dump_" + System.currentTimeMillis() + "_.halcyon");
         try {
             FileWriter fw = new FileWriter(f);
             fw.write(s);

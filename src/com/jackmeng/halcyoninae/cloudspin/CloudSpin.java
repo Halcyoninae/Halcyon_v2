@@ -98,14 +98,14 @@ public final class CloudSpin {
      * @return BufferedImage
      */
     public static BufferedImage createGradient(BufferedImage src, int startOpacity, int endOpacity, int startX,
-            int startY, int endX, int endY) {
+                                               int startY, int endX, int endY) {
         BufferedImage alphamask = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = alphamask.createGraphics();
         LinearGradientPaint lgp = new LinearGradientPaint(
-                new Point(startX, startY),
-                new Point(endX, endY),
-                new float[] { 0.0f, 1.0f },
-                new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
+            new Point(startX, startY),
+            new Point(endX, endY),
+            new float[]{0.0f, 1.0f},
+            new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
         g2d.setPaint(lgp);
         g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
         g2d.dispose();
@@ -152,13 +152,13 @@ public final class CloudSpin {
         // crop the image from (x1, y1) to (x2, y2)
         if (points != null && points.length > 0) {
             g.drawImage(target, points[0], points[1], width, height, (int) w.getX(), (int) w.getY(),
-                    (int) (w.getX() + w.getWidth()),
-                    (int) (w.getY() + w.getHeight()), null);
+                (int) (w.getX() + w.getWidth()),
+                (int) (w.getY() + w.getHeight()), null);
             g.dispose();
         } else {
             g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(),
-                    (int) (w.getX() + w.getWidth()),
-                    (int) (w.getY() + w.getHeight()), null);
+                (int) (w.getX() + w.getWidth()),
+                (int) (w.getY() + w.getHeight()), null);
             g.dispose();
         }
         return cropped;
@@ -179,7 +179,7 @@ public final class CloudSpin {
         }
         Graphics2D g = target.createGraphics();
         g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(), (int) (w.getX() + w.getWidth()),
-                (int) (w.getY() + w.getHeight()), null);
+            (int) (w.getY() + w.getHeight()), null);
         g.dispose();
     }
 
@@ -187,18 +187,18 @@ public final class CloudSpin {
      * Applies a specific hue upon the image.
      * This method tries to preserve the pixel's original Alpha, however
      * depending on the given hue, this is not guranteed.
-     *
+     * <p>
      * This method will not return anything, use the same object as you passed in
      * by reference.
-     *
+     * <p>
      * This method will perform bound checks upon the hue and will only take
      * the first 3 elements
      *
-     * @author Jack Meng
-     * @since 3.3
      * @param image A desired image to alter (java.awt.image.BufferedImage)
      * @param color A Color to shift the pixels to (int[]). Where hue[0] is RED,
      *              hue[1] is GREEN, and hue[2] is BLUE
+     * @author Jack Meng
+     * @since 3.3
      */
     public static void hueImage(BufferedImage image, int[] color) {
         image.setAccelerationPriority(1);
@@ -241,7 +241,6 @@ public final class CloudSpin {
     }
 
     /**
-     *
      * @param viewport
      * @param src
      * @return

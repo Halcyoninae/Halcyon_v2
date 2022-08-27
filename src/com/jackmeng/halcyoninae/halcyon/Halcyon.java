@@ -112,9 +112,9 @@ public final class Halcyon {
         Global.ifp.addInfoViewUpdateListener(Global.bctp);
         JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         bottom.setMinimumSize(
-                new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
         bottom.setPreferredSize(
-                new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
         ArrayList<BBlocButton> bb = new ArrayList<>();
         bb.add(new AddFolder());
         bb.add(new RefreshFileView());
@@ -184,7 +184,7 @@ public final class Halcyon {
             e.printStackTrace();
         }
         try {
-            IconHandler ico = new IconHandler(new String[] { "png" });
+            IconHandler ico = new IconHandler(new String[]{"png"});
 
             try {
                 ico.load();
@@ -193,7 +193,7 @@ public final class Halcyon {
             }
 
             ExternalResource.checkResourceFolder(
-                    ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
+                ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 
             for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
                 ExternalResource.createFolder(str);
@@ -204,7 +204,7 @@ public final class Halcyon {
 
             if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
                 new ConfirmWindow(
-                        "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
+                    "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
                     status -> {
                         if (status) {
                             run();

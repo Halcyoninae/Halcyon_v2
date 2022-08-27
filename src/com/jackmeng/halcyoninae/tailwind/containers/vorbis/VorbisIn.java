@@ -80,6 +80,6 @@ public class VorbisIn extends InputStream {
      */
     public AudioFormat getFormat() {
         return new AudioFormat(stream.getIdentificationHeader().getSampleRate(), 16,
-                stream.getIdentificationHeader().getChannels(), true, true);
+            stream.getIdentificationHeader().getChannels(), true, true);
     }
 }

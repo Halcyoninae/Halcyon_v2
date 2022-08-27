@@ -45,9 +45,9 @@ public class ExternalResource {
      * The program has one global instance to reduce overhead.
      */
     public static final PropertiesManager pm = new PropertiesManager(ProgramResourceManager.getProgramDefaultProperties(),
-            ProgramResourceManager.getAllowedProperties(),
-            ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-                    + ProgramResourceManager.PROGRAM_RESOURCE_FILE_PROPERTIES);
+        ProgramResourceManager.getAllowedProperties(),
+        ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
+            + ProgramResourceManager.PROGRAM_RESOURCE_FILE_PROPERTIES);
 
     private ExternalResource() {
     }
@@ -103,13 +103,13 @@ public class ExternalResource {
      */
     public static void writeLog(String folderName, String f) {
         if (!new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName)
-                .isDirectory() || !new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName).exists()) {
+            .isDirectory() || !new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName).exists()) {
             new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName).mkdir();
         }
         File logFile = new File(
-                ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName
-                        + ProgramResourceManager.FILE_SLASH
-                        + System.currentTimeMillis() + "_log.halcylog");
+            ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH + folderName
+                + ProgramResourceManager.FILE_SLASH
+                + System.currentTimeMillis() + "_log.halcylog");
         try {
             logFile.createNewFile();
             FileWriter writer = new FileWriter(logFile);
@@ -132,9 +132,9 @@ public class ExternalResource {
      */
     public static String writeBufferedImageCacheFile(BufferedImage bi, String cacheFolder, String fileName) {
         DeImage.write(bi, ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/" + cacheFolder
-                + "/" + fileName);
+            + "/" + fileName);
         return new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + "/" + cacheFolder
-                + "/" + fileName).getAbsolutePath();
+            + "/" + fileName).getAbsolutePath();
 
     }
 
@@ -163,7 +163,7 @@ public class ExternalResource {
      */
     public static boolean cacheFile(String fileName, String[] content) {
         File f = new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-                + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
+            + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f)));
             for (String str : content) {
@@ -184,7 +184,7 @@ public class ExternalResource {
      */
     public static File getCacheFile(String fileName) {
         return new File(ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
-                + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
+            + ProgramResourceManager.RESOURCE_SUBFOLDERS[2] + ProgramResourceManager.FILE_SLASH + fileName);
     }
 
     /**
@@ -204,16 +204,16 @@ public class ExternalResource {
                 Date d = new Date(System.currentTimeMillis());
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
                 StringBuilder sbt = new StringBuilder();
-                for(StackTraceElement ste : e.getStackTrace()) {
+                for (StackTraceElement ste : e.getStackTrace()) {
                     sbt.append(ste.toString()).append("\n");
                 }
                 writeLog("log",
-                        "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
-                                + "\n"
-                                + e.getClass() + "\n" + e + "\n" +
-                                e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n==BEGIN_STACK_TRACE==\n"
-                                + sbt + "\n==END_STACK_TRACE==\n"
-                                + "Submit an issue by making a PR to the file BUGS at " + DefaultManager.PROJECT_GITHUB_PAGE);
+                    "Halcyon/MP4J - LOG EXCEPTION | PLEASE KNOW WHAT YOU ARE DOING\nException caught time: " + df.format(d)
+                        + "\n"
+                        + e.getClass() + "\n" + e + "\n" +
+                        e.getMessage() + "\nLOCALIZED: " + e.getLocalizedMessage() + "\n==BEGIN_STACK_TRACE==\n"
+                        + sbt + "\n==END_STACK_TRACE==\n"
+                        + "Submit an issue by making a PR to the file BUGS at " + DefaultManager.PROJECT_GITHUB_PAGE);
             }
             return null;
         });

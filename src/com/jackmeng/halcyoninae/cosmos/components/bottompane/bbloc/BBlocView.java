@@ -54,9 +54,9 @@ public class BBlocView extends JPanel {
      * to the current BBloc container.
      *
      * @param buttons A Vararg of BBloc Buttons
+     * @author Jack Meng
      * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton
      * @since 3.0
-     * @author Jack Meng
      */
     public void addBBlockButtons(BBlocButton... buttons) {
         if (buttons.length > 0) {

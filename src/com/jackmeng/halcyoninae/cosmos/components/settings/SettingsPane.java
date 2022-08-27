@@ -35,7 +35,7 @@ import java.awt.event.ActionListener;
  */
 public class SettingsPane extends JFrame implements Runnable, ActionListener {
     protected static final SettingsTabs[] tabs = {
-            new AudioSettings()
+        new AudioSettings()
     };
 
     private final JTabbedPane pane;

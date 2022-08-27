@@ -107,6 +107,12 @@ public class TailwindPlayer implements Audio {
         return pipeline;
     }
 
+    /**
+     * @param pipeline
+     */
+    public synchronized void setPipelineMethod(TailwindPipelineMethod pipeline) {
+        this.pipeline = pipeline;
+    }
 
     /**
      * @return boolean
@@ -115,23 +121,6 @@ public class TailwindPlayer implements Audio {
         return pipeline.equals(TailwindPipelineMethod.DEFAULT_);
     }
 
-
-    /**
-     * @param pipeline
-     */
-    public synchronized void setPipelineMethod(TailwindPipelineMethod pipeline) {
-        this.pipeline = pipeline;
-    }
-
-
-    /**
-     * @param s
-     */
-    public void setForceCloseOnOpen(boolean s) {
-        this.forceClose = s;
-    }
-
-
     /**
      * @return boolean
      */
@@ -139,6 +128,12 @@ public class TailwindPlayer implements Audio {
         return forceClose;
     }
 
+    /**
+     * @param s
+     */
+    public void setForceCloseOnOpen(boolean s) {
+        this.forceClose = s;
+    }
 
     /**
      * @return boolean
@@ -161,13 +156,13 @@ public class TailwindPlayer implements Audio {
                     Control old = table.get(t);
                     if (ctrl instanceof FloatControl && old instanceof FloatControl) {
                         ((FloatControl) ctrl).setValue(
-                                ((FloatControl) ctrl).getValue());
+                            ((FloatControl) ctrl).getValue());
                     } else if (ctrl instanceof BooleanControl) {
                         ((BooleanControl) ctrl).setValue(
-                                ((BooleanControl) ctrl).getValue());
+                            ((BooleanControl) ctrl).getValue());
                     } else if (ctrl instanceof EnumControl) {
                         ((EnumControl) ctrl).setValue(
-                                ((EnumControl) ctrl).getValue());
+                            ((EnumControl) ctrl).getValue());
                     }
                 }
                 temp.put(ctrl.getType().toString(), ctrl);
@@ -179,9 +174,9 @@ public class TailwindPlayer implements Audio {
 
     /**
      * Note: This method does not check the exact validity of a file.
-     *
+     * <p>
      * Opens the line for reading and playback.
-     *
+     * <p>
      * This method will try its best to handle missing media length
      * by manually reading per frame-which may take time.
      *
@@ -190,10 +185,10 @@ public class TailwindPlayer implements Audio {
     @Override
     public void open(File url) {
         if (isForceCloseOnOpen()
-                && (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))))
+            && (isOpen() || isPlaying() || (worker != null && (!worker.isShutdown() || !worker.isTerminated()))))
             close();
         if (!isForceCloseOnOpen() && (isOpen() || isPlaying()
-                || (worker != null && (!worker.isShutdown() || !worker.isTerminated())))) {
+            || (worker != null && (!worker.isShutdown() || !worker.isTerminated())))) {
             return;
         }
         if (isDefaultPipeline()) {
@@ -205,8 +200,8 @@ public class TailwindPlayer implements Audio {
                 ais = TailwindHelper.getAudioIS(resource.toURI().toURL());
                 assert ais != null;
                 microsecondLength = (long) (1000000 *
-                        (ais.getFrameLength() /
-                                ais.getFormat().getFrameRate()));
+                    (ais.getFrameLength() /
+                        ais.getFormat().getFrameRate()));
                 frameLength = ais.getFrameLength();
 
                 if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
@@ -223,19 +218,19 @@ public class TailwindPlayer implements Audio {
                         this.ais = TailwindHelper.getAudioIS(this.resource.toURI().toURL());
                         assert this.ais != null;
                         this.microsecondLength = (long) (1000000 *
-                                (frameLength / this.ais.getFormat().getFrameRate()));
+                            (frameLength / this.ais.getFormat().getFrameRate()));
                     }
                 } else {
                     if (microsecondLength < 0) {
                         frameLength = ais.getFrameLength();
                         microsecondLength = 1000000L
-                                * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
+                            * Integer.parseInt(new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION));
                     }
                 }
 
                 DataLine.Info info = new DataLine.Info(
-                        SourceDataLine.class,
-                        ais.getFormat());
+                    SourceDataLine.class,
+                    ais.getFormat());
                 formatAudio = ais.getFormat();
                 this.line = (SourceDataLine) AudioSystem.getLine(info);
                 this.line.open(ais.getFormat());
@@ -273,7 +268,7 @@ public class TailwindPlayer implements Audio {
 
     /**
      * @return AudioFormat Get the absolute audio format obj representing the
-     *         current stream
+     * current stream
      */
     public synchronized AudioFormat getAudioFormatAbsolute() {
         return formatAudio;
@@ -310,7 +305,7 @@ public class TailwindPlayer implements Audio {
     /**
      * Defaults to the SourceDataLine's microsecond
      * position.
-     *
+     * <p>
      * NOTE: This method does not take into account any
      * time seeking etc and only takes into account the time
      * since the line was opened.
@@ -319,14 +314,14 @@ public class TailwindPlayer implements Audio {
      */
     public synchronized long getMicrosecondPosition() {
         return isDefaultPipeline()
-                ? (line != null ? line.getMicrosecondPosition() : 0L)
-                : 0L;
+            ? (line != null ? line.getMicrosecondPosition() : 0L)
+            : 0L;
     }
 
     /**
      * Does not use the internal SourceDataLine's microsecond
      * positioning.
-     *
+     * <p>
      * NOTE: This method does not gurantee absolute precision;
      * however, it does take into account any time modifications
      * including seeking.
@@ -430,8 +425,8 @@ public class TailwindPlayer implements Audio {
 
     /**
      * Fades out the audio until the audio dies.
-     *
-     *
+     * <p>
+     * <p>
      * NOTE: This method does not automatically take care
      * of draining and closing the current line and stream.
      *
@@ -444,8 +439,8 @@ public class TailwindPlayer implements Audio {
                 FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
                 if (control.getUpdatePeriod() != -1) {
                     control.shift(
-                            control.getValue(),
-                            control.getMinimum(), time * 1000);
+                        control.getValue(),
+                        control.getMinimum(), time * 1000);
                 } else {
                     Debugger.info("Automatic Updates Not Supported");
                     // later i will implement this
@@ -515,7 +510,7 @@ public class TailwindPlayer implements Audio {
         if (isDefaultPipeline()) {
             FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
             control.setValue(percent < control.getMinimum() ? control.getMinimum()
-                    : (Math.min(percent, control.getMaximum())));
+                : (Math.min(percent, control.getMaximum())));
             if (((int) control.getValue()) == ((int) control.getMaximum())) {
                 Debugger.good(">3< Earrape Mode! Let's go!");
             }
@@ -530,7 +525,7 @@ public class TailwindPlayer implements Audio {
         if (isDefaultPipeline()) {
             FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
             bal.setValue(
-                    balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+                balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
         }
     }
 
@@ -541,7 +536,7 @@ public class TailwindPlayer implements Audio {
         if (isDefaultPipeline()) {
             FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
             ctrl.setValue(
-                    pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
+                pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
         }
     }
 
@@ -551,7 +546,7 @@ public class TailwindPlayer implements Audio {
     @Override
     public void setMute(boolean mute) {
         throw new UnsupportedOperationException(
-                "This method should not be used directly via the Tailwind Implementation!");
+            "This method should not be used directly via the Tailwind Implementation!");
     }
 
     @Override
@@ -573,11 +568,11 @@ public class TailwindPlayer implements Audio {
     /**
      * This method provides a safety check upon the given
      * time to seek.
-     *
+     * <p>
      * This method takes the current position of the
      * stream and adds the given millis parameter to
      * that time and resume play from there.
-     *
+     * <p>
      * If the method is called with -2, the stream will
      * skip to the beginning (essentially restarting the
      * stream); while -1 as a parameter
@@ -592,10 +587,10 @@ public class TailwindPlayer implements Audio {
             if (open || playing) {
                 long time = getPosition() + millis;
                 Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
-                        + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n"
-                        + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time)
-                        + "\nCurrent Time"
-                        + TimeParser.fromMillis(milliPos));
+                    + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n"
+                    + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time)
+                    + "\nCurrent Time"
+                    + TimeParser.fromMillis(milliPos));
                 if (time < 0 || millis == -2) {
                     milliPos = 0L;
                     setPosition(0);
@@ -689,12 +684,12 @@ public class TailwindPlayer implements Audio {
                 if (!ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE).equals("auto")) {
                     try {
                         buffer = new byte[Integer
-                                .parseInt(
-                                        ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
+                            .parseInt(
+                                ExternalResource.pm.get(ProgramResourceManager.KEY_AUDIO_DEFAULT_BUFFER_SIZE))];
                     } catch (Exception e) {
                         new ErrorWindow(
-                                "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
-                                .run();
+                            "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
+                            .run();
                         e.printStackTrace();
                     }
                 }
@@ -706,9 +701,9 @@ public class TailwindPlayer implements Audio {
                  */
                 if (buffer == null) {
                     buffer = new byte[(my_magic_number == -1
-                            ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
-                            : MAGIC_NUMBER * formatAudio.getChannels()
-                                    * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
+                        ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
+                        : MAGIC_NUMBER * formatAudio.getChannels()
+                        * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
                     Debugger.warn("Tailwind_buffer_size: " + buffer.length);
                 }
                 line.start();

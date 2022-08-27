@@ -40,6 +40,7 @@ public final class Numerical {
 
     /**
      * A bound method
+     *
      * @param f1 Func1 requires first param
      * @param f2 Func2 requires second param
      * @return A double

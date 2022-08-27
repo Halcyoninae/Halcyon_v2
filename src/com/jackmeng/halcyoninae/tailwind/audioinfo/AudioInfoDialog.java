@@ -33,7 +33,7 @@ import java.awt.image.BufferedImage;
 /**
  * This is a window popup that shows information regarding the current
  * track by using the AudioInfo class.
- *
+ * <p>
  * This is non resusable and a new instance must be initiated on every
  * AudioInfo launch.
  *
@@ -53,11 +53,10 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
     private final JPanel artWork;
     private final JPopupMenu rightClickArtwork;
-
-    // Transient Components
-    private transient boolean toOpenArtwork = true;
     private final transient AudioInfoArtworkDialog aiad;
     private final transient BufferedImage img;
+    // Transient Components
+    private transient boolean toOpenArtwork = true;
     private transient AudioInfo info;
 
     public AudioInfoDialog(AudioInfo info) {
@@ -94,14 +93,14 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         });
 
         img = CloudSpin.resizeToFitViewport(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT),
-                info.getArtwork());
+            info.getArtwork());
 
         artWork = new JPanel() {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
                 g.drawImage(img, (artWork.getWidth() - img.getWidth()) / 2, (artWork.getHeight() - img.getHeight()) / 2,
-                        rootPane);
+                    rootPane);
                 g.dispose();
             }
         };
@@ -187,7 +186,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
     /**
      * @return This instance's AudioInfo object that is being used to generate the
-     *         compiled information.
+     * compiled information.
      */
     public AudioInfo getInfo() {
         return info;

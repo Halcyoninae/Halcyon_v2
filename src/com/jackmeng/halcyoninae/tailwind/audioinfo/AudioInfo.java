@@ -52,9 +52,9 @@ import java.util.WeakHashMap;
  */
 public class AudioInfo {
     public static final String KEY_ABSOLUTE_FILE_PATH = "a", KEY_FILE_NAME = "f",
-            KEY_MEDIA_DURATION = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
-            KEY_SAMPLE_RATE = "mS", KEY_ALBUM = "mA", KEY_GENRE = "mG",
-            KEY_MEDIA_ARTIST = "mAr", KEY_ARTWORK = "mArt", KEY_TRACK = "mTr";
+        KEY_MEDIA_DURATION = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
+        KEY_SAMPLE_RATE = "mS", KEY_ALBUM = "mA", KEY_GENRE = "mG",
+        KEY_MEDIA_ARTIST = "mAr", KEY_ARTWORK = "mArt", KEY_TRACK = "mTr";
     private File f;
     private Map<String, String> tags;
     private Tag t;
@@ -81,7 +81,7 @@ public class AudioInfo {
     }
 
     public AudioInfo(File f, boolean s)
-            throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
+        throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
         this.f = f;
         AudioFile af;
         af = AudioFileIO.read(f);
@@ -146,7 +146,7 @@ public class AudioInfo {
             info.getTag(KEY_MEDIA_TITLE);
             info.getTag(KEY_SAMPLE_RATE);
         } catch (TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException
-                | IOException e) {
+            | IOException e) {
             return false;
         }
         return true;
@@ -167,7 +167,7 @@ public class AudioInfo {
      */
     public void forceSet(Map<String, String> forceSetMap) {
         Debugger.warn(
-                "Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
+            "Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
         this.tags = forceSetMap;
     }
 
@@ -198,13 +198,13 @@ public class AudioInfo {
         tags.put(KEY_FILE_NAME, f.getName());
         tags.put(KEY_MEDIA_DURATION, header.getTrackLength() + "");
         tags.put(KEY_MEDIA_TITLE,
-                checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
+            checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
         tags.put(KEY_BITRATE, header.getBitRate() + "");
         tags.put(KEY_SAMPLE_RATE, header.getSampleRate() + "");
         tags.put(KEY_ALBUM, checkEmptiness(t.getFirst(FieldKey.ALBUM)) ? "Unknown" : t.getFirst(FieldKey.ALBUM));
         tags.put(KEY_GENRE, checkEmptiness(t.getFirst(FieldKey.GENRE)) ? "Unknown" : t.getFirst(FieldKey.GENRE));
         tags.put(KEY_MEDIA_ARTIST,
-                checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
+            checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
     }
 
     /**
@@ -221,7 +221,7 @@ public class AudioInfo {
                 try {
                     mp = new MP3File(f);
                 } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
-                        | InvalidAudioFrameException e1) {
+                    | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
                 assert mp != null;
@@ -250,7 +250,7 @@ public class AudioInfo {
                 try {
                     mp = new MP3File(f);
                 } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
-                        | InvalidAudioFrameException e1) {
+                    | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
                 assert mp != null;
@@ -272,7 +272,7 @@ public class AudioInfo {
      * Returns the map of tags to the Audio file
      *
      * @return A Map of String, String representing the parsed tags from the audio
-     *         file.
+     * file.
      */
     public Map<String, String> getTags() {
         return tags;
@@ -309,7 +309,7 @@ public class AudioInfo {
      */
     public AudioInfoDialog launchAsDialog() {
         Debugger.alert(new TConstr(CLIStyles.MAGENTA_TXT,
-                "Launching current AudioInfo"));
+            "Launching current AudioInfo"));
         return new AudioInfoDialog(this);
     }
 }

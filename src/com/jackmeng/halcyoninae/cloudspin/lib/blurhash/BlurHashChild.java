@@ -104,8 +104,8 @@ public final class BlurHashChild {
                 for (int x = 0; x < width; x++) {
                     for (int y = 0; y < height; y++) {
                         double basis = normalisation
-                                * Math.cos((Math.PI * i * x) / width)
-                                * Math.cos((Math.PI * j * y) / height);
+                            * Math.cos((Math.PI * i * x) / width)
+                            * Math.cos((Math.PI * j * y) / height);
                         int pixel = pixels[y * width + x];
                         r += basis * to_linear((pixel >> 16) & 0xff);
                         g += basis * to_linear((pixel >> 8) & 0xff);
@@ -130,7 +130,7 @@ public final class BlurHashChild {
         if (factorsLength > 1) {
             double actualMaximumValue = max(factors);
             double quantisedMaximumValue = Math
-                    .floor(Math.max(0, Math.min(82, Math.floor(actualMaximumValue * 166 - 0.5))));
+                .floor(Math.max(0, Math.min(82, Math.floor(actualMaximumValue * 166 - 0.5))));
             maximumValue = (quantisedMaximumValue + 1) / 166;
             base_83.encode(Math.round(quantisedMaximumValue), 1, hash, 1);
         } else {
@@ -181,7 +181,7 @@ public final class BlurHashChild {
                 for (int y = 0; y < sizeY; y++) {
                     for (int x = 0; x < sizeX; x++) {
                         double basic = Math.cos(Math.PI * x * i / width) *
-                                Math.cos(Math.PI * y * j / height);
+                            Math.cos(Math.PI * y * j / height);
                         double[] color = colors[x + y * sizeX];
                         r += (color[0] * basic);
                         g += (color[1] * basic);
@@ -189,7 +189,7 @@ public final class BlurHashChild {
                     }
                 }
                 pixels[pos++] = 255 << 24 | (_as_linear(r) & 255) << 16 |
-                        (_as_linear(g) & 255) << 8 | (_as_linear(b) & 255);
+                    (_as_linear(g) & 255) << 8 | (_as_linear(b) & 255);
             }
         }
         return pixels;

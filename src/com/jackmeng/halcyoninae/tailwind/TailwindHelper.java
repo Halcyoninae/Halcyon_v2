@@ -48,13 +48,13 @@ public final class TailwindHelper {
                 ais = AudioSystem.getAudioInputStream(locale);
                 AudioFormat base = ais.getFormat();
                 AudioFormat decode = new AudioFormat(
-                        AudioFormat.Encoding.PCM_SIGNED,
-                        base.getSampleRate(),
-                        16,
-                        base.getChannels(),
-                        base.getChannels() * 2,
-                        base.getSampleRate(),
-                        false);
+                    AudioFormat.Encoding.PCM_SIGNED,
+                    base.getSampleRate(),
+                    16,
+                    base.getChannels(),
+                    base.getChannels() * 2,
+                    base.getSampleRate(),
+                    false);
                 ais = AudioSystem.getAudioInputStream(decode, ais);
                 return ais;
             } else if (target.equals(FileFormat.WAV)) {
@@ -65,8 +65,8 @@ public final class TailwindHelper {
                 return ais;
             } else if (target.equals(FileFormat.OGG)) {
                 LogicalOggStream stream = (LogicalOggStream) new OnDemandUrlStream(locale).getLogicalStreams()
-                        .iterator()
-                        .next();
+                    .iterator()
+                    .next();
                 if (stream.getFormat().equals(LogicalOggStream.FORMAT_FLAC)) {
                     FlacIn v = new FlacIn(new FlacStream(stream));
                     ais = new AudioInputStream(v, v.getFormat(), -1L);

@@ -43,7 +43,7 @@ public class WaveFormPane extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
 
             }
         });
@@ -51,7 +51,7 @@ public class WaveFormPane extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
 
             }
         });

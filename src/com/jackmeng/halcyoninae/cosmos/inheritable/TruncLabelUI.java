@@ -40,7 +40,7 @@ public class TruncLabelUI extends BasicLabelUI {
                               Rectangle textR) {
         before = text.length();
         String s = super.layoutCL(
-                l, fontMetrics, text, icon, viewR, iconR, textR);
+            l, fontMetrics, text, icon, viewR, iconR, textR);
         after = s.length();
         Debugger.warn(s);
         return s;

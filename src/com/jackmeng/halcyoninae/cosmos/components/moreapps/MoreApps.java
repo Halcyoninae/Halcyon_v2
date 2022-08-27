@@ -32,10 +32,10 @@ import java.awt.event.MouseMotionAdapter;
  * @since 3.3
  */
 public class MoreApps extends JFrame implements Runnable {
-    private final JScrollPane jsp;
     private static final int maxCols = 5;
-    private int colIndex = 0;
+    private final JScrollPane jsp;
     private final GridLayout gl;
+    private int colIndex = 0;
     private int pX, pY;
 
     public MoreApps() {
@@ -46,7 +46,7 @@ public class MoreApps extends JFrame implements Runnable {
         setAutoRequestFocus(true);
 
         jsp = new JScrollPane(null, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
-                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jsp.setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
 
         gl = new GridLayout(1, maxCols);
@@ -63,7 +63,7 @@ public class MoreApps extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
             }
         });
 
@@ -77,7 +77,7 @@ public class MoreApps extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
             }
         });
 
@@ -91,21 +91,21 @@ public class MoreApps extends JFrame implements Runnable {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
             }
         });
         addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
             }
         });
         jsp.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
                 setLocation(getLocation().x + me.getX() - pX,
-                        getLocation().y + me.getY() - pY);
+                    getLocation().y + me.getY() - pY);
             }
         });
         setResizable(true);
@@ -114,7 +114,7 @@ public class MoreApps extends JFrame implements Runnable {
     /**
      * This method will dynamically allocate the necessary space for
      * the individual component cells.
-     *
+     * <p>
      * All elements will be resized to fit the correct cell size!!!
      *
      * @param c Components to add to the screen.
@@ -122,7 +122,7 @@ public class MoreApps extends JFrame implements Runnable {
     public void addComponent(JComponent... c) {
         for (JComponent cc : c) {
             cc.setPreferredSize(
-                    new Dimension(MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT, MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT));
+                new Dimension(MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT, MoreAppsManager.ELEMENT_MAX_WIDTH_HEIGHT));
             cc.setBorder(BorderFactory.createLineBorder(ColorManager.BORDER_THEME));
             if (colIndex % maxCols == 0) {
                 Debugger.info("Adding a component: " + cc.getClass().getCanonicalName() + " to row a new row");

@@ -28,7 +28,7 @@ import java.util.Map;
 
 /**
  * A WaveForm main panel.
- *
+ * <p>
  * 3.3 : Optimized the heck out of the algorithms
  * used to draw thus reducing overhead and memory
  * usage.
@@ -37,15 +37,17 @@ import java.util.Map;
  * @since 3.2
  */
 public class WaveForm extends JPanel implements TailwindListener.FrameBufferListener {
+    private static final Map<RenderingHints.Key, Object> renderinghints = new HashMap<>();
+
+    static {
+        renderinghints.put(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+    }
+
     private final transient Object lock = new Object();
     private float[] samples;
     private Path2D.Float path = new Path2D.Float();
     private int s_valid;
     private boolean fakeVis = false;
-    private static final Map<RenderingHints.Key, Object> renderinghints = new HashMap<>();
-    static {
-        renderinghints.put(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
-    }
 
     public WaveForm() {
         setPreferredSize(new Dimension(WaveFormManager.MIN_WIDTH, WaveFormManager.MIN_HEIGHT));
@@ -71,7 +73,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
 
     /**
      * DOES NOT REPAINT THE FRAME
-     *
+     * <p>
      * REPAINT MUST BE CALLED SEPARATELY
      *
      * @param samples
@@ -109,7 +111,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
                     }
                     avg /= chnls;
                     main.lineTo(
-                            (float) frame / fvalid * this.getWidth(), hd2 - avg * hd2);
+                        (float) frame / fvalid * this.getWidth(), hd2 - avg * hd2);
                 }
                 path = main;
 
@@ -119,8 +121,8 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
                     g2.setBackground(ColorManager.ONE_DARK_BG);
                     g2.clearRect(0, 0, this.getWidth(), this.getHeight());
                     g2.setRenderingHint(
-                            RenderingHints.KEY_ANTIALIASING,
-                            RenderingHints.VALUE_ANTIALIAS_ON);
+                        RenderingHints.KEY_ANTIALIASING,
+                        RenderingHints.VALUE_ANTIALIAS_ON);
                     g2.setStroke(new BasicStroke(3));
                     g2.addRenderingHints(renderinghints);
                     g2.setPaint(ColorManager.MAIN_FG_THEME);

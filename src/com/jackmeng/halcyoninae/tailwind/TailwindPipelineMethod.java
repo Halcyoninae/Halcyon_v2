@@ -23,5 +23,5 @@ package com.jackmeng.halcyoninae.tailwind;
  * @since 3.3
  */
 public enum TailwindPipelineMethod {
-    FX_, DEFAULT_;
+    FX_, DEFAULT_
 }

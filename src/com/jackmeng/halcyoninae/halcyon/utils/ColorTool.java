@@ -40,9 +40,9 @@ public final class ColorTool {
             hex = "#" + hex;
         }
         return new Color(
-                Integer.valueOf(hex.substring(1, 3), 16),
-                Integer.valueOf(hex.substring(3, 5), 16),
-                Integer.valueOf(hex.substring(5, 7), 16));
+            Integer.valueOf(hex.substring(1, 3), 16),
+            Integer.valueOf(hex.substring(3, 5), 16),
+            Integer.valueOf(hex.substring(5, 7), 16));
     }
 
     /**
@@ -73,15 +73,17 @@ public final class ColorTool {
      * Returns an integer array representing the standard RED GREEN BLUE
      * colors. Where arr[0]:RED arr[1]:GREEN arr[2]:BLUE. Alpha is not
      * represented
+     *
      * @param c A Color object (java.awt.Color)
      * @return An integer array of length 3
      */
     public static int[] colorBreakDown(Color c) {
-        return new int[] { c.getRed(), c.getGreen(), c.getBlue() };
+        return new int[]{c.getRed(), c.getGreen(), c.getBlue()};
     }
 
     /**
      * Get a color with 0 RED GREEN BLUE ALPHA
+     *
      * @return A Color object (java.awt.Color)
      */
     public static Color getNullColor() {

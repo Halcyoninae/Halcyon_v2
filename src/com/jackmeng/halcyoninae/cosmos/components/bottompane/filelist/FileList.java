@@ -77,7 +77,7 @@ public class FileList extends JScrollPane implements TabTree {
     /// FileView Config END
 
     public FileList(PhysicalFolder info, Icon closed, Icon open, Icon leaf, String rightClickHideString,
-            RightClickHideItemListener hideStringTask) {
+                    RightClickHideItemListener hideStringTask) {
         super();
         this.info = info;
         fileMap = new WeakHashMap<>();
@@ -218,7 +218,7 @@ public class FileList extends JScrollPane implements TabTree {
         List<File> toRemove = new ArrayList<>();
         for (File f : fileMap.keySet()) {
             if (!f.exists() || !f.isFile()
-                    || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
+                || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
                 ((DefaultTreeModel) tree.getModel()).removeNodeFromParent(fileMap.get(f));
                 toRemove.add(f);
             }

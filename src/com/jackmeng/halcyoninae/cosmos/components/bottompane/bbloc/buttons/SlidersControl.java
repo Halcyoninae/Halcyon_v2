@@ -32,8 +32,8 @@ import java.awt.event.WindowEvent;
  * etc..
  *
  * @author Jack Meng
- * @since 3.2
  * @see com.jackmeng.halcyoninae.cosmos.dialog.SlidersDialog
+ * @since 3.2
  */
 public class SlidersControl extends JButton implements BBlocButton {
     private final SlidersDialog dialog;

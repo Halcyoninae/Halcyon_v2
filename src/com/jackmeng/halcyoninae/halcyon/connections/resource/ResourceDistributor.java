@@ -45,7 +45,7 @@ public class ResourceDistributor {
     public ImageIcon getFromAsImageIcon(String path) {
         try {
             return new ImageIcon(
-                    java.util.Objects.requireNonNull(getClass().getResource(path))
+                java.util.Objects.requireNonNull(getClass().getResource(path))
             );
         } catch (NullPointerException e) {
 
@@ -62,7 +62,7 @@ public class ResourceDistributor {
     public File getFromAsFile(String path) {
         try {
             return new File(
-                    java.util.Objects.requireNonNull(getClass().getResource(path)).getFile());
+                java.util.Objects.requireNonNull(getClass().getResource(path)).getFile());
         } catch (NullPointerException e) {
 
             return new File(path);

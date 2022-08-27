@@ -15,9 +15,9 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
-import java.util.concurrent.ExecutorService;
-
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
+
+import java.util.concurrent.ExecutorService;
 
 /**
  * A class designed to constantly ping

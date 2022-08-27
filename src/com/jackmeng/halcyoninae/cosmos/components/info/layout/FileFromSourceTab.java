@@ -42,12 +42,11 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
      *
      * @param tabName The preferred tab name (should be kept at a small length)
      * @param textTab The content of the tab {@link #getContent(String)}
-     *
      * @see #getContent(String)
      */
     public FileFromSourceTab(String tabName, String textTab) {
         setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH,
-                LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
+            LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
         setFocusable(true);
 
         this.tabName = tabName;

@@ -45,7 +45,7 @@ public class BottomPane extends JTabbedPane {
      */
     private final Map<String, Integer> tabsMap;
 
-    private TitledBorder t = BorderFactory.createTitledBorder("Playlists");
+    private final TitledBorder t = BorderFactory.createTitledBorder("Playlists");
 
     /**
      * Creates a bottom viewport
@@ -62,9 +62,9 @@ public class BottomPane extends JTabbedPane {
         addChangeListener(x -> {
             if (getTabComponentAt(getSelectedIndex()) != null) {
                 t.setTitle((getSelectedIndex() + 1) + " | " + (getTabComponentAt(getSelectedIndex()).getName() == null ? " "
-                        : new File(getTabComponentAt(
-                                getSelectedIndex()).getName()).getName()) + " | " + getTabComponentAt(
-                                        getSelectedIndex()).getName() + "");
+                    : new File(getTabComponentAt(
+                    getSelectedIndex()).getName()).getName()) + " | " + getTabComponentAt(
+                    getSelectedIndex()).getName() + "");
             } else {
                 t.setTitle("Playlist");
             }
@@ -73,7 +73,7 @@ public class BottomPane extends JTabbedPane {
 
     /**
      * @return list that represents the
-     *         FileList tabs.
+     * FileList tabs.
      */
     public List<FileList> getTabs() {
         return tabs;
@@ -165,7 +165,7 @@ public class BottomPane extends JTabbedPane {
         for (FileList l : tabs) {
             if (!l.isVirtual) {
                 if (!new File(l.getFolderInfo().getAbsolutePath()).exists()
-                        || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
+                    || !new File(l.getFolderInfo().getAbsolutePath()).isDirectory()) {
                     removeTabAt(i);
                     needToRemove.add(i);
                     Program.cacher.getSavedPlaylists().remove(l.getFolderInfo().getAbsolutePath());

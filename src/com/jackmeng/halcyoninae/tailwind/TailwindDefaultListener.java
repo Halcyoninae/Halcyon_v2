@@ -23,7 +23,7 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @since 3.2
  */
 public record TailwindDefaultListener(TailwindPlayer player)
-        implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
+    implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
 
     /**
      * @param status

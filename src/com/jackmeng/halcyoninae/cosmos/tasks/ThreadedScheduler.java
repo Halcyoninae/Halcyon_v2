@@ -65,7 +65,7 @@ public class ThreadedScheduler {
         UIManager.put("TitlePane.buttonHoverForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
         UIManager.put("TitlePane.buttonPressedForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
         UIManager.put("Component.focusedBorderColor", ColorTool.getNullColor()); // takes a generic java.awt.Color
-                                                                                 // object
+        // object
         UIManager.put("Component.focusColor", ColorTool.getNullColor()); // takes a generic java.awt.Color object
         UIManager.put("TitlePane.centerTitle", true);
         UIManager.put("TitlePane.buttonSize", new java.awt.Dimension(25, 20));
@@ -88,9 +88,9 @@ public class ThreadedScheduler {
         }
 
         // PROGRAMMABLE THREADS
-        WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[] {
-                new PingFileView(Global.bp),
-                new DefunctOptimizer(),
+        WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[]{
+            new PingFileView(Global.bp),
+            new DefunctOptimizer(),
         });
 
         for (Runnable t : tasks.get()) {

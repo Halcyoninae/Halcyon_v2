@@ -58,9 +58,9 @@ public class DebuggerTab extends JScrollPane implements InformationTab {
                 long free = Runtime.getRuntime().freeMemory();
                 synchronized (memLabel) {
                     memLabel.setText("<html><p><strong>Memory (mB):</strong></p></html>" + " " + (total - free) / 1024 / 1024
-                            + "/" + total / 1024 / 1024);
+                        + "/" + total / 1024 / 1024);
                     memLabel.setToolTipText((total - free) / 1024 / 1024
-                            + "/" + total / 1024 / 1024);
+                        + "/" + total / 1024 / 1024);
                 }
                 memBar.setMaximum(((int) total) / 1024 / 1024);
                 memBar.setValue((int) (total - free) / 1024 / 1024);

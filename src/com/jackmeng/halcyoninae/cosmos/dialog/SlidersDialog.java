@@ -55,7 +55,7 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
                 Global.player.getStream().setPan(panSlider.getValue());
             }
             panSlider.setToolTipText("Pan Slider: " + panSlider.getValue() + " | "
-                    + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
+                + (balanceSlider.getValue() > 50 ? "RIGHT" : (balanceSlider.getValue() < 50 ? "LEFT" : "CENTER")));
             pan = panSlider.getValue();
         });
 
