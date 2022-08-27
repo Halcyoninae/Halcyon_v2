@@ -18,8 +18,6 @@ package com.jackmeng.halcyoninae.halcyon.connections.properties;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.validators.*;
 
 import java.awt.image.BufferedImage;
-import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 

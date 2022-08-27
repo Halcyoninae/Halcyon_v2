@@ -44,7 +44,6 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 
