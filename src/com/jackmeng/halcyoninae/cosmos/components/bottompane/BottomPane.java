@@ -56,7 +56,7 @@ public class BottomPane extends JTabbedPane {
 
         setPreferredSize(new Dimension(FileList.FILEVIEW_MAX_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
         setMinimumSize(new Dimension(FileList.FILEVIEW_MIN_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
-        this.tabs = new ArrayList<>();
+        this.tabs = new ArrayList<>(20);
         setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         setBorder(t);
         addChangeListener(x -> {
@@ -160,7 +160,7 @@ public class BottomPane extends JTabbedPane {
      * @see com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList#revalidateFiles()
      */
     public synchronized void mastRevalidate() {
-        List<Integer> needToRemove = new ArrayList<>();
+        List<Integer> needToRemove = new ArrayList<>(tabs.size());
         int i = 0;
         for (FileList l : tabs) {
             if (!l.isVirtual) {

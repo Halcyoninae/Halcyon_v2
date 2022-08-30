@@ -215,7 +215,7 @@ public class FileList extends JScrollPane implements TabTree {
                 ((DefaultTreeModel) tree.getModel()).reload();
             }
         }
-        List<File> toRemove = new ArrayList<>();
+        List<File> toRemove = new ArrayList<>(20);
         for (File f : fileMap.keySet()) {
             if (!f.exists() || !f.isFile()
                 || Program.cacher.isExcluded(f.getAbsolutePath()) && fileMap.get(f).getParent() != null) {
