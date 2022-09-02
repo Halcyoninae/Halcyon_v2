@@ -1,3 +1,11 @@
+[***] #46 HELLA BREAD
+    Detailed Description: Use the implemented BlurLayer instead of calling the custom
+    blurring methods to blur images in order to perform a filtered blur.
+    Difficulty: Mild
+    Testing: Decent
+    Category: Potential Optimization
+    Status: Working On
+
 [***] #45 Multiple Audio Engine support
     Detailed Description: Allow for far more control over how audio is processed
     For example, the user can use Tritnous or the Java Sound API to play audio,
