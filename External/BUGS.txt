@@ -1,3 +1,14 @@
+[***] #43 "AudioInfodialog Dispose"
+    Detailed Description: 
+        A spawned dialog seeminly does not clear itself once it
+        is created. This results in increased memory usage when
+        multiple are being created in a short amount of time.
+    Status:
+    Author: B33F70C8E8 
+    State: 
+    Difficulty: 
+    Testing:
+    
 [***] #42 "DeImage Optimizations"
     Detailed Description: This is a reminder
     Status: None
