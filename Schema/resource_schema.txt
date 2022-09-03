@@ -1,3 +1,0 @@
-ButtonControl Normal Buttons:
-Image Size: 64x64
-Format: PNG
