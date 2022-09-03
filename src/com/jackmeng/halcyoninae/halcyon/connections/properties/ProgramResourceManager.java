@@ -63,7 +63,7 @@ public class ProgramResourceManager {
                     "true", new BooleanValidator()),
             new Property(KEY_INFOVIEW_BACKDROP_USE_GRADIENT, "true",
                     new BooleanValidator()),
-            new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "true", new BooleanValidator()),
+            new Property(KEY_PROGRAM_FORCE_OPTIMIZATION, "false", new BooleanValidator()),
             new Property(KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE,
                     "focused", new StrictValidator("top", "left", "right",
                             "focused")),
