@@ -137,7 +137,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 getPreferredSize());
         backPanel.setOpaque(false);
 
-        JLayer<Component> blurBp = new JLayer<>(backPanel, new StdBlurLayer(30, null));
+        JLayer<Component> blurBp = new JLayer<>(backPanel,
+                new StdBlurLayer(
+                        Integer.parseInt(
+                                ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_FACTOR)),
+                        null));
         blurBp.setPreferredSize(backPanel.getPreferredSize());
 
         BufferedImage bi = DeImage.imageIconToBI(
@@ -234,9 +238,9 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 }
                 backPanelArt = img;
                 backPanel.repaint();
-                backPanel.repaint(100L);
             }
         });
+        backPanel.repaint(100L);
     }
 
     /**
