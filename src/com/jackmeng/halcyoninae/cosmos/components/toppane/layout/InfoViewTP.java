@@ -43,7 +43,6 @@ import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +85,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      */
     private final JLabel[] infoDisplayers;
     private final JLabel artWork;
-    private final transient SoftReference<ArrayList<InfoViewUpdateListener>> listeners;
+    private final transient ArrayList<InfoViewUpdateListener> listeners;
     private transient BufferedImage backPanelArt;
     private transient AudioInfo info;
     private String infoTitle;
@@ -96,7 +95,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     public InfoViewTP() {
         super();
         info = new AudioInfo();
-        listeners = new SoftReference<>(new ArrayList<>());
+        listeners = new ArrayList<>();
         setPreferredSize(
                 new Dimension(INFOVIEW_MIN_WIDTH, INFOVIEW_MIN_HEIGHT));
         setMinimumSize(
@@ -138,7 +137,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 getPreferredSize());
         backPanel.setOpaque(false);
 
-        JLayer<Component> blurBp = new JLayer<>(backPanel, new StdBlurLayer(30, null));
+        JLayer<Component> blurBp = new JLayer<>(backPanel,
+                new StdBlurLayer(
+                        Integer.parseInt(
+                                ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_FACTOR)),
+                        null));
         blurBp.setPreferredSize(backPanel.getPreferredSize());
 
         BufferedImage bi = DeImage.imageIconToBI(
@@ -235,9 +238,9 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 }
                 backPanelArt = img;
                 backPanel.repaint();
-                backPanel.repaint(100L);
             }
         });
+        backPanel.repaint(100L);
     }
 
     /**
@@ -315,7 +318,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
     private void __dispatch_() {
         SwingUtilities.invokeLater(() -> {
             Debugger.warn("InfoView Preparing a dispatch: " + info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
-            for (InfoViewUpdateListener l : listeners.get()) {
+            for (InfoViewUpdateListener l : listeners) {
                 l.infoView(info);
             }
         });
@@ -358,7 +361,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * @param l A listener that can be called
      */
     public void addInfoViewUpdateListener(InfoViewUpdateListener l) {
-        listeners.get().add(l);
+        listeners.add(l);
     }
 
     /**

@@ -202,9 +202,9 @@ public final class Halcyon {
 
             new ThreadedScheduler();
 
-            if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
+            if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
                 new ConfirmWindow(
-                    "You seemed to have turned off Forced Optimization, this can result in increased performance loss. It is best to keep it on!",
+                    "Turning this feature ON may result in unexpected performance anomalies!! Best to leave this off",
                     status -> {
                         if (status) {
                             run();

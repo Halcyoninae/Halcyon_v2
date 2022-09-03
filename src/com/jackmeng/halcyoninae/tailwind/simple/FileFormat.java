@@ -56,7 +56,9 @@ public enum FileFormat {
      *
      * @since 1.0.0
      */
-    OGG(false, null, "ogg", "oga"),
+    OGG(false, null, "ogg", "oga", "ogv"),
+
+    FLAC(false, null, "flac"),
 
     /**
      * Audio Interchange File Format(.aiff)
@@ -93,9 +95,9 @@ public enum FileFormat {
     private final AudioFileFormat.Type type;
 
     FileFormat(
-        boolean writingSupported,
-        AudioFileFormat.Type type,
-        String... associatedFileExtensions) {
+            boolean writingSupported,
+            AudioFileFormat.Type type,
+            String... associatedFileExtensions) {
         this.associatedFileExtensions = new ArrayList<>();
         this.writingSupported = writingSupported;
         this.type = type;
@@ -106,7 +108,7 @@ public enum FileFormat {
     /**
      * @param name name of the file
      * @return the {@linkplain FileFormat} instance which fits or {@code null} if no
-     * file format could be found for that name.
+     *         file format could be found for that name.
      * @since 1.0.0
      */
     public static FileFormat getFormatByName(String name) {
@@ -114,8 +116,8 @@ public enum FileFormat {
 
         if (name.contains(".") && !name.endsWith(".")) {
             String extension = name
-                .substring(name.lastIndexOf('.') + 1)
-                .toLowerCase();
+                    .substring(name.lastIndexOf('.') + 1)
+                    .toLowerCase();
 
             for (FileFormat format : FileFormat.values()) {
                 if (format.getAssociatedExtensions().contains(extension)) {
@@ -130,7 +132,7 @@ public enum FileFormat {
 
     /**
      * @return the {@linkplain AudioFileFormat.Type} equivalent to this
-     * {@linkplain FileFormat} instance
+     *         {@linkplain FileFormat} instance
      * @since 1.1.0
      */
     public AudioFileFormat.Type getType() {
@@ -139,7 +141,7 @@ public enum FileFormat {
 
     /**
      * @return {@code true} if writing for the file format is supported, else
-     * {@code false}
+     *         {@code false}
      * @since 1.0.0
      */
     public boolean isWritingSupported() {
