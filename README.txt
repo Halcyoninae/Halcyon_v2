@@ -5,8 +5,8 @@ with full feature transparency.
 
 ==================================
 
-This repository contains the 
-source code for the Halcyon Music 
+This repository contains the
+source code for the Halcyon Music
 Player.
 
 Copyright(C)Jack Meng 2021
@@ -16,7 +16,7 @@ Licensed under the following:
 1. Source Code: GPL OR Vendor
 2. EULA & Binaries: VENDOR
 
-(See section "Legals" for more 
+(See section "Legals" for more
 info).
 
 ----------------------------------
@@ -80,29 +80,29 @@ Hopefully to support:
   3. AAC
   4. USAC
 
-Memory usage usually hovers at 
+Memory usage usually hovers at
 around 30-50 mB of memory usage
 no matter the file being played
 back. This is according to Java
 Mission Control, which may differ
 from the actual committed Java
-Heap which is allocated to the 
+Heap which is allocated to the
 individual Java Processes.
 
-The program will allow for 
+The program will allow for
 multiple audio API integrations.
 By default, the program must
 support the standard Java Sound
 abstraction (Tailwind) along
 with the Tritonus Open Java
-Sound API. The JavaFX media 
+Sound API. The JavaFX media
 platform shall only be required
 if the "com.sun.media" package
 is present.
 
-Along with everything else, the 
+Along with everything else, the
 program features its own image
-manipulation library, filesystem 
+manipulation library, filesystem
 API, and custom GUI components
 that can be used.
 
@@ -121,13 +121,13 @@ secondary licenses.
 
 The only main reason things like
 a Discord RPC and the FlatLaf Laf
-are bundled with the program is 
+are bundled with the program is
 because they do not interfere
 with audio playback. This is
 unlike using someone else's audio
 library for audio playback.
 
-Currently there are a few 3rd 
+Currently there are a few 3rd
 party libraries that I will try
 and minimize the usage of and
 fully find alternatives and adopt
@@ -136,18 +136,18 @@ them.
 ----------------------------------
 
 [!] Legals
-  
+
 Legals refer to licensing of this
-software and all other third 
+software and all other third
 party libraries and software that
 are bundled with it.
 
-This program's source code is 
+This program's source code is
 provided under: Standard GPL2.0
 (WITHOUT CLASSPATH EXCEPTION)
 
 However, if you are to distribute
-any pre-built binaries of any 
+any pre-built binaries of any
 kind are subject to the standard:
 VENDOR_LICENSE.
     > See File: VENDOR_LICENSE
@@ -167,35 +167,35 @@ Standard Vendor Licensing:
 [!] Q&A
 
   1. Why Java?
-    > This was more of a first 
-    hand experience with Java, 
+    > This was more of a first
+    hand experience with Java,
     before I started learning it
     in school (previous MP4J prj).
     > It also challenged me for
-    stronger methods of 
+    stronger methods of
     optimization methods, instead
-    of using something like 
+    of using something like
     Object Pascal, C#, C/C++, or
     JavaScript/TypeScript.
-    > Although I knew how to 
+    > Although I knew how to
     create apps and audio
     playback in C & C++, it
     felt like bigger fun to do it
     in Java ;)
-    
+
   2. Why not JavaFX?
-    > In the section "Extern.", I 
-    clearly state that I want to 
+    > In the section "Extern.", I
+    clearly state that I want to
     minimize the usage of third
     party libraries for as much
     as possible.
     > JavaFX would not improve
-    any form of making this 
-    program faster. It only 
+    any form of making this
+    program faster. It only
     simplifies the process of
-    creating graphical items 
+    creating graphical items
     using HTML/CSS.
-    
+
 ----------------------------------
 
 [!] Building
@@ -205,8 +205,8 @@ original author is licensed under
 the default Yttrium License.
 
 Pre-req:
-  This program was tested on 
-  Window10+11 & Linux (515) with 
+  This program was tested on
+  Window10+11 & Linux (515) with
   zero to minimal faults.
 
 Default testing kit:
@@ -235,35 +235,30 @@ official vendor(s):
     1. Jack Meng
     2. Halcyoninae
     3. Yttrium Terminus
-     
+
 NOTE: Any downloads and releases
 under any circumstances, whether
 it just be reuploaded are not
-considered official vendors. 
-Official releases are only 
+considered official vendors.
+Official releases are only
 provided and signed by the above
 vendors.
 Use extern. vendors with caution
-   
+
 All builds are designed to be an
-archive file which will each 
+archive file which will each
 contain their respective usage
 README (based on their version).
 
     Release Exec Types:
-        1. Fat-JAR
-            -A JAR archive file 
-            that contains 
-            everything the
-            program needs.
-        2. General Archive Bundle
-            -ZIP 
+        1. General Archive Bundle
+            -ZIP
             -Tarball
-        3. Specifc Platform PKG
+        2. Specifc Platform PKG
             -RPM
             -MSI
             -EXE
-        4. Specific Platform Exec.
+        3. Specific Platform Exec.
     Dev. Release Exec Types:
         1. General Archive Bundle
             -Tarball
@@ -279,9 +274,9 @@ over the specific internals
 of the program and are not made
 for the average end-user.
 
-NOTE: Downloading a FAT-JAR can 
+NOTE: Downloading a FAT-JAR can
 have extended setup requirements,
-as there might be specific 
+as there might be specific
 platform dependent pkgs that are
 required.
 
@@ -303,7 +298,7 @@ Halcyon -> Default Running Package
   - Features the default backend
     utils for the program
 CloudSpin -> Graphics Manipulation
-  - Features default libraries 
+  - Features default libraries
     related to graphics, like
     image manipulation.
 Cosmos -> GUI Components
@@ -311,8 +306,8 @@ Cosmos -> GUI Components
     which is the GUI user
     interface.
 Tailwind -> Audio Processors
-  - Features the audio playback 
-    library. This is the second 
+  - Features the audio playback
+    library. This is the second
     half of the program.
 Setup -> General runner that is
 called to perform a setup routine
@@ -320,10 +315,10 @@ called to perform a setup routine
     every required pkg is present
 
 ----------------------------------
-                                  
-[!] MISC                          
-                                  
-You can view the JavaDocs here:   
+
+[!] MISC
+
+You can view the JavaDocs here:
 halcyoninae.github.io/halcyon
 
 You can read more about submitting
@@ -350,7 +345,7 @@ with your RE vendor with specifics
     CPU: 32bit / 64bit
     GPU: Any
     OS: Win32,MacOS,Linux
-    
+
 ==================================
-      Made by Jack Meng :)    
+      Made by Jack Meng :)
 ==================================
