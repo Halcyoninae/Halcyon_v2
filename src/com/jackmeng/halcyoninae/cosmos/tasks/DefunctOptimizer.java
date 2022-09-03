@@ -15,6 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 
@@ -33,17 +37,8 @@ public class DefunctOptimizer implements Runnable {
     @Override
     public void run() {
         if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
-            new Thread(() -> {
-                while (true) {
-                    Runtime.getRuntime().gc();
-                    try {
-                        Thread.sleep(250L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    System.gc();
-                }
-            }).start();
+            ScheduledExecutorService s = Executors.newScheduledThreadPool(2);
+            s.scheduleAtFixedRate(System::gc, 0, 250, TimeUnit.MILLISECONDS);
         }
     }
 }

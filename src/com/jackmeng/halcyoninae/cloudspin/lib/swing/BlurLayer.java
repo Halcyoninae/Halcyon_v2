@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyoninae.cosmos.special;
+package com.jackmeng.halcyoninae.cloudspin.lib.swing;
 
 import com.jackmeng.halcyoninae.cloudspin.CloudSpinFilters;
 
@@ -26,20 +26,27 @@ import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
 /**
- * Blur Frame UI
+ * Blur UI
+ *
+ * Useful for dealing with realtime blurring
+ * techniques. This is useful for when
+ * not planning to deal with CloudSpin
+ * image manipulation libraries.
  *
  * @author Jack Meng
  * @since 3.3
  */
-public class BlurLayer extends LayerUI<JComponent> {
+public class BlurLayer extends LayerUI<Component> {
     private final transient BufferedImageOp image;
     private transient BufferedImage bufferImage;
 
     public BlurLayer() {
-
-        image = new ConvolveOp(new Kernel(3, 3, CloudSpinFilters.BLUR_KERNEL), ConvolveOp.EDGE_NO_OP, null);
+        this(3, 3);
     }
 
+    public BlurLayer(int width, int height) {
+        image = new ConvolveOp(new Kernel(width, height, CloudSpinFilters.BLUR_KERNEL), ConvolveOp.EDGE_NO_OP, null);
+    }
 
     /**
      * @param g

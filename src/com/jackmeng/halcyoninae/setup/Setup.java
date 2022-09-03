@@ -116,7 +116,6 @@ public class Setup extends JFrame implements Runnable {
             public void mouseClicked(java.awt.event.MouseEvent arg0) {
                 welcomePanelBack.repaint(150);
                 welcomePanel.repaint(20);
-                Runtime.getRuntime().gc();
             }
 
             @Override

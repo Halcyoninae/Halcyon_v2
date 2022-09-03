@@ -128,7 +128,6 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
                     g2.setPaint(ColorManager.MAIN_FG_THEME);
                     g2.draw(path);
                 }
-                Runtime.getRuntime().gc();
                 g2.dispose();
             }
         }

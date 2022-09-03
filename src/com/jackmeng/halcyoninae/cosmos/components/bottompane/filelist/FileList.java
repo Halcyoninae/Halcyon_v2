@@ -80,7 +80,7 @@ public class FileList extends JScrollPane implements TabTree {
                     RightClickHideItemListener hideStringTask) {
         super();
         this.info = info;
-        fileMap = new WeakHashMap<>();
+        fileMap = new HashMap<>();
         root = new DefaultMutableTreeNode(info.getName());
         isVirtual = info instanceof VirtualFolder;
         setAutoscrolls(true);
@@ -124,7 +124,7 @@ public class FileList extends JScrollPane implements TabTree {
 
     public FileList(PhysicalFolder info) {
         this.info = info;
-        fileMap = new WeakHashMap<>();
+        fileMap = new HashMap<>();
         root = new DefaultMutableTreeNode(info.getName());
         isVirtual = info instanceof VirtualFolder;
         setAutoscrolls(true);
