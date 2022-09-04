@@ -73,12 +73,14 @@ Currently the program supports:
   1. MP3
   2. WAV
   3. AIFF & AIFC* (partially tested)
-  4. OGG (Vorbis, FLAC, Opus)
+  4. OGG (Vorbis)
+  5. Theora
+  6. Flac
+  7. AU
+  8. MP2 & MP1 Layers
 Hopefully to support:
-  1. AU
-  2. MP2 (Partial support)
-  3. AAC
-  4. USAC
+  1. AAC
+  2. USAC
 
 Memory usage usually hovers at
 around 30-50 mB of memory usage
