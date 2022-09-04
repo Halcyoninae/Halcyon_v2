@@ -45,7 +45,6 @@ public class WaveFormLinker extends JButton implements BBlocButton {
         setPreferredSize(new Dimension(16, 16));
         addActionListener(this);
         setToolTipText("WaveForm display Currently Unavailable due to technical issues");
-        setEnabled(false);
     }
 
     /**

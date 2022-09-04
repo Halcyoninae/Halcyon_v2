@@ -44,7 +44,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
     }
 
     private final transient Object lock = new Object();
-    private float[] samples;
+    private byte[] samples;
     private Path2D.Float path = new Path2D.Float();
     private int s_valid;
     private boolean fakeVis = false;
@@ -55,14 +55,12 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
         setDoubleBuffered(true);
     }
 
-
     /**
      * @param vis
      */
     public void setVisibility(boolean vis) {
         fakeVis = vis;
     }
-
 
     /**
      * @return boolean
@@ -77,11 +75,9 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
      * REPAINT MUST BE CALLED SEPARATELY
      *
      * @param samples
-     * @param svalid
      */
-    public void make(float[] samples, int svalid) {
+    public void make(byte[] samples) {
         this.samples = samples;
-        this.s_valid = svalid;
     }
 
     /**
@@ -135,14 +131,9 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
 
     /**
      * @param samples
-     * @param s_valid
      */
     @Override
-    public void frameUpdate(float[] samples, int s_valid) {
-        Wrapper.async(() -> {
-            make(samples, s_valid);
-            repaint(20);
-        });
-
+    public void frameUpdate(byte[] samples) {
+        SwingUtilities.invokeLater(() -> make(samples));;
     }
 }

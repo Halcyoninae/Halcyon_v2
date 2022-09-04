@@ -55,6 +55,7 @@ public class AudioInfo {
         KEY_MEDIA_DURATION = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
         KEY_SAMPLE_RATE = "mS", KEY_ALBUM = "mA", KEY_GENRE = "mG",
         KEY_MEDIA_ARTIST = "mAr", KEY_ARTWORK = "mArt", KEY_TRACK = "mTr";
+        static final BufferedImage DEFAULT = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(InfoViewTP.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     private File f;
     private Map<String, String> tags;
     private Tag t;
@@ -126,7 +127,7 @@ public class AudioInfo {
      * @return BufferedImage
      */
     public static BufferedImage getDefaultIcon() {
-        return DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(InfoViewTP.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+        return DEFAULT;
     }
 
     /**

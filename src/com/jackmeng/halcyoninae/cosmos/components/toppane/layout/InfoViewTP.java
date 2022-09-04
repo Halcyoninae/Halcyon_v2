@@ -136,6 +136,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         backPanel.setPreferredSize(
                 getPreferredSize());
         backPanel.setOpaque(false);
+        backPanel.setDoubleBuffered(true);
 
         JLayer<Component> blurBp = new JLayer<>(backPanel,
                 new StdBlurLayer(
@@ -187,7 +188,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         infoDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
         infoDisplay.add(Box.createVerticalGlue());
 
-        topPanel.add(artWork);
+        JPanel artWorkWrapper = new JPanel();
+        artWorkWrapper.setOpaque(false);
+        artWorkWrapper.setLayout(new GridBagLayout());
+
+        topPanel.add(artWorkWrapper);
         topPanel.add(infoDisplay);
         addComponentListener(this);
         setLayout(new OverlayLayout(this));
@@ -240,7 +245,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 backPanel.repaint();
             }
         });
-        backPanel.repaint(100L);
+        backPanel.repaint(500L);
     }
 
     /**
