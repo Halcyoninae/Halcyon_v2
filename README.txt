@@ -82,7 +82,7 @@ Hopefully to support:
   1. AAC
   2. M4A
   3. WMA
-  4. Raw PCM
+  4. RAW* (Configurable by user)
   5. DSD
   6. APE
   7. ACC
