@@ -80,7 +80,16 @@ Currently the program supports:
   8. MP2 & MP1 Layers
 Hopefully to support:
   1. AAC
-  2. USAC
+  2. M4A
+  3. WMA
+  4. Raw PCM
+  5. DSD
+  6. APE
+  7. ACC
+  8. MID & SNG
+  9. WAVPACK
+  10. TTA
+  11. MPC
 
 Memory usage usually hovers at
 around 30-50 mB of memory usage
