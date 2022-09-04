@@ -77,16 +77,6 @@ public class ThreadedScheduler {
         System.setProperty("sun.java2d.opengl", "true");
         System.setProperty("sun.java2d.uiScale", "0.9");
 
-        // set program font
-        Enumeration<?> e = UIManager.getDefaults().keys();
-        while (e.hasMoreElements()) {
-            Object key = e.nextElement();
-            Object value = UIManager.get(key);
-            if (value instanceof javax.swing.plaf.FontUIResource) {
-                UIManager.put(key, new FontUIResource("Roboto", Font.PLAIN, 13));
-            }
-        }
-
         // PROGRAMMABLE THREADS
         WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[]{
             new PingFileView(Global.bp),

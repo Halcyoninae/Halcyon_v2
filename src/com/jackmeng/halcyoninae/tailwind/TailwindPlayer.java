@@ -408,7 +408,7 @@ public class TailwindPlayer implements Audio {
                         worker.shutdown();
                     }
                     if (line != null) {
-                        line.flush();
+                        line.stop();
                         line.drain();
                         line.close();
                     }
@@ -701,7 +701,7 @@ public class TailwindPlayer implements Audio {
                  */
                 if (buffer == null) {
                     buffer = new byte[(my_magic_number == -1
-                        ? formatAudio.getFrameSize() * formatAudio.getSampleSizeInBits()
+                        ? formatAudio.getFrameSize() * 2
                         : MAGIC_NUMBER * formatAudio.getChannels()
                         * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
                     Debugger.warn("Tailwind_buffer_size: " + buffer.length);
