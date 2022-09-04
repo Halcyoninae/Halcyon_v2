@@ -49,7 +49,6 @@ public class FVRightClick extends MouseAdapter {
 
     private TabTree tree;
     private JTree lastJTree;
-    private int rightClicks = 0;
     private String hideString = "Hide Item";
     private RightClickHideItemListener hideTask;
 
@@ -143,7 +142,7 @@ public class FVRightClick extends MouseAdapter {
                     new Thread(() -> new AudioInfoDialog(new AudioInfo(tree.getSelectedNode(rcNode))).run()).start();
                 } else {
                     new StraightTextDialog(
-                        "<html><body><p><strong>Folder:</strong> " + tree.getPath() + "</p></body></html>").run();
+                            "<html><body><p><strong>Folder:</strong> " + tree.getPath() + "</p></body></html>").run();
                 }
             } catch (NullPointerException excec) {
                 new ErrorWindow("A root node is not a valid audio stream.").run();
@@ -191,7 +190,7 @@ public class FVRightClick extends MouseAdapter {
                 lastJTree = (JTree) e.getSource();
             }
             if (!lastJTree.equals(e.getSource())) {
-                if (rightClicks == 2) {
+                if (e.getClickCount() == 2) {
                     JTree pathTree = (JTree) e.getSource();
                     TreePath path = pathTree.getSelectionPath();
                     if (path != null) {
@@ -202,11 +201,11 @@ public class FVRightClick extends MouseAdapter {
                                 f = new File(node.toString());
                             } else {
                                 f = new File(
-                                    Global.bp.findByTree((JTree) e.getSource())
-                                        .getFolderInfo()
-                                        .getAbsolutePath() +
-                                        ProgramResourceManager.FILE_SLASH +
-                                        node);
+                                        Global.bp.findByTree((JTree) e.getSource())
+                                                .getFolderInfo()
+                                                .getAbsolutePath() +
+                                                ProgramResourceManager.FILE_SLASH +
+                                                node);
                             }
                             File f2 = f;
                             Debugger.info(f2);
@@ -215,35 +214,32 @@ public class FVRightClick extends MouseAdapter {
                         }
                     }
                     lastJTree = pathTree;
-                    rightClicks = 0;
-                } else if (rightClicks == 0 || rightClicks == 1) {
-                    rightClicks++;
                 }
             } else {
-                JTree pathTree = (JTree) e.getSource();
-                TreePath path = pathTree.getSelectionPath();
-                if (path != null) {
-                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-                    if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                        File f;
-                        if (tree.isVirtual()) {
-                            f = new File(node.toString());
-                        } else {
-                            f = new File(
-                                Global.bp.findByTree((JTree) e.getSource())
-                                    .getFolderInfo()
-                                    .getAbsolutePath() +
-                                    ProgramResourceManager.FILE_SLASH +
-                                    node);
+                if (e.getClickCount() == 2) {
+                    JTree pathTree = (JTree) e.getSource();
+                    TreePath path = pathTree.getSelectionPath();
+                    if (path != null) {
+                        DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+                        if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
+                            File f;
+                            if (tree.isVirtual()) {
+                                f = new File(node.toString());
+                            } else {
+                                f = new File(
+                                        Global.bp.findByTree((JTree) e.getSource())
+                                                .getFolderInfo()
+                                                .getAbsolutePath() +
+                                                ProgramResourceManager.FILE_SLASH +
+                                                node);
+                            }
+                            File f2 = f;
+                            Debugger.info(f2);
+                            SwingUtilities.invokeLater(() -> Global.ifp.setAssets(f2));
                         }
-                        File f2 = f;
-                        Debugger.info(f2);
-                        SwingUtilities.invokeLater(() -> Global.ifp.setAssets(f2));
-                    }
 
+                    }
                 }
-                lastJTree = pathTree;
-                rightClicks = 0;
             }
         }
 

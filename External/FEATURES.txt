@@ -1,3 +1,10 @@
+[***] #47 "Graphics use scale on fly method"
+    Detailed Description: https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawImage%28java.awt.Image,%20int,%20int,%20int,%20int,%20int,%20int,%20int,%20int,%20java.awt.Color,%20java.awt.image.ImageObserver%29
+    Difficulty: None
+    Testing: Mild
+    Category: Potential Optimization
+    Status: Implementing
+
 [***] #46 HELLA BREAD
     Detailed Description: Use the implemented BlurLayer instead of calling the custom
     blurring methods to blur images in order to perform a filtered blur.

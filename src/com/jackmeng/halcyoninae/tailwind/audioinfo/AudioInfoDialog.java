@@ -93,18 +93,20 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         });
 
         img = CloudSpin.resizeToFitViewport(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT),
-            info.getArtwork());
+                info.getArtwork());
 
         artWork = new JPanel() {
             @Override
             public void paint(Graphics g) {
                 super.paint(g);
-                g.drawImage(img, (artWork.getWidth() - img.getWidth()) / 2, (artWork.getHeight() - img.getHeight()) / 2,
-                    rootPane);
-                g.dispose();
+                if (this.isVisible() || this.isShowing()) {
+                    g.drawImage(img, (artWork.getWidth() - img.getWidth()) / 2,
+                            (artWork.getHeight() - img.getHeight()) / 2,
+                            rootPane);
+                    g.dispose();
+                }
             }
         };
-        artWork.setDoubleBuffered(true);
 
         JScrollPane artWorkPanel = new JScrollPane();
         artWorkPanel.setViewportView(artWork);
@@ -163,30 +165,31 @@ public class AudioInfoDialog extends JFrame implements Runnable {
      */
     private static synchronized String infoToHtml(AudioInfo in) {
         return "<html><body>" +
-            parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)) +
-            parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)) +
-            parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)) +
-            parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)) +
-            parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)) +
-            parseAsProperty("Duration",
-                TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION)))) +
-            parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)) +
-            parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)) +
-            parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)) +
-            parseAsProperty("BPM", in.getRaw(FieldKey.BPM)) +
-            parseAsProperty("Track", in.getRaw(FieldKey.TRACK)) +
-            parseAsProperty("Year", in.getRaw(FieldKey.YEAR)) +
-            parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)) +
-            parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)) +
-            parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)) +
-            parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)) +
-            parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)) +
-            "</body></html>";
+                parseAsProperty("Title", in.getTag(AudioInfo.KEY_MEDIA_TITLE)) +
+                parseAsProperty("Artist", in.getTag(AudioInfo.KEY_MEDIA_ARTIST)) +
+                parseAsProperty("Album", in.getTag(AudioInfo.KEY_ALBUM)) +
+                parseAsProperty("Genre", in.getTag(AudioInfo.KEY_GENRE)) +
+                parseAsProperty("Bitrate", in.getTag(AudioInfo.KEY_BITRATE)) +
+                parseAsProperty("Duration",
+                        TimeParser.fromSeconds(Integer.parseInt(in.getTag(AudioInfo.KEY_MEDIA_DURATION))))
+                +
+                parseAsProperty("Sample Rate", in.getTag(AudioInfo.KEY_SAMPLE_RATE)) +
+                parseAsProperty("File Name", in.getTag(AudioInfo.KEY_FILE_NAME)) +
+                parseAsProperty("File Path", in.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)) +
+                parseAsProperty("BPM", in.getRaw(FieldKey.BPM)) +
+                parseAsProperty("Track", in.getRaw(FieldKey.TRACK)) +
+                parseAsProperty("Year", in.getRaw(FieldKey.YEAR)) +
+                parseAsProperty("Language", in.getRaw(FieldKey.LANGUAGE)) +
+                parseAsProperty("Album Artist", in.getRaw(FieldKey.ALBUM_ARTIST)) +
+                parseAsProperty("Composer", in.getRaw(FieldKey.COMPOSER)) +
+                parseAsProperty("Disc", in.getRaw(FieldKey.DISC_NO)) +
+                parseAsProperty("Comment", in.getRaw(FieldKey.COMMENT)) +
+                "</body></html>";
     }
 
     /**
      * @return This instance's AudioInfo object that is being used to generate the
-     * compiled information.
+     *         compiled information.
      */
     public AudioInfo getInfo() {
         return info;
