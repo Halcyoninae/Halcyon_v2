@@ -1,3 +1,14 @@
+[**] #44 "Inconsistent buffering strategy"
+    Detailed Description: Besides a blocking reading strategy,
+    a separate thread should be used to fetch data from
+    the resource and then given to the local player. This ensures
+    that no calls are blocking another when the audio is being
+    played back.
+    State: Experimental-Build ~ MP4J
+    Status: None
+    Difficulty: Decent
+    Testing: Decent
+
 [***] #43 "AudioInfodialog Dispose"
     Detailed Description: 
         A spawned dialog seeminly does not clear itself once it
