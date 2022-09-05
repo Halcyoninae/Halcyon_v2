@@ -32,10 +32,12 @@ public final class TimeParser {
     }
 
     /**
-     * Returns a string representation of the time in the format of {@code yyyy-MM-dd HH:mm:ss}
+     * Returns a string representation of the time in the format of
+     * {@code yyyy-MM-dd HH:mm:ss}
      * This time is taken from {@link java.lang.System#currentTimeMillis()}.
      *
-     * @return A string representation of the time in the format of {@code yyyy-MM-dd HH:mm:ss}
+     * @return A string representation of the time in the format of
+     *         {@code yyyy-MM-dd HH:mm:ss}
      */
     public static String getLogCurrentTime() {
         Date date = new Date();
@@ -65,10 +67,16 @@ public final class TimeParser {
      */
     public static String fromMillis(long millis) {
         return String.format("%02d:%02d:%02d",
-            TimeUnit.MILLISECONDS.toHours(millis),
-            TimeUnit.MILLISECONDS.toMinutes(millis) -
-                TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
-            TimeUnit.MILLISECONDS.toSeconds(millis) -
-                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                TimeUnit.MILLISECONDS.toHours(millis),
+                TimeUnit.MILLISECONDS.toMinutes(millis) -
+                        TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)), // The change is in this line
+                TimeUnit.MILLISECONDS.toSeconds(millis) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+    }
+
+    public static String fromRealMillis(long millis) {
+        Date d = new Date(millis);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        return df.format(d);
     }
 }
