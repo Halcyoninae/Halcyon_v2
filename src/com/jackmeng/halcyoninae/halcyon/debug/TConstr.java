@@ -46,7 +46,6 @@ public class TConstr {
         this.start = new CLIStyles[]{start};
     }
 
-
     /**
      * @return String
      */
