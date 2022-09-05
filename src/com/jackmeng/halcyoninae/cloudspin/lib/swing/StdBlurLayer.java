@@ -15,11 +15,13 @@
 
 package com.jackmeng.halcyoninae.cloudspin.lib.swing;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
-
-import java.awt.image.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ConvolveOp;
+import java.awt.image.Kernel;
 
 public class StdBlurLayer extends LayerUI<Component> {
     private transient BufferedImageOp oImageOp;

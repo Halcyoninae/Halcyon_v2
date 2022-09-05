@@ -15,12 +15,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.inheritable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.NavigationFilter;
 import javax.swing.text.Position;
-
 import java.awt.event.ActionEvent;
 
 public class NavFilterText extends NavigationFilter {

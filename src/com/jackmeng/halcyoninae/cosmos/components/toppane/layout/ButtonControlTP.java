@@ -53,30 +53,30 @@ import java.util.concurrent.Executors;
  */
 public class ButtonControlTP extends JPanel
     implements InfoViewUpdateListener, ActionListener, ChangeListener, TailwindListener.StatusUpdateListener {
-    public static final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
-    public static final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
+    public static final int BUTTONCONTROL_MIN_WIDTH         = Manager.MIN_WIDTH;
+    public static final int BUTTONCONTROL_MIN_HEIGHT        = Manager.MIN_HEIGHT / 4;
     public static final int BUTTONCONTROL_BOTTOM_TOP_BUDGET = 12;
     /// ButtonControl Config START
-    final int PLAY_PAUSE_ICON_SIZE = 40;
-    final int OTHER_BUTTONS_SIZE = 24;
-    final String BUTTONCTRL_PLAY_PAUSE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
-    final String BUTTONCTRL_PAUSE_PLAY_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/pause_button.png";
-    final String BUTTONCTRL_FWD_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
-    final String BUTTONCTRL_BWD_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
-    final String BUTTONCTRL_LOOP_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
-    final String BUTTONCTRL_SHUFFLE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
-    final String BUTTONCTRL_MUTED_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
-    final String BUTTONCTRL_NOMUTED_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
-    final String BUTTONCTRL_LIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
-    final String BUTTONCTRL_NOLIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
-    final String BUTTONCTRL_RESTART_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
-    final String BUTTONCTRL_INFORMATION_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/information_button.png";
-    final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED = Manager.RSC_FOLDER_NAME
+    final int PLAY_PAUSE_ICON_SIZE                          = 40;
+    final int OTHER_BUTTONS_SIZE                            = 24;
+    final String BUTTONCTRL_PLAY_PAUSE_ICON                 = Manager.RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
+    final String BUTTONCTRL_PAUSE_PLAY_ICON                 = Manager.RSC_FOLDER_NAME + "/buttoncontrol/pause_button.png";
+    final String BUTTONCTRL_FWD_ICON                        = Manager.RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
+    final String BUTTONCTRL_BWD_ICON                        = Manager.RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
+    final String BUTTONCTRL_LOOP_ICON                       = Manager.RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
+    final String BUTTONCTRL_SHUFFLE_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
+    final String BUTTONCTRL_MUTED_ICON                      = Manager.RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
+    final String BUTTONCTRL_NOMUTED_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
+    final String BUTTONCTRL_LIKE_ICON                       = Manager.RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
+    final String BUTTONCTRL_NOLIKE_ICON                     = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
+    final String BUTTONCTRL_RESTART_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
+    final String BUTTONCTRL_INFORMATION_ICON                = Manager.RSC_FOLDER_NAME + "/buttoncontrol/information_button.png";
+    final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED         = Manager.RSC_FOLDER_NAME
         + "/buttoncontrol/shuffle_button_pressed.png";
-    final String BUTTONCONTROL_LOOP_ICON_PRESSED = Manager.RSC_FOLDER_NAME
+    final String BUTTONCONTROL_LOOP_ICON_PRESSED            = Manager.RSC_FOLDER_NAME
         + "/buttoncontrol/loop_button_pressed.png";
-    final int BUTTONCONTROL_MAX_WIDTH = Manager.MAX_WIDTH;
-    final int BUTTONCONTROL_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
+    final int BUTTONCONTROL_MAX_WIDTH                       = Manager.MAX_WIDTH;
+    final int BUTTONCONTROL_MAX_HEIGHT                      = Manager.MAX_HEIGHT / 4;
     private final JButton playButton;
     private final JButton nextButton;
     private final JButton previousButton;

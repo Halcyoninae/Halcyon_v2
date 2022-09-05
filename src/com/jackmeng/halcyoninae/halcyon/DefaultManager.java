@@ -34,12 +34,12 @@ public final class DefaultManager {
     /**
      * The default FILE_SLASH component to use.
      */
-    public static final String FILE_SLASH = System.getProperty("file.separator");
+    public static final String FILE_SLASH          = System.getProperty("file.separator");
 
     /**
      * If the program should turn on every possible debugging option.
      */
-    public static boolean DEBUG_PROGRAM = false;
+    public static boolean DEBUG_PROGRAM            = false;
 
     private DefaultManager() {
     }

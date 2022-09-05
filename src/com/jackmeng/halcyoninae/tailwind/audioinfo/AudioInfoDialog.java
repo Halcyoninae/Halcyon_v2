@@ -43,12 +43,12 @@ import java.awt.image.BufferedImage;
 public class AudioInfoDialog extends JFrame implements Runnable {
 
     /// AUDIOINFO Window Config START
-    final String AUDIOINFO_WIN_TITLE = "Halcyon - Audio Info";
-    final int AUDIOINFO_MIN_WIDTH = 600;
-    final int AUDIOINFO_MIN_HEIGHT = 400;
+    final String AUDIOINFO_WIN_TITLE       = "Halcyon - Audio Info";
+    final int AUDIOINFO_MIN_WIDTH          = 600;
+    final int AUDIOINFO_MIN_HEIGHT         = 400;
 
     final int AUDIOINFO_ARTWORK_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 200;
-    final int AUDIOINFO_INFO_PANE_WIDTH = AUDIOINFO_MIN_WIDTH - 150;
+    final int AUDIOINFO_INFO_PANE_WIDTH    = AUDIOINFO_MIN_WIDTH - 150;
     /// AUDIOINFO Window Config END
 
     private final JPanel artWork;

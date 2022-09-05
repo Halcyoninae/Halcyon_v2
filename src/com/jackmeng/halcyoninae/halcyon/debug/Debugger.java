@@ -42,7 +42,7 @@ public class Debugger {
      * The designated output stream to be used by
      * the debugger with attached encoding.
      */
-    public static PrintStream out = new PrintStream(System.err, true, StandardCharsets.UTF_8);
+    public static PrintStream out          = new PrintStream(System.err, true, StandardCharsets.UTF_8);
     /**
      * A globally modifiable variable (should only be modified
      * programmatically) to either disable or enable during runtime.

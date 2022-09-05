@@ -27,11 +27,11 @@ import java.awt.event.WindowEvent;
 
 public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
-    static final String DIALOG_CONFIRM_WIN_TITLE = "Confirmation!";
+    static final String DIALOG_CONFIRM_WIN_TITLE    = "Confirmation!";
     /// Confirm Config START
-    final int DIALOG_CONFIRM_MIN_WIDTH = 300;
-    final int DIALOG_CONFIRM_MIN_HEIGHT = 200;
-    final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH = DIALOG_CONFIRM_MIN_WIDTH - 20;
+    final int DIALOG_CONFIRM_MIN_WIDTH              = 300;
+    final int DIALOG_CONFIRM_MIN_HEIGHT             = 200;
+    final int DIALOG_CONFIRM_PROMPT_AREA_MIN_WIDTH  = DIALOG_CONFIRM_MIN_WIDTH - 20;
     final int DIALOG_CONFIRM_PROMPT_AREA_MIN_HEIGHT = DIALOG_CONFIRM_MIN_HEIGHT / 5;
     /// Confirm Config END
     private final JButton confirm;

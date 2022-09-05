@@ -34,8 +34,8 @@ public class ErrorWindow extends JFrame implements Runnable {
 
     static final String DIALOG_ERROR_WIN_TITLE = "Exception!";
     /// Error Window Config START
-    final int DIALOG_ERROR_MIN_WIDTH = 300;
-    final int DIALOG_ERROR_MIN_HEIGHT = 150;
+    final int DIALOG_ERROR_MIN_WIDTH           = 300;
+    final int DIALOG_ERROR_MIN_HEIGHT          = 150;
     /// Error Window Config END
 
     public ErrorWindow(String content) {

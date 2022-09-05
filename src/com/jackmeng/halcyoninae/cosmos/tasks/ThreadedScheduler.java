@@ -21,12 +21,9 @@ import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.FontUIResource;
-import java.awt.*;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.ref.WeakReference;
-import java.util.Enumeration;
 import java.util.logging.LogManager;
 
 public class ThreadedScheduler {

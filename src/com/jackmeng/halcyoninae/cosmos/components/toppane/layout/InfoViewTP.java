@@ -29,14 +29,12 @@ import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
-
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
 import org.jaudiotagger.tag.TagException;
 
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -44,7 +42,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
 

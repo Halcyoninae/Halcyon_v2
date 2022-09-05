@@ -62,11 +62,11 @@ import java.util.Collections;
  * @since 3.3
  */
 public class Setup extends JFrame implements Runnable {
-    public static final File MAIN_LOCK_USER_SETUP = new File(
+    public static final File MAIN_LOCK_USER_SETUP                         = new File(
         ProgramResourceManager.PROGRAM_RESOURCE_FOLDER + ProgramResourceManager.FILE_SLASH
             + ProgramResourceManager.RESOURCE_SUBFOLDERS[2]
             + ProgramResourceManager.FILE_SLASH + "__user.lock");
-    public static final String KILL_ARG = "kill";
+    public static final String KILL_ARG                                   = "kill";
     private static final transient java.util.List<SetupListener> listener = new ArrayList<>(); // must specify java.util
     // cuz
     public static boolean SETUP_EXISTS = false;

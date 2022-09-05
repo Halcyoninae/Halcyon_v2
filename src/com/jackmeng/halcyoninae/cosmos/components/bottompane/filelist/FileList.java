@@ -51,15 +51,15 @@ import java.util.*;
  */
 public class FileList extends JScrollPane implements TabTree {
     /// FileView Config START
-    public static final String FILEVIEW_ICON_FOLDER_OPEN = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-    public static final String FILEVIEW_ICON_FOLDER_CLOSED = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-    public static final String FILEVIEW_ICON_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf.png";
+    public static final String FILEVIEW_ICON_FOLDER_OPEN    = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+    public static final String FILEVIEW_ICON_FOLDER_CLOSED  = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
+    public static final String FILEVIEW_ICON_FILE           = Manager.RSC_FOLDER_NAME + "/fileview/leaf.png";
     public static final String FILEVIEW_DEFAULT_FOLDER_ICON = Manager.RSC_FOLDER_NAME + "/fileview/folder_icon.png";
-    public static final String FILEVIEW_ICON_LIKED_FILE = Manager.RSC_FOLDER_NAME + "/fileview/leaf_like.png";
-    public static final int FILEVIEW_MIN_WIDTH = Manager.MIN_WIDTH - 70;
-    public static final int FILEVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT - 50 / 2;
-    public static final int FILEVIEW_MAX_WIDTH = Manager.MAX_WIDTH - 50;
-    public static final int FILEVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT + 50 / 2 - 40;
+    public static final String FILEVIEW_ICON_LIKED_FILE     = Manager.RSC_FOLDER_NAME + "/fileview/leaf_like.png";
+    public static final int FILEVIEW_MIN_WIDTH              = Manager.MIN_WIDTH - 70;
+    public static final int FILEVIEW_MIN_HEIGHT             = Manager.MIN_HEIGHT - 50 / 2;
+    public static final int FILEVIEW_MAX_WIDTH              = Manager.MAX_WIDTH - 50;
+    public static final int FILEVIEW_MAX_HEIGHT             = Manager.MAX_HEIGHT + 50 / 2 - 40;
     private final JTree tree;
     /**
      * Represents a list of collected files throughout the

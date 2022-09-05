@@ -41,12 +41,12 @@ import java.awt.event.ActionListener;
 public class TimeControlSubTP extends JPanel implements ActionListener {
     public static long INTERVAL_TIMING_MILLISECONDS = 10000L;
     /// TimeControl Config START
-    final String FAST_FORWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/forward.png";
-    final String FAST_BACKWARD_ICON = Manager.RSC_FOLDER_NAME + "/time_control/backward.png";
-    final String TO_END_ICON = Manager.RSC_FOLDER_NAME + "/time_control/end.png";
-    final String TO_START_ICON = Manager.RSC_FOLDER_NAME + "/time_control/start.png";
-    final int ICON_SIZING = 18;
-    final int TIMECONTROL_HEIGHT = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT
+    final String FAST_FORWARD_ICON                  = Manager.RSC_FOLDER_NAME + "/time_control/forward.png";
+    final String FAST_BACKWARD_ICON                 = Manager.RSC_FOLDER_NAME + "/time_control/backward.png";
+    final String TO_END_ICON                        = Manager.RSC_FOLDER_NAME + "/time_control/end.png";
+    final String TO_START_ICON                      = Manager.RSC_FOLDER_NAME + "/time_control/start.png";
+    final int ICON_SIZING                           = 18;
+    final int TIMECONTROL_HEIGHT                    = ButtonControlTP.BUTTONCONTROL_MIN_HEIGHT
         - ButtonControlTP.BUTTONCONTROL_BOTTOM_TOP_BUDGET;
     private final JButton fastForward;
     private final JButton fastBackward;

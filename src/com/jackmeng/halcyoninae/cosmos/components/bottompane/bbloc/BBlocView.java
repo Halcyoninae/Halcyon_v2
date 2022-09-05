@@ -35,10 +35,10 @@ public class BBlocView extends JPanel {
 
     /// BBloc Config START
     /// B Bloc Size Config START ///
-    final int B_MIN_WIDTH = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH - 40;
+    final int B_MIN_WIDTH  = Manager.MIN_WIDTH - FileList.FILEVIEW_MIN_WIDTH - 40;
     final int B_MIN_HEIGHT = Manager.MIN_HEIGHT / 2;
 
-    final int B_MAX_WIDTH = B_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
+    final int B_MAX_WIDTH  = B_MIN_WIDTH - FileList.FILEVIEW_MAX_WIDTH;
     final int B_MAX_HEIGHT = Manager.MAX_HEIGHT / 2;
     /// B Bloc Size Config END ///
     /// BBloc Config END

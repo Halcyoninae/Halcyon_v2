@@ -34,8 +34,8 @@ import java.util.List;
  */
 public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
     private final List<File> history;
-    private boolean loop = false, autoPlay = false;
-    private int pointer = 0;
+    private boolean loop     = false, autoPlay = false;
+    private int pointer      = 0;
     private float gain;
     private File currentFile = new File(".");
 

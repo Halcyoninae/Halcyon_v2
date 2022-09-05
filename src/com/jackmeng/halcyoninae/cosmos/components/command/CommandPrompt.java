@@ -1,7 +1,5 @@
 package com.jackmeng.halcyoninae.cosmos.components.command;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.cosmos.inheritable.NavFilterText;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
@@ -9,14 +7,12 @@ import com.jackmeng.halcyoninae.halcyon.global.Pair;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 
+import javax.swing.*;
+import java.awt.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.awt.*;
+import java.lang.reflect.Modifier;
+import java.util.*;
 
 public class CommandPrompt extends JFrame implements Runnable {
 
@@ -56,6 +52,7 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandOut = new JEditorPane();
     commandOut.setContentType("text/html");
     commandOut.setText(get_str__());
+    commandOut.setAutoscrolls(true);
     commandOut.setPreferredSize(new Dimension(commandIn.getPreferredSize().width,
         getPreferredSize().height - commandIn.getPreferredSize().height));
     commandOut.setEditable(false);
@@ -70,6 +67,14 @@ public class CommandPrompt extends JFrame implements Runnable {
 
     getContentPane().add(jspl);
 
+  }
+
+  public static String arrayStr(Object... e) {
+    StringBuilder sb = new StringBuilder();
+    for (Object t : e) {
+      sb.append(t + " ");
+    }
+    return sb.toString();
   }
 
   private String get_str__() {
@@ -91,11 +96,11 @@ public class CommandPrompt extends JFrame implements Runnable {
     String cmd = st.nextToken();
     print("<strong>" + (prompt.isBlank() ? "> " : prompt)
         + wrap(prompt_zero_cmd__(), null, ColorTool.hexToRGBA("#e6ac00")) + "</strong>");
-    StringBuilder sb = new StringBuilder();
+    ArrayList<String> sb = new ArrayList<>();
     while (st.hasMoreTokens()) {
-      sb.append(st.nextToken());
+      sb.add(st.nextToken());
     }
-    String[] argTokens = sb.toString().split(" ");
+    String[] argTokens = sb.toArray(new String[0]);
     argTokens = purge__(argTokens, "");
     Debugger.warn(cmd + " | " + Arrays.toString(argTokens));
     if (invokables.get(cmd) == null) {
@@ -107,20 +112,22 @@ public class CommandPrompt extends JFrame implements Runnable {
           String str;
           if (invokables.get(cmd).second.getParameterCount() > 0) {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first,
-                argTokens.length > 0 ? null : new Object[] { argTokens }));
+                (Object) (argTokens.length > 0 ? argTokens : null)));
           } else {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first));
           }
-
           print(wrap(str, null, ColorTool.hexToRGBA("#99f3ff")));
         } else {
           invokables.get(cmd).second.invoke(invokables.get(cmd).first,
-              argTokens.length > 0 ? null : new Object[] { argTokens });
+              argTokens.length > 0 ? null : argTokens);
         }
       } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         print(wrap("Error while invoking: <br>" + e.getMessage() + "<br>", Color.BLACK, Color.RED)
-            + "<br>Command Arguments: " + cmd + " (" + argTokens.length + "):" + Arrays.toString(argTokens));
-        e.printStackTrace();
+            + "<br>Command Arguments: " + cmd + " (" + argTokens.length + "):" + Arrays.toString(argTokens)
+            + "<br><u>Diagnostics:</u><br>Required ArgTokens: " + invokables.get(cmd).second.getParameterCount()
+            + "<br>Got Len: " + argTokens.length);
+      } finally {
+        commandIn.setText(prompt);
       }
     }
     commandIn.setText(prompt);
@@ -137,6 +144,7 @@ public class CommandPrompt extends JFrame implements Runnable {
     return "No Arguments";
   }
 
+  @Invokable()
   public String help() {
     StringBuilder sb = new StringBuilder();
     sb.append(wrap("<strong><u>Available Commands</u></strong><br>", null, ColorTool.hexToRGBA("#ff7039")));
@@ -157,6 +165,7 @@ public class CommandPrompt extends JFrame implements Runnable {
         + text + "</code>";
   }
 
+  @Invokable(aliases = { "clear" })
   public void clearBuffer() {
     buffer = new StringBuilder("");
     commandOut.setText(get_str__());
@@ -164,31 +173,36 @@ public class CommandPrompt extends JFrame implements Runnable {
 
   public void print(Object... e) {
     for (Object ex : e) {
-      buffer.append((ex == null ? "[NULL_CONT]" : ex) + "<br>");
+      buffer.append(wrap((ex == null ? "[NULL_CONT]" : ex) + "<br>", null, null));
     }
     commandOut.setText(get_str__());
   }
 
-  public void addInvokable(Pair<Object, Method>[] e) {
-    for (Pair<Object, Method> x : e) {
-      invokables.put(x.second.getName(), x);
-      Debugger
-          .crit("Added: " + x.second.getName() + " | " + x.second.getDeclaringClass().getSimpleName() + " | Returns: "
-              + x.second.getReturnType().getCanonicalName() + " | Params: "
-              + Arrays.toString(x.second.getParameterTypes()));
+  public void addInvokable(Object instance, Class<?> invs) {
+    for (Method s : invs.getDeclaredMethods()) {
+      if (s.getAnnotation(Invokable.class) != null) {
+        Invokable k = s.getAnnotation(Invokable.class);
+        try {
+          for (String al : k.aliases()) {
+            invokables.put(al,
+                new Pair<>((instance == null && Modifier.isStatic(s.getModifiers())
+                    ? invs.getDeclaredConstructor().newInstance()
+                    : instance), s));
+          }
+          invokables.put(s.getName(),
+              new Pair<>(
+                  (instance == null && Modifier.isStatic(s.getModifiers()) ? invs.getDeclaredConstructor().newInstance()
+                      : instance),
+                  s));
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+            | NoSuchMethodException | SecurityException e) {
+          print(wrap("Failed to load: " + invs.getSimpleName() + "<br><u>Diagnostics:</u><br>" + e.getMessage(),
+              Color.BLACK, Color.RED));
+          e.printStackTrace();
+        }
+        Debugger.crit("Added (@Invokable): " + s.getName() + " | Aliases: " + Arrays.toString(k.aliases()));
+      }
     }
-  }
-
-  public void addInvokable(Pair<Object, Method> x) {
-    Debugger.crit("Added: " + x.second.getName() + " | " + x.second.getDeclaringClass().getSimpleName() + " | Returns: "
-        + x.second.getReturnType().getCanonicalName());
-  }
-
-  public void prompt(String str) {
-    this.prompt = str;
-    commandIn.setText(prompt);
-    commandIn.setNavigationFilter(new NavFilterText(prompt.length(), commandIn));
-    commandIn.repaint();
   }
 
   @Override
@@ -206,26 +220,23 @@ public class CommandPrompt extends JFrame implements Runnable {
     return print_hello();
   }
 
+  @Invokable(aliases = { "time" })
   public static String print_time() {
     return TimeParser.fromRealMillis(System.currentTimeMillis());
   }
 
   public static String echo(String[] args) {
-    return args == null ? "" : Arrays.toString(args);
+    return args == null ? "" : arrayStr((Object[]) args);
   }
 
   // END INTERNAL INVOKABLES
 
-  @SuppressWarnings("unchecked")
   public static void main(String... args) {
     CommandPrompt cp = new CommandPrompt();
     try {
-      cp.addInvokable(new Pair[] { new Pair<>(null, CommandPrompt.class.getMethod("print_hello")),
-          new Pair<>(cp, CommandPrompt.class.getDeclaredMethod("echo", String[].class)),
-          new Pair<>(null, CommandPrompt.class.getMethod("print_time")),
-          new Pair<>(null, CommandPrompt.class.getMethod("hello")),
-          new Pair<>(cp, CommandPrompt.class.getDeclaredMethod("help")) });
-    } catch (NoSuchMethodException | SecurityException e) {
+      cp.addInvokable(cp, cp.getClass());
+      cp.addInvokable(null, CommandPrompt.class);
+    } catch (SecurityException e) {
       e.printStackTrace();
     }
     cp.run();

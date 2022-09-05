@@ -36,12 +36,12 @@ import com.jackmeng.halcyoninae.tailwind.wrapper.Player;
 public final class Global {
 
     public static ResourceDistributor rd = new ResourceDistributor();
-    public static BottomPane bp = new BottomPane();
-    public static ButtonControlTP bctp = new ButtonControlTP();
-    public static InfoViewTP ifp = new InfoViewTP();
-    public static Player player = new Player();
-    public static LikeList ll = new LikeList();
-    public static MoreApps moreApps = new MoreApps();
+    public static BottomPane bp          = new BottomPane();
+    public static ButtonControlTP bctp   = new ButtonControlTP();
+    public static InfoViewTP ifp         = new InfoViewTP();
+    public static Player player          = new Player();
+    public static LikeList ll            = new LikeList();
+    public static MoreApps moreApps      = new MoreApps();
 
     static {
         player.getStream().addStatusUpdateListener(bctp);

@@ -28,9 +28,9 @@ public class Property {
     public String[] commonProperties;
 
     public Property(String propertyName, String defaultProperty, PropertyValidator pr, String... commonProperties) {
-        this.propertyName = propertyName;
-        this.defaultProperty = defaultProperty;
-        this.pr = pr;
+        this.propertyName     = propertyName;
+        this.defaultProperty  = defaultProperty;
+        this.pr               = pr;
         this.commonProperties = commonProperties;
     }
 

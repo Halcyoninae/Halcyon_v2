@@ -17,7 +17,6 @@ package com.jackmeng.halcyoninae.cosmos.components.waveform;
 
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 
 import javax.swing.*;

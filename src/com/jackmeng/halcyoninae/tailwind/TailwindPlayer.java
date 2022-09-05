@@ -27,7 +27,6 @@ import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -67,14 +66,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class TailwindPlayer implements Audio {
     // PUBLIC STATIC UTIL START
-    public static final int MAGIC_NUMBER = 1024;
+    public static final int MAGIC_NUMBER       = 1024;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
-    private final Object referencable = new Object();
-    private final Object timeRef = new Object();
+    private final Object referencable          = new Object();
+    private final Object timeRef               = new Object();
     private final TailwindEventManager events;
     private File resource;
-    private int my_magic_number = MAGIC_NUMBER;
+    private int my_magic_number                = MAGIC_NUMBER;
     private SourceDataLine line;
     private TailwindPipelineMethod pipeline;
     private FileFormat format;
