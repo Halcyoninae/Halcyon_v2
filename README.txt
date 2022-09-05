@@ -1,6 +1,6 @@
 ====== Halcyon Music Player ======
 
-A simplistic robust music player,
+A simplistic, robust music player,
 with full feature transparency.
 
 ==================================
