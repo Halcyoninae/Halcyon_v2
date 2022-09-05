@@ -3,7 +3,9 @@
     a separate thread should be used to fetch data from
     the resource and then given to the local player. This ensures
     that no calls are blocking another when the audio is being
-    played back.
+    played back. Currently the audio buffer is unbounded which
+    can have severe consequences especially for bigger audio files.
+    This can be better optimized via circular buffer strategy. 
     State: Experimental-Build ~ MP4J
     Status: None
     Difficulty: Decent
