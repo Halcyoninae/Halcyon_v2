@@ -41,7 +41,7 @@ info).
 Note: Check /root/VERSION for the
 absolute version info history.
 
-Current Version: 3.4
+Current Version: 3.4.1
 Current Iteration: 3.0
 Current Build Meta: Beta
 
