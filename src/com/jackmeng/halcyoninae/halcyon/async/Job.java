@@ -28,6 +28,10 @@ public class Job implements JobListener {
     private boolean isSuccess, isFail;
     private Callable<Integer> task;
 
+
+    /**
+     * @param state
+     */
     private void __dispatch_status(int state) {
         listeners.forEach(x -> x.jobTask(state));
     }
@@ -43,44 +47,84 @@ public class Job implements JobListener {
         task = () -> 0;
     }
 
+
+    /**
+     * @param listeners
+     */
     public void addJobStateListener(JobListener... listeners) {
         for (JobListener e : listeners) {
             this.listeners.add(e);
         }
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isSuccessExit() {
         return isSuccess && !isFail;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isFailedExit() {
         return !isSuccess && isFail;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isExited() {
         return isSuccess || isFail;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isRunning() {
         return task != null && (!worker.isShutdown() || !worker.isTerminated());
     }
 
+
+    /**
+     * @return long
+     */
     public long getWaitingTime() {
         return waitingTime;
     }
 
+
+    /**
+     * @return long
+     */
     public long getTerminationTime() {
         return terminationHalt;
     }
 
+
+    /**
+     * @param l
+     */
     public void setWaitingTime(long l) {
         this.waitingTime = l;
     }
 
+
+    /**
+     * @param l
+     */
     public void setTerminationTime(long l) {
         this.terminationHalt = l;
     }
 
+
+    /**
+     * @param task
+     */
     public void runTaskSafe(Callable<Integer> task) {
         if (!worker.isShutdown()) {
             cancel();
@@ -115,6 +159,10 @@ public class Job implements JobListener {
         }
     }
 
+
+    /**
+     * @param lastStatus
+     */
     @Override
     public void jobTask(int lastStatus) {
         Debugger.warn("JOB > " + lastStatus + " Code Got for the last current task!!");

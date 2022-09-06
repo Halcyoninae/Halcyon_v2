@@ -13,7 +13,7 @@
  * along with this program; If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.jackmeng.halcyoninae.cosmos.components.command;
+package com.jackmeng.halcyoninae.halcyon.command;
 
 import java.lang.annotation.*;
 

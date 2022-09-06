@@ -74,6 +74,11 @@ public final class TimeParser {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
     }
 
+
+    /**
+     * @param millis
+     * @return String
+     */
     public static String fromRealMillis(long millis) {
         Date d = new Date(millis);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");

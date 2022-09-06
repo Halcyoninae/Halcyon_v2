@@ -32,11 +32,23 @@ public class NavFilterText extends NavigationFilter {
     component.setCaretPosition(pxL);
   }
 
+
+  /**
+   * @param fb
+   * @param dot
+   * @param bias
+   */
   @Override
   public void setDot(NavigationFilter.FilterBypass fb, int dot, Position.Bias bias) {
     fb.setDot(Math.max(dot, pxL), bias);
   }
 
+
+  /**
+   * @param fb
+   * @param dot
+   * @param bias
+   */
   @Override
   public void moveDot(NavigationFilter.FilterBypass fb, int dot, Position.Bias bias) {
     fb.moveDot(Math.max(dot, pxL), bias);

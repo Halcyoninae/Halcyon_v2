@@ -1,4 +1,4 @@
-package com.jackmeng.halcyoninae.cosmos.components.command;
+package com.jackmeng.halcyoninae.halcyon.command;
 
 import com.jackmeng.halcyoninae.cosmos.inheritable.NavFilterText;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
@@ -14,6 +14,17 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.*;
 
+/**
+ * This was technically started in 3.3 but finished in 3.4.1!!!
+ * This class represents the entirety of the Reflection based command prompt
+ * system. This command prompt features a simple GUI that calls methods
+ * of any modifier type and run them via Java's Reflection API. This utility
+ * should be used with care as this command access has the utmost access to
+ * all methods given to it via {@link #addInvokable(Object, Class)}
+ *
+ * @author Jack Meng
+ * @since 3.4.1
+ */
 public class CommandPrompt extends JFrame implements Runnable {
 
   static final int WIDTH = 690, HEIGHT = 450;
@@ -69,6 +80,11 @@ public class CommandPrompt extends JFrame implements Runnable {
 
   }
 
+
+  /**
+   * @param e
+   * @return String
+   */
   public static String arrayStr(Object... e) {
     StringBuilder sb = new StringBuilder();
     for (Object t : e) {
@@ -77,10 +93,20 @@ public class CommandPrompt extends JFrame implements Runnable {
     return sb.toString();
   }
 
+
+  /**
+   * @return String
+   */
   private String get_str__() {
     return HEADER + buffer.toString() + FOOTER;
   }
 
+
+  /**
+   * @param arr
+   * @param ele
+   * @return String[]
+   */
   private static String[] purge__(String[] arr, String ele) {
     ArrayList<String> newArgs = new ArrayList<>(arr.length);
     for (String s : arr) {
@@ -133,6 +159,11 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandIn.setText(prompt);
   }
 
+
+  /**
+   * @param paramsDefs
+   * @return String
+   */
   private String param_str__(Class<?>[] paramsDefs) {
     if (paramsDefs.length > 0) {
       StringBuilder sbt = new StringBuilder();
@@ -144,6 +175,10 @@ public class CommandPrompt extends JFrame implements Runnable {
     return "No Arguments";
   }
 
+
+  /**
+   * @return String
+   */
   @Invokable()
   public String help() {
     StringBuilder sb = new StringBuilder();
@@ -155,10 +190,21 @@ public class CommandPrompt extends JFrame implements Runnable {
     return sb.toString();
   }
 
+
+  /**
+   * @return String
+   */
   private String prompt_zero_cmd__() {
     return commandIn.getText().substring(prompt.length(), commandIn.getText().length());
   }
 
+
+  /**
+   * @param text
+   * @param bg
+   * @param fg
+   * @return String
+   */
   public static String wrap(String text, Color bg, Color fg) {
     return "<code style=\"background-color:" + (bg == null ? "" : ColorTool.rgbTohex(bg)) + ";color:"
         + (fg == null ? "" : ColorTool.rgbTohex(fg)) + "\">"
@@ -171,6 +217,10 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandOut.setText(get_str__());
   }
 
+
+  /**
+   * @param e
+   */
   public void print(Object... e) {
     for (Object ex : e) {
       buffer.append(wrap((ex == null ? "[NULL_CONT]" : ex) + "<br>", null, null));
@@ -178,6 +228,11 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandOut.setText(get_str__());
   }
 
+
+  /**
+   * @param instance
+   * @param invs
+   */
   public void addInvokable(Object instance, Class<?> invs) {
     for (Method s : invs.getDeclaredMethods()) {
       if (s.getAnnotation(Invokable.class) != null) {
@@ -211,24 +266,45 @@ public class CommandPrompt extends JFrame implements Runnable {
     setVisible(true);
   }
 
+
+  /**
+   * @return String
+   */
   // INTERNAL INVOKABLES
   public static String print_hello() {
     return "Hello there! :)";
   }
 
+
+  /**
+   * @return String
+   */
   public static String hello() {
     return print_hello();
   }
 
+
+  /**
+   * @return String
+   */
   @Invokable(aliases = { "time" })
   public static String print_time() {
     return TimeParser.fromRealMillis(System.currentTimeMillis());
   }
 
+
+  /**
+   * @param args
+   * @return String
+   */
   public static String echo(String[] args) {
     return args == null ? "" : arrayStr((Object[]) args);
   }
 
+
+  /**
+   * @param args
+   */
   // END INTERNAL INVOKABLES
 
   public static void main(String... args) {

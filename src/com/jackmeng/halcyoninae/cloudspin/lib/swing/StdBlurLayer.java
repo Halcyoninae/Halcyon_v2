@@ -39,6 +39,11 @@ public class StdBlurLayer extends LayerUI<Component> {
         this(5, null);
     }
 
+
+    /**
+     * @param g
+     * @param comp
+     */
     @Override
     public void paint(Graphics g, JComponent comp) {
         if (comp.getWidth() == 0 || comp.getHeight() == 0)
