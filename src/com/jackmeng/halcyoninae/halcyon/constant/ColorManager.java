@@ -39,6 +39,7 @@ public final class ColorManager {
     public static String MAIN_BG_STR        = ColorTool.rgbTohex(programTheme.getBackgroundColor());
     public static String MAIN_FG_STR        = ColorTool.rgbTohex(programTheme.getForegroundColor());
     public static Color MAIN_BG_THEME       = programTheme.getBackgroundColor();
+    public static Color MAIN_TEXT_THEME     = ColorTool.hexToRGBA("#9499a2");
 
     private ColorManager() {
     }

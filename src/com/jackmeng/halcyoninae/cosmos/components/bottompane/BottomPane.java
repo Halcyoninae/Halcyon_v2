@@ -17,9 +17,11 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList;
 import com.jackmeng.halcyoninae.cosmos.inheritable.TabButton;
+import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
+import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -53,7 +55,7 @@ public class BottomPane extends JTabbedPane {
     public BottomPane() {
         super();
         tabsMap = new HashMap<>();
-
+        t.setBorder(BorderFactory.createLineBorder(ColorTool.hexToRGBA("#323842")));
         setPreferredSize(new Dimension(FileList.FILEVIEW_MAX_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
         setMinimumSize(new Dimension(FileList.FILEVIEW_MIN_WIDTH, FileList.FILEVIEW_MIN_HEIGHT));
         this.tabs = new ArrayList<>(20);

@@ -188,6 +188,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         JPanel artWorkWrapper = new JPanel();
         artWorkWrapper.setOpaque(false);
         artWorkWrapper.setLayout(new GridBagLayout());
+        artWorkWrapper.add(artWork);
 
         topPanel.add(artWorkWrapper);
         topPanel.add(infoDisplay);
