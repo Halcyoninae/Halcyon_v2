@@ -335,7 +335,7 @@ halcyoninae.github.io/halcyon
 You can read more about submitting
 a FEATURE request or a bug report,
 here:
-/root/External/README
+/root/requests/README
 
 Note: This is WIP
 
