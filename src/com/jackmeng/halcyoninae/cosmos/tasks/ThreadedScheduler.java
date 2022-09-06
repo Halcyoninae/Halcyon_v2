@@ -51,6 +51,7 @@ public class ThreadedScheduler {
         UIManager.put("ScrollBar.thumb", new ColorUIResource(ColorManager.MAIN_FG_FADED_THEME));
         UIManager.put("Scrollbar.pressedThumbColor", new ColorUIResource(ColorManager.MAIN_FG_FADED_THEME));
         UIManager.put("ScrollBar.hoverThumbColor", new ColorUIResource(ColorManager.MAIN_FG_FADED_THEME));
+        UIManager.put("TabbedPane.underlineColor", new ColorUIResource(ColorManager.MAIN_FG_FADED_THEME));
         UIManager.put("TabbedPane.showTabSeparators", true);
         UIManager.put("ScrollBar.showButtons", false);
         UIManager.put("TitlePane.closeHoverBackground", new ColorUIResource(ColorManager.MAIN_FG_THEME));
