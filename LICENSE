@@ -67,7 +67,7 @@ Source Code may be freely distributed under the GPL-2.0 License (without Classpa
 All subsequent redistributions of this program in any form must reproduce the following types of files from the original
 vendor if present:
     1. VENDOR_LICENSE (this)
-    2. SOURCE_CODE_LICENSE (GPL-2.0 & Third Party Libraries found in LICENSE.txt)
+    2. SOURCE_CODE_LICENSE (VENDOR & Third Party Libraries found in LICENSE.txt)
     3. VENDOR_README (original README from the vendor)
     4. RSC (all original resources present from the original vendor)
     5. SOURCE_CODE_BLOB (the image of the source code from when your distribution deviated from)
