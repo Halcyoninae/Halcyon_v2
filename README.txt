@@ -13,7 +13,7 @@ Copyright(C)Jack Meng 2021
 
 Licensed under the following:
 
-1. Source Code: GPL OR Vendor
+1. Source Code: Vendor
 2. EULA & Binaries: VENDOR
 
 (See section "Legals" for more
