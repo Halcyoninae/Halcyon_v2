@@ -12,7 +12,7 @@ Player.
 Copyright (C):
     Jack Meng 
     2021
-    <jackmeng0814@gmai.com>
+    <jackmeng0814@gmail.com>
 
 Licensed under the following:
 
