@@ -118,7 +118,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     if (Halcyon.bgt.getFrame().isVisible() && Halcyon.bgt.getFrame().isShowing()
                             && backPanelArt != null) {
                         Graphics2D g2d = (Graphics2D) g;
-                        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                         g2d.setComposite(
                                 AlphaComposite.getInstance(
                                         AlphaComposite.SRC_OVER, // SRC_OVER could be optimized as XOR will not work
@@ -252,7 +251,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     img = null;
                 }
                 backPanelArt = img;
-                backPanel.repaint();
+                backPanelArt.setAccelerationPriority(0.7F);
+                backPanel.repaint(30L);
             }
         });
         backPanel.repaint(100L);
