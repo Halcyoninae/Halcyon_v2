@@ -37,7 +37,7 @@ public class CommandWindow extends JButton implements BBlocButton {
    */
   @Override
   public void actionPerformed(ActionEvent e) {
-    new CommandPrompt().run();
+    CommandPrompt.main();
   }
 
 }

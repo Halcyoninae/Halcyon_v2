@@ -1,6 +1,7 @@
 package com.jackmeng.halcyoninae.halcyon.command;
 
 import com.jackmeng.halcyoninae.cosmos.inheritable.NavFilterText;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.global.Pair;
@@ -41,6 +42,7 @@ public class CommandPrompt extends JFrame implements Runnable {
     super("Halcyon ~ exoad (CLI)");
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+    setIconImage(Halcyon.bgt == null ? null : Halcyon.bgt.getFrame().getIconImage());
 
     prompt = "$ ";
 
@@ -80,7 +82,6 @@ public class CommandPrompt extends JFrame implements Runnable {
 
   }
 
-
   /**
    * @param e
    * @return String
@@ -93,14 +94,12 @@ public class CommandPrompt extends JFrame implements Runnable {
     return sb.toString();
   }
 
-
   /**
    * @return String
    */
   private String get_str__() {
     return HEADER + buffer.toString() + FOOTER;
   }
-
 
   /**
    * @param arr
@@ -159,7 +158,6 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandIn.setText(prompt);
   }
 
-
   /**
    * @param paramsDefs
    * @return String
@@ -175,7 +173,6 @@ public class CommandPrompt extends JFrame implements Runnable {
     return "No Arguments";
   }
 
-
   /**
    * @return String
    */
@@ -184,12 +181,11 @@ public class CommandPrompt extends JFrame implements Runnable {
     StringBuilder sb = new StringBuilder();
     sb.append(wrap("<strong><u>Available Commands</u></strong><br>", null, ColorTool.hexToRGBA("#ff7039")));
     for (String key : invokables.keySet()) {
-      sb.append(invokables.get(key).second.getName() + " | "
-          + param_str__(invokables.get(key).second.getParameterTypes())).append("<br>");
+      sb.append(key + " | "
+          + param_str__(invokables.get(key).second.getParameterTypes()) + " ->  " + invokables.get(key).second.getName()).append("()<br>");
     }
     return sb.toString();
   }
-
 
   /**
    * @return String
@@ -197,7 +193,6 @@ public class CommandPrompt extends JFrame implements Runnable {
   private String prompt_zero_cmd__() {
     return commandIn.getText().substring(prompt.length(), commandIn.getText().length());
   }
-
 
   /**
    * @param text
@@ -217,7 +212,6 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandOut.setText(get_str__());
   }
 
-
   /**
    * @param e
    */
@@ -227,7 +221,6 @@ public class CommandPrompt extends JFrame implements Runnable {
     }
     commandOut.setText(get_str__());
   }
-
 
   /**
    * @param instance
@@ -266,32 +259,22 @@ public class CommandPrompt extends JFrame implements Runnable {
     setVisible(true);
   }
 
-
   /**
    * @return String
    */
   // INTERNAL INVOKABLES
-  public static String print_hello() {
+  @Invokable(aliases = { "hello_there", "hello" })
+  public String print_hello() {
     return "Hello there! :)";
   }
-
-
-  /**
-   * @return String
-   */
-  public static String hello() {
-    return print_hello();
-  }
-
 
   /**
    * @return String
    */
   @Invokable(aliases = { "time" })
-  public static String print_time() {
+  public String print_time() {
     return TimeParser.fromRealMillis(System.currentTimeMillis());
   }
-
 
   /**
    * @param args
@@ -300,7 +283,6 @@ public class CommandPrompt extends JFrame implements Runnable {
   public static String echo(String[] args) {
     return args == null ? "" : arrayStr((Object[]) args);
   }
-
 
   /**
    * @param args
@@ -311,7 +293,6 @@ public class CommandPrompt extends JFrame implements Runnable {
     CommandPrompt cp = new CommandPrompt();
     try {
       cp.addInvokable(cp, cp.getClass());
-      cp.addInvokable(null, CommandPrompt.class);
     } catch (SecurityException e) {
       e.printStackTrace();
     }
