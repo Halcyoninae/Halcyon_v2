@@ -145,6 +145,7 @@ public final class Halcyon {
         }
 
         bgt.run();
+        bgt.getFrame().setSize(new Dimension(514, 518));
         Debugger.crit(ExternalResource.pm.exposeProperties().toString());
     }
 
