@@ -322,5 +322,15 @@ public final class PropertiesManager {
         return true;
     }
 
+    /**
+     * Attempts to expose the underling properties
+     * object that holds the access points to the main
+     * properties config file.
+     * @return A Properties object (value copy)
+     */
+    public Properties exposeProperties() {
+        return util;
+    }
+
     /// END PUBLIC METHODS
 }

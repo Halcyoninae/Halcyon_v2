@@ -29,6 +29,8 @@ import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.twelvemonkeys.image.ConvolveWithEdgeOp;
+
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
 import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
@@ -39,6 +41,7 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
+import java.awt.image.ConvolveOp;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -115,13 +118,11 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     if (Halcyon.bgt.getFrame().isVisible() && Halcyon.bgt.getFrame().isShowing()
                             && backPanelArt != null) {
                         Graphics2D g2d = (Graphics2D) g;
-                        float compositeAlpha = ExternalResource.pm
-                                .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_GRADIENT_STYLE)
-                                .equals("top") ? 0.2F : 0.5F;
+                        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
                         g2d.setComposite(
                                 AlphaComposite.getInstance(
                                         AlphaComposite.SRC_OVER, // SRC_OVER could be optimized as XOR will not work
-                                        compositeAlpha));
+                                        0.5F));
                         g2d.drawImage(CloudSpin.grabCrop(backPanelArt, backPanel.getVisibleRect()), 0, 0,
                                 topPanel.getWidth(), backPanel.getHeight(), null);
                         g2d.dispose();
@@ -133,13 +134,23 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         backPanel.setPreferredSize(
                 getPreferredSize());
         backPanel.setOpaque(false);
-        backPanel.setDoubleBuffered(true);
 
         JLayer<Component> blurBp = new JLayer<>(backPanel,
                 new StdBlurLayer(
                         Integer.parseInt(
                                 ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_FACTOR)),
-                        null));
+                        null,
+                        (ExternalResource.pm.get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_STYLE)
+                                .equals("default")
+                                        ? ConvolveOp.EDGE_ZERO_FILL
+                                        : ExternalResource.pm
+                                                .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_STYLE)
+                                                .equals("wrap")
+                                                        ? ConvolveWithEdgeOp.EDGE_WRAP
+                                                        : ExternalResource.pm
+                                                                .get(ProgramResourceManager.KEY_INFOVIEW_BACKDROP_BLUR_STYLE)
+                                                                .equals("reflect") ? ConvolveWithEdgeOp.EDGE_REFLECT
+                                                                        : ConvolveWithEdgeOp.EDGE_ZERO_FILL)));
         blurBp.setPreferredSize(backPanel.getPreferredSize());
 
         BufferedImage bi = DeImage.imageIconToBI(
@@ -148,6 +159,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 bi,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+        bi.setAccelerationPriority(0.8F);
         artWork = new JLabel(new ImageIcon(bi));
         artWork.setBorder(BorderFactory.createEmptyBorder());
         artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -243,7 +255,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 backPanel.repaint();
             }
         });
-        backPanel.repaint(500L);
+        backPanel.repaint(100L);
     }
 
     /**
@@ -331,30 +343,28 @@ public class InfoViewTP extends JPanel implements ComponentListener {
      * @param beSmart
      */
     private void __reset_artwork_lowicon(final boolean beSmart) {
-        SwingUtilities.invokeLater(() -> {
-            if (info.hasArtwork()) {
-                Debugger.warn("Artwork found for drawing!");
-                BufferedImage bi = null;
-                if (!beSmart)
-                    bi = DeImage.resizeNoDistort(info.getArtwork(), INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                else {
-                    bi = DeImage.resizeNoDistort(
-                            bi,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
-                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                }
-                artWork.setIcon(new ImageIcon(bi));
-                artWorkIsDefault = false;
-            } else {
-                Debugger.warn("Artwork reset!");
-                BufferedImage bi = DeImage
-                        .resizeNoDistort(DeImage.imageIconToBI(INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
-                                INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-                artWork.setIcon(new ImageIcon(bi));
-                artWorkIsDefault = true;
+        if (info.hasArtwork()) {
+            Debugger.warn("Artwork found for drawing!");
+            BufferedImage bi = null;
+            if (!beSmart)
+                bi = DeImage.resizeNoDistort(info.getArtwork(), INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+                        INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+            else {
+                bi = DeImage.resizeNoDistort(
+                        bi,
+                        INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
+                        INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
             }
-        });
+            artWork.setIcon(new ImageIcon(bi));
+            artWorkIsDefault = false;
+        } else {
+            Debugger.warn("Artwork reset!");
+            BufferedImage bi = DeImage
+                    .resizeNoDistort(DeImage.imageIconToBI(INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON),
+                            INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT, INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
+            artWork.setIcon(new ImageIcon(bi));
+            artWorkIsDefault = true;
+        }
     }
 
     /**

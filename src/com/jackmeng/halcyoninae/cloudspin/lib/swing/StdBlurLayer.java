@@ -17,6 +17,9 @@ package com.jackmeng.halcyoninae.cloudspin.lib.swing;
 
 import javax.swing.*;
 import javax.swing.plaf.LayerUI;
+
+import com.twelvemonkeys.image.ConvolveWithEdgeOp;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
@@ -26,19 +29,14 @@ import java.awt.image.Kernel;
 public class StdBlurLayer extends LayerUI<Component> {
     private transient BufferedImageOp oImageOp;
 
-    public StdBlurLayer(int blur, RenderingHints renderer) {
+    public StdBlurLayer(int blur, RenderingHints renderer, int edgeNotation) {
         float[] matrix = new float[blur * blur];
         float frac = 1.0F / (blur * blur);
         for (int i = 0; i < blur * blur; i++) {
             matrix[i] = frac;
         }
-        oImageOp = new ConvolveOp(new Kernel(blur, blur, matrix), ConvolveOp.EDGE_ZERO_FILL, renderer);
+        oImageOp = new ConvolveWithEdgeOp(new Kernel(blur, blur, matrix), edgeNotation, renderer);
     }
-
-    public StdBlurLayer() {
-        this(5, null);
-    }
-
 
     /**
      * @param g

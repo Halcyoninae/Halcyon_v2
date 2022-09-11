@@ -76,6 +76,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
             @Override
             public void windowClosed(WindowEvent e) {
                 toOpenArtwork = true;
+                System.gc();
             }
 
         });
@@ -94,6 +95,8 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
         img = CloudSpin.resizeToFitViewport(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT),
                 info.getArtwork());
+
+        img.setAccelerationPriority(0.9F);
 
         artWork = new JPanel() {
             @Override

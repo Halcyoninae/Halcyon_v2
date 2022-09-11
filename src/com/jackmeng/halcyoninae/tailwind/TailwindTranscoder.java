@@ -48,14 +48,14 @@ public final class TailwindTranscoder implements Transcoder {
     /**
      * @param buffer
      * @param transfer
-     * @param samples
+     * @param cum
      * @param b_
      * @param format
      * @return float[]
      */
-    public static float[] f_unpack(byte[] buffer, long[] transfer, float[] samples, int b_, AudioFormat format) {
+    public static float[] f_unpack(byte[] buffer, long[] transfer, float[] cum, int b_, AudioFormat format) {
         if (format.getEncoding() != AudioFormat.Encoding.PCM_SIGNED && format.getEncoding() != AudioFormat.Encoding.PCM_UNSIGNED) {
-            return samples;
+            return cum;
         }
         int bps = format.getSampleSizeInBits();
         int nb = normalize(bps);
@@ -87,27 +87,27 @@ public final class TailwindTranscoder implements Transcoder {
             }
         }
         for (int i = 0; i < transfer.length; i++) {
-            samples[i] = ((float) transfer[i]) / scale;
+            cum[i] = ((float) transfer[i]) / scale;
         }
-        return samples;
+        return cum;
     }
 
     /**
-     * @param samples
+     * @param cum
      * @param s_
      * @param format
      * @return
      */
-    public static float[] window_func(float[] samples, int s_, AudioFormat format) {
+    public static float[] window_func(float[] cum, int s_, AudioFormat format) {
         int chnls = format.getChannels();
         int len = s_ / chnls;
 
         for (int i = 0, k, j; i < chnls; i++) {
             for (j = i, k = 0; j < s_; j += chnls) {
-                samples[j] *= Math.sin(Math.PI * (k++) / (len - 1));
+                cum[j] *= Math.sin(Math.PI * (k++) / (len - 1));
             }
         }
-        return samples;
+        return cum;
     }
 
     /**

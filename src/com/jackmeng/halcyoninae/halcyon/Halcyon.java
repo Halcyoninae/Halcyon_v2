@@ -111,8 +111,6 @@ public final class Halcyon {
         TopPane tp = new TopPane(Global.ifp, Global.bctp);
         Global.ifp.addInfoViewUpdateListener(Global.bctp);
         JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
-        bottom.setMinimumSize(
-            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
         bottom.setPreferredSize(
             new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
         ArrayList<BBlocButton> bb = new ArrayList<>();
@@ -120,8 +118,10 @@ public final class Halcyon {
         bb.add(new RefreshFileView());
         bb.add(new SlidersControl());
         bb.add(new MinimizePlayer());
+        bb.add(new CommandWindow());
         bb.add(new Settings());
         bb.add(new LegalNoticeButton());
+        bb.add(new MoreButton());
         BBlocView b = new BBlocView();
         b.addBBlockButtons(bb.toArray(new BBlocButton[0]));
         bottom.add(b);
@@ -145,6 +145,7 @@ public final class Halcyon {
         }
 
         bgt.run();
+        Debugger.crit(ExternalResource.pm.exposeProperties().toString());
     }
 
     private static void run() {

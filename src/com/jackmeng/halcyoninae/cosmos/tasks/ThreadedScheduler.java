@@ -72,7 +72,6 @@ public class ThreadedScheduler {
         UIManager.put("FileChooser.readOnly", false);
         LogManager.getLogManager().reset();
         // fix blurriness on high-DPI screens
-        System.setProperty("sun.java2d.opengl", "true");
         System.setProperty("sun.java2d.uiScale", "0.9");
 
         // PROGRAMMABLE THREADS

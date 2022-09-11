@@ -66,7 +66,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class TailwindPlayer implements Audio {
     // PUBLIC STATIC UTIL START
-    public static final int MAGIC_NUMBER       = 1024;
+    public static final int MAGIC_NUMBER       = 4096;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
     private final Object referencable          = new Object();
@@ -690,10 +690,9 @@ public class TailwindPlayer implements Audio {
                      * float[] samples = new float[MAGIC_NUMBER * formatAudio.getChannels()];
                      * long[] transfer = new long[samples.length];
                      */
-                    buffer = new byte[(my_magic_number == -1
+                    buffer = new byte[my_magic_number == -1
                             ? ais.getFormat().getFrameSize() * 2
-                            : MAGIC_NUMBER * formatAudio.getChannels()
-                                    * TailwindTranscoder.normalize(formatAudio.getSampleSizeInBits()))];
+                            : MAGIC_NUMBER];
                     Debugger.warn("Tailwind_buffer_size: " + buffer.length);
                 }
                 line.start();
@@ -712,7 +711,7 @@ public class TailwindPlayer implements Audio {
                                 worker.shutdown();
                                 worker.awaitTermination(25L, TimeUnit.MILLISECONDS);
                                 events.dispatchStatusEvent(TailwindStatus.END);
-                                Debugger.warn("=========TailwindPlayer STOP=========");
+                                Debugger.warn("=========TailwindPlayer STOP=========\n");
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

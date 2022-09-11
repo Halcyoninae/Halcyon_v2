@@ -17,6 +17,9 @@ package com.jackmeng.halcyoninae.cosmos.components.toppane.layout;
 
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
+import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm;
+import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.BoxWaveConf;
+import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.ColorConf;
 import com.jackmeng.halcyoninae.cosmos.inheritable.LikeButton;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
@@ -85,6 +88,7 @@ public class ButtonControlTP extends JPanel
     private final JButton informationButton;
     private final LikeButton likeButton;
     private final JSlider progressSlider;
+    private BarForm bf;
     private final JSlider volumeSlider;
     private final TimeControlSubTP tsp;
     private final JPanel buttons;
@@ -105,7 +109,7 @@ public class ButtonControlTP extends JPanel
             new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
         buttons.setMinimumSize(
             new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
-        buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, getPreferredSize().height / 6));
+        buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, getPreferredSize().height / 1));
 
         playButton = new JButton(
             DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
@@ -203,6 +207,9 @@ public class ButtonControlTP extends JPanel
         buttons.add(loopButton);
         buttons.add(likeButton);
 
+        JPanel overlayWaveForm = new JPanel();
+        overlayWaveForm.setLayout(new OverlayLayout(overlayWaveForm));
+
         JPanel sliders = new JPanel();
         sliders.setLayout(new BoxLayout(sliders, BoxLayout.Y_AXIS));
         sliders.setPreferredSize(
@@ -214,10 +221,20 @@ public class ButtonControlTP extends JPanel
         progressSlider.setValue(0);
         progressSlider.setFocusable(false);
         progressSlider.setForeground(ColorManager.MAIN_FG_THEME);
-        progressSlider.setBackground(ColorManager.MAIN_BG_THEME);
         progressSlider.setBorder(null);
+        progressSlider.setOpaque(false);
         progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         progressSlider.addChangeListener(this);
+
+        bf = new BarForm(Toolkit.getDefaultToolkit().getScreenSize().width, 10, 1, 3, new BoxWaveConf(10, 5, 2, 3), new ColorConf(ColorManager.BORDER_THEME, null));
+
+        JPanel bfWrapper = new JPanel();
+        bfWrapper.setLayout(new BorderLayout());
+        bfWrapper.setOpaque(false);
+        bfWrapper.add(bf, BorderLayout.CENTER);
+
+        overlayWaveForm.add(progressSlider);
+        overlayWaveForm.add(bfWrapper);
 
         tsp = new TimeControlSubTP();
 
@@ -246,10 +263,9 @@ public class ButtonControlTP extends JPanel
         });
 
         sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 5));
-        sliders.add(progressSlider);
+        sliders.add(overlayWaveForm);
         sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 5));
         sliders.add(tsp);
-
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -264,7 +280,7 @@ public class ButtonControlTP extends JPanel
         });
         add(buttons);
         add(sliders);
-
+        bf.makeRNG();
     }
 
     /**
@@ -302,6 +318,7 @@ public class ButtonControlTP extends JPanel
         }
         progressSlider.setValue(0);
         tsp.setTimeText("00:00:00");
+        bf.makeRNG();
     }
 
     /**
