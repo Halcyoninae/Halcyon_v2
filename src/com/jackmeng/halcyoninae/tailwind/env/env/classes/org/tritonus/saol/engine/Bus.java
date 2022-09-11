@@ -27,88 +27,80 @@
 package org.tritonus.saol.engine;
 
 
-
-
-/**	Bus in the SA engine.
-	This interface abstracts the way calculated samples are
-	output from the engine. The engine only calls this interface,
-	while implementations of this interface write the samples to a
-	file, a line, a network socket or whatever else.
-
-	@author Matthias Pfisterer
+/**
+ * Bus in the SA engine.
+ * This interface abstracts the way calculated samples are
+ * output from the engine. The engine only calls this interface,
+ * while implementations of this interface write the samples to a
+ * file, a line, a network socket or whatever else.
+ *
+ * @author Matthias Pfisterer
  */
 public class Bus
-implements Output
-{
-	private float[]		m_afValues;
+        implements Output {
+    private final float[] m_afValues;
 
 
-
-	public Bus(int nWidth)
-	{
-		m_afValues = new float[nWidth];
-	}
+    public Bus(int nWidth) {
+        m_afValues = new float[nWidth];
+    }
 
 
-	/**	Gives the width of this bus.
-		@returns	width of the bus (number of channels)
-	 */
-	public int getWidth()
-	{
-		return m_afValues.length;
-	}
+    /**
+     * Gives the width of this bus.
+     *
+     * @returns width of the bus (number of channels)
+     */
+    public int getWidth() {
+        return m_afValues.length;
+    }
 
 
-	/**	Initiate the cumulation of a sample value.
-		Sets the values of all samples to 0.0.
-		This method must be called in an a-cycle before
-		any instrument's a-cycle code is executed.
-	*/
-	public void clear()
-	{
-		for (int i = 0; i < getWidth(); i++)
-		{
-			m_afValues[i] = 0.0F;
-		}
-	}
+    /**
+     * Initiate the cumulation of a sample value.
+     * Sets the values of all samples to 0.0.
+     * This method must be called in an a-cycle before
+     * any instrument's a-cycle code is executed.
+     */
+    public void clear() {
+        for (int i = 0; i < getWidth(); i++) {
+            m_afValues[i] = 0.0F;
+        }
+    }
 
 
-	/**	Add the sample value of one instrument.
-		This method can be called by instrument's a-cycle
-		code to output the sample value the instrument has
-		calculated for this a-cycle.
-		The current hacky version allows only for mono samples.
-	*/
-	public void output(float fSample)
-	{
-		for (int i = 0; i < getWidth(); i++)
-		{
-			m_afValues[i] += fSample;
-		}
-	}
+    /**
+     * Add the sample value of one instrument.
+     * This method can be called by instrument's a-cycle
+     * code to output the sample value the instrument has
+     * calculated for this a-cycle.
+     * The current hacky version allows only for mono samples.
+     */
+    public void output(float fSample) {
+        for (int i = 0; i < getWidth(); i++) {
+            m_afValues[i] += fSample;
+        }
+    }
 
 
-	/**	Add sample values of one instrument.
-		This method can be called by instrument's a-cycle
-		code to output the sample value the instrument has
-		calculated for this a-cycle.
-		The current hacky version allows only for mono samples.
-	*/
-	public void output(float[] afSamples)
-	{
-		for (int i = 0; i < getWidth(); i++)
-		{
-			m_afValues[i] += afSamples[i];
-		}
-	}
+    /**
+     * Add sample values of one instrument.
+     * This method can be called by instrument's a-cycle
+     * code to output the sample value the instrument has
+     * calculated for this a-cycle.
+     * The current hacky version allows only for mono samples.
+     */
+    public void output(float[] afSamples) {
+        for (int i = 0; i < getWidth(); i++) {
+            m_afValues[i] += afSamples[i];
+        }
+    }
 
 
-	public float[] getValues()
-	{
-		return m_afValues;
-	}
+    public float[] getValues() {
+        return m_afValues;
+    }
 }
-
 
 
 /*** Bus.java ***/

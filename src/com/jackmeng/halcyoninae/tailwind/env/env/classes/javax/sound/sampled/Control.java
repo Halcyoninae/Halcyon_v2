@@ -31,76 +31,55 @@ package javax.sound.sampled;
 import org.tritonus.share.TDebug;
 
 
-
-public abstract class Control
-{
-	private Type	m_type;
+public abstract class Control {
+    private final Type m_type;
 
 
-
-	protected Control(Type type)
-	{
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("Control.<init>: begin");
-		}
-		m_type = type;
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("Control.<init>: end");
-		}
-	}
+    protected Control(Type type) {
+        if (TDebug.TraceControl) {
+            TDebug.out("Control.<init>: begin");
+        }
+        m_type = type;
+        if (TDebug.TraceControl) {
+            TDebug.out("Control.<init>: end");
+        }
+    }
 
 
-
-	public Type getType()
-	{
-		return m_type;
-	}
+    public Type getType() {
+        return m_type;
+    }
 
 
-	public String toString()
-	{
-		return super.toString() + "[type = " + getType() + "]";
-	}
+    public String toString() {
+        return super.toString() + "[type = " + getType() + "]";
+    }
 
 
+    public static class Type {
+        private final String m_strName;
 
 
-	public static class Type
-	{
-		private String	m_strName;
+        protected Type(String strName) {
+            m_strName = strName;
+        }
 
 
-
-		protected Type(String strName)
-		{
-			m_strName = strName;
-		}
+        public final boolean equals(Object obj) {
+            return super.equals(obj);
+        }
 
 
-
-		public final boolean equals(Object obj)
-		{
-			return super.equals(obj);
-		}
+        public final int hashCode() {
+            return super.hashCode();
+        }
 
 
-
-		public final int hashCode()
-		{
-			return super.hashCode();
-		}
-
-
-
-		public final String toString()
-		{
-			return m_strName;
-		}
-	}
+        public final String toString() {
+            return m_strName;
+        }
+    }
 }
-
 
 
 /*** Control.java ***/

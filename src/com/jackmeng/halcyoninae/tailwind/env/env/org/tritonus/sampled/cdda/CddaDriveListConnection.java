@@ -36,58 +36,59 @@ import java.net.URLConnection;
 import java.util.Iterator;
 
 
-
 public class CddaDriveListConnection
-extends	URLConnection
-{
-	private CddaMidLevel	m_cddaMidLevel;
+        extends URLConnection {
+    private CddaMidLevel m_cddaMidLevel;
 
 
-
-	// TODO: m_cdda.close();
-	public CddaDriveListConnection(URL url)
-	{
-		super(url);
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.<init>(): begin"); }
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.<init>(): end"); }
-	}
-
-
-
-	public void connect()
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.connect(): begin"); }
-		if (! connected)
-		{
-			m_cddaMidLevel = CddaUtils.getCddaMidLevel();
-			connected = true;
-		}
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.connect(): end"); }
-	}
+    // TODO: m_cdda.close();
+    public CddaDriveListConnection(URL url) {
+        super(url);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.<init>(): begin");
+        }
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.<init>(): end");
+        }
+    }
 
 
+    public void connect() {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.connect(): begin");
+        }
+        if (!connected) {
+            m_cddaMidLevel = CddaUtils.getCddaMidLevel();
+            connected = true;
+        }
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.connect(): end");
+        }
+    }
 
-	public InputStream getInputStream()
-		throws IOException
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.getInputStream(): begin"); }
-		connect();
-		Iterator	drivesIterator = m_cddaMidLevel.getDevices();
-		ByteArrayOutputStream	baos = new ByteArrayOutputStream();
-		PrintStream		out = new PrintStream(baos);
-		while (drivesIterator.hasNext())
-		{
-			String	strDrive = (String) drivesIterator.next();
-			out.print(strDrive + "\n");
-		}
-		byte[]	abData = baos.toByteArray();
-		baos.close();
-		ByteArrayInputStream	bais = new ByteArrayInputStream(abData);
-		if (TDebug.TraceCdda) { TDebug.out("CddaDriveListConnection.getInputStream(): end"); }
-		return bais;
-	}
+
+    public InputStream getInputStream()
+            throws IOException {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.getInputStream(): begin");
+        }
+        connect();
+        Iterator drivesIterator = m_cddaMidLevel.getDevices();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos);
+        while (drivesIterator.hasNext()) {
+            String strDrive = (String) drivesIterator.next();
+            out.print(strDrive + "\n");
+        }
+        byte[] abData = baos.toByteArray();
+        baos.close();
+        ByteArrayInputStream bais = new ByteArrayInputStream(abData);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDriveListConnection.getInputStream(): end");
+        }
+        return bais;
+    }
 }
-
 
 
 /*** CddaDriveListConnection.java ****/

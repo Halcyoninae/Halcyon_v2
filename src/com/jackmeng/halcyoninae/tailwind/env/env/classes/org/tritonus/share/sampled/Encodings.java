@@ -23,7 +23,7 @@
  */
 
 
-package org.tritonus.share.sampled;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.share.sampled;
 
 import org.tritonus.share.StringHashedSet;
 
@@ -65,31 +65,33 @@ import java.util.Iterator;
  */
 public class Encodings extends AudioFormat.Encoding {
 
-	/** contains all known encodings */
-	private static StringHashedSet<AudioFormat.Encoding> encodings = new StringHashedSet<AudioFormat.Encoding>();
+    /**
+     * contains all known encodings
+     */
+    private static final StringHashedSet<AudioFormat.Encoding> encodings = new StringHashedSet<AudioFormat.Encoding>();
 
-	// initially add the standard encodings
-	static {
-		encodings.add(AudioFormat.Encoding.PCM_SIGNED);
-		encodings.add(AudioFormat.Encoding.PCM_UNSIGNED);
-		encodings.add(AudioFormat.Encoding.ULAW);
-		encodings.add(AudioFormat.Encoding.ALAW);
-	}
+    // initially add the standard encodings
+    static {
+        encodings.add(AudioFormat.Encoding.PCM_SIGNED);
+        encodings.add(AudioFormat.Encoding.PCM_UNSIGNED);
+        encodings.add(AudioFormat.Encoding.ULAW);
+        encodings.add(AudioFormat.Encoding.ALAW);
+    }
 
-	Encodings(String name) {
-		super(name);
-	}
+    Encodings(String name) {
+        super(name);
+    }
 
-	/**
-	 * Use this method for retrieving an instance of
-	 * <code>AudioFormat.Encoding</code> of the specified
-	 * name. A standard registry of encoding names will
-	 * be maintained by the Tritonus team.
-	 * <p>
-	 * Every file reader, file writer, and format converter
-	 * provider should exclusively use this method for
-	 * retrieving instances of <code>AudioFormat.Encoding</code>.
-	 */
+    /**
+     * Use this method for retrieving an instance of
+     * <code>AudioFormat.Encoding</code> of the specified
+     * name. A standard registry of encoding names will
+     * be maintained by the Tritonus team.
+     * <p>
+     * Every file reader, file writer, and format converter
+     * provider should exclusively use this method for
+     * retrieving instances of <code>AudioFormat.Encoding</code>.
+     */
 	/*
 	  MP2000/09/11:
 	  perhaps it is not a good idea to allow user programs the creation of new
@@ -108,74 +110,72 @@ public class Encodings extends AudioFormat.Encoding {
 	  loading of all providers very early. Hmmm, maybe this is necessary in any
 	  case when the user issues something like AudioSystem.isConversionSupported.
 	 */
-	public static AudioFormat.Encoding getEncoding(String name) {
-		AudioFormat.Encoding res=encodings.get(name);
-		if (res==null) {
-			// it is not already in the string set. Create a new encoding instance.
-			res=new Encodings(name);
-			// and save it for the future
-			encodings.add(res);
-		}
-		return res;
-	}
+    public static AudioFormat.Encoding getEncoding(String name) {
+        AudioFormat.Encoding res = encodings.get(name);
+        if (res == null) {
+            // it is not already in the string set. Create a new encoding instance.
+            res = new Encodings(name);
+            // and save it for the future
+            encodings.add(res);
+        }
+        return res;
+    }
 
-	/**
-	 * Tests for equality of 2 encodings. They are equal when their strings match.
-	 * <p>
-	 * This function should be AudioFormat.Encoding.equals and must
-	 * be considered as a temporary work around until it flows into the
-	 * JavaSound API.
-	 */
-	// IDEA: create a special "NOT_SPECIFIED" encoding
-	// and a AudioFormat.Encoding.matches method.
-	public static boolean equals(AudioFormat.Encoding e1, AudioFormat.Encoding e2) {
-		return e2.toString().equals(e1.toString());
-	}
-
-
-	/**
-	 * Returns all &quot;supported&quot; encodings.
-	 * Supported means that it is possible to read or
-	 * write files with this encoding, or that a converter
-	 * accepts this encoding as source or target format.
-	 * <p>
-	 * Currently, this method returns a best guess and
-	 * the search algorithm is far from complete: with standard
-	 * methods of AudioSystem, only the target encodings
-	 * of the converters can be retrieved - neither
-	 * the source encodings of converters nor the encodings
-	 * of file readers and file writers cannot be retrieved.
-	 */
-	public static AudioFormat.Encoding[] getEncodings() {
-		StringHashedSet<AudioFormat.Encoding> iteratedSources=new StringHashedSet<AudioFormat.Encoding>();
-		StringHashedSet<AudioFormat.Encoding> retrievedTargets=new StringHashedSet<AudioFormat.Encoding>();
-		Iterator<AudioFormat.Encoding> sourceFormats=encodings.iterator();
-		while (sourceFormats.hasNext()) {
-			AudioFormat.Encoding source=sourceFormats.next();
-			iterateEncodings(source, iteratedSources, retrievedTargets);
-		}
-		return retrievedTargets.toArray(
-		           new AudioFormat.Encoding[retrievedTargets.size()]);
-	}
+    /**
+     * Tests for equality of 2 encodings. They are equal when their strings match.
+     * <p>
+     * This function should be AudioFormat.Encoding.equals and must
+     * be considered as a temporary work around until it flows into the
+     * JavaSound API.
+     */
+    // IDEA: create a special "NOT_SPECIFIED" encoding
+    // and a AudioFormat.Encoding.matches method.
+    public static boolean equals(AudioFormat.Encoding e1, AudioFormat.Encoding e2) {
+        return e2.toString().equals(e1.toString());
+    }
 
 
-	private static void iterateEncodings(AudioFormat.Encoding source,
-	                                     StringHashedSet<AudioFormat.Encoding> iteratedSources,
-	                                     StringHashedSet<AudioFormat.Encoding> retrievedTargets) {
-		if (!iteratedSources.contains(source)) {
-			iteratedSources.add(source);
-			AudioFormat.Encoding[] targets=AudioSystem.getTargetEncodings(source);
-			for (int i=0; i<targets.length; i++) {
-				AudioFormat.Encoding target=targets[i];
-				if (retrievedTargets.add(target)) {
-					iterateEncodings(target, iteratedSources,retrievedTargets);
-				}
-			}
-		}
-	}
+    /**
+     * Returns all &quot;supported&quot; encodings.
+     * Supported means that it is possible to read or
+     * write files with this encoding, or that a converter
+     * accepts this encoding as source or target format.
+     * <p>
+     * Currently, this method returns a best guess and
+     * the search algorithm is far from complete: with standard
+     * methods of AudioSystem, only the target encodings
+     * of the converters can be retrieved - neither
+     * the source encodings of converters nor the encodings
+     * of file readers and file writers cannot be retrieved.
+     */
+    public static AudioFormat.Encoding[] getEncodings() {
+        StringHashedSet<AudioFormat.Encoding> iteratedSources = new StringHashedSet<AudioFormat.Encoding>();
+        StringHashedSet<AudioFormat.Encoding> retrievedTargets = new StringHashedSet<AudioFormat.Encoding>();
+        Iterator<AudioFormat.Encoding> sourceFormats = encodings.iterator();
+        while (sourceFormats.hasNext()) {
+            AudioFormat.Encoding source = sourceFormats.next();
+            iterateEncodings(source, iteratedSources, retrievedTargets);
+        }
+        return retrievedTargets.toArray(
+                new AudioFormat.Encoding[retrievedTargets.size()]);
+    }
+
+
+    private static void iterateEncodings(AudioFormat.Encoding source,
+                                         StringHashedSet<AudioFormat.Encoding> iteratedSources,
+                                         StringHashedSet<AudioFormat.Encoding> retrievedTargets) {
+        if (!iteratedSources.contains(source)) {
+            iteratedSources.add(source);
+            AudioFormat.Encoding[] targets = AudioSystem.getTargetEncodings(source);
+            for (int i = 0; i < targets.length; i++) {
+                AudioFormat.Encoding target = targets[i];
+                if (retrievedTargets.add(target)) {
+                    iterateEncodings(target, iteratedSources, retrievedTargets);
+                }
+            }
+        }
+    }
 }
 
 
-
 /*** Encodings.java ***/
-

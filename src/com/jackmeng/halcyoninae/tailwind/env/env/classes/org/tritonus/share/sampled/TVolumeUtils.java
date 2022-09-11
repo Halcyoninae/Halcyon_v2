@@ -24,30 +24,23 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.share.sampled;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.share.sampled;
 
 
-
-public class TVolumeUtils
-{
-	private static final double		FACTOR1 = 20.0 / Math.log(10.0);
-	private static final double		FACTOR2 = 1 / 20.0;
+public class TVolumeUtils {
+    private static final double FACTOR1 = 20.0 / Math.log(10.0);
+    private static final double FACTOR2 = 1 / 20.0;
 
 
-
-	public static double lin2log(double dLinear)
-	{
-		return FACTOR1 * Math.log(dLinear);
-	}
+    public static double lin2log(double dLinear) {
+        return FACTOR1 * Math.log(dLinear);
+    }
 
 
-
-	public static double log2lin(double dLogarithmic)
-	{
-		return Math.pow(10.0, dLogarithmic * FACTOR2);
-	}
+    public static double log2lin(double dLogarithmic) {
+        return Math.pow(10.0, dLogarithmic * FACTOR2);
+    }
 }
-
 
 
 /*** TVolumeUtils.java ***/

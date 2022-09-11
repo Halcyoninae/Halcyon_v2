@@ -29,22 +29,16 @@
 package javax.sound.sampled;
 
 
-
 public class LineUnavailableException
-extends	Exception
-{
-	public LineUnavailableException()
-	{
-	}
+        extends Exception {
+    public LineUnavailableException() {
+    }
 
 
-
-	public LineUnavailableException(String strMessage)
-	{
-		super(strMessage);
-	}
+    public LineUnavailableException(String strMessage) {
+        super(strMessage);
+    }
 }
-
 
 
 /*** LineUnavailableException.java ***/

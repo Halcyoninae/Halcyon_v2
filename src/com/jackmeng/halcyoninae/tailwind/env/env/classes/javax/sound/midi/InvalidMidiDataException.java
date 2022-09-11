@@ -29,23 +29,17 @@
 package javax.sound.midi;
 
 
-
 public class InvalidMidiDataException
-    extends Exception
-{
-    public InvalidMidiDataException()
-    {
-	super();
+        extends Exception {
+    public InvalidMidiDataException() {
+        super();
     }
 
 
-
-    public InvalidMidiDataException(String sMessage)
-    {
-	super(sMessage);
+    public InvalidMidiDataException(String sMessage) {
+        super(sMessage);
     }
 }
-
 
 
 /*** InvalidMidiDataException.java ***/

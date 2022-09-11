@@ -29,25 +29,21 @@
 package javax.sound.sampled;
 
 
-
-
 public interface TargetDataLine
-extends DataLine
-{
-	public void open(AudioFormat audioFormat,
-			 int nBufferSize)
-		throws LineUnavailableException;
+        extends DataLine {
+    void open(AudioFormat audioFormat,
+              int nBufferSize)
+            throws LineUnavailableException;
 
 
-	public void open(AudioFormat audioFormat)
-		throws LineUnavailableException;
+    void open(AudioFormat audioFormat)
+            throws LineUnavailableException;
 
 
-	public int read(byte[] abData,
-			int nOffset,
-			int nLength);
+    int read(byte[] abData,
+             int nOffset,
+             int nLength);
 }
-
 
 
 /*** TargetDataLine.java ***/

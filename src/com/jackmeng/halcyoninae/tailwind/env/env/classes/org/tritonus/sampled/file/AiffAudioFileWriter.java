@@ -46,50 +46,50 @@ import java.util.Arrays;
 
 public class AiffAudioFileWriter extends TAudioFileWriter {
 
-	private static final AudioFileFormat.Type[] FILE_TYPES =
-	    {
-	        AudioFileFormat.Type.AIFF,
-	        AudioFileFormat.Type.AIFC
-	    };
+    private static final AudioFileFormat.Type[] FILE_TYPES =
+            {
+                    AudioFileFormat.Type.AIFF,
+                    AudioFileFormat.Type.AIFC
+            };
 
-	private static final AudioFormat.Encoding	ULAW = AudioFormat.Encoding.ULAW;
-	private static final AudioFormat.Encoding	IMA_ADPCM = new AudioFormat.Encoding("IMA_ADPCM");
+    private static final AudioFormat.Encoding ULAW = AudioFormat.Encoding.ULAW;
+    private static final AudioFormat.Encoding IMA_ADPCM = new AudioFormat.Encoding("IMA_ADPCM");
 
-	// IMPORTANT: this array depends on the AudioFormat.match() algorithm which takes
-	//            AudioSystem.NOT_SPECIFIED into account !
-	private static final AudioFormat[]	AUDIO_FORMATS =
-	    {
-	        new AudioFormat(PCM_SIGNED, ALL, 8, ALL, ALL, ALL, true),
-	        new AudioFormat(PCM_SIGNED, ALL, 8, ALL, ALL, ALL, false),
-	        new AudioFormat(ULAW, ALL, 8, ALL, ALL, ALL, false),
-	        new AudioFormat(ULAW, ALL, 8, ALL, ALL, ALL, true),
-	        new AudioFormat(PCM_SIGNED, ALL, 16, ALL, ALL, ALL, true),
-	        new AudioFormat(PCM_SIGNED, ALL, 24, ALL, ALL, ALL, true),
-	        new AudioFormat(PCM_SIGNED, ALL, 32, ALL, ALL, ALL, true),
-	        new AudioFormat(IMA_ADPCM, ALL, 4, ALL, ALL, ALL, true),
-	        new AudioFormat(IMA_ADPCM, ALL, 4, ALL, ALL, ALL, false),
-	    };
+    // IMPORTANT: this array depends on the AudioFormat.match() algorithm which takes
+    //            AudioSystem.NOT_SPECIFIED into account !
+    private static final AudioFormat[] AUDIO_FORMATS =
+            {
+                    new AudioFormat(PCM_SIGNED, ALL, 8, ALL, ALL, ALL, true),
+                    new AudioFormat(PCM_SIGNED, ALL, 8, ALL, ALL, ALL, false),
+                    new AudioFormat(ULAW, ALL, 8, ALL, ALL, ALL, false),
+                    new AudioFormat(ULAW, ALL, 8, ALL, ALL, ALL, true),
+                    new AudioFormat(PCM_SIGNED, ALL, 16, ALL, ALL, ALL, true),
+                    new AudioFormat(PCM_SIGNED, ALL, 24, ALL, ALL, ALL, true),
+                    new AudioFormat(PCM_SIGNED, ALL, 32, ALL, ALL, ALL, true),
+                    new AudioFormat(IMA_ADPCM, ALL, 4, ALL, ALL, ALL, true),
+                    new AudioFormat(IMA_ADPCM, ALL, 4, ALL, ALL, ALL, false),
+            };
 
-	public AiffAudioFileWriter() {
-		super(Arrays.asList(FILE_TYPES),
-		      Arrays.asList(AUDIO_FORMATS));
-	}
-
-
-	protected boolean isAudioFormatSupportedImpl(AudioFormat format,
-	        AudioFileFormat.Type fileType) {
-		return AiffTool.getFormatCode(format)!=AiffTool.AIFF_COMM_UNSPECIFIED;
-	}
+    public AiffAudioFileWriter() {
+        super(Arrays.asList(FILE_TYPES),
+                Arrays.asList(AUDIO_FORMATS));
+    }
 
 
-	protected AudioOutputStream getAudioOutputStream(AudioFormat audioFormat,
-	        long lLengthInBytes,
-	        AudioFileFormat.Type fileType,
-	        TDataOutputStream dataOutputStream)	throws IOException {
-	            return new AiffAudioOutputStream(audioFormat, fileType,
-	                                             lLengthInBytes,
-	                                             dataOutputStream);
-	        }
+    protected boolean isAudioFormatSupportedImpl(AudioFormat format,
+                                                 AudioFileFormat.Type fileType) {
+        return AiffTool.getFormatCode(format) != AiffTool.AIFF_COMM_UNSPECIFIED;
+    }
+
+
+    protected AudioOutputStream getAudioOutputStream(AudioFormat audioFormat,
+                                                     long lLengthInBytes,
+                                                     AudioFileFormat.Type fileType,
+                                                     TDataOutputStream dataOutputStream) throws IOException {
+        return new AiffAudioOutputStream(audioFormat, fileType,
+                lLengthInBytes,
+                dataOutputStream);
+    }
 
 }
 

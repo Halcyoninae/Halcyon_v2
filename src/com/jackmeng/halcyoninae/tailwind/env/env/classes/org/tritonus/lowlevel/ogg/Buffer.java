@@ -29,144 +29,137 @@ package org.tritonus.lowlevel.ogg;
 import org.tritonus.share.TDebug;
 
 
-/** Wrapper for oggpack_buffer.
+/**
+ * Wrapper for oggpack_buffer.
  */
-public class Buffer
-{
-        static
-        {
-                Ogg.loadNativeLibrary();
-                if (TDebug.TraceOggNative)
-                {
-                        setTrace(true);
-                }
+public class Buffer {
+    static {
+        Ogg.loadNativeLibrary();
+        if (TDebug.TraceOggNative) {
+            setTrace(true);
         }
+    }
 
 
-	/**
-	 *	Holds the pointer to oggpack_buffer
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
+    /**
+     * Holds the pointer to oggpack_buffer
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
+    public Buffer() {
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Buffer.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of ogg_page failed");
+        }
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Buffer.<init>(): end");
+        }
+    }
 
-	public Buffer()
-	{
-		if (TDebug.TraceOggNative) { TDebug.out("Buffer.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of ogg_page failed");
-		}
-		if (TDebug.TraceOggNative) { TDebug.out("Buffer.<init>(): end"); }
-	}
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
+    private native int malloc();
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    public native void free();
 
+    /**
+     * Calls oggpack_writeinit().
+     */
+    public native void writeInit();
 
+    /**
+     * Calls oggpack_writetrunc().
+     */
+    public native void writeTrunc(int nBits);
 
-	private native int malloc();
-	public native void free();
+    /**
+     * Calls oggpack_writealign().
+     */
+    public native void writeAlign();
 
+    /**
+     * Calls oggpack_writecopy().
+     */
+    public native void writeCopy(byte[] abSource, int nBits);
 
-	/** Calls oggpack_writeinit().
-	 */
-	public native void writeInit();
+    /**
+     * Calls oggpack_reset().
+     */
+    public native void reset();
 
+    /**
+     * Calls oggpack_writeclear().
+     */
+    public native void writeClear();
 
-	/** Calls oggpack_writetrunc().
-	 */
-	public native void writeTrunc(int nBits);
+    /**
+     * Calls oggpack_readinit().
+     */
+    public native void readInit(byte[] abBuffer, int nBytes);
 
+    /**
+     * Calls oggpack_write().
+     */
+    public native void write(int nValue, int nBits);
 
-	/** Calls oggpack_writealign().
-	 */
-	public native void writeAlign();
+    /**
+     * Calls oggpack_look().
+     */
+    public native int look(int nBits);
 
+    /**
+     * Calls oggpack_look1().
+     */
+    public native int look1();
 
-	/** Calls oggpack_writecopy().
-	 */
-	public native void writeCopy(byte[] abSource, int nBits);
+    /**
+     * Calls oggpack_adv().
+     */
+    public native void adv(int nBits);
 
+    /**
+     * Calls oggpack_adv1().
+     */
+    public native void adv1();
 
-	/** Calls oggpack_reset().
-	 */
-	public native void reset();
+    /**
+     * Calls oggpack_read().
+     */
+    public native int read(int nBits);
 
+    /**
+     * Calls oggpack_read1().
+     */
+    public native int read1();
 
-	/** Calls oggpack_writeclear().
-	 */
-	public native void writeClear();
+    /**
+     * Calls oggpack_bytes().
+     */
+    public native int bytes();
 
+    /**
+     * Calls oggpack_bits().
+     */
+    public native int bits();
 
-	/** Calls oggpack_readinit().
-	 */
-	public native void readInit(byte[] abBuffer, int nBytes);
-
-
-	/** Calls oggpack_write().
-	 */
-	public native void write(int nValue, int nBits);
-
-
-	/** Calls oggpack_look().
-	 */
-	public native int look(int nBits);
-
-
-	/** Calls oggpack_look1().
-	 */
-	public native int look1();
-
-
-	/** Calls oggpack_adv().
-	 */
-	public native void adv(int nBits);
-
-
-	/** Calls oggpack_adv1().
-	 */
-	public native void adv1();
-
-
-	/** Calls oggpack_read().
-	 */
-	public native int read(int nBits);
-
-
-	/** Calls oggpack_read1().
-	 */
-	public native int read1();
-
-
-	/** Calls oggpack_bytes().
-	 */
-	public native int bytes();
-
-
-	/** Calls oggpack_bits().
-	 */
-	public native int bits();
-
-
-	/** Calls oggpack_get_buffer().
-	 */
-	public native byte[] getBuffer();
-
-
-	private static native void setTrace(boolean bTrace);
+    /**
+     * Calls oggpack_get_buffer().
+     */
+    public native byte[] getBuffer();
 }
-
 
 
 /*** Buffer.java ***/

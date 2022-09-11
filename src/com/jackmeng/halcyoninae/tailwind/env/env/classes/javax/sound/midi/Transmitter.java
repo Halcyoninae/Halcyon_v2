@@ -30,14 +30,13 @@
 package javax.sound.midi;
 
 
+public interface Transmitter {
+    Receiver getReceiver();
 
-public interface Transmitter
-{
-	public void setReceiver(Receiver receiver);
-	public Receiver getReceiver();
-	public void close();
+    void setReceiver(Receiver receiver);
+
+    void close();
 }
-
 
 
 /*** Transmitter.java ***/

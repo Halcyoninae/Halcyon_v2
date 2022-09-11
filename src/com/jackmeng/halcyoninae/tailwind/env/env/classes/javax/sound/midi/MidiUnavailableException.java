@@ -29,23 +29,17 @@
 package javax.sound.midi;
 
 
-
 public class MidiUnavailableException
-    extends Exception
-{
-    public MidiUnavailableException()
-    {
-		super();
+        extends Exception {
+    public MidiUnavailableException() {
+        super();
     }
 
 
-
-    public MidiUnavailableException(String sMessage)
-    {
-		super(sMessage);
+    public MidiUnavailableException(String sMessage) {
+        super(sMessage);
     }
 }
-
 
 
 /*** MidiUnavailableException.java ***/

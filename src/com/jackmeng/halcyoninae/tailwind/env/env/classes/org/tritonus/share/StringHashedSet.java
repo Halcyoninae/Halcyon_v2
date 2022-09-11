@@ -26,7 +26,7 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.share;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.share;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -53,57 +53,52 @@ import java.util.Iterator;
  * It is not possible to add <code>null</code> elements.
  */
 
-public class StringHashedSet<E> extends ArraySet<E>
-{
-	private static final long serialVersionUID = 1;
+public class StringHashedSet<E> extends ArraySet<E> {
+    private static final long serialVersionUID = 1;
 
-	public StringHashedSet()
-	{
-		super();
-	}
+    public StringHashedSet() {
+        super();
+    }
 
-	public StringHashedSet(Collection<E> c)
-	{
-		super(c);
-	}
+    public StringHashedSet(Collection<E> c) {
+        super(c);
+    }
 
-	public boolean add(E elem)
-	{
-		if (elem==null) {
-			return false;
-		}
-		return super.add(elem);
-	}
+    public boolean add(E elem) {
+        if (elem == null) {
+            return false;
+        }
+        return super.add(elem);
+    }
 
-	public boolean contains(Object elem)
-	{
-		if (elem==null) {
-			return false;
-		}
-		String comp=elem.toString();
-		Iterator<E> it=iterator();
-		while (it.hasNext()) {
-			if (comp.equals(it.next().toString())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean contains(Object elem) {
+        if (elem == null) {
+            return false;
+        }
+        String comp = elem.toString();
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            if (comp.equals(it.next().toString())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public E get(Object elem) {
-		if (elem==null) {
-			return null;
-		}
-		String comp=elem.toString();
-		Iterator<E> it=iterator();
-		while (it.hasNext()) {
-			E thisElem=it.next();
-			if (comp.equals(thisElem.toString())) {
-				return thisElem;
-			}
-		}
-		return null;
-	}
+    public E get(Object elem) {
+        if (elem == null) {
+            return null;
+        }
+        String comp = elem.toString();
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            E thisElem = it.next();
+            if (comp.equals(thisElem.toString())) {
+                return thisElem;
+            }
+        }
+        return null;
+    }
 
 }
 

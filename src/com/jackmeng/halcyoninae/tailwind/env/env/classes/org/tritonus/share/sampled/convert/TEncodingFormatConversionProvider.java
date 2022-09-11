@@ -61,67 +61,66 @@ import java.util.Iterator;
  * @author Florian Bomers
  */
 public abstract class TEncodingFormatConversionProvider
-extends TSimpleFormatConversionProvider
-{
-	
-	/** create an instance. The given formats can be set to null. */
-	protected TEncodingFormatConversionProvider(
-	    Collection<AudioFormat> sourceFormats,
-	    Collection<AudioFormat> targetFormats)
-	{
-		super(sourceFormats, targetFormats);
-	}
+        extends TSimpleFormatConversionProvider {
+
+    /**
+     * create an instance. The given formats can be set to null.
+     */
+    protected TEncodingFormatConversionProvider(
+            Collection<AudioFormat> sourceFormats,
+            Collection<AudioFormat> targetFormats) {
+        super(sourceFormats, targetFormats);
+    }
 
 
-
-	/**
-	 * This implementation assumes that the converter can convert
-	 * from each of its source formats to each of its target
-	 * formats. If this is not the case, the converter has to
-	 * override this method.
-	 * <p>When conversion is supported, for every target encoding,
-	 * the fields sample size in bits, channels and sample rate are checked:
-	 * <ul>
-	 * <li>When a field in both the source and target format is AudioSystem.NOT_SPECIFIED,
-	 *     one instance of that targetFormat is returned with this field set to AudioSystem.NOT_SPECIFIED.
-	 * <li>When a field in sourceFormat is set and it is AudioSystem.NOT_SPECIFIED in the target format,
-	 *     the value of the field of source format is set in the returned format.
-	 * <li>The same applies for the other way round.
-	 * </ul>
-	 * For this, <code>replaceNotSpecified(sourceFormat, targetFormat)</code> in the base
-	 * class TSimpleFormatConversionProvider is used - and accordingly, the frameSize
-	 * is recalculated with <code>getFrameSize(...)</code> if a field with AudioSystem.NOT_SPECIFIED
-	 * is replaced. Inheriting classes may wish to override this method if the
-	 * default mode of calculating the frame size is not appropriate.
-	 */
-	@Override
-	public AudioFormat[] getTargetFormats(AudioFormat.Encoding targetEncoding, AudioFormat sourceFormat) {
-		if (TDebug.TraceAudioConverter) {
-			TDebug.out(">TEncodingFormatConversionProvider.getTargetFormats(AudioFormat.Encoding, AudioFormat):");
-			TDebug.out("checking if conversion possible");
-			TDebug.out("from: " + sourceFormat);
-			TDebug.out("to: " + targetEncoding);
-		}
-		if (isConversionSupported(targetEncoding, sourceFormat)) {
-			// TODO: check that no duplicates may occur...
-			ArraySet<AudioFormat>	result=new ArraySet<AudioFormat>();
-			Iterator<AudioFormat>	iterator = getCollectionTargetFormats().iterator();
-			while (iterator.hasNext()) {
-				AudioFormat	targetFormat = iterator.next();
-				targetFormat=replaceNotSpecified(sourceFormat, targetFormat);
-				result.add(targetFormat);
-			}
-			if (TDebug.TraceAudioConverter) {
-				TDebug.out("< returning "+result.size()+" elements.");
-			}
-			return result.toArray(EMPTY_FORMAT_ARRAY);
-		} else {
-			if (TDebug.TraceAudioConverter) {
-				TDebug.out("< returning empty array.");
-			}
-			return EMPTY_FORMAT_ARRAY;
-		}
-	}
+    /**
+     * This implementation assumes that the converter can convert
+     * from each of its source formats to each of its target
+     * formats. If this is not the case, the converter has to
+     * override this method.
+     * <p>When conversion is supported, for every target encoding,
+     * the fields sample size in bits, channels and sample rate are checked:
+     * <ul>
+     * <li>When a field in both the source and target format is AudioSystem.NOT_SPECIFIED,
+     *     one instance of that targetFormat is returned with this field set to AudioSystem.NOT_SPECIFIED.
+     * <li>When a field in sourceFormat is set and it is AudioSystem.NOT_SPECIFIED in the target format,
+     *     the value of the field of source format is set in the returned format.
+     * <li>The same applies for the other way round.
+     * </ul>
+     * For this, <code>replaceNotSpecified(sourceFormat, targetFormat)</code> in the base
+     * class TSimpleFormatConversionProvider is used - and accordingly, the frameSize
+     * is recalculated with <code>getFrameSize(...)</code> if a field with AudioSystem.NOT_SPECIFIED
+     * is replaced. Inheriting classes may wish to override this method if the
+     * default mode of calculating the frame size is not appropriate.
+     */
+    @Override
+    public AudioFormat[] getTargetFormats(AudioFormat.Encoding targetEncoding, AudioFormat sourceFormat) {
+        if (TDebug.TraceAudioConverter) {
+            TDebug.out(">TEncodingFormatConversionProvider.getTargetFormats(AudioFormat.Encoding, AudioFormat):");
+            TDebug.out("checking if conversion possible");
+            TDebug.out("from: " + sourceFormat);
+            TDebug.out("to: " + targetEncoding);
+        }
+        if (isConversionSupported(targetEncoding, sourceFormat)) {
+            // TODO: check that no duplicates may occur...
+            ArraySet<AudioFormat> result = new ArraySet<AudioFormat>();
+            Iterator<AudioFormat> iterator = getCollectionTargetFormats().iterator();
+            while (iterator.hasNext()) {
+                AudioFormat targetFormat = iterator.next();
+                targetFormat = replaceNotSpecified(sourceFormat, targetFormat);
+                result.add(targetFormat);
+            }
+            if (TDebug.TraceAudioConverter) {
+                TDebug.out("< returning " + result.size() + " elements.");
+            }
+            return result.toArray(EMPTY_FORMAT_ARRAY);
+        } else {
+            if (TDebug.TraceAudioConverter) {
+                TDebug.out("< returning empty array.");
+            }
+            return EMPTY_FORMAT_ARRAY;
+        }
+    }
 
 }
 

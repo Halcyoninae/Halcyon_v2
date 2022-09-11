@@ -37,82 +37,81 @@ import java.net.URL;
 import java.net.URLConnection;
 
 
-
 public class CddaDataConnection
-extends	URLConnection
-{
-	private static int		PCM_FRAMES_PER_CDDA_FRAME = 588;
-	private static AudioFormat	CDDA_FORMAT = new AudioFormat(
-		AudioFormat.Encoding.PCM_SIGNED,
-		44100.0F, 16, 2, 4, 44100.0F, false);
+        extends URLConnection {
+    private static final int PCM_FRAMES_PER_CDDA_FRAME = 588;
+    private static final AudioFormat CDDA_FORMAT = new AudioFormat(
+            AudioFormat.Encoding.PCM_SIGNED,
+            44100.0F, 16, 2, 4, 44100.0F, false);
 
-	/**	The cdda device name to read from.
-	 */
-	private String		m_strDevice;
+    /**
+     * The cdda device name to read from.
+     */
+    private String m_strDevice;
 
-	/**	Track to read from the CD.
-	 */
-	private int		m_nTrack;
+    /**
+     * Track to read from the CD.
+     */
+    private final int m_nTrack;
 
-	private CddaMidLevel	m_cddaMidLevel;
-
-
-
-	public CddaDataConnection(URL url)
-	{
-		super(url);
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.<init>(): begin"); }
-		m_strDevice = url.getFile();
-		String	strTrack = url.getRef();
-		m_nTrack = Integer.parseInt(strTrack);
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.<init>(): end"); }
-	}
+    private CddaMidLevel m_cddaMidLevel;
 
 
-
-	public void connect()
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.connect(): begin"); }
-		if (! connected)
-		{
-			m_cddaMidLevel = CddaUtils.getCddaMidLevel();
-			if (m_strDevice.equals(""))
-			{
-				m_strDevice = m_cddaMidLevel.getDefaultDevice();
-			}
-			connected = true;
-		}
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.connect(): end"); }
-	}
+    public CddaDataConnection(URL url) {
+        super(url);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.<init>(): begin");
+        }
+        m_strDevice = url.getFile();
+        String strTrack = url.getRef();
+        m_nTrack = Integer.parseInt(strTrack);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.<init>(): end");
+        }
+    }
 
 
+    public void connect() {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.connect(): begin");
+        }
+        if (!connected) {
+            m_cddaMidLevel = CddaUtils.getCddaMidLevel();
+            if (m_strDevice.equals("")) {
+                m_strDevice = m_cddaMidLevel.getDefaultDevice();
+            }
+            connected = true;
+        }
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.connect(): end");
+        }
+    }
 
 
-	public InputStream getInputStream()
-		throws IOException
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.getInputStream(): begin"); }
-		connect();
-		String	strDevice = getDevice();
-		int	nTrack = getTrack();
-		InputStream	inputStream = m_cddaMidLevel.getTrack(strDevice, nTrack);
-		if (TDebug.TraceCdda) { TDebug.out("CddaDataConnection.getInputStream(): end"); }
-		return inputStream;
-	}
+    public InputStream getInputStream()
+            throws IOException {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.getInputStream(): begin");
+        }
+        connect();
+        String strDevice = getDevice();
+        int nTrack = getTrack();
+        InputStream inputStream = m_cddaMidLevel.getTrack(strDevice, nTrack);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaDataConnection.getInputStream(): end");
+        }
+        return inputStream;
+    }
 
 
-
-	private String getDevice()
-	{
-		return m_strDevice;
-	}
+    private String getDevice() {
+        return m_strDevice;
+    }
 
 
-
-	private int getTrack()
-	{
-		return m_nTrack;
-	}
+    private int getTrack() {
+        return m_nTrack;
+    }
 }
 
 

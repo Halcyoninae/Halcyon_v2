@@ -36,62 +36,60 @@ import javax.sound.midi.MidiDevice;
 import javax.sound.midi.spi.MidiDeviceProvider;
 
 
-
-
 public class JavaSequencerProvider
-extends MidiDeviceProvider
-{
-	private static MidiDevice.Info		sm_info;
+        extends MidiDeviceProvider {
+    private static MidiDevice.Info sm_info;
 
 
-
-	public JavaSequencerProvider()
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.<init>(): begin"); }
-		synchronized (JavaSequencerProvider.class)
-		{
-			if (sm_info == null)
-			{
-				sm_info = new TMidiDevice.Info(
-					"Tritonus Java Sequencer",
-					GlobalInfo.getVendor(),
-					"this is a pure-java sequencer",
-					GlobalInfo.getVersion());
-			}
-		}
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.<init>(): end"); }
-	}
-
-
-
-	public MidiDevice.Info[] getDeviceInfo()
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.getDeviceInfo(): begin"); }
-		MidiDevice.Info[]	infos = new MidiDevice.Info[1];
-		infos[0] = sm_info;
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.getDeviceInfo(): end"); }
-		return infos;
-	}
+    public JavaSequencerProvider() {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.<init>(): begin");
+        }
+        synchronized (JavaSequencerProvider.class) {
+            if (sm_info == null) {
+                sm_info = new TMidiDevice.Info(
+                        "Tritonus Java Sequencer",
+                        GlobalInfo.getVendor(),
+                        "this is a pure-java sequencer",
+                        GlobalInfo.getVersion());
+            }
+        }
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.<init>(): end");
+        }
+    }
 
 
+    public MidiDevice.Info[] getDeviceInfo() {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.getDeviceInfo(): begin");
+        }
+        MidiDevice.Info[] infos = new MidiDevice.Info[1];
+        infos[0] = sm_info;
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.getDeviceInfo(): end");
+        }
+        return infos;
+    }
 
-	public MidiDevice getDevice(MidiDevice.Info info)
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.getDevice(): begin"); }
-		MidiDevice	device = null;
-		if (info != null && info.equals(sm_info))
-		{
-			device = new JavaSequencer(sm_info);
-		}
-		if (device == null)
-		{
-			throw new IllegalArgumentException("no device for " + info);
-		}
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("JavaSequencerProvider.getDevice(): end"); }
-		return device;
-	}
+
+    public MidiDevice getDevice(MidiDevice.Info info) {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.getDevice(): begin");
+        }
+        MidiDevice device = null;
+        if (info != null && info.equals(sm_info)) {
+            device = new JavaSequencer(sm_info);
+        }
+        if (device == null) {
+            throw new IllegalArgumentException("no device for " + info);
+        }
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("JavaSequencerProvider.getDevice(): end");
+        }
+        return device;
+    }
 }
-
 
 
 /*** JavaSequencerProvider.java ***/

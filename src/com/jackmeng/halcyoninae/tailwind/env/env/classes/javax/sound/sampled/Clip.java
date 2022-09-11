@@ -31,45 +31,40 @@ package javax.sound.sampled;
 import java.io.IOException;
 
 
-
 public interface Clip
-extends DataLine
-{
-	// TODO: check value against sun implementation
-	public static final int	LOOP_CONTINUOUSLY = -1;
+        extends DataLine {
+    // TODO: check value against sun implementation
+    int LOOP_CONTINUOUSLY = -1;
 
 
-	public void open(AudioFormat audioFormat,
-			 byte[] abData,
-			 int nOffset,
-			 int nBufferSize)
-		throws LineUnavailableException;
+    void open(AudioFormat audioFormat,
+              byte[] abData,
+              int nOffset,
+              int nBufferSize)
+            throws LineUnavailableException;
 
 
-
-	public void open(AudioInputStream audioInputStream)
-		throws LineUnavailableException, IOException;
-
-
-	public int getFrameLength();
+    void open(AudioInputStream audioInputStream)
+            throws LineUnavailableException, IOException;
 
 
-	public long getMicrosecondLength();
+    int getFrameLength();
 
 
-	public void setFramePosition(int nFrames);
+    long getMicrosecondLength();
 
 
-	public void setMicrosecondPosition(long lMicroseconds);
+    void setFramePosition(int nFrames);
 
 
+    void setMicrosecondPosition(long lMicroseconds);
 
-	public void setLoopPoints(int nStart, int nEnd);
+
+    void setLoopPoints(int nStart, int nEnd);
 
 
-	public void loop(int nCount);
+    void loop(int nCount);
 }
-
 
 
 /*** Clip.java ***/

@@ -24,49 +24,39 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import org.tritonus.saol.sablecc.node.AInstrdeclInstrdecl;
 
 
-
-public class InstrumentEntry
-{
-	private String			m_strInstrumentName;
-	private AInstrdeclInstrdecl	m_startNode;
-	VariableTable			m_localVariableTable;
+public class InstrumentEntry {
+    VariableTable m_localVariableTable;
+    private final String m_strInstrumentName;
+    private final AInstrdeclInstrdecl m_startNode;
 
 
-
-	public InstrumentEntry(String strInstrumentName,
-			       AInstrdeclInstrdecl startNode)
-	{
-		m_strInstrumentName = strInstrumentName;
-		m_startNode = startNode;
-		m_localVariableTable = new VariableTable();
-	}
+    public InstrumentEntry(String strInstrumentName,
+                           AInstrdeclInstrdecl startNode) {
+        m_strInstrumentName = strInstrumentName;
+        m_startNode = startNode;
+        m_localVariableTable = new VariableTable();
+    }
 
 
-
-	public String getInstrumentName()
-	{
-		return m_strInstrumentName;
-	}
+    public String getInstrumentName() {
+        return m_strInstrumentName;
+    }
 
 
-
-	public AInstrdeclInstrdecl getStartNode()
-	{
-		return m_startNode;
-	}
+    public AInstrdeclInstrdecl getStartNode() {
+        return m_startNode;
+    }
 
 
-	public VariableTable getLocalVariableTable()
-	{
-		return m_localVariableTable;
-	}
+    public VariableTable getLocalVariableTable() {
+        return m_localVariableTable;
+    }
 }
-
 
 
 /*** InstrumentEntry.java ***/

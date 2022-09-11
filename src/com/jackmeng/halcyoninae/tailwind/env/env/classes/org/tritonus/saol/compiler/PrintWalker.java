@@ -26,11 +26,10 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import org.tritonus.saol.sablecc.analysis.DepthFirstAdapter;
 import org.tritonus.saol.sablecc.node.*;
-
 
 
 /**
@@ -38,78 +37,59 @@ import org.tritonus.saol.sablecc.node.*;
  * which will visit each of the nodes and print on standard output the
  * name of particular node visited. This class can be very usefull while
  * testing the tree structure for a given input. Check PrintTree class.
- *@author Mariusz Nowostawski
+ *
+ * @author Mariusz Nowostawski
  */
 public class PrintWalker
-extends DepthFirstAdapter
-{
-	private static final int	INDENT_STEP = 3;
+        extends DepthFirstAdapter {
+    private static final int INDENT_STEP = 3;
 
-	private int	indent = 0;
+    private int indent = 0;
 
+    private static String getStrippedClassName(Node node) {
+        String strClassName = node.getClass().getName();
+        return stripClassName(strClassName);
+    }
 
-	void indent()
-	{
-		String s = new String ("");
-		for (int i = 0; i < indent; i++)
-		{
-			s += " ";
-		}
-		System.out.print(s);
-	}
+    private static String stripClassName(String strClassName) {
+        int nLastDotPosition = strClassName.lastIndexOf(".");
+        if (nLastDotPosition >= 0) {
+            strClassName = strClassName.substring(nLastDotPosition + 1);
+        }
+        return strClassName;
+    }
 
+    void indent() {
+        String s = "";
+        for (int i = 0; i < indent; i++) {
+            s += " ";
+        }
+        System.out.print(s);
+    }
 
+    public void defaultIn(Node node) {
+        indent();
+        System.out.print("in ");
+        String str = getStrippedClassName(node);
+        System.out.println(str);
+        indent += INDENT_STEP;
+    }
 
-	public void defaultIn(Node node)
-	{
-		indent();
-		System.out.print( "in ");
-		String  str = getStrippedClassName(node);
-		System.out.println(str);
-		indent += INDENT_STEP;
-	}
+    public void defaultOut(Node node) {
+        indent -= INDENT_STEP;
+        indent();
+        System.out.print("out ");
+        String str = getStrippedClassName(node);
+        System.out.println(str);
+    }
 
-
-
-	public void defaultOut(Node node)
-	{
-		indent -= INDENT_STEP;
-		indent();
-		System.out.print( "out ");
-		String str = getStrippedClassName(node);
-		System.out.println(str);
-	}
-
-
-
-	public void defaultCase(Node node)
-	{
-		indent();
-		System.out.print( "case ");
-		String	str = getStrippedClassName(node) + ": " + ((Token) node).getText();
-		System.out.println(str);
-	}
-
-
-	private static String getStrippedClassName(Node node)
-	{
-		String	strClassName = node.getClass().getName();
-		return stripClassName(strClassName);
-	}
-
-
-
-	private static String stripClassName(String strClassName)
-	{
-		int	nLastDotPosition = strClassName.lastIndexOf(".");
-		if (nLastDotPosition >= 0)
-		{
-			strClassName = strClassName.substring(nLastDotPosition + 1);
-		}
-		return strClassName;
-	}
+    public void defaultCase(Node node) {
+        indent();
+        System.out.print("case ");
+        String str = getStrippedClassName(node) + ": " + ((Token) node).getText();
+        System.out.println(str);
+    }
 }
-
 
 
 /*** PrintWalker.java ***/

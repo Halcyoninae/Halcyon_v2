@@ -27,67 +27,59 @@
 package org.tritonus.saol.engine.opcodes;
 
 
-/**	Representation of one opcode implementation.
-	This class is used for entries in the opcode table.
+/**
+ * Representation of one opcode implementation.
+ * This class is used for entries in the opcode table.
  */
-public class OpcodeEntry
-{
-	private String		m_strOpcodeName;
-	private OpcodeClass	m_opcodeClass;
-	private String		m_strMethodName;
-	private int		m_nRate;
-	// TODO: parameter description, including dummy params
+public class OpcodeEntry {
+    private final String m_strOpcodeName;
+    private final OpcodeClass m_opcodeClass;
+    private final String m_strMethodName;
+    private final int m_nRate;
+    // TODO: parameter description, including dummy params
 
 
-
-	// if opcode and method name are the same
-	public OpcodeEntry(String strOpcodeName,
-			   OpcodeClass opcodeClass,
-			   int nRate)
-	{
-		this(strOpcodeName,
-		     opcodeClass,
-		     strOpcodeName,
-		     nRate);
-	}
+    // if opcode and method name are the same
+    public OpcodeEntry(String strOpcodeName,
+                       OpcodeClass opcodeClass,
+                       int nRate) {
+        this(strOpcodeName,
+                opcodeClass,
+                strOpcodeName,
+                nRate);
+    }
 
 
-	public OpcodeEntry(String strOpcodeName,
-			   OpcodeClass opcodeClass,
-			   String strMethodName,
-			   int nRate)
-	{
-		m_strOpcodeName = strOpcodeName;
-		m_opcodeClass = opcodeClass;
-		m_strMethodName = strMethodName;
-		m_nRate = nRate;
-	}
+    public OpcodeEntry(String strOpcodeName,
+                       OpcodeClass opcodeClass,
+                       String strMethodName,
+                       int nRate) {
+        m_strOpcodeName = strOpcodeName;
+        m_opcodeClass = opcodeClass;
+        m_strMethodName = strMethodName;
+        m_nRate = nRate;
+    }
 
 
-	public String getOpcodeName()
-	{
-		return m_strOpcodeName;
-	}
+    public String getOpcodeName() {
+        return m_strOpcodeName;
+    }
 
 
-	public OpcodeClass getOpcodeClass()
-	{
-		return m_opcodeClass;
-	}
+    public OpcodeClass getOpcodeClass() {
+        return m_opcodeClass;
+    }
 
 
-	public String getMethodName()
-	{
-		return m_strMethodName;
-	}
+    public String getMethodName() {
+        return m_strMethodName;
+    }
 
 
-	public int getRate()
-	{
-		return m_nRate;
-	}
+    public int getRate() {
+        return m_nRate;
+    }
 }
-
 
 
 /*** OpcodeEntry.java ***/

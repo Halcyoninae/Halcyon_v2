@@ -33,101 +33,96 @@ import javax.sound.midi.MidiMessage;
 import java.util.Collection;
 
 
-
-/** Base class for sequencers that work with an internal queue.
-	To be more precise, this is the base class for sequencers that
-	do not load the complete Sequence to internal data structures before start,
-	but take single events from the Sequence and put them to the sequencing
-	queue while running.
+/**
+ * Base class for sequencers that work with an internal queue.
+ * To be more precise, this is the base class for sequencers that
+ * do not load the complete Sequence to internal data structures before start,
+ * but take single events from the Sequence and put them to the sequencing
+ * queue while running.
  */
 public abstract class TPreloadingSequencer
-extends TSequencer
-{
-	/** The default value for {@link m_nLatency}.
-		This default value is set in the constructor.
-	 */
-	private static final int DEFAULT_LATENCY = 100;
+        extends TSequencer {
+    /**
+     * The default value for {@link m_nLatency}.
+     * This default value is set in the constructor.
+     */
+    private static final int DEFAULT_LATENCY = 100;
 
-	/**
-	 */
-	private int m_nLatency;
+    /**
+     *
+     */
+    private int m_nLatency;
 
-	@SuppressWarnings("unused")
-	private Thread				m_loaderThread;
+    @SuppressWarnings("unused")
+    private Thread m_loaderThread;
 
-	/**
-	   Sets the latency to the default value.
-	 */
-	protected TPreloadingSequencer(MidiDevice.Info info,
-								   Collection<SyncMode> masterSyncModes,
-								   Collection<SyncMode> slaveSyncModes)
-	{
-		super(info, masterSyncModes,
-			  slaveSyncModes);
-		if (TDebug.TraceSequencer) { TDebug.out("TPreloadingSequencer.<init>(): begin"); }
-		m_nLatency = DEFAULT_LATENCY;
-		if (TDebug.TraceSequencer) { TDebug.out("TPreloadingSequencer.<init>(): end"); }
-	}
+    /**
+     * Sets the latency to the default value.
+     */
+    protected TPreloadingSequencer(MidiDevice.Info info,
+                                   Collection<SyncMode> masterSyncModes,
+                                   Collection<SyncMode> slaveSyncModes) {
+        super(info, masterSyncModes,
+                slaveSyncModes);
+        if (TDebug.TraceSequencer) {
+            TDebug.out("TPreloadingSequencer.<init>(): begin");
+        }
+        m_nLatency = DEFAULT_LATENCY;
+        if (TDebug.TraceSequencer) {
+            TDebug.out("TPreloadingSequencer.<init>(): end");
+        }
+    }
 
+    /**
+     * Get the preloading intervall.
+     *
+     * @return the preloading intervall in milliseconds, or -1 if the sequencer
+     * doesn't repond to changes in the <code>Sequence</code> at all.
+     */
+    public int getLatency() {
+        return m_nLatency;
+    }
 
+    /**
+     * Sets the preloading intervall.
+     * This is the time span between preloading events to an internal
+     * queue and playing them. This intervall should be kept constant
+     * by the implementation. However, this cannot be guaranteed.
+     */
+    public void setLatency(int nLatency) {
+        // TODO: preload if latency becomes shorter
+        m_nLatency = nLatency;
+    }
 
-
-
-
-	/** Sets the preloading intervall.
-		This is the time span between preloading events to an internal
-		queue and playing them. This intervall should be kept constant
-		by the implementation. However, this cannot be guaranteed.
-	*/
-	public void setLatency(int nLatency)
-	{
-		// TODO: preload if latency becomes shorter
-		m_nLatency = nLatency;
-	}
-
-
-
-	/** Get the preloading intervall.
-
-	@return the preloading intervall in milliseconds, or -1 if the sequencer
-	doesn't repond to changes in the <code>Sequence</code> at all.
-	*/
-	public int getLatency()
-	{
-		return m_nLatency;
-	}
-
-
-	// currently not called by subclasses. order has to be assured (subclass first)
-	protected void openImpl()
-	{
-		if (TDebug.TraceSequencer) { TDebug.out("AlsaSequencer.openImpl(): begin"); }
-		// m_loaderThread = new LoaderThread();
-		// m_loaderThread.start();
-	}
+    // currently not called by subclasses. order has to be assured (subclass first)
+    protected void openImpl() {
+        if (TDebug.TraceSequencer) {
+            TDebug.out("AlsaSequencer.openImpl(): begin");
+        }
+        // m_loaderThread = new LoaderThread();
+        // m_loaderThread.start();
+    }
 
 
-
-	/**	Put a message into the queue.
-		This is Claus-Dieter's special method: it puts the message to
-		the ALSA queue for delivery at the specified time.
-		The time has to be given in ticks according to the resolution
-		of the currently active Sequence. For this method to work,
-		the Sequencer has to be started. The message is delivered
-		the same way as messages from a Sequence, i.e. to all
-		registered Transmitters. If the current queue position (as
-		returned by getTickPosition()) is
-		already behind the desired schedule time, the message is
-		ignored.
-
-		@param message the MidiMessage to put into the queue.
-
-		@param lTick the desired schedule time in ticks.
-	*/
-	public abstract void sendMessageTick(MidiMessage message, long lTick);
+    /**
+     * Put a message into the queue.
+     * This is Claus-Dieter's special method: it puts the message to
+     * the ALSA queue for delivery at the specified time.
+     * The time has to be given in ticks according to the resolution
+     * of the currently active Sequence. For this method to work,
+     * the Sequencer has to be started. The message is delivered
+     * the same way as messages from a Sequence, i.e. to all
+     * registered Transmitters. If the current queue position (as
+     * returned by getTickPosition()) is
+     * already behind the desired schedule time, the message is
+     * ignored.
+     *
+     * @param message the MidiMessage to put into the queue.
+     * @param lTick   the desired schedule time in ticks.
+     */
+    public abstract void sendMessageTick(MidiMessage message, long lTick);
 
 }
-
 
 
 /*** TPreloadingSequencer.java ***/

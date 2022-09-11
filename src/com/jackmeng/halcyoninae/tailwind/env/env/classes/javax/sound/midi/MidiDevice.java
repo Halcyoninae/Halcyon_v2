@@ -31,125 +31,96 @@ package javax.sound.midi;
 import java.util.List;
 
 
-
-public interface MidiDevice
-{
-	public MidiDevice.Info getDeviceInfo();
+public interface MidiDevice {
+    MidiDevice.Info getDeviceInfo();
 
 
-
-	public void open()
-		throws MidiUnavailableException;
-
+    void open()
+            throws MidiUnavailableException;
 
 
-	public void close();
+    void close();
 
 
-
-	public boolean isOpen();
-
+    boolean isOpen();
 
 
-	public long getMicrosecondPosition();
+    long getMicrosecondPosition();
 
 
-
-	public int getMaxReceivers();
-
+    int getMaxReceivers();
 
 
-	public int getMaxTransmitters();
+    int getMaxTransmitters();
 
 
-
-	public Receiver getReceiver()
-		throws MidiUnavailableException;
-
+    Receiver getReceiver()
+            throws MidiUnavailableException;
 
 
-	public Transmitter getTransmitter()
-		throws MidiUnavailableException;
+    Transmitter getTransmitter()
+            throws MidiUnavailableException;
 
 
-
-	public List<Receiver> getReceivers();
-
-
-	public List<Transmitter> getTransmitters();
+    List<Receiver> getReceivers();
 
 
-
-	public static class Info
-	{
-		private String		m_strName;
-		private String		m_strVendor;
-		private String		m_strDescription;
-		private String		m_strVersion;
+    List<Transmitter> getTransmitters();
 
 
-
-		protected Info(String strName,
-			       String strVendor,
-			       String strDescription,
-			       String strVersion)
-		{
-			m_strName = strName;
-			m_strVendor = strVendor;
-			m_strDescription = strDescription;
-			m_strVersion = strVersion;
-		}
+    class Info {
+        private final String m_strName;
+        private final String m_strVendor;
+        private final String m_strDescription;
+        private final String m_strVersion;
 
 
-		public final boolean equals(Object obj)
-		{
-			return super.equals(obj);
-		}
+        protected Info(String strName,
+                       String strVendor,
+                       String strDescription,
+                       String strVersion) {
+            m_strName = strName;
+            m_strVendor = strVendor;
+            m_strDescription = strDescription;
+            m_strVersion = strVersion;
+        }
 
 
-
-		public final int hashCode()
-		{
-			return super.hashCode();
-		}
+        public final boolean equals(Object obj) {
+            return super.equals(obj);
+        }
 
 
-
-		public final String getName()
-		{
-			return m_strName;
-		}
+        public final int hashCode() {
+            return super.hashCode();
+        }
 
 
-
-		public final String getVendor()
-		{
-			return m_strVendor;
-		}
+        public final String getName() {
+            return m_strName;
+        }
 
 
-
-		public final String getDescription()
-		{
-			return m_strDescription;
-		}
+        public final String getVendor() {
+            return m_strVendor;
+        }
 
 
-
-		public final String getVersion()
-		{
-			return m_strVersion;
-		}
+        public final String getDescription() {
+            return m_strDescription;
+        }
 
 
+        public final String getVersion() {
+            return m_strVersion;
+        }
 
-		public final String toString()
-		{
-			return super.toString() + "[name=" + getName() + ", vendor=" + getVendor() + ", description=" + getDescription() + ", version=" + getVersion() + "]";
-		}
-	}
+
+        public final String toString() {
+            return super.toString() + "[name=" + getName() + ", vendor=" + getVendor() + ", description=" + getDescription() + ", version=" + getVersion() + "]";
+        }
+    }
 }
-
 
 
 /*** MidiDevice.java ***/

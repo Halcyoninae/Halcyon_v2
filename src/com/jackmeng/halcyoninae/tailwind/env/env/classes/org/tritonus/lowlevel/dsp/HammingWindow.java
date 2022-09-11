@@ -30,16 +30,18 @@ package org.tritonus.lowlevel.dsp;
  * An implementation of the Hamming window.
  */
 public class HammingWindow implements FIRWindow {
-	/** {@inheritDoc} */
-	@Override
-	public double[] getWindow(int nOrder) {
-		double[] adWindow = new double[nOrder];
-		for (int n = 0; n < nOrder; n++) {
-			adWindow[n] = 0.54 - 0.46 * Math.cos((2.0 * Math.PI * n)
-					/ (nOrder - 1));
-		}
-		return adWindow;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getWindow(int nOrder) {
+        double[] adWindow = new double[nOrder];
+        for (int n = 0; n < nOrder; n++) {
+            adWindow[n] = 0.54 - 0.46 * Math.cos((2.0 * Math.PI * n)
+                    / (nOrder - 1));
+        }
+        return adWindow;
+    }
 }
 
 /*** HammingWindow.java ***/

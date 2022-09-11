@@ -24,30 +24,26 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import java.util.HashMap;
 
 
-
-/**	The instrument table.
-	TODO: use generics
+/**
+ * The instrument table.
+ * TODO: use generics
  */
 public class InstrumentTable
-extends HashMap
-{
-	public void add(InstrumentEntry instrumentEntry)
-	{
-		put(instrumentEntry.getInstrumentName(), instrumentEntry);
-	}
+        extends HashMap {
+    public void add(InstrumentEntry instrumentEntry) {
+        put(instrumentEntry.getInstrumentName(), instrumentEntry);
+    }
 
 
-	public InstrumentEntry getEntry(String strInstrumentName)
-	{
-		return (InstrumentEntry) get(strInstrumentName);
-	}
+    public InstrumentEntry getEntry(String strInstrumentName) {
+        return (InstrumentEntry) get(strInstrumentName);
+    }
 }
-
 
 
 /*** InstrumentTable.java ***/

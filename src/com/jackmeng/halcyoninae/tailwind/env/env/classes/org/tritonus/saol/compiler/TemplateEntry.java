@@ -24,41 +24,32 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import org.tritonus.saol.sablecc.node.ATemplatedeclTemplatedecl;
 
 
-
-public class TemplateEntry
-{
-	private String				m_strTemplateName;
-	private ATemplatedeclTemplatedecl	m_startNode;
+public class TemplateEntry {
+    private final String m_strTemplateName;
+    private final ATemplatedeclTemplatedecl m_startNode;
 
 
-
-	public TemplateEntry(String strTemplateName,
-			       ATemplatedeclTemplatedecl startNode)
-	{
-		m_strTemplateName = strTemplateName;
-		m_startNode = startNode;
-	}
+    public TemplateEntry(String strTemplateName,
+                         ATemplatedeclTemplatedecl startNode) {
+        m_strTemplateName = strTemplateName;
+        m_startNode = startNode;
+    }
 
 
-
-	public String getTemplateName()
-	{
-		return m_strTemplateName;
-	}
+    public String getTemplateName() {
+        return m_strTemplateName;
+    }
 
 
-
-	public ATemplatedeclTemplatedecl getStartNode()
-	{
-		return m_startNode;
-	}
+    public ATemplatedeclTemplatedecl getStartNode() {
+        return m_startNode;
+    }
 }
-
 
 
 /*** TemplateEntry.java ***/

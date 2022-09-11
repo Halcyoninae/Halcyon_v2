@@ -29,57 +29,64 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-/** TODO:
+/**
+ * TODO:
  */
-public class AlsaPcmSWParams
-{
-	/**
-	 *	Holds the pointer to snd_pcm_sw_params_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
+public class AlsaPcmSWParams {
+    /**
+     * Holds the pointer to snd_pcm_sw_params_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
-
-	public AlsaPcmSWParams()
-	{
-		if (TDebug.TraceAlsaPcmNative) { TDebug.out("AlsaPcmSWParams.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of hw_params failed");
-		}
-		if (TDebug.TraceAlsaPcmNative) { TDebug.out("AlsaPcmSWParams.<init>(): end"); }
-	}
-
-
-
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    public AlsaPcmSWParams() {
+        if (TDebug.TraceAlsaPcmNative) {
+            TDebug.out("AlsaPcmSWParams.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of hw_params failed");
+        }
+        if (TDebug.TraceAlsaPcmNative) {
+            TDebug.out("AlsaPcmSWParams.<init>(): end");
+        }
+    }
 
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	private native int malloc();
-	public native void free();
 
-	public native int getStartMode();
-	public native int getXrunMode();
-	public native int getTStampMode();
-	public native int getSleepMin();
-	public native int getAvailMin();
-	public native int getXferAlign();
-	public native int getStartThreshold();
-	public native int getStopThreshold();
-	public native int getSilenceThreshold();
-	public native int getSilenceSize();
+    private native int malloc();
+
+    public native void free();
+
+    public native int getStartMode();
+
+    public native int getXrunMode();
+
+    public native int getTStampMode();
+
+    public native int getSleepMin();
+
+    public native int getAvailMin();
+
+    public native int getXferAlign();
+
+    public native int getStartThreshold();
+
+    public native int getStopThreshold();
+
+    public native int getSilenceThreshold();
+
+    public native int getSilenceSize();
 }
-
 
 
 /*** AlsaPcmSWParams.java ***/

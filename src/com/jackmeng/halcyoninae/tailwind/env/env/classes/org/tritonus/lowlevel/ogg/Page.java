@@ -29,102 +29,100 @@ package org.tritonus.lowlevel.ogg;
 import org.tritonus.share.TDebug;
 
 
-
-/** Wrapper for ogg_page.
+/**
+ * Wrapper for ogg_page.
  */
-public class Page
-{
-        static
-        {
-                Ogg.loadNativeLibrary();
-                if (TDebug.TraceOggNative)
-                {
-                        setTrace(true);
-                }
+public class Page {
+    static {
+        Ogg.loadNativeLibrary();
+        if (TDebug.TraceOggNative) {
+            setTrace(true);
         }
-	/**
-	 *	Holds the pointer to ogg_page
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
+    }
+
+    /**
+     * Holds the pointer to ogg_page
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
+    public Page() {
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Page.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of ogg_page failed");
+        }
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Page.<init>(): end");
+        }
+    }
 
-	public Page()
-	{
-		if (TDebug.TraceOggNative) { TDebug.out("Page.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of ogg_page failed");
-		}
-		if (TDebug.TraceOggNative) { TDebug.out("Page.<init>(): end"); }
-	}
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
+    private native int malloc();
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    public native void free();
 
+    /**
+     * Calls ogg_page_version().
+     */
+    public native int getVersion();
 
+    /**
+     * Calls ogg_page_continued().
+     */
+    public native boolean isContinued();
 
-	private native int malloc();
-	public native void free();
+    /**
+     * Calls ogg_page_packets().
+     */
+    public native int getPackets();
 
+    /**
+     * Calls ogg_page_bos().
+     */
+    public native boolean isBos();
 
-	/** Calls ogg_page_version().
-	 */
-	public native int getVersion();
+    /**
+     * Calls ogg_page_eos().
+     */
+    public native boolean isEos();
 
-	/** Calls ogg_page_continued().
-	 */
-	public native boolean isContinued();
+    /**
+     * Calls ogg_page_granulepos().
+     */
+    public native long getGranulePos();
 
-	/** Calls ogg_page_packets().
-	 */
-	public native int getPackets();
+    /**
+     * Calls ogg_page_serialno().
+     */
+    public native int getSerialNo();
 
-	/** Calls ogg_page_bos().
-	 */
-	public native boolean isBos();
+    /**
+     * Calls ogg_page_pageno().
+     */
+    public native int getPageNo();
 
-	/** Calls ogg_page_eos().
-	 */
-	public native boolean isEos();
+    /**
+     * Calls ogg_page_checksum_set().
+     */
+    public native void setChecksum();
 
-	/** Calls ogg_page_granulepos().
-	 */
-	public native long getGranulePos();
+    public native byte[] getHeader();
 
-	/** Calls ogg_page_serialno().
-	 */
-	public native int getSerialNo();
-
-	/** Calls ogg_page_pageno().
-	 */
-	public native int getPageNo();
-
-	/** Calls ogg_page_checksum_set().
-	 */
-	public native void setChecksum();
-
-
-	public native byte[] getHeader();
-
-	public native byte[] getBody();
-
-
-	private static native void setTrace(boolean bTrace);
+    public native byte[] getBody();
 }
-
-
-
 
 
 /*** Page.java ***/

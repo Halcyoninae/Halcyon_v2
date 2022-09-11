@@ -31,29 +31,22 @@ package javax.sound.midi.spi;
 import javax.sound.midi.MidiDevice;
 
 
+public abstract class MidiDeviceProvider {
+    public boolean isDeviceSupported(MidiDevice.Info info) {
+        MidiDevice.Info[] deviceInfos = getDeviceInfo();
+        for (int i = 0; i < deviceInfos.length; i++) {
+            if (deviceInfos[i].equals(info)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public abstract MidiDevice.Info[] getDeviceInfo();
 
-public abstract class MidiDeviceProvider
-{
-	public boolean isDeviceSupported(MidiDevice.Info info)
-	{
-		MidiDevice.Info[]	deviceInfos = getDeviceInfo();
-		for (int i = 0; i < deviceInfos.length; i++)
-		{
-			if (deviceInfos[i].equals(info))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public abstract MidiDevice.Info[] getDeviceInfo();
-
-	public abstract MidiDevice getDevice(MidiDevice.Info info);
+    public abstract MidiDevice getDevice(MidiDevice.Info info);
 
 }
-
 
 
 /*** MidiDeviceProvider.java ***/

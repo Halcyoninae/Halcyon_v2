@@ -28,7 +28,7 @@ package org.tritonus.lowlevel.dsp;
 
 /**
  * Common interface for all types of filters with sample processing.
- * 
+ *
  * <p>
  * This is for filters that have a sample-by-sample processing approach (opposed
  * to a block processing approach). This is intended for filters that consume
@@ -41,14 +41,13 @@ package org.tritonus.lowlevel.dsp;
  * </p>
  */
 public interface Filter {
-	/**
-	 * Process one sample through the filter.
-	 * 
-	 * @param fSample
-	 *            the input sample
-	 * @return the output sample
-	 */
-	public float process(float fSample);
+    /**
+     * Process one sample through the filter.
+     *
+     * @param fSample the input sample
+     * @return the output sample
+     */
+    float process(float fSample);
 }
 
 /*** Filter.java ***/

@@ -29,48 +29,37 @@
 package javax.sound.midi;
 
 
-
-public abstract class SoundbankResource
-{
-	private Soundbank	m_soundbank;
-	private String		m_strName;
-	private Class		m_dataClass;
+public abstract class SoundbankResource {
+    private final Soundbank m_soundbank;
+    private final String m_strName;
+    private Class m_dataClass;
 
 
-
-	protected SoundbankResource(Soundbank soundbank,
-				    String strName,
-				    Class dataClass)
-	{
-		m_soundbank = soundbank;
-		m_strName = strName;
-	}
+    protected SoundbankResource(Soundbank soundbank,
+                                String strName,
+                                Class dataClass) {
+        m_soundbank = soundbank;
+        m_strName = strName;
+    }
 
 
-	public Soundbank getSoundbank()
-	{
-		return m_soundbank;
-	}
+    public Soundbank getSoundbank() {
+        return m_soundbank;
+    }
 
 
-
-	public String getName()
-	{
-		return m_strName;
-	}
+    public String getName() {
+        return m_strName;
+    }
 
 
-
-	public Class getDataClass()
-	{
-		return m_dataClass;
-	}
+    public Class getDataClass() {
+        return m_dataClass;
+    }
 
 
-
-	public abstract Object getData();
+    public abstract Object getData();
 }
-
 
 
 /*** SoundbankResource.java ***/

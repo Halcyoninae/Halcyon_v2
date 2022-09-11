@@ -31,21 +31,16 @@ package org.tritonus.share.sampled.mixer;
 import javax.sound.sampled.Mixer;
 
 
-
-
 /*
  *	This is needed only because Mixer.Info's constructor
  *	is protected (in the Sun jdk1.3).
  */
 public class TMixerInfo
-extends Mixer.Info
-{
-	public TMixerInfo(String a, String b, String c, String d)
-	{
-		super(a, b, c, d);
-	}
+        extends Mixer.Info {
+    public TMixerInfo(String a, String b, String c, String d) {
+        super(a, b, c, d);
+    }
 }
-
 
 
 /*** TMixerInfo.java ***/

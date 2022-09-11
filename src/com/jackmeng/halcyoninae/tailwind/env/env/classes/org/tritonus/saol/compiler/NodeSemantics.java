@@ -24,47 +24,37 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
-
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 
 public class NodeSemantics
-extends WidthAndRate
-{
-	/**	Auxiliary information.
-	 */
-	private Object		m_aux;
+        extends WidthAndRate {
+    /**
+     * Auxiliary information.
+     */
+    private final Object m_aux;
 
 
-
-	public NodeSemantics(int nWidth, int nRate)
-	{
-		this(nWidth, nRate, null);
-	}
+    public NodeSemantics(int nWidth, int nRate) {
+        this(nWidth, nRate, null);
+    }
 
 
-
-	public NodeSemantics(Object aux)
-	{
-		this(WidthAndRate.WIDTH_UNKNOWN, WidthAndRate.RATE_UNKNOWN, aux);
-	}
+    public NodeSemantics(Object aux) {
+        this(WidthAndRate.WIDTH_UNKNOWN, WidthAndRate.RATE_UNKNOWN, aux);
+    }
 
 
-
-	public NodeSemantics(int nWidth, int nRate, Object aux)
-	{
-		super(nWidth, nRate);
-		m_aux = aux;
-	}
+    public NodeSemantics(int nWidth, int nRate, Object aux) {
+        super(nWidth, nRate);
+        m_aux = aux;
+    }
 
 
-
-	public Object getAux()
-	{
-		return m_aux;
-	}
+    public Object getAux() {
+        return m_aux;
+    }
 }
-
 
 
 /*** NodeSemantics.java ***/

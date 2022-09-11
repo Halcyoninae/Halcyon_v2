@@ -37,38 +37,30 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-
-public abstract class AudioFileReader
-{
-	public abstract AudioFileFormat getAudioFileFormat(InputStream inputStream)
-		throws UnsupportedAudioFileException, IOException;
+public abstract class AudioFileReader {
+    public abstract AudioFileFormat getAudioFileFormat(InputStream inputStream)
+            throws UnsupportedAudioFileException, IOException;
 
 
-
-	public abstract AudioFileFormat getAudioFileFormat(URL url)
-		throws UnsupportedAudioFileException, IOException;
-
+    public abstract AudioFileFormat getAudioFileFormat(URL url)
+            throws UnsupportedAudioFileException, IOException;
 
 
-	public abstract AudioFileFormat getAudioFileFormat(File file)
-		throws UnsupportedAudioFileException, IOException;
+    public abstract AudioFileFormat getAudioFileFormat(File file)
+            throws UnsupportedAudioFileException, IOException;
 
 
-
-	public abstract AudioInputStream getAudioInputStream(InputStream inputStream)
-		throws UnsupportedAudioFileException, IOException;
-
+    public abstract AudioInputStream getAudioInputStream(InputStream inputStream)
+            throws UnsupportedAudioFileException, IOException;
 
 
-	public abstract AudioInputStream getAudioInputStream(URL url)
-		throws UnsupportedAudioFileException, IOException;
+    public abstract AudioInputStream getAudioInputStream(URL url)
+            throws UnsupportedAudioFileException, IOException;
 
 
-
-	public abstract AudioInputStream getAudioInputStream(File file)
-		throws UnsupportedAudioFileException, IOException;
+    public abstract AudioInputStream getAudioInputStream(File file)
+            throws UnsupportedAudioFileException, IOException;
 }
-
 
 
 /*** AudioFileReader.java ***/

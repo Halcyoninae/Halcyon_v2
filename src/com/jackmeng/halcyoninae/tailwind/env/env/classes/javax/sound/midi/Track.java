@@ -34,79 +34,59 @@ import java.util.List;
 import java.util.Vector;
 
 
+public class Track {
+    // not used; only to confirm with official API
+    protected Vector events;
 
-public class Track
-{
-	// not used; only to confirm with official API
-	protected Vector	events;
-
-	// this is the actual store
-	private List<MidiEvent>		m_events;
+    // this is the actual store
+    private final List<MidiEvent> m_events;
 
 
-
-	public Track()
-	{
-		m_events = new ArrayList<MidiEvent>();
-	}
+    public Track() {
+        m_events = new ArrayList<MidiEvent>();
+    }
 
 
-
-	public synchronized boolean add(MidiEvent event)
-	{
-		if (!m_events.contains(event))
-		{
-			int	nIndex = size() - 1;
-			for (nIndex = size() - 1;
-			     nIndex >= 0 && get(nIndex).getTick() > event.getTick();
-			     nIndex--)
-			{
-			}
-			m_events.add(nIndex + 1, event);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+    public synchronized boolean add(MidiEvent event) {
+        if (!m_events.contains(event)) {
+            int nIndex = size() - 1;
+            for (nIndex = size() - 1;
+                 nIndex >= 0 && get(nIndex).getTick() > event.getTick();
+                 nIndex--) {
+            }
+            m_events.add(nIndex + 1, event);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
-
-	public synchronized boolean remove(MidiEvent event)
-	{
-		return m_events.remove(event);
-	}
+    public synchronized boolean remove(MidiEvent event) {
+        return m_events.remove(event);
+    }
 
 
-
-	public synchronized MidiEvent get(int nIndex)
-		throws ArrayIndexOutOfBoundsException
-	{
-		return m_events.get(nIndex);
-	}
+    public synchronized MidiEvent get(int nIndex)
+            throws ArrayIndexOutOfBoundsException {
+        return m_events.get(nIndex);
+    }
 
 
-
-	public synchronized int size()
-	{
-		return m_events.size();
-	}
+    public synchronized int size() {
+        return m_events.size();
+    }
 
 
-
-
-	public long ticks()
-	{
-		/*
-		 *	Since ordering by tick value is guaranteed, we can
-		 *	simply pick the last event and return its tick value.
-		 */
-		return get(size() - 1).getTick();
-	}
+    public long ticks() {
+        /*
+         *	Since ordering by tick value is guaranteed, we can
+         *	simply pick the last event and return its tick value.
+         */
+        return get(size() - 1).getTick();
+    }
 
 }
-
 
 
 /*** Track.java ***/

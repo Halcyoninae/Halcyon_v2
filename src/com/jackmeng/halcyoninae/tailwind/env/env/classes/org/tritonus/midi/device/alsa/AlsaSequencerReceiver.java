@@ -29,12 +29,9 @@
 package org.tritonus.midi.device.alsa;
 
 
-
-public interface AlsaSequencerReceiver
-{
-	public boolean subscribeTo(int nClient, int nPort);
+public interface AlsaSequencerReceiver {
+    boolean subscribeTo(int nClient, int nPort);
 }
-
 
 
 /*** AlsaSequencerReceiver.java ***/

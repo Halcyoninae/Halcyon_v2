@@ -31,60 +31,55 @@ package org.tritonus.midi.device.alsa;
 import org.tritonus.lowlevel.alsa.AlsaSeq;
 
 
-
-/**	A representation of a physical MIDI port based on the ALSA sequencer.
+/**
+ * A representation of a physical MIDI port based on the ALSA sequencer.
  */
-public class AlsaQueueHolder
-{
-	/**	The object interfacing to the ALSA sequencer.
-	 */
-	private AlsaSeq	m_aSequencer;
+public class AlsaQueueHolder {
+    /**
+     * The object interfacing to the ALSA sequencer.
+     */
+    private final AlsaSeq m_aSequencer;
 
-	/**	ALSA queue number.
-	 */
-	private int		m_nQueue;
-
-
-
-
-	/**
-	 */
-	public AlsaQueueHolder(AlsaSeq aSequencer)
-	{
-		m_aSequencer = aSequencer;
-		m_nQueue = m_aSequencer.allocQueue();
-		if (m_nQueue < 0)
-		{
-			throw new RuntimeException("can't get ALSA sequencer queue");
-		}
-	}
+    /**
+     * ALSA queue number.
+     */
+    private final int m_nQueue;
 
 
-	/**	Returns the allocated queue
-		@return the queue number.
-	 */
-	public int getQueue()
-	{
-		return m_nQueue;
-	}
+    /**
+     *
+     */
+    public AlsaQueueHolder(AlsaSeq aSequencer) {
+        m_aSequencer = aSequencer;
+        m_nQueue = m_aSequencer.allocQueue();
+        if (m_nQueue < 0) {
+            throw new RuntimeException("can't get ALSA sequencer queue");
+        }
+    }
 
 
+    /**
+     * Returns the allocated queue
+     *
+     * @return the queue number.
+     */
+    public int getQueue() {
+        return m_nQueue;
+    }
 
-	/**	Frees the queue.
-	 */
-	public void close()
-	{
-		m_aSequencer.freeQueue(getQueue());
-	}
+
+    /**
+     * Frees the queue.
+     */
+    public void close() {
+        m_aSequencer.freeQueue(getQueue());
+    }
 
 
-
-	public void finalize()
-	{
-		close();
-	}
+    public void finalize() {
+        close();
+    }
 }
-
 
 
 /*** AlsaQueueHolder.java ***/

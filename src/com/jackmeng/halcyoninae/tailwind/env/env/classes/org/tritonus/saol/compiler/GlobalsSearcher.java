@@ -24,39 +24,33 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import org.tritonus.saol.sablecc.analysis.*;
 import org.tritonus.saol.sablecc.node.*;
 
 
-
 public class GlobalsSearcher
-extends DepthFirstAdapter
-{
-	private SAOLGlobals	m_saolGlobals;
+        extends DepthFirstAdapter {
+    private final SAOLGlobals m_saolGlobals;
 
 
-	public GlobalsSearcher(SAOLGlobals saolGlobals)
-	{
-		m_saolGlobals = saolGlobals;
-	}
+    public GlobalsSearcher(SAOLGlobals saolGlobals) {
+        m_saolGlobals = saolGlobals;
+    }
 
 
-
-	public SAOLGlobals getSAOLGlobals()
-	{
-		return m_saolGlobals;
-	}
+    public SAOLGlobals getSAOLGlobals() {
+        return m_saolGlobals;
+    }
 
 
-	public void outASrateRtparam(ASrateRtparam node)
-	{
-		TInteger	integer = node.getInteger();
-		String		strInt = integer.getText();
-		int		nARate = Integer.parseInt(strInt);
-		getSAOLGlobals().setARate(nARate);
-	}
+    public void outASrateRtparam(ASrateRtparam node) {
+        TInteger integer = node.getInteger();
+        String strInt = integer.getText();
+        int nARate = Integer.parseInt(strInt);
+        getSAOLGlobals().setARate(nARate);
+    }
 
 
 // 	public void caseTNumber(TNumber node)
@@ -89,7 +83,6 @@ extends DepthFirstAdapter
 // 		System.out.print(node.getMod());
 // 	}
 }
-
 
 
 /*** GlobalsSearcher.java ***/

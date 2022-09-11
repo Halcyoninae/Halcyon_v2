@@ -29,22 +29,16 @@
 package javax.sound.sampled;
 
 
-
 public class UnsupportedAudioFileException
-    extends	Exception
-{
-    public UnsupportedAudioFileException()
-    {
+        extends Exception {
+    public UnsupportedAudioFileException() {
     }
 
 
-
-    public UnsupportedAudioFileException(String strMessage)
-    {
-	super(strMessage);
+    public UnsupportedAudioFileException(String strMessage) {
+        super(strMessage);
     }
 }
-
 
 
 /*** UnsupportedAudioFileException.java ***/

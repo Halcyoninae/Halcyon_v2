@@ -36,69 +36,52 @@ import javax.sound.midi.MidiDevice;
 import javax.sound.midi.spi.MidiDeviceProvider;
 
 
-
-
 public class FluidSynthesizerProvider
-extends MidiDeviceProvider
-{
-	private static MidiDevice.Info		sm_info;
+        extends MidiDeviceProvider {
+    private static MidiDevice.Info sm_info;
 
 
-
-	public FluidSynthesizerProvider()
-	{
-		if (TDebug.TraceMidiDeviceProvider)
-			TDebug.out("FluidSynthesizerProvider.<init>(): begin");
-		synchronized (FluidSynthesizerProvider.class)
-		{
-			if (sm_info == null)
-			{
-				sm_info = new TMidiDevice.Info(
-					"Tritonus fluidsynth Synthesizer",
-					GlobalInfo.getVendor(),
-					"a synthesizer based on fluidsynth",
-					GlobalInfo.getVersion());
-			}
-		}
-		if (TDebug.TraceMidiDeviceProvider)
-			TDebug.out("FluidSynthesizerProvider.<init>(): end");
-	}
+    public FluidSynthesizerProvider() {
+        if (TDebug.TraceMidiDeviceProvider)
+            TDebug.out("FluidSynthesizerProvider.<init>(): begin");
+        synchronized (FluidSynthesizerProvider.class) {
+            if (sm_info == null) {
+                sm_info = new TMidiDevice.Info(
+                        "Tritonus fluidsynth Synthesizer",
+                        GlobalInfo.getVendor(),
+                        "a synthesizer based on fluidsynth",
+                        GlobalInfo.getVersion());
+            }
+        }
+        if (TDebug.TraceMidiDeviceProvider)
+            TDebug.out("FluidSynthesizerProvider.<init>(): end");
+    }
 
 
-
-	public MidiDevice.Info[] getDeviceInfo()
-	{
-		if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDeviceInfo(): begin");
-		MidiDevice.Info[]	infos = new MidiDevice.Info[1];
-		infos[0] = sm_info;
-		if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDeviceInfo(): end");
-		return infos;
-	}
+    public MidiDevice.Info[] getDeviceInfo() {
+        if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDeviceInfo(): begin");
+        MidiDevice.Info[] infos = new MidiDevice.Info[1];
+        infos[0] = sm_info;
+        if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDeviceInfo(): end");
+        return infos;
+    }
 
 
-
-	public MidiDevice getDevice(MidiDevice.Info info)
-	{
-		if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDevice(): begin");
-		MidiDevice	device = null;
-		if (info != null && info.equals(sm_info))
-		{
-			try
-			{
-				device = new FluidSynthesizer(sm_info);
-			}
-			catch (Exception e)
-			{
-				throw new IllegalArgumentException("unable to create device for " + info, e);
-			}
-		}
-		else
-		{
-			throw new IllegalArgumentException("no device for " + info);
-		}
-		if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDevice(): end");
-		return device;
-	}
+    public MidiDevice getDevice(MidiDevice.Info info) {
+        if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDevice(): begin");
+        MidiDevice device = null;
+        if (info != null && info.equals(sm_info)) {
+            try {
+                device = new FluidSynthesizer(sm_info);
+            } catch (Exception e) {
+                throw new IllegalArgumentException("unable to create device for " + info, e);
+            }
+        } else {
+            throw new IllegalArgumentException("no device for " + info);
+        }
+        if (TDebug.TraceMidiDeviceProvider) TDebug.out("FluidSynthesizerProvider.getDevice(): end");
+        return device;
+    }
 }
 
 /*** FluidSynthesizerProvider.java ***/

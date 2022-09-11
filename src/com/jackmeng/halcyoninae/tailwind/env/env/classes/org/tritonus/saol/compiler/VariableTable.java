@@ -24,30 +24,26 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import java.util.HashMap;
 
 
-
-/**	The variable table.
-	TODO: use generics
+/**
+ * The variable table.
+ * TODO: use generics
  */
 public class VariableTable
-extends HashMap
-{
-	public void add(VariableEntry variableEntry)
-	{
-		put(variableEntry.getVariableName(), variableEntry);
-	}
+        extends HashMap {
+    public void add(VariableEntry variableEntry) {
+        put(variableEntry.getVariableName(), variableEntry);
+    }
 
 
-	public VariableEntry getEntry(String strVariableName)
-	{
-		return (VariableEntry) get(strVariableName);
-	}
+    public VariableEntry getEntry(String strVariableName) {
+        return (VariableEntry) get(strVariableName);
+    }
 }
-
 
 
 /*** VariableTable.java ***/

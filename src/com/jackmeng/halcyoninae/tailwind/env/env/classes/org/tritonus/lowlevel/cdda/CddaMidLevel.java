@@ -34,46 +34,48 @@ import java.io.InputStream;
 import java.util.Iterator;
 
 
-
-/**	Mid-level interface definition for reading CDs
+/**
+ * Mid-level interface definition for reading CDs
  */
-public interface CddaMidLevel
-{
-	/**	Size of a cdda frame in bytes.
-	 */
-	public static final int		FRAME_SIZE = 2352;
+public interface CddaMidLevel {
+    /**
+     * Size of a cdda frame in bytes.
+     */
+    int FRAME_SIZE = 2352;
 
 
-	// TODO: document!!
-	/**	Gives the available CDROM devices.
-		The returned iteration should contain a list of Strings.
-		Each String represents an internal name of a CDROM drive.
-		This String should be considered implementation-specific.
-		It may contain no useful information (however, most
-		time it does). Currently, it is required that the
-		String starts with exactely one '/'.
-		Should only those drives returned that have an audio CD in?
-	 */
-	public Iterator getDevices();
+    // TODO: document!!
+
+    /**
+     * Gives the available CDROM devices.
+     * The returned iteration should contain a list of Strings.
+     * Each String represents an internal name of a CDROM drive.
+     * This String should be considered implementation-specific.
+     * It may contain no useful information (however, most
+     * time it does). Currently, it is required that the
+     * String starts with exactely one '/'.
+     * Should only those drives returned that have an audio CD in?
+     */
+    Iterator getDevices();
 
 
-	/**	Gives the default drive.
-		A String should be returned that represents the default drive.
-		The String has to follow the conventions described in
-		getDevices(). The String returned by this method should also
-		appear as one of the elements in the iteration returned
-		by getDevices().
-	 */
-	public String getDefaultDevice();
+    /**
+     * Gives the default drive.
+     * A String should be returned that represents the default drive.
+     * The String has to follow the conventions described in
+     * getDevices(). The String returned by this method should also
+     * appear as one of the elements in the iteration returned
+     * by getDevices().
+     */
+    String getDefaultDevice();
 
 
-	public InputStream getTocAsXml(String strDevice)
-		throws IOException;
+    InputStream getTocAsXml(String strDevice)
+            throws IOException;
 
-	public AudioInputStream getTrack(String strDevice, int nTrack)
-		throws IOException;
+    AudioInputStream getTrack(String strDevice, int nTrack)
+            throws IOException;
 }
-
 
 
 /*** CddaMidLevel.java ***/

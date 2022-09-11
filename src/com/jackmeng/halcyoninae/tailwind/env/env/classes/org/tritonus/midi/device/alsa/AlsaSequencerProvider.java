@@ -36,62 +36,60 @@ import javax.sound.midi.MidiDevice;
 import javax.sound.midi.spi.MidiDeviceProvider;
 
 
-
-
 public class AlsaSequencerProvider
-extends MidiDeviceProvider
-{
-	private static MidiDevice.Info		sm_info;
+        extends MidiDeviceProvider {
+    private static MidiDevice.Info sm_info;
 
 
-
-	public AlsaSequencerProvider()
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.<init>(): begin"); }
-		synchronized (AlsaSequencerProvider.class)
-		{
-			if (sm_info == null)
-			{
-				sm_info = new TMidiDevice.Info(
-					"Tritonus ALSA Sequencer",
-					GlobalInfo.getVendor(),
-					"this sequencer uses the ALSA sequencer",
-					GlobalInfo.getVersion());
-			}
-		}
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.<init>(): end"); }
-	}
-
-
-
-	public MidiDevice.Info[] getDeviceInfo()
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.getDeviceInfo(): begin"); }
-		MidiDevice.Info[]	infos = new MidiDevice.Info[1];
-		infos[0] = sm_info;
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.getDeviceInfo(): end"); }
-		return infos;
-	}
+    public AlsaSequencerProvider() {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.<init>(): begin");
+        }
+        synchronized (AlsaSequencerProvider.class) {
+            if (sm_info == null) {
+                sm_info = new TMidiDevice.Info(
+                        "Tritonus ALSA Sequencer",
+                        GlobalInfo.getVendor(),
+                        "this sequencer uses the ALSA sequencer",
+                        GlobalInfo.getVersion());
+            }
+        }
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.<init>(): end");
+        }
+    }
 
 
+    public MidiDevice.Info[] getDeviceInfo() {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.getDeviceInfo(): begin");
+        }
+        MidiDevice.Info[] infos = new MidiDevice.Info[1];
+        infos[0] = sm_info;
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.getDeviceInfo(): end");
+        }
+        return infos;
+    }
 
-	public MidiDevice getDevice(MidiDevice.Info info)
-	{
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.getDevice(): begin"); }
-		MidiDevice	device = null;
-		if (info != null && info.equals(sm_info))
-		{
-			device = new AlsaSequencer(sm_info);
-		}
-		if (device == null)
-		{
-			throw new IllegalArgumentException("no device for " + info);
-		}
-		if (TDebug.TraceMidiDeviceProvider) { TDebug.out("AlsaSequencerProvider.getDevice(): end"); }
-		return device;
-	}
+
+    public MidiDevice getDevice(MidiDevice.Info info) {
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.getDevice(): begin");
+        }
+        MidiDevice device = null;
+        if (info != null && info.equals(sm_info)) {
+            device = new AlsaSequencer(sm_info);
+        }
+        if (device == null) {
+            throw new IllegalArgumentException("no device for " + info);
+        }
+        if (TDebug.TraceMidiDeviceProvider) {
+            TDebug.out("AlsaSequencerProvider.getDevice(): end");
+        }
+        return device;
+    }
 }
-
 
 
 /*** AlsaSequencerProvider.java ***/

@@ -29,39 +29,28 @@
 package javax.sound.midi;
 
 
+public class Patch {
+    private final int m_nBank;
+    private final int m_nProgram;
 
 
-public class Patch
-{
-	private int		m_nBank;
-	private int		m_nProgram;
+    public Patch(int nBank, int nProgram) {
+        m_nBank = nBank;
+        m_nProgram = nProgram;
+    }
 
 
-
-	public Patch(int nBank, int nProgram)
-	{
-		m_nBank = nBank;
-		m_nProgram = nProgram;
-	}
+    public int getBank() {
+        return m_nBank;
+    }
 
 
-
-	public int getBank()
-	{
-		return m_nBank;
-	}
-
-
-
-	public int getProgram()
-	{
-		return m_nProgram;
-	}
-
+    public int getProgram() {
+        return m_nProgram;
+    }
 
 
 }
-
 
 
 /*** Patch.java ***/

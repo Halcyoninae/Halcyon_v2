@@ -31,67 +31,53 @@ package org.tritonus.lowlevel.esd;
 import org.tritonus.share.TDebug;
 
 
-
 public class EsdRecordingStream
-extends	Esd
-{
-	/**	Holds socket fd to EsounD.
-	 *	This field is long because on 64 bit architectures, the native
-	 *	size of ints may be 64 bit.
-	 */
-	@SuppressWarnings("unused")
-	private long			m_lNativeHandle;
+        extends Esd {
+    static {
+        Esd.loadNativeLibrary();
+        if (TDebug.TraceEsdRecordingStreamNative) {
+            setTrace(true);
+        }
+    }
+
+    /**
+     * Holds socket fd to EsounD.
+     * This field is long because on 64 bit architectures, the native
+     * size of ints may be 64 bit.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
+    public EsdRecordingStream() {
+    }
 
+    private static native void setTrace(boolean bTrace);
 
-	static
-	{
-		Esd.loadNativeLibrary();
-		if (TDebug.TraceEsdRecordingStreamNative)
-		{
-			setTrace(true);
-		}
-	}
+    /**
+     * Opens the connection to esd and initiates a stream.
+     */
+    public native void open(int nFormat, int nSampleRate);
 
+    /**
+     * Reads a block of data to esd.
+     * Before using this method, you have to open a connection
+     * to esd with open(). After being done, call close() to
+     * release native and server-side resources.
+     *
+     * @return the number of bytes read
+     */
+    public native int read(byte[] abData, int nOffset, int nLength);
 
-
-	public EsdRecordingStream()
-	{
-	}
-
-
-
-	/**	Opens the connection to esd and initiates a stream.
-	 *
-	 */	
-	public native void open(int nFormat, int nSampleRate);
-
-
-
-	/**	Reads a block of data to esd.
-	 *	Before using this method, you have to open a connection
-	 *	to esd with open(). After being done, call close() to
-	 *	release native and server-side resources.
-	 *
-	 *	@return	the number of bytes read
-	 */
-	public native int read(byte[] abData, int nOffset, int nLength);
-
-
-
-	/**	Closes the connection to esd.
-	 *	With this call, all resources inside esd associated with
-	 *	this stream are freed.???
-	 *	Calls to the read() method are no longer allowed after
-	 *	return from this call.
-	 */
-	public native void close();
-
-
-	private static native void setTrace(boolean bTrace);
+    /**
+     * Closes the connection to esd.
+     * With this call, all resources inside esd associated with
+     * this stream are freed.???
+     * Calls to the read() method are no longer allowed after
+     * return from this call.
+     */
+    public native void close();
 }
-
 
 
 /*** EsdRecordingStream.java ***/

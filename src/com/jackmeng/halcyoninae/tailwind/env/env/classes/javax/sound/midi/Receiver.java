@@ -30,13 +30,11 @@
 package javax.sound.midi;
 
 
+public interface Receiver {
+    void send(MidiMessage message, long lTimeStamp);
 
-public interface Receiver
-{
-	public void send(MidiMessage message, long lTimeStamp);
-	public void close();
+    void close();
 }
-
 
 
 /*** Receiver.java ***/

@@ -29,14 +29,13 @@
 package org.tritonus.share.sampled.mixer;
 
 
+public interface TControllable {
+    TCompoundControl getParentControl();
 
-public interface TControllable
-{
-	public void setParentControl(TCompoundControl compoundControl);
-	public TCompoundControl getParentControl();
-	public void commit();
+    void setParentControl(TCompoundControl compoundControl);
+
+    void commit();
 }
-
 
 
 /*** TControllable.java ***/

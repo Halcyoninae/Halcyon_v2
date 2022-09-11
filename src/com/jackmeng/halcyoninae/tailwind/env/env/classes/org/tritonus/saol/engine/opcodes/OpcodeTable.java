@@ -30,45 +30,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
-/**	The opcode table.
-	TODO: use generics
+/**
+ * The opcode table.
+ * TODO: use generics
  */
-public class OpcodeTable
-{
-	/**	Map that holds the opcode entries.
-		Key: the name of the opcode.
-		Value: a OpcodeEntry instance.
-	*/
-	private Map		m_opcodeMap;
+public class OpcodeTable {
+    /**
+     * Map that holds the opcode entries.
+     * Key: the name of the opcode.
+     * Value: a OpcodeEntry instance.
+     */
+    private final Map m_opcodeMap;
 
 
-	public OpcodeTable()
-	{
-		m_opcodeMap = new HashMap();
-		buildOpcodeTable();
-	}
+    public OpcodeTable() {
+        m_opcodeMap = new HashMap();
+        buildOpcodeTable();
+    }
 
 
-	private void buildOpcodeTable()
-	{
-		PitchOpcodes.buildOpcodeTable(this);
-		MathOpcodes.buildOpcodeTable(this);
-	}
+    private void buildOpcodeTable() {
+        PitchOpcodes.buildOpcodeTable(this);
+        MathOpcodes.buildOpcodeTable(this);
+    }
 
 
-	public void addEntry(OpcodeEntry opcodeEntry)
-	{
-		m_opcodeMap.put(opcodeEntry.getOpcodeName(), opcodeEntry);
-	}
+    public void addEntry(OpcodeEntry opcodeEntry) {
+        m_opcodeMap.put(opcodeEntry.getOpcodeName(), opcodeEntry);
+    }
 
 
-	public OpcodeEntry getOpcode(String strOpcodeName)
-	{
-		return (OpcodeEntry) m_opcodeMap.get(strOpcodeName);
-	}
+    public OpcodeEntry getOpcode(String strOpcodeName) {
+        return (OpcodeEntry) m_opcodeMap.get(strOpcodeName);
+    }
 }
-
 
 
 /*** OpcodeTable.java ***/

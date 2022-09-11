@@ -66,86 +66,88 @@ import javax.sound.sampled.AudioFileFormat;
  */
 public class AudioFileTypes extends AudioFileFormat.Type {
 
-	/** contains all known types */
-	private static StringHashedSet<AudioFileFormat.Type> types = new StringHashedSet<AudioFileFormat.Type>();
+    /**
+     * contains all known types
+     */
+    private static final StringHashedSet<AudioFileFormat.Type> types = new StringHashedSet<AudioFileFormat.Type>();
 
-	// initially add the standard types
-	static {
-		types.add(AudioFileFormat.Type.AIFF);
-		types.add(AudioFileFormat.Type.AIFC);
-		types.add(AudioFileFormat.Type.AU);
-		types.add(AudioFileFormat.Type.SND);
-		types.add(AudioFileFormat.Type.WAVE);
-	}
+    // initially add the standard types
+    static {
+        types.add(AudioFileFormat.Type.AIFF);
+        types.add(AudioFileFormat.Type.AIFC);
+        types.add(AudioFileFormat.Type.AU);
+        types.add(AudioFileFormat.Type.SND);
+        types.add(AudioFileFormat.Type.WAVE);
+    }
 
-	AudioFileTypes(String name, String ext) {
-		super(name, ext);
-	}
+    AudioFileTypes(String name, String ext) {
+        super(name, ext);
+    }
 
-	/**
-	 * Use this method to retrieve an instance of
-	 * <code>AudioFileFormat.Type</code> of the specified
-	 * name. If no type of this name is in the internally
-	 * maintained list, <code>null</code> is returned.
-	 * <p>
-	 * This method is supposed to be used by user programs.
-	 * <p>
-	 * In order to assure a well-filled internal list,
-	 * call <code>AudioSystem.getAudioFileTypes()</code>
-	 * at initialization time.
-	 *
-	 * @see #getType(String, String)
-	 */
-	public static AudioFileFormat.Type getType(String name) {
-		return getType(name, null);
-	}
+    /**
+     * Use this method to retrieve an instance of
+     * <code>AudioFileFormat.Type</code> of the specified
+     * name. If no type of this name is in the internally
+     * maintained list, <code>null</code> is returned.
+     * <p>
+     * This method is supposed to be used by user programs.
+     * <p>
+     * In order to assure a well-filled internal list,
+     * call <code>AudioSystem.getAudioFileTypes()</code>
+     * at initialization time.
+     *
+     * @see #getType(String, String)
+     */
+    public static AudioFileFormat.Type getType(String name) {
+        return getType(name, null);
+    }
 
-	/**
-	 * Use this method to retrieve an instance of
-	 * <code>AudioFileFormat.Type</code> of the specified
-	 * name. If it does not exist in the internal list
-	 * of types, a new type is created and returned.
-	 * If it a type of that name already exists (regardless
-	 * of extension), it is returned. In this case it can
-	 * not be guaranteed that the extension is the same as
-	 * passed as parameter.<br>
-	 * If <code>extension</code> is <code>null</code>,
-	 * this method returns <code>null</code> if the
-	 * type of the specified name does not exist in the
-	 * internal list.
-	 * <p>
-	 * This method is supposed to be used by file providers.
-	 * Every file reader and file writer provider should
-	 * exclusively use this method for retrieving instances
-	 * of <code>AudioFileFormat.Type</code>.
-	 */
-	public static AudioFileFormat.Type getType(String name, String extension) {
-		AudioFileFormat.Type res = types.get(name);
-		if (res==null) {
-			// it is not already in the string set.
-			if (extension==null) {
-				return null;
-			}
-			// Create a new type instance.
-			res=new AudioFileTypes(name, extension);
-			// and save it for the future
-			types.add(res);
-		}
-		return res;
-	}
+    /**
+     * Use this method to retrieve an instance of
+     * <code>AudioFileFormat.Type</code> of the specified
+     * name. If it does not exist in the internal list
+     * of types, a new type is created and returned.
+     * If it a type of that name already exists (regardless
+     * of extension), it is returned. In this case it can
+     * not be guaranteed that the extension is the same as
+     * passed as parameter.<br>
+     * If <code>extension</code> is <code>null</code>,
+     * this method returns <code>null</code> if the
+     * type of the specified name does not exist in the
+     * internal list.
+     * <p>
+     * This method is supposed to be used by file providers.
+     * Every file reader and file writer provider should
+     * exclusively use this method for retrieving instances
+     * of <code>AudioFileFormat.Type</code>.
+     */
+    public static AudioFileFormat.Type getType(String name, String extension) {
+        AudioFileFormat.Type res = types.get(name);
+        if (res == null) {
+            // it is not already in the string set.
+            if (extension == null) {
+                return null;
+            }
+            // Create a new type instance.
+            res = new AudioFileTypes(name, extension);
+            // and save it for the future
+            types.add(res);
+        }
+        return res;
+    }
 
-	/**
-	 * Tests for equality of 2 file types. They are equal when their names match.
-	 * <p>
-	 * This function should be AudioFileFormat.Type.equals and must
-	 * be considered as a temporary workaround until it flows into the
-	 * JavaSound API.
-	 */
-	// IDEA: create a special "NOT_SPECIFIED" file type
-	// and a AudioFileFormat.Type.matches method.
-	public static boolean equals(AudioFileFormat.Type t1, AudioFileFormat.Type t2) {
-		return t2.toString().equals(t1.toString());
-	}
+    /**
+     * Tests for equality of 2 file types. They are equal when their names match.
+     * <p>
+     * This function should be AudioFileFormat.Type.equals and must
+     * be considered as a temporary workaround until it flows into the
+     * JavaSound API.
+     */
+    // IDEA: create a special "NOT_SPECIFIED" file type
+    // and a AudioFileFormat.Type.matches method.
+    public static boolean equals(AudioFileFormat.Type t1, AudioFileFormat.Type t2) {
+        return t2.toString().equals(t1.toString());
+    }
 
 }
 

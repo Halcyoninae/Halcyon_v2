@@ -29,83 +29,86 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-/**	TODO:
+/**
+ * TODO:
  */
-public class AlsaCtlCardInfo
-{
-	/**	Holds the pointer to snd_ctl_card_info_t.
-		for the native code.
-		This must be long to be 64bit-clean.
-		The access modifier is not private because this
-		variable has to be accessed from AlsaCtl.
-	*/
-	long	m_lNativeHandle;
+public class AlsaCtlCardInfo {
+    /**
+     * Holds the pointer to snd_ctl_card_info_t.
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     * The access modifier is not private because this
+     * variable has to be accessed from AlsaCtl.
+     */
+    long m_lNativeHandle;
 
 
+    public AlsaCtlCardInfo() {
+        if (TDebug.TraceAlsaCtlNative) {
+            TDebug.out("AlsaPcm.CardInfo.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of card_info failed");
+        }
+        if (TDebug.TraceAlsaCtlNative) {
+            TDebug.out("AlsaPcm.CardInfo.<init>(): end");
+        }
+    }
 
-	public AlsaCtlCardInfo()
-	{
-		if (TDebug.TraceAlsaCtlNative) { TDebug.out("AlsaPcm.CardInfo.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of card_info failed");
-		}
-		if (TDebug.TraceAlsaCtlNative) { TDebug.out("AlsaPcm.CardInfo.<init>(): end"); }
-	}
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
+    /**
+     * Calls snd_ctl_card_info_malloc().
+     */
+    private native int malloc();
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    /**
+     * Calls snd_ctl_card_info_free().
+     */
+    public native void free();
 
+    /**
+     * Calls snd_ctl_card_info_get_card().
+     */
+    public native int getCard();
 
+    /**
+     * Calls snd_ctl_card_info_get_id().
+     */
+    public native String getId();
 
-	/**	Calls snd_ctl_card_info_malloc().
-	 */
-	private native int malloc();
+    /**
+     * Calls snd_ctl_card_info_get_driver().
+     */
+    public native String getDriver();
 
-	/**	Calls snd_ctl_card_info_free().
-	 */
-	public native void free();
+    /**
+     * Calls snd_ctl_card_info_get_name().
+     */
+    public native String getName();
 
+    /**
+     * Calls snd_ctl_card_info_get_longname().
+     */
+    public native String getLongname();
 
-	/**	Calls snd_ctl_card_info_get_card().
-	 */
-	public native int getCard();
+    /**
+     * Calls snd_ctl_card_info_get_mixername().
+     */
+    public native String getMixername();
 
-	/**	Calls snd_ctl_card_info_get_id().
-	 */
-	public native String getId();
-
-	/**	Calls snd_ctl_card_info_get_driver().
-	 */
-	public native String getDriver();
-
-	/**	Calls snd_ctl_card_info_get_name().
-	 */
-	public native String getName();
-
-	/**	Calls snd_ctl_card_info_get_longname().
-	 */
-	public native String getLongname();
-
-	/**	Calls snd_ctl_card_info_get_mixername().
-	 */
-	public native String getMixername();
-
-	/**	Calls snd_ctl_card_info_get_components().
-	 */
-	public native String getComponents();
-
-	private static native void setTrace(boolean bTrace);
+    /**
+     * Calls snd_ctl_card_info_get_components().
+     */
+    public native String getComponents();
 }
-
 
 
 /*** AlsaCtlCardInfo.java ***/

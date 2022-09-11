@@ -35,23 +35,19 @@ import java.io.File;
 import java.io.IOException;
 
 
-
 public class FileOutput
-extends AudioOutputStreamOutput
-{
-	public FileOutput(File outputFile,
-					  AudioFileFormat.Type targetType,
-					  AudioFormat audioFormat)
-		throws IOException
-	{
-		super(AudioSystemShadow.getAudioOutputStream(
-				  targetType,
-				  audioFormat,
-				  AudioSystem.NOT_SPECIFIED,
-				  outputFile));
-	}
+        extends AudioOutputStreamOutput {
+    public FileOutput(File outputFile,
+                      AudioFileFormat.Type targetType,
+                      AudioFormat audioFormat)
+            throws IOException {
+        super(AudioSystemShadow.getAudioOutputStream(
+                targetType,
+                audioFormat,
+                AudioSystem.NOT_SPECIFIED,
+                outputFile));
+    }
 }
-
 
 
 /*** FileOutput.java ***/

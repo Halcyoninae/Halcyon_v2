@@ -31,13 +31,10 @@ package javax.sound.midi;
 import java.util.EventListener;
 
 
-
 public interface ControllerEventListener
-extends EventListener
-{
-	public void controlChange(ShortMessage message);
+        extends EventListener {
+    void controlChange(ShortMessage message);
 }
-
 
 
 /*** ControllerEventListener.java ***/

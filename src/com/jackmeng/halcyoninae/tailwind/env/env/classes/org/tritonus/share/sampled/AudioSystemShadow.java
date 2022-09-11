@@ -26,7 +26,7 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.share.sampled;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.share.sampled;
 
 import org.tritonus.sampled.file.AiffAudioOutputStream;
 import org.tritonus.sampled.file.AuAudioOutputStream;
@@ -43,69 +43,54 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
-
-/**	Experminatal area for AudioSystem.
- *	This class is used to host features that may become part of the
- *	Java Sound API (In which case they will be moved to AudioSystem).
+/**
+ * Experminatal area for AudioSystem.
+ * This class is used to host features that may become part of the
+ * Java Sound API (In which case they will be moved to AudioSystem).
  */
-public class AudioSystemShadow
-{
-	public static TDataOutputStream getDataOutputStream(File file)
-		throws IOException
-	{
-			return new TSeekableDataOutputStream(file);
-	}
+public class AudioSystemShadow {
+    public static TDataOutputStream getDataOutputStream(File file)
+            throws IOException {
+        return new TSeekableDataOutputStream(file);
+    }
 
 
-
-	public static TDataOutputStream getDataOutputStream(OutputStream stream)
-		throws IOException
-	{
-			return new TNonSeekableDataOutputStream(stream);
-	}
+    public static TDataOutputStream getDataOutputStream(OutputStream stream)
+            throws IOException {
+        return new TNonSeekableDataOutputStream(stream);
+    }
 
 
+    // TODO: lLengthInBytes actually should be lLengthInFrames (design problem of A.O.S.)
+    public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, TDataOutputStream dataOutputStream) {
+        AudioOutputStream audioOutputStream = null;
 
-	// TODO: lLengthInBytes actually should be lLengthInFrames (design problem of A.O.S.)
-	public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, TDataOutputStream dataOutputStream)
-	{
-		AudioOutputStream	audioOutputStream = null;
-
-		if (type.equals(AudioFileFormat.Type.AIFF) ||
-			type.equals(AudioFileFormat.Type.AIFF))
-		{
-			audioOutputStream = new AiffAudioOutputStream(audioFormat, type, lLengthInBytes, dataOutputStream);
-		}
-		else if (type.equals(AudioFileFormat.Type.AU))
-		{
-			audioOutputStream = new AuAudioOutputStream(audioFormat, lLengthInBytes, dataOutputStream);
-		}
-		else if (type.equals(AudioFileFormat.Type.WAVE))
-		{
-			audioOutputStream = new WaveAudioOutputStream(audioFormat, lLengthInBytes, dataOutputStream);
-		}
-		return audioOutputStream;
-	}
+        if (type.equals(AudioFileFormat.Type.AIFF) ||
+                type.equals(AudioFileFormat.Type.AIFF)) {
+            audioOutputStream = new AiffAudioOutputStream(audioFormat, type, lLengthInBytes, dataOutputStream);
+        } else if (type.equals(AudioFileFormat.Type.AU)) {
+            audioOutputStream = new AuAudioOutputStream(audioFormat, lLengthInBytes, dataOutputStream);
+        } else if (type.equals(AudioFileFormat.Type.WAVE)) {
+            audioOutputStream = new WaveAudioOutputStream(audioFormat, lLengthInBytes, dataOutputStream);
+        }
+        return audioOutputStream;
+    }
 
 
-
-	public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, File file)
-		throws IOException
-	{
-		TDataOutputStream	dataOutputStream = getDataOutputStream(file);
-		AudioOutputStream	audioOutputStream = getAudioOutputStream(type, audioFormat, lLengthInBytes, dataOutputStream);
-		return audioOutputStream;
-	}
+    public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, File file)
+            throws IOException {
+        TDataOutputStream dataOutputStream = getDataOutputStream(file);
+        AudioOutputStream audioOutputStream = getAudioOutputStream(type, audioFormat, lLengthInBytes, dataOutputStream);
+        return audioOutputStream;
+    }
 
 
-
-	public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, OutputStream outputStream)
-		throws IOException
-	{
-		TDataOutputStream	dataOutputStream = getDataOutputStream(outputStream);
-		AudioOutputStream	audioOutputStream = getAudioOutputStream(type, audioFormat, lLengthInBytes, dataOutputStream);
-		return audioOutputStream;
-	}
+    public static AudioOutputStream getAudioOutputStream(AudioFileFormat.Type type, AudioFormat audioFormat, long lLengthInBytes, OutputStream outputStream)
+            throws IOException {
+        TDataOutputStream dataOutputStream = getDataOutputStream(outputStream);
+        AudioOutputStream audioOutputStream = getAudioOutputStream(type, audioFormat, lLengthInBytes, dataOutputStream);
+        return audioOutputStream;
+    }
 }
 
 

@@ -36,24 +36,18 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-
-
-public abstract class SoundbankReader
-{
+public abstract class SoundbankReader {
     public abstract Soundbank getSoundbank(InputStream inputStream)
-	throws InvalidMidiDataException, IOException;
-
+            throws InvalidMidiDataException, IOException;
 
 
     public abstract Soundbank getSoundbank(URL url)
-	throws InvalidMidiDataException, IOException;
-
+            throws InvalidMidiDataException, IOException;
 
 
     public abstract Soundbank getSoundbank(File file)
-	throws InvalidMidiDataException, IOException;
+            throws InvalidMidiDataException, IOException;
 }
-
 
 
 /*** SoundbankReader.java ***/

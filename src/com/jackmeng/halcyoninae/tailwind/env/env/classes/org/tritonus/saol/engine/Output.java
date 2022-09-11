@@ -27,50 +27,52 @@
 package org.tritonus.saol.engine;
 
 
-
-
-/**	Output method for the SA engine.
-	This interface abstracts the way calculated samples are
-	output from the engine. The engine only calls this interface,
-	while implementations of this interface write the samples to a
-	file, a line, a network socket or whatever else.
-
-	@author Matthias Pfisterer
+/**
+ * Output method for the SA engine.
+ * This interface abstracts the way calculated samples are
+ * output from the engine. The engine only calls this interface,
+ * while implementations of this interface write the samples to a
+ * file, a line, a network socket or whatever else.
+ *
+ * @author Matthias Pfisterer
  */
-public interface Output
-{
-	/**	Gives the width of this output.
-		@returns	width of the output (number of channels)
-	 */
-	public int getWidth();
+public interface Output {
+    /**
+     * Gives the width of this output.
+     *
+     * @returns width of the output (number of channels)
+     */
+    int getWidth();
 
 
-	/**	Initiate the cumulation of a sample value.
-		Sets the values of all samples to 0.0.
-		This method must be called in an a-cycle before
-		any instrument's a-cycle code is executed.
-	*/
-	public void clear();
+    /**
+     * Initiate the cumulation of a sample value.
+     * Sets the values of all samples to 0.0.
+     * This method must be called in an a-cycle before
+     * any instrument's a-cycle code is executed.
+     */
+    void clear();
 
 
-	/**	Add the sample value of one instrument.
-		This method can be called by instrument's a-cycle
-		code to output the sample value the instrument has
-		calculated for this a-cycle.
-		The current hacky version allows only for mono samples.
-	*/
-	public void output(float fSample);
+    /**
+     * Add the sample value of one instrument.
+     * This method can be called by instrument's a-cycle
+     * code to output the sample value the instrument has
+     * calculated for this a-cycle.
+     * The current hacky version allows only for mono samples.
+     */
+    void output(float fSample);
 
 
-	/**	Add sample values of one instrument.
-		This method can be called by instrument's a-cycle
-		code to output the sample value the instrument has
-		calculated for this a-cycle.
-		The current hacky version allows only for mono samples.
-	*/
-	public void output(float[] afSamples);
+    /**
+     * Add sample values of one instrument.
+     * This method can be called by instrument's a-cycle
+     * code to output the sample value the instrument has
+     * calculated for this a-cycle.
+     * The current hacky version allows only for mono samples.
+     */
+    void output(float[] afSamples);
 }
-
 
 
 /*** Output.java ***/

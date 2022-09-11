@@ -48,455 +48,383 @@ import javax.sound.midi.*;
 
 
 public class FluidSynthesizer
-extends TDirectSynthesizer
-implements Synthesizer
-{
-    private MidiChannel channels[];
+        extends TDirectSynthesizer
+        implements Synthesizer {
+    static {
+        loadNativeLibrary();
+    }
+
+    private MidiChannel[] channels;
     private FluidSoundbank defaultSoundbank;
-
-	private int defaultbankSfontID;
-    
+    private int defaultbankSfontID;
     // native pointers 64 bit maximum
-	private long settingsPtr;
-	private long synthPtr;
-	private long audioDriverPtr;
+    private long settingsPtr;
+    private long synthPtr;
+    private long audioDriverPtr;
 
 
-
-	static
-	{
-		loadNativeLibrary();
-	}
-
-
-	/** Load the native library for fluidsynth.
-	 */
-	private static void loadNativeLibrary()
-	{
-		if (TDebug.TraceFluidNative) TDebug.out("FluidSynthesizer.loadNativeLibrary(): loading native library tritonusfluid");
-		try
-		{
-			System.loadLibrary("tritonusfluid");
-			// only reached if no exception occures
-			setTrace(TDebug.TraceFluidNative);
-		}
-		catch (Error e)
-		{
-			if (TDebug.TraceFluidNative ||
-			    TDebug.TraceAllExceptions)
-			{
-				TDebug.out(e);
-			}
-			// throw e;
-		}
-		if (TDebug.TraceFluidNative) TDebug.out("FluidSynthesizer.loadNativeLibrary(): loaded");
-	}
-
-
-
-	/**
-	 * Constructor.
-	 */
-    public FluidSynthesizer(MidiDevice.Info info) throws Exception
-    {
+    /**
+     * Constructor.
+     */
+    public FluidSynthesizer(MidiDevice.Info info) throws Exception {
         super(info);
     }
 
+    /**
+     * Load the native library for fluidsynth.
+     */
+    private static void loadNativeLibrary() {
+        if (TDebug.TraceFluidNative)
+            TDebug.out("FluidSynthesizer.loadNativeLibrary(): loading native library tritonusfluid");
+        try {
+            System.loadLibrary("tritonusfluid");
+            // only reached if no exception occures
+            setTrace(TDebug.TraceFluidNative);
+        } catch (Error e) {
+            if (TDebug.TraceFluidNative ||
+                    TDebug.TraceAllExceptions) {
+                TDebug.out(e);
+            }
+            // throw e;
+        }
+        if (TDebug.TraceFluidNative) TDebug.out("FluidSynthesizer.loadNativeLibrary(): loaded");
+    }
 
-	protected void openImpl() 
-	throws MidiUnavailableException
-	{
-		if (newSynth() < 0)
-        {
+    /**
+     * Sets tracing in the native code.
+     * Note that this method can either be called directly or (recommended)
+     * the system property "tritonus.TraceFluidNative" can be set to true.
+     *
+     * @see org.tritonus.share.TDebug
+     */
+    public static native void setTrace(boolean bTrace);
+
+    protected void openImpl()
+            throws MidiUnavailableException {
+        if (newSynth() < 0) {
             throw new MidiUnavailableException("Low-level initialization of the synthesizer failed");
         }
         if (TDebug.TraceSynthesizer) TDebug.out("FluidSynthesizer: " + Long.toHexString(synthPtr));
 
         channels = new MidiChannel[16];
-        for (int i = 0; i < 16; i++)
-        {
-        	channels[i] = new NewFluidMidiChannel(i);
+        for (int i = 0; i < 16; i++) {
+            channels[i] = new NewFluidMidiChannel(i);
         }
 
         String sfontFile =
-			System.getProperty("tritonus.fluidsynth.defaultsoundbank");
-		if (sfontFile != null && ! sfontFile.equals(""))
-		{
-			int sfontID = loadSoundFont(sfontFile);
-			setDefaultSoundBank(sfontID);
-	        String strBankOffset =
-				System.getProperty("tritonus.fluidsynth.defaultsoundbankoffset");
-			if (strBankOffset != null && ! strBankOffset.equals(""))
-			{
-				setBankOffset(sfontID, Integer.parseInt(strBankOffset));				
-			}
-		}
+                System.getProperty("tritonus.fluidsynth.defaultsoundbank");
+        if (sfontFile != null && !sfontFile.equals("")) {
+            int sfontID = loadSoundFont(sfontFile);
+            setDefaultSoundBank(sfontID);
+            String strBankOffset =
+                    System.getProperty("tritonus.fluidsynth.defaultsoundbankoffset");
+            if (strBankOffset != null && !strBankOffset.equals("")) {
+                setBankOffset(sfontID, Integer.parseInt(strBankOffset));
+            }
+        }
     }
 
-
-    protected void closeImpl()
-    {
+    protected void closeImpl() {
         if (TDebug.TraceSynthesizer) TDebug.out("FluidSynthesizer.closeImpl(): "
-        		+ Long.toHexString(synthPtr));
+                + Long.toHexString(synthPtr));
         deleteSynth();
         super.closeImpl();
     }
 
-
-
-
-    public void setDefaultSoundBank(int sfontID)
-    {
-	    defaultSoundbank = new FluidSoundbank(this, sfontID);
-	    defaultbankSfontID = sfontID;
+    public void setDefaultSoundBank(int sfontID) {
+        defaultSoundbank = new FluidSoundbank(this, sfontID);
+        defaultbankSfontID = sfontID;
     }
 
-
-    protected void finalize(){
+    protected void finalize() {
         if (TDebug.TraceSynthesizer) TDebug.out("finalize: " + Long.toHexString(synthPtr));
         close();
     }
 
     public native int loadSoundFont(String filename);
+
     public native void setBankOffset(int sfontID, int offset);
+
     public native void setGain(float gain);
 
-	/* $$mp: currently not functional because fluid_synth_set_reverb_preset()
-	 * is not present in fluidsynth 1.0.6.
-	 */
+    /* $$mp: currently not functional because fluid_synth_set_reverb_preset()
+     * is not present in fluidsynth 1.0.6.
+     */
     public native void setReverbPreset(int reverbPreset);
 
     public native int getMaxPolyphony();
 
     protected native int newSynth();
+
     protected native void deleteSynth();
 
     /**
      * Turns a note on.
-     * 
+     * <p>
      * The implementation calls fluid_synth_noteoff().
-     * 
-     * @param nChannel the channel
+     *
+     * @param nChannel    the channel
      * @param nNoteNumber the note
-     * @param nVelocity the velocity
+     * @param nVelocity   the velocity
      */
-	native void noteOn(int nChannel, int nNoteNumber, int nVelocity);
+    native void noteOn(int nChannel, int nNoteNumber, int nVelocity);
 
-	/**
-	 * Turns a note off.
-	 * 
-	 * The implementation calls fluid_synth_noteon().
-	 * 
-	 * @param nChannel the channel
-	 * @param nNoteNumber the note
-	 * @param nVelocity the velocity
-	 */
-	native void noteOff(int nChannel, int nNoteNumber, int nVelocity);
+    /**
+     * Turns a note off.
+     * <p>
+     * The implementation calls fluid_synth_noteon().
+     *
+     * @param nChannel    the channel
+     * @param nNoteNumber the note
+     * @param nVelocity   the velocity
+     */
+    native void noteOff(int nChannel, int nNoteNumber, int nVelocity);
 
-
-	/**
-	 * Changes a controller on the synthesizer.
-     * 
+    /**
+     * Changes a controller on the synthesizer.
+     * <p>
      * The implementation calls fluid_synth_cc().
-     * 
-     * @param nChannel the channel
+     *
+     * @param nChannel    the channel
      * @param nController the controller number
-     * @param nValue the controller value
+     * @param nValue      the controller value
      */
-	native void controlChange(int nChannel, int nController, int nValue);
+    native void controlChange(int nChannel, int nController, int nValue);
 
+    /**
+     * Obtains the value of a controller.
+     * <p>
+     * The implementation calls fluid_synth_get_cc().
+     *
+     * @param nChannel    the channel
+     * @param nController the controller number
+     * @return the controller value
+     */
+    native int getController(int nChannel, int nController);
 
-	/**
-	 * Obtains the value of a controller.
-	 * 
-	 * The implementation calls fluid_synth_get_cc().
-	 * 
-	 * @param nChannel the channel
-	 * @param nController the controller number
-	 * @return the controller value
-	 */
-	native int getController(int nChannel, int nController);
+    /**
+     * Sets the program for a channel.
+     * <p>
+     * The implementation calls fluid_synth_program_change().
+     *
+     * @param nChannel the channel
+     * @param nProgram the program number
+     */
+    native void programChange(int nChannel, int nProgram);
 
+    /**
+     * Obtains the program set for a channel.
+     * <p>
+     * The implementation calls fluid_synth_get_program().
+     *
+     * @param nChannel the channel
+     * @return the program number set for this channel
+     */
+    native int getProgram(int nChannel);
 
-	/**
-	 * Sets the program for a channel.
-	 * 
-	 * The implementation calls fluid_synth_program_change().
-	 * 
-	 * @param nChannel the channel
-	 * @param nProgram the program number
-	 */
-	native void programChange(int nChannel, int nProgram);
+    /**
+     * Sets the pitch bend for a channel.
+     * <p>
+     * The implementation calls fluid_synth_pitch_bend().
+     *
+     * @param nChannel the channel
+     * @param nBend    the pitch bend value
+     */
+    native void setPitchBend(int nChannel, int nBend);
 
+    /**
+     * Obtains the pitch bend for a channel.
+     * <p>
+     * The implementations calls fluid_synth_get_pitch_bend().
+     *
+     * @param nChannel the channel
+     * @return the pitch bend value.
+     */
+    native int getPitchBend(int nChannel);
 
-	/**
-	 * Obtains the program set for a channel.
-	 * 
-	 * The implementation calls fluid_synth_get_program().
-	 * 
-	 * @param nChannel the channel
-	 * @return the program number set for this channel
-	 */
-	native int getProgram(int nChannel);
-
-
-	/**
-	 * Sets the pitch bend for a channel.
-	 * 
-	 * The implementation calls fluid_synth_pitch_bend().
-	 * 
-	 * @param nChannel the channel
-	 * @param nBend the pitch bend value
-	 */
-	native void setPitchBend(int nChannel, int nBend);
-
-
-	/**
-	 * Obtains the pitch bend for a channel.
-	 * 
-	 * The implementations calls fluid_synth_get_pitch_bend().
-	 * 
-	 * @param nChannel the channel
-	 * @return the pitch bend value.
-	 */
-	native int getPitchBend(int nChannel);
-
-
-	/** Sets tracing in the native code.
-	 * Note that this method can either be called directly or (recommended)
-	 * the system property "tritonus.TraceFluidNative" can be set to true.
-	 *
-	 * @see org.tritonus.share.TDebug
-	 */
-	public static native void setTrace(boolean bTrace);
-
-
-    public boolean isSoundbankSupported(Soundbank soundbank)
-    {
+    public boolean isSoundbankSupported(Soundbank soundbank) {
         return (soundbank instanceof FluidSoundbank);
     }
 
-    public boolean loadAllInstruments(Soundbank soundbank)
-    {
-    	checkSoundbank(soundbank);
+    public boolean loadAllInstruments(Soundbank soundbank) {
+        checkSoundbank(soundbank);
         return true;
     }
 
-    public void unloadAllInstruments(Soundbank soundbank)
-    {
-    	checkSoundbank(soundbank);
+    public void unloadAllInstruments(Soundbank soundbank) {
+        checkSoundbank(soundbank);
     }
 
-    public void unloadInstruments(Soundbank soundbank, Patch[] patchList)
-    {
-    	checkSoundbank(soundbank);
+    public void unloadInstruments(Soundbank soundbank, Patch[] patchList) {
+        checkSoundbank(soundbank);
     }
 
-    public boolean loadInstruments(Soundbank soundbank, Patch[] patchList)
-    {
-    	checkSoundbank(soundbank);
+    public boolean loadInstruments(Soundbank soundbank, Patch[] patchList) {
+        checkSoundbank(soundbank);
         return true;
     }
 
-    public void unloadInstrument(Instrument instrument)
-    {
-    	checkInstrument(instrument);
+    public void unloadInstrument(Instrument instrument) {
+        checkInstrument(instrument);
     }
 
-    public boolean loadInstrument(Instrument instrument)
-    {
-    	checkInstrument(instrument);
+    public boolean loadInstrument(Instrument instrument) {
+        checkInstrument(instrument);
         return true;
     }
 
-    public Instrument[] getAvailableInstruments()
-    {
+    public Instrument[] getAvailableInstruments() {
         return null;
     }
 
-    public MidiChannel[] getChannels()
-    {
+    public MidiChannel[] getChannels() {
         return channels;
     }
 
-    public Soundbank getDefaultSoundbank()
-    {
-       return defaultSoundbank;
+    public Soundbank getDefaultSoundbank() {
+        return defaultSoundbank;
     }
 
-    public long getLatency()
-    {
+    public long getLatency() {
         return 0L;
     }
 
-    public Instrument[] getLoadedInstruments()
-    {
+    public Instrument[] getLoadedInstruments() {
         return null;
     }
 
-    public VoiceStatus[] getVoiceStatus()
-    {
+    public VoiceStatus[] getVoiceStatus() {
         return new VoiceStatus[0];
     }
 
-    public boolean remapInstrument(Instrument from, Instrument to)
-    {
-    	checkInstrument(from);
-    	checkInstrument(to);
+    public boolean remapInstrument(Instrument from, Instrument to) {
+        checkInstrument(from);
+        checkInstrument(to);
         return true;
     }
 
 
-	/** Checks if the soundbank is supported by this synthesizer implementation.
-     * 
+    /**
+     * Checks if the soundbank is supported by this synthesizer implementation.
+     *
      * @param sb the soundbank to check
      * @throws IllegalArgumentException if the soundbank is not supported
      */
-    private void checkSoundbank(Soundbank sb)
-    {
-    	if (! isSoundbankSupported(sb))
-    		throw new IllegalArgumentException("soundbank is not supported");
+    private void checkSoundbank(Soundbank sb) {
+        if (!isSoundbankSupported(sb))
+            throw new IllegalArgumentException("soundbank is not supported");
     }
 
     /**
      * Checks if the instrument belongs to a soundbank that is supported by this
      * synthesizer implementation.
-     * 
+     *
      * @param instr the instrument to check
      * @throws IllegalArgumentException if the instrument's soundbank
-     * is not supported
+     *                                  is not supported
      */
-    private void checkInstrument(Instrument instr)
-    {
-    	checkSoundbank(instr.getSoundbank());
+    private void checkInstrument(Instrument instr) {
+        checkSoundbank(instr.getSoundbank());
     }
 
 
     private class NewFluidMidiChannel
-    extends TMidiChannel
-	{
-		public NewFluidMidiChannel(int nChannel)
-		{
-			super(nChannel);
-		}
+            extends TMidiChannel {
+        public NewFluidMidiChannel(int nChannel) {
+            super(nChannel);
+        }
 
 
-		public void noteOn(int nNoteNumber, int nVelocity)
-		{
-			FluidSynthesizer.this.noteOn(getChannel(), nNoteNumber, nVelocity);
-		}
+        public void noteOn(int nNoteNumber, int nVelocity) {
+            FluidSynthesizer.this.noteOn(getChannel(), nNoteNumber, nVelocity);
+        }
 
 
-		public void noteOff(int nNoteNumber, int nVelocity)
-		{
-			FluidSynthesizer.this.noteOff(getChannel(), nNoteNumber, nVelocity);
-		}
+        public void noteOff(int nNoteNumber, int nVelocity) {
+            FluidSynthesizer.this.noteOff(getChannel(), nNoteNumber, nVelocity);
+        }
 
 
-		public void noteOff(int nNoteNumber)
-		{
-			noteOff(nNoteNumber, 0);
-		}
+        public void noteOff(int nNoteNumber) {
+            noteOff(nNoteNumber, 0);
+        }
 
 
-		/**
-		 * Fluidsynth does not implement poly pressure (aftertouch). Therefore,
-		 * this method does nothing.
-		 */
-		public void setPolyPressure(int nNoteNumber, int nPressure)
-		{
-		}
+        /**
+         * Fluidsynth does not implement poly pressure (aftertouch). Therefore,
+         * this method does nothing.
+         */
+        public void setPolyPressure(int nNoteNumber, int nPressure) {
+        }
 
 
-		/**
-		 * Fluidsynth does not implement poly pressure (aftertouch). Therefore,
-		 * this method always return 0.
-		 */
-		public int getPolyPressure(int nNoteNumber)
-		{
-			return 0;
-		}
+        /**
+         * Fluidsynth does not implement poly pressure (aftertouch). Therefore,
+         * this method always return 0.
+         */
+        public int getPolyPressure(int nNoteNumber) {
+            return 0;
+        }
+
+        /**
+         * Fluidsynth does not implement channel pressure. Therefore,
+         * this method always returns 0.
+         */
+        public int getChannelPressure() {
+            return 0;
+        }
+
+        /**
+         * Fluidsynth does not implement channel pressure. Therefore,
+         * this method does nothing.
+         */
+        public void setChannelPressure(int nPressure) {
+        }
+
+        public void controlChange(int nController, int nValue) {
+            FluidSynthesizer.this.controlChange(getChannel(), nController,
+                    nValue);
+        }
 
 
-		/**
-		 * Fluidsynth does not implement channel pressure. Therefore,
-		 * this method does nothing.
-		 */
-		public void setChannelPressure(int nPressure)
-		{
-		}
+        public int getController(int nController) {
+            return FluidSynthesizer.this.getController(getChannel(),
+                    nController);
+        }
 
 
-		/**
-		 * Fluidsynth does not implement channel pressure. Therefore,
-		 * this method always returns 0.
-		 */
-		public int getChannelPressure()
-		{
-			return 0;
-		}
+        public void programChange(int nProgram) {
+            FluidSynthesizer.this.programChange(getChannel(), nProgram);
+        }
 
 
-		public void controlChange(int nController, int nValue)
-		{
-			FluidSynthesizer.this.controlChange(getChannel(), nController,
-					nValue);
-		}
+        public int getProgram() {
+            return FluidSynthesizer.this.getProgram(getChannel());
+        }
 
+        public int getPitchBend() {
+            return FluidSynthesizer.this.getPitchBend(getChannel());
+        }
 
-		public int getController(int nController)
-		{
-			return FluidSynthesizer.this.getController(getChannel(),
-						nController);
-		}
+        public void setPitchBend(int nBend) {
+            FluidSynthesizer.this.setPitchBend(getChannel(), nBend);
+        }
 
+        public boolean getMute() {
+            return false;
+        }
 
-		public void programChange(int nProgram)
-		{
-			FluidSynthesizer.this.programChange(getChannel(), nProgram);
-		}
+        // TODO: emulate by manipulating volume
+        public void setMute(boolean bMute) {
+        }
 
+        public boolean getSolo() {
+            return false;
+        }
 
-		public int getProgram()
-		{
-			return FluidSynthesizer.this.getProgram(getChannel());
-		}
-
-
-		public void setPitchBend(int nBend)
-		{
-			FluidSynthesizer.this.setPitchBend(getChannel(), nBend);
-		}
-
-
-		public int getPitchBend()
-		{
-			return FluidSynthesizer.this.getPitchBend(getChannel());
-		}
-
-
-		// TODO: emulate by manipulating volume
-		public void setMute(boolean bMute)
-		{
-		}
-
-
-		public boolean getMute()
-		{
-			return false;
-		}
-
-
-		public void setSolo(boolean bSolo)
-		{
-		}
-
-
-		public boolean getSolo()
-		{
-			return false;
-		}
-	}
+        public void setSolo(boolean bSolo) {
+        }
+    }
 }
 
 /* FluidSynthesizer.java */

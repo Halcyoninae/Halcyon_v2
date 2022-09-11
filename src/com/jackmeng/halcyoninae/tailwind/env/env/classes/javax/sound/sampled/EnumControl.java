@@ -34,88 +34,61 @@ import java.util.Arrays;
 import java.util.Collection;
 
 
-
 public abstract class EnumControl
-extends Control
-{
-	private static final Object[]	EMPTY_OBJECT_ARRAY = new Object[0];
+        extends Control {
+    private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
 
-
-	private Object		m_value;
-	private Collection<Object>	m_values;
-
+    private Object m_value;
+    private final Collection<Object> m_values;
 
 
-	protected EnumControl(Type type,
-			      Object[]	aValues,
-			      Object value)
-	{
-		super(type);
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("EnumControl.<init>: begin");
-		}
-		m_values = Arrays.asList(aValues);
-		setValue(value);
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("EnumControl.<init>: end");
-		}
-	}
+    protected EnumControl(Type type,
+                          Object[] aValues,
+                          Object value) {
+        super(type);
+        if (TDebug.TraceControl) {
+            TDebug.out("EnumControl.<init>: begin");
+        }
+        m_values = Arrays.asList(aValues);
+        setValue(value);
+        if (TDebug.TraceControl) {
+            TDebug.out("EnumControl.<init>: end");
+        }
+    }
+
+    public Object getValue() {
+        return m_value;
+    }
+
+    public void setValue(Object value) {
+        if (m_values.contains(value)) {
+            m_value = value;
+        } else {
+            throw new IllegalArgumentException("illegal value " + value);
+        }
+    }
+
+    public Object[] getValues() {
+        return m_values.toArray(EMPTY_OBJECT_ARRAY);
+    }
 
 
-
-	public void setValue(Object value)
-	{
-		if (m_values.contains(value))
-		{
-			m_value = value;
-		}
-		else
-		{
-			throw new IllegalArgumentException("illegal value " + value);
-		}
-	}
+    public String toString() {
+        return super.toString() + " [value = " + getValue() + "]";
+    }
 
 
-
-	public Object getValue()
-	{
-		return m_value;
-	}
+    public static class Type
+            extends Control.Type {
+        public static final Type REVERB = new Type("REVERB");
 
 
-
-	public Object[] getValues()
-	{
-		return m_values.toArray(EMPTY_OBJECT_ARRAY);
-	}
-
-
-
-	public String toString()
-	{
-		return super.toString() + " [value = " + getValue() + "]";
-	}
-
-
-
-
-	public static class Type
-	extends Control.Type
-	{
-		public static final Type	REVERB = new Type("REVERB");
-
-
-
-		protected Type(String strName)
-		{
-			super(strName);
-		}
-	}
+        protected Type(String strName) {
+            super(strName);
+        }
+    }
 }
-
 
 
 /*** EnumControl.java ***/

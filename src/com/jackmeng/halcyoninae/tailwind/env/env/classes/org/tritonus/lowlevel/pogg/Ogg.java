@@ -31,72 +31,67 @@ package org.tritonus.lowlevel.pogg;
 import org.tritonus.share.TDebug;
 
 
-/**	libogg loading.
+/**
+ * libogg loading.
  */
-public class Ogg
-{
-	private static boolean	sm_bIsLibraryAvailable = false;
+public class Ogg {
+    private static boolean sm_bIsLibraryAvailable = false;
 
 
-
-	static
-	{
-		Ogg.loadNativeLibrary();
-	}
+    static {
+        Ogg.loadNativeLibrary();
+    }
 
 
+    public static void loadNativeLibrary() {
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Ogg.loadNativeLibrary(): begin");
+        }
 
-	public static void loadNativeLibrary()
-	{
-		if (TDebug.TraceOggNative) { TDebug.out("Ogg.loadNativeLibrary(): begin"); }
-
-		if (! isLibraryAvailable())
-		{
-			loadNativeLibraryImpl();
-		}
-		if (TDebug.TraceOggNative) { TDebug.out("Ogg.loadNativeLibrary(): end"); }
-	}
-
-
-
-	/** Load the native library for ogg vorbis.
-
-	This method actually does the loading of the library.  Unlike
-	{@link loadNativeLibrary() loadNativeLibrary()}, it does not
-	check if the library is already loaded.
-
-	 */
-	private static void loadNativeLibraryImpl()
-	{
-		if (TDebug.TraceOggNative) { TDebug.out("Ogg.loadNativeLibraryImpl(): loading native library tritonuspvorbis"); }
-		try
-		{
-			System.loadLibrary("tritonuspvorbis");
-			// only reached if no exception occures
-			sm_bIsLibraryAvailable = true;
-		}
-		catch (Error e)
-		{
-			if (TDebug.TraceOggNative ||
-			    TDebug.TraceAllExceptions)
-			{
-				TDebug.out(e);
-			}
-			// throw e;
-		}
-		if (TDebug.TraceOggNative) { TDebug.out("Ogg.loadNativeLibraryImpl(): loaded"); }
-	}
+        if (!isLibraryAvailable()) {
+            loadNativeLibraryImpl();
+        }
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Ogg.loadNativeLibrary(): end");
+        }
+    }
 
 
+    /**
+     * Load the native library for ogg vorbis.
+     * <p>
+     * This method actually does the loading of the library.  Unlike
+     * {@link loadNativeLibrary() loadNativeLibrary()}, it does not
+     * check if the library is already loaded.
+     */
+    private static void loadNativeLibraryImpl() {
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Ogg.loadNativeLibraryImpl(): loading native library tritonuspvorbis");
+        }
+        try {
+            System.loadLibrary("tritonuspvorbis");
+            // only reached if no exception occures
+            sm_bIsLibraryAvailable = true;
+        } catch (Error e) {
+            if (TDebug.TraceOggNative ||
+                    TDebug.TraceAllExceptions) {
+                TDebug.out(e);
+            }
+            // throw e;
+        }
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Ogg.loadNativeLibraryImpl(): loaded");
+        }
+    }
 
-	/**	Returns whether the libraries are installed correctly.
-	 */
-	public static boolean isLibraryAvailable()
-	{
-		return sm_bIsLibraryAvailable;
-	}
+
+    /**
+     * Returns whether the libraries are installed correctly.
+     */
+    public static boolean isLibraryAvailable() {
+        return sm_bIsLibraryAvailable;
+    }
 }
-
 
 
 /*** Ogg.java ***/

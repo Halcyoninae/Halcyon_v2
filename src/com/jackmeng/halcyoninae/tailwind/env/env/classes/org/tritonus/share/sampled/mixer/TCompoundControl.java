@@ -34,55 +34,39 @@ import javax.sound.sampled.CompoundControl;
 import javax.sound.sampled.Control;
 
 
-
-
-/**	Base class for classes implementing Line.
+/**
+ * Base class for classes implementing Line.
  */
 public class TCompoundControl
-extends CompoundControl
-implements TControllable
-{
-	private TControlController	m_controller;
+        extends CompoundControl
+        implements TControllable {
+    private final TControlController m_controller;
 
 
+    public TCompoundControl(CompoundControl.Type type,
+                            Control[] aMemberControls) {
+        super(type, aMemberControls);
+        if (TDebug.TraceControl) {
+            TDebug.out("TCompoundControl.<init>: begin");
+        }
+        m_controller = new TControlController();
+        if (TDebug.TraceControl) {
+            TDebug.out("TCompoundControl.<init>: end");
+        }
+    }
 
-	public TCompoundControl(CompoundControl.Type type,
-				Control[] aMemberControls)
-	{
-		super(type, aMemberControls);
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("TCompoundControl.<init>: begin");
-		}
-		m_controller = new TControlController();
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("TCompoundControl.<init>: end");
-		}
-	}
+    public TCompoundControl getParentControl() {
+        return m_controller.getParentControl();
+    }
 
+    public void setParentControl(TCompoundControl compoundControl) {
+        m_controller.setParentControl(compoundControl);
+    }
 
-
-	public void setParentControl(TCompoundControl compoundControl)
-	{
-		m_controller.setParentControl(compoundControl);
-	}
-
-
-
-	public TCompoundControl getParentControl()
-	{
-		return m_controller.getParentControl();
-	}
-
-
-
-	public void commit()
-	{
-		m_controller.commit();
-	}
+    public void commit() {
+        m_controller.commit();
+    }
 }
-
 
 
 /*** TCompoundControl.java ***/

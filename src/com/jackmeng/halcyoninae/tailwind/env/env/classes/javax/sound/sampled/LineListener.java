@@ -31,13 +31,10 @@ package javax.sound.sampled;
 import java.util.EventListener;
 
 
-
 public interface LineListener
-    extends EventListener
-{
-    public void update(LineEvent event);
+        extends EventListener {
+    void update(LineEvent event);
 }
-
 
 
 /*** LineListener.java ***/

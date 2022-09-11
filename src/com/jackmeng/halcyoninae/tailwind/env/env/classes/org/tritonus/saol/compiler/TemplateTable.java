@@ -24,43 +24,39 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-
-/**	The template table.
-	TODO: use generics
+/**
+ * The template table.
+ * TODO: use generics
  */
-public class TemplateTable
-{
-	/**	Map that holds the template entries.
-		Key: the name of the template.
-		Value: a TemplateEntry instance.
-	*/
-	private Map		m_templateMap;
+public class TemplateTable {
+    /**
+     * Map that holds the template entries.
+     * Key: the name of the template.
+     * Value: a TemplateEntry instance.
+     */
+    private final Map m_templateMap;
 
 
-	public TemplateTable()
-	{
-		m_templateMap = new HashMap();
-	}
+    public TemplateTable() {
+        m_templateMap = new HashMap();
+    }
 
 
-	public void add(TemplateEntry templateEntry)
-	{
-		m_templateMap.put(templateEntry.getTemplateName(), templateEntry);
-	}
+    public void add(TemplateEntry templateEntry) {
+        m_templateMap.put(templateEntry.getTemplateName(), templateEntry);
+    }
 
 
-	public TemplateEntry get(String strTemplateName)
-	{
-		return (TemplateEntry) m_templateMap.get(strTemplateName);
-	}
+    public TemplateEntry get(String strTemplateName) {
+        return (TemplateEntry) m_templateMap.get(strTemplateName);
+    }
 }
-
 
 
 /*** TemplateTable.java ***/

@@ -30,64 +30,58 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-public class AlsaSeqQueueTempo
-{
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+public class AlsaSeqQueueTempo {
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
 
 
-
-	/**
-	 *	Holds the pointer to snd_seq_queue_tempo_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	/*private*/ long	m_lNativeHandle;
-
+    /**
+     * Holds the pointer to snd_seq_queue_tempo_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    /*private*/ long m_lNativeHandle;
 
 
-	public AlsaSeqQueueTempo()
-	{
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.QueueTempo.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of port_info failed");
-		}
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.QueueTempo.<init>(): end"); }
-	}
+    public AlsaSeqQueueTempo() {
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.QueueTempo.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of port_info failed");
+        }
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.QueueTempo.<init>(): end");
+        }
+    }
 
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private native int malloc();
 
+    public native void free();
 
+    public native int getQueue();
 
-	private native int malloc();
-	public native void free();
+    public native int getTempo();
 
-	public native int getQueue();
-	public native int getTempo();
-	public native int getPpq();
-	public native void setTempo(int nTempo);
-	public native void setPpq(int nPpq);
+    public native void setTempo(int nTempo);
 
-	private static native void setTrace(boolean bTrace);
+    public native int getPpq();
+
+    public native void setPpq(int nPpq);
 }
-
-
 
 
 /*** AlsaSeqQueueTempo.java ***/

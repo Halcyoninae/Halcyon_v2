@@ -29,104 +29,80 @@
 package javax.sound.sampled;
 
 
+public class ReverbType {
+    private final String m_strName;
+    private final int m_nEarlyReflectionDelay;
+    private final float m_fEarlyReflectionIntensity;
+    private final int m_nLateReflectionDelay;
+    private final float m_fLateReflectionIntensity;
+    private final int m_nDecayTime;
 
 
-public class ReverbType
-{
-	private String		m_strName;
-	private int		m_nEarlyReflectionDelay;
-	private float		m_fEarlyReflectionIntensity;
-	private int		m_nLateReflectionDelay;
-	private float		m_fLateReflectionIntensity;
-	private int		m_nDecayTime;
+    protected ReverbType(String strName,
+                         int nEarlyReflectionDelay,
+                         float fEarlyReflectionIntensity,
+                         int nLateReflectionDelay,
+                         float fLateReflectionIntensity,
+                         int nDecayTime) {
+        m_strName = strName;
+        m_nEarlyReflectionDelay = nEarlyReflectionDelay;
+        m_fEarlyReflectionIntensity = fEarlyReflectionIntensity;
+        m_nLateReflectionDelay = nLateReflectionDelay;
+        m_fLateReflectionIntensity = fLateReflectionIntensity;
+        m_nDecayTime = nDecayTime;
+    }
 
 
-
-	protected ReverbType(String strName,
-			     int nEarlyReflectionDelay,
-			     float fEarlyReflectionIntensity,
-			     int nLateReflectionDelay,
-			     float fLateReflectionIntensity,
-			     int nDecayTime)
-	{
-		m_strName = strName;
-		m_nEarlyReflectionDelay = nEarlyReflectionDelay;
-		m_fEarlyReflectionIntensity = fEarlyReflectionIntensity;
-		m_nLateReflectionDelay = nLateReflectionDelay;
-		m_fLateReflectionIntensity = fLateReflectionIntensity;
-		m_nDecayTime = nDecayTime;
-	}
+    public String getName() {
+        return m_strName;
+    }
 
 
-
-	public String getName()
-	{
-		return m_strName;
-	}
+    public int getEarlyReflectionDelay() {
+        return m_nEarlyReflectionDelay;
+    }
 
 
-
-	public int getEarlyReflectionDelay()
-	{
-		return m_nEarlyReflectionDelay;
-	}
+    public float getEarlyReflectionIntensity() {
+        return m_fEarlyReflectionIntensity;
+    }
 
 
-
-	public float getEarlyReflectionIntensity()
-	{
-		return m_fEarlyReflectionIntensity;
-	}
+    public int getLateReflectionDelay() {
+        return m_nLateReflectionDelay;
+    }
 
 
-
-	public int getLateReflectionDelay()
-	{
-		return m_nLateReflectionDelay;
-	}
+    public float getLateReflectionIntensity() {
+        return m_fLateReflectionIntensity;
+    }
 
 
-
-	public float getLateReflectionIntensity()
-	{
-		return m_fLateReflectionIntensity;
-	}
+    public int getDecayTime() {
+        return m_nDecayTime;
+    }
 
 
-
-	public int getDecayTime()
-	{
-		return m_nDecayTime;
-	}
+    public final boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 
 
-
-	public final boolean equals(Object obj)
-	{
-		return super.equals(obj);
-	}
+    public final int hashCode() {
+        return super.hashCode();
+    }
 
 
-
-	public final int hashCode()
-	{
-		return super.hashCode();
-	}
-
-
-
-	public final String toString()
-	{
-		return super.toString() +
-			"[name=" + getName() +
-			", earlyReflectionDelay = " + getEarlyReflectionDelay() +
-			", earlyReflectionIntensity = " + getEarlyReflectionIntensity() +
-			", lateReflectionDelay = " + getLateReflectionDelay() +
-			", lateReflectionIntensity = " + getLateReflectionIntensity() +
-			", decayTime = " + getDecayTime() + "]";
-	}
+    public final String toString() {
+        return super.toString() +
+                "[name=" + getName() +
+                ", earlyReflectionDelay = " + getEarlyReflectionDelay() +
+                ", earlyReflectionIntensity = " + getEarlyReflectionIntensity() +
+                ", lateReflectionDelay = " + getLateReflectionDelay() +
+                ", lateReflectionIntensity = " + getLateReflectionIntensity() +
+                ", decayTime = " + getDecayTime() + "]";
+    }
 }
-
 
 
 /*** ReverbType.java ***/

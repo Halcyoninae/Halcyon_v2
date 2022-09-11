@@ -30,86 +30,65 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-/**	General information about the sequencer.
- *	This class encapsulates the information of
- *	snd_seq_system_info_t.
+/**
+ * General information about the sequencer.
+ * This class encapsulates the information of
+ * snd_seq_system_info_t.
  */
-public class AlsaSeqSystemInfo
-{
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+public class AlsaSeqSystemInfo {
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
 
 
-
-	/**
-	 *	Holds the pointer to snd_seq_system_info_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	/*private*/ long	m_lNativeHandle;
-
+    /**
+     * Holds the pointer to snd_seq_system_info_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    /*private*/ long m_lNativeHandle;
 
 
-	public AlsaSeqSystemInfo()
-	{
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.SystemInfo.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of system_info failed");
-		}
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.SystemInfo.<init>(): end"); }
-	}
+    public AlsaSeqSystemInfo() {
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.SystemInfo.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of system_info failed");
+        }
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.SystemInfo.<init>(): end");
+        }
+    }
 
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private native int malloc();
 
+    public native void free();
 
+    public native int getQueues();
 
-	private native int malloc();
-	public native void free();
+    public native int getClients();
 
+    public native int getPorts();
 
+    public native int getChannels();
 
-	public native int getQueues();
+    public native int getCurrentClients();
 
-
-
-	public native int getClients();
-
-
-
-	public native int getPorts();
-
-
-
-	public native int getChannels();
-
-
-
-	public native int getCurrentClients();
-
-
-
-	public native int getCurrentQueues();
-
-	private static native void setTrace(boolean bTrace);
+    public native int getCurrentQueues();
 }
-
-
 
 
 /*** AlsaSeqSystemInfo.java ***/

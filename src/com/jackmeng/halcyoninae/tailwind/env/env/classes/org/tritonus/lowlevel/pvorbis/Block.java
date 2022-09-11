@@ -31,127 +31,112 @@ import org.tritonus.lowlevel.pogg.Packet;
 import org.tritonus.share.TDebug;
 
 
-/** Wrapper for vorbis_block.
+/**
+ * Wrapper for vorbis_block.
  */
-public class Block
-{
-        static
-        {
-                Ogg.loadNativeLibrary();
-                if (TDebug.TraceVorbisNative)
-                {
-                        setTrace(true);
-                }
+public class Block {
+    static {
+        Ogg.loadNativeLibrary();
+        if (TDebug.TraceVorbisNative) {
+            setTrace(true);
         }
+    }
 
 
-
-	/**
-	 *	Holds the pointer to vorbis_block
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
-
+    /**
+     * Holds the pointer to vorbis_block
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
-	public Block()
-	{
-		if (TDebug.TraceVorbisNative) { TDebug.out("Block.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of vorbis_block failed");
-		}
-		if (TDebug.TraceVorbisNative) { TDebug.out("Block.<init>(): end"); }
-	}
+    public Block() {
+        if (TDebug.TraceVorbisNative) {
+            TDebug.out("Block.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of vorbis_block failed");
+        }
+        if (TDebug.TraceVorbisNative) {
+            TDebug.out("Block.<init>(): end");
+        }
+    }
 
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private native int malloc();
 
+    public native void free();
 
+    /**
+     * Calls vorbis_block_init().
+     */
+    public int init(DspState dspState) {
+        return init_native(dspState);
+    }
 
-	private native int malloc();
-	public native void free();
+    /**
+     * Calls vorbis_block_init().
+     */
+    public native int init_native(DspState dspState);
 
+    /**
+     * Calls vorbis_bitrate_addblock().
+     */
+    public int addBlock() {
+        return addBlock_native();
+    }
 
-	/** Calls vorbis_block_init().
-	 */
-	public int init(DspState dspState)
-	{
-		return init_native(dspState);
-	}
+    /**
+     * Calls vorbis_bitrate_addblock().
+     */
+    public native int addBlock_native();
 
+    /**
+     * Calls vorbis_analysis().
+     */
+    public int analysis(Packet packet) {
+        return analysis_native(packet);
+    }
 
-	/** Calls vorbis_block_init().
-	 */
-	public native int init_native(DspState dspState);
+    /**
+     * Calls vorbis_analysis().
+     */
+    public native int analysis_native(Packet packet);
 
+    /**
+     * Calls vorbis_synthesis().
+     */
+    public int synthesis(Packet packet) {
+        return synthesis_native(packet);
+    }
 
-	/** Calls vorbis_bitrate_addblock().
-	 */
-	public int addBlock()
-	{
-		return addBlock_native();
-	}
+    /**
+     * Calls vorbis_synthesis().
+     */
+    public native int synthesis_native(Packet packet);
 
+    /**
+     * Calls vorbis_block_clear().
+     */
+    public int clear() {
+        return clear_native();
+    }
 
-	/** Calls vorbis_bitrate_addblock().
-	 */
-	public native int addBlock_native();
-
-
-	/** Calls vorbis_analysis().
-	 */
-	public int analysis(Packet packet)
-	{
-		return analysis_native(packet);
-	}
-
-
-	/** Calls vorbis_analysis().
-	 */
-	public native int analysis_native(Packet packet);
-
-
-	/** Calls vorbis_synthesis().
-	 */
-	public int synthesis(Packet packet)
-	{
-		return synthesis_native(packet);
-	}
-
-
-	/** Calls vorbis_synthesis().
-	 */
-	public native int synthesis_native(Packet packet);
-
-
-	/** Calls vorbis_block_clear().
-	 */
-	public int clear()
-	{
-		return clear_native();
-	}
-
-
-	/** Calls vorbis_block_clear().
-	 */
-	public native int clear_native();
-
-
-	private static native void setTrace(boolean bTrace);
+    /**
+     * Calls vorbis_block_clear().
+     */
+    public native int clear_native();
 }
-
-
-
 
 
 /*** Block.java ***/

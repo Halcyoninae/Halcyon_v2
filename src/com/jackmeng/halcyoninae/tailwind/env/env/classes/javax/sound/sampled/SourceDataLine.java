@@ -27,37 +27,30 @@
 package javax.sound.sampled;
 
 
-
-
 public interface SourceDataLine
-extends DataLine
-{
-	public void open(AudioFormat audioFormat,
-			 int nBufferSize)
-		throws LineUnavailableException;
+        extends DataLine {
+    void open(AudioFormat audioFormat,
+              int nBufferSize)
+            throws LineUnavailableException;
 
 
-	public void open(AudioFormat audioFormat)
-		throws LineUnavailableException;
+    void open(AudioFormat audioFormat)
+            throws LineUnavailableException;
 
 
-	/** Write data to the line.
-
-	@param abData The buffer to use.
-
-	@param nOffset
-
-	@param nLength The length of the data that should be written,
-	in bytes. Can be less that the length of abData.
-
-	@return The number of bytes written. May be less than nLength.
-
-	*/
-	public int write(byte[] abData,
-			 int nOffset,
-			 int nLength);
+    /**
+     * Write data to the line.
+     *
+     * @param abData  The buffer to use.
+     * @param nOffset
+     * @param nLength The length of the data that should be written,
+     *                in bytes. Can be less that the length of abData.
+     * @return The number of bytes written. May be less than nLength.
+     */
+    int write(byte[] abData,
+              int nOffset,
+              int nLength);
 }
-
 
 
 /*** SourceDataLine.java ***/

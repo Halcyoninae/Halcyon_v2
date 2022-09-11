@@ -24,50 +24,41 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 public class VariableEntry
-extends WidthAndRate
-{
-	private String			m_strVariableName;
-	private boolean			m_bImports;
-	private boolean			m_bExports;
+        extends WidthAndRate {
+    private final String m_strVariableName;
+    private final boolean m_bImports;
+    private final boolean m_bExports;
 
 
-	public VariableEntry(String strVariableName,
-			     int nWidth,
-			     int nRate,
-			     boolean bImports,
-			     boolean bExports)
-	{
-		super(nWidth, nRate);
-		m_strVariableName = strVariableName;
-		m_bImports = bImports;
-		m_bExports = bExports;
-	}
+    public VariableEntry(String strVariableName,
+                         int nWidth,
+                         int nRate,
+                         boolean bImports,
+                         boolean bExports) {
+        super(nWidth, nRate);
+        m_strVariableName = strVariableName;
+        m_bImports = bImports;
+        m_bExports = bExports;
+    }
 
 
-
-	public String getVariableName()
-	{
-		return m_strVariableName;
-	}
+    public String getVariableName() {
+        return m_strVariableName;
+    }
 
 
-
-	public boolean getImports()
-	{
-		return m_bImports;
-	}
+    public boolean getImports() {
+        return m_bImports;
+    }
 
 
-
-	public boolean getExports()
-	{
-		return m_bExports;
-	}
+    public boolean getExports() {
+        return m_bExports;
+    }
 }
-
 
 
 /*** VariableEntry.java ***/

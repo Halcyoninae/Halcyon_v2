@@ -29,84 +29,80 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-/** TODO:
+/**
+ * TODO:
  */
-public class AlsaPcmHWParamsFormatMask
-{
-	/**
-	 *	Holds the pointer to snd_pcm_format_mask_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
+public class AlsaPcmHWParamsFormatMask {
+    /**
+     * Holds the pointer to snd_pcm_format_mask_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
-
-	public AlsaPcmHWParamsFormatMask()
-	{
-		if (TDebug.TraceAlsaPcmNative) { TDebug.out("AlsaPcmHWParamsFormatMask.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of format_mask failed");
-		}
-		if (TDebug.TraceAlsaPcmNative) { TDebug.out("AlsaPcmHWParamsFormatMask.<init>(): end"); }
-	}
-
-
-
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    public AlsaPcmHWParamsFormatMask() {
+        if (TDebug.TraceAlsaPcmNative) {
+            TDebug.out("AlsaPcmHWParamsFormatMask.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of format_mask failed");
+        }
+        if (TDebug.TraceAlsaPcmNative) {
+            TDebug.out("AlsaPcmHWParamsFormatMask.<init>(): end");
+        }
+    }
 
 
-	/**
-	 *	Calls snd_pcm_format_mask_malloc().
-	 */
-	private native int malloc();
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
 
-
-	/**
-	 *	Calls snd_pcm_format_mask_free().
-	 */
-	public native void free();
-
-	/**
-	 *	Calls snd_pcm_format_mask_none().
-	 */
-	public native void none();
-
-	/**
-	 *	Calls snd_pcm_format_mask_any().
-	 */
-	public native void any();
-
-	/**
-	 *	Calls snd_pcm_format_mask_test().
-	 */
-	public native boolean test(int nFormat);
+    /**
+     * Calls snd_pcm_format_mask_malloc().
+     */
+    private native int malloc();
 
 
-	/**
-	 *	Calls snd_pcm_format_mask_set().
-	 */
-	public native void set(int nFormat);
+    /**
+     * Calls snd_pcm_format_mask_free().
+     */
+    public native void free();
+
+    /**
+     * Calls snd_pcm_format_mask_none().
+     */
+    public native void none();
+
+    /**
+     * Calls snd_pcm_format_mask_any().
+     */
+    public native void any();
+
+    /**
+     * Calls snd_pcm_format_mask_test().
+     */
+    public native boolean test(int nFormat);
 
 
-	/**
-	 *	Calls snd_pcm_format_mask_reset().
-	 */
-	public native void reset(int nFormat);
+    /**
+     * Calls snd_pcm_format_mask_set().
+     */
+    public native void set(int nFormat);
+
+
+    /**
+     * Calls snd_pcm_format_mask_reset().
+     */
+    public native void reset(int nFormat);
 
 
 }
-
 
 
 /*** AlsaPcmHWParamsFormatMask.java ***/

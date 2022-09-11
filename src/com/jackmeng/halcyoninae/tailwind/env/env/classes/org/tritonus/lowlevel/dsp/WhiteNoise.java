@@ -29,20 +29,20 @@ package org.tritonus.lowlevel.dsp;
 import java.util.Random;
 
 public class WhiteNoise implements Source {
-	private Random m_random;
+    private final Random m_random;
 
-	public WhiteNoise() {
-		this(new Random());
-	}
+    public WhiteNoise() {
+        this(new Random());
+    }
 
-	public WhiteNoise(Random random) {
-		m_random = random;
-	}
+    public WhiteNoise(Random random) {
+        m_random = random;
+    }
 
-	public float process() {
-		float fOutput = m_random.nextFloat() * 2.0F - 1.0F;
-		return fOutput;
-	}
+    public float process() {
+        float fOutput = m_random.nextFloat() * 2.0F - 1.0F;
+        return fOutput;
+    }
 }
 
 /*** WhiteNoise.java ***/

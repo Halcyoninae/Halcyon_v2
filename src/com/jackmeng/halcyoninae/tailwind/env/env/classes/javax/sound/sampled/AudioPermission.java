@@ -29,30 +29,28 @@ package javax.sound.sampled;
 import java.security.BasicPermission;
 
 
-/** TODO:
+/**
+ * TODO:
  */
 public class AudioPermission
-extends BasicPermission
-{
-	/** TODO:
-	 */
-	public AudioPermission(String strName)
-	{
-		super(strName);
-	}
+        extends BasicPermission {
+    /**
+     * TODO:
+     */
+    public AudioPermission(String strName) {
+        super(strName);
+    }
 
 
-
-	/** TODO:
-	 */
-	public AudioPermission(String strName,
-			       String strActions)
-	{
-		super(strName,
-		      strActions);
-	}
+    /**
+     * TODO:
+     */
+    public AudioPermission(String strName,
+                           String strActions) {
+        super(strName,
+                strActions);
+    }
 }
-
 
 
 /*** AudioPermission.java ***/

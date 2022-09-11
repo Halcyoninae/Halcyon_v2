@@ -26,62 +26,63 @@
 
 package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.debug;
 
-/** Debugging output aspect.
+/**
+ * Debugging output aspect.
  */
 privileged aspect AJDebugVorbis
-extends Utils
-{
-	pointcut allExceptions(): handler(Throwable+);
+        extends Utils
+        {
+        pointcut allExceptions():handler(Throwable+);
 
-	pointcut AudioConverterCalls():
-		execution(JorbisFormatConversionProvider.new(..)) ||
-		execution(* JorbisFormatConversionProvider.*(..)) ||
-		execution(DecodedJorbisAudioInputStream.new(..)) ||
-		execution(* DecodedJorbisAudioInputStream.*(..));
+        pointcut AudioConverterCalls():
+        execution(JorbisFormatConversionProvider.new(..))||
+        execution(*JorbisFormatConversionProvider.*(..))||
+        execution(DecodedJorbisAudioInputStream.new(..))||
+        execution(*DecodedJorbisAudioInputStream.*(..));
 
 
 // 	pointcut sourceDataLine():
 // 		call(* SourceDataLine+.*(..));
 
 
-	// currently not used
+        // currently not used
 // 	pointcut printVelocity(): execution(* JavaSoundToneGenerator.playTone(..)) && call(JavaSoundToneGenerator.ToneThread.new(..));
 
-	// pointcut tracedCall(): execution(protected void JavaSoundAudioPlayer.doRealize() throws Exception);
+        // pointcut tracedCall(): execution(protected void JavaSoundAudioPlayer.doRealize() throws Exception);
 
 
-	///////////////////////////////////////////////////////
-	//
-	//	ACTIONS
-	//
-	///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
+        //
+        //	ACTIONS
+        //
+        ///////////////////////////////////////////////////////
 
 
-	before(): AudioConverterCalls()
-		{
-			if (TDebug.TraceAudioConverter)
-			{
-				outEnteringJoinPoint(thisJoinPoint);
-			}
-		}
+        before():AudioConverterCalls()
+        {
+        if(TDebug.TraceAudioConverter)
+        {
+        outEnteringJoinPoint(thisJoinPoint);
+        }
+        }
 
-	after(): AudioConverterCalls()
-		{
-			if (TDebug.TraceAudioConverter)
-			{
-				outLeavingJoinPoint(thisJoinPoint);
-			}
-		}
+        after():AudioConverterCalls()
+        {
+        if(TDebug.TraceAudioConverter)
+        {
+        outLeavingJoinPoint(thisJoinPoint);
+        }
+        }
 
 
-	before(Throwable t): allExceptions() && args(t)
-		{
-			if (TDebug.TraceAllExceptions)
-			{
-				TDebug.out(t);
-			}
-		}
-}
+        before(Throwable t):allExceptions()&&args(t)
+        {
+        if(TDebug.TraceAllExceptions)
+        {
+        TDebug.out(t);
+        }
+        }
+        }
 
 
 /*** AJDebug.java ***/

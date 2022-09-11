@@ -57,48 +57,41 @@ paul.kellett@maxim.abel.co.uk
 http://www.abel.co.uk/~maxim/
  */
 public class PinkNoise
-implements Source
-{
-	private Source		m_whiteNoiseSource;
-	private float		m_b0, m_b1, m_b2, m_b3, m_b4, m_b5, m_b6;
+        implements Source {
+    private final Source m_whiteNoiseSource;
+    private float m_b0, m_b1, m_b2, m_b3, m_b4, m_b5, m_b6;
 
 
-
-	public PinkNoise(float fSampleRate)
-	{
-		this(fSampleRate, new WhiteNoise());
-	}
+    public PinkNoise(float fSampleRate) {
+        this(fSampleRate, new WhiteNoise());
+    }
 
 
-	public PinkNoise(float fSampleRate, Random random)
-	{
-		this(fSampleRate, new WhiteNoise(random));
-	}
+    public PinkNoise(float fSampleRate, Random random) {
+        this(fSampleRate, new WhiteNoise(random));
+    }
 
 
-	private PinkNoise(float fSampleRate, Source whiteNoiseSource)
-	{
-		// TODO: scale filter for sample rate
-		m_whiteNoiseSource = whiteNoiseSource;
-	}
+    private PinkNoise(float fSampleRate, Source whiteNoiseSource) {
+        // TODO: scale filter for sample rate
+        m_whiteNoiseSource = whiteNoiseSource;
+    }
 
 
-	public float process()
-	{
-		float	fWhite = m_whiteNoiseSource.process();
+    public float process() {
+        float fWhite = m_whiteNoiseSource.process();
 
-		m_b0 = 0.99886F * m_b0 + fWhite * 0.0555179F;
-		m_b1 = 0.99332F * m_b1 + fWhite * 0.0750759F;
-		m_b2 = 0.96900F * m_b2 + fWhite * 0.1538520F;
-		m_b3 = 0.86650F * m_b3 + fWhite * 0.3104856F;
-		m_b4 = 0.55000F * m_b4 + fWhite * 0.5329522F;
-		m_b5 = -0.7616F * m_b5 - fWhite * 0.0168980F;
-		float	fPink = m_b0 + m_b1 + m_b2 + m_b3 + m_b4 + m_b5 + m_b6 + fWhite * 0.5362F;
-		m_b6 = fWhite * 0.115926F;
-		return fPink;
-	}
-} 
-
+        m_b0 = 0.99886F * m_b0 + fWhite * 0.0555179F;
+        m_b1 = 0.99332F * m_b1 + fWhite * 0.0750759F;
+        m_b2 = 0.96900F * m_b2 + fWhite * 0.1538520F;
+        m_b3 = 0.86650F * m_b3 + fWhite * 0.3104856F;
+        m_b4 = 0.55000F * m_b4 + fWhite * 0.5329522F;
+        m_b5 = -0.7616F * m_b5 - fWhite * 0.0168980F;
+        float fPink = m_b0 + m_b1 + m_b2 + m_b3 + m_b4 + m_b5 + m_b6 + fWhite * 0.5362F;
+        m_b6 = fWhite * 0.115926F;
+        return fPink;
+    }
+}
 
 
 /*** PinkNoise.java ***/

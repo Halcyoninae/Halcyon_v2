@@ -29,80 +29,58 @@
 package javax.sound.sampled;
 
 
-
-public interface Line
-{
-	public Line.Info getLineInfo();
+public interface Line {
+    Line.Info getLineInfo();
 
 
-
-	public void open()
-		throws LineUnavailableException;
-
+    void open()
+            throws LineUnavailableException;
 
 
-	public void close();
+    void close();
 
 
-
-	public boolean isOpen();
-
+    boolean isOpen();
 
 
-	public Control[] getControls();
+    Control[] getControls();
 
 
-
-	public boolean isControlSupported(Control.Type controlType);
-
+    boolean isControlSupported(Control.Type controlType);
 
 
-	public Control getControl(Control.Type controlType);
+    Control getControl(Control.Type controlType);
 
 
-
-	public void addLineListener(LineListener listener);
-
+    void addLineListener(LineListener listener);
 
 
-	public void removeLineListener(LineListener listener);
+    void removeLineListener(LineListener listener);
 
 
+    class Info {
+        private final Class m_lineClass;
 
 
-	public static class Info
-	{
-		private Class		m_lineClass;
-	
+        public Info(Class lineClass) {
+            m_lineClass = lineClass;
+        }
 
 
-
-		public Info(Class lineClass)
-		{
-			m_lineClass = lineClass;
-		}
+        public Class getLineClass() {
+            return m_lineClass;
+        }
 
 
-
-		public Class getLineClass()
-		{
-			return m_lineClass;
-		}
+        public boolean matches(Line.Info info) {
+            return this.getLineClass() == info.getLineClass();
+        }
 
 
-
-		public boolean matches(Line.Info info)
-		{
-			return this.getLineClass() == info.getLineClass();
-		}
-
-
-
-		public String toString()
-		{
-			return super.toString() + "[lineClass=" + getLineClass() + "]";
-		}
-	}
+        public String toString() {
+            return super.toString() + "[lineClass=" + getLineClass() + "]";
+        }
+    }
 }
 
 

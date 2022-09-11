@@ -7,16 +7,16 @@ import javax.sound.sampled.AudioFormat;
 
 public class GeneratorAudioInputStream extends FloatAudioInputStream {
 
-	private final AbstractGenerator generator;
+    private final AbstractGenerator generator;
 
-	public GeneratorAudioInputStream(AbstractGenerator generator,
-			AudioFormat targetFormat) {
-		super(null, targetFormat);
-		this.generator = generator;
-	}
+    public GeneratorAudioInputStream(AbstractGenerator generator,
+                                     AudioFormat targetFormat) {
+        super(null, targetFormat);
+        this.generator = generator;
+    }
 
-	@Override
-	protected void convert(FloatSampleBuffer buffer) {
-		// TODO Auto-generated method stub
-	}
+    @Override
+    protected void convert(FloatSampleBuffer buffer) {
+        // TODO Auto-generated method stub
+    }
 }

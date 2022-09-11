@@ -34,53 +34,44 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
+public abstract class MidiFileWriter {
+    public abstract int[] getMidiFileTypes();
 
-public abstract class MidiFileWriter
-{
-	public abstract int[] getMidiFileTypes();
+    public abstract int[] getMidiFileTypes(Sequence sequence);
 
-	public abstract int[] getMidiFileTypes(Sequence sequence);
-
-	public boolean isFileTypeSupported(int nFileType)
-	{
-		int[]	anFileTypes = getMidiFileTypes();
-		for (int i = 0; i < anFileTypes.length; i++)
-		{
-			if (anFileTypes[i] == nFileType)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean isFileTypeSupported(int nFileType) {
+        int[] anFileTypes = getMidiFileTypes();
+        for (int i = 0; i < anFileTypes.length; i++) {
+            if (anFileTypes[i] == nFileType) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-	public boolean isFileTypeSupported(int nFileType, Sequence sequence)
-	{
-		int[]	anFileTypes = getMidiFileTypes(sequence);
-		for (int i = 0; i < anFileTypes.length; i++)
-		{
-			if (anFileTypes[i] == nFileType)
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean isFileTypeSupported(int nFileType, Sequence sequence) {
+        int[] anFileTypes = getMidiFileTypes(sequence);
+        for (int i = 0; i < anFileTypes.length; i++) {
+            if (anFileTypes[i] == nFileType) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-	public abstract int write(Sequence sequence,
-				  int nFileType,
-				  OutputStream outputStream)
-		throws IOException;
+    public abstract int write(Sequence sequence,
+                              int nFileType,
+                              OutputStream outputStream)
+            throws IOException;
 
 
-	public abstract int write(Sequence sequence,
-				  int nFileType,
-				  File outputFile)
-		throws IOException;
+    public abstract int write(Sequence sequence,
+                              int nFileType,
+                              File outputFile)
+            throws IOException;
 }
-
 
 
 /*** MidiFileWriter.java ***/

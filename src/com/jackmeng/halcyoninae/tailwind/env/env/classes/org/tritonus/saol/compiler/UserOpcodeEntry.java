@@ -24,44 +24,36 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import org.tritonus.saol.sablecc.node.AOpcodedeclOpcodedecl;
 
 
-
-/**	Representation of one opcode implementation.
-	This class is used for entries in the opcode table.
+/**
+ * Representation of one opcode implementation.
+ * This class is used for entries in the opcode table.
  */
-public class UserOpcodeEntry
-{
-	private String			m_strOpcodeName;
-	private AOpcodedeclOpcodedecl	m_startNode;
+public class UserOpcodeEntry {
+    private final String m_strOpcodeName;
+    private final AOpcodedeclOpcodedecl m_startNode;
 
 
-
-	public UserOpcodeEntry(String strOpcodeName,
-			       AOpcodedeclOpcodedecl startNode)
-	{
-		m_strOpcodeName = strOpcodeName;
-		m_startNode = startNode;
-	}
+    public UserOpcodeEntry(String strOpcodeName,
+                           AOpcodedeclOpcodedecl startNode) {
+        m_strOpcodeName = strOpcodeName;
+        m_startNode = startNode;
+    }
 
 
-
-	public String getOpcodeName()
-	{
-		return m_strOpcodeName;
-	}
+    public String getOpcodeName() {
+        return m_strOpcodeName;
+    }
 
 
-
-	public AOpcodedeclOpcodedecl getStartNode()
-	{
-		return m_startNode;
-	}
+    public AOpcodedeclOpcodedecl getStartNode() {
+        return m_startNode;
+    }
 }
-
 
 
 /*** UserOpcodeEntry.java ***/

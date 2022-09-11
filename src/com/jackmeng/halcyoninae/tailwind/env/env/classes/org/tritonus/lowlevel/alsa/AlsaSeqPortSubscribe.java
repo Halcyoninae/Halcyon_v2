@@ -30,80 +30,76 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-public class AlsaSeqPortSubscribe
-{
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+public class AlsaSeqPortSubscribe {
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
 
 
-
-	/**
-	 *	Holds the pointer to snd_seq_port_info_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	/*private*/ long	m_lNativeHandle;
-
+    /**
+     * Holds the pointer to snd_seq_port_info_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    /*private*/ long m_lNativeHandle;
 
 
-	public AlsaSeqPortSubscribe()
-	{
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.PortSubscribe.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of port_info failed");
-		}
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.PortSubscribe.<init>(): end"); }
-	}
+    public AlsaSeqPortSubscribe() {
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.PortSubscribe.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of port_info failed");
+        }
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.PortSubscribe.<init>(): end");
+        }
+    }
 
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private native int malloc();
 
+    public native void free();
 
+    public native int getSenderClient();
 
-	private native int malloc();
-	public native void free();
+    public native int getSenderPort();
 
+    public native int getDestClient();
 
+    public native int getDestPort();
 
-	public native int getSenderClient();
-	public native int getSenderPort();
-	public native int getDestClient();
-	public native int getDestPort();
+    public native int getQueue();
 
-	public native int getQueue();
+    public native void setQueue(int nQueue);
 
-	public native boolean getExclusive();
-	public native boolean getTimeUpdate();
-	public native boolean getTimeReal();
+    public native boolean getExclusive();
 
-	public native void setSender(int nClient, int nPort);
-	public native void setDest(int nClient, int nPort);
+    public native void setExclusive(boolean bExclusive);
 
-	public native void setQueue(int nQueue);
+    public native boolean getTimeUpdate();
 
-	public native void setExclusive(boolean bExclusive);
-	public native void setTimeUpdate(boolean bUpdate);
-	public native void setTimeReal(boolean bReal);
+    public native void setTimeUpdate(boolean bUpdate);
 
-	private static native void setTrace(boolean bTrace);
+    public native boolean getTimeReal();
+
+    public native void setTimeReal(boolean bReal);
+
+    public native void setSender(int nClient, int nPort);
+
+    public native void setDest(int nClient, int nPort);
 }
-
-
 
 
 /*** AlsaSeqPortSubscribe.java ***/

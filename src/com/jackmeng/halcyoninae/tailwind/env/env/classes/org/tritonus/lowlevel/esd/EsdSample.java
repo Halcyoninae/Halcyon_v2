@@ -29,106 +29,101 @@
 package org.tritonus.lowlevel.esd;
 
 
-
 public class EsdSample
-extends	Esd
-{
-	/**	Holds socket fd to EsounD.
-	 *	This variable is only used by native code.
-	 *	This field is long because on 64 bit architectures, the native
-	 *	size of ints may be 64 bit.
-	 */
-	@SuppressWarnings("unused")
-	private long			m_lNativeFd;
+        extends Esd {
+    static {
+        Esd.loadNativeLibrary();
+    }
 
-	/**	Holds the sample id.
-	 *	This variable is only used by native code.
-	 *	This field is long because on 64 bit architectures, the native
-	 *	size of ints may be 64 bit.
-	 */
-	@SuppressWarnings("unused")
-	private long			m_lNativeId;
-
-
-
-
-
-	static
-	{
-		Esd.loadNativeLibrary();
-	}
+    /**
+     * Holds socket fd to EsounD.
+     * This variable is only used by native code.
+     * This field is long because on 64 bit architectures, the native
+     * size of ints may be 64 bit.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeFd;
+    /**
+     * Holds the sample id.
+     * This variable is only used by native code.
+     * This field is long because on 64 bit architectures, the native
+     * size of ints may be 64 bit.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeId;
 
 
-
-	public EsdSample()
-	{
-	}
+    public EsdSample() {
+    }
 
 
-	/**	Opens the connection to esd and starts uploading the sample data.
-	 *	After this call, you can upload the sample data with
-	 *	calls to write() (multiple calls allowed). Then you can
-	 *	play or loop the sample.
-	 *	To free native resources, call close() if you're done with
-	 *	the sample (not after you've uploaded all data).
-	 */
-	public native void open(int nFormat, int nSampleRate, int nLength);
+    /**
+     * Opens the connection to esd and starts uploading the sample data.
+     * After this call, you can upload the sample data with
+     * calls to write() (multiple calls allowed). Then you can
+     * play or loop the sample.
+     * To free native resources, call close() if you're done with
+     * the sample (not after you've uploaded all data).
+     */
+    public native void open(int nFormat, int nSampleRate, int nLength);
 //		throws IOException;
 
 
-
-	/**	Uploads a piece of data for the sample.
-	 *	You have to open a connection to esd with open() before
-	 *	calling this method. Multiple calls to this (write())
-	 *	method are allowed. The data uploaded in consequtive
-	 *	calls are simply concatenated.
-	 *
-	 *	@return	the number of bytes written
-	 */
-	public native int write(byte[] abData, int nOffset, int nLength);
-		//throws IOException;
-
-
-
-	/**	Closes the connection to esd.
-	 *	Use only if you are completely done with this sample.
-	 */
-	public native void close();
+    /**
+     * Uploads a piece of data for the sample.
+     * You have to open a connection to esd with open() before
+     * calling this method. Multiple calls to this (write())
+     * method are allowed. The data uploaded in consequtive
+     * calls are simply concatenated.
+     *
+     * @return the number of bytes written
+     */
+    public native int write(byte[] abData, int nOffset, int nLength);
+    //throws IOException;
 
 
+    /**
+     * Closes the connection to esd.
+     * Use only if you are completely done with this sample.
+     */
+    public native void close();
 
-	/**	Play the sample once.
-	 */
-	public native void play();
+
+    /**
+     * Play the sample once.
+     */
+    public native void play();
 
 
+    /**
+     * Play the sample indefinitely.
+     */
+    public native void loop();
 
-	/**	Play the sample indefinitely.
-	 */
-	public native void loop();
+    /**
+     * Stop a looping sample at end.
+     */
+    public native void stop();
 
-	/**	Stop a looping sample at end.
-	 */
-	public native void stop();
+    /**
+     * Stop a playing sample immediately.
+     */
+    public native void kill();
 
-	/**	Stop a playing sample immediately.
-	 */
-	public native void kill();
+    /**
+     * Uncache a sample from the server.
+     * This call frees resources in the server associated with
+     * the sample and invalidated the internal id.
+     * Calls to play() and loop() are no longer allowed after
+     * return from this method.
+     */
+    public native void free();
 
-	/**	Uncache a sample from the server.
-	 *	This call frees resources in the server associated with
-	 *	the sample and invalidated the internal id.
-	 *	Calls to play() and loop() are no longer allowed after
-	 *	return from this method.
-	 */
-	public native void free();
-
-	/**	Sets the volume for the sample.
-	 *
-	 */
-	public native void setVolume(int nLeftVolume, int nRightVolume);
+    /**
+     * Sets the volume for the sample.
+     */
+    public native void setVolume(int nLeftVolume, int nRightVolume);
 }
-
 
 
 /*** EsdSample.java ***/

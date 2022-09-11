@@ -29,37 +29,59 @@
 package javax.sound.midi;
 
 
+public interface MidiChannel {
+    void noteOn(int nNoteNumber, int nVelocity);
 
-public interface MidiChannel
-{
-	public void noteOn(int nNoteNumber, int nVelocity);
-	public void noteOff(int nNoteNumber, int nVelocity);
-	public void noteOff(int nNoteNumber);
-	public void setPolyPressure(int nNoteNumber, int nPressure);
-	public int getPolyPressure(int nNoteNumber);
-	public void setChannelPressure(int nPressure);
-	public int getChannelPressure();
-	public void controlChange(int nController, int nValue);
-	public int getController(int nController);
-	public void programChange(int nProgram);
-	public void programChange(int nBank, int nProgram);
-	public int getProgram();
-	public void setPitchBend(int nBend);
-	public int getPitchBend();
-	public void resetAllControllers();
-	public void allNotesOff();
-	public void allSoundOff();
-	public boolean localControl(boolean bOn);
-	public void setMono(boolean bMono);
-	public boolean getMono();
-	public void setOmni(boolean bOmni);
-	public boolean getOmni();
-	public void setMute(boolean bMute);
-	public boolean getMute();
-	public void setSolo(boolean bSolo);
-	public boolean getSolo();
+    void noteOff(int nNoteNumber, int nVelocity);
+
+    void noteOff(int nNoteNumber);
+
+    void setPolyPressure(int nNoteNumber, int nPressure);
+
+    int getPolyPressure(int nNoteNumber);
+
+    int getChannelPressure();
+
+    void setChannelPressure(int nPressure);
+
+    void controlChange(int nController, int nValue);
+
+    int getController(int nController);
+
+    void programChange(int nProgram);
+
+    void programChange(int nBank, int nProgram);
+
+    int getProgram();
+
+    int getPitchBend();
+
+    void setPitchBend(int nBend);
+
+    void resetAllControllers();
+
+    void allNotesOff();
+
+    void allSoundOff();
+
+    boolean localControl(boolean bOn);
+
+    boolean getMono();
+
+    void setMono(boolean bMono);
+
+    boolean getOmni();
+
+    void setOmni(boolean bOmni);
+
+    boolean getMute();
+
+    void setMute(boolean bMute);
+
+    boolean getSolo();
+
+    void setSolo(boolean bSolo);
 }
-
 
 
 /*** MidiChannel.java ***/

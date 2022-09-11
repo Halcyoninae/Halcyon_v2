@@ -30,15 +30,17 @@ package org.tritonus.lowlevel.dsp;
  * An implementation of the Rectangular window.
  */
 public class RectangularWindow implements FIRWindow {
-	/** {@inheritDoc} */
-	@Override
-	public double[] getWindow(int nOrder) {
-		double[] adWindow = new double[nOrder];
-		for (int n = 0; n < nOrder; n++) {
-			adWindow[n] = 1.0;
-		}
-		return adWindow;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getWindow(int nOrder) {
+        double[] adWindow = new double[nOrder];
+        for (int n = 0; n < nOrder; n++) {
+            adWindow[n] = 1.0;
+        }
+        return adWindow;
+    }
 }
 
 /*** RectangularWindow.java ***/

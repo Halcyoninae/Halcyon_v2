@@ -42,44 +42,40 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-
-/**	AudioFileReader class for GSM 06.10 data.
-	@author Matthias Pfisterer
+/**
+ * AudioFileReader class for GSM 06.10 data.
+ *
+ * @author Matthias Pfisterer
  */
 public class GSMAudioFileReader
-extends	TAudioFileReader
-{
-	private static final int	GSM_MAGIC = 0xD0;
-	private static final int	GSM_MAGIC_MASK = 0xF0;
+        extends TAudioFileReader {
+    private static final int GSM_MAGIC = 0xD0;
+    private static final int GSM_MAGIC_MASK = 0xF0;
 
-	private static final int	MARK_LIMIT = 1;
-
+    private static final int MARK_LIMIT = 1;
 
 
-	public GSMAudioFileReader()
-	{
-		super(MARK_LIMIT, true);
-	}
+    public GSMAudioFileReader() {
+        super(MARK_LIMIT, true);
+    }
 
 
+    protected AudioFileFormat getAudioFileFormat(InputStream inputStream, long lFileSizeInBytes)
+            throws UnsupportedAudioFileException, IOException {
+        if (TDebug.TraceAudioFileReader) {
+            TDebug.out("GSMAudioFileReader.getAudioFileFormat(): begin");
+        }
+        int b0 = inputStream.read();
+        if (b0 < 0) {
+            throw new EOFException();
+        }
 
-	protected AudioFileFormat getAudioFileFormat(InputStream inputStream, long lFileSizeInBytes)
-		throws UnsupportedAudioFileException, IOException
-	{
-		if (TDebug.TraceAudioFileReader) { TDebug.out("GSMAudioFileReader.getAudioFileFormat(): begin"); }
-		int	b0 = inputStream.read();
-		if (b0 < 0)
-		{
-			throw new EOFException();
-		}
-
-		/*
-		 *	Check for magic number.
-		 */
-		if ((b0 & GSM_MAGIC_MASK) != GSM_MAGIC)
-		{
-			throw new UnsupportedAudioFileException("not a GSM stream: wrong magic number");
-		}
+        /*
+         *	Check for magic number.
+         */
+        if ((b0 & GSM_MAGIC_MASK) != GSM_MAGIC) {
+            throw new UnsupportedAudioFileException("not a GSM stream: wrong magic number");
+        }
 
 
 		/*
@@ -89,47 +85,46 @@ extends	TAudioFileReader
 		  NOT_SPECIFIED. 'Unknown' is considered less incorrect than
 		  a wrong value.
 		*/
-		// [fb] not specifying it causes Sun's Wave file writer to write rubbish
-		int	nByteSize = AudioSystem.NOT_SPECIFIED;
-		int	nFrameSize = AudioSystem.NOT_SPECIFIED;
-		Map<String, Object> properties = new HashMap<String, Object>();
-		if (lFileSizeInBytes != AudioSystem.NOT_SPECIFIED)
-		{
-			// the number of GSM frames
-			long lFrameSize = lFileSizeInBytes / 33;
-			// duration in microseconds
-			long lDuration = lFrameSize * 20000;
-			properties.put("duration", lDuration);
-			if (lFileSizeInBytes <= Integer.MAX_VALUE)
-			{
-				nByteSize = (int) lFileSizeInBytes;
-				nFrameSize = (int) (lFileSizeInBytes / 33);
-			}
-		}
+        // [fb] not specifying it causes Sun's Wave file writer to write rubbish
+        int nByteSize = AudioSystem.NOT_SPECIFIED;
+        int nFrameSize = AudioSystem.NOT_SPECIFIED;
+        Map<String, Object> properties = new HashMap<String, Object>();
+        if (lFileSizeInBytes != AudioSystem.NOT_SPECIFIED) {
+            // the number of GSM frames
+            long lFrameSize = lFileSizeInBytes / 33;
+            // duration in microseconds
+            long lDuration = lFrameSize * 20000;
+            properties.put("duration", lDuration);
+            if (lFileSizeInBytes <= Integer.MAX_VALUE) {
+                nByteSize = (int) lFileSizeInBytes;
+                nFrameSize = (int) (lFileSizeInBytes / 33);
+            }
+        }
 
-		Map<String, Object> afProperties = new HashMap<String, Object>();
-		afProperties.put("bitrate", 13200L);
-		AudioFormat	format = new AudioFormat(
-			new AudioFormat.Encoding("GSM0610"),
-			8000.0F,
-			AudioSystem.NOT_SPECIFIED /* ??? [sample size in bits] */,
-			1,
-			33,
-			50.0F,
-			true,	// this value is chosen arbitrarily
-			afProperties);
-		AudioFileFormat	audioFileFormat =
-			new TAudioFileFormat(
-				new AudioFileFormat.Type("GSM","gsm"),
-				format,
-				nFrameSize,
-				nByteSize,
-				properties);
-		if (TDebug.TraceAudioFileReader) { TDebug.out("GSMAudioFileReader.getAudioFileFormat(): end"); }
-		return audioFileFormat;
-	}
+        Map<String, Object> afProperties = new HashMap<String, Object>();
+        afProperties.put("bitrate", 13200L);
+        AudioFormat format = new AudioFormat(
+                new AudioFormat.Encoding("GSM0610"),
+                8000.0F,
+                AudioSystem.NOT_SPECIFIED /* ??? [sample size in bits] */,
+                1,
+                33,
+                50.0F,
+                true,    // this value is chosen arbitrarily
+                afProperties);
+        AudioFileFormat audioFileFormat =
+                new TAudioFileFormat(
+                        new AudioFileFormat.Type("GSM", "gsm"),
+                        format,
+                        nFrameSize,
+                        nByteSize,
+                        properties);
+        if (TDebug.TraceAudioFileReader) {
+            TDebug.out("GSMAudioFileReader.getAudioFileFormat(): end");
+        }
+        return audioFileFormat;
+    }
 }
-
 
 
 /*** GSMAudioFileReader.java ***/

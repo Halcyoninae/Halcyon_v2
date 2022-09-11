@@ -26,7 +26,7 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package	javax.sound.sampled.spi;
+package javax.sound.sampled.spi;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -35,61 +35,48 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 
-
-public abstract class AudioFileWriter
-{
-	public abstract AudioFileFormat.Type[] getAudioFileTypes();
+public abstract class AudioFileWriter {
+    public abstract AudioFileFormat.Type[] getAudioFileTypes();
 
 
-	public boolean isFileTypeSupported(AudioFileFormat.Type fileType)
-	{
-		AudioFileFormat.Type[]	aFileTypes = getAudioFileTypes();
-		return isFileTypeSupportedImpl(aFileTypes, fileType);
-	}
+    public boolean isFileTypeSupported(AudioFileFormat.Type fileType) {
+        AudioFileFormat.Type[] aFileTypes = getAudioFileTypes();
+        return isFileTypeSupportedImpl(aFileTypes, fileType);
+    }
 
 
-
-	public abstract AudioFileFormat.Type[] getAudioFileTypes(AudioInputStream audioInputStream);
-
+    public abstract AudioFileFormat.Type[] getAudioFileTypes(AudioInputStream audioInputStream);
 
 
-	public boolean isFileTypeSupported(
-		AudioFileFormat.Type fileType,
-		AudioInputStream audioInputStream)
-	{
-		AudioFileFormat.Type[]	aFileTypes = getAudioFileTypes(audioInputStream);
-		return isFileTypeSupportedImpl(aFileTypes, fileType);
-	}
+    public boolean isFileTypeSupported(
+            AudioFileFormat.Type fileType,
+            AudioInputStream audioInputStream) {
+        AudioFileFormat.Type[] aFileTypes = getAudioFileTypes(audioInputStream);
+        return isFileTypeSupportedImpl(aFileTypes, fileType);
+    }
 
 
-
-	public abstract int write(AudioInputStream audioInputStream,
-				  AudioFileFormat.Type fileType,
-				  OutputStream outputStream)
-		throws IOException;
-
+    public abstract int write(AudioInputStream audioInputStream,
+                              AudioFileFormat.Type fileType,
+                              OutputStream outputStream)
+            throws IOException;
 
 
-	public abstract int write(AudioInputStream audioInputStream,
-				  AudioFileFormat.Type fileType,
-				  File file)
-		throws IOException;
+    public abstract int write(AudioInputStream audioInputStream,
+                              AudioFileFormat.Type fileType,
+                              File file)
+            throws IOException;
 
 
-
-	private boolean isFileTypeSupportedImpl(AudioFileFormat.Type[] aFileTypes, AudioFileFormat.Type fileType)
-	{
-		for (int i = 0; i < aFileTypes.length; i++)
-		{
-			if (aFileTypes[i].equals(fileType))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
+    private boolean isFileTypeSupportedImpl(AudioFileFormat.Type[] aFileTypes, AudioFileFormat.Type fileType) {
+        for (int i = 0; i < aFileTypes.length; i++) {
+            if (aFileTypes[i].equals(fileType)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
-
 
 
 /*** AudioFileWriter.java ***/

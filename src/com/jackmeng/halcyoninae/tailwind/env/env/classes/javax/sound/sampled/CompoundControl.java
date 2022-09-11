@@ -34,54 +34,40 @@ import java.util.Arrays;
 import java.util.Collection;
 
 
-
 public abstract class CompoundControl
-extends Control
-{
-	private static final Control[]	EMPTY_CONTROL_ARRAY = new Control[0];
+        extends Control {
+    private static final Control[] EMPTY_CONTROL_ARRAY = new Control[0];
 
-	private Collection<Control>	m_memberControls;
-
+    private final Collection<Control> m_memberControls;
 
 
-	protected CompoundControl(Type type,
-				 Control[] aMemberControls)
-	{
-		super(type);
-		if (TDebug.TraceControl) TDebug.out("CompoundControl.<init>: begin");
-		m_memberControls = Arrays.asList(aMemberControls);
-		if (TDebug.TraceControl) TDebug.out("CompoundControl.<init>: end");
-	}
+    protected CompoundControl(Type type,
+                              Control[] aMemberControls) {
+        super(type);
+        if (TDebug.TraceControl) TDebug.out("CompoundControl.<init>: begin");
+        m_memberControls = Arrays.asList(aMemberControls);
+        if (TDebug.TraceControl) TDebug.out("CompoundControl.<init>: end");
+    }
 
 
-
-	public Control[] getMemberControls()
-	{
-		return m_memberControls.toArray(EMPTY_CONTROL_ARRAY);
-	}
+    public Control[] getMemberControls() {
+        return m_memberControls.toArray(EMPTY_CONTROL_ARRAY);
+    }
 
 
-
-	public String toString()
-	{
-		// TODO:
-		return super.toString() + " components: " + "";
-	}
+    public String toString() {
+        // TODO:
+        return super.toString() + " components: " + "";
+    }
 
 
-
-
-
-	public static class Type
-	extends Control.Type
-	{
-		protected Type(String strName)
-		{
-			super(strName);
-		}
-	}
+    public static class Type
+            extends Control.Type {
+        protected Type(String strName) {
+            super(strName);
+        }
+    }
 }
-
 
 
 /*** CompoundControl.java ***/

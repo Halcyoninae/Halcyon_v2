@@ -24,8 +24,7 @@
 
 package org.tritonus.lowlevel.gsm;
 
-public class InvalidGSMFrameException extends Exception
-{
+public class InvalidGSMFrameException extends Exception {
 }
 
 /*** InvalidGSMFrameException.java ***/

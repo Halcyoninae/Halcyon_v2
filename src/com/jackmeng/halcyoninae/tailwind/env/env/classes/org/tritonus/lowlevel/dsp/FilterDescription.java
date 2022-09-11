@@ -28,7 +28,7 @@ package org.tritonus.lowlevel.dsp;
 
 /**
  * Common interface for all types of filter descriptions.
- * 
+ *
  * <p>
  * This interface should be implemented by classes that contain filter
  * descriptions, i.e. containers for a set of filter coefficients.
@@ -36,38 +36,36 @@ package org.tritonus.lowlevel.dsp;
  */
 public interface FilterDescription {
 
-	/**
-	 * Get the frequency response of the filter at a specified frequency.
-	 * 
-	 * <p>
-	 * This method calculates the frequency response of the filter for a
-	 * specified frequency. Calling this method is allowed at any time, even
-	 * while the filter is operating. It does not affect the operation of the
-	 * filter.
-	 * </p>
-	 * 
-	 * @param dOmega
-	 *            The frequency for which the frequency response should be
-	 *            calculated. Has to be given as omega values ([-PI .. +PI]).
-	 * @return The calculated frequency response
-	 */
-	public double getFrequencyResponse(double dOmega);
+    /**
+     * Get the frequency response of the filter at a specified frequency.
+     *
+     * <p>
+     * This method calculates the frequency response of the filter for a
+     * specified frequency. Calling this method is allowed at any time, even
+     * while the filter is operating. It does not affect the operation of the
+     * filter.
+     * </p>
+     *
+     * @param dOmega The frequency for which the frequency response should be
+     *               calculated. Has to be given as omega values ([-PI .. +PI]).
+     * @return The calculated frequency response
+     */
+    double getFrequencyResponse(double dOmega);
 
-	/**
-	 * Get the phase response of the filter at a specified frequency.
-	 * 
-	 * <p>
-	 * This method calculates the phase response of the filter for a specified
-	 * frequency. Calling this method is allowed at any time, even while the
-	 * filter is operating. It does not affect the operation of the filter.
-	 * </p>
-	 * 
-	 * @param dOmega
-	 *            The frequency for which the phase response should be
-	 *            calculated. Has to be given as omega values ([-PI .. +PI]).
-	 * @return The calculated phase response
-	 */
-	public double getPhaseResponse(double dOmega);
+    /**
+     * Get the phase response of the filter at a specified frequency.
+     *
+     * <p>
+     * This method calculates the phase response of the filter for a specified
+     * frequency. Calling this method is allowed at any time, even while the
+     * filter is operating. It does not affect the operation of the filter.
+     * </p>
+     *
+     * @param dOmega The frequency for which the phase response should be
+     *               calculated. Has to be given as omega values ([-PI .. +PI]).
+     * @return The calculated phase response
+     */
+    double getPhaseResponse(double dOmega);
 }
 
 /*** Filter.java ***/

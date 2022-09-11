@@ -30,41 +30,42 @@ package org.tritonus.lowlevel.dsp;
  * An implementation of the Kaiser window.
  */
 public class KaiserWindow implements FIRWindow {
-	/**
-	 * The alpha parameter of the Kaiser window.
-	 */
-	private double m_dAlpha;
+    /**
+     * The alpha parameter of the Kaiser window.
+     */
+    private final double m_dAlpha;
 
-	/**
-	 * Constructor taking alpha.
-	 * 
-	 * @param dAlpha
-	 *            The alpha parameter of the Kaiser window.
-	 */
-	public KaiserWindow(double dAlpha) {
-		m_dAlpha = dAlpha;
-	}
+    /**
+     * Constructor taking alpha.
+     *
+     * @param dAlpha The alpha parameter of the Kaiser window.
+     */
+    public KaiserWindow(double dAlpha) {
+        m_dAlpha = dAlpha;
+    }
 
-	/**
-	 * Returns alpha.
-	 * 
-	 * @return alpha.
-	 */
-	public double getAlpha() {
-		return m_dAlpha;
-	}
+    /**
+     * Returns alpha.
+     *
+     * @return alpha.
+     */
+    public double getAlpha() {
+        return m_dAlpha;
+    }
 
-	/** {@inheritDoc} */
-	@Override
-	public double[] getWindow(int nOrder) {
-		double[] adWindow = new double[nOrder];
-		for (int n = 0; n < nOrder; n++) {
-			adWindow[n] = Util.I0(getAlpha()
-					* Math.sqrt(n * (2.0 * nOrder - n)) / nOrder)
-					/ Util.I0(getAlpha());
-		}
-		return adWindow;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public double[] getWindow(int nOrder) {
+        double[] adWindow = new double[nOrder];
+        for (int n = 0; n < nOrder; n++) {
+            adWindow[n] = Util.I0(getAlpha()
+                    * Math.sqrt(n * (2.0 * nOrder - n)) / nOrder)
+                    / Util.I0(getAlpha());
+        }
+        return adWindow;
+    }
 }
 
 /*** KaiserWindow.java ***/

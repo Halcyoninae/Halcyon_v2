@@ -34,32 +34,27 @@ import org.tritonus.share.sampled.TConversionTool;
 import javax.sound.sampled.*;
 
 
-
 public class AlsaTargetDataLine
-extends AlsaBaseDataLine
-implements TargetDataLine
-{
-	private byte[]			m_abSwapBuffer;
+        extends AlsaBaseDataLine
+        implements TargetDataLine {
+    private byte[] m_abSwapBuffer;
 
 
-
-	public AlsaTargetDataLine(AlsaDataLineMixer mixer, AudioFormat format, int nBufferSize)
-		throws LineUnavailableException
-	{
-		// TODO: use an info object that represents the mixer's capabilities (all possible formats for the line)
-		super(mixer,
-		      new DataLine.Info(TargetDataLine.class,
-					format,
-					nBufferSize)/*,
+    public AlsaTargetDataLine(AlsaDataLineMixer mixer, AudioFormat format, int nBufferSize)
+            throws LineUnavailableException {
+        // TODO: use an info object that represents the mixer's capabilities (all possible formats for the line)
+        super(mixer,
+                new DataLine.Info(TargetDataLine.class,
+                        format,
+                        nBufferSize)/*,
 						    // TODO: has info object to change if format or buffer size are changed later?
 						    format, nBufferSize*/);
-	}
+    }
 
 
-	protected int getAlsaStreamType()
-	{
-		return AlsaPcm.SND_PCM_STREAM_CAPTURE;
-	}
+    protected int getAlsaStreamType() {
+        return AlsaPcm.SND_PCM_STREAM_CAPTURE;
+    }
 
 
 
@@ -79,179 +74,141 @@ implements TargetDataLine
 */
 
 
-
-	protected void stopImpl()
-	{
-		if (TDebug.TraceTargetDataLine)
-		{
-			TDebug.out("AlsaTargetDataLine.stopImpl(): called.");
-		}
-		int	nReturn = 0; //getAlsaPcm().flushChannel(AlsaPcm.SND_PCM_CHANNEL_CAPTURE);
-		if (nReturn != 0)
-		{
-			TDebug.out("flushChannel: " + Alsa.getStringError(nReturn));
-		}
-	}
+    protected void stopImpl() {
+        if (TDebug.TraceTargetDataLine) {
+            TDebug.out("AlsaTargetDataLine.stopImpl(): called.");
+        }
+        int nReturn = 0; //getAlsaPcm().flushChannel(AlsaPcm.SND_PCM_CHANNEL_CAPTURE);
+        if (nReturn != 0) {
+            TDebug.out("flushChannel: " + Alsa.getStringError(nReturn));
+        }
+    }
 
 
-
-	public int available()
-	{
-		// TODO:
-		return -1;
-	}
+    public int available() {
+        // TODO:
+        return -1;
+    }
 
 
+    // TODO: check if should block
+    public int read(byte[] abData, int nOffset, int nLength) {
+        if (TDebug.TraceTargetDataLine) {
+            TDebug.out("AlsaTargetDataLine.read(): called.");
+            TDebug.out("AlsaTargetDataLine.read(): wanted length: " + nLength);
+        }
+        int nOriginalOffset = nOffset;
+        if (nLength > 0 && !isActive()) {
+            start();
+        }
+        if (!isOpen()) {
+            if (TDebug.TraceTargetDataLine) {
+                TDebug.out("AlsaTargetDataLine.read(): stream closed");
+            }
+        }
+        int nBytesRead = readImpl(abData, nOffset, nLength);
+        if (TDebug.TraceTargetDataLine) {
+            TDebug.out("AlsaTargetDataLine.read(): read (bytes): " + nBytesRead);
+        }
+        if (getSwapBytes() && nBytesRead > 0) {
+            TConversionTool.swapOrder16(abData, nOriginalOffset, nBytesRead / 2);
+        }
+        return nBytesRead;
+    }
 
 
-	// TODO: check if should block
-	public int read(byte[] abData, int nOffset, int nLength)
-	{
-		if (TDebug.TraceTargetDataLine)
-		{
-			TDebug.out("AlsaTargetDataLine.read(): called.");
-			TDebug.out("AlsaTargetDataLine.read(): wanted length: " + nLength);
-		}
-		int	nOriginalOffset = nOffset;
-		if (nLength > 0 && !isActive())
-		{
-			start();
-		}
-		if (!isOpen())
-		{
-			if (TDebug.TraceTargetDataLine)
-			{
-				TDebug.out("AlsaTargetDataLine.read(): stream closed");
-			}
-		}
-		int	nBytesRead = readImpl(abData, nOffset, nLength);
-		if (TDebug.TraceTargetDataLine)
-		{
-			TDebug.out("AlsaTargetDataLine.read(): read (bytes): " + nBytesRead);
-		}
-		if (getSwapBytes() && nBytesRead > 0)
-		{
-			TConversionTool.swapOrder16(abData, nOriginalOffset, nBytesRead / 2);
-		}
-		return nBytesRead;
-	}
+    // TODO: check if should block
+    public int readImpl(byte[] abData, int nOffset, int nLength) {
+        if (TDebug.TraceTargetDataLine) {
+            TDebug.out("AlsaTargetDataLine.readImpl(): called.");
+            TDebug.out("AlsaTargetDataLine.readImpl(): wanted length: " + nLength);
+        }
+        int nFrameSize = getFormat().getFrameSize();
+        int nFramesToRead = nLength / nFrameSize;
+        if (nLength > 0 && !isActive()) {
+            start();
+        }
+        if (!isOpen()) {
+            if (TDebug.TraceTargetDataLine) {
+                TDebug.out("AlsaTargetDataLine.readImpl(): stream closed");
+            }
+        }
+        int nFramesRead = (int) getAlsaPcm().readi(abData, nOffset, nFramesToRead);
+        if (nFramesRead < 0) {
+            TDebug.out("AlsaTargetDataLine.readImpl(): " + Alsa.getStringError(nFramesRead));
+        }
+        int nBytesRead = nFramesRead * nFrameSize;
+        if (TDebug.TraceTargetDataLine) {
+            TDebug.out("AlsaTargetDataLine.readImpl(): read (bytes): " + nBytesRead);
+        }
+        return nBytesRead;
+    }
 
 
+    public void drain() {
+        // TODO:
+    }
 
 
-
-	// TODO: check if should block
-	public int readImpl(byte[] abData, int nOffset, int nLength)
-	{
-		if (TDebug.TraceTargetDataLine)
-		{
-			TDebug.out("AlsaTargetDataLine.readImpl(): called.");
-			TDebug.out("AlsaTargetDataLine.readImpl(): wanted length: " + nLength);
-		}
-		int	nFrameSize = getFormat().getFrameSize();
-		int	nFramesToRead = nLength / nFrameSize;
-		if (nLength > 0 && !isActive())
-		{
-			start();
-		}
-		if (!isOpen())
-		{
-			if (TDebug.TraceTargetDataLine) { TDebug.out("AlsaTargetDataLine.readImpl(): stream closed"); }
-		}
-		int	nFramesRead = (int) getAlsaPcm().readi(abData, nOffset, nFramesToRead);
-		if (nFramesRead < 0)
-		{
-			TDebug.out("AlsaTargetDataLine.readImpl(): " + Alsa.getStringError(nFramesRead));
-		}
-		int	nBytesRead = nFramesRead * nFrameSize;
-		if (TDebug.TraceTargetDataLine)
-		{
-			TDebug.out("AlsaTargetDataLine.readImpl(): read (bytes): " + nBytesRead);
-		}
-		return nBytesRead;
-	}
+    public void flush() {
+        // TODO:
+    }
 
 
+    public long getPosition() {
+        // TODO:
+        return 0;
+    }
 
 
-	public void drain()
-	{
-		// TODO:
-	}
+    /**
+     * fGain is logarithmic!!
+     */
+    protected void setGain(float fGain) {
+    }
 
 
+    public class AlsaTargetDataLineGainControl
+            extends FloatControl {
+        /*
+         *	These variables should be static. However, Java 1.1
+         *	doesn't allow this. So they aren't.
+         */
+        private /*static*/ final float MAX_GAIN = 90.0F;
+        private /*static*/ final float MIN_GAIN = -96.0F;
 
-	public void flush()
-	{
-		// TODO:
-	}
+        // TODO: recheck this value
+        private /*static*/ final int GAIN_INCREMENTS = 1000;
 
-
-
-	public long getPosition()
-	{
-		// TODO:
-		return 0;
-	}
-
-
-
-	/**
-	 *	fGain is logarithmic!!
-	 */
-	protected void setGain(float fGain)
-	{
-	}
+        // private float		m_fGain;
+        // private boolean		m_bMuted;
 
 
-
-	public class AlsaTargetDataLineGainControl
-	extends FloatControl
-	{
-		/*
-		 *	These variables should be static. However, Java 1.1
-		 *	doesn't allow this. So they aren't.
-		 */
-		private /*static*/ final float	MAX_GAIN = 90.0F;
-		private /*static*/ final float	MIN_GAIN = -96.0F;
-
-		// TODO: recheck this value
-		private /*static*/ final int	GAIN_INCREMENTS = 1000;
-
-		// private float		m_fGain;
-		// private boolean		m_bMuted;
+        /*package*/ AlsaTargetDataLineGainControl() {
+            super(FloatControl.Type.VOLUME,    // or MASTER_GAIN ?
+                    -96.0F,    // MIN_GAIN,
+                    24.0F,    // MAX_GAIN,
+                    0.01F,    // precision
+                    0,    // update period?
+                    0.0F,    // initial value
+                    "dB",
+                    "-96.0",
+                    "",
+                    "+24.0");
+            // m_bMuted = false;	// should be included in a compund control?
+        }
 
 
-
-		/*package*/ AlsaTargetDataLineGainControl()
-		{
-			super(FloatControl.Type.VOLUME,	// or MASTER_GAIN ?
-			      -96.0F,	// MIN_GAIN,
-			      24.0F,	// MAX_GAIN,
-			      0.01F,	// precision
-			      0,	// update period?
-			      0.0F,	// initial value
-			      "dB",
-			      "-96.0",
-			      "",
-			      "+24.0");
-			// m_bMuted = false;	// should be included in a compund control?
-		}
-
-
-
-		public void setValue(float fGain)
-		{
-			fGain = Math.max(Math.min(fGain, getMaximum()), getMinimum());
-			if (Math.abs(fGain - getValue()) > 1.0E9)
-			{
-				super.setValue(fGain);
-				// if (!getMute())
-				// {
-				AlsaTargetDataLine.this.setGain(getValue());
-				// }
-			}
-		}
+        public void setValue(float fGain) {
+            fGain = Math.max(Math.min(fGain, getMaximum()), getMinimum());
+            if (Math.abs(fGain - getValue()) > 1.0E9) {
+                super.setValue(fGain);
+                // if (!getMute())
+                // {
+                AlsaTargetDataLine.this.setGain(getValue());
+                // }
+            }
+        }
 
 
 /*
@@ -317,9 +274,8 @@ implements TargetDataLine
 */
 
 
-		}
-	}
-
+    }
+}
 
 
 /*** AlsaTargetDataLine.java ***/

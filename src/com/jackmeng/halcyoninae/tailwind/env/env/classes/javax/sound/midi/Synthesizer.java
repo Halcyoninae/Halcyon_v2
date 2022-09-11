@@ -29,42 +29,38 @@
 package javax.sound.midi;
 
 
-
-
 public interface Synthesizer
-extends MidiDevice
-{
-	public int getMaxPolyphony();
+        extends MidiDevice {
+    int getMaxPolyphony();
 
-	public long getLatency();
+    long getLatency();
 
-	public MidiChannel[] getChannels();
+    MidiChannel[] getChannels();
 
-	public VoiceStatus[] getVoiceStatus();
+    VoiceStatus[] getVoiceStatus();
 
-	public boolean isSoundbankSupported(Soundbank soundbank);
+    boolean isSoundbankSupported(Soundbank soundbank);
 
-	public boolean loadInstrument(Instrument instrument);
+    boolean loadInstrument(Instrument instrument);
 
-	public void unloadInstrument(Instrument instrument);
+    void unloadInstrument(Instrument instrument);
 
-	public boolean remapInstrument(Instrument from, Instrument to);
+    boolean remapInstrument(Instrument from, Instrument to);
 
-	public Soundbank getDefaultSoundbank();
+    Soundbank getDefaultSoundbank();
 
-	public Instrument[] getAvailableInstruments();
+    Instrument[] getAvailableInstruments();
 
-	public Instrument[] getLoadedInstruments();
+    Instrument[] getLoadedInstruments();
 
-	public boolean loadAllInstruments(Soundbank soundbank);
+    boolean loadAllInstruments(Soundbank soundbank);
 
-	public void unloadAllInstruments(Soundbank soundbank);
+    void unloadAllInstruments(Soundbank soundbank);
 
-	public boolean loadInstruments(Soundbank soundbank, Patch[] aPatches);
+    boolean loadInstruments(Soundbank soundbank, Patch[] aPatches);
 
-	public void unloadInstruments(Soundbank soundbank, Patch[] aPatches);
+    void unloadInstruments(Soundbank soundbank, Patch[] aPatches);
 }
-
 
 
 /*** Synthesizer.java ***/

@@ -30,87 +30,87 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-/** TODO:
+/**
+ * TODO:
  */
-public class AlsaSeqRemoveEvents
-{
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+public class AlsaSeqRemoveEvents {
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
+
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
+
+    /**
+     * Holds the pointer to snd_seq_queue_timer_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    /*private*/ long m_lNativeHandle;
 
 
+    public AlsaSeqRemoveEvents() {
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeqRemoveEvents.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of port_info failed");
+        }
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeqRemoveEvents.<init>(): end");
+        }
+    }
 
-	/**
-	 *	Holds the pointer to snd_seq_queue_timer_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	/*private*/ long	m_lNativeHandle;
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
+    private native int malloc();
 
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+    public native void free();
 
+    public native int getCondition();
 
+    public native void setCondition(int nCondition);
 
-	public AlsaSeqRemoveEvents()
-	{
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeqRemoveEvents.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of port_info failed");
-		}
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeqRemoveEvents.<init>(): end"); }
-	}
+    public native int getQueue();
 
+    public native void setQueue(int nQueue);
 
+    public native long getTime();
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    public native void setTime(long lTime);
 
+    public native int getDestClient();
 
+    public native int getDestPort();
 
-	private native int malloc();
-	public native void free();
+    public native int getChannel();
 
-	public native int getCondition();
-	public native int getQueue();
-	public native long getTime();
-	public native int getDestClient();
-	public native int getDestPort();
-	public native int getChannel();
-	public native int getEventType();
-	public native int getTag();
+    public native void setChannel(int nChannel);
 
-	public native void setCondition(int nCondition);
-	public native void setQueue(int nQueue);
-	public native void setTime(long lTime);
-	public native void setDest(int nClient, int nPort);
-	public native void setChannel(int nChannel);
-	public native void setEventType(int nEventType);
-	public native void setTag(int nTag);
+    public native int getEventType();
 
-	private static native void setTrace(boolean bTrace);
+    public native void setEventType(int nEventType);
+
+    public native int getTag();
+
+    public native void setTag(int nTag);
+
+    public native void setDest(int nClient, int nPort);
 }
-
 
 
 /*** AlsaSeqRemoveEvents.java ***/

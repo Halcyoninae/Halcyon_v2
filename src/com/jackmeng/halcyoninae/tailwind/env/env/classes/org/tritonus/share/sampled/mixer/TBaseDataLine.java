@@ -35,62 +35,55 @@ import javax.sound.sampled.LineUnavailableException;
 import java.util.Collection;
 
 
-
-/**	Base class for implementing SourceDataLine or TargetDataLine.
+/**
+ * Base class for implementing SourceDataLine or TargetDataLine.
  */
 public abstract class TBaseDataLine
-extends	TDataLine
-{
-	public TBaseDataLine(TMixer mixer,
-			     DataLine.Info info)
-	{
-		super(mixer,
-		      info);
-	}
+        extends TDataLine {
+    public TBaseDataLine(TMixer mixer,
+                         DataLine.Info info) {
+        super(mixer,
+                info);
+    }
 
 
-
-	public TBaseDataLine(TMixer mixer,
-						 DataLine.Info info,
-						 Collection<Control> controls)
-	{
-		super(mixer,
-		      info,
-		      controls);
-	}
+    public TBaseDataLine(TMixer mixer,
+                         DataLine.Info info,
+                         Collection<Control> controls) {
+        super(mixer,
+                info,
+                controls);
+    }
 
 
-
-	public void open(AudioFormat format, int nBufferSize)
-		throws LineUnavailableException
-	{
-		if (TDebug.TraceDataLine) { TDebug.out("TBaseDataLine.open(AudioFormat, int): called with buffer size: " + nBufferSize); }
-		setBufferSize(nBufferSize);
-		open(format);
-	}
-
-
-
-	public void open(AudioFormat format)
-		throws LineUnavailableException
-	{
-		if (TDebug.TraceDataLine) { TDebug.out("TBaseDataLine.open(AudioFormat): called"); }
-		setFormat(format);
-		open();
-	}
+    public void open(AudioFormat format, int nBufferSize)
+            throws LineUnavailableException {
+        if (TDebug.TraceDataLine) {
+            TDebug.out("TBaseDataLine.open(AudioFormat, int): called with buffer size: " + nBufferSize);
+        }
+        setBufferSize(nBufferSize);
+        open(format);
+    }
 
 
-	// IDEA: move to TDataLine or TLine?
-	// necessary and wise at all?
-	protected void finalize()
-	{
-		if (isOpen())
-		{
-			close();
-		}
-	}
+    public void open(AudioFormat format)
+            throws LineUnavailableException {
+        if (TDebug.TraceDataLine) {
+            TDebug.out("TBaseDataLine.open(AudioFormat): called");
+        }
+        setFormat(format);
+        open();
+    }
+
+
+    // IDEA: move to TDataLine or TLine?
+    // necessary and wise at all?
+    protected void finalize() {
+        if (isOpen()) {
+            close();
+        }
+    }
 }
-
 
 
 /*** TBaseDataLine.java ***/

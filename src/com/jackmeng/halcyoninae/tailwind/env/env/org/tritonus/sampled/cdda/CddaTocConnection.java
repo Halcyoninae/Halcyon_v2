@@ -36,65 +36,65 @@ import java.net.URL;
 import java.net.URLConnection;
 
 
-
 public class CddaTocConnection
-extends	URLConnection
-{
-	/**	The cdda device name to read from.
-	 */
-	private String		m_strDevice;
+        extends URLConnection {
+    /**
+     * The cdda device name to read from.
+     */
+    private String m_strDevice;
 
-	private CddaMidLevel	m_cddaMidLevel;
-
-
-
-	// TODO: m_cdda.close();
-	public CddaTocConnection(URL url)
-	{
-		super(url);
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.<init>(): begin"); }
-		m_strDevice = url.getPath();
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.<init>(): end"); }
-	}
+    private CddaMidLevel m_cddaMidLevel;
 
 
-
-	public void connect()
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.connect(): begin"); }
-		if (! connected)
-		{
-			m_cddaMidLevel = CddaUtils.getCddaMidLevel();
-			if (m_strDevice.equals(""))
-			{
-				m_strDevice = m_cddaMidLevel.getDefaultDevice();
-			}
-			connected = true;
-		}
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.connect(): end"); }
-	}
+    // TODO: m_cdda.close();
+    public CddaTocConnection(URL url) {
+        super(url);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.<init>(): begin");
+        }
+        m_strDevice = url.getPath();
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.<init>(): end");
+        }
+    }
 
 
+    public void connect() {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.connect(): begin");
+        }
+        if (!connected) {
+            m_cddaMidLevel = CddaUtils.getCddaMidLevel();
+            if (m_strDevice.equals("")) {
+                m_strDevice = m_cddaMidLevel.getDefaultDevice();
+            }
+            connected = true;
+        }
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.connect(): end");
+        }
+    }
 
-	public InputStream getInputStream()
-		throws IOException
-	{
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.getInputStream(): begin"); }
-		connect();
-		String	strDevice = getDevice();
-		InputStream	inputStream = m_cddaMidLevel.getTocAsXml(strDevice);
-		if (TDebug.TraceCdda) { TDebug.out("CddaTocConnection.getInputStream(): end"); }
-		return inputStream;
-	}
+
+    public InputStream getInputStream()
+            throws IOException {
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.getInputStream(): begin");
+        }
+        connect();
+        String strDevice = getDevice();
+        InputStream inputStream = m_cddaMidLevel.getTocAsXml(strDevice);
+        if (TDebug.TraceCdda) {
+            TDebug.out("CddaTocConnection.getInputStream(): end");
+        }
+        return inputStream;
+    }
 
 
-
-	private String getDevice()
-	{
-		return m_strDevice;
-	}
+    private String getDevice() {
+        return m_strDevice;
+    }
 }
-
 
 
 /*** CddaTocConnection.java ****/

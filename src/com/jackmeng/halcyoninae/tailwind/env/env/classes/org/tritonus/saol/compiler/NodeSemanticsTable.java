@@ -24,30 +24,26 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.saol.compiler;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.saol.compiler;
 
 import java.util.HashMap;
 
 
-
-/**	The instrument table.
-	TODO: use generics
+/**
+ * The instrument table.
+ * TODO: use generics
  */
 public class NodeSemanticsTable
-extends HashMap
-{
-	public void setNodeSemantics(Node node, NodeSemantics nodeSemantics)
-	{
-		put(node, nodeSemantics);
-	}
+        extends HashMap {
+    public void setNodeSemantics(Node node, NodeSemantics nodeSemantics) {
+        put(node, nodeSemantics);
+    }
 
 
-	public NodeSemantics getNodeSemantics(Node node)
-	{
-		return (NodeSemantics) get(node);
-	}
+    public NodeSemantics getNodeSemantics(Node node) {
+        return (NodeSemantics) get(node);
+    }
 }
-
 
 
 /*** NodeSemanticsTable.java ***/

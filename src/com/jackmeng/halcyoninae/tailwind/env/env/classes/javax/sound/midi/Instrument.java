@@ -29,29 +29,21 @@
 package javax.sound.midi;
 
 
-
-
 public abstract class Instrument
-extends SoundbankResource
-{
-	private Patch		m_patch;
+        extends SoundbankResource {
+    private final Patch m_patch;
 
 
-
-	protected Instrument(Soundbank soundbank, Patch patch, String strName, Class dataClass)
-	{
-		super(soundbank, strName, dataClass);
-		m_patch = patch;
-	}
+    protected Instrument(Soundbank soundbank, Patch patch, String strName, Class dataClass) {
+        super(soundbank, strName, dataClass);
+        m_patch = patch;
+    }
 
 
-
-	public Patch getPatch()
-	{
-		return m_patch;
-	}
+    public Patch getPatch() {
+        return m_patch;
+    }
 }
-
 
 
 /*** Instrument.java ***/

@@ -29,17 +29,14 @@
 package javax.sound.midi;
 
 
-
-public class VoiceStatus
-{
-    public boolean	active;
-    public int		channel;
-    public int		bank;
-    public int		program;
-    public int		note;
-    public int		volume;
+public class VoiceStatus {
+    public boolean active;
+    public int channel;
+    public int bank;
+    public int program;
+    public int note;
+    public int volume;
 }
-
 
 
 /*** VoiceStatus.java ***/

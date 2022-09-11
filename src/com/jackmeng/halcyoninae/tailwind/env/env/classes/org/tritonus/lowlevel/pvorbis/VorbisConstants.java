@@ -27,27 +27,26 @@
 package org.tritonus.lowlevel.pvorbis;
 
 
-/** Constants, especially error codes from vorbis/codec.h.
+/**
+ * Constants, especially error codes from vorbis/codec.h.
  */
-public interface VorbisConstants
-{
-	public static final int OV_FALSE      = -1;
-	public static final int OV_EOF        = -2;
-	public static final int OV_HOLE       = -3;
+public interface VorbisConstants {
+    int OV_FALSE = -1;
+    int OV_EOF = -2;
+    int OV_HOLE = -3;
 
-	public static final int OV_EREAD      = -128;
-	public static final int OV_EFAULT     = -129;
-	public static final int OV_EIMPL      = -130;
-	public static final int OV_EINVAL     = -131;
-	public static final int OV_ENOTVORBIS = -132;
-	public static final int OV_EBADHEADER = -133;
-	public static final int OV_EVERSION   = -134;
-	public static final int OV_ENOTAUDIO  = -135;
-	public static final int OV_EBADPACKET = -136;
-	public static final int OV_EBADLINK   = -137;
-	public static final int OV_ENOSEEK    = -138;
+    int OV_EREAD = -128;
+    int OV_EFAULT = -129;
+    int OV_EIMPL = -130;
+    int OV_EINVAL = -131;
+    int OV_ENOTVORBIS = -132;
+    int OV_EBADHEADER = -133;
+    int OV_EVERSION = -134;
+    int OV_ENOTAUDIO = -135;
+    int OV_EBADPACKET = -136;
+    int OV_EBADLINK = -137;
+    int OV_ENOSEEK = -138;
 }
-
 
 
 /*** VorbisConstants.java ***/

@@ -29,35 +29,33 @@ package org.tritonus.midi.device.java;
 import sun.misc.Perf;
 
 
-/** Sequencer clock based on sun.misc.Perf.
-	Sun JDK 1.4.2 or later is required to compile this class.
+/**
+ * Sequencer clock based on sun.misc.Perf.
+ * Sun JDK 1.4.2 or later is required to compile this class.
  */
 public class SunMiscPerfClock
-implements JavaSequencer.Clock
-{
-	private Perf m_perf;
-	private long m_lTicksPerSecond;
+        implements JavaSequencer.Clock {
+    private final Perf m_perf;
+    private final long m_lTicksPerSecond;
 
 
-	public SunMiscPerfClock()
-	{
-		m_perf = Perf.getPerf(); // may throw SecurityException
-		m_lTicksPerSecond = m_perf.highResFrequency();
-	}
+    public SunMiscPerfClock() {
+        m_perf = Perf.getPerf(); // may throw SecurityException
+        m_lTicksPerSecond = m_perf.highResFrequency();
+    }
 
 
-	/**	Retrieve system time in microseconds.
-		This method retrieves the time by calling
-		{@link sun.misc.Perf}.
-
-		@return the system time in microseconds
-	*/
-	public long getMicroseconds()
-	{
-		return (m_perf.highResCounter() * 1000000) / m_lTicksPerSecond;
-	}
+    /**
+     * Retrieve system time in microseconds.
+     * This method retrieves the time by calling
+     * {@link sun.misc.Perf}.
+     *
+     * @return the system time in microseconds
+     */
+    public long getMicroseconds() {
+        return (m_perf.highResCounter() * 1000000) / m_lTicksPerSecond;
+    }
 }
-
 
 
 /*** SunMiscPerfClock.java ***/

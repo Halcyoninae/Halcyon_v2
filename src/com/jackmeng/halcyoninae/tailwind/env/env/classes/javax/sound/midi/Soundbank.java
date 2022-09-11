@@ -29,25 +29,21 @@
 package javax.sound.midi;
 
 
+public interface Soundbank {
+    String getName();
 
+    String getVersion();
 
-public interface Soundbank
-{
-	public String getName();
+    String getVendor();
 
-	public String getVersion();
+    String getDescription();
 
-	public String getVendor();
+    SoundbankResource[] getResources();
 
-	public String getDescription();
+    Instrument[] getInstruments();
 
-	public SoundbankResource[] getResources();
-
-	public Instrument[] getInstruments();
-
-	public Instrument getInstrument(Patch patch);
+    Instrument getInstrument(Patch patch);
 }
-
 
 
 /*** Soundbank.java ***/

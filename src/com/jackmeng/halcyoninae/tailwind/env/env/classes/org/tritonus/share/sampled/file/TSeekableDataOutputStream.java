@@ -34,7 +34,6 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 
-
 /**
  * A TDataOutputStream that allows seeking.
  *
@@ -42,43 +41,34 @@ import java.io.RandomAccessFile;
  * @author Matthias Pfisterer
  */
 public class TSeekableDataOutputStream
-extends RandomAccessFile
-implements TDataOutputStream
-{
-	public TSeekableDataOutputStream(File file)
-		throws IOException
-	{
-		super(file, "rw");
-	}
+        extends RandomAccessFile
+        implements TDataOutputStream {
+    public TSeekableDataOutputStream(File file)
+            throws IOException {
+        super(file, "rw");
+    }
 
 
-
-	public boolean supportsSeek()
-	{
-		return true;
-	}
+    public boolean supportsSeek() {
+        return true;
+    }
 
 
-
-	public void writeLittleEndian32(int value)
-		throws IOException
-	{
-		writeByte(value & 0xFF);
-    		writeByte((value >> 8) & 0xFF);
-    		writeByte((value >> 16) & 0xFF);
-	    	writeByte((value >> 24) & 0xFF);
-	}
+    public void writeLittleEndian32(int value)
+            throws IOException {
+        writeByte(value & 0xFF);
+        writeByte((value >> 8) & 0xFF);
+        writeByte((value >> 16) & 0xFF);
+        writeByte((value >> 24) & 0xFF);
+    }
 
 
-
-	public void writeLittleEndian16(short value)
-		throws IOException
-	{
-		writeByte(value & 0xFF);
-		writeByte((value >> 8) & 0xFF);
-	}
+    public void writeLittleEndian16(short value)
+            throws IOException {
+        writeByte(value & 0xFF);
+        writeByte((value >> 8) & 0xFF);
+    }
 }
-
 
 
 /*** TSeekableDataOutputStream.java ***/

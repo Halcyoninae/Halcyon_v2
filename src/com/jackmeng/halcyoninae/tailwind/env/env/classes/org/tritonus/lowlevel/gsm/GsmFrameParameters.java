@@ -5,10 +5,10 @@ import java.io.PrintWriter;
 
 /**
  * Contains the "exploded" parameters of a GSM frame.
- * 
+ *
  * <p>
  * This are the parameters after bit-decoding or before bit-encoding.
- * 
+ *
  * <table border="1">
  * <tr>
  * <th>Parameter name</th>
@@ -46,12 +46,10 @@ import java.io.PrintWriter;
  * <td>52 (13 * 4)</td>
  * </tr>
  * </table>
- * 
+ *
  * @author Matthias Pfisterer
- * 
  */
-public class GsmFrameParameters
-{
+public class GsmFrameParameters {
     public int[] m_LARc = new int[8];
     public int[] m_Nc = new int[4];
     public int[] m_Mc = new int[4];
@@ -61,31 +59,26 @@ public class GsmFrameParameters
 
     /**
      * Dumps the parameter values to an output stream.
-     * 
+     *
      * <p>
      * Can be used in the following ways: <code>dump(System.out)</code> or
      * <code>dump(System.err)</code>.
      * </p>
-     * 
-     * @param printStream
-     *            the stream to output the dump
+     *
+     * @param printStream the stream to output the dump
      */
-    public void dump(PrintStream printStream)
-    {
+    public void dump(PrintStream printStream) {
         PrintWriter pw = new PrintWriter(printStream);
         pw.println("GSM frame:");
-        for (int i = 0; i < 8; i++)
-        {
+        for (int i = 0; i < 8; i++) {
             pw.println("m_LARc[" + i + "]" + m_LARc[i]);
         }
-        for (int i = 0; i < 4; i++)
-        {
+        for (int i = 0; i < 4; i++) {
             pw.println("m_Nc[" + i + "]" + m_Nc[i]);
             pw.println("m_bc[" + i + "]" + m_bc[i]);
             pw.println("m_Mc[" + i + "]" + m_Mc[i]);
             pw.println("m_xmaxc[" + i + "]" + m_xmaxc[i]);
-            for (int j = 0; j < 13; j++)
-            {
+            for (int j = 0; j < 13; j++) {
                 pw.println("m_xmc[" + i * 13 + j + "]" + m_xmc[i * 13 + j]);
             }
         }

@@ -31,111 +31,81 @@ package javax.sound.sampled;
 import org.tritonus.share.TDebug;
 
 
-
 public abstract class BooleanControl
-extends Control
-{
-	private static final String	DEFAULT_TRUE_LABEL = "true";
-	private static final String	DEFAULT_FALSE_LABEL = "false";
+        extends Control {
+    private static final String DEFAULT_TRUE_LABEL = "true";
+    private static final String DEFAULT_FALSE_LABEL = "false";
 
 
-
-	private boolean		m_bValue;
-	private String		m_strTrueLabel;
-	private String		m_strFalseLabel;
-
+    private boolean m_bValue;
+    private final String m_strTrueLabel;
+    private final String m_strFalseLabel;
 
 
-	protected BooleanControl(Type type,
-				 boolean bInitialValue,
-				 String strTrueLabel,
-				 String strFalseLabel)
-	{
-		super(type);
+    protected BooleanControl(Type type,
+                             boolean bInitialValue,
+                             String strTrueLabel,
+                             String strFalseLabel) {
+        super(type);
 
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("BooleanControl.<init>: begin");
-		}
-		/* $$mp 2001-02-06: TODO: what's the matter with this?
-		 */
-		//$$fb 2000-12-02: incompatible with Sun implementation...
-		//setValue(bInitialValue);
-		m_bValue = bInitialValue;
+        if (TDebug.TraceControl) {
+            TDebug.out("BooleanControl.<init>: begin");
+        }
+        /* $$mp 2001-02-06: TODO: what's the matter with this?
+         */
+        //$$fb 2000-12-02: incompatible with Sun implementation...
+        //setValue(bInitialValue);
+        m_bValue = bInitialValue;
 
-		m_strTrueLabel = strTrueLabel;
-		m_strFalseLabel = strFalseLabel;
-		if (TDebug.TraceControl)
-		{
-			TDebug.out("BooleanControl.<init>: end");
-		}
-	}
+        m_strTrueLabel = strTrueLabel;
+        m_strFalseLabel = strFalseLabel;
+        if (TDebug.TraceControl) {
+            TDebug.out("BooleanControl.<init>: end");
+        }
+    }
 
 
+    protected BooleanControl(Type type,
+                             boolean bInitialValue) {
+        this(type,
+                bInitialValue,
+                DEFAULT_TRUE_LABEL,
+                DEFAULT_FALSE_LABEL);
+    }
 
-	protected BooleanControl(Type type,
-				 boolean bInitialValue)
-	{
-		this(type,
-		     bInitialValue,
-		     DEFAULT_TRUE_LABEL,
-		     DEFAULT_FALSE_LABEL);
-	}
+    public boolean getValue() {
+        return m_bValue;
+    }
 
+    public void setValue(boolean bValue) {
+        m_bValue = bValue;
+    }
 
-
-	public void setValue(boolean bValue)
-	{
-		m_bValue = bValue;
-	}
-
-
-
-	public boolean getValue()
-	{
-		return m_bValue;
-	}
-
-
-
-	public String getStateLabel(boolean bState)
-	{
-		if (bState)
-		{
-			return m_strTrueLabel;
-		}
-		else
-		{
-			return m_strFalseLabel;
-		}
-	}
+    public String getStateLabel(boolean bState) {
+        if (bState) {
+            return m_strTrueLabel;
+        } else {
+            return m_strFalseLabel;
+        }
+    }
 
 
-
-	public String toString()
-	{
-		return super.toString() + " state = " + getStateLabel(getValue());
-	}
+    public String toString() {
+        return super.toString() + " state = " + getStateLabel(getValue());
+    }
 
 
+    public static class Type
+            extends Control.Type {
+        public static final Type MUTE = new Type("MUTE");
+        public static final Type APPLY_REVERB = new Type("APPLY_REVERB");
 
 
-
-	public static class Type
-	extends Control.Type
-	{
-		public static final Type	MUTE = new Type("MUTE");
-		public static final Type	APPLY_REVERB = new Type("APPLY_REVERB");
-
-
-
-		protected Type(String strName)
-		{
-			super(strName);
-		}
-	}
+        protected Type(String strName) {
+            super(strName);
+        }
+    }
 }
-
 
 
 /*** BooleanControl.java ***/

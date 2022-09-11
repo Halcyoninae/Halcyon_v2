@@ -33,173 +33,145 @@ import java.io.InputStream;
 
 
 public interface Sequencer
-extends MidiDevice
-{
-	public static final int LOOP_CONTINUOUSLY = -1;
+        extends MidiDevice {
+    int LOOP_CONTINUOUSLY = -1;
 
+    Sequence getSequence();
 
-	public void setSequence(Sequence sequence)
-		throws InvalidMidiDataException;
+    void setSequence(Sequence sequence)
+            throws InvalidMidiDataException;
 
+    void setSequence(InputStream inputStream)
+            throws InvalidMidiDataException, IOException;
 
+    void start();
 
+    long getLoopStartPoint();
 
-	public void setSequence(InputStream inputStream)
-		throws InvalidMidiDataException, IOException;
+    void setLoopStartPoint(long lTick);
 
+    long getLoopEndPoint();
 
+    void setLoopEndPoint(long lTick);
 
-	public Sequence getSequence();
+    int getLoopCount();
 
+    void setLoopCount(int nLoopCount);
 
-	public void start();
+    void stop();
 
 
+    boolean isRunning();
 
+    void startRecording();
 
-	public void setLoopStartPoint(long lTick);
+    void stopRecording();
 
+    boolean isRecording();
 
-	public long getLoopStartPoint();
+    // name should be: enableRecording
+    void recordEnable(Track track, int nChannel);
 
+    // name should be: disableRecording
+    void recordDisable(Track track);
 
-	public void setLoopEndPoint(long lTick);
 
+    float getTempoInBPM();
 
-	public long getLoopEndPoint();
+    void setTempoInBPM(float fBPM);
 
 
-	public void setLoopCount(int nLoopCount);
+    float getTempoInMPQ();
 
-	public int getLoopCount();
+    void setTempoInMPQ(float fMPQ);
 
 
+    float getTempoFactor();
 
-	public void stop();
+    void setTempoFactor(float fFactor);
 
 
-	public boolean isRunning();
+    long getTickLength();
 
-	public void startRecording();
+    long getTickPosition();
 
-	public void stopRecording();
+    void setTickPosition(long lTick);
 
-	public boolean isRecording();
 
-	// name should be: enableRecording
-	public void recordEnable(Track track, int nChannel);
+    long getMicrosecondLength();
 
-	// name should be: disableRecording
-	public void recordDisable(Track track);
+    long getMicrosecondPosition();
 
+    void setMicrosecondPosition(long lMicroseconds);
 
-	public float getTempoInBPM();
 
-	public void setTempoInBPM(float fBPM);
+    Sequencer.SyncMode getMasterSyncMode();
 
+    void setMasterSyncMode(Sequencer.SyncMode syncMode);
 
-	public float getTempoInMPQ();
+    Sequencer.SyncMode[] getMasterSyncModes();
 
-	public void setTempoInMPQ(float fMPQ);
 
+    Sequencer.SyncMode getSlaveSyncMode();
 
-	public float getTempoFactor();
+    void setSlaveSyncMode(Sequencer.SyncMode syncMode);
 
-	public void setTempoFactor(float fFactor);
+    Sequencer.SyncMode[] getSlaveSyncModes();
 
 
-	public long getTickLength();
+    void setTrackMute(int nTrack, boolean bMute);
 
-	public long getTickPosition();
+    boolean getTrackMute(int nTrack);
 
-	public void setTickPosition(long lTick);
-    
+    void setTrackSolo(int nTrack, boolean bSolo);
 
-	public long getMicrosecondLength();
+    boolean getTrackSolo(int nTrack);
 
-	public long getMicrosecondPosition();
 
-	public void setMicrosecondPosition(long lMicroseconds);
+    boolean addMetaEventListener(MetaEventListener listener);
 
+    void removeMetaEventListener(MetaEventListener listener);
 
-	public Sequencer.SyncMode getMasterSyncMode();
 
-	public void setMasterSyncMode(Sequencer.SyncMode syncMode);
+    int[] addControllerEventListener(ControllerEventListener listener, int[] anControllers);
 
-	public Sequencer.SyncMode[] getMasterSyncModes();
-
-
-	public Sequencer.SyncMode getSlaveSyncMode();
-
-	public void setSlaveSyncMode(Sequencer.SyncMode syncMode);
-
-	public Sequencer.SyncMode[] getSlaveSyncModes();
-
-
-	public void setTrackMute(int nTrack, boolean bMute);
-
-	public boolean getTrackMute(int nTrack);
-
-	public void setTrackSolo(int nTrack, boolean bSolo);
-
-	public boolean getTrackSolo(int nTrack);
-
-
-	public boolean addMetaEventListener(MetaEventListener listener);
-
-	public void removeMetaEventListener(MetaEventListener listener);
-
-
-	public int[] addControllerEventListener(ControllerEventListener listener, int[] anControllers);
-	public int[] removeControllerEventListener(ControllerEventListener listener, int[] anControllers);
+    int[] removeControllerEventListener(ControllerEventListener listener, int[] anControllers);
 
 
 ////////////////////////// INNER CLASSES //////////////////////////////
 
-	public static class SyncMode
-	{
-		public static final SyncMode	INTERNAL_CLOCK = new SyncMode("Internal Clock");
-		public static final SyncMode	MIDI_SYNC = new SyncMode("MIDI Sync");
-		public static final SyncMode	MIDI_TIME_CODE = new SyncMode("MIDI Time Code");
-		public static final SyncMode	NO_SYNC = new SyncMode("No Timing");
+    class SyncMode {
+        public static final SyncMode INTERNAL_CLOCK = new SyncMode("Internal Clock");
+        public static final SyncMode MIDI_SYNC = new SyncMode("MIDI Sync");
+        public static final SyncMode MIDI_TIME_CODE = new SyncMode("MIDI Time Code");
+        public static final SyncMode NO_SYNC = new SyncMode("No Timing");
 
 
-		private String		m_strName;
+        private final String m_strName;
 
 
+        protected SyncMode(String strName) {
+            m_strName = strName;
+        }
 
 
-		protected SyncMode(String strName)
-		{
-			m_strName = strName;
-		}
+        public final boolean equals(Object obj) {
+            return super.equals(obj);
+        }
 
 
-
-		public final boolean equals(Object obj)
-		{
-			return super.equals(obj);
-		}
+        public final int hashCode() {
+            return super.hashCode();
+        }
 
 
-
-		public final int hashCode()
-		{
-			return super.hashCode();
-		}
+        public final String toString() {
+            return super.toString() + "[name=" + m_strName + "]";
+        }
 
 
-
-		public final String toString()
-		{
-			return super.toString() + "[name=" + m_strName + "]";
-		}
-
-
-
-	}
+    }
 }
-
 
 
 /*** Sequencer.java ***/

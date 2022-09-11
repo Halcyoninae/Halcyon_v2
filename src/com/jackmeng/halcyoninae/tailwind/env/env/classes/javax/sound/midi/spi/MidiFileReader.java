@@ -37,24 +37,25 @@ import java.io.InputStream;
 import java.net.URL;
 
 
-
-
-public abstract class MidiFileReader
-{
+public abstract class MidiFileReader {
     public abstract MidiFileFormat getMidiFileFormat(InputStream inputStream)
-	throws InvalidMidiDataException, IOException;
-    public abstract MidiFileFormat getMidiFileFormat(URL url)
-	throws InvalidMidiDataException, IOException;
-    public abstract MidiFileFormat getMidiFileFormat(File file)
-	throws InvalidMidiDataException, IOException;
-    public abstract Sequence getSequence(InputStream inputStream)
-	throws InvalidMidiDataException, IOException;
-    public abstract Sequence getSequence(URL url)
-	throws InvalidMidiDataException, IOException;
-    public abstract Sequence getSequence(File file)
-	throws InvalidMidiDataException, IOException;
-}
+            throws InvalidMidiDataException, IOException;
 
+    public abstract MidiFileFormat getMidiFileFormat(URL url)
+            throws InvalidMidiDataException, IOException;
+
+    public abstract MidiFileFormat getMidiFileFormat(File file)
+            throws InvalidMidiDataException, IOException;
+
+    public abstract Sequence getSequence(InputStream inputStream)
+            throws InvalidMidiDataException, IOException;
+
+    public abstract Sequence getSequence(URL url)
+            throws InvalidMidiDataException, IOException;
+
+    public abstract Sequence getSequence(File file)
+            throws InvalidMidiDataException, IOException;
+}
 
 
 /*** MidiFileReader.java ***/

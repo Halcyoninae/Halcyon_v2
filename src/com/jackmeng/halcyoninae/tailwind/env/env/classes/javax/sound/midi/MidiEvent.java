@@ -29,44 +29,33 @@
 package javax.sound.midi;
 
 
-
 // NOTE: sun implementation is not serializable
 public class MidiEvent
-implements java.io.Serializable
-{
-	private MidiMessage	m_message;
-	private long		m_lTick;
+        implements java.io.Serializable {
+    private final MidiMessage m_message;
+    private long m_lTick;
 
 
-
-	public MidiEvent(MidiMessage message, long lTick)
-	{
-		m_message = message;
-		m_lTick = lTick;
-	}
+    public MidiEvent(MidiMessage message, long lTick) {
+        m_message = message;
+        m_lTick = lTick;
+    }
 
 
-
-	public MidiMessage getMessage()
-	{
-		return m_message;
-	}
+    public MidiMessage getMessage() {
+        return m_message;
+    }
 
 
-
-	public long getTick()
-	{
-		return m_lTick;
-	}
+    public long getTick() {
+        return m_lTick;
+    }
 
 
-
-	public void setTick(long lTick)
-	{
-		m_lTick = lTick;
-	}
+    public void setTick(long lTick) {
+        m_lTick = lTick;
+    }
 }
-
 
 
 /*** MidiEvent.java ***/

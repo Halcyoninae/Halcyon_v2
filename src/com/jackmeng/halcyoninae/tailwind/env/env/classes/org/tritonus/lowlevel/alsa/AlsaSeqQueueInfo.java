@@ -30,70 +30,66 @@ package org.tritonus.lowlevel.alsa;
 import org.tritonus.share.TDebug;
 
 
-
-public class AlsaSeqQueueInfo
-{
-	static
-	{
-		Alsa.loadNativeLibrary();
-		if (TDebug.TraceAlsaSeqNative)
-		{
-			setTrace(true);
-		}
-	}
+public class AlsaSeqQueueInfo {
+    static {
+        Alsa.loadNativeLibrary();
+        if (TDebug.TraceAlsaSeqNative) {
+            setTrace(true);
+        }
+    }
 
 
-
-	/**
-	 *	Holds the pointer to snd_seq_queue_info_t
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	/*private*/ long	m_lNativeHandle;
-
+    /**
+     * Holds the pointer to snd_seq_queue_info_t
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    /*private*/ long m_lNativeHandle;
 
 
-	public AlsaSeqQueueInfo()
-	{
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.QueueInfo.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of port_info failed");
-		}
-		if (TDebug.TraceAlsaSeqNative) { TDebug.out("AlsaSeq.QueueInfo.<init>(): end"); }
-	}
+    public AlsaSeqQueueInfo() {
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.QueueInfo.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of port_info failed");
+        }
+        if (TDebug.TraceAlsaSeqNative) {
+            TDebug.out("AlsaSeq.QueueInfo.<init>(): end");
+        }
+    }
 
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private native int malloc();
 
+    public native void free();
 
+    public native int getQueue();
 
-	private native int malloc();
-	public native void free();
+    public native String getName();
 
-	public native int getQueue();
-	public native String getName();
-	public native int getOwner();
-	public native boolean getLocked();
-	public native int getFlags();
+    public native void setName(String strName);
 
-	public native void setName(String strName);
-	public native void setOwner(int nOwner);
-	public native void setLocked(boolean bLocked);
-	public native void setFlags(int nFlags);
+    public native int getOwner();
 
-	private static native void setTrace(boolean bTrace);
+    public native void setOwner(int nOwner);
+
+    public native boolean getLocked();
+
+    public native void setLocked(boolean bLocked);
+
+    public native int getFlags();
+
+    public native void setFlags(int nFlags);
 }
-
-
-
 
 
 /*** AlsaSeqQueueInfo.java ***/

@@ -26,107 +26,83 @@
 |<---            this code is formatted to fit into 80 columns             --->|
 */
 
-package org.tritonus.share;
+package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.share;
 
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import java.util.*;
 
 
-
 public class TNotifier
-extends	Thread
-{
-	public static class NotifyEntry
-	{
-		private EventObject	m_event;
-		private List<LineListener>	m_listeners;
+        extends Thread {
+    public static TNotifier notifier = null;
+
+    static {
+        notifier = new TNotifier();
+        notifier.setDaemon(true);
+        notifier.start();
+    }
+
+    /**
+     * The queue of events to deliver.
+     * The entries are of class NotifyEntry.
+     */
+    private final List<NotifyEntry> m_entries;
 
 
+    public TNotifier() {
+        super("Tritonus Notifier");
+        m_entries = new ArrayList<NotifyEntry>();
+    }
 
-		public NotifyEntry(EventObject event, Collection<LineListener> listeners)
-		{
-			m_event = event;
-			m_listeners = new ArrayList<LineListener>(listeners);
-		}
+    public void addEntry(EventObject event, Collection<LineListener> listeners) {
+        // TDebug.out("%% TNotifier.addEntry(): called.");
+        synchronized (m_entries) {
+            m_entries.add(new NotifyEntry(event, listeners));
+            m_entries.notifyAll();
+        }
+        // TDebug.out("%% TNotifier.addEntry(): completed.");
+    }
 
+    public void run() {
+        while (true) {
+            NotifyEntry entry = null;
+            synchronized (m_entries) {
+                while (m_entries.size() == 0) {
+                    try {
+                        m_entries.wait();
+                    } catch (InterruptedException e) {
+                        if (TDebug.TraceAllExceptions) {
+                            TDebug.out(e);
+                        }
+                    }
+                }
+                entry = m_entries.remove(0);
+            }
+            entry.deliver();
+        }
+    }
 
-		public void deliver()
-		{
-			// TDebug.out("%% TNotifier.NotifyEntry.deliver(): called.");
-			Iterator<LineListener>	iterator = m_listeners.iterator();
-			while (iterator.hasNext())
-			{
-				LineListener	listener = iterator.next();
-				listener.update((LineEvent) m_event);
-			}
-		}
-	}
-
-
-	public static TNotifier	notifier = null;
-
-	static
-	{
-		notifier = new TNotifier();
-		notifier.setDaemon(true);
-		notifier.start();
-	}
-
-
-
-	/**	The queue of events to deliver.
-	 *	The entries are of class NotifyEntry.
-	 */
-	private List<NotifyEntry>	m_entries;
-
-
-	public TNotifier()
-	{
-		super("Tritonus Notifier");
-		m_entries = new ArrayList<NotifyEntry>();
-	}
+    public static class NotifyEntry {
+        private final EventObject m_event;
+        private final List<LineListener> m_listeners;
 
 
-
-	public void addEntry(EventObject event, Collection<LineListener> listeners)
-	{
-		// TDebug.out("%% TNotifier.addEntry(): called.");
-		synchronized (m_entries)
-		{
-			m_entries.add(new NotifyEntry(event, listeners));
-			m_entries.notifyAll();
-		}
-		// TDebug.out("%% TNotifier.addEntry(): completed.");
-	}
+        public NotifyEntry(EventObject event, Collection<LineListener> listeners) {
+            m_event = event;
+            m_listeners = new ArrayList<LineListener>(listeners);
+        }
 
 
-	public void run()
-	{
-		while (true)
-		{
-			NotifyEntry	entry = null;
-			synchronized (m_entries)
-			{
-				while (m_entries.size() == 0)
-				{
-					try
-					{
-						m_entries.wait();
-					}
-					catch (InterruptedException e)
-					{
-						if (TDebug.TraceAllExceptions)
-						{
-							TDebug.out(e);
-						}
-					}
-				}
-				entry = m_entries.remove(0);
-			}
-			entry.deliver();
-		}
-	}
+        public void deliver() {
+            // TDebug.out("%% TNotifier.NotifyEntry.deliver(): called.");
+            Iterator<LineListener> iterator = m_listeners.iterator();
+            while (iterator.hasNext()) {
+                LineListener listener = iterator.next();
+                listener.update((LineEvent) m_event);
+            }
+        }
+    }
 }
 
 

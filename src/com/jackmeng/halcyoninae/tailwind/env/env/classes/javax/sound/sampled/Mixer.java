@@ -29,116 +29,94 @@
 package javax.sound.sampled;
 
 
-
-
 public interface Mixer
-extends Line
-{
-	public Mixer.Info getMixerInfo();
+        extends Line {
+    Mixer.Info getMixerInfo();
 
-	public Line.Info[] getSourceLineInfo();
+    Line.Info[] getSourceLineInfo();
 
-	public Line.Info[] getTargetLineInfo();
+    Line.Info[] getTargetLineInfo();
 
-	public Line.Info[] getSourceLineInfo(Line.Info info);
+    Line.Info[] getSourceLineInfo(Line.Info info);
 
-	public Line.Info[] getTargetLineInfo(Line.Info info);
+    Line.Info[] getTargetLineInfo(Line.Info info);
 
-	public boolean isLineSupported(Line.Info info);
+    boolean isLineSupported(Line.Info info);
 
-	public Line getLine(Line.Info info)
-		throws LineUnavailableException;
+    Line getLine(Line.Info info)
+            throws LineUnavailableException;
 
-	public int getMaxLines(Line.Info info);
+    int getMaxLines(Line.Info info);
 
-	public Line[] getSourceLines();
+    Line[] getSourceLines();
 
-	public Line[] getTargetLines();
+    Line[] getTargetLines();
 
-	public void synchronize(Line[] aLines,
-				boolean bMaintainSync);
-
-
-	public void unsynchronize(Line[] aLines);
+    void synchronize(Line[] aLines,
+                     boolean bMaintainSync);
 
 
-	public boolean isSynchronizationSupported(Line[] aLines,
-				boolean bMaintainSync);
+    void unsynchronize(Line[] aLines);
 
 
-
-	public static class Info
-	{
-		private String		m_strName;
-		private String		m_strVendor;
-		private String		m_strDescription;
-		private String		m_strVersion;
+    boolean isSynchronizationSupported(Line[] aLines,
+                                       boolean bMaintainSync);
 
 
-
-		protected Info(String strName,
-			    String strVendor,
-			    String strDescription,
-			    String strVersion)
-		{
-			m_strName = strName;
-			m_strVendor = strVendor;
-			m_strDescription = strDescription;
-			m_strVersion = strVersion;
-		}
+    class Info {
+        private final String m_strName;
+        private final String m_strVendor;
+        private final String m_strDescription;
+        private final String m_strVersion;
 
 
-
-		public boolean equals(Object obj)
-		{
-			return super.equals(obj);
-		}
-
-
-
-		public int hashCode()
-		{
-			return super.hashCode();
-		}
+        protected Info(String strName,
+                       String strVendor,
+                       String strDescription,
+                       String strVersion) {
+            m_strName = strName;
+            m_strVendor = strVendor;
+            m_strDescription = strDescription;
+            m_strVersion = strVersion;
+        }
 
 
-
-		public String getName()
-		{
-			return m_strName;
-		}
+        public boolean equals(Object obj) {
+            return super.equals(obj);
+        }
 
 
-
-		public String getVendor()
-		{
-			return m_strVendor;
-		}
+        public int hashCode() {
+            return super.hashCode();
+        }
 
 
-
-		public String getDescription()
-		{
-			return m_strDescription;
-		}
+        public String getName() {
+            return m_strName;
+        }
 
 
-
-		public String getVersion()
-		{
-			return m_strVersion;
-		}
+        public String getVendor() {
+            return m_strVendor;
+        }
 
 
+        public String getDescription() {
+            return m_strDescription;
+        }
 
-		public String toString()
-		{
-			return super.toString() /* + TODO: .... */;
-		}
 
-	}
+        public String getVersion() {
+            return m_strVersion;
+        }
+
+
+        public String toString() {
+            return super.toString() /* + TODO: .... */;
+        }
+
+    }
 }
-
 
 
 /*** Mixer.java ***/

@@ -31,52 +31,47 @@ package org.tritonus.lowlevel.esd;
 import org.tritonus.share.TDebug;
 
 
+public class Esd {
+    public static final int ESD_STREAM = 0x0000;
+    public static final int ESD_PLAY = 0x1000;
+    public static final int ESD_BITS8 = 0x0000;
+    public static final int ESD_BITS16 = 0x0001;
+    public static final int ESD_MONO = 0x0010;
+    public static final int ESD_STEREO = 0x0020;
 
-public class Esd
-{
-	public static final int		ESD_STREAM	= 0x0000;
-	public static final int		ESD_PLAY	= 0x1000;
-	public static final int		ESD_BITS8	= 0x0000;
-	public static final int		ESD_BITS16	= 0x0001;
-	public static final int		ESD_MONO	= 0x0010;
-	public static final int		ESD_STEREO	= 0x0020;
-
-	private static boolean	sm_bIsLibraryAvailable = false;
+    private static boolean sm_bIsLibraryAvailable = false;
 
 
-
-	static
-	{
-		Esd.loadNativeLibrary();
-	}
+    static {
+        Esd.loadNativeLibrary();
+    }
 
 
+    public static void loadNativeLibrary() {
+        if (TDebug.TraceEsdNative) {
+            TDebug.out("Esd.loadNativeLibrary(): loading native library tritonusesd");
+        }
+        try {
+            System.loadLibrary("tritonusesd");
+            sm_bIsLibraryAvailable = true;
+        } catch (Throwable t) {
+            if (TDebug.TraceEsdNative || TDebug.TraceAllExceptions) {
+                TDebug.out(t);
+            }
+        }
+        if (TDebug.TraceEsdNative) {
+            TDebug.out("Esd.loadNativeLibrary(): loaded");
+        }
+    }
 
-	public static void loadNativeLibrary()
-	{
-		if (TDebug.TraceEsdNative) { TDebug.out("Esd.loadNativeLibrary(): loading native library tritonusesd"); }
-		try
-		{
-			System.loadLibrary("tritonusesd");
-			sm_bIsLibraryAvailable = true;
-		}
-		catch (Throwable t)
-		{
-			if (TDebug.TraceEsdNative || TDebug.TraceAllExceptions) { TDebug.out(t); }
-		}
-		if (TDebug.TraceEsdNative) { TDebug.out("Esd.loadNativeLibrary(): loaded"); }
-	}
 
-
-
-	/**	Returns whether the libraries are installed correctly.
-	 */
-	public static boolean isLibraryAvailable()
-	{
-		return sm_bIsLibraryAvailable;
-	}
+    /**
+     * Returns whether the libraries are installed correctly.
+     */
+    public static boolean isLibraryAvailable() {
+        return sm_bIsLibraryAvailable;
+    }
 }
-
 
 
 /*** Esd.java ***/

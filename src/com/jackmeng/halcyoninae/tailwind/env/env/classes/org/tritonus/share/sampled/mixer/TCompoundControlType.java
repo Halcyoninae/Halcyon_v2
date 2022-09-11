@@ -29,25 +29,23 @@ package org.tritonus.share.sampled.mixer;
 import javax.sound.sampled.CompoundControl;
 
 
-
-/**	CompoundControl.Type class.
-	This class is only needed to provide a public constructor.
+/**
+ * CompoundControl.Type class.
+ * This class is only needed to provide a public constructor.
  */
 public class TCompoundControlType
-extends CompoundControl.Type
-{
-	/**	Constructor.
-		Constructs a CompoundControl.Type with the
-		name given.
-
-		@param strName The name of the control.
-	*/
-	public TCompoundControlType(String strName)
-	{
-		super(strName);
-	}
+        extends CompoundControl.Type {
+    /**
+     * Constructor.
+     * Constructs a CompoundControl.Type with the
+     * name given.
+     *
+     * @param strName The name of the control.
+     */
+    public TCompoundControlType(String strName) {
+        super(strName);
+    }
 }
-
 
 
 /*** TCompoundControlType.java ***/

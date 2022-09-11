@@ -29,104 +29,88 @@ package org.tritonus.lowlevel.pogg;
 import org.tritonus.share.TDebug;
 
 
-
-/** Wrapper for ogg_packet.
+/**
+ * Wrapper for ogg_packet.
  */
-public class Packet
-{
-        static
-        {
-                Ogg.loadNativeLibrary();
-                if (TDebug.TraceOggNative)
-                {
-                        setTrace(true);
-                }
+public class Packet {
+    static {
+        Ogg.loadNativeLibrary();
+        if (TDebug.TraceOggNative) {
+            setTrace(true);
         }
-                                                                                
-
-	/**
-	 *	Holds the pointer to ogg_packet
-	 *	for the native code.
-	 *	This must be long to be 64bit-clean.
-	 */
-	@SuppressWarnings("unused")
-	private long	m_lNativeHandle;
+    }
 
 
-
-	public Packet()
-	{
-		if (TDebug.TraceOggNative) { TDebug.out("Packet.<init>(): begin"); }
-		int	nReturn = malloc();
-		if (nReturn < 0)
-		{
-			throw new RuntimeException("malloc of ogg_packet failed");
-		}
-		if (TDebug.TraceOggNative) { TDebug.out("Packet.<init>(): end"); }
-	}
+    /**
+     * Holds the pointer to ogg_packet
+     * for the native code.
+     * This must be long to be 64bit-clean.
+     */
+    @SuppressWarnings("unused")
+    private long m_lNativeHandle;
 
 
+    public Packet() {
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Packet.<init>(): begin");
+        }
+        int nReturn = malloc();
+        if (nReturn < 0) {
+            throw new RuntimeException("malloc of ogg_packet failed");
+        }
+        if (TDebug.TraceOggNative) {
+            TDebug.out("Packet.<init>(): end");
+        }
+    }
 
-	public void finalize()
-	{
-		// TODO: call free()
-		// call super.finalize() first or last?
-		// and introduce a flag if free() has already been called?
-	}
+    private static native void setTrace(boolean bTrace);
 
+    public void finalize() {
+        // TODO: call free()
+        // call super.finalize() first or last?
+        // and introduce a flag if free() has already been called?
+    }
 
+    private native int malloc();
 
-	private native int malloc();
-	public native void free();
+    public native void free();
 
+    /**
+     * Calls ogg_packet_clear().
+     */
+    public native void clear();
 
+    /**
+     * Accesses packet and bytes.
+     */
+    public native byte[] getData();
 
-	/** Calls ogg_packet_clear().
-	 */
-	public native void clear();
+    /**
+     * Accesses b_o_s.
+     */
+    public native boolean isBos();
 
+    /**
+     * Accesses e_o_s.
+     */
+    public native boolean isEos();
 
+    public native long getGranulePos();
 
-	/** Accesses packet and bytes.
-	 */
-	public native byte[] getData();
+    public native long getPacketNo();
 
+    /**
+     * Sets the data in the packet.
+     */
+    public native void setData(byte[] abData, int nOffset, int nLength);
 
-	/** Accesses b_o_s.
-	 */
-	public native boolean isBos();
+    public native void setFlags(boolean bBos, boolean bEos, long lGranulePos,
+                                long lPacketNo);
 
-
-	/** Accesses e_o_s.
-	 */
-	public native boolean isEos();
-
-
-	public native long getGranulePos();
-
-
-	public native long getPacketNo();
-
-
-	/**	Sets the data in the packet.
-	 */
-	public native void setData(byte[] abData, int nOffset, int nLength);
-
-
-	public native void setFlags(boolean bBos, boolean bEos, long lGranulePos,
-								long lPacketNo);
-
-	public void setFlags(boolean bBos, boolean bEos, long lGranulePos)
-	{
-		setFlags(bBos, bEos, lGranulePos, 0);
-	}
-
-
-	private static native void setTrace(boolean bTrace);
+    public void setFlags(boolean bBos, boolean bEos, long lGranulePos) {
+        setFlags(bBos, bEos, lGranulePos, 0);
+    }
 }
-
-
-
 
 
 /*** Packet.java ***/

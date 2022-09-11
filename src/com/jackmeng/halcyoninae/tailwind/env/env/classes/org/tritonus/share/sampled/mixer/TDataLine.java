@@ -34,134 +34,105 @@ import javax.sound.sampled.*;
 import java.util.Collection;
 
 
-
-/**	Base class for classes implementing DataLine.
+/**
+ * Base class for classes implementing DataLine.
  */
 public abstract class TDataLine
-extends	TLine
-implements DataLine
-{
-	private static final int	DEFAULT_BUFFER_SIZE = 128000;
+        extends TLine
+        implements DataLine {
+    private static final int DEFAULT_BUFFER_SIZE = 128000;
 
-	private AudioFormat		m_format;
-	private int			m_nBufferSize;
-	private boolean			m_bRunning;
-	// private boolean			m_bActive;
-
+    private AudioFormat m_format;
+    private int m_nBufferSize;
+    private boolean m_bRunning;
+    // private boolean			m_bActive;
 
 
-
-	public TDataLine(TMixer mixer,
-			 DataLine.Info info)
-	{
-		super(mixer,
-		      info);
-		init(info);
-	}
+    public TDataLine(TMixer mixer,
+                     DataLine.Info info) {
+        super(mixer,
+                info);
+        init(info);
+    }
 
 
-
-	public TDataLine(TMixer mixer,
-					 DataLine.Info info,
-					 Collection<Control> controls)
-	{
-		super(mixer,
-		      info,
-		      controls);
-		init(info);
-	}
+    public TDataLine(TMixer mixer,
+                     DataLine.Info info,
+                     Collection<Control> controls) {
+        super(mixer,
+                info,
+                controls);
+        init(info);
+    }
 
 
-
-	// IDEA: extract format and bufsize from info?
-	private void init(DataLine.Info info)
-	{
-		m_format = null;
-		m_nBufferSize = AudioSystem.NOT_SPECIFIED;
-		setRunning(false);
-		// setActive(false);
-	}
+    // IDEA: extract format and bufsize from info?
+    private void init(DataLine.Info info) {
+        m_format = null;
+        m_nBufferSize = AudioSystem.NOT_SPECIFIED;
+        setRunning(false);
+        // setActive(false);
+    }
 
 
-
-	// not defined here:
-	// public void drain()
-	// public void flush()
-
+    // not defined here:
+    // public void drain()
+    // public void flush()
 
 
-	public void start()
-	{
-		if (TDebug.TraceSourceDataLine)
-		{
-			TDebug.out("TDataLine.start(): called");
-		}
-		setRunning(true);
-	}
+    public void start() {
+        if (TDebug.TraceSourceDataLine) {
+            TDebug.out("TDataLine.start(): called");
+        }
+        setRunning(true);
+    }
 
 
-
-	public void stop()
-	{
-		if (TDebug.TraceSourceDataLine)
-		{
-			TDebug.out("TDataLine.stop(): called");
-		}
-		setRunning(false);
-	}
+    public void stop() {
+        if (TDebug.TraceSourceDataLine) {
+            TDebug.out("TDataLine.stop(): called");
+        }
+        setRunning(false);
+    }
 
 
-
-	public boolean isRunning()
-	{
-		return m_bRunning;
-	}
+    public boolean isRunning() {
+        return m_bRunning;
+    }
 
 
-
-	// TODO: recheck
-	protected void setRunning(boolean bRunning)
-	{
-		boolean	bOldValue = isRunning();
-		m_bRunning = bRunning;
-		if (bOldValue != isRunning())
-		{
-			if (isRunning())
-			{
-				startImpl();
-				notifyLineEvent(LineEvent.Type.START);
-			}
-			else
-			{
-				stopImpl();
-				notifyLineEvent(LineEvent.Type.STOP);
-			}
-		}
-	}
+    // TODO: recheck
+    protected void setRunning(boolean bRunning) {
+        boolean bOldValue = isRunning();
+        m_bRunning = bRunning;
+        if (bOldValue != isRunning()) {
+            if (isRunning()) {
+                startImpl();
+                notifyLineEvent(LineEvent.Type.START);
+            } else {
+                stopImpl();
+                notifyLineEvent(LineEvent.Type.STOP);
+            }
+        }
+    }
 
 
-
-	protected void startImpl()
-	{
-	}
+    protected void startImpl() {
+    }
 
 
-
-	protected void stopImpl()
-	{
-	}
+    protected void stopImpl() {
+    }
 
 
-
-	/**
-	 *	This implementation returns the status of isRunning().
-	 *	Subclasses should overwrite this method if there is more
-	 *	precise information about the status of the line available.
-	 */
-	public boolean isActive()
-	{
-		return isRunning();
-	}
+    /**
+     * This implementation returns the status of isRunning().
+     * Subclasses should overwrite this method if there is more
+     * precise information about the status of the line available.
+     */
+    public boolean isActive() {
+        return isRunning();
+    }
 
 
 /*
@@ -171,8 +142,8 @@ implements DataLine
 	}
 */
 
-	// TODO: should only ALLOW engaging in data I/O.
-	// actual START event should only be sent when line really becomes active
+    // TODO: should only ALLOW engaging in data I/O.
+    // actual START event should only be sent when line really becomes active
 /*
 	protected void setStarted(boolean bStarted)
 	{
@@ -185,107 +156,80 @@ implements DataLine
 */
 
 
-	public AudioFormat getFormat()
-	{
-		return m_format;
-	}
+    public AudioFormat getFormat() {
+        return m_format;
+    }
 
 
-
-	protected void setFormat(AudioFormat format)
-	{
-		if (TDebug.TraceDataLine)
-		{
-			TDebug.out("TDataLine.setFormat(): setting: " + format);
-		}
-		m_format = format;
-	}
+    protected void setFormat(AudioFormat format) {
+        if (TDebug.TraceDataLine) {
+            TDebug.out("TDataLine.setFormat(): setting: " + format);
+        }
+        m_format = format;
+    }
 
 
-
-	public int getBufferSize()
-	{
-		return m_nBufferSize;
-	}
+    public int getBufferSize() {
+        return m_nBufferSize;
+    }
 
 
-
-	protected void setBufferSize(int nBufferSize)
-	{
-		if (TDebug.TraceDataLine)
-		{
-			TDebug.out("TDataLine.setBufferSize(): setting: " + nBufferSize);
-		}
-		m_nBufferSize = nBufferSize;
-	}
+    protected void setBufferSize(int nBufferSize) {
+        if (TDebug.TraceDataLine) {
+            TDebug.out("TDataLine.setBufferSize(): setting: " + nBufferSize);
+        }
+        m_nBufferSize = nBufferSize;
+    }
 
 
-
-	// not defined here:
-	// public int available()
-
+    // not defined here:
+    // public int available()
 
 
-	public int getFramePosition()
-	{
-		// TODO:
-		return -1;
-	}
+    public int getFramePosition() {
+        // TODO:
+        return -1;
+    }
 
 
-
-	public long getLongFramePosition()
-	{
-		// TODO:
-		return -1;
-	}
+    public long getLongFramePosition() {
+        // TODO:
+        return -1;
+    }
 
 
-
-	public long getMicrosecondPosition()
-	{
-		return (long) (getFramePosition() * getFormat().getFrameRate() * 1000000);
-	}
+    public long getMicrosecondPosition() {
+        return (long) (getFramePosition() * getFormat().getFrameRate() * 1000000);
+    }
 
 
-
-	/*
-	 *	Has to be overridden to be useful.
-	 */
-	public float getLevel()
-	{
-		return AudioSystem.NOT_SPECIFIED;
-	}
+    /*
+     *	Has to be overridden to be useful.
+     */
+    public float getLevel() {
+        return AudioSystem.NOT_SPECIFIED;
+    }
 
 
-
-	protected void checkOpen()
-	{
-		if (getFormat() == null)
-		{
-			throw new IllegalStateException("format must be specified");
-		}
-		if (getBufferSize() == AudioSystem.NOT_SPECIFIED)
-		{
-			setBufferSize(getDefaultBufferSize());
-		}
-	}
+    protected void checkOpen() {
+        if (getFormat() == null) {
+            throw new IllegalStateException("format must be specified");
+        }
+        if (getBufferSize() == AudioSystem.NOT_SPECIFIED) {
+            setBufferSize(getDefaultBufferSize());
+        }
+    }
 
 
-
-	protected int getDefaultBufferSize()
-	{
-		return DEFAULT_BUFFER_SIZE;
-	}
+    protected int getDefaultBufferSize() {
+        return DEFAULT_BUFFER_SIZE;
+    }
 
 
-
-	protected void notifyLineEvent(LineEvent.Type type)
-	{
-		notifyLineEvent(new LineEvent(this, type, getFramePosition()));
-	}
+    protected void notifyLineEvent(LineEvent.Type type) {
+        notifyLineEvent(new LineEvent(this, type, getFramePosition()));
+    }
 }
-
 
 
 /*** TDataLine.java ***/

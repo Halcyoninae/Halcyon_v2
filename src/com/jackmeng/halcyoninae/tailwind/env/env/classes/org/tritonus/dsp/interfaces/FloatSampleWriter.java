@@ -29,12 +29,9 @@ package com.jackmeng.halcyoninae.tailwind.env.env.classes.org.tritonus.dsp.inter
 import org.tritonus.share.sampled.FloatSampleBuffer;
 
 
-
-public interface FloatSampleWriter
-{
-	public void write(FloatSampleBuffer buffer);
+public interface FloatSampleWriter {
+    void write(FloatSampleBuffer buffer);
 }
-
 
 
 /*** FloatSampleWriter.java ***/

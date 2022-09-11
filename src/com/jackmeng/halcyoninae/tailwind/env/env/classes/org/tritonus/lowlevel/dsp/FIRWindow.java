@@ -30,11 +30,10 @@ package org.tritonus.lowlevel.dsp;
  * Window for FIR filter design using the windowing method.
  */
 public interface FIRWindow {
-	/**
-	 * Get an array containing the window coefficients.
-	 * 
-	 * @param nOrder
-	 *            The number of elements that the returned array should have.
-	 */
-	public double[] getWindow(int nOrder);
+    /**
+     * Get an array containing the window coefficients.
+     *
+     * @param nOrder The number of elements that the returned array should have.
+     */
+    double[] getWindow(int nOrder);
 }

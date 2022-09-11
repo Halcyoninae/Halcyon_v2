@@ -33,49 +33,46 @@ import org.tritonus.share.TDebug;
 import org.tritonus.share.sampled.mixer.TMixerProvider;
 
 
-
 public class EsdMixerProvider
-extends	TMixerProvider
-{
-	private static boolean	sm_bInitialized = false;
+        extends TMixerProvider {
+    private static boolean sm_bInitialized = false;
 
 
+    public EsdMixerProvider() {
+        super();
+        if (TDebug.TraceMixerProvider) {
+            TDebug.out("EsdMixerProvider.<init>(): begin");
+        }
+        if (!sm_bInitialized && !isDisabled()) {
+            /// TODO: adapt!
+            if (!Esd.isLibraryAvailable()) {
+                disable();
+            } else {
+                staticInit();
+                sm_bInitialized = true;
+            }
+        } else {
+            if (TDebug.TraceMixerProvider) {
+                TDebug.out("EsdMixerProvider.<init>(): already initialized or disabled");
+            }
+        }
 
-	public EsdMixerProvider()
-	{
-		super();
-		if (TDebug.TraceMixerProvider) { TDebug.out("EsdMixerProvider.<init>(): begin"); }
-		if (! sm_bInitialized && ! isDisabled())
-		{
-			/// TODO: adapt!
-			if (! Esd.isLibraryAvailable())
-			{
-				disable();
-			}
-			else
-			{
-				staticInit();
-				sm_bInitialized = true;
-			}
-		}
-		else
-		{
-			if (TDebug.TraceMixerProvider) { TDebug.out("EsdMixerProvider.<init>(): already initialized or disabled"); }
-		}
-
-		if (TDebug.TraceMixerProvider) { TDebug.out("EsdMixerProvider.<init>(): end"); }
-	}
+        if (TDebug.TraceMixerProvider) {
+            TDebug.out("EsdMixerProvider.<init>(): end");
+        }
+    }
 
 
-
-	protected void staticInit()
-	{
-		if (TDebug.TraceMixerProvider) { TDebug.out("EsdMixerProvider.staticInit(): begin"); }
-		addMixer(new EsdMixer());
-		if (TDebug.TraceMixerProvider) { TDebug.out("EsdMixerProvider.staticInit(): end"); }
-	}
+    protected void staticInit() {
+        if (TDebug.TraceMixerProvider) {
+            TDebug.out("EsdMixerProvider.staticInit(): begin");
+        }
+        addMixer(new EsdMixer());
+        if (TDebug.TraceMixerProvider) {
+            TDebug.out("EsdMixerProvider.staticInit(): end");
+        }
+    }
 }
-
 
 
 /*** EsdMixerProvider.java ***/
