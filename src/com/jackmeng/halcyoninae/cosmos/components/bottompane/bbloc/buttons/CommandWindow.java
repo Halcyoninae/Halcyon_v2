@@ -22,6 +22,7 @@ public class CommandWindow extends JButton implements BBlocButton {
         setDoubleBuffered(true);
         setBorder(null);
         setContentAreaFilled(false);
+        setToolTipText("Open a command window to run internal commands & code snippets");
     }
 
   /**

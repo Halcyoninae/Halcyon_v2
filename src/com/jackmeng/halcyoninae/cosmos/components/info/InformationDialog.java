@@ -16,9 +16,7 @@
 package com.jackmeng.halcyoninae.cosmos.components.info;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
-import com.jackmeng.halcyoninae.cosmos.components.info.layout.DebuggerTab;
 import com.jackmeng.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
-import com.jackmeng.halcyoninae.cosmos.components.info.layout.SystemTab;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 
@@ -51,8 +49,6 @@ public class InformationDialog extends JFrame implements Runnable {
             new FileFromSourceTab("Program Properties",
                 FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_PROPERTIES_DOCS)),
             new FileFromSourceTab("Legals", FileFromSourceTab.getContent(LegalNoticeButton.LEGAL_NOTICE_DOCS)),
-            new SystemTab(),
-            new DebuggerTab()
         };
         for (InformationTab tab : tabs) {
             panes.addTab(tab.getName(), tab.getComponent());

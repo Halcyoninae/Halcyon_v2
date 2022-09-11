@@ -15,12 +15,50 @@
 
 package com.jackmeng.halcyoninae.halcyon.command;
 
-public class SmallInvokable {
+import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-  /**
-   * @return String
-   */
-  public String print_hello() {
-    return "hello :)";
+/**
+ * @author Jack Meng
+ * @since 3.4.1
+ */
+public class SmallInvokable {
+  @Invokable()
+  public String echo(String[] str) {
+    StringBuilder sb = new StringBuilder();
+    for (String strx : str) {
+      sb.append(strx).append(" ");
+    }
+    return sb.toString();
+  }
+
+  @Invokable(aliases = "root_exec")
+  public String rexec(String[] str) {
+    try {
+      Process t = Runtime.getRuntime().exec(str);
+
+      BufferedReader stdOut = new BufferedReader(new InputStreamReader(t.getInputStream()));
+
+      BufferedReader stdErr = new BufferedReader(new InputStreamReader(t.getErrorStream()));
+
+      StringBuilder b = new StringBuilder(CommandPrompt
+          .wrap("<strong><u>Root_Execution_In Returns (stdOut):</u></strong><br>", Color.BLACK, Color.GREEN));
+      String temp = null;
+      while ((temp = stdOut.readLine()) != null) {
+        b.append(temp).append("<br>");
+      }
+
+      b.append(CommandPrompt.wrap("<strong><u>Root_Execution_Err Returns (stdErr):</u></strong><br>", Color.BLACK,
+          Color.ORANGE));
+      String temp2 = null;
+      while ((temp2 = stdErr.readLine()) != null) {
+        b.append(temp2).append("<br>");
+      }
+      return b.toString();
+    } catch (IOException e) {
+      return CommandPrompt.wrap(e.getMessage(), null, Color.RED);
+    }
   }
 }

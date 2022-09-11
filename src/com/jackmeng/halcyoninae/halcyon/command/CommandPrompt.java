@@ -182,7 +182,8 @@ public class CommandPrompt extends JFrame implements Runnable {
     sb.append(wrap("<strong><u>Available Commands</u></strong><br>", null, ColorTool.hexToRGBA("#ff7039")));
     for (String key : invokables.keySet()) {
       sb.append(key + " | "
-          + param_str__(invokables.get(key).second.getParameterTypes()) + " ->  " + invokables.get(key).second.getName()).append("()<br>");
+          + param_str__(invokables.get(key).second.getParameterTypes()) + " ->  "
+          + invokables.get(key).second.getName()).append("()<br>");
     }
     return sb.toString();
   }
@@ -210,6 +211,18 @@ public class CommandPrompt extends JFrame implements Runnable {
   public void clearBuffer() {
     buffer = new StringBuilder("");
     commandOut.setText(get_str__());
+  }
+
+  @Invokable(aliases = { "system_properties" })
+  public String sys_properties() {
+    StringBuilder sb = new StringBuilder("==SYSTEM_PROPERTIES==<br>");
+    long i = 1;
+    for (Object str : System.getProperties().keySet()) {
+      sb.append(i).append(") ").append(wrap(str.toString(), null, Color.WHITE)).append(" = ")
+          .append(wrap(System.getProperties().get(str).toString(), null, Color.RED)).append("<br>");
+      i++;
+    }
+    return sb.toString();
   }
 
   /**
@@ -292,7 +305,9 @@ public class CommandPrompt extends JFrame implements Runnable {
   public static void main(String... args) {
     CommandPrompt cp = new CommandPrompt();
     try {
+      SmallInvokable sm = new SmallInvokable();
       cp.addInvokable(cp, cp.getClass());
+      cp.addInvokable(sm, sm.getClass());
     } catch (SecurityException e) {
       e.printStackTrace();
     }

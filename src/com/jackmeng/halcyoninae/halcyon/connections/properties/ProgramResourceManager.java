@@ -48,6 +48,7 @@ public class ProgramResourceManager {
         public static final String KEY_USER_PROGRAM_COLOR_THEME = "user.program_color_theme";
         public static final String KEY_INFOVIEW_BACKDROP_BLUR_FACTOR = "audio.info.backdrop_blur_factor";
         public static final String KEY_INFOVIEW_BACKDROP_BLUR_STYLE = "audio.info.backdrop_blur_style";
+        public static final String KEY_USER_PROGRAM_USE_OPENGL = "user.opengl_acc_pipeline";
 
         /**
          * if false, a loop will disable a shuffle if both are activated.
@@ -81,7 +82,8 @@ public class ProgramResourceManager {
                                                         "light_green")),
                         new Property(KEY_INFOVIEW_BACKDROP_BLUR_FACTOR, "30", new NumericRangeValidator(0, 40, 1)),
                         new Property(KEY_INFOVIEW_BACKDROP_BLUR_STYLE, "default",
-                                        new StrictValidator("wrap", "reflect"))
+                                        new StrictValidator("wrap", "reflect")),
+                        new Property(KEY_USER_PROGRAM_USE_OPENGL, "true", new BooleanValidator()),
         };
         public static final String FILE_SLASH = "/";
         public static final String PROGRAM_RESOURCE_FOLDER = "halcyon";

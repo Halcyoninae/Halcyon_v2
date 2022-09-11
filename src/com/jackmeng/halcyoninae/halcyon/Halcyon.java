@@ -112,7 +112,7 @@ public final class Halcyon {
         Global.ifp.addInfoViewUpdateListener(Global.bctp);
         JSplitPane bottom = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
         bottom.setPreferredSize(
-            new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
+                new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT / 2));
         ArrayList<BBlocButton> bb = new ArrayList<>();
         bb.add(new AddFolder());
         bb.add(new RefreshFileView());
@@ -179,13 +179,9 @@ public final class Halcyon {
                 Debugger.DISABLE_DEBUGGER = false;
             }
         }
+
         try {
-            UIManager.setLookAndFeel(ColorManager.programTheme.getLAF().getName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            IconHandler ico = new IconHandler(new String[]{"png"});
+            IconHandler ico = new IconHandler(new String[] { "png" });
 
             try {
                 ico.load();
@@ -194,24 +190,34 @@ public final class Halcyon {
             }
 
             ExternalResource.checkResourceFolder(
-                ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
+                    ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 
             for (String str : ProgramResourceManager.RESOURCE_SUBFOLDERS) {
                 ExternalResource.createFolder(str);
             }
             ExternalResource.pm.checkAllPropertiesExistence();
 
+            if(ExternalResource.pm.get(ProgramResourceManager.KEY_USER_PROGRAM_USE_OPENGL).equals("true")) {
+                System.setProperty("sun.java2d.opengl", "true");
+            }
+            /*
+             * Everything else under this are GUI related code.
+             */
+            try {
+                UIManager.setLookAndFeel(ColorManager.programTheme.getLAF().getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             new ThreadedScheduler();
-
             if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
                 new ConfirmWindow(
-                    "Turning this feature ON may result in unexpected performance anomalies!! Best to leave this off",
-                    status -> {
-                        if (status) {
-                            run();
-                        } else
-                            System.exit(0);
-                    }).run();
+                        "Turning this feature ON may result in unexpected performance anomalies!! Best to leave this off",
+                        status -> {
+                            if (status) {
+                                run();
+                            } else
+                                System.exit(0);
+                        }).run();
             } else {
                 run();
             }
