@@ -171,7 +171,9 @@ be viewed from the file:
     1. LICENSE.md
 
 Licenses for any third parties:
-    1. LICENSE.txt
+    1. Contained within the
+       resources in the final
+       binary.
 
 Standard Vendor Licensing:
     1. VENDOR_LICENSE
@@ -227,6 +229,7 @@ Default testing kit:
   > JavaJDK -> 11+
   > JavaJRE -> 11+
   > JavaFX -> 12+
+  > C++0x
 
 The code struct tree:
 (src/com/jackmeng/halcyon/...)
@@ -288,12 +291,13 @@ over the specific internals
 of the program and are not made
 for the average end-user.
 
-NOTE: Downloading a FAT-JAR can
-have extended setup requirements,
-as there might be specific
-platform dependent pkgs that are
-required.
-
+NOTE: For developer versions,
+native code will not be pre-
+compiled for you meaning, you
+must compile it yourself. However,
+for official binaries, proper
+wrappers and compiled bins will
+be included with that release.
 ----------------------------------
 
 [!] Package Layout
@@ -359,7 +363,11 @@ with your RE vendor with specifics
     CPU: x86 or x64 no ARM
     GPU: Any w/ OpenGL
     OS: Win32 & *NIX
+This information is provided
+best on this project's 
+wesbite:
 
+github.io/halcyoninae/.github
 ==================================
       Made by Jack Meng :)
 ==================================
