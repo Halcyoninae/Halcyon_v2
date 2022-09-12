@@ -1,4 +1,12 @@
-[***] #47 "Graphics use scale on fly method"
+[**] #48 "Hide/Show Liked"
+    Detailed Description: Include a method for the user to hide the 
+    liked playlist tab if they prefer.
+    Difficulty: None
+    Testing: Minimal
+    Category: Program Dynamics
+    Status: Implementing
+
+[***] #47 "Graphics use scale on the fly method"
     Detailed Description: https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#drawImage%28java.awt.Image,%20int,%20int,%20int,%20int,%20int,%20int,%20int,%20int,%20java.awt.Color,%20java.awt.image.ImageObserver%29
     Difficulty: None
     Testing: Mild
