@@ -157,8 +157,9 @@ party libraries and software that
 are bundled with it.
 
 This program's source code is
-provided under: Standard GPL2.0
-(WITHOUT CLASSPATH EXCEPTION)
+provided under: 
+"Standard Halcyoninae Protective
+License"
 
 However, if you are to distribute
 any pre-built binaries of any
