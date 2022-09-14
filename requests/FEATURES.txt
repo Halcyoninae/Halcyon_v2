@@ -1,3 +1,12 @@
+[***] #49 "Master List"
+    Detailed Description: Instead of separate liked tabs and other permanent
+    "virtual" tabs, have one tab that have multiple nodes representing
+    these virtual tabs, like liked tracks, last played, etc..
+    Difficulty: Minimal
+    Testing: Minimal
+    Category: Program Dynamics
+    Status: None
+
 [**] #48 "Hide/Show Liked"
     Detailed Description: Include a method for the user to hide the 
     liked playlist tab if they prefer.
