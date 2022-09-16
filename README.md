@@ -42,6 +42,7 @@
 - FLAC (.flac)
 - AU (.au)
 - MP2 & MP1 Layers (.mp2)
+- Opus (.opus, .oga)
 
 <details close>
 <summary><strong>Soon To Support</strong></summary>
