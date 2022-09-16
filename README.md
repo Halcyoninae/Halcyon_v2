@@ -2,7 +2,7 @@
 > <em>Copyright (C) Jack Meng 2021</em>
 <hr>
 
-![](https://img.shields.io/static/v1?label=Halcyon&message=b3.4.1&color=89EDA4&labelColor=21252B)
+![](https://img.shields.io/static/v1?label=Halcyon&message=b3.4.1&color=89EDA4&labelColor=21252B) 
 
 <!--
     LICENSED UNDER VENDOR LICENSE
