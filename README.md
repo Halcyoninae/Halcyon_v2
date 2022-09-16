@@ -179,7 +179,6 @@ A Native Bundle provides a runtime image based on your specified architecture
 ![](https://img.shields.io/github/downloads/Halcyoninae/Halcyon/total?label=All%20Release%20Downloads&style=flat-square)
 ![](https://img.shields.io/github/v/tag/Halcyoninae/Halcyon?label=Latest%20Tag&style=flat-square)
 ![](https://img.shields.io/github/v/release/Halcyoninae/Halcyon?include_prereleases&label=Latest%20Release&style=flat-square)
-[![Delete old artifacts](https://github.com/Halcyoninae/Halcyon/actions/workflows/purge-artifacts.yml/badge.svg)](https://github.com/Halcyoninae/Halcyon/actions/workflows/purge-artifacts.yml)
 ![](https://img.shields.io/github/commit-activity/w/Halcyoninae/Halcyon?label=weekly%20activity&style=flat-square)
 ![](https://img.shields.io/github/last-commit/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/commits-since/Halcyoninae/Halcyon/latest?label=last%20release&style=flat-square)
