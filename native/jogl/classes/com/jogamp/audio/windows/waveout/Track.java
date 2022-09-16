@@ -80,11 +80,19 @@ public class Track {
         swapBuffers();
     }
 
+
+    /**
+     * @throws IOException
+     */
     private void openInput() throws IOException {
         input = new BufferedInputStream(new FileInputStream(file));
         totalSamples = (int) file.length() / BYTES_PER_SAMPLE;
     }
 
+
+    /**
+     * @return File
+     */
     public File getFile() {
         return file;
     }
@@ -104,22 +112,44 @@ public class Track {
         playing = true;
     }
 
+
+    /**
+     * @return boolean
+     */
     public synchronized boolean isPlaying() {
         return playing;
     }
 
+
+    /**
+     * @param looping
+     */
     public synchronized void setLooping(final boolean looping) {
         this.looping = looping;
     }
 
+
+    /**
+     * @return boolean
+     */
     public synchronized boolean isLooping() {
         return looping;
     }
 
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     */
     public void setPosition(final float x, final float y, final float z) {
         position = new Vec3f(x, y, z);
     }
 
+
+    /**
+     * @throws IOException
+     */
     synchronized void fill() throws IOException {
         if (input == null) {
             return;
@@ -151,32 +181,60 @@ public class Track {
     private float leftGain;
     private float rightGain;
 
+
+    /**
+     * @param leftGain
+     */
     void setLeftGain(final float leftGain) {
         this.leftGain = leftGain;
     }
 
+
+    /**
+     * @return float
+     */
     float getLeftGain() {
         return leftGain;
     }
 
+
+    /**
+     * @param rightGain
+     */
     void setRightGain(final float rightGain) {
         this.rightGain = rightGain;
     }
 
+
+    /**
+     * @return float
+     */
     float getRightGain() {
         return rightGain;
     }
 
+
+    /**
+     * @return Vec3f
+     */
     Vec3f getPosition() {
         return position;
     }
 
+
+    /**
+     * @return boolean
+     */
     // This is called by the mixer and must be extremely fast
     // Note this assumes mono sounds (FIXME)
     boolean hasNextSample() {
         return (!activeBuffer.empty() && samplePosition < activeBuffer.numSamples());
     }
 
+
+    /**
+     * @return float
+     */
     // This is called by the mixer and must be extremely fast
     float nextSample() {
         final float res = activeBuffer.getSample(samplePosition++);
@@ -198,6 +256,10 @@ public class Track {
         fillingBuffer.empty(true);
     }
 
+
+    /**
+     * @return boolean
+     */
     // This provides a more robust termination condition
     boolean done() {
         return (samplesRead == totalSamples) && !looping;

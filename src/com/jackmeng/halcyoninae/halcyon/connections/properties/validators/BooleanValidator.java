@@ -26,7 +26,6 @@ import com.jackmeng.halcyoninae.halcyon.connections.properties.PropertyValidator
  */
 public class BooleanValidator implements PropertyValidator {
 
-
     /**
      * @param propertyValue
      * @return boolean

@@ -182,7 +182,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 "??kbps,??kHZ,N:N:N") };
         infoDisplayers[0].setForeground(ColorManager.MAIN_FG_THEME);
         infoDisplayers[0].setFont(new Font(getFont().getName(), Font.BOLD, 18));
-        infoDisplayers[1].setForeground(ColorManager.MAIN_BG_THEME);
+        infoDisplayers[1].setForeground(ColorManager.MAIN_FG2_THEME);
         infoDisplayers[1].setFont(new Font(getFont().getName(), Font.ITALIC, 13));
         infoDisplayers[2].setForeground(Color.WHITE);
         infoDisplayers[2].setFont(getFont().deriveFont(11F));
@@ -251,7 +251,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     img = null;
                 }
                 backPanelArt = img;
-                backPanelArt.setAccelerationPriority(0.7F);
+                if(backPanelArt != null)
+                    backPanelArt.setAccelerationPriority(0.7F);
                 backPanel.repaint(30L);
             }
         });
@@ -401,7 +402,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                             text
                             +
                             "</strong></nobr></span></p><p style=\"text-align: left;\"><span style=\"color: "
-                            + ColorManager.MAIN_BG_STR + ";font-size: 10px\">"
+                            + ColorManager.MAIN_FG2_STR+ ";font-size: 10px\">"
                             +
                             info.getTag(AudioInfo.KEY_MEDIA_ARTIST) +
                             "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +
@@ -428,7 +429,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                             text
                             +
                             "</strong></span></p><p style=\"text-align: left;\"><span style=\"color: "
-                            + ColorManager.MAIN_BG_STR + ";font-size: 10px\">"
+                            + ColorManager.MAIN_FG2_STR+ ";font-size: 10px\">"
                             +
                             author +
                             "</span></p><p style=\"text-align: left;\"><span style=\"color: #ffffff;font-size: 8px\">" +

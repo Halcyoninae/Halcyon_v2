@@ -66,14 +66,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class Tailwind implements Audio {
     // PUBLIC STATIC UTIL START
-    public static final int MAGIC_NUMBER       = 4096;
+    public static final int MAGIC_NUMBER = 4096;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
-    private final Object referencable          = new Object();
-    private final Object timeRef               = new Object();
+    private final Object referencable = new Object();
+    private final Object timeRef = new Object();
     private final TailwindEventManager events;
     private File resource;
-    private int my_magic_number                = MAGIC_NUMBER;
+    private int my_magic_number = MAGIC_NUMBER;
     private SourceDataLine line;
     private TailwindPipelineMethod pipeline;
     private FileFormat format;
@@ -89,6 +89,22 @@ public class Tailwind implements Audio {
         pipeline = TailwindPipelineMethod.DEFAULT_;
         if (useAutoClose)
             events.addStatusUpdateListener(new TailwindDefaultListener(this));
+    }
+
+
+    /**
+     * @param e
+     */
+    private void handleException(Exception e) {
+        if (e != null) {
+            ExternalResource.dispatchLog(e);
+            Debugger.crit("EXCEPTION THROWN: " + e.getLocalizedMessage());
+            new ErrorWindow("There was an exception thrown:\n" + e.getMessage()).run();
+            if(line != null) {
+                line.close();
+            }
+            events.dispatchStatusEvent(TailwindStatus.CLOSED);
+        }
     }
 
     /**
@@ -237,8 +253,7 @@ public class Tailwind implements Audio {
                 events.dispatchStatusEvent(TailwindStatus.OPEN);
                 events.dispatchGenericEvent(new TailwindEvent(new AudioInfo(resource)));
             } catch (Exception e) {
-                new ErrorWindow("There was an error reading this file!\n" + e.getMessage()).run();
-                ExternalResource.dispatchLog(e);
+                handleException(e);
             }
         }
     }
@@ -408,7 +423,7 @@ public class Tailwind implements Audio {
                     }
                     events.dispatchStatusEvent(TailwindStatus.CLOSED);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    handleException(e);
                 }
             }
         }
@@ -650,7 +665,7 @@ public class Tailwind implements Audio {
                     resume();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                handleException(e);
             }
         }
     }
@@ -682,7 +697,6 @@ public class Tailwind implements Audio {
                         new ErrorWindow(
                                 "<html><p>Failed to allocate the necessary amount to the buffer!<br>Do not modify the property (set to \"auto\") for buffer allocation<br>unless you know what you are doing!</p></html>")
                                 .run();
-                        e.printStackTrace();
                     }
                 } else {
                     /*
@@ -714,7 +728,7 @@ public class Tailwind implements Audio {
                                 Debugger.warn("=========TailwindPlayer STOP=========\n");
                             }
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            handleException(e);
                         }
                     } else {
                         while (paused) {
@@ -723,7 +737,7 @@ public class Tailwind implements Audio {
                                     referencable.wait();
                                 }
                             } catch (InterruptedException e) {
-                                e.printStackTrace();
+                                // IGNORE
                             }
                         }
                     }

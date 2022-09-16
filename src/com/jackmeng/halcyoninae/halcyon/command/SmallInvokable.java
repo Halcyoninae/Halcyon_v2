@@ -25,6 +25,11 @@ import java.io.InputStreamReader;
  * @since 3.4.1
  */
 public class SmallInvokable {
+
+  /**
+   * @param str
+   * @return String
+   */
   @Invokable()
   public String echo(String[] str) {
     StringBuilder sb = new StringBuilder();
@@ -34,6 +39,11 @@ public class SmallInvokable {
     return sb.toString();
   }
 
+
+  /**
+   * @param str
+   * @return String
+   */
   @Invokable(aliases = "root_exec")
   public String rexec(String[] str) {
     try {

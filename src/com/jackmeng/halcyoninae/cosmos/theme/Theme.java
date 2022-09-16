@@ -37,22 +37,25 @@ public interface Theme {
     Class<? extends BasicLookAndFeel> getLAF();
 
     /**
-     * The theme or the background colors
-     * <p>
-     * This is not to be used as the "main_background" color
-     * and instead should be used when the component has a quick
-     * comparison with the theme's foreground color.
+     * The secondary foreground color
      *
-     * @return the background color
+     * @return the secondary foreground color
      */
-    Color getBackgroundColor();
+    Color getForegroundColor2();
 
     /**
-     * The theme or the foreground colors
+     * The primary foreground colors
      *
-     * @return the foreground color
+     * @return the primary foreground color
      */
     Color getForegroundColor();
+
+    /**
+     * The main background theme
+     *
+     * @return the main background color
+     */
+    Color getMainBackground();
 
     /**
      * The theme or the selection colors

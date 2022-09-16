@@ -30,7 +30,7 @@ public class CommandPrompt extends JFrame implements Runnable {
 
   static final int WIDTH = 690, HEIGHT = 450;
 
-  private final String HEADER = "<html><body style=\"background:" + ColorTool.rgbTohex(ColorManager.ONE_DARK_BG)
+  private final String HEADER = "<html><body style=\"background:" + ColorTool.rgbTohex(ColorManager.MAIN_BG_THEME)
       + ";color:" + ColorManager.MAIN_FG_STR + "\"><pre>", FOOTER = "</pre></body></html>";
   private StringBuilder buffer;
   private JEditorPane commandOut;
@@ -213,6 +213,10 @@ public class CommandPrompt extends JFrame implements Runnable {
     commandOut.setText(get_str__());
   }
 
+
+  /**
+   * @return String
+   */
   @Invokable(aliases = { "system_properties" })
   public String sys_properties() {
     StringBuilder sb = new StringBuilder("==SYSTEM_PROPERTIES==<br>");

@@ -304,6 +304,12 @@ public class GLProfile {
         initSingleton();
         return isAvailableImpl(getProfileMap(device, false), profile);
     }
+
+    /**
+     * @param map
+     * @param profile
+     * @return boolean
+     */
     private static boolean isAvailableImpl(final HashMap<String /*GLProfile_name*/, GLProfile> map, final String profile) {
         return null != map && null != map.get(profile);
     }
@@ -328,13 +334,31 @@ public class GLProfile {
         return isAvailable(null, null);
     }
 
+
+    /**
+     * @param device
+     * @return String
+     */
     public static String glAvailabilityToString(final AbstractGraphicsDevice device) {
         return glAvailabilityToString(device, null).toString();
     }
 
+
+    /**
+     * @param device
+     * @param sb
+     * @return StringBuilder
+     */
     public static StringBuilder glAvailabilityToString(final AbstractGraphicsDevice device, final StringBuilder sb) {
         return glAvailabilityToString(device, sb, null, 0);
     }
+
+    /**
+     * @param sb
+     * @param indent
+     * @param indentCount
+     * @return StringBuilder
+     */
     private static StringBuilder doIndent(final StringBuilder sb, final String indent, int indentCount) {
         while(indentCount>0) {
             sb.append(indent);
@@ -342,6 +366,14 @@ public class GLProfile {
         }
         return sb;
     }
+
+    /**
+     * @param device
+     * @param sb
+     * @param indent
+     * @param indentCount
+     * @return StringBuilder
+     */
     public static StringBuilder glAvailabilityToString(AbstractGraphicsDevice device, StringBuilder sb, final String indent, int indentCount) {
         boolean avail;
         if(null == sb) {
@@ -1096,6 +1128,11 @@ public class GLProfile {
         JOGL's AWT part */
     public static boolean isAWTAvailable() { return isAWTAvailable; }
 
+
+    /**
+     * @param type
+     * @return String
+     */
     public static String getGLTypeName(final int type) {
         switch (type) {
         case GL.GL_UNSIGNED_BYTE:
@@ -1126,6 +1163,11 @@ public class GLProfile {
         return null;
     }
 
+
+    /**
+     * @param array
+     * @return String
+     */
     public static String getGLArrayName(final int array) {
         switch(array) {
         case GLPointerFunc.GL_VERTEX_ARRAY:
@@ -1140,9 +1182,18 @@ public class GLProfile {
         return null;
     }
 
+
+    /**
+     * @return String
+     */
     public final String getGLImplBaseClassName() {
         return getGLImplBaseClassName(getImplName());
     }
+
+    /**
+     * @param profileImpl
+     * @return String
+     */
     private static final String getGLImplBaseClassName(final String profileImpl) {
         if( GLES2 == profileImpl || GLES3 == profileImpl ) {
             return "jogamp.opengl.es3.GLES3";
@@ -1159,9 +1210,20 @@ public class GLProfile {
         }
     }
 
+
+    /**
+     * @param glObject
+     * @return Constructor<?>
+     */
     public final Constructor<?> getGLCtor(final boolean glObject) {
         return getGLCtor(getImplName(), glObject);
     }
+
+    /**
+     * @param profileImpl
+     * @param glObject
+     * @return Constructor<?>
+     */
     private static final Constructor<?> getGLCtor(final String profileImpl, final boolean glObject) {
         if( GLES2 == profileImpl || GLES3 == profileImpl ) {
             return glObject ? ctorGLES3Impl : ctorGLES3ProcAddr;
@@ -1193,6 +1255,10 @@ public class GLProfile {
         return false;
     }
 
+
+    /**
+     * @return int
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -1372,6 +1438,15 @@ public class GLProfile {
         return false;
     }
 
+
+    /**
+     * @param index
+     * @param comps
+     * @param type
+     * @param isVertexAttribPointer
+     * @param throwException
+     * @return boolean
+     */
     public boolean isValidArrayDataType(final int index, final int comps, final int type,
                                         final boolean isVertexAttribPointer, final boolean throwException) {
         final String arrayName = getGLArrayName(index);
@@ -1634,6 +1709,10 @@ public class GLProfile {
         return true;
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "GLProfile[" + getName() + "/" + getImplName() + "."+(this.isHardwareRasterizer?"hw":"sw")+(isCustom?".custom":"")+"]";
@@ -1670,6 +1749,13 @@ public class GLProfile {
     private static final String GLES3ImplClassName = "jogamp.opengl.es3.GLES3Impl";
     private static final String GLES3ProcClassName = "jogamp.opengl.es3.GLES3ProcAddressTable";
 
+
+    /**
+     * @param clazzName
+     * @param glObject
+     * @param cl
+     * @return Constructor<?>
+     */
     private static final Constructor<?> getCtor(final String clazzName, final boolean glObject, final ClassLoader cl) {
         try {
             return ReflectionUtil.getConstructor(clazzName, glObject ? ctorGLArgs : ctorProcArgs, false, cl);
@@ -1897,6 +1983,11 @@ public class GLProfile {
         }
         return false;
     }
+
+    /**
+     * @param device
+     * @return boolean
+     */
     private static boolean initProfilesForDeviceCritical(final AbstractGraphicsDevice device) {
         final boolean isSet = GLContext.getAvailableGLVersionsSet(device);
 
@@ -2022,6 +2113,11 @@ public class GLProfile {
         return addedDesktopProfile || addedMobileProfile;
     }
 
+
+    /**
+     * @param factory
+     * @param device
+     */
     private static void dumpGLInfo(final GLDrawableFactoryImpl factory, final AbstractGraphicsDevice device)  {
         final GLContext ctx = factory.getOrCreateSharedContext(device);
         if(null != ctx) {
@@ -2043,11 +2139,20 @@ public class GLProfile {
         }
     }
 
+
+    /**
+     * @return AbstractGraphicsDevice
+     */
     public static AbstractGraphicsDevice getDefaultDevice() {
         initSingleton();
         return defaultDevice;
     }
 
+
+    /**
+     * @param list
+     * @return String
+     */
     private static String array2String(final String[] list) {
         final StringBuilder msg = new StringBuilder();
         msg.append("[");
@@ -2060,6 +2165,13 @@ public class GLProfile {
         return msg.toString();
     }
 
+
+    /**
+     * @param device
+     * @param sb
+     * @param major
+     * @param profile
+     */
     private static void glAvailabilityToString(final AbstractGraphicsDevice device, final StringBuilder sb, final int major, final int profile) {
         final String str = GLContext.getAvailableGLVersionAsString(device, major, profile);
         if(null==str) {
@@ -2070,6 +2182,13 @@ public class GLProfile {
         sb.append("]");
     }
 
+
+    /**
+     * @param device
+     * @param desktopCtxUndef
+     * @param esCtxUndef
+     * @return HashMap<String, GLProfile>
+     */
     private static HashMap<String, GLProfile> computeProfileMap(final AbstractGraphicsDevice device, final boolean desktopCtxUndef, final boolean esCtxUndef) {
         if (DEBUG) {
             System.err.println("GLProfile.init map "+device.getUniqueID()+", desktopCtxUndef "+desktopCtxUndef+", esCtxUndef "+esCtxUndef);
@@ -2345,6 +2464,11 @@ public class GLProfile {
         return map;
     }
 
+
+    /**
+     * @param device
+     * @param mappedProfiles
+     */
     private static void setProfileMap(final AbstractGraphicsDevice device, final HashMap<String /*GLProfile_name*/, GLProfile> mappedProfiles) {
         synchronized ( deviceConn2ProfileMap ) {
             deviceConn2ProfileMap.put(device.getUniqueID(), mappedProfiles);
@@ -2358,6 +2482,12 @@ public class GLProfile {
         this.isCustom = isCustom;
     }
 
+
+    /**
+     * @param profile
+     * @param profileImpl
+     * @return GLProfile
+     */
     public static GLProfile createCustomGLProfile(final String profile, final GLProfile profileImpl) {
         return new GLProfile(profile, profileImpl, profileImpl.isHardwareRasterizer, true);
     }

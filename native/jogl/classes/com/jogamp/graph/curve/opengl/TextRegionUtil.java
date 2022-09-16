@@ -61,6 +61,12 @@ public class TextRegionUtil {
         public void visit(final OutlineShape shape, final AffineTransform t);
     }
 
+
+    /**
+     * @param s
+     * @param c
+     * @return int
+     */
     public static int getCharCount(final String s, final char c) {
         final int sz = s.length();
         int count = 0;
@@ -289,6 +295,11 @@ public class TextRegionUtil {
     */
    public final int getCacheSize() { return stringCacheArray.size(); }
 
+
+   /**
+    * @param gl
+    * @param space
+    */
    protected final void validateCache(final GL2ES2 gl, final int space) {
        if ( getCacheLimit() > 0 ) {
            while ( getCacheSize() + space > getCacheLimit() ) {
@@ -297,10 +308,27 @@ public class TextRegionUtil {
        }
    }
 
+
+   /**
+    * @param font
+    * @param str
+    * @param pixelSize
+    * @param special
+    * @return GLRegion
+    */
    protected final GLRegion getCachedRegion(final Font font, final CharSequence str, final float pixelSize, final int special) {
        return stringCacheMap.get(getKey(font, str, pixelSize, special));
    }
 
+
+   /**
+    * @param gl
+    * @param font
+    * @param str
+    * @param pixelSize
+    * @param special
+    * @param glyphString
+    */
    protected final void addCachedRegion(final GL2ES2 gl, final Font font, final CharSequence str, final float pixelSize, final int special, final GLRegion glyphString) {
        if ( 0 != getCacheLimit() ) {
            final String key = getKey(font, str, pixelSize, special);
@@ -313,6 +341,14 @@ public class TextRegionUtil {
        }
    }
 
+
+   /**
+    * @param gl
+    * @param font
+    * @param str
+    * @param pixelSize
+    * @param special
+    */
    protected final void removeCachedRegion(final GL2ES2 gl, final Font font, final CharSequence str, final int pixelSize, final int special) {
        final String key = getKey(font, str, pixelSize, special);
        final GLRegion region = stringCacheMap.remove(key);
@@ -322,6 +358,11 @@ public class TextRegionUtil {
        stringCacheArray.remove(key);
    }
 
+
+   /**
+    * @param gl
+    * @param idx
+    */
    protected final void removeCachedRegion(final GL2ES2 gl, final int idx) {
        final String key = stringCacheArray.remove(idx);
        if( null != key ) {
@@ -332,6 +373,14 @@ public class TextRegionUtil {
        }
    }
 
+
+   /**
+    * @param font
+    * @param str
+    * @param pixelSize
+    * @param special
+    * @return String
+    */
    protected final String getKey(final Font font, final CharSequence str, final float pixelSize, final int special) {
        final StringBuilder sb = new StringBuilder();
        return font.getName(sb, Font.NAME_UNIQUNAME)

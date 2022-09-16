@@ -56,14 +56,28 @@ class Vec3f {
     set(x, y, z);
   }
 
+
+  /**
+   * @return Vec3f
+   */
   public Vec3f copy() {
     return new Vec3f(this);
   }
 
+
+  /**
+   * @param arg
+   */
   public void set(final Vec3f arg) {
     set(arg.x, arg.y, arg.z);
   }
 
+
+  /**
+   * @param x
+   * @param y
+   * @param z
+   */
   public void set(final float x, final float y, final float z) {
     this.x = x;
     this.y = y;
@@ -98,14 +112,27 @@ class Vec3f {
   public void setY(final float y) { this.y = y; }
   public void setZ(final float z) { this.z = z; }
 
+
+  /**
+   * @param arg
+   * @return float
+   */
   public float dot(final Vec3f arg) {
     return x * arg.x + y * arg.y + z * arg.z;
   }
 
+
+  /**
+   * @return float
+   */
   public float length() {
     return (float) Math.sqrt(lengthSquared());
   }
 
+
+  /**
+   * @return float
+   */
   public float lengthSquared() {
     return this.dot(this);
   }
@@ -206,6 +233,10 @@ class Vec3f {
     z *= arg.z;
   }
 
+
+  /**
+   * @return String
+   */
   @Override
   public String toString() {
     return "(" + x + ", " + y + ", " + z + ")";

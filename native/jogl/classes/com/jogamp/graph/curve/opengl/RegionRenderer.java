@@ -210,6 +210,10 @@ public class RegionRenderer {
         initialized = true;
     }
 
+
+    /**
+     * @param gl
+     */
     public final void destroy(final GL2ES2 gl) {
         if(!initialized){
             if(DEBUG_INSTANCE) {
@@ -261,6 +265,14 @@ public class RegionRenderer {
         this.vp_height = height;
     }
 
+
+    /**
+     * @param angle
+     * @param width
+     * @param height
+     * @param near
+     * @param far
+     */
     public final void reshapePerspective(final float angle, final int width, final int height, final float near, final float far) {
         this.vp_width = width;
         this.vp_height = height;
@@ -271,6 +283,13 @@ public class RegionRenderer {
         p.gluPerspective(angle, ratio, near, far);
     }
 
+
+    /**
+     * @param width
+     * @param height
+     * @param near
+     * @param far
+     */
     public final void reshapeOrtho(final int width, final int height, final float near, final float far) {
         this.vp_width = width;
         this.vp_height = height;
@@ -294,6 +313,10 @@ public class RegionRenderer {
     private static String GLSL_MAIN_BEGIN = "void main (void)\n{\n";
     private static final String gcuTexture2D = "gcuTexture2D";
 
+
+    /**
+     * @return String
+     */
     private String getVersionedShaderName() {
         return "curverenderer01";
     }
@@ -301,6 +324,11 @@ public class RegionRenderer {
     // FIXME: Really required to have sampler2D def. precision ? If not, we can drop getFragmentShaderPrecision(..) and use default ShaderCode ..
     private static final String es2_precision_fp = "\nprecision mediump float;\nprecision mediump int;\nprecision mediump sampler2D;\n";
 
+
+    /**
+     * @param gl
+     * @return String
+     */
     private final String getFragmentShaderPrecision(final GL2ES2 gl) {
         if( gl.isGLES() ) {
             return es2_precision_fp;

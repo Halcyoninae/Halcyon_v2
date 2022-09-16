@@ -79,14 +79,30 @@ public class RenderState {
      */
     public static final int BITHINT_GLOBAL_DEPTH_TEST_ENABLED = 1 << 1 ;
 
+
+    /**
+     * @param pointFactory
+     * @return RenderState
+     */
     public static RenderState createRenderState(final Vertex.Factory<? extends Vertex> pointFactory) {
         return new RenderState(pointFactory, null);
     }
 
+
+    /**
+     * @param pointFactory
+     * @param pmvMatrix
+     * @return RenderState
+     */
     public static RenderState createRenderState(final Vertex.Factory<? extends Vertex> pointFactory, final PMVMatrix pmvMatrix) {
         return new RenderState(pointFactory, pmvMatrix);
     }
 
+
+    /**
+     * @param gl
+     * @return RenderState
+     */
     public static final RenderState getRenderState(final GL2ES2 gl) {
         return (RenderState) gl.getContext().getAttachedObject(thisKey);
     }
@@ -101,6 +117,10 @@ public class RenderState {
     private int hintBitfield;
 
     private final int id;
+
+    /**
+     * @return int
+     */
     private static synchronized int getNextID() {
         return nextID++;
     }
@@ -224,10 +244,19 @@ public class RenderState {
 
     public final PMVMatrix getMatrix() { return pmvMatrix; }
 
+
+    /**
+     * @param v
+     * @return boolean
+     */
     public static boolean isWeightValid(final float v) {
         return 0.0f <= v && v <= 1.9f ;
     }
     public final float getWeight() { return weight[0]; }
+
+    /**
+     * @param v
+     */
     public final void setWeight(final float v) {
         if( !isWeightValid(v) ) {
              throw new IllegalArgumentException("Weight out of range");
@@ -236,10 +265,22 @@ public class RenderState {
     }
 
 
+
+    /**
+     * @param rgbaColor
+     * @return float[]
+     */
     public final float[] getColorStatic(final float[] rgbaColor) {
         System.arraycopy(colorStatic, 0, rgbaColor, 0, 4);
         return rgbaColor;
     }
+
+    /**
+     * @param r
+     * @param g
+     * @param b
+     * @param a
+     */
     public final void setColorStatic(final float r, final float g, final float b, final float a){
         colorStatic[0] = r;
         colorStatic[1] = g;
@@ -312,16 +353,33 @@ public class RenderState {
     }
 
 
+
+    /**
+     * @param mask
+     * @return boolean
+     */
     public final boolean isHintMaskSet(final int mask) {
         return mask == ( hintBitfield & mask );
     }
+
+    /**
+     * @param mask
+     */
     public final void setHintMask(final int mask) {
         hintBitfield |= mask;
     }
+
+    /**
+     * @param mask
+     */
     public final void clearHintMask(final int mask) {
         hintBitfield &= ~mask;
     }
 
+
+    /**
+     * @param gl
+     */
     public void destroy(final GL2ES2 gl) {
         if( null != sp ) {
             sp.destroy(gl);
@@ -329,10 +387,20 @@ public class RenderState {
         }
     }
 
+
+    /**
+     * @param gl
+     * @return RenderState
+     */
     public final RenderState attachTo(final GL2ES2 gl) {
         return (RenderState) gl.getContext().attachObject(thisKey, this);
     }
 
+
+    /**
+     * @param gl
+     * @return boolean
+     */
     public final boolean detachFrom(final GL2ES2 gl) {
         final RenderState _rs = (RenderState) gl.getContext().getAttachedObject(thisKey);
         if(_rs == this) {
@@ -342,6 +410,10 @@ public class RenderState {
         return false;
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "RenderState["+sp+"]";

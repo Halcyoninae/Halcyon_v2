@@ -33,7 +33,6 @@ import java.awt.*;
  */
 public class LightGreen implements Theme {
 
-
     /**
      * @return
      */
@@ -42,15 +41,13 @@ public class LightGreen implements Theme {
         return FlatLightFlatIJTheme.class;
     }
 
-
     /**
      * @return Color
      */
     @Override
-    public Color getBackgroundColor() {
+    public Color getForegroundColor2() {
         return ColorTool.hexToRGBA("#cef5e6");
     }
-
 
     /**
      * @return Color
@@ -62,13 +59,20 @@ public class LightGreen implements Theme {
 
 
     /**
+     * @return Color
+     */
+    @Override
+    public Color getMainBackground() {
+        return ColorTool.hexToRGBA("#d9e4fa");
+    }
+
+    /**
      * @return String
      */
     @Override
     public String getThemeName() {
         return "Light Green";
     }
-
 
     /**
      * @return String
@@ -77,7 +81,6 @@ public class LightGreen implements Theme {
     public String getCanonicalName() {
         return "light_green";
     }
-
 
     /**
      * @return ThemeType

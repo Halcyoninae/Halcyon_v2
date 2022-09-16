@@ -52,22 +52,43 @@ class SoundBuffer {
         empty = true;
     }
 
+
+    /**
+     * @return boolean
+     */
     boolean playing() {
         return playing;
     }
 
+
+    /**
+     * @param playing
+     */
     void playing(final boolean playing) {
         this.playing = playing;
     }
 
+
+    /**
+     * @return boolean
+     */
     boolean empty() {
         return empty;
     }
 
+
+    /**
+     * @param empty
+     */
     void empty(final boolean empty) {
         this.empty = empty;
     }
 
+
+    /**
+     * @param input
+     * @throws IOException
+     */
     void fill(final InputStream input) throws IOException {
         synchronized(this) {
             if (playing) {
@@ -90,10 +111,19 @@ class SoundBuffer {
         }
     }
 
+
+    /**
+     * @return int
+     */
     int numSamples() {
         return numSamples;
     }
 
+
+    /**
+     * @param sample
+     * @return float
+     */
     // This is called by the mixer and must be extremely fast
     // FIXME: may want to reconsider use of floating point at this point
     // FIXME: assumes all sounds are of the same format to avoid normalization

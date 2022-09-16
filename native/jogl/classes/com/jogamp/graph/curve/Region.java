@@ -115,14 +115,29 @@ public abstract class Region {
     protected final AABBox box = new AABBox();
     protected Frustum frustum = null;
 
+
+    /**
+     * @param renderModes
+     * @return boolean
+     */
     public static boolean isVBAA(final int renderModes) {
         return 0 != (renderModes & Region.VBAA_RENDERING_BIT);
     }
 
+
+    /**
+     * @param renderModes
+     * @return boolean
+     */
     public static boolean isMSAA(final int renderModes) {
         return 0 != (renderModes & Region.MSAA_RENDERING_BIT);
     }
 
+
+    /**
+     * @param renderModes
+     * @return boolean
+     */
     public static boolean isTwoPass(final int renderModes) {
         return 0 != ( renderModes & ( Region.VBAA_RENDERING_BIT | Region.MSAA_RENDERING_BIT) );
     }
@@ -154,6 +169,11 @@ public abstract class Region {
         return 0 != (renderModes & Region.COLORTEXTURE_RENDERING_BIT);
     }
 
+
+    /**
+     * @param renderModes
+     * @return String
+     */
     public static String getRenderModeString(final int renderModes) {
         final String curveS = hasVariableWeight(renderModes) ? "-curve" : "";
         final String cChanS = hasColorChannel(renderModes) ? "-cols" : "";
@@ -172,6 +192,12 @@ public abstract class Region {
         this.quality = MAX_QUALITY;
     }
 
+
+    /**
+     * @param coords
+     * @param texParams
+     * @param clearImpl(
+     */
     // FIXME: Better handling of impl. buffer growth .. !
     // protected abstract void setupInitialComponentCount(int attributeCount, int indexCount);
 
@@ -247,6 +273,12 @@ public abstract class Region {
 
     final float[] coordsEx = new float[3];
 
+
+    /**
+     * @param vertIn
+     * @param transform
+     * @param rgba
+     */
     private void pushNewVertexImpl(final Vertex vertIn, final AffineTransform transform, final float[] rgba) {
         if( null != transform ) {
             final float[] coordsIn = vertIn.getCoord();
@@ -261,6 +293,12 @@ public abstract class Region {
         numVertices++;
     }
 
+
+    /**
+     * @param vertIn
+     * @param transform
+     * @param rgba
+     */
     private void pushNewVertexIdxImpl(final Vertex vertIn, final AffineTransform transform, final float[] rgba) {
         pushIndex(numVertices);
         pushNewVertexImpl(vertIn, transform, rgba);
@@ -362,6 +400,12 @@ public abstract class Region {
         markShapeDirty();
     }
 
+
+    /**
+     * @param shapes
+     * @param transform
+     * @param rgbaColor
+     */
     public final void addOutlineShapes(final List<OutlineShape> shapes, final AffineTransform transform, final float[] rgbaColor) {
         for (int i = 0; i < shapes.size(); i++) {
             addOutlineShape(shapes.get(i), transform, rgbaColor);
@@ -404,6 +448,10 @@ public abstract class Region {
     }
     protected final int getDirtyBits() { return dirty; }
 
+
+    /**
+     * @return String
+     */
     public String toString() {
         return "Region["+getRenderModeString(this.renderModes)+", q "+quality+", dirty "+dirty+", vertices "+numVertices+", box "+box+"]";
     }

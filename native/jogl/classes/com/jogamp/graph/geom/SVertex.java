@@ -99,6 +99,12 @@ public class SVertex implements Vertex {
         setOnCurve(onCurve);
     }
 
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     */
     @Override
     public final void setCoord(final float x, final float y, final float z) {
         coord[0] = x;
@@ -106,71 +112,130 @@ public class SVertex implements Vertex {
         coord[2] = z;
     }
 
+
+    /**
+     * @param coordsBuffer
+     * @param offset
+     * @param length
+     */
     @Override
     public final void setCoord(final float[] coordsBuffer, final int offset, final int length) {
         System.arraycopy(coordsBuffer, offset, coord, 0, length);
     }
 
+
+    /**
+     * @return int
+     */
     @Override
     public int getCoordCount() {
         return 3;
     }
 
+
+    /**
+     * @return float[]
+     */
     @Override
     public final float[] getCoord() {
         return coord;
     }
 
+
+    /**
+     * @param x
+     */
     @Override
     public final void setX(final float x) {
         this.coord[0] = x;
     }
 
+
+    /**
+     * @param y
+     */
     @Override
     public final void setY(final float y) {
         this.coord[1] = y;
     }
 
+
+    /**
+     * @param z
+     */
     @Override
     public final void setZ(final float z) {
         this.coord[2] = z;
     }
 
+
+    /**
+     * @return float
+     */
     @Override
     public final float getX() {
         return this.coord[0];
     }
 
+
+    /**
+     * @return float
+     */
     @Override
     public final float getY() {
         return this.coord[1];
     }
 
+
+    /**
+     * @return float
+     */
     @Override
     public final float getZ() {
         return this.coord[2];
     }
 
+
+    /**
+     * @return boolean
+     */
     @Override
     public final boolean isOnCurve() {
         return onCurve;
     }
 
+
+    /**
+     * @param onCurve
+     */
     @Override
     public final void setOnCurve(final boolean onCurve) {
         this.onCurve = onCurve;
     }
 
+
+    /**
+     * @return int
+     */
     @Override
     public final int getId(){
         return id;
     }
 
+
+    /**
+     * @param id
+     */
     @Override
     public final void setId(final int id){
         this.id = id;
     }
 
+
+    /**
+     * @param obj
+     * @return boolean
+     */
     @Override
     public boolean equals(final Object obj) {
         if( obj == this) {
@@ -185,16 +250,30 @@ public class SVertex implements Vertex {
                VectorUtil.isVec3Equal(getTexCoord(), 0, v.getTexCoord(), 0, FloatUtil.EPSILON) &&
                VectorUtil.isVec3Equal(getCoord(), 0, v.getCoord(), 0, FloatUtil.EPSILON) ;
     }
+
+    /**
+     * @return int
+     */
     @Override
     public final int hashCode() {
         throw new InternalError("hashCode not designed");
     }
 
+
+    /**
+     * @return float[]
+     */
     @Override
     public final float[] getTexCoord() {
         return texCoord;
     }
 
+
+    /**
+     * @param s
+     * @param t
+     * @param p
+     */
     @Override
     public final void setTexCoord(final float s, final float t, final float p) {
         texCoord[0] = s;
@@ -202,6 +281,12 @@ public class SVertex implements Vertex {
         texCoord[2] = p;
     }
 
+
+    /**
+     * @param texCoordsBuffer
+     * @param offset
+     * @param length
+     */
     @Override
     public final void setTexCoord(final float[] texCoordsBuffer, final int offset, final int length) {
         System.arraycopy(texCoordsBuffer, offset, texCoord, 0, length);
@@ -215,6 +300,10 @@ public class SVertex implements Vertex {
         return new SVertex(this); // OK to not call super.clone(), using own copy-ctor
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "[ID: " + id + ", onCurve: " + onCurve +

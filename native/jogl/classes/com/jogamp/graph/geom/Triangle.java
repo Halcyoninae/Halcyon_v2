@@ -88,10 +88,18 @@ public class Triangle {
                VectorUtil.isVec2Zero(vertices[2].getTexCoord(), 0) ;
     }
 
+
+    /**
+     * @return int
+     */
     public int getId() {
         return id;
     }
 
+
+    /**
+     * @param id
+     */
     public void setId(final int id) {
         this.id = id;
     }
@@ -101,26 +109,50 @@ public class Triangle {
         return vertices;
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isEdgesBoundary() {
         return boundaryEdges[0] || boundaryEdges[1] || boundaryEdges[2];
     }
 
+
+    /**
+     * @return boolean
+     */
     public boolean isVerticesBoundary() {
         return boundaryVertices[0] || boundaryVertices[1] || boundaryVertices[2];
     }
 
+
+    /**
+     * @return boolean[]
+     */
     public boolean[] getEdgeBoundary() {
         return boundaryEdges;
     }
 
+
+    /**
+     * @return boolean[]
+     */
     public boolean[] getVerticesBoundary() {
         return boundaryVertices;
     }
 
+
+    /**
+     * @param boundaryVertices
+     */
     public void setVerticesBoundary(final boolean[] boundaryVertices) {
         this.boundaryVertices = boundaryVertices;
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         return "Tri ID: " + id + ", onCurve "+isOnCurve()+"\n\t" +

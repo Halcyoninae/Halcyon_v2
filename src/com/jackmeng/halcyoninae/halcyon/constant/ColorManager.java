@@ -31,14 +31,13 @@ import java.awt.*;
  */
 public final class ColorManager {
     public static Theme programTheme        = ThemeBundles.getDefaultTheme();
-    // stable const
-    public static Color ONE_DARK_BG         = ColorTool.hexToRGBA("#21252B");
+    public static Color MAIN_BG_THEME       = programTheme.getMainBackground();
     public static Color BORDER_THEME        = ColorTool.hexToRGBA("#5F657D");
     public static Color MAIN_FG_THEME       = programTheme.getForegroundColor();
     public static Color MAIN_FG_FADED_THEME = ColorTool.brightenColor(MAIN_FG_THEME, 30);
-    public static String MAIN_BG_STR        = ColorTool.rgbTohex(programTheme.getBackgroundColor());
+    public static String MAIN_FG2_STR       = ColorTool.rgbTohex(programTheme.getForegroundColor2());
     public static String MAIN_FG_STR        = ColorTool.rgbTohex(programTheme.getForegroundColor());
-    public static Color MAIN_BG_THEME       = programTheme.getBackgroundColor();
+    public static Color MAIN_FG2_THEME      = programTheme.getForegroundColor2();
     public static Color MAIN_TEXT_THEME     = ColorTool.hexToRGBA("#9499a2");
 
     private ColorManager() {
@@ -47,6 +46,6 @@ public final class ColorManager {
     public static void refreshColors() {
         MAIN_FG_THEME                       = programTheme.getForegroundColor();
         MAIN_FG_STR                         = ColorTool.rgbTohex(programTheme.getForegroundColor());
-        MAIN_BG_THEME                       = programTheme.getBackgroundColor();
+        MAIN_FG2_THEME                      = programTheme.getForegroundColor2();
     }
 }

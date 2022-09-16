@@ -206,6 +206,10 @@ public class OutlineShape implements Comparable<OutlineShape> {
      */
     public final Vertex.Factory<? extends Vertex> vertexFactory() { return vertexFactory; }
 
+
+    /**
+     * @return int
+     */
     public final int getOutlineNumber() {
         return outlines.size();
     }
@@ -442,6 +446,14 @@ public class OutlineShape implements Comparable<OutlineShape> {
         // checkPossibleOverlaps = false;
     }
 
+
+    /**
+     * @param outline
+     * @param a
+     * @param b
+     * @param c
+     * @param index
+     */
     private void subdivideTriangle(final Outline outline, final Vertex a, final Vertex b, final Vertex c, final int index){
         VectorUtil.midVec3(tmpV1, a.getCoord(), b.getCoord());
         VectorUtil.midVec3(tmpV3, b.getCoord(), c.getCoord());
@@ -511,6 +523,13 @@ public class OutlineShape implements Comparable<OutlineShape> {
         } while( !overlaps.isEmpty() );
     }
 
+
+    /**
+     * @param a
+     * @param b
+     * @param c
+     * @return Vertex
+     */
     private Vertex checkTriOverlaps0(final Vertex a, final Vertex b, final Vertex c) {
         final int count = getOutlineNumber();
         for (int cc = 0; cc < count; cc++) {
@@ -543,6 +562,13 @@ public class OutlineShape implements Comparable<OutlineShape> {
         }
         return null;
     }
+
+    /**
+     * @param a
+     * @param b
+     * @param c
+     * @return Vertex
+     */
     @SuppressWarnings("unused")
     private Vertex checkTriOverlaps1(final Vertex a, final Vertex b, final Vertex c) {
         final int count = getOutlineNumber();
@@ -613,6 +639,10 @@ public class OutlineShape implements Comparable<OutlineShape> {
         checkOverlaps();
     }
 
+
+    /**
+     * @return int
+     */
     private int generateVertexIds() {
         int maxVertexId = 0;
         for(int i=0; i<outlines.size(); i++) {
@@ -753,6 +783,10 @@ public class OutlineShape implements Comparable<OutlineShape> {
         }
     }
 
+
+    /**
+     * @return AABBox
+     */
     public final AABBox getBounds() {
         if( 0 == ( dirtyBits & DIRTY_BOUNDS ) ) {
             validateBoundingBox();
@@ -791,11 +825,19 @@ public class OutlineShape implements Comparable<OutlineShape> {
         return true;
     }
 
+
+    /**
+     * @return int
+     */
     @Override
     public final int hashCode() {
         throw new InternalError("hashCode not designed");
     }
 
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         // Avoid calling this.hashCode() !

@@ -39,6 +39,10 @@ public class Audio {
     private static Audio instance = null;
     private final Mixer mixer;
 
+
+    /**
+     * @return Audio
+     */
     public synchronized static Audio getInstance() {
         if (instance == null) {
             instance = new Audio();
@@ -50,10 +54,20 @@ public class Audio {
         mixer = Mixer.getMixer();
     }
 
+
+    /**
+     * @return Mixer
+     */
     public Mixer getMixer() {
         return mixer;
     }
 
+
+    /**
+     * @param file
+     * @return Track
+     * @throws IOException
+     */
     public Track newTrack(final File file) throws IOException
     {
         final Track res = new Track(file);

@@ -22,18 +22,42 @@ import java.util.concurrent.Callable;
  * @since 3.4.1
  */
 public final class Utils {
+
+  /**
+   * @param min
+   * @param max
+   * @return int
+   */
   public static int rng(int min, int max) {
     return (int) (Math.random() * (max - min)) + min;
   }
 
+
+  /**
+   * @param i
+   * @param lim
+   * @return int
+   */
   public static int limg(int i, int lim) {
     return i > lim ? lim : i;
   }
 
+
+  /**
+   * @param i
+   * @param lim
+   * @return int
+   */
   public static int liml(int i, int lim) {
     return i < lim ? lim : i;
   }
 
+
+  /**
+   * @param arr
+   * @param e
+   * @return int[]
+   */
   public static int[] fillArr(int[] arr, Callable<Integer> e) {
     for (int i = 0; i < arr.length; i++) {
       try {
@@ -45,6 +69,13 @@ public final class Utils {
     return arr;
   }
 
+
+  /**
+   * @param arr
+   * @param defCondition
+   * @param e
+   * @return int[]
+   */
   public static int[] appendArr(int[] arr, int defCondition, Callable<Integer> e) {
     for(int i = 0; i < arr.length; i++) {
       if(arr[i] == defCondition) {

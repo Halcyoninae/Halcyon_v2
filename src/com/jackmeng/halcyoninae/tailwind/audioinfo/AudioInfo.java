@@ -16,6 +16,7 @@
 package com.jackmeng.halcyoninae.tailwind.audioinfo;
 
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
@@ -33,11 +34,19 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 /**
  * This class holds information regarding an audio
@@ -51,11 +60,12 @@ import java.util.WeakHashMap;
  * @since 3.0
  */
 public class AudioInfo {
-    public static final String KEY_ABSOLUTE_FILE_PATH = "a", KEY_FILE_NAME = "f",
-        KEY_MEDIA_DURATION = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
-        KEY_SAMPLE_RATE = "mS", KEY_ALBUM = "mA", KEY_GENRE = "mG",
-        KEY_MEDIA_ARTIST = "mAr", KEY_ARTWORK = "mArt", KEY_TRACK = "mTr";
-        static final BufferedImage DEFAULT = DeImage.imageIconToBI(Global.rd.getFromAsImageIcon(InfoViewTP.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+    public static final String KEY_ABSOLUTE_FILE_PATH = "a", KEY_FILE_NAME    = "f",
+            KEY_MEDIA_DURATION                        = "mD", KEY_MEDIA_TITLE = "mT", KEY_BITRATE = "mB",
+            KEY_SAMPLE_RATE                           = "mS", KEY_ALBUM       = "mA", KEY_GENRE   = "mG",
+            KEY_MEDIA_ARTIST                          = "mAr", KEY_ARTWORK    = "mArt", KEY_TRACK = "mTr";
+    static final BufferedImage DEFAULT                = DeImage
+            .imageIconToBI(Global.rd.getFromAsImageIcon(InfoViewTP.INFOVIEW_DISK_NO_FILE_LOADED_ICON));
     private File f;
     private Map<String, String> tags;
     private Tag t;
@@ -82,7 +92,7 @@ public class AudioInfo {
     }
 
     public AudioInfo(File f, boolean s)
-        throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
+            throws InvalidAudioFrameException, CannotReadException, IOException, TagException, ReadOnlyFileException {
         this.f = f;
         AudioFile af;
         af = AudioFileIO.read(f);
@@ -147,7 +157,7 @@ public class AudioInfo {
             info.getTag(KEY_MEDIA_TITLE);
             info.getTag(KEY_SAMPLE_RATE);
         } catch (TagException | ReadOnlyFileException | InvalidAudioFrameException | CannotReadException
-            | IOException e) {
+                | IOException e) {
             return false;
         }
         return true;
@@ -168,7 +178,7 @@ public class AudioInfo {
      */
     public void forceSet(Map<String, String> forceSetMap) {
         Debugger.warn(
-            "Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
+                "Attempting a force set for the current AudioInfo...!!! (Prepare for unforseen consequences (jk)");
         this.tags = forceSetMap;
     }
 
@@ -199,13 +209,13 @@ public class AudioInfo {
         tags.put(KEY_FILE_NAME, f.getName());
         tags.put(KEY_MEDIA_DURATION, header.getTrackLength() + "");
         tags.put(KEY_MEDIA_TITLE,
-            checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
+                checkEmptiness(t.getFirst(FieldKey.TITLE)) ? f.getName() : t.getFirst(FieldKey.TITLE));
         tags.put(KEY_BITRATE, header.getBitRate() + "");
         tags.put(KEY_SAMPLE_RATE, header.getSampleRate() + "");
         tags.put(KEY_ALBUM, checkEmptiness(t.getFirst(FieldKey.ALBUM)) ? "Unknown" : t.getFirst(FieldKey.ALBUM));
         tags.put(KEY_GENRE, checkEmptiness(t.getFirst(FieldKey.GENRE)) ? "Unknown" : t.getFirst(FieldKey.GENRE));
         tags.put(KEY_MEDIA_ARTIST,
-            checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
+                checkEmptiness(t.getFirst(FieldKey.ARTIST)) ? "Unknown" : t.getFirst(FieldKey.ARTIST));
     }
 
     /**
@@ -222,7 +232,7 @@ public class AudioInfo {
                 try {
                     mp = new MP3File(f);
                 } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
-                    | InvalidAudioFrameException e1) {
+                        | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
                 assert mp != null;
@@ -251,7 +261,7 @@ public class AudioInfo {
                 try {
                     mp = new MP3File(f);
                 } catch (IOException | TagException | ReadOnlyFileException | CannotReadException
-                    | InvalidAudioFrameException e1) {
+                        | InvalidAudioFrameException e1) {
                     e1.printStackTrace();
                 }
                 assert mp != null;
@@ -273,7 +283,7 @@ public class AudioInfo {
      * Returns the map of tags to the Audio file
      *
      * @return A Map of String, String representing the parsed tags from the audio
-     * file.
+     *         file.
      */
     public Map<String, String> getTags() {
         return tags;
@@ -304,13 +314,34 @@ public class AudioInfo {
         }
     }
 
-
     /**
      * @return AudioInfoDialog
      */
     public AudioInfoDialog launchAsDialog() {
         Debugger.alert(new TConstr(CLIStyles.MAGENTA_TXT,
-            "Launching current AudioInfo"));
+                "Launching current AudioInfo"));
         return new AudioInfoDialog(this);
+    }
+
+    public static void extractArtwork(AudioInfo ai) {
+        JFileChooser jfc = new JFileChooser();
+        jfc.setDialogTitle("Where to?");
+        jfc.setFileHidingEnabled(false);
+        jfc.setMultiSelectionEnabled(false);
+        int sel = jfc.showSaveDialog(Halcyon.bgt.getFrame());
+        if (sel == JFileChooser.APPROVE_OPTION) {
+            try {
+                OutputStream os = new BufferedOutputStream(new FileOutputStream(jfc.getSelectedFile()));
+
+                ImageIO.write(ai.getArtwork(), "png",
+                        os);
+                os.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Debugger.crit("Failed to export and extract artwork with code: " + e.getLocalizedMessage());
+            }
+            Debugger.good(
+                    "Successfully exported and extracted the artwork to: " + jfc.getSelectedFile().getAbsolutePath());
+        }
     }
 }

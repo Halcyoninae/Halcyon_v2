@@ -63,7 +63,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         setLayout(new GridLayout(1, 5));
 
         timeLabel = new JLabel("00:00:00", SwingConstants.CENTER);
-        timeLabel.setForeground(ColorManager.MAIN_BG_THEME);
+        timeLabel.setForeground(ColorManager.MAIN_FG2_THEME);
 
         fastForward = new JButton();
         fastForward.setLayout(new BorderLayout());

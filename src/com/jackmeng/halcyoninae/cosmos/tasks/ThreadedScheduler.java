@@ -58,10 +58,10 @@ public class ThreadedScheduler {
         UIManager.put("TitlePane.closePressedBackground", new ColorUIResource(ColorManager.MAIN_FG_THEME));
         UIManager.put("TitlePane.buttonHoverBackground", new ColorUIResource(ColorManager.MAIN_FG_THEME));
         UIManager.put("TitlePane.buttonPressedBackground", new ColorUIResource(ColorManager.MAIN_FG_THEME));
-        UIManager.put("TitlePane.closeHoverForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
-        UIManager.put("TitlePane.closePressedForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
-        UIManager.put("TitlePane.buttonHoverForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
-        UIManager.put("TitlePane.buttonPressedForeground", new ColorUIResource(ColorManager.MAIN_BG_THEME));
+        UIManager.put("TitlePane.closeHoverForeground", new ColorUIResource(ColorManager.MAIN_FG2_THEME));
+        UIManager.put("TitlePane.closePressedForeground", new ColorUIResource(ColorManager.MAIN_FG2_THEME));
+        UIManager.put("TitlePane.buttonHoverForeground", new ColorUIResource(ColorManager.MAIN_FG2_THEME));
+        UIManager.put("TitlePane.buttonPressedForeground", new ColorUIResource(ColorManager.MAIN_FG2_THEME));
         UIManager.put("Component.focusedBorderColor", ColorTool.getNullColor()); // takes a generic java.awt.Color
         // object
         UIManager.put("Component.focusColor", ColorTool.getNullColor()); // takes a generic java.awt.Color object

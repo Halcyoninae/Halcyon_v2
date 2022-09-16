@@ -79,6 +79,10 @@ public class Outline implements Comparable<Outline> {
         dirtyBBox = src.dirtyBBox;
     }
 
+
+    /**
+     * @return int
+     */
     public final int getVertexCount() {
         return vertices.size();
     }
@@ -125,10 +129,20 @@ public class Outline implements Comparable<Outline> {
         dirtyBBox = true;
     }
 
+
+    /**
+     * @param index
+     * @return Vertex
+     */
     public final Vertex getVertex(final int index){
         return vertices.get(index);
     }
 
+
+    /**
+     * @param vertex
+     * @return int
+     */
     public int getVertexIndex(final Vertex vertex){
         return vertices.indexOf(vertex);
     }
@@ -144,10 +158,18 @@ public class Outline implements Comparable<Outline> {
         return vertices.remove(position);
     }
 
+
+    /**
+     * @return boolean
+     */
     public final boolean isEmpty(){
         return (vertices.size() == 0);
     }
 
+
+    /**
+     * @return Vertex
+     */
     public final Vertex getLastVertex(){
         if(isEmpty()){
             return null;
@@ -155,6 +177,10 @@ public class Outline implements Comparable<Outline> {
         return vertices.get(vertices.size()-1);
     }
 
+
+    /**
+     * @return ArrayList<Vertex>
+     */
     public final ArrayList<Vertex> getVertices() {
         return vertices;
     }
@@ -170,6 +196,10 @@ public class Outline implements Comparable<Outline> {
         validateBoundingBox();
     }
 
+
+    /**
+     * @return boolean
+     */
     public final boolean isClosed() {
         return closed;
     }
@@ -224,6 +254,10 @@ public class Outline implements Comparable<Outline> {
         }
     }
 
+
+    /**
+     * @return AABBox
+     */
     public final AABBox getBounds() {
         if (dirtyBBox) {
             validateBoundingBox();
@@ -275,10 +309,18 @@ public class Outline implements Comparable<Outline> {
         }
         return true;
     }
+
+    /**
+     * @return int
+     */
     @Override
     public final int hashCode() {
         throw new InternalError("hashCode not designed");
     }
+
+    /**
+     * @return String
+     */
     @Override
     public String toString() {
         // Avoid calling this.hashCode() !

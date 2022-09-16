@@ -74,22 +74,40 @@ public class Mixer {
         m.start();
     }
 
+
+    /**
+     * @return Mixer
+     */
     public static Mixer getMixer() {
         return mixer;
     }
 
+
+    /**
+     * @param track
+     */
     synchronized void add(final Track track) {
         final ArrayList<Track> newTracks = new ArrayList<Track>(tracks);
         newTracks.add(track);
         tracks = newTracks;
     }
 
+
+    /**
+     * @param track
+     */
     synchronized void remove(final Track track) {
         final ArrayList<Track> newTracks = new ArrayList<Track>(tracks);
         newTracks.remove(track);
         tracks = newTracks;
     }
 
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     */
     // NOTE: due to a bug on the APX device, we only have mono sounds,
     // so we currently only pay attention to the position of the left
     // speaker
@@ -97,6 +115,12 @@ public class Mixer {
         leftSpeakerPosition.set(x, y, z);
     }
 
+
+    /**
+     * @param x
+     * @param y
+     * @param z
+     */
     // NOTE: due to a bug on the APX device, we only have mono sounds,
     // so we currently only pay attention to the position of the left
     // speaker
@@ -303,28 +327,75 @@ public class Mixer {
         }
     }
 
+
+    /**
+     * @param address
+     * @param capacity
+     * @return boolean
+     */
     // Initializes waveout device
     private static native boolean initializeWaveOut(long eventObject);
+
+    /**
+     * @param address
+     * @param capacity
+     */
     // Shuts down waveout device
     private static native void shutdownWaveOut();
 
+
+    /**
+     * @param address
+     * @param capacity
+     * @return long
+     */
     // Gets the next (opaque) buffer of data to fill from the native
     // code, or 0 if none was available yet (it should not happen that
     // none is available the way the code is written).
     private static native long getNextMixerBuffer();
+
+    /**
+     * @param address
+     * @param capacity
+     * @return ByteBuffer
+     */
     // Gets the next ByteBuffer to fill out of the mixer buffer. It
     // requires interleaved left and right channel samples, 16 signed
     // bits per sample, little endian. Implicit 44.1 kHz sample rate.
     private static native ByteBuffer getMixerBufferData(long mixerBuffer);
+
+    /**
+     * @param address
+     * @param capacity
+     * @return long
+     */
     // We need these to work around the lack of
     // JNI_NewDirectByteBuffer in CVM + the JSR 239 NIO classes
     private static native long getMixerBufferDataAddress(long mixerBuffer);
     private static native int  getMixerBufferDataCapacity(long mixerBuffer);
+
+    /**
+     * @param address
+     * @param capacity
+     * @return boolean
+     */
     // Prepares this mixer buffer for writing to the device.
     private static native boolean prepareMixerBuffer(long mixerBuffer);
+
+    /**
+     * @param address
+     * @param capacity
+     * @return boolean
+     */
     // Writes this mixer buffer to the device.
     private static native boolean writeMixerBuffer(long mixerBuffer);
 
+
+    /**
+     * @param address
+     * @param capacity
+     * @return long
+     */
     // Helpers to prevent mixer thread from busy waiting
     private static native long CreateEvent();
     private static native boolean WaitForSingleObject(long event);
@@ -338,6 +409,12 @@ public class Mixer {
     private static Constructor directByteBufferConstructor;
     private static Map createdBuffers = new HashMap(); // Map Long, ByteBuffer
 
+
+    /**
+     * @param address
+     * @param capacity
+     * @return ByteBuffer
+     */
     private static ByteBuffer newDirectByteBuffer(final long address, final long capacity) {
         final Long key = Long.valueOf(address);
         ByteBuffer buf = (ByteBuffer) createdBuffers.get(key);
@@ -349,6 +426,12 @@ public class Mixer {
         }
         return buf;
     }
+
+    /**
+     * @param address
+     * @param capacity
+     * @return ByteBuffer
+     */
     private static ByteBuffer newDirectByteBufferImpl(final long address, final long capacity) {
         if (directByteBufferClass == null) {
             try {

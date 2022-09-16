@@ -34,7 +34,6 @@ import java.awt.*;
  */
 public class DarkGreen implements Theme {
 
-
     /**
      * @return
      */
@@ -43,15 +42,13 @@ public class DarkGreen implements Theme {
         return FlatAtomOneDarkIJTheme.class;
     }
 
-
     /**
      * @return Color
      */
     @Override
-    public Color getBackgroundColor() {
+    public Color getForegroundColor2() {
         return ColorTool.hexToRGBA("#cef5e6");
     }
-
 
     /**
      * @return Color
@@ -61,7 +58,6 @@ public class DarkGreen implements Theme {
         return ColorTool.hexToRGBA("#89EDA4");
     }
 
-
     /**
      * @return String
      */
@@ -69,7 +65,6 @@ public class DarkGreen implements Theme {
     public String getThemeName() {
         return "Dark Green";
     }
-
 
     /**
      * @return String
@@ -79,13 +74,21 @@ public class DarkGreen implements Theme {
         return "dark_green";
     }
 
-
     /**
      * @return ThemeType
      */
     @Override
     public ThemeType getThemeType() {
         return ThemeType.DARK;
+    }
+
+
+    /**
+     * @return Color
+     */
+    @Override
+    public Color getMainBackground() {
+        return ColorTool.hexToRGBA("#282c34");
     }
 
 }

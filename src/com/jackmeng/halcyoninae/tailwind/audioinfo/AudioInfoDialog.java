@@ -76,9 +76,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
             @Override
             public void windowClosed(WindowEvent e) {
                 toOpenArtwork = true;
-                System.gc();
             }
-
         });
 
         rightClickArtwork = new JPopupMenu();
@@ -92,6 +90,9 @@ public class AudioInfoDialog extends JFrame implements Runnable {
                 Debugger.warn("Already launched an Artwork Viewport, not running another!!");
             }
         });
+        JMenuItem saveArtwork = new JMenuItem("Export Artwork");
+        saveArtwork.setToolTipText("Extract the artwork to a working directory.");
+        saveArtwork.addActionListener(x -> AudioInfo.extractArtwork(info));
 
         img = CloudSpin.resizeToFitViewport(new Dimension(AUDIOINFO_ARTWORK_PANE_WIDTH, AUDIOINFO_MIN_HEIGHT),
                 info.getArtwork());
@@ -135,6 +136,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
         mainPane.setPreferredSize(getPreferredSize());
 
         rightClickArtwork.add(rightClickArtworkShowBig);
+        rightClickArtwork.add(saveArtwork);
 
         artWorkPanel.addMouseListener(new MouseAdapter() {
             @Override

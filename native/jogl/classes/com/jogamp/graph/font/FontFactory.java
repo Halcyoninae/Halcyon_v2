@@ -73,10 +73,19 @@ public class FontFactory {
         fontConstr = (FontConstructor) ReflectionUtil.createInstance(fontImplName, FontFactory.class.getClassLoader());
     }
 
+
+    /**
+     * @return FontSet
+     */
     public static final FontSet getDefault() {
         return get(UBUNTU);
     }
 
+
+    /**
+     * @param font
+     * @return FontSet
+     */
     public static final FontSet get(final int font) {
         switch (font) {
             case JAVA:
@@ -184,6 +193,14 @@ public class FontFactory {
         }
     }
 
+
+    /**
+     * @param context
+     * @param fname
+     * @param useTempJarCache
+     * @return Font
+     * @throws IOException
+     */
     public static final Font get(final Class<?> context, final String fname, final boolean useTempJarCache) throws IOException {
         InputStream stream = null;
         if( useTempJarCache ) {
@@ -202,6 +219,11 @@ public class FontFactory {
         return null;
     }
 
+
+    /**
+     * @param c
+     * @return boolean
+     */
     public static boolean isPrintableChar( final char c ) {
         if( Character.isWhitespace(c) ) {
             return true;

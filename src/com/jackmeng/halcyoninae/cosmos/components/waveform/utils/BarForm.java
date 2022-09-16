@@ -70,6 +70,10 @@ public class BarForm extends JPanel {
     });
   }
 
+
+  /**
+   * @param g
+   */
   @Override
   protected void paintComponent(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
@@ -86,6 +90,11 @@ public class BarForm extends JPanel {
     }
   }
 
+
+  /**
+   * @param bars
+   * @param schedule
+   */
   public void make(int[] bars, long schedule) {
     this.bars = bars;
     SwingUtilities.invokeLater(() -> repaint(schedule));
@@ -96,10 +105,19 @@ public class BarForm extends JPanel {
     SwingUtilities.invokeLater(() -> repaint(30L));
   }
 
+
+  /**
+   * @return int[]
+   */
   public int[] getCurrentDrawable() {
     return bars;
   }
 
+
+  /**
+   * @param args
+   * @throws Exception
+   */
   public static void main(String[] args) throws Exception {
     JFrame f = new JFrame();
     f.setPreferredSize(new Dimension(300, 100));

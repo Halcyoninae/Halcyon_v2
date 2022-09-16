@@ -113,7 +113,7 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
                 Graphics2D g2 = (Graphics2D) g;
 
                 synchronized (lock) {
-                    g2.setBackground(ColorManager.ONE_DARK_BG);
+                    g2.setBackground(ColorManager.MAIN_BG_THEME);
                     g2.clearRect(0, 0, this.getWidth(), this.getHeight());
                     g2.setRenderingHint(
                         RenderingHints.KEY_ANTIALIASING,
