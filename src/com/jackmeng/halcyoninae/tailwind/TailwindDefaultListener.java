@@ -22,7 +22,7 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
  * @author Jack Meng
  * @since 3.2
  */
-public record TailwindDefaultListener(TailwindPlayer player)
+public record TailwindDefaultListener(Tailwind player)
     implements TailwindListener.StatusUpdateListener, TailwindListener.GenericUpdateListener {
 
     /**

@@ -19,7 +19,7 @@ import com.jackmeng.halcyoninae.cosmos.dialog.LoadingDialog;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
-import com.jackmeng.halcyoninae.tailwind.TailwindPlayer;
+import com.jackmeng.halcyoninae.tailwind.Tailwind;
 import com.jackmeng.halcyoninae.tailwind.TailwindPlaylist;
 import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 
@@ -164,7 +164,7 @@ public class Player {
     /**
      * @return TailwindPlayer
      */
-    public TailwindPlayer getStream() {
+    public Tailwind getStream() {
         return audio;
     }
 

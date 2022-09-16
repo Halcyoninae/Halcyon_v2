@@ -29,7 +29,7 @@ import java.net.URL;
  * An example of this implementation is TailwindPlayer
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.tailwind.TailwindPlayer
+ * @see com.jackmeng.halcyoninae.tailwind.Tailwind
  * @since 3.1
  */
 public interface Audio {

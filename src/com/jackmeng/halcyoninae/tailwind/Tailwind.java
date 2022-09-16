@@ -64,7 +64,7 @@ import java.util.concurrent.TimeUnit;
  * @author Jack Meng
  * @since 3.1
  */
-public class TailwindPlayer implements Audio {
+public class Tailwind implements Audio {
     // PUBLIC STATIC UTIL START
     public static final int MAGIC_NUMBER       = 4096;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
@@ -84,7 +84,7 @@ public class TailwindPlayer implements Audio {
     private ExecutorService worker;
     private AudioFormat formatAudio;
 
-    public TailwindPlayer(boolean useAutoClose) {
+    public Tailwind(boolean useAutoClose) {
         events = new TailwindEventManager();
         pipeline = TailwindPipelineMethod.DEFAULT_;
         if (useAutoClose)

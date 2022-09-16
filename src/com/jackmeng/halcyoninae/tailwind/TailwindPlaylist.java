@@ -32,7 +32,7 @@ import java.util.List;
  * @since 3.2
  * (Technically 3.1)
  */
-public class TailwindPlaylist extends TailwindPlayer implements TailwindListener.StatusUpdateListener {
+public class TailwindPlaylist extends Tailwind implements TailwindListener.StatusUpdateListener {
     private final List<File> history;
     private boolean loop     = false, autoPlay = false;
     private int pointer      = 0;
