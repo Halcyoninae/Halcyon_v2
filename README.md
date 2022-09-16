@@ -168,6 +168,25 @@ A Native Bundle provides a runtime image based on your specified architecture
 
 **Project Website** | [Click Here](https://halcyoninae.github.io/.github/)
 
+
+![](https://img.shields.io/github/repo-size/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/languages/code-size/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/tokei/lines/github/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/stars/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/forks/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/search/Halcyoninae/Halcyon/goto?style=flat-square)
+![](https://img.shields.io/github/languages/top/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/discord/851999446057222144?color=%20%09%237289da&label=discord&style=flat-square)
+![](https://img.shields.io/github/languages/count/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/downloads/Halcyoninae/Halcyon/total?label=All%20Release%20Downloads&style=flat-square)
+![](https://img.shields.io/github/v/tag/Halcyoninae/Halcyon?label=Latest%20Tag&style=flat-square)
+![](https://img.shields.io/github/v/release/Halcyoninae/Halcyon?include_prereleases&label=Latest%20Release&style=flat-square)
+[![Delete old artifacts](https://github.com/Halcyoninae/Halcyon/actions/workflows/purge-artifacts.yml/badge.svg)](https://github.com/Halcyoninae/Halcyon/actions/workflows/purge-artifacts.yml)
+![](https://img.shields.io/github/commit-activity/w/Halcyoninae/Halcyon?label=weekly%20activity&style=flat-square)
+![](https://img.shields.io/github/last-commit/Halcyoninae/Halcyon?style=flat-square)
+![](https://img.shields.io/github/commits-since/Halcyoninae/Halcyon/latest?label=last%20release&style=flat-square)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1673939abd204e86a0629c73b2e917ff)](https://www.codacy.com/gh/exoad/Halcyon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=exoad/Halcyon&amp;utm_campaign=Badge_Grade)
+
 <hr>
 
 > Everything is a work in progress :)
