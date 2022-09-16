@@ -1,4 +1,4 @@
-# <strong>Halcyon</strong> : <br/> <em>Simple & Robust Audio Player</em>
+# <strong>Halcyon</strong> : <br/> <em>A Simplistic & Robust Audio Player</em>
 > <em>Copyright (C) Jack Meng 2021</em>
 <hr>
 
