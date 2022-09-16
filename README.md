@@ -114,7 +114,7 @@ Releases will be pushed out in the following formats:
    - Contains a copy of the JavaDocs for this project
    - A sub version of this style is a separate archive per architecture and operating system
 2. **Native Binary**
-   - An archive file that has its main entrypoiny compiled as a native image that is compatible with your operating system and hardware (x86 & x86_64)
+   - An archive file that has its main entrypoint compiled as a native image that is compatible with your operating system and hardware (x86 & x86_64)
    - Contains static & dynamic libraries that are linked during compile time
    - Does not contain a copy of the JavaDocs
    - Any runtime components are provided on demand
