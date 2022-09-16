@@ -134,6 +134,8 @@ This project is the 3rd iteration of a much older project, which you can find [h
 <u>Rolling Iteration:</u> 3.0<br>
 <u>Version Meta:</u> Beta<br>
 
+View Version History [here](VERSION.txt)
+
 <hr>
 
 ## <strong>System Requirements</strong>
