@@ -170,7 +170,6 @@ A Native Bundle provides a runtime image based on your specified architecture
 
 ![](https://img.shields.io/github/repo-size/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/languages/code-size/Halcyoninae/Halcyon?style=flat-square)
-![](https://img.shields.io/tokei/lines/github/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/stars/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/forks/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/search/Halcyoninae/Halcyon/goto?style=flat-square)
