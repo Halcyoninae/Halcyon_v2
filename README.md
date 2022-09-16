@@ -135,6 +135,30 @@ This project is the 3rd iteration of a much older project, which you can find [h
 
 <hr>
 
+## <strong>System Requirements</strong>
+
+This is a lightweight program, but there are some things that you need in order to have this program running smoothly. Usual memory usage hovers around 20-30 mB on any load.
+
+**Runtime Requirements**
+
+Entirely based on your provider.
+
+A Native Bundle provides a runtime image based on your specified architecture
+
+- Minimum version: 11
+- Minimum Heap: 25 mB
+
+**Client Requirements**
+
+- Proper Sound Card
+- CPU: Any that can run Java
+- GPU: Any with OpenGL support
+- Minimum Memory: 20 mB
+- Maximum Memory: 300 mB
+- Minimum Screen Resolution: None
+
+<hr>
+
 ## <strong>Related Resources</strong>
 
 **JavaDocs Documentation** | [Click Here](https://halcyoninae.github.io/halcyon-docs/)
