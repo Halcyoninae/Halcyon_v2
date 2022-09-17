@@ -1,3 +1,14 @@
+[**] #45 "Liked List should use singleton layout"
+    Detailed Description: A Set should be used instead in order to 
+    prevent a single track from being inserted multiple times
+    into the liked list ordering. This can also be accomplished by 
+    having multiple checks if the current audio track is already
+    present in the liked list.
+    State: Experimental-Build ~ MP4J
+    Status: Fixing
+    Difficulty: Decent
+    Testing: Minimal
+
 [**] #44 "Inconsistent buffering strategy"
     Detailed Description: Besides a blocking reading strategy,
     a separate thread should be used to fetch data from
@@ -16,11 +27,12 @@
         A spawned dialog seeminly does not clear itself once it
         is created. This results in increased memory usage when
         multiple are being created in a short amount of time.
-    Status:
+    Status: FIXED; A single instance of the AudioInfoDialog is reused
+                   on each call.
     Author: B33F70C8E8 
-    State: 
-    Difficulty: 
-    Testing:
+    State: Experimental-Build ~ MP4J
+    Difficulty: Minimal
+    Testing: Minimal
     
 [***] #42 "DeImage Optimizations"
     Detailed Description: This is a reminder
