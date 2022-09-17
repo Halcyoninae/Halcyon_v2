@@ -18,7 +18,7 @@
 -->
 <a href="https://halcyoninae.github.io/.github/">
 <img src="https://raw.githubusercontent.com/Halcyoninae/.github/main/assets/img/3.4_1_2.png" alt="Snapshot from the GUI wrapper for the internal Audio API"
-    width="369" align="right" />
+    width="469" align="right" />
 </a>
 
 ### <strong><u>Description</u></strong>
