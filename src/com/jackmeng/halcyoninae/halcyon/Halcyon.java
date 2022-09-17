@@ -1,16 +1,40 @@
 /*
- *  Copyright: (C) 2022 MP4J Jack Meng
- * Halcyon MP4J is a music player designed openly.
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with this program; If not, see <http://www.gnu.org/licenses/>.
+ * Halcyon ~ exoad
+ *
+ * A simplistic & robust audio library that
+ * is created OPENLY and distributed in hopes
+ * that it will be benefitial.
+ * ============================================
+ * Copyright (C) 2021 Jack Meng
+ * ============================================
+ * The VENDOR_LICENSE is defined as:
+ * "Standard Halcyoninae Protective 1.0 (MODIFIED) License or
+ * later"
+ *
+ * Subsiding Wrappers are defined as:
+ * "GUI Wrappers, Audio API Wrappers provided within the base
+ * build of the original software"
+ * ============================================
+ * The Halcyon Audio API & subsiding wrappers
+ * are licensed under the provided VENDOR_LICENSE
+ * You are permitted to redistribute and/or modify this
+ * piece of software in the source or binary form under
+ * the VENDOR_LICENSE. You are permitted to link this
+ * software statically or dynamically under the descriptions
+ * of VENDOR_LICENSE without classpath exception.
+ *
+ * THE SOFTWARE AND ALL SUBSETS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+ * KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+ * EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+ * OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ * ============================================
+ * If you did not receive a copy of the VENDOR_LICENSE,
+ * consult the following link:
+ * https://raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
+ * ============================================
  */
 
 package com.jackmeng.halcyoninae.halcyon;
@@ -57,13 +81,6 @@ import java.util.Arrays;
  * restrictive licensing towards any end users, including,
  * me being the author of this program.
  * <br>
- * This program is licensed under the GPL-2.0 license:
- * https://www.gnu.org/licenses/gpl-2.0.html
- * <br>
- * A copy of the license must be attached to all distributions
- * and copies of this program, source code, and associated linked
- * libraries. If you have not received a copy of the license, please
- * contact me at: mailto://jackmeng0814@gmail.com
  * <p>
  * Any external libraries used by this program including the audio
  * engine are licensed separately and are included in this program,

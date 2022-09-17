@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /manifests
 /srctest
 /src/com/jackmeng/test
@@ -10,7 +9,6 @@
 *.log
 /out
 MAKE.sh
-=======
 *.class
 /engine
 /halcyon
@@ -32,6 +30,6 @@ Source/com/jackmeng/test
 /gradle
 /classes
 /docs
+/default
 MAKE.sh
 .editorconfig
->>>>>>> 207607d (START VERSION 3.4 [BETA])
