@@ -99,7 +99,7 @@ Currently, the Tailwind Framework can work with the following pipelines:
 - Java Sound API (Standard Tailwind)
 - Tritonus Sound
 - JavaFX MediaPlayer (if available)
-- OpenAL [SOFT] (via Jogamp & JOAL)
+- MiniAudio (Always provided natively)
 
 <hr>
 
