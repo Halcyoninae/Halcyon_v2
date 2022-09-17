@@ -39,11 +39,12 @@
 
 - MP3 (.mp3)
 - WAVE (.wav)
-- AIFF (.aiff)
+- AIFF (.aiff, .aif)
 - Vorbis OGG (.ogg, .oga)
 - FLAC (.flac)
 - AU (.au)
 - MP2 & MP1 Layers (.mp2)
+- AIFC (.aifc)
 - Opus (.opus, .oga)
 
 <details close>
@@ -54,6 +55,9 @@
 - WMA
 - RAW
 - DSD
+- AC3
+- M4R
+- RA
 - APE
 - ACC
 - MIDI
