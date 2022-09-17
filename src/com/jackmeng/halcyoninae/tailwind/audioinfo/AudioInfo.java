@@ -33,20 +33,13 @@ import org.jaudiotagger.tag.FieldKey;
 import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Map;
 import java.util.Objects;
 import java.util.WeakHashMap;
-
-import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 
 /**
  * This class holds information regarding an audio
@@ -323,6 +316,9 @@ public class AudioInfo {
         return new AudioInfoDialog(this);
     }
 
+    /**
+     * @param ai
+     */
     public static void extractArtwork(AudioInfo ai) {
         JFileChooser jfc = new JFileChooser();
         jfc.setDialogTitle("Where to?");

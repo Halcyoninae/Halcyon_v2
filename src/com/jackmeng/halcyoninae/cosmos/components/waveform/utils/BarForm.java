@@ -16,12 +16,9 @@
 package com.jackmeng.halcyoninae.cosmos.components.waveform.utils;
 
 import javax.swing.*;
-
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-
 import java.awt.*;
-import java.awt.event.*;
-import java.util.Arrays;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  * @author Jack Meng

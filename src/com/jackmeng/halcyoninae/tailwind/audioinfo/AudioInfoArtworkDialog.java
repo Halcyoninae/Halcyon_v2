@@ -23,6 +23,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * @author Jack Meng
+ * @since 3.3
+ */
 public class AudioInfoArtworkDialog extends JFrame implements Runnable {
     private final JPanel drawable;
 

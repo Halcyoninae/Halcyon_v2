@@ -6,9 +6,8 @@ import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 
 public class CommandWindow extends JButton implements BBlocButton {
 

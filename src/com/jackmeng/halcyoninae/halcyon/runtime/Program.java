@@ -16,7 +16,6 @@
 package com.jackmeng.halcyoninae.halcyon.runtime;
 
 import com.jackmeng.halcyoninae.halcyon.cacher.MoosicCache;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;

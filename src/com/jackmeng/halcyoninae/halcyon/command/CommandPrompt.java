@@ -137,7 +137,7 @@ public class CommandPrompt extends JFrame implements Runnable {
           String str;
           if (invokables.get(cmd).second.getParameterCount() > 0) {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first,
-                (Object) (argTokens.length > 0 ? argTokens : null)));
+                (String[]) (argTokens.length > 0 ? argTokens : null)));
           } else {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first));
           }

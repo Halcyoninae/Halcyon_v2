@@ -7,6 +7,10 @@ import javax.sound.sampled.AudioFormat;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * @author Jack Meng
+ * @since 3.3
+ */
 public class FlacIn extends InputStream {
     private final FlacStream stream;
 

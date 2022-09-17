@@ -18,10 +18,6 @@ package com.jackmeng.halcyoninae.halcyon.utils;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.makers.ThumbnailMaker;
-
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BaseMultiResolutionImage;

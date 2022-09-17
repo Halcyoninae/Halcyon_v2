@@ -120,8 +120,9 @@ Request TYPE are defined as the following:
 
 To place a request you simply do so by making a pull request that may or may not modify the original request file in the live branch. The pull request should follow this format for best clarity:
 
-> RequestType|#RequestNumber|RequestTitle
+> Urgency|RequestType|#RequestNumber|RequestTitle
 
+- Urgency -> 1 to 3 asteriks (*) with 3 being the most urgent
 - RequestType -> Feature Request OR Issue / Vulnerability Report; this should simplified to <code>FTR</code> OR <code>ISE</code>
 - RequestNumber -> The latest number in the live branch's request type file
 - RequestTitle -> A short eye catching string that describes your request best

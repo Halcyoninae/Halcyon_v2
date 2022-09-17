@@ -15,7 +15,7 @@
 
 package com.jackmeng.halcyoninae.halcyon.command;
 
-import java.awt.Color;
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

@@ -15,15 +15,13 @@
 
 package com.jackmeng.halcyoninae.cloudspin.lib.swing;
 
-import javax.swing.*;
-import javax.swing.plaf.LayerUI;
-
 import com.twelvemonkeys.image.ConvolveWithEdgeOp;
 
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferedImageOp;
-import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
 
 public class StdBlurLayer extends LayerUI<Component> {
