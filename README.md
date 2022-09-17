@@ -1,8 +1,10 @@
 # <strong>Halcyon</strong> : <br/> <em>A Simplistic & Robust Audio Player</em>
+
 > <em>Copyright (C) Jack Meng 2021</em>
+
 <hr>
 
-![](https://img.shields.io/static/v1?label=Halcyon&message=b3.4.1&color=89EDA4&labelColor=21252B&style=for-the-badge) 
+![](https://img.shields.io/static/v1?label=Halcyon&message=b3.4.1&color=89EDA4&labelColor=21252B&style=for-the-badge)
 
 <!--
     LICENSED UNDER VENDOR LICENSE
@@ -20,14 +22,17 @@
 </a>
 
 ### <strong><u>Description</u></strong>
+
 > Halcyon is designed to be a lightweight
 > and efficient native audio player that
 > fits the needs of anyone.
+
 - Features an intuitive API with inbuilt [localization](repo/text/localization.md)
 - Efficient graphics pipelines to boost the nature of [Java's Swing Framework](https://jogamp.org/deployment/jogamp-next/javadoc/jogl/javadoc/overview-summary.html)
 - Scalable plugin interfaces for [quick plugin development](repo/text/plugin_interfacing.md)
 
 ### <strong><u>Features</u></strong>
+
 - Multiple [audio pipelines](repo/text/audio_lineage.md) to choose from and used to play audio efficiently
 - Many supported audio formats (and more to be supported)
 - Inbuilt Swing extendable (BlurredUILayer, Scalable Frames, etc.) that you can use in your own programs
@@ -35,6 +40,7 @@
 - Lightweight image manipulation library (Cosmos / DeImage)
 
 ### <strong><u>Supported Formats</u></strong>
+
 <strong>Currently Supporting</strong>
 
 - MP3 (.mp3)
@@ -70,6 +76,7 @@
 <hr>
 
 ## <strong>Why Halcyon?</strong>
+
 <u>GUI Wrapper</u>
 
 Halcyon's GUI program uses both Java Swing & OpenGL to display graphics on screen. However, for the majority, a <code>javax.swing</code> component will be used, with OpenGL used for
@@ -96,6 +103,47 @@ Currently, the Tailwind Framework can work with the following pipelines:
 
 <hr>
 
+## <strong>Requests</strong>
+
+Request TYPE are defined as the following:
+
+- Feature Requests
+- Issue / Vulnerability Report
+
+<hr>
+
+**<code>[!!]</code> Notice:** It is strongly advised that if you are going to submit any form of requests that you read the more indepth overview in [<code>CONTRIBUTING.md</code>](CONTRIBUTING.md)
+
+<hr>
+
+**How to place a request**
+
+To place a request you simply do so by making a pull request that may or may not modify the original request file in the live branch. The pull request should follow this format for best clarity:
+
+> RequestType|#RequestNumber|RequestTitle
+
+- RequestType -> Feature Request OR Issue / Vulnerability Report; this should simplified to <code>FTR</code> OR <code>ISE</code>
+- RequestNumber -> The latest number in the live branch's request type file
+- RequestTitle -> A short eye catching string that describes your request best
+
+The changes you make in the pull requests are not limited to just the file (meaning you can include your own rework).
+
+### <strong>Request Types</strong>
+
+**[FTR] Feature Request**
+
+Defined in the file [<code>/requests/FEATURES.txt</code>](requests/FEATURES.txt).
+
+Feature requests are placed when someone wants something added to the base build of the final software. These requests can sometimes mention and/or include ISSUE reports within.
+
+**[ISE] Issue Report**
+
+Defined in the file [<code>/requests/ISSUES.txt</code>](requests/BUGS.txt).
+
+Issue Reports are requests that are placed when something isn't working properly. AKA a bug report.
+
+<hr>
+
 ## <strong>Packaging</strong>
 
 This program is provided under [this license](LICENSE.txt).
@@ -105,9 +153,10 @@ This program is provided under [this license](LICENSE.txt).
 Standard Layout:
 <code>
 src/
-     com/
-          jackmeng/
+com/
+jackmeng/
 </code>
+
 - You will find the designated packages regarding the Halcyon project in the dir: <em>halcyoninae</em>
 
 <u>Release Style</u>
@@ -134,6 +183,7 @@ Releases will be pushed out in the following formats:
 <hr>
 
 ## <strong>Version Info</strong>
+
 This project is the 3rd iteration of a much older project, which you can find [here](https://github.com/Halcyoninae/mp4j-old), so technical version number starts from **3** (rolling iteration). This number will increase by 1 (+1) per every 1 whole iteration in the rolling release number.
 
 <u>Rolling Release:</u> 3.4.1<br>
@@ -188,7 +238,8 @@ A Native Bundle provides a runtime image based on your specified architecture
 ![](https://img.shields.io/github/commit-activity/w/Halcyoninae/Halcyon?label=weekly%20activity&style=flat-square)
 ![](https://img.shields.io/github/last-commit/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/commits-since/Halcyoninae/Halcyon/latest?label=last%20release&style=flat-square)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1673939abd204e86a0629c73b2e917ff)](https://www.codacy.com/gh/exoad/Halcyon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=exoad/Halcyon&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1673939abd204e86a0629c73b2e917ff)](https://www.codacy.com/gh/exoad/Halcyon/dashboard?utm_source=github.com&utm_medium=referral&utm_content=exoad/Halcyon&utm_campaign=Badge_Grade)
+
 </center>
 
 <hr>
