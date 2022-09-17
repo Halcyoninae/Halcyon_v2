@@ -69,11 +69,8 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             INFOVIEW_DISK_NO_FILE_LOADED_ICON);
     final int INFOVIEW_MIN_WIDTH = Manager.MIN_WIDTH;
     final int INFOVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
-    final int INFOVIEW_MAX_WIDTH = Manager.MAX_WIDTH;
-    final int INFOVIEW_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
     final int INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT = 108;
     final int INFOVIEW_FLOWLAYOUT_HGAP = 30;
-    final int INFOVIEW_FLOWLAYOUT_VGAP_DIVIDEN = 6;
     /// InfoView Config END
 
     private final JPanel backPanel, infoDisplay;
@@ -221,7 +218,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
             if (!disable_backpanel) {
                 Debugger.alert(new TConstr(new CLIStyles[] { CLIStyles.GREEN_BG, CLIStyles.WHITE_TXT },
                         "Defaulting a new background image."));
-                BufferedImage img = null;
+                BufferedImage img;
                 if (!draw_as_first && info.hasArtwork()) {
                     img = info.getArtwork();
                     /*
