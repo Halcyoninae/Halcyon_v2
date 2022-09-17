@@ -29,14 +29,14 @@ jobs:
       - name: Run Codacy Analysis CLI
         uses: codacy/codacy-analysis-cli-action@d840f886c4bd4edc059706d09c6a1586111c540b
         with:
-          verbose: true
+          verbose: false
           output: results.sarif
           format: sarif
           # Adjust severity of non-security issues
           gh-code-scanning-compat: true
           # Force 0 exit code to allow SARIF file generation
           # This will handover control about PR rejection to the GitHub side
-          max-allowed-issues: 2147483647
+          max-allowed-issues: 100
 
       # Upload the SARIF file generated in the previous step
       - name: Upload SARIF results file
