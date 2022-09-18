@@ -190,6 +190,26 @@ Releases will be pushed out in the following formats:
 
 <hr>
 
+## <strong>Example</strong>
+
+Playing audio is as simple as initing a `Tailwind` object like so:
+
+```java
+/*
+ * You don't have to force a pipeline! 
+ * The class itself has constructs to determine
+ * what to use.
+ */
+Tailwind player = new Tailwind(); // no parameters are accepted
+player.open(new File("some_audio_data.ogg")); // opening the stream
+player.play();
+```
+
+Check the documentation for more: [Tailwind Docs](https://halcyoninae.github.io/halcyon-docs/com/jackmeng/halcyoninae/tailwind/TailwindPlayer.html)
+
+
+<hr>
+
 ## <strong>Version Info</strong>
 
 This project is the 3rd iteration of a much older project, which you can find [here](https://github.com/Halcyoninae/mp4j-old), so technical version number starts from **3** (rolling iteration). This number will increase by 1 (+1) per every 1 whole iteration in the rolling release number.
