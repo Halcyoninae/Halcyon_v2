@@ -95,8 +95,7 @@ public class ThreadedScheduler {
         UIManager.put("SplitPaneDivider.gripDotCount", 0);
         UIManager.put("FileChooser.readOnly", false);
         LogManager.getLogManager().reset();
-        // fix blurriness on high-DPI screens
-        System.setProperty("sun.java2d.uiScale", "0.9");
+
 
         // PROGRAMMABLE THREADS
         WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[]{

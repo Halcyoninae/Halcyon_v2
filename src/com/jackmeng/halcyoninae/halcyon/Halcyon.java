@@ -215,7 +215,7 @@ public final class Halcyon {
             }
             ExternalResource.pm.checkAllPropertiesExistence();
 
-            if(ExternalResource.pm.get(ProgramResourceManager.KEY_USER_PROGRAM_USE_OPENGL).equals("true")) {
+            if (ExternalResource.pm.get(ProgramResourceManager.KEY_USER_PROGRAM_USE_OPENGL).equals("true")) {
                 System.setProperty("sun.java2d.opengl", "true");
             }
             /*
@@ -227,9 +227,9 @@ public final class Halcyon {
                 e.printStackTrace();
             }
             new ThreadedScheduler();
-            if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
+            if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
                 new ConfirmWindow(
-                        "Turning this feature ON may result in unexpected performance anomalies!! Best to leave this off",
+                        "Turning this feature OFF may result in unexpected performance anomalies!! Best to leave this on",
                         status -> {
                             if (status) {
                                 run();

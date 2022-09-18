@@ -88,6 +88,12 @@ Image Manipulation is done via the internal lightweight library Cosmos. It serve
 
 Note: The internal Swing Components that are created and implemented are not designed to be used outside this program (also known as [localization](repo/text/localization.md)) and can cause unexpected results in your own programs if you are to use this as a library of sorts.
 
+<center>
+<img src="./repo/img/dark_green_color.png" alt="Color Scheme" width="249"/>
+
+<em>The GUI Wrapper's "Dark Green" color scheme</em>
+</center>
+
 <u>Sound API</u>
 
 The Java Sound API is pretty lackluster, and many features surrounding its usage are less user-friendly. Therefore, there are many adaptations and separate implementations by third parties. For example, JavaFX adopted its [MediaPlayer](https://docs.oracle.com/javafx/2/api/javafx/scene/media/MediaPlayer.html) via Java Sound (a wrapper of sorts). Then you also have a feature rich low level implementation of Java Sound, called [Tritonus Sound](https://www.tritonus.org/). However, it might seem correct to go with JavaFX's premade high-level abstraction, but it offers far less control over the ACTUAL audio data being streamed. Thus, we come to Halcyon's Tailwind Audio API (not to be confused with [TailwindCSS](https://tailwindcss.com/)). Tailwind offers a transition and a bridge between these frameworks and adaptations (if available) in a user-friendly and lightweight format. In offers high level functionalities such as just simple <code>play(file)</code> & <code>pause()</code> functions, but also offering much higher level functions such as <code>normalize(bytes[])</code> <code>read(bytes[])</code> (see the documentation for more).
@@ -122,7 +128,7 @@ To place a request you simply do so by making a pull request that may or may not
 
 > Urgency|RequestType|#RequestNumber|RequestTitle
 
-- Urgency -> 1 to 3 asteriks (*) with 3 being the most urgent
+- Urgency -> 1 to 3 asteriks (\*) with 3 being the most urgent
 - RequestType -> Feature Request OR Issue / Vulnerability Report; this should simplified to <code>FTR</code> OR <code>ISE</code>
 - RequestNumber -> The latest number in the live branch's request type file
 - RequestTitle -> A short eye catching string that describes your request best
