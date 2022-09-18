@@ -1,6 +1,6 @@
 # <strong>Halcyon</strong> : <br/> <em>A Simplistic & Robust Audio Player</em>
 
-> <em>Copyright (C) Jack Meng 2021</em>
+> <em>Copyright (C) [Jack Meng 2021](mailto://jackmeng0814@gmail.com)</em>
 
 <hr>
 
