@@ -28,7 +28,7 @@
 > fits the needs of anyone.
 
 - Features an intuitive API with inbuilt [localization](repo/text/localization.md)
-- JOGL implementation to boost the nature of [Java's Swing Framework](https://jogamp.org/deployment/jogamp-next/javadoc/jogl/javadoc/overview-summary.html)
+- OpenGL implementation to boost the nature of [Java's Swing Framework](https://jogamp.org/deployment/jogamp-next/javadoc/jogl/javadoc/overview-summary.html)
 - Scalable plugin interfaces for [quick plugin development](repo/text/plugin_interfacing.md)
 
 ### <strong><u>Features</u></strong>
