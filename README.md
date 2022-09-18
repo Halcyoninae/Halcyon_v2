@@ -88,11 +88,12 @@ Image Manipulation is done via the internal lightweight library Cosmos. It serve
 
 Note: The internal Swing Components that are created and implemented are not designed to be used outside this program (also known as [localization](repo/text/localization.md)) and can cause unexpected results in your own programs if you are to use this as a library of sorts.
 
-<center>
+<p align="center">
 <img src="./repo/img/dark_green_color.png" alt="Color Scheme" width="249" align="center"/>
-
+</p>
+<p align="center">
 <em>The GUI Wrapper's "Dark Green" color scheme</em>
-</center>
+</p>
 
 <u>Sound API</u>
 
