@@ -54,7 +54,7 @@
 - Opus (.opus, .oga)
 
 <details close>
-<summary><strong>Soon To Support</strong></summary>
+<summary><strong>Soon To Support / Partially Supported</strong></summary>
 
 - AAC
 - M4A
