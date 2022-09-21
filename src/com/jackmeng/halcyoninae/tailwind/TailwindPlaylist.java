@@ -64,7 +64,7 @@ public class TailwindPlaylist extends Tailwind implements TailwindListener.Statu
     private File currentFile = new File(".");
 
     public TailwindPlaylist() {
-        super(false);
+        super();
         history = new ArrayList<>();
         setForceCloseOnOpen(false);
         setDynamicAllocation(true); // for optimal performance

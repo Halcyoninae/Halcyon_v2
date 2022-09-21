@@ -108,13 +108,11 @@ public class Tailwind implements Audio {
     private ExecutorService worker;
     private AudioFormat formatAudio;
 
-    public Tailwind(boolean useAutoClose) {
+    public Tailwind() {
         events = new TailwindEventManager();
         pipeline = TailwindPipelineMethod.DEFAULT_;
-        if (useAutoClose)
-            events.addStatusUpdateListener(new TailwindDefaultListener(this));
+        events.addStatusUpdateListener(new TailwindDefaultListener(this));
     }
-
 
     /**
      * @param e
@@ -124,7 +122,7 @@ public class Tailwind implements Audio {
             ExternalResource.dispatchLog(e);
             Debugger.crit("EXCEPTION THROWN: " + e.getLocalizedMessage());
             new ErrorWindow("There was an exception thrown:\n" + e.getMessage()).run();
-            if(line != null) {
+            if (line != null) {
                 line.close();
             }
             events.dispatchStatusEvent(TailwindStatus.CLOSED);
@@ -148,8 +146,13 @@ public class Tailwind implements Audio {
     /**
      * @param pipeline
      */
-    public synchronized void setPipelineMethod(TailwindPipelineMethod pipeline) {
-        this.pipeline = pipeline;
+    public synchronized void setPipelineMethod(TailwindPipelineMethod pipeline) throws TailwindThrowable {
+        if (worker.isShutdown()) {
+            this.pipeline = pipeline;
+        } else {
+            throw new TailwindThrowable(
+                    "Failed to set the pipeline strategy to: " + pipeline.getClass().getCanonicalName());
+        }
     }
 
     /**
@@ -706,7 +709,20 @@ public class Tailwind implements Audio {
         return controlTable;
     }
 
+    /**
+     * A Pipeline strategy that intends to use
+     * the Java Sound API to play audio.
+     *
+     * This is also known as the standard pipeline
+     * in which Tailwind will default to, if some
+     * native components for other streaming strategies
+     * are unavaliable.
+     *
+     * @author Jack Meng
+     * @since 3.3
+     */
     public class StandardPipeLine implements Runnable {
+
         @Override
         public void run() {
             if (line != null) {
@@ -771,4 +787,18 @@ public class Tailwind implements Audio {
         }
     }
 
+    /**
+     * This is the secondary pipeline that is supplied when dealing with 
+     *
+     * @author Jack Meng
+     * @since 3.4.1
+     */
+    public class TritonusPipeline implements Runnable {
+
+        @Override
+        public void run() {
+
+        }
+
+    }
 }

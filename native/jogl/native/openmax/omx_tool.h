@@ -1,5 +1,9 @@
 /**
  * Uses the EGL Extensions: EGL_KHR_reusable_sync and EGL_KHR_fence_sync
+ *
+ * @author Jack Meng -> uwu sexy
+ *
+ * @brief Simple GL Reusuable toolkit
  */
 
 #ifndef _OMX_TOOL_H
@@ -143,4 +147,3 @@ void OMXToolBasicAV_DestroyInstance(OMXToolBasicAV_t * pOMXAV);
 #endif
 
 #endif /* _OMX_TOOL_H */
-
