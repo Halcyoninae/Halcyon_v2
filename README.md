@@ -242,6 +242,7 @@ A Native Bundle provides a runtime image based on your specified architecture
 - GPU: Any with OpenGL support
 - Minimum Memory: 20 mB
 - Maximum Memory: 300 mB
+- Minimum Hard Storage: 35 mB (dependent on usage w/o automatic cache control)
 - Minimum Screen Resolution: None
 
 <hr>
