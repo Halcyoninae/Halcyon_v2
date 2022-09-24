@@ -69,8 +69,8 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
     /// LEGALNOTICEDIALOG Config END
 
     public LegalNoticeButton() {
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
         addActionListener(this);
         setOpaque(true);
         setBackground(null);

@@ -1,5 +1,5 @@
 /*
- * Halcyon ~ exoad
+ *  Halcyon ~ exoad:
  *
  * A simplistic & robust audio library that
  * is created OPENLY and distributed in hopes
@@ -33,15 +33,57 @@
  * ============================================
  * If you did not receive a copy of the VENDOR_LICENSE,
  * consult the following link:
- * https://raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
+ * https: //raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
  * ============================================
  */
-package com.jackmeng.halcyoninae.cloudspin.enums;
+
+package com.jackmeng.halcyoninae.halcyon.internal;
+
+import java.lang.annotation.Documented;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+
+@Retention(value = RetentionPolicy.SOURCE)
+@Documented
 
 /**
+ * A localized tag adapted during
+ * version 3.4.1 to increase transparency
+ * of Localized classes meant either partially
+ * or purely for the GUI wrapper.
+ *
+ * A localized functionality means
+ * it's highly unsafe or broken to use
+ * this function outside of the GUI wrapper
+ * build routine.
+ *
+ * Notice: It is best for this annotation
+ * to be used within the internals of the
+ * Halcyon source code and not be
+ * used else in order to not confuse any
+ * other contributors.
+ *
  * @author Jack Meng
- * @since 3.2
+ * @since 3.4.1
  */
-public enum SpeedStyle {
-    SPEED, QUALITY, GENERAL
+public @interface Localized {
+
+  /**
+   * Stability is a factor for a third party
+   * programmer to decide to either risk
+   * it and use this localized component
+   * or not.
+   *
+   * Stability of true represents there
+   * is a partial support for delocalized
+   * components.
+   *
+   * Stability of false represents there
+   * is a HIGHLY unlikely chance it will
+   * work.
+   *
+   * @return (true || false) for stability factor
+   */
+  boolean stability() default false;
 }

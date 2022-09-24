@@ -62,9 +62,9 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     private WaveFormPane pane;
 
     public WaveFormLinker() {
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
         setRolloverIcon(DeImage.resizeImage(
-            Global.rd.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
+            Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
         setBorder(BorderFactory.createEmptyBorder());
         setPreferredSize(new Dimension(16, 16));
         addActionListener(this);

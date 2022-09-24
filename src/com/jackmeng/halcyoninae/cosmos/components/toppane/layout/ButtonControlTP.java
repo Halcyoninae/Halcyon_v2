@@ -49,6 +49,7 @@ import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.internal.Localized;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
@@ -65,6 +66,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+@Localized(stability = false)
 
 /**
  * This class represents the GUI component collection
@@ -136,7 +139,7 @@ public class ButtonControlTP extends JPanel
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, getPreferredSize().height / 1));
 
         playButton = new JButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         playButton.setBackground(null);
         playButton.setBorder(null);
@@ -146,7 +149,7 @@ public class ButtonControlTP extends JPanel
         playButton.setRolloverEnabled(false);
         playButton.setBorderPainted(false);
 
-        informationButton = new JButton(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
+        informationButton = new JButton(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
             OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         informationButton.setBackground(null);
         informationButton.setBorder(null);
@@ -157,7 +160,7 @@ public class ButtonControlTP extends JPanel
         informationButton.addActionListener(this);
 
         nextButton = new JButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         nextButton.setBackground(null);
         nextButton.setBorder(null);
@@ -168,7 +171,7 @@ public class ButtonControlTP extends JPanel
         nextButton.addActionListener(this);
 
         previousButton = new JButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         previousButton.setBackground(null);
         previousButton.setBorder(null);
@@ -179,7 +182,7 @@ public class ButtonControlTP extends JPanel
         previousButton.addActionListener(this);
 
         loopButton = new JButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         loopButton.setBackground(null);
@@ -191,7 +194,7 @@ public class ButtonControlTP extends JPanel
         loopButton.addActionListener(this);
 
         shuffleButton = new JButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         shuffleButton.setBackground(null);
@@ -211,10 +214,10 @@ public class ButtonControlTP extends JPanel
         volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
 
         likeButton = new LikeButton(
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE),
-            DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         likeButton.setBackground(null);
@@ -318,6 +321,7 @@ public class ButtonControlTP extends JPanel
     /**
      * @param info
      */
+    @Localized
     @Override
     public void infoView(AudioInfo info) {
         if (aif != null
@@ -348,14 +352,15 @@ public class ButtonControlTP extends JPanel
     /**
      * @param isLooping
      */
+    @Localized
     public void callLoopFeatures(boolean isLooping) {
         if (isLooping) {
             loopButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
                     OTHER_BUTTONS_SIZE,
                     OTHER_BUTTONS_SIZE));
         } else {
-            loopButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
+            loopButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         }
@@ -364,13 +369,14 @@ public class ButtonControlTP extends JPanel
     /**
      * @param isShuffling
      */
+    @Localized
     public void callShuffleFeatures(boolean isShuffling) {
         if (isShuffling) {
             shuffleButton.setIcon(
-                DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
                     OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         } else {
-            shuffleButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
+            shuffleButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         }
     }
@@ -378,6 +384,7 @@ public class ButtonControlTP extends JPanel
     /**
      * @param isLoop
      */
+    @Localized
     private void loopVShuffleDuel(boolean isLoop) {
         if (isLoop && Global.player.isShuffling()) {
             Global.player.setShuffling(false);
@@ -422,12 +429,12 @@ public class ButtonControlTP extends JPanel
             /*
              * if (!flip) {
              * playButton
-             * .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(
+             * .setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(
              * BUTTONCTRL_PAUSE_PLAY_ICON),
              * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
              * } else {
              * playButton
-             * .setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(
+             * .setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(
              * BUTTONCTRL_PLAY_PAUSE_ICON),
              * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
              * }
@@ -472,11 +479,11 @@ public class ButtonControlTP extends JPanel
     @Override
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
-            playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
+            playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED)
             || status.equals(TailwindStatus.END)) {
-            playButton.setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
+            playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         }
     }

@@ -98,7 +98,7 @@ public class Setup extends JFrame implements Runnable {
 
     public Setup() {
         setTitle("Setup Routine");
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setPreferredSize(new Dimension(350, 400));
         setResizable(true);
         addComponentListener(new ForceMaxSize(getPreferredSize().width, getPreferredSize().height,

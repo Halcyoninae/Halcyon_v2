@@ -49,7 +49,7 @@ import java.awt.*;
 public class StraightTextDialog extends JFrame implements Runnable {
 
     public StraightTextDialog(String content) {
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setTitle("Information");
         setPreferredSize(new Dimension(250, 100));
         setAutoRequestFocus(true);

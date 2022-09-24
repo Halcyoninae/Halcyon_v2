@@ -96,7 +96,8 @@ public final class Wrapper {
      * particular task. See the documentation of {@link #async(Runnable)}
      * for the exact documentations as the overall usage are the same.
      *
-     * @param run A runnable or an anonymous class can be used for this implementation
+     * @param run A runnable or an anonymous class can be used for this
+     *            implementation
      * @author Jack Meng
      * @since 3.2
      */

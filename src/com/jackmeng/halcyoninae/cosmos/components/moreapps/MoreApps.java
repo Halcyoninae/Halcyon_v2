@@ -65,7 +65,7 @@ public class MoreApps extends JFrame implements Runnable {
     public MoreApps() {
         setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
         setUndecorated(true);
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setFocusable(true);
         setAutoRequestFocus(true);
 

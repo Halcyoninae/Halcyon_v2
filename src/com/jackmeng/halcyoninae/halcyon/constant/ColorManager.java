@@ -39,11 +39,17 @@
 
 package com.jackmeng.halcyoninae.halcyon.constant;
 
+import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.cosmos.theme.Theme;
 import com.jackmeng.halcyoninae.cosmos.theme.ThemeBundles;
+import com.jackmeng.halcyoninae.halcyon.internal.Localized;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
 import java.awt.*;
+import java.awt.image.*;
+
+import javax.swing.ImageIcon;
 
 /**
  * This interface holds constants for any color values that
@@ -54,22 +60,53 @@ import java.awt.*;
  * @since 3.0
  */
 public final class ColorManager {
-    public static Theme programTheme        = ThemeBundles.getDefaultTheme();
-    public static Color MAIN_BG_THEME       = programTheme.getMainBackground();
-    public static Color BORDER_THEME        = ColorTool.hexToRGBA("#5F657D");
-    public static Color MAIN_FG_THEME       = programTheme.getForegroundColor();
-    public static Color MAIN_FG_FADED_THEME = ColorTool.brightenColor(MAIN_FG_THEME, 30);
-    public static String MAIN_FG2_STR       = ColorTool.rgbTohex(programTheme.getForegroundColor2());
-    public static String MAIN_FG_STR        = ColorTool.rgbTohex(programTheme.getForegroundColor());
-    public static Color MAIN_FG2_THEME      = programTheme.getForegroundColor2();
-    public static Color MAIN_TEXT_THEME     = ColorTool.hexToRGBA("#9499a2");
+    @Localized public static Theme programTheme        = ThemeBundles.getDefaultTheme();
+    @Localized public static Color MAIN_BG_THEME       = programTheme.getMainBackground();
+    @Localized public static Color BORDER_THEME        = ColorTool.hexToRGBA("#5F657D");
+    @Localized public static Color MAIN_FG_THEME       = programTheme.getForegroundColor();
+    @Localized public static Color MAIN_FG_FADED_THEME = ColorTool.brightenColor(MAIN_FG_THEME, 30);
+    @Localized public static String MAIN_FG2_STR       = ColorTool.rgbTohex(programTheme.getForegroundColor2());
+    @Localized public static String MAIN_FG_STR        = ColorTool.rgbTohex(programTheme.getForegroundColor());
+    @Localized public static Color MAIN_FG2_THEME      = programTheme.getForegroundColor2();
+    @Localized public static Color MAIN_TEXT_THEME     = ColorTool.hexToRGBA("#9499a2");
 
     private ColorManager() {
     }
 
+    /**
+     * This static global method attempts to refresh
+     * the above public fields for colors.
+     */
+    @Localized
     public static void refreshColors() {
         MAIN_FG_THEME                       = programTheme.getForegroundColor();
         MAIN_FG_STR                         = ColorTool.rgbTohex(programTheme.getForegroundColor());
         MAIN_FG2_THEME                      = programTheme.getForegroundColor2();
+    }
+
+    /**
+     * This method uses the current static theme
+     * to hue the image
+     * @param g An ImageIcon
+     * @return An ImageIcon with a tinted hue from the current theme
+     *
+     * @see #themedIcon(ImageIcon, Color)
+     */
+    @Localized
+    public static ImageIcon hueTheme(ImageIcon g) {
+        return themedIcon(g, MAIN_FG_THEME);
+    }
+
+    /**
+     * This method hues an image icon
+     *
+     * @param t An ImageIcon
+     * @param theme A java.awt.Color object to use
+     * @return A new ImageIcon object
+     */
+   public static ImageIcon themedIcon(ImageIcon t, Color theme) {
+        BufferedImage img = DeImage.imageIconToBI(t);
+        CloudSpin.hueImage(img, ColorTool.colorBreakDown(theme));
+        return new ImageIcon(img);
     }
 }

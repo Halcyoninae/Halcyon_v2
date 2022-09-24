@@ -76,7 +76,7 @@ public class SettingsPane extends JFrame implements Runnable, ActionListener {
         setMinimumSize(getPreferredSize());
 
         setTitle("Halcyon Settings ~ exoad");
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
 
         pane = new JTabbedPane();
         pane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);

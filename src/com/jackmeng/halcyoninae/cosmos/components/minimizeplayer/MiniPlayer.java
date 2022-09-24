@@ -72,7 +72,7 @@ public class MiniPlayer extends JFrame implements Runnable {
         setPreferredSize(
             new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setUndecorated(true);
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setAutoRequestFocus(true);
         setFocusable(true);
         MiniContentPane pane = new MiniContentPane();

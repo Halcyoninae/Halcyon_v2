@@ -39,87 +39,76 @@
 
 package com.jackmeng.halcyoninae.cosmos.icon;
 
-import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.filesystem.FileParser;
-import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+import com.jackmeng.halcyoninae.halcyon.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.internal.Localized;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
 import java.io.File;
-import java.io.IOException;
-import java.lang.ref.WeakReference;
+import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+@Localized
+/**
+ * @author Jack Meng
+ * @since 3.4.1
+ */
 public class IconHandler {
-    public static String RSCLocale = Manager.RSC_FOLDER_NAME;
-    private Color themeColor;
-    private Map<String, BufferedImage> icons;
-    private WeakReference<String[]> temp;
-
-    public IconHandler(String[] acceptableRuleSets) {
-        themeColor = ColorManager.MAIN_FG_THEME;
-        this.temp = new WeakReference<>(acceptableRuleSets);
-    }
+    private Map<String, ImageIcon> imageIcons;
+    private String defaultLocale;
 
     /**
-     * @param locale
-     * @param acceptableRuleSets
-     * @throws IOException
+     * @param defaultLocale The default lookup location
      */
-    private static void load(String locale, String[] acceptableRuleSets) throws IOException {
-        Map<String, BufferedImage> map = new HashMap<>();
-        if (!FileParser.checkDirExistence(locale)) {
-            map = null;
-        } else {
-            for (File f : Objects.requireNonNull(new File(locale).listFiles((current, name) -> new File(current, name).isDirectory()))) {
-                for (File x : Objects.requireNonNull(f.listFiles())) {
-                    for (String str : acceptableRuleSets) {
-                        if (x.getAbsolutePath().endsWith(str)) {
-                            map.put(x.getName(), ImageIO.read(x));
-                        }
-                    }
+    public IconHandler(String defaultLocale) {
+        imageIcons = new HashMap<>();
+        this.defaultLocale = defaultLocale;
+        load();
+    }
+
+    public void setDefaultLocale(String str) {
+        this.defaultLocale = str;
+    }
+
+    public String getDefaultLocale() {
+        return defaultLocale;
+    }
+
+    public void load() {
+        File s = new File(defaultLocale);
+        Debugger.warn("[ICO-Handler]: " + s.getAbsolutePath());
+        for (String x : s.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File curr, String str) {
+                return new File(curr, str).isDirectory();
+            }
+        })) {
+            Debugger.warn("Scanning Directory: " + new File(x).getAbsolutePath());
+            for (File t : new File(x).listFiles()) {
+                if (t.getAbsolutePath().endsWith(".png")) {
+                    Debugger.warn(defaultLocale + "/" + x + "/" + t.getName());
+                    imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
+                            this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                 }
             }
         }
-
     }
 
-    /**
-     * @throws IOException
-     */
-    public void load() throws IOException {
-        load(RSCLocale, temp.get());
-        temp = null;
-    }
-
-    /**
-     * @param c
-     */
-    public void setColorTheme(Color c) {
-        this.themeColor = c;
-    }
-
-
-    /**
-     * @return Color
-     */
-    public Color getThemeColor() {
-        return themeColor;
-    }
-
-
-    /**
-     * @param key
-     * @return ImageIcon
-     */
     public ImageIcon request(String key) {
-        return icons.get(key) == null ? new ImageIcon(CloudSpin.createUnknownIMG())
-            : new ImageIcon(CloudSpin.hueImageUnsafe(icons.get(key), ColorTool.colorBreakDown(themeColor)));
+        return imageIcons.get(key) == null ? new ImageIcon(new byte[] { (byte) 0xFF, (byte) 0x36 })
+                : imageIcons.get(key);
+    }
+
+    @Localized(stability = true)
+    public ImageIcon requestApplied(String key) {
+        return imageIcons.get(key) == null ? new ImageIcon(new byte[] { (byte) 0xFF, (byte) 0x36 })
+                : ColorManager.hueTheme(imageIcons.get(key));
+    }
+
+    public ImageIcon getFromAsImageIcon(String key) {
+        return requestApplied(key);
     }
 }

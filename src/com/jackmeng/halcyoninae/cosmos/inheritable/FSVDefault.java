@@ -63,6 +63,6 @@ public class FSVDefault extends JFrame {
      * Constructs the inheritable FSVDefault object to be inherited by
      */
     public FSVDefault() {
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     }
 }

@@ -64,7 +64,7 @@ public class ErrorWindow extends JFrame implements Runnable {
 
     public ErrorWindow(String content) {
         super(DIALOG_ERROR_WIN_TITLE);
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setPreferredSize(new Dimension(DIALOG_ERROR_MIN_WIDTH, DIALOG_ERROR_MIN_HEIGHT));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

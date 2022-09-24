@@ -89,7 +89,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
     /// InfoView Config START
     public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = Manager.RSC_FOLDER_NAME + "/infoview/disk.png";
-    final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.rd.getFromAsImageIcon(
+    final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.ico.getFromAsImageIcon(
             INFOVIEW_DISK_NO_FILE_LOADED_ICON);
     final int INFOVIEW_MIN_WIDTH = Manager.MIN_WIDTH;
     final int INFOVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
@@ -173,7 +173,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         blurBp.setPreferredSize(backPanel.getPreferredSize());
 
         BufferedImage bi = DeImage.imageIconToBI(
-                Global.rd.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+                Global.ico.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
         bi = DeImage.resizeNoDistort(
                 bi,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,

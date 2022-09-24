@@ -72,7 +72,6 @@ public class ResourceDistributor {
                 java.util.Objects.requireNonNull(getClass().getResource(path))
             );
         } catch (NullPointerException e) {
-
             return new ImageIcon(path);
         }
     }
@@ -143,7 +142,7 @@ public class ResourceDistributor {
         try {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
         return null;
     }

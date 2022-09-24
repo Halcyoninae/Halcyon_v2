@@ -179,9 +179,9 @@ public class FileList extends JScrollPane implements TabTree {
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         setBorder(null);
         DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-        ImageIcon closedIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
-        ImageIcon openIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
-        ImageIcon leafIcon = Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FILE);
+        ImageIcon closedIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
+        ImageIcon openIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
+        ImageIcon leafIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FILE);
         renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
         renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
         renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));

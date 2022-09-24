@@ -59,8 +59,8 @@ public class Settings extends JButton implements BBlocButton {
     private final SettingsPane e = new SettingsPane();
 
     public Settings() {
-        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
         setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
         setOpaque(true);
         setBorder(null);

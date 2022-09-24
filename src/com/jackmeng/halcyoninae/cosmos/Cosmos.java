@@ -92,7 +92,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
             };
         }
 
-        container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         container.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
         //container.setMinimumSize(container.getPreferredSize());
@@ -162,13 +162,13 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
     @Override
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING)) {
-            container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_GREEN_LOGO).getImage());
+            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_GREEN_LOGO).getImage());
         } else if (status.equals(TailwindStatus.OPEN)) {
-            container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_BLUE_LOGO).getImage());
+            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_BLUE_LOGO).getImage());
         } else if (status.equals(TailwindStatus.PAUSED)) {
-            container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_RED_LOGO).getImage());
+            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_RED_LOGO).getImage());
         } else {
-            container.setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         }
     }
 

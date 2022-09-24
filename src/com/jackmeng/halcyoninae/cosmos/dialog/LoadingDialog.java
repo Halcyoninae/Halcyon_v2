@@ -58,7 +58,7 @@ public class LoadingDialog extends JFrame {
         setResizable(false);
         setAlwaysOnTop(isImportant);
         setLocationRelativeTo(null);
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         JPanel panel = new JPanel();

@@ -63,7 +63,7 @@ public class ConfirmWindow extends JFrame implements Runnable, ActionListener {
 
     public ConfirmWindow(String content, ConfirmationListener... listeners) {
         super(DIALOG_CONFIRM_WIN_TITLE);
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         this.listeners = listeners;
         setPreferredSize(new Dimension(DIALOG_CONFIRM_MIN_WIDTH, DIALOG_CONFIRM_MIN_HEIGHT));
         setLocationRelativeTo(null);

@@ -54,7 +54,7 @@ public class WaveFormPane extends JFrame implements Runnable {
     private int pX, pY;
 
     public WaveFormPane() {
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
 
         addMouseListener(new MouseAdapter() {
             @Override

@@ -63,7 +63,7 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     private boolean pressed = false;
 
     public MinimizePlayer() {
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
         setToolTipText("Launch the audio player in a mini display form factor");
         setRolloverEnabled(false);
         setBorder(null);

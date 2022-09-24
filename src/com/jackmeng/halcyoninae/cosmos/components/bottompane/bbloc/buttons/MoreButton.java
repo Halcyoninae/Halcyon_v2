@@ -65,8 +65,8 @@ public class MoreButton extends JButton implements BBlocButton {
     private boolean isPressed;
 
     public MoreButton() {
-        setIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(DEFAULT_ICON), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Global.rd.getFromAsImageIcon(PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(PRESSED_ICON), 16, 16));
         setToolTipText("Open a window to display more apps");
         setOpaque(true);
         setBorder(null);

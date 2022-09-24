@@ -83,9 +83,9 @@ public class LikeList extends FileList {
      */
     public LikeList() {
         super(new VirtualFolder("Liked", Program.fetchLikedTracks()),
-            Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
-            Global.rd.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
-            Global.rd.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
         folder = (VirtualFolder) getFolderInfo();
     }
 

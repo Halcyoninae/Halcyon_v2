@@ -46,7 +46,6 @@ import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.TopPane;
 import com.jackmeng.halcyoninae.cosmos.dialog.ConfirmWindow;
 import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.jackmeng.halcyoninae.cosmos.icon.IconHandler;
 import com.jackmeng.halcyoninae.cosmos.tasks.ThreadedScheduler;
 import com.jackmeng.halcyoninae.halcyon.connections.discord.Discordo;
 import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
@@ -64,7 +63,6 @@ import com.jackmeng.halcyoninae.setup.Setup;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -199,14 +197,6 @@ public final class Halcyon {
         }
 
         try {
-            IconHandler ico = new IconHandler(new String[] { "png" });
-
-            try {
-                ico.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
             ExternalResource.checkResourceFolder(
                     ProgramResourceManager.PROGRAM_RESOURCE_FOLDER);
 

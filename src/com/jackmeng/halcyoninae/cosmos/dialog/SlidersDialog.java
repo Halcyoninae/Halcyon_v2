@@ -88,7 +88,7 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
 
         pane.addTab("Basic Sliders", basicSlidersPane);
 
-        setIconImage(Global.rd.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setTitle("Sliders");
         setPreferredSize(new Dimension(300, 350));
         setAutoRequestFocus(false);
