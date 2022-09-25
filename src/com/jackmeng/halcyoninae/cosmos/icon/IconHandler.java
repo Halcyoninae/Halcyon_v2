@@ -86,12 +86,15 @@ public class IconHandler {
                 return new File(curr, str).isDirectory();
             }
         })) {
-            Debugger.warn("Scanning Directory: " + new File(x).getAbsolutePath());
-            for (File t : new File(x).listFiles()) {
-                if (t.getAbsolutePath().endsWith(".png")) {
-                    Debugger.warn(defaultLocale + "/" + x + "/" + t.getName());
-                    imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
-                            this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
+            Debugger.warn("Scanning Directory: " + x);
+            File xr = new File(x);
+            Debugger.warn("XR: " + xr.getAbsolutePath());
+            if (xr.listFiles().length > 0) {
+                for (File t : xr.listFiles()) {
+                    if (t.getAbsolutePath().endsWith(".png")) {
+                        imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
+                                this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
+                    }
                 }
             }
         }

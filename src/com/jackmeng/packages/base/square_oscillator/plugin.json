@@ -1,0 +1,7 @@
+{
+    "name" : "Square",
+    "uid"  : 11281339367032197477,
+    "category" : "Oscillator",
+    "input-names" : ["freq", "phase"],
+    "output-names" : ["out"]
+}
