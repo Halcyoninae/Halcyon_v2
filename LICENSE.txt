@@ -1,5 +1,5 @@
 [HP-1.0]
-Standard Halcyoninae Protective 1.0 (MODIFIED) License
+Standard Halcyoninae Protective 1.0 License
   - This is a source-avaliable permissive license -
  
 Copyright (C) 2021 Jack Meng
