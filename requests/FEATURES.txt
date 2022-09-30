@@ -1,3 +1,20 @@
+[**] #50 "Internal Shell better implementation"
+    Detailed Description: Make the internal shell better, 
+    to contrast the usability. This includes the following
+    attributes:
+      ; 1. Color customization via the master properties
+      ; 2. Fully support all unicode characters
+      ; 3. Enable for backslash characters
+      ; 4. Treat a command as a running object, and not
+           a plain text, this enables for interactivity,
+           such as in/out, retraceable text (/r), etc..
+      ; 5. Use dual buffers to handle duplicate data 
+           simply.
+    Difficulty: Decent
+    Testing: At large
+    Category: Program Dynamics,Visual Comfort
+    Status: Implementing
+
 [***] #49 "Master List"
     Detailed Description: Instead of separate liked tabs and other permanent
     "virtual" tabs, have one tab that have multiple nodes representing
