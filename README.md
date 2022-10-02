@@ -125,6 +125,8 @@ SIMPLE: In no way shall the API be developed in a way that an average programmer
 
 SCALABLE: The API is built on the fact that everything can be extended & improved without the need to make an entire new implementation. This includes native calls, linking, and licensing.
 
+<hr>
+
 ## <strong>Requests</strong>
 
 Request TYPE are defined as the following:
