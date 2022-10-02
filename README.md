@@ -110,6 +110,21 @@ Currently, the Tailwind Framework can work with the following pipelines:
 
 <hr>
 
+## <strong>Manifesto</strong>
+
+Halcyon follows a KISS motive for all its abstract APIs:<br>
+
+- **K** - Keep<br>
+- **I** - It<br>
+- **S** - Simple<br>
+- **S** - Scalable<br>
+
+*Disclaimer: not what the original KISS stands for*
+
+SIMPLE: In no way shall the API be developed in a way that an average programmer cannot distinguish the usage/complexity of a low level function with that of a high level function. All API calls should be clear and do as what they are documented to do, without caveats.
+
+SCALABLE: The API is built on the fact that everything can be extended & improved without the need to make an entire new implementation. This includes native calls, linking, and licensing.
+
 ## <strong>Requests</strong>
 
 Request TYPE are defined as the following:
