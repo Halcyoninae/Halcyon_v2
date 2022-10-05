@@ -122,18 +122,22 @@ public final class CloudSpin {
      * @return BufferedImage
      */
     public static BufferedImage createGradient(BufferedImage src, int startOpacity, int endOpacity, int startX,
-                                               int startY, int endX, int endY) {
+            int startY, int endX, int endY) {
         BufferedImage alphamask = new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = alphamask.createGraphics();
         LinearGradientPaint lgp = new LinearGradientPaint(
-            new Point(startX, startY),
-            new Point(endX, endY),
-            new float[]{0.0f, 1.0f},
-            new Color[]{new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity)});
+                new Point(startX, startY),
+                new Point(endX, endY),
+                new float[] { 0.0f, 1.0f },
+                new Color[] { new Color(0, 0, 0, startOpacity), new Color(0, 0, 0, endOpacity) });
         g2d.setPaint(lgp);
         g2d.fillRect(0, 0, alphamask.getWidth(), alphamask.getHeight());
         g2d.dispose();
         return applyMask(src, alphamask, AlphaComposite.DST_IN);
+    }
+
+    public static int[] pixelRGBA(int pixel) {
+        return new int[] { ((pixel >> 16) & 0xFF), ((pixel >> 8) & 0xFF), (pixel & 0xFF), ((pixel >> 24) & 0xFF) };
     }
 
     /**
@@ -176,18 +180,17 @@ public final class CloudSpin {
         // crop the image from (x1, y1) to (x2, y2)
         if (points != null && points.length > 0) {
             g.drawImage(target, points[0], points[1], width, height, (int) w.getX(), (int) w.getY(),
-                (int) (w.getX() + w.getWidth()),
-                (int) (w.getY() + w.getHeight()), null);
+                    (int) (w.getX() + w.getWidth()),
+                    (int) (w.getY() + w.getHeight()), null);
             g.dispose();
         } else {
             g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(),
-                (int) (w.getX() + w.getWidth()),
-                (int) (w.getY() + w.getHeight()), null);
+                    (int) (w.getX() + w.getWidth()),
+                    (int) (w.getY() + w.getHeight()), null);
             g.dispose();
         }
         return cropped;
     }
-
 
     /**
      * @param target
@@ -203,7 +206,7 @@ public final class CloudSpin {
         }
         Graphics2D g = target.createGraphics();
         g.drawImage(target, 0, 0, width, height, (int) w.getX(), (int) w.getY(), (int) (w.getX() + w.getWidth()),
-            (int) (w.getY() + w.getHeight()), null);
+                (int) (w.getY() + w.getHeight()), null);
         g.dispose();
     }
 
@@ -236,7 +239,6 @@ public final class CloudSpin {
         }
     }
 
-
     /**
      * @param img
      * @param color
@@ -246,7 +248,6 @@ public final class CloudSpin {
         hueImage(img, color);
         return img;
     }
-
 
     /**
      * @return BufferedImage
