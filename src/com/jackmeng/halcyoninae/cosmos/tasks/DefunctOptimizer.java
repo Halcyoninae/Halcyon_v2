@@ -39,12 +39,12 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
 
 /**
  * This class aims to optimize tasks throughout the JVM

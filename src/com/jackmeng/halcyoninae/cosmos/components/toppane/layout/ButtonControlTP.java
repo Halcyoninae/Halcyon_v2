@@ -51,8 +51,8 @@ import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
-import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.AudioInfo;
+import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 import com.jackmeng.locale.Localized;
 

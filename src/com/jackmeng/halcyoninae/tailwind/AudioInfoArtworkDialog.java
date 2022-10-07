@@ -39,12 +39,11 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.utils.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TConstr;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

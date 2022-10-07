@@ -39,11 +39,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

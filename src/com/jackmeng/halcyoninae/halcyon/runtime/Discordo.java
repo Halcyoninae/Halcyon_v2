@@ -45,7 +45,6 @@ import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TConstr;
 import com.jackmeng.halcyoninae.halcyon.utils.TextParser;
 import com.jackmeng.halcyoninae.tailwind.AudioInfo;
-
 import net.arikia.dev.drpc.DiscordEventHandlers;
 import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;

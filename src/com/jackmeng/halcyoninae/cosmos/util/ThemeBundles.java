@@ -39,7 +39,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.util;
 
-import com.jackmeng.halcyoninae.cosmos.util.bundles.*;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.DarkGreen;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.DarkOrange;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.LightGreen;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.LightOrange;
 
 import java.lang.ref.WeakReference;
 
@@ -49,7 +52,7 @@ import java.lang.ref.WeakReference;
  * The default theme for the program is the dark green theme.
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.cosmos.theme.bundles.DarkGreen
+ * @see com.jackmeng.halcyoninae.cosmos.util.bundles.DarkGreen
  * @see com.jackmeng.halcyoninae.cosmos.util.Theme
  * @since 3.3
  */

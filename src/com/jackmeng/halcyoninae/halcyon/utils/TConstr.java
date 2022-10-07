@@ -39,9 +39,9 @@
 
 package com.jackmeng.halcyoninae.halcyon.utils;
 
-import java.util.Arrays;
-
 import com.jackmeng.locale.TObject;
+
+import java.util.Arrays;
 
 /**
  * Custom Alert Debugger TextConstructor

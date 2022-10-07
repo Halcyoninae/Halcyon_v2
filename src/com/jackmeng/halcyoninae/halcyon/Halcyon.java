@@ -52,11 +52,7 @@ import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.utils.CLIStyles;
-import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
-import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.utils.TConstr;
+import com.jackmeng.halcyoninae.halcyon.utils.*;
 import com.jackmeng.halcyoninae.setup.Setup;
 import com.jackmeng.locale.PhysicalFolder;
 

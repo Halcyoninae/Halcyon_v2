@@ -39,10 +39,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
-import javax.swing.*;
-
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+
+import javax.swing.*;
 
 /**
  * This class mainly provides the necessary inheritable attributes

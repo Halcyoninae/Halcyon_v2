@@ -39,11 +39,10 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
-import javax.swing.*;
-import javax.swing.plaf.basic.BasicLabelUI;
-
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicLabelUI;
 import java.awt.*;
 
 public class TruncLabelUI extends BasicLabelUI {

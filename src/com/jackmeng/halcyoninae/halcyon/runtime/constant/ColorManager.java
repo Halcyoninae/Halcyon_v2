@@ -46,10 +46,9 @@ import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.locale.Localized;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.image.*;
-
-import javax.swing.ImageIcon;
+import java.awt.image.BufferedImage;
 
 /**
  * This interface holds constants for any color values that

@@ -156,7 +156,6 @@ public class TailwindEventManager {
 
     /**
      * @param samples
-     * @param s_
      */
     public synchronized void dispatchNewBufferEvent(byte[] samples) {
         Wrapper.threadedRun(() -> bufferListener.frameUpdate(samples));

@@ -39,8 +39,8 @@
 
 package com.jackmeng.halcyoninae.cloudspin.lib.domclr;
 
-import java.awt.image.*;
-import java.awt.Color;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * A class that handles fast accent color gathering from an image

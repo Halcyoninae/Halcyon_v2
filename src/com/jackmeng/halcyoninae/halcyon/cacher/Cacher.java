@@ -39,13 +39,12 @@
 
 package com.jackmeng.halcyoninae.halcyon.cacher;
 
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
-import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
