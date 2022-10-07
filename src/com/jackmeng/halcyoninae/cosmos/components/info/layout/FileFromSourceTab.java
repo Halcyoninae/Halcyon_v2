@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.info.layout;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.InformationTab;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
 
 import javax.swing.*;
 import java.awt.*;

@@ -40,9 +40,9 @@
 package com.jackmeng.halcyoninae.halcyon.runtime;
 
 import com.jackmeng.halcyoninae.halcyon.cacher.MoosicCache;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+import com.jackmeng.locale.PhysicalFolder;
 
 import java.io.File;
 import java.io.FileWriter;

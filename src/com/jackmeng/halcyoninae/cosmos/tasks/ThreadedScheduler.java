@@ -39,8 +39,8 @@
 
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 
 import javax.swing.*;

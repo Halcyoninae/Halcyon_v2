@@ -39,9 +39,8 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
 
 /**
  * @author Jack Meng

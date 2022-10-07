@@ -45,7 +45,7 @@ package com.jackmeng.halcyoninae.halcyon;
  * any data. It is similar to Manager
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.halcyon.constant.Manager
+ * @see com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager
  * @since 3.0
  */
 public final class DefaultManager {

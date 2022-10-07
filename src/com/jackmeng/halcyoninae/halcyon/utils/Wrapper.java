@@ -68,7 +68,7 @@ public final class Wrapper {
      *
      * @param runnable The runnable to be launched
      * @author Jack Meng
-     * @see com.jackmeng.halcyoninae.halcyon.worker.Job
+     * @see com.jackmeng.locale.Job
      * @since 3.1
      */
     public static void async(Runnable runnable) {

@@ -42,17 +42,17 @@ package com.jackmeng.halcyoninae.cosmos.components.toppane.layout;
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.cloudspin.lib.swing.StdBlurLayer;
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.utils.CLIStyles;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+import com.jackmeng.halcyoninae.halcyon.utils.TConstr;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.jackmeng.halcyoninae.tailwind.AudioInfo;
 import com.twelvemonkeys.image.ConvolveWithEdgeOp;
 import org.jaudiotagger.audio.exceptions.CannotReadException;
 import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
@@ -82,7 +82,7 @@ import java.util.WeakHashMap;
  * If the user wants to know more about the audio file
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfoDialog
+ * @see com.jackmeng.halcyoninae.tailwind.AudioInfoDialog
  * @since 3.0
  */
 public class InfoViewTP extends JPanel implements ComponentListener {

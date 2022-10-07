@@ -39,15 +39,15 @@
 
 package com.jackmeng.halcyoninae.cosmos;
 
-import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.jackmeng.halcyoninae.cosmos.events.InstantClose;
-import com.jackmeng.halcyoninae.cosmos.theme.Theme;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;
+import com.jackmeng.halcyoninae.cosmos.components.InstantClose;
+import com.jackmeng.halcyoninae.cosmos.util.Theme;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.utils.GUITools;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
 
@@ -109,7 +109,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
      * @param theme The theme to update to
      * @throws UnsupportedLookAndFeelException If the LAF is not supported
      * @author Jack Meng
-     * @see com.jackmeng.halcyoninae.cosmos.theme.Theme
+     * @see com.jackmeng.halcyoninae.cosmos.util.Theme
      * @since 3.3
      */
     public static void refreshUI(Theme theme) throws UnsupportedLookAndFeelException {

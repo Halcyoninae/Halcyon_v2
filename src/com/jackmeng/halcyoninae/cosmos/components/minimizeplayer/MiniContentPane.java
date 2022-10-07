@@ -40,14 +40,14 @@
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.utils.Numerical;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+import com.jackmeng.halcyoninae.tailwind.AudioInfo;
 
 import javax.swing.*;
 import java.awt.*;

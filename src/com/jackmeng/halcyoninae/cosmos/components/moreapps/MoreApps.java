@@ -40,10 +40,10 @@
 package com.jackmeng.halcyoninae.cosmos.components.moreapps;
 
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
 import javax.swing.*;
 import java.awt.*;

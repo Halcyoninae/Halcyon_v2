@@ -40,10 +40,10 @@
 package com.jackmeng.halcyoninae.cosmos.components.settings.tabs.properties;
 
 import com.jackmeng.halcyoninae.cosmos.components.settings.SettingsTabs;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.Property;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.Property.PropertyFilterType;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+import com.jackmeng.halcyoninae.halcyon.utils.Property;
+import com.jackmeng.halcyoninae.halcyon.utils.Property.PropertyFilterType;
 
 import javax.swing.*;
 import java.awt.*;

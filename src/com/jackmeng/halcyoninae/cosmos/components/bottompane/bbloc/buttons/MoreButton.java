@@ -40,8 +40,8 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
 import javax.swing.*;

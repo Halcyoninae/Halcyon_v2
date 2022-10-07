@@ -40,25 +40,25 @@
 package com.jackmeng.halcyoninae.halcyon;
 
 import com.jackmeng.halcyoninae.cosmos.Cosmos;
+import com.jackmeng.halcyoninae.cosmos.components.ConfirmWindow;
+import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.TopPane;
-import com.jackmeng.halcyoninae.cosmos.dialog.ConfirmWindow;
-import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
 import com.jackmeng.halcyoninae.cosmos.tasks.ThreadedScheduler;
-import com.jackmeng.halcyoninae.halcyon.connections.discord.Discordo;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.CLIStyles;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.debug.TConstr;
-import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
+import com.jackmeng.halcyoninae.halcyon.runtime.Discordo;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
+import com.jackmeng.halcyoninae.halcyon.utils.CLIStyles;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
+import com.jackmeng.halcyoninae.halcyon.utils.TConstr;
 import com.jackmeng.halcyoninae.setup.Setup;
+import com.jackmeng.locale.PhysicalFolder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -106,11 +106,11 @@ import java.util.Arrays;
  * <p>
  * If there needs to be any objects that needs to be passed down,
  * the programmer must specify that as a global scope object in
- * {@link com.jackmeng.halcyoninae.halcyon.constant.Global}.
+ * {@link com.jackmeng.halcyoninae.halcyon.runtime.constant.Global}.
  * </p>
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.halcyon.constant.Global
+ * @see com.jackmeng.halcyoninae.halcyon.runtime.constant.Global
  * @since 3.0
  */
 public final class Halcyon {

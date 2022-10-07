@@ -39,8 +39,6 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
-
 /**
  * Represents a generic tailwind event
  * which contains certain things about the most recent

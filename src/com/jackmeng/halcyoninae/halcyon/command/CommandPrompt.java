@@ -1,12 +1,12 @@
 package com.jackmeng.halcyoninae.halcyon.command;
 
-import com.jackmeng.halcyoninae.cosmos.inheritable.NavFilterText;
+import com.jackmeng.halcyoninae.cosmos.components.NavFilterText;
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.global.Pair;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
+import com.jackmeng.locale.Pair;
 
 import javax.swing.*;
 import java.awt.*;

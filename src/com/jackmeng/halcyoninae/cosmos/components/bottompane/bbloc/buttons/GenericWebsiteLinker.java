@@ -40,8 +40,8 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
 import javax.swing.*;
 import java.awt.*;

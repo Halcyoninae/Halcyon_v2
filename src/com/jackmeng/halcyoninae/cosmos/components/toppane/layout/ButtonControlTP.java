@@ -39,22 +39,22 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.toppane.layout;
 
+import com.jackmeng.halcyoninae.cosmos.components.LikeButton;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP.InfoViewUpdateListener;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.TimeControlSubTP;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.BoxWaveConf;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.ColorConf;
-import com.jackmeng.halcyoninae.cosmos.inheritable.LikeButton;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.internal.Localized;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
+import com.jackmeng.halcyoninae.tailwind.AudioInfo;
 import com.jackmeng.halcyoninae.tailwind.TailwindListener;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
+import com.jackmeng.locale.Localized;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;

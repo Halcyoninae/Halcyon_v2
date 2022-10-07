@@ -39,12 +39,12 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane;
 
+import com.jackmeng.halcyoninae.cosmos.components.TabButton;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.FileList;
-import com.jackmeng.halcyoninae.cosmos.inheritable.TabButton;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.locale.PhysicalFolder;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

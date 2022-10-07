@@ -39,13 +39,13 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
+import com.jackmeng.halcyoninae.cosmos.components.ConfirmWindow;
+import com.jackmeng.halcyoninae.cosmos.components.SelectApplicableFolders;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.cosmos.dialog.ConfirmWindow;
-import com.jackmeng.halcyoninae.cosmos.dialog.SelectApplicableFolders;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.filesystem.FileParser;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.locale.FileParser;
 
 import javax.swing.*;
 import java.io.File;
@@ -53,11 +53,11 @@ import java.io.File;
 /**
  * A BBloc button that handles when a user selects
  * a folder from the
- * {@link com.jackmeng.halcyoninae.cosmos.dialog.SelectApplicableFolders}
+ * {@link com.jackmeng.halcyoninae.cosmos.components.SelectApplicableFolders}
  * instance.
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.cosmos.dialog.SelectApplicableFolders
+ * @see com.jackmeng.halcyoninae.cosmos.components.SelectApplicableFolders
  * @since 3.0
  */
 public class AddFolder extends JButton implements BBlocButton {

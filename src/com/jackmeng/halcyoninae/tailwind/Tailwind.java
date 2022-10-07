@@ -39,14 +39,12 @@
 
 package com.jackmeng.halcyoninae.tailwind;
 
-import com.jackmeng.halcyoninae.cosmos.dialog.ErrorWindow;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
+import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
+import com.jackmeng.halcyoninae.halcyon.utils.ProgramResourceManager;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
-import com.jackmeng.halcyoninae.tailwind.audioinfo.AudioInfo;
-import com.jackmeng.halcyoninae.tailwind.simple.FileFormat;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -788,7 +786,7 @@ public class Tailwind implements Audio {
     }
 
     /**
-     * This is the secondary pipeline that is supplied when dealing with 
+     * This is the secondary pipeline that is supplied when dealing with
      *
      * @author Jack Meng
      * @since 3.4.1

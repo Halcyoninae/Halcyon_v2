@@ -39,16 +39,16 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist;
 
-import com.jackmeng.halcyoninae.cosmos.events.FVRightClick;
-import com.jackmeng.halcyoninae.cosmos.events.FVRightClick.RightClickHideItemListener;
-import com.jackmeng.halcyoninae.halcyon.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.constant.Global;
-import com.jackmeng.halcyoninae.halcyon.constant.Manager;
-import com.jackmeng.halcyoninae.halcyon.debug.Debugger;
-import com.jackmeng.halcyoninae.halcyon.filesystem.PhysicalFolder;
-import com.jackmeng.halcyoninae.halcyon.filesystem.VirtualFolder;
+import com.jackmeng.halcyoninae.cosmos.components.FVRightClick;
+import com.jackmeng.halcyoninae.cosmos.components.FVRightClick.RightClickHideItemListener;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.locale.PhysicalFolder;
+import com.jackmeng.locale.VirtualFolder;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;

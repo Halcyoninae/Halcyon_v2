@@ -39,9 +39,6 @@
 
 package com.jackmeng.halcyoninae.halcyon.utils;
 
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ExternalResource;
-import com.jackmeng.halcyoninae.halcyon.connections.properties.ProgramResourceManager;
-
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
