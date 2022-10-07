@@ -50,6 +50,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Localized
 /**
@@ -59,6 +60,7 @@ import java.util.Map;
 public class IconHandler {
     private Map<String, ImageIcon> imageIcons;
     private String defaultLocale;
+    private Random r;
 
     /**
      * @param defaultLocale The default lookup location
@@ -66,6 +68,7 @@ public class IconHandler {
     public IconHandler(String defaultLocale) {
         imageIcons = new HashMap<>();
         this.defaultLocale = defaultLocale;
+        this.r = new Random();
         load();
     }
 
@@ -79,18 +82,17 @@ public class IconHandler {
 
     public void load() {
         File s = new File(defaultLocale);
-        Debugger.warn("[ICO-Handler]: " + s.getAbsolutePath());
         for (String x : s.list(new FilenameFilter() {
             @Override
             public boolean accept(File curr, String str) {
                 return new File(curr, str).isDirectory();
             }
         })) {
-            Debugger.warn("Scanning Directory: " + x);
-            File xr = new File(x);
+            File xr = new File(s.getAbsolutePath() + "/" + x);
             Debugger.warn("XR: " + xr.getAbsolutePath());
             if (xr.listFiles().length > 0) {
                 for (File t : xr.listFiles()) {
+                    Debugger.crit("XR_LOAD: " + t.getAbsolutePath());
                     if (t.getAbsolutePath().endsWith(".png")) {
                         imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
                                 this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
