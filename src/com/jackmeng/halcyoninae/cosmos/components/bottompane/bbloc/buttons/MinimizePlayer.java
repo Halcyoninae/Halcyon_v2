@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.minimizeplayer.MiniPlayer;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
@@ -63,7 +63,7 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     private boolean pressed = false;
 
     public MinimizePlayer() {
-        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
         setToolTipText("Launch the audio player in a mini display form factor");
         setRolloverEnabled(false);
         setBorder(null);

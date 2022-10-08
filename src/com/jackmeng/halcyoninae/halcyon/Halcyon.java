@@ -47,7 +47,6 @@ import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocView;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.*;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.TopPane;
 import com.jackmeng.halcyoninae.cosmos.tasks.ThreadedScheduler;
-import com.jackmeng.halcyoninae.cosmos.util.IconHandler;
 import com.jackmeng.halcyoninae.halcyon.runtime.Discordo;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
@@ -111,11 +110,6 @@ import java.util.Arrays;
  * @since 3.0
  */
 public final class Halcyon {
-
-    public static IconHandler ico = new IconHandler(Manager.RSC_FOLDER_NAME);
-    static {
-        ico.load();
-    }
     public static com.jackmeng.halcyoninae.cosmos.Cosmos bgt;
 
     public static void boot_kick_mainUI() {
@@ -190,7 +184,6 @@ public final class Halcyon {
      * @param args Null arguments
      */
     public static void main(String... args) {
-        ico.load();
         if (args.length > 0) {
             if (args[0].equals("-debug")) {
                 DefaultManager.DEBUG_PROGRAM = true;

@@ -1,7 +1,7 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.locale.CommandPrompt;
@@ -14,7 +14,7 @@ public class CommandWindow extends JButton implements BBlocButton {
   final String CMD_BBLOC = Manager.RSC_FOLDER_NAME + "/bbloc/cmd-bbloc.png";
 
   public CommandWindow() {
-        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(CMD_BBLOC), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(CMD_BBLOC), 16, 16));
         addActionListener(this);
         setOpaque(true);
         setBackground(null);

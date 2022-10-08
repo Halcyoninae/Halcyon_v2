@@ -45,7 +45,6 @@ import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.buttoncontrol.T
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.BoxWaveConf;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.utils.BarForm.ColorConf;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
@@ -140,7 +139,7 @@ public class ButtonControlTP extends JPanel
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, getPreferredSize().height / 1));
 
         playButton = new JButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         playButton.setBackground(null);
         playButton.setBorder(null);
@@ -150,7 +149,7 @@ public class ButtonControlTP extends JPanel
         playButton.setRolloverEnabled(false);
         playButton.setBorderPainted(false);
 
-        informationButton = new JButton(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
+        informationButton = new JButton(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
             OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         informationButton.setBackground(null);
         informationButton.setBorder(null);
@@ -161,7 +160,7 @@ public class ButtonControlTP extends JPanel
         informationButton.addActionListener(this);
 
         nextButton = new JButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         nextButton.setBackground(null);
         nextButton.setBorder(null);
@@ -172,7 +171,7 @@ public class ButtonControlTP extends JPanel
         nextButton.addActionListener(this);
 
         previousButton = new JButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         previousButton.setBackground(null);
         previousButton.setBorder(null);
@@ -183,7 +182,7 @@ public class ButtonControlTP extends JPanel
         previousButton.addActionListener(this);
 
         loopButton = new JButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         loopButton.setBackground(null);
@@ -195,7 +194,7 @@ public class ButtonControlTP extends JPanel
         loopButton.addActionListener(this);
 
         shuffleButton = new JButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         shuffleButton.setBackground(null);
@@ -215,10 +214,10 @@ public class ButtonControlTP extends JPanel
         volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
 
         likeButton = new LikeButton(
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE),
-            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
+            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         likeButton.setBackground(null);
@@ -357,11 +356,11 @@ public class ButtonControlTP extends JPanel
     public void callLoopFeatures(boolean isLooping) {
         if (isLooping) {
             loopButton.setIcon(
-                DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
                     OTHER_BUTTONS_SIZE,
                     OTHER_BUTTONS_SIZE));
         } else {
-            loopButton.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
+            loopButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
                 OTHER_BUTTONS_SIZE,
                 OTHER_BUTTONS_SIZE));
         }
@@ -374,10 +373,10 @@ public class ButtonControlTP extends JPanel
     public void callShuffleFeatures(boolean isShuffling) {
         if (isShuffling) {
             shuffleButton.setIcon(
-                DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
                     OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         } else {
-            shuffleButton.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
+            shuffleButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
                 OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         }
     }
@@ -430,12 +429,12 @@ public class ButtonControlTP extends JPanel
             /*
              * if (!flip) {
              * playButton
-             * .setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(
+             * .setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(
              * BUTTONCTRL_PAUSE_PLAY_ICON),
              * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
              * } else {
              * playButton
-             * .setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(
+             * .setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(
              * BUTTONCTRL_PLAY_PAUSE_ICON),
              * PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
              * }
@@ -480,11 +479,11 @@ public class ButtonControlTP extends JPanel
     @Override
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
-            playButton.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
+            playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED)
             || status.equals(TailwindStatus.END)) {
-            playButton.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
+            playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
                 PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         }
     }

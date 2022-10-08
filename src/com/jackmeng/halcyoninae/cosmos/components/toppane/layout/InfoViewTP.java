@@ -43,6 +43,7 @@ import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.cloudspin.lib.StdBlurLayer;
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.*;
 import com.jackmeng.halcyoninae.tailwind.AudioInfo;
@@ -82,7 +83,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
 
     /// InfoView Config START
     public static final String INFOVIEW_DISK_NO_FILE_LOADED_ICON = Manager.RSC_FOLDER_NAME + "/infoview/disk.png";
-    final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Halcyon.ico.getFromAsImageIcon(
+    final ImageIcon INFOVIEW_DISK_NO_FILE_LOADED_ICON_ICON = Global.ico.getFromAsImageIcon(
             INFOVIEW_DISK_NO_FILE_LOADED_ICON);
     final int INFOVIEW_MIN_WIDTH = Manager.MIN_WIDTH;
     final int INFOVIEW_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
@@ -166,7 +167,7 @@ public class InfoViewTP extends JPanel implements ComponentListener {
         blurBp.setPreferredSize(backPanel.getPreferredSize());
 
         BufferedImage bi = DeImage.imageIconToBI(
-                Halcyon.ico.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
+                Global.ico.getFromAsImageIcon(INFOVIEW_DISK_NO_FILE_LOADED_ICON));
         bi = DeImage.resizeNoDistort(
                 bi,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,

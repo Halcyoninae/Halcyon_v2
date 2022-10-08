@@ -41,6 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.moreapps;
 
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
@@ -64,7 +65,7 @@ public class MoreApps extends JFrame implements Runnable {
     public MoreApps() {
         setPreferredSize(new Dimension(MoreAppsManager.MIN_WIDTH, MoreAppsManager.MIN_HEIGHT));
         setUndecorated(true);
-        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setFocusable(true);
         setAutoRequestFocus(true);
 

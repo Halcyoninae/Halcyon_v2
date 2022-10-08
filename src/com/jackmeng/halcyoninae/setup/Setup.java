@@ -47,8 +47,8 @@ import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;
 import com.jackmeng.halcyoninae.cosmos.components.ForceMaxSize;
 import com.jackmeng.halcyoninae.cosmos.util.Theme;
 import com.jackmeng.halcyoninae.cosmos.util.ThemeBundles;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.*;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage.Directional;
@@ -94,7 +94,7 @@ public class Setup extends JFrame implements Runnable {
 
     public Setup() {
         setTitle("Setup Routine");
-        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setPreferredSize(new Dimension(350, 400));
         setResizable(true);
         addComponentListener(new ForceMaxSize(getPreferredSize().width, getPreferredSize().height,

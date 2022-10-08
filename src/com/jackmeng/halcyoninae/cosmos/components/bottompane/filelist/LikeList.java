@@ -40,7 +40,6 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist;
 
 import com.jackmeng.halcyoninae.cosmos.components.FVRightClick.RightClickHideItemListener;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
@@ -84,9 +83,9 @@ public class LikeList extends FileList {
      */
     public LikeList() {
         super(new VirtualFolder("Liked", Program.fetchLikedTracks()),
-            Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
-            Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
-            Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED),
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN),
+            Global.ico.getFromAsImageIcon(FILEVIEW_ICON_LIKED_FILE), "Unlike", itemListener);
         folder = (VirtualFolder) getFolderInfo();
     }
 

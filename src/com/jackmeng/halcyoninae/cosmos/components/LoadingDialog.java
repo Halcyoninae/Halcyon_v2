@@ -39,7 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
 import javax.swing.*;
@@ -58,7 +58,7 @@ public class LoadingDialog extends JFrame {
         setResizable(false);
         setAlwaysOnTop(isImportant);
         setLocationRelativeTo(null);
-        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
         JPanel panel = new JPanel();

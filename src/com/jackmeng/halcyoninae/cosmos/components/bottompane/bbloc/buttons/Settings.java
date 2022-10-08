@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.settings.SettingsPane;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
@@ -59,8 +59,8 @@ public class Settings extends JButton implements BBlocButton {
     private final SettingsPane e = new SettingsPane();
 
     public Settings() {
-        setRolloverIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
-        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SETTINGS_BUTTON_DEFAULT_ICON), 16, 16));
         setToolTipText(Manager.SETTINGS_BUTTON_TOOLTIP);
         setOpaque(true);
         setBorder(null);

@@ -40,7 +40,6 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
@@ -66,8 +65,8 @@ public class MoreButton extends JButton implements BBlocButton {
     private boolean isPressed;
 
     public MoreButton() {
-        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(DEFAULT_ICON), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(PRESSED_ICON), 16, 16));
         setToolTipText("Open a window to display more apps");
         setOpaque(true);
         setBorder(null);

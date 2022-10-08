@@ -42,7 +42,6 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 import com.jackmeng.halcyoninae.cosmos.components.ConfirmWindow;
 import com.jackmeng.halcyoninae.cosmos.components.SelectApplicableFolders;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
@@ -63,8 +62,8 @@ import java.io.File;
  */
 public class AddFolder extends JButton implements BBlocButton {
     public AddFolder() {
-        super(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_PRESSED_ICON), 16, 16));
+        super(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_DEFAULT_ICON), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.ADDFOLDER_BUTTON_PRESSED_ICON), 16, 16));
         setToolTipText(Manager.ADDFOLDER_BUTTON_TOOLTIP);
         setOpaque(true);
         setBackground(null);
