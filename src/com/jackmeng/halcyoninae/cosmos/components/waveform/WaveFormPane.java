@@ -39,7 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.waveform;
 
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
 import javax.swing.*;
@@ -54,7 +54,7 @@ public class WaveFormPane extends JFrame implements Runnable {
     private int pX, pY;
 
     public WaveFormPane() {
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
 
         addMouseListener(new MouseAdapter() {
             @Override

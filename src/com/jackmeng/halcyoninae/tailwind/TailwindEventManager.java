@@ -45,6 +45,7 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A global scoped targeted towards managing multiple
@@ -130,7 +131,7 @@ public class TailwindEventManager {
      */
     public synchronized void dispatchTimeEvent(long time) {
         for (WeakReference<TailwindListener.TimeUpdateListener> e : timeListeners) {
-            e.get().trackCurrentTime(time);
+            Objects.requireNonNull(e.get()).trackCurrentTime(time);
         }
 
     }
@@ -140,7 +141,7 @@ public class TailwindEventManager {
      */
     public synchronized void dispatchStatusEvent(TailwindStatus status) {
         for (WeakReference<TailwindListener.StatusUpdateListener> e : statusUpdateListeners) {
-            e.get().statusUpdate(status);
+            Objects.requireNonNull(e.get()).statusUpdate(status);
         }
 
     }
@@ -150,7 +151,7 @@ public class TailwindEventManager {
      */
     public synchronized void dispatchGenericEvent(TailwindEvent event) {
         for (WeakReference<TailwindListener.GenericUpdateListener> e : genericUpdateListeners) {
-            e.get().genericUpdate(event);
+            Objects.requireNonNull(e.get()).genericUpdate(event);
         }
     }
 

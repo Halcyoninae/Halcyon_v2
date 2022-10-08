@@ -58,8 +58,7 @@ import java.io.FileReader;
  * @since 3.2
  */
 public class FileFromSourceTab extends JScrollPane implements InformationTab {
-    private final JEditorPane text;
-    private String tabName = "";
+    private final String tabName;
 
     /**
      * Two arguments are accepted in the construction of this custom tab.
@@ -75,7 +74,7 @@ public class FileFromSourceTab extends JScrollPane implements InformationTab {
 
         this.tabName = tabName;
 
-        text = new JEditorPane();
+        JEditorPane text = new JEditorPane();
         text.setEditable(false);
         text.setContentType("text/html");
         text.setText(textTab);

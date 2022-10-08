@@ -41,9 +41,7 @@ package com.jackmeng.locale;
 
 import java.lang.annotation.*;
 
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+
 /**
  * This annotation is used by the Command
  * Prompt to determine what methods to load
@@ -54,6 +52,9 @@ import java.lang.annotation.*;
  * @author Jack Meng
  * @since 3.3
  */
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface Invokable {
 
   /**

@@ -44,9 +44,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 
-@Retention(value = RetentionPolicy.SOURCE)
-@Documented
-
 /**
  * A localized tag adapted during
  * version 3.4.1 to increase transparency
@@ -67,6 +64,8 @@ import java.lang.annotation.RetentionPolicy;
  * @author Jack Meng
  * @since 3.4.1
  */
+@Retention(value = RetentionPolicy.SOURCE)
+@Documented
 public @interface Localized {
 
   /**

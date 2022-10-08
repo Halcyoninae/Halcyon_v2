@@ -42,8 +42,8 @@ package com.jackmeng.halcyoninae.cosmos;
 import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;
 import com.jackmeng.halcyoninae.cosmos.components.InstantClose;
 import com.jackmeng.halcyoninae.cosmos.util.Theme;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
 import com.jackmeng.halcyoninae.halcyon.utils.GUITools;
@@ -92,7 +92,7 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
             };
         }
 
-        container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        container.setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         container.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         container.setPreferredSize(new Dimension(Manager.MIN_WIDTH, Manager.MIN_HEIGHT));
         //container.setMinimumSize(container.getPreferredSize());
@@ -162,13 +162,13 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
     @Override
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING)) {
-            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_GREEN_LOGO).getImage());
+            container.setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_GREEN_LOGO).getImage());
         } else if (status.equals(TailwindStatus.OPEN)) {
-            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_BLUE_LOGO).getImage());
+            container.setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_BLUE_LOGO).getImage());
         } else if (status.equals(TailwindStatus.PAUSED)) {
-            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_RED_LOGO).getImage());
+            container.setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_RED_LOGO).getImage());
         } else {
-            container.setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+            container.setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         }
     }
 

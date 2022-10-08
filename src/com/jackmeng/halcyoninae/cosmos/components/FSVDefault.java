@@ -39,7 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
 import javax.swing.*;
@@ -63,6 +63,6 @@ public class FSVDefault extends JFrame {
      * Constructs the inheritable FSVDefault object to be inherited by
      */
     public FSVDefault() {
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
     }
 }

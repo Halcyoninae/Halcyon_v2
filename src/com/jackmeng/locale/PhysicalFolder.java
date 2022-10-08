@@ -49,7 +49,7 @@ import java.io.File;
  * @since 3.1
  */
 public class PhysicalFolder {
-    private String absPath = ".";
+    private final String absPath;
 
     /**
      * Constructs the folder-info object instance with

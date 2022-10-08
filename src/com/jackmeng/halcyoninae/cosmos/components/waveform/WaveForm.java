@@ -157,6 +157,6 @@ public class WaveForm extends JPanel implements TailwindListener.FrameBufferList
      */
     @Override
     public void frameUpdate(byte[] samples) {
-        SwingUtilities.invokeLater(() -> make(samples));;
+        SwingUtilities.invokeLater(() -> make(samples));
     }
 }

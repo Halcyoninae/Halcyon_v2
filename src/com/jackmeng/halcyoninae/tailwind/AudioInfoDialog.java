@@ -40,7 +40,7 @@
 package com.jackmeng.halcyoninae.tailwind;
 
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
@@ -85,7 +85,7 @@ public class AudioInfoDialog extends JFrame implements Runnable {
 
     public AudioInfoDialog(AudioInfo info) {
         setTitle(AUDIOINFO_WIN_TITLE);
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));
         setMinimumSize(new Dimension(AUDIOINFO_MIN_WIDTH, AUDIOINFO_MIN_HEIGHT));

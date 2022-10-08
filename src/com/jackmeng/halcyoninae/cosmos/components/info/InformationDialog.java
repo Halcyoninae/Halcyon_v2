@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.info;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons.LegalNoticeButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.layout.FileFromSourceTab;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
 import javax.swing.*;
@@ -58,7 +58,7 @@ public class InformationDialog extends JFrame implements Runnable {
 
     public InformationDialog() {
         setTitle("Halcyon ~ Information");
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setPreferredSize(new Dimension(LegalNoticeButton.LEGALNOTICEDIALOG_MIN_WIDTH, LegalNoticeButton.LEGALNOTICEDIALOG_MIN_HEIGHT));
         setResizable(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

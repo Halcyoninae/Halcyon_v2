@@ -1,10 +1,10 @@
 package com.jackmeng.halcyoninae.cloudspin.lib;
 
+import com.jackmeng.halcyoninae.cloudspin.SpeedStyle;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
-import com.jackmeng.halcyoninae.cloudspin.SpeedStyle;
 
 /**
  * A gradient generator meant to generate some interesting

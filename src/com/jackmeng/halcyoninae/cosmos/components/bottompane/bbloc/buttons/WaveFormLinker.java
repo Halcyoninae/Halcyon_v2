@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.waveform.WaveFormPane;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
@@ -62,9 +62,9 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     private WaveFormPane pane;
 
     public WaveFormLinker() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
+        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
         setRolloverIcon(DeImage.resizeImage(
-            Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
+            Halcyon.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
         setBorder(BorderFactory.createEmptyBorder());
         setPreferredSize(new Dimension(16, 16));
         addActionListener(this);
@@ -84,7 +84,7 @@ public class WaveFormLinker extends JButton implements BBlocButton {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        SwingUtilities.invokeLater(pane::run);
+        SwingUtilities.invokeLater(pane);
     }
 
 }

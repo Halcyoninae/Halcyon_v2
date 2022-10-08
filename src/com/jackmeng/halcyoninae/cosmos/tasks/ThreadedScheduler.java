@@ -48,6 +48,7 @@ import javax.swing.plaf.ColorUIResource;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 import java.util.logging.LogManager;
 
 public class ThreadedScheduler {
@@ -103,7 +104,7 @@ public class ThreadedScheduler {
             new DefunctOptimizer(),
         });
 
-        for (Runnable t : tasks.get()) {
+        for (Runnable t : Objects.requireNonNull(tasks.get())) {
             t.run();
         }
 

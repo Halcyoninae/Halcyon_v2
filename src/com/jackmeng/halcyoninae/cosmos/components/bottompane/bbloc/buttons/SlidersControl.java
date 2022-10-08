@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.SlidersDialog;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
@@ -64,7 +64,7 @@ public class SlidersControl extends JButton implements BBlocButton {
     private boolean isPressed;
 
     public SlidersControl() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
         setToolTipText("Open a window to display sliders that can alter certain things");
         setOpaque(true);
         setBorder(null);

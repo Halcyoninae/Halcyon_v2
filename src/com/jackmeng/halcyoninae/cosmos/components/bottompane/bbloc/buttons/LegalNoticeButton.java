@@ -41,7 +41,7 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
 import com.jackmeng.halcyoninae.cosmos.components.info.InformationDialog;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 
@@ -69,8 +69,8 @@ public class LegalNoticeButton extends JButton implements BBlocButton {
     /// LEGALNOTICEDIALOG Config END
 
     public LegalNoticeButton() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
+        setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_NORMAL), 16, 16));
+        setRolloverIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(LEGALNOTICEBBLOC_ICON_BUTTON_PRESSED), 16, 16));
         addActionListener(this);
         setOpaque(true);
         setBackground(null);

@@ -39,6 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
@@ -88,7 +89,7 @@ public class SlidersDialog extends JFrame implements Runnable, TailwindListener.
 
         pane.addTab("Basic Sliders", basicSlidersPane);
 
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setTitle("Sliders");
         setPreferredSize(new Dimension(300, 350));
         setAutoRequestFocus(false);

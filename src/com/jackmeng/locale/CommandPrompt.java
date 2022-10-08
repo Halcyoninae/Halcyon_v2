@@ -189,7 +189,7 @@ public class CommandPrompt extends JFrame implements Runnable {
    * @return String
    */
   private String prompt_zero_cmd__() {
-    return commandIn.getText().substring(prompt.length(), commandIn.getText().length());
+    return commandIn.getText().substring(prompt.length());
   }
 
   /**
@@ -206,7 +206,7 @@ public class CommandPrompt extends JFrame implements Runnable {
 
   @Invokable(aliases = { "clear" })
   public void clearBuffer() {
-    buffer = new StringBuilder("");
+    buffer = new StringBuilder();
     commandOut.setText(get_str__());
   }
 

@@ -40,6 +40,7 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
@@ -60,11 +61,11 @@ public class RefreshFileView extends JButton implements BBlocButton {
 
     public RefreshFileView() {
         super(new ImageIcon(DeImage
-            .resize(DeImage.imageIconToBI(Global.ico.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16,
+            .resize(DeImage.imageIconToBI(Halcyon.ico.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON)), 16,
                 16)));
         setRolloverIcon(new ImageIcon(DeImage
             .resize(DeImage
-                    .imageIconToBI(Global.ico.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
+                    .imageIconToBI(Halcyon.ico.getFromAsImageIcon(Manager.BBLOC_REFRESH_FILEVIEW_ICON_PRESSED)), 16,
                 16)));
         setToolTipText(Manager.REFRESH_BUTTON_TOOLTIP);
         setOpaque(true);

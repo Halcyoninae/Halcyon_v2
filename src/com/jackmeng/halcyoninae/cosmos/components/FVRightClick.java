@@ -218,7 +218,7 @@ public class FVRightClick extends MouseAdapter {
                     if (path != null) {
                         DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
                         if (!node.getParent().toString().equals(StringManager.JTREE_ROOT_NAME)) {
-                            File f = null;
+                            File f;
                             if (tree.isVirtual()) {
                                 f = new File(node.toString());
                             } else {

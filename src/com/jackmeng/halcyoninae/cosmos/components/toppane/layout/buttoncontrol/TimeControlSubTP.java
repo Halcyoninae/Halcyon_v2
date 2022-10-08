@@ -17,6 +17,7 @@ package com.jackmeng.halcyoninae.cosmos.components.toppane.layout.buttoncontrol;
 
 import com.jackmeng.halcyoninae.cosmos.components.toppane.TopPane;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
@@ -68,7 +69,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         fastForward = new JButton();
         fastForward.setLayout(new BorderLayout());
         fastForward.setIcon(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(FAST_FORWARD_ICON), ICON_SIZING, ICON_SIZING));
+            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(FAST_FORWARD_ICON), ICON_SIZING, ICON_SIZING));
         fastForward.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
             TIMECONTROL_HEIGHT / 5));
         fastForward.setMaximumSize(fastForward.getPreferredSize());
@@ -79,7 +80,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         fastBackward = new JButton();
         fastBackward.setLayout(new BorderLayout());
         fastBackward.setIcon(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(FAST_BACKWARD_ICON), ICON_SIZING, ICON_SIZING));
+            DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(FAST_BACKWARD_ICON), ICON_SIZING, ICON_SIZING));
         fastBackward.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
             TIMECONTROL_HEIGHT / 5));
         fastBackward.setMaximumSize(fastBackward.getPreferredSize());
@@ -88,7 +89,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         fastBackward.addActionListener(this);
 
         toEnd = new JButton();
-        toEnd.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(TO_END_ICON), ICON_SIZING, ICON_SIZING));
+        toEnd.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(TO_END_ICON), ICON_SIZING, ICON_SIZING));
         toEnd.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
             TIMECONTROL_HEIGHT / 5));
         toEnd.setMaximumSize(toEnd.getPreferredSize());
@@ -97,7 +98,7 @@ public class TimeControlSubTP extends JPanel implements ActionListener {
         toEnd.addActionListener(this);
 
         toStart = new JButton();
-        toStart.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(TO_START_ICON), ICON_SIZING, ICON_SIZING));
+        toStart.setIcon(DeImage.resizeImage(Halcyon.ico.getFromAsImageIcon(TO_START_ICON), ICON_SIZING, ICON_SIZING));
         toStart.setPreferredSize(new Dimension(TopPane.TOPPANE_MIN_WIDTH / 5,
             TIMECONTROL_HEIGHT / 5));
         toStart.setMaximumSize(toStart.getPreferredSize());

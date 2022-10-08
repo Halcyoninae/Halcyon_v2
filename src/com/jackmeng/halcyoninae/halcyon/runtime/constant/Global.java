@@ -44,7 +44,6 @@ import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
 import com.jackmeng.halcyoninae.cosmos.components.moreapps.MoreApps;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.ButtonControlTP;
 import com.jackmeng.halcyoninae.cosmos.components.toppane.layout.InfoViewTP;
-import com.jackmeng.halcyoninae.cosmos.util.IconHandler;
 import com.jackmeng.halcyoninae.halcyon.runtime.Player;
 import com.jackmeng.halcyoninae.halcyon.utils.ResourceDistributor;
 
@@ -65,7 +64,6 @@ import com.jackmeng.halcyoninae.halcyon.utils.ResourceDistributor;
  */
 public final class Global {
 
-    public static IconHandler ico = new IconHandler(Manager.RSC_FOLDER_NAME);
     public static ResourceDistributor rd = new ResourceDistributor();
     public static BottomPane bp          = new BottomPane();
     public static ButtonControlTP bctp   = new ButtonControlTP();
@@ -75,7 +73,6 @@ public final class Global {
     public static MoreApps moreApps      = new MoreApps();
 
     static {
-        ico.load();
         player.getStream().addStatusUpdateListener(bctp);
     }
 

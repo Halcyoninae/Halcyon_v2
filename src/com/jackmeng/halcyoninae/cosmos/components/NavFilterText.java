@@ -46,8 +46,8 @@ import javax.swing.text.Position;
 import java.awt.event.ActionEvent;
 
 public class NavFilterText extends NavigationFilter {
-  private int pxL;
-  private Action enL;
+  private final int pxL;
+  private final Action enL;
 
   public NavFilterText(int pxL, JTextComponent component) {
     this.pxL = pxL;

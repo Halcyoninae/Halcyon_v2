@@ -41,9 +41,9 @@ package com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist;
 
 import com.jackmeng.halcyoninae.cosmos.components.FVRightClick;
 import com.jackmeng.halcyoninae.cosmos.components.FVRightClick.RightClickHideItemListener;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.Program;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
@@ -179,9 +179,9 @@ public class FileList extends JScrollPane implements TabTree {
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         setBorder(null);
         DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
-        ImageIcon closedIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
-        ImageIcon openIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
-        ImageIcon leafIcon = Global.ico.getFromAsImageIcon(FILEVIEW_ICON_FILE);
+        ImageIcon closedIcon = Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_CLOSED);
+        ImageIcon openIcon = Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_FOLDER_OPEN);
+        ImageIcon leafIcon = Halcyon.ico.getFromAsImageIcon(FILEVIEW_ICON_FILE);
         renderer.setClosedIcon(DeImage.resizeImage(closedIcon, 16, 16));
         renderer.setOpenIcon(DeImage.resizeImage(openIcon, 16, 16));
         renderer.setLeafIcon(DeImage.resizeImage(leafIcon, 16, 16));

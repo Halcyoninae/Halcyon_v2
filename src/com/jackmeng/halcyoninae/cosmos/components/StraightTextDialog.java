@@ -40,7 +40,6 @@
 package com.jackmeng.halcyoninae.cosmos.components;
 
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
 import javax.swing.*;
@@ -49,7 +48,7 @@ import java.awt.*;
 public class StraightTextDialog extends JFrame implements Runnable {
 
     public StraightTextDialog(String content) {
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setTitle("Information");
         setPreferredSize(new Dimension(250, 100));
         setAutoRequestFocus(true);

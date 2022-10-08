@@ -39,6 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components.minimizeplayer;
 
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 
@@ -72,7 +73,7 @@ public class MiniPlayer extends JFrame implements Runnable {
         setPreferredSize(
             new Dimension(MiniPlayerManager.MINI_PLAYER_MIN_WIDTH, MiniPlayerManager.MINI_PLAYER_MIN_HEIGHT));
         setUndecorated(true);
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
         setAutoRequestFocus(true);
         setFocusable(true);
         MiniContentPane pane = new MiniContentPane();

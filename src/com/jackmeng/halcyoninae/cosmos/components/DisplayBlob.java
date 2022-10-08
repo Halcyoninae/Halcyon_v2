@@ -1,7 +1,7 @@
 package com.jackmeng.halcyoninae.cosmos.components;
 
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -13,8 +13,6 @@ import java.awt.*;
  */
 public class DisplayBlob extends JFrame implements Runnable {
   public static class Blob extends JPanel {
-    private JLabel name;
-    private JEditorPane[] contexts;
 
     public Blob(Border e, String blobName, String... presets) {
       super();
@@ -22,9 +20,9 @@ public class DisplayBlob extends JFrame implements Runnable {
       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
       setBorder(e);
 
-      name = new JLabel(blobName);
+      JLabel name = new JLabel(blobName);
       name.setAlignmentX(Component.LEFT_ALIGNMENT);
-      contexts = new JEditorPane[presets.length];
+      JEditorPane[] contexts = new JEditorPane[presets.length];
 
       add(name);
 
@@ -40,8 +38,6 @@ public class DisplayBlob extends JFrame implements Runnable {
     }
   }
 
-  private JPanel masterPanel;
-
   public DisplayBlob(Blob... presets) {
     super();
 
@@ -49,7 +45,7 @@ public class DisplayBlob extends JFrame implements Runnable {
     setPreferredSize(new Dimension(400, 550));
     setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
-    masterPanel = new JPanel();
+    JPanel masterPanel = new JPanel();
     masterPanel.setPreferredSize(getPreferredSize());
     masterPanel.setLayout(new BoxLayout(masterPanel, BoxLayout.Y_AXIS));
 

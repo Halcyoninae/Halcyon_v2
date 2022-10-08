@@ -79,14 +79,14 @@ public class SmallInvokable {
 
       StringBuilder b = new StringBuilder(CommandPrompt
           .wrap("<strong><u>Root_Execution_In Returns (stdOut):</u></strong><br>", Color.BLACK, Color.GREEN));
-      String temp = null;
+      String temp;
       while ((temp = stdOut.readLine()) != null) {
         b.append(temp).append("<br>");
       }
 
       b.append(CommandPrompt.wrap("<strong><u>Root_Execution_Err Returns (stdErr):</u></strong><br>", Color.BLACK,
           Color.ORANGE));
-      String temp2 = null;
+      String temp2;
       while ((temp2 = stdErr.readLine()) != null) {
         b.append(temp2).append("<br>");
       }

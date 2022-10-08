@@ -48,15 +48,16 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
-@Localized
 /**
  * @author Jack Meng
  * @since 3.4.1
  */
+@Localized
 public class IconHandler {
-    private Map<String, ImageIcon> imageIcons;
+    private final Map<String, ImageIcon> imageIcons;
     private String defaultLocale;
     private Random r;
 
@@ -80,24 +81,20 @@ public class IconHandler {
 
     public void load() {
         File s = new File(defaultLocale);
-        for (String x : s.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File curr, String str) {
-                return new File(curr, str).isDirectory();
-            }
-        })) {
+        for (String x : Objects.requireNonNull(s.list((curr, str) -> new File(curr, str).isDirectory()))) {
             File xr = new File(s.getAbsolutePath() + "/" + x);
-            Debugger.warn("XR: " + xr.getAbsolutePath());
-            if (xr.listFiles().length > 0) {
-                for (File t : xr.listFiles()) {
-                    Debugger.crit("XR_LOAD: " + t.getAbsolutePath());
+            if (Objects.requireNonNull(xr.listFiles()).length > 0) {
+                for (File t : Objects.requireNonNull(xr.listFiles())) {
                     if (t.getAbsolutePath().endsWith(".png")) {
+                        Debugger.warn(defaultLocale + "/" + x + "/" + t.getName() + " : "
+                                + this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                         imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
                                 this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                     }
                 }
             }
         }
+        Debugger.warn(imageIcons);
     }
 
     public ImageIcon request(String key) {
@@ -107,11 +104,14 @@ public class IconHandler {
 
     @Localized(stability = true)
     public ImageIcon requestApplied(String key) {
-        return imageIcons.get(key) == null ? new ImageIcon(new byte[] { (byte) 0xFF, (byte) 0x36 })
-                : ColorManager.hueTheme(imageIcons.get(key));
+        if (imageIcons.size() == 0)
+            load();
+        return ColorManager.hueTheme(imageIcons.get(key));
     }
 
     public ImageIcon getFromAsImageIcon(String key) {
+        if (imageIcons.size() == 0)
+            load();
         return requestApplied(key);
     }
 }

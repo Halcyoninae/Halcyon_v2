@@ -45,6 +45,7 @@ import com.jackmeng.halcyoninae.cosmos.util.bundles.LightGreen;
 import com.jackmeng.halcyoninae.cosmos.util.bundles.LightOrange;
 
 import java.lang.ref.WeakReference;
+import java.util.Objects;
 
 /**
  * A helper class to deal with all the available themes in the bundles.
@@ -88,7 +89,7 @@ public final class ThemeBundles {
      * @return The theme with the given canonical name, or the default if not found.
      */
     public static Theme searchFor(String canonicalName) {
-        for (Theme theme : getThemes().get()) {
+        for (Theme theme : Objects.requireNonNull(getThemes().get())) {
             if (theme.getCanonicalName().equals(canonicalName)) {
                 return theme;
             }
@@ -100,9 +101,9 @@ public final class ThemeBundles {
      * @return All of the available canonical names from the available themes.
      */
     public static String[] getCanonicNames() {
-        String[] canonicNames = new String[getThemes().get().length];
-        for (int i = 0; i < getThemes().get().length; i++)
-            canonicNames[i] = getThemes().get()[i].getCanonicalName();
+        String[] canonicNames = new String[Objects.requireNonNull(getThemes().get()).length];
+        for (int i = 0; i < Objects.requireNonNull(getThemes().get()).length; i++)
+            canonicNames[i] = Objects.requireNonNull(getThemes().get())[i].getCanonicalName();
         return canonicNames;
     }
 }

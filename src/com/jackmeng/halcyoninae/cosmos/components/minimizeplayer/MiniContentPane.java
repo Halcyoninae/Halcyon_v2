@@ -66,7 +66,6 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     private final JProgressBar progressBar;
     private transient AudioInfo info;
     private boolean fDrawn = true;
-    private transient ExecutorService timeKeeper;
     private transient BufferedImage bg;
 
     public MiniContentPane() {
@@ -158,7 +157,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
     }
 
     private void _init_time() {
-        timeKeeper = Executors.newFixedThreadPool(1);
+        ExecutorService timeKeeper = Executors.newFixedThreadPool(1);
         timeKeeper.execute(() -> {
             while (true) {
                 if (this.isShowing() || this.isVisible()) {

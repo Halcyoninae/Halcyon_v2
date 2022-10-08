@@ -40,8 +40,8 @@
 package com.jackmeng.halcyoninae.cosmos.components.settings;
 
 import com.jackmeng.halcyoninae.cosmos.components.settings.tabs.properties.AudioSettings;
+import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
-import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
 
@@ -76,7 +76,7 @@ public class SettingsPane extends JFrame implements Runnable, ActionListener {
         setMinimumSize(getPreferredSize());
 
         setTitle("Halcyon Settings ~ exoad");
-        setIconImage(Global.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
+        setIconImage(Halcyon.ico.getFromAsImageIcon(Manager.PROGRAM_ICON_LOGO).getImage());
 
         pane = new JTabbedPane();
         pane.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
