@@ -51,8 +51,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Provides a concurrent logging system for the program
@@ -64,41 +62,6 @@ import java.util.concurrent.Executors;
  */
 public class Program {
     public static MoosicCache cacher = new MoosicCache();
-    private static ExecutorService executorService;
-
-    /**
-     * Different from Debugger's log method, this method is meant for
-     * printing out messages to the console, however can only
-     * print out a string.
-     * <p>
-     * Asynchronous println t the console.
-     *
-     * @param e A string
-     */
-    private static void println(String e) {
-        if (executorService == null) {
-            executorService = Executors.newCachedThreadPool(
-                r -> {
-                    Thread t = new Thread(r);
-                    t.setDaemon(true);
-                    return t;
-                });
-            executorService.submit(
-                new Runnable() {
-                    @Override
-                    public synchronized void run() {
-                        while (true) {
-                            try {
-                                wait();
-                                System.err.println(e);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
-        }
-    }
 
     /**
      * Writes a dump file to the bin folder.
@@ -181,9 +144,7 @@ public class Program {
      * @param args Initial items to log
      */
     public static void main(String... args) {
-        for (String arg : args) {
-            println(arg);
-        }
+
     }
 
     /**

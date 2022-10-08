@@ -82,31 +82,31 @@ import java.util.concurrent.Executors;
  * @since 3.0
  */
 public class ButtonControlTP extends JPanel
-    implements InfoViewUpdateListener, ActionListener, ChangeListener, TailwindListener.StatusUpdateListener {
-    public static final int BUTTONCONTROL_MIN_WIDTH         = Manager.MIN_WIDTH;
-    public static final int BUTTONCONTROL_MIN_HEIGHT        = Manager.MIN_HEIGHT / 4;
+        implements InfoViewUpdateListener, ActionListener, ChangeListener, TailwindListener.StatusUpdateListener {
+    public static final int BUTTONCONTROL_MIN_WIDTH = Manager.MIN_WIDTH;
+    public static final int BUTTONCONTROL_MIN_HEIGHT = Manager.MIN_HEIGHT / 4;
     public static final int BUTTONCONTROL_BOTTOM_TOP_BUDGET = 12;
     /// ButtonControl Config START
-    final int PLAY_PAUSE_ICON_SIZE                          = 40;
-    final int OTHER_BUTTONS_SIZE                            = 24;
-    final String BUTTONCTRL_PLAY_PAUSE_ICON                 = Manager.RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
-    final String BUTTONCTRL_PAUSE_PLAY_ICON                 = Manager.RSC_FOLDER_NAME + "/buttoncontrol/pause_button.png";
-    final String BUTTONCTRL_FWD_ICON                        = Manager.RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
-    final String BUTTONCTRL_BWD_ICON                        = Manager.RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
-    final String BUTTONCTRL_LOOP_ICON                       = Manager.RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
-    final String BUTTONCTRL_SHUFFLE_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
-    final String BUTTONCTRL_MUTED_ICON                      = Manager.RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
-    final String BUTTONCTRL_NOMUTED_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
-    final String BUTTONCTRL_LIKE_ICON                       = Manager.RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
-    final String BUTTONCTRL_NOLIKE_ICON                     = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
-    final String BUTTONCTRL_RESTART_ICON                    = Manager.RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
-    final String BUTTONCTRL_INFORMATION_ICON                = Manager.RSC_FOLDER_NAME + "/buttoncontrol/information_button.png";
-    final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED         = Manager.RSC_FOLDER_NAME
-        + "/buttoncontrol/shuffle_button_pressed.png";
-    final String BUTTONCONTROL_LOOP_ICON_PRESSED            = Manager.RSC_FOLDER_NAME
-        + "/buttoncontrol/loop_button_pressed.png";
-    final int BUTTONCONTROL_MAX_WIDTH                       = Manager.MAX_WIDTH;
-    final int BUTTONCONTROL_MAX_HEIGHT                      = Manager.MAX_HEIGHT / 4;
+    final int PLAY_PAUSE_ICON_SIZE = 40;
+    final int OTHER_BUTTONS_SIZE = 24;
+    final String BUTTONCTRL_PLAY_PAUSE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/play_button.png";
+    final String BUTTONCTRL_PAUSE_PLAY_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/pause_button.png";
+    final String BUTTONCTRL_FWD_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/forward_button.png";
+    final String BUTTONCTRL_BWD_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/backward_button.png";
+    final String BUTTONCTRL_LOOP_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/loop_button.png";
+    final String BUTTONCTRL_SHUFFLE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/shuffle_button.png";
+    final String BUTTONCTRL_MUTED_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/mute_button.png";
+    final String BUTTONCTRL_NOMUTED_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nomute_button.png";
+    final String BUTTONCTRL_LIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/like_button.png";
+    final String BUTTONCTRL_NOLIKE_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/nolike_button.png";
+    final String BUTTONCTRL_RESTART_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/restart_button.png";
+    final String BUTTONCTRL_INFORMATION_ICON = Manager.RSC_FOLDER_NAME + "/buttoncontrol/information_button.png";
+    final String BUTTONCONTROL_SHUFFLE_ICON_PRESSED = Manager.RSC_FOLDER_NAME
+            + "/buttoncontrol/shuffle_button_pressed.png";
+    final String BUTTONCONTROL_LOOP_ICON_PRESSED = Manager.RSC_FOLDER_NAME
+            + "/buttoncontrol/loop_button_pressed.png";
+    final int BUTTONCONTROL_MAX_WIDTH = Manager.MAX_WIDTH;
+    final int BUTTONCONTROL_MAX_HEIGHT = Manager.MAX_HEIGHT / 4;
     private final JButton playButton;
     private final JButton nextButton;
     private final JButton previousButton;
@@ -119,7 +119,7 @@ public class ButtonControlTP extends JPanel
     private final JSlider volumeSlider;
     private final TimeControlSubTP tsp;
     private final JPanel buttons;
-    private final transient ExecutorService timeKeeper;
+    private final transient Timer timeKeeper;
     private transient AudioInfo aif = new AudioInfo();
     private boolean hasPlayed = false;
     /// ButtonControl Config END
@@ -133,14 +133,14 @@ public class ButtonControlTP extends JPanel
 
         buttons = new JPanel();
         buttons.setPreferredSize(
-            new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
+                new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
         buttons.setMinimumSize(
-            new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
+                new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
         buttons.setLayout(new FlowLayout(FlowLayout.LEFT, 10, getPreferredSize().height / 1));
 
         playButton = new JButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
-                PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
+                        PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
         playButton.setBackground(null);
         playButton.setBorder(null);
         playButton.setToolTipText("Play/Pause");
@@ -150,7 +150,7 @@ public class ButtonControlTP extends JPanel
         playButton.setBorderPainted(false);
 
         informationButton = new JButton(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_INFORMATION_ICON),
-            OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+                OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         informationButton.setBackground(null);
         informationButton.setBorder(null);
         informationButton.setContentAreaFilled(false);
@@ -160,8 +160,8 @@ public class ButtonControlTP extends JPanel
         informationButton.addActionListener(this);
 
         nextButton = new JButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
-                OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_FWD_ICON),
+                        OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         nextButton.setBackground(null);
         nextButton.setBorder(null);
         nextButton.setContentAreaFilled(false);
@@ -171,8 +171,8 @@ public class ButtonControlTP extends JPanel
         nextButton.addActionListener(this);
 
         previousButton = new JButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
-                OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_BWD_ICON),
+                        OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         previousButton.setBackground(null);
         previousButton.setBorder(null);
         previousButton.setToolTipText("Previous track");
@@ -182,9 +182,9 @@ public class ButtonControlTP extends JPanel
         previousButton.addActionListener(this);
 
         loopButton = new JButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
-                OTHER_BUTTONS_SIZE,
-                OTHER_BUTTONS_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
+                        OTHER_BUTTONS_SIZE,
+                        OTHER_BUTTONS_SIZE));
         loopButton.setBackground(null);
         loopButton.setBorder(null);
         loopButton.setContentAreaFilled(false);
@@ -194,9 +194,9 @@ public class ButtonControlTP extends JPanel
         loopButton.addActionListener(this);
 
         shuffleButton = new JButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
-                OTHER_BUTTONS_SIZE,
-                OTHER_BUTTONS_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
+                        OTHER_BUTTONS_SIZE,
+                        OTHER_BUTTONS_SIZE));
         shuffleButton.setBackground(null);
         shuffleButton.setBorder(null);
         shuffleButton.setContentAreaFilled(false);
@@ -214,12 +214,12 @@ public class ButtonControlTP extends JPanel
         volumeSlider.setToolTipText(volumeSlider.getValue() + "%");
 
         likeButton = new LikeButton(
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
-                OTHER_BUTTONS_SIZE,
-                OTHER_BUTTONS_SIZE),
-            DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
-                OTHER_BUTTONS_SIZE,
-                OTHER_BUTTONS_SIZE));
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_NOLIKE_ICON),
+                        OTHER_BUTTONS_SIZE,
+                        OTHER_BUTTONS_SIZE),
+                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LIKE_ICON),
+                        OTHER_BUTTONS_SIZE,
+                        OTHER_BUTTONS_SIZE));
         likeButton.setBackground(null);
         likeButton.setBorder(null);
         likeButton.setEnabled(false);
@@ -240,9 +240,9 @@ public class ButtonControlTP extends JPanel
         JPanel sliders = new JPanel();
         sliders.setLayout(new BoxLayout(sliders, BoxLayout.Y_AXIS));
         sliders.setPreferredSize(
-            new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
+                new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
         sliders.setMinimumSize(
-            new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
+                new Dimension(BUTTONCONTROL_MIN_WIDTH, BUTTONCONTROL_MIN_HEIGHT / 2));
 
         progressSlider = new JSlider(0, 100);
         progressSlider.setValue(0);
@@ -253,7 +253,8 @@ public class ButtonControlTP extends JPanel
         progressSlider.setAlignmentX(Component.CENTER_ALIGNMENT);
         progressSlider.addChangeListener(this);
 
-        bf = new BarForm(Toolkit.getDefaultToolkit().getScreenSize().width, 10, 1, 3, new BoxWaveConf(10, 5, 2, 3), new ColorConf(ColorManager.BORDER_THEME, null));
+        bf = new BarForm(Toolkit.getDefaultToolkit().getScreenSize().width, 10, 1, 3, new BoxWaveConf(10, 5, 2, 3),
+                new ColorConf(ColorManager.BORDER_THEME, null));
 
         JPanel bfWrapper = new JPanel();
         bfWrapper.setLayout(new BorderLayout());
@@ -265,29 +266,26 @@ public class ButtonControlTP extends JPanel
 
         tsp = new TimeControlSubTP();
 
-        timeKeeper = Executors.newSingleThreadExecutor();
-        timeKeeper.submit(() -> {
-            while (true) {
+        timeKeeper = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 if (Global.player.getStream().isPlaying()) {
                     if (Global.player.getStream().getLength() > 0) {
                         progressSlider
-                            .setValue((int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
-                                / Global.player.getStream().getLength()));
+                                .setValue(
+                                        (int) (Global.player.getStream().getPosition() * progressSlider.getMaximum()
+                                                / Global.player.getStream().getLength()));
 
                         tsp.setTimeText(TimeParser.fromMillis(Global.player.getStream().getPosition()));
-
                     } else {
                         progressSlider.setValue(0);
                         tsp.setTimeText("00:00:00");
                     }
                 }
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         });
+        timeKeeper.setRepeats(true);
+        timeKeeper.start();
 
         sliders.add(Box.createVerticalStrut(BUTTONCONTROL_BOTTOM_TOP_BUDGET / 5));
         sliders.add(overlayWaveForm);
@@ -299,8 +297,8 @@ public class ButtonControlTP extends JPanel
                 progressSlider.setMaximum(getWidth() - 10);
                 volumeSlider.setPreferredSize(new Dimension(getPreferredSize().width / 4, 20));
                 buttons.setLayout(
-                    new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35,
-                        getPreferredSize().height / 6));
+                        new FlowLayout(FlowLayout.CENTER, e.getComponent().getWidth() / 35,
+                                getPreferredSize().height / 6));
                 buttons.revalidate();
                 volumeSlider.revalidate();
             }
@@ -325,8 +323,8 @@ public class ButtonControlTP extends JPanel
     @Override
     public void infoView(AudioInfo info) {
         if (aif != null
-            && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)
-            .equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
+                && !aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH)
+                        .equals(info.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH))) {
             Global.player.setFile(aif.getTag(AudioInfo.KEY_ABSOLUTE_FILE_PATH));
         }
         aif = info;
@@ -356,13 +354,13 @@ public class ButtonControlTP extends JPanel
     public void callLoopFeatures(boolean isLooping) {
         if (isLooping) {
             loopButton.setIcon(
-                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
-                    OTHER_BUTTONS_SIZE,
-                    OTHER_BUTTONS_SIZE));
+                    DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_LOOP_ICON_PRESSED),
+                            OTHER_BUTTONS_SIZE,
+                            OTHER_BUTTONS_SIZE));
         } else {
             loopButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_LOOP_ICON),
-                OTHER_BUTTONS_SIZE,
-                OTHER_BUTTONS_SIZE));
+                    OTHER_BUTTONS_SIZE,
+                    OTHER_BUTTONS_SIZE));
         }
     }
 
@@ -373,11 +371,11 @@ public class ButtonControlTP extends JPanel
     public void callShuffleFeatures(boolean isShuffling) {
         if (isShuffling) {
             shuffleButton.setIcon(
-                DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
-                    OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+                    DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCONTROL_SHUFFLE_ICON_PRESSED),
+                            OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         } else {
             shuffleButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_SHUFFLE_ICON),
-                OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
+                    OTHER_BUTTONS_SIZE, OTHER_BUTTONS_SIZE));
         }
     }
 
@@ -472,7 +470,6 @@ public class ButtonControlTP extends JPanel
         }
     }
 
-
     /**
      * @param status
      */
@@ -480,11 +477,15 @@ public class ButtonControlTP extends JPanel
     public void statusUpdate(TailwindStatus status) {
         if (status.equals(TailwindStatus.PLAYING) || status.equals(TailwindStatus.RESUMED)) {
             playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PAUSE_PLAY_ICON),
-                PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+                    PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+            if (!timeKeeper.isRunning())
+                timeKeeper.start();
         } else if (status.equals(TailwindStatus.PAUSED) || status.equals(TailwindStatus.CLOSED)
-            || status.equals(TailwindStatus.END)) {
+                || status.equals(TailwindStatus.END)) {
             playButton.setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(BUTTONCTRL_PLAY_PAUSE_ICON),
-                PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+                    PLAY_PAUSE_ICON_SIZE, PLAY_PAUSE_ICON_SIZE));
+            if (timeKeeper.isRunning())
+                timeKeeper.stop();
         }
     }
 }

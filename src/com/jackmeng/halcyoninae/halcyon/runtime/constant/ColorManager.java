@@ -42,6 +42,10 @@ package com.jackmeng.halcyoninae.halcyon.runtime.constant;
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
 import com.jackmeng.halcyoninae.cosmos.util.Theme;
 import com.jackmeng.halcyoninae.cosmos.util.ThemeBundles;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.DarkGreen;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.DarkOrange;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.LightGreen;
+import com.jackmeng.halcyoninae.cosmos.util.bundles.LightOrange;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
 import com.jackmeng.locale.Localized;
@@ -59,7 +63,7 @@ import java.awt.image.BufferedImage;
  * @since 3.0
  */
 public final class ColorManager {
-    @Localized public static Theme programTheme        = ThemeBundles.getDefaultTheme();
+    @Localized public static Theme programTheme        = new DarkGreen();
     @Localized public static Color MAIN_BG_THEME       = programTheme.getMainBackground();
     @Localized public static Color BORDER_THEME        = ColorTool.hexToRGBA("#5F657D");
     @Localized public static Color MAIN_FG_THEME       = programTheme.getForegroundColor();

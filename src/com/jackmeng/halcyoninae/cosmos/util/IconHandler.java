@@ -77,6 +77,8 @@ public class IconHandler {
     }
 
     public void load() {
+        return;
+        /*
         File s = new File(defaultLocale);
         for (String x : Objects.requireNonNull(s.list((curr, str) -> new File(curr, str).isDirectory()))) {
             File xr = new File(s.getAbsolutePath() + "/" + x);
@@ -89,7 +91,9 @@ public class IconHandler {
                 }
             }
         }
+        */
     }
+
     /**
      * Gets an ImageIcon from the resource folder.
      *
@@ -111,6 +115,6 @@ public class IconHandler {
     }
 
     public ImageIcon getFromAsImageIcon(String key) {
-        return imageIcons.get(key);
+        return request(key);
     }
 }
