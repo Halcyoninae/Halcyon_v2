@@ -40,7 +40,9 @@
 package com.jackmeng.halcyoninae.cosmos.util;
 
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
+import com.jackmeng.halcyoninae.halcyon.utils.ResourceDistributor;
 import com.jackmeng.locale.Localized;
 
 import javax.swing.*;
@@ -59,7 +61,6 @@ import java.util.Random;
 public class IconHandler {
     private final Map<String, ImageIcon> imageIcons;
     private String defaultLocale;
-    private Random r;
 
     /**
      * @param defaultLocale The default lookup location
@@ -67,7 +68,6 @@ public class IconHandler {
     public IconHandler(String defaultLocale) {
         imageIcons = new HashMap<>();
         this.defaultLocale = defaultLocale;
-        this.r = new Random();
         load();
     }
 
@@ -87,9 +87,9 @@ public class IconHandler {
                 for (File t : Objects.requireNonNull(xr.listFiles())) {
                     if (t.getAbsolutePath().endsWith(".png")) {
                         Debugger.warn(defaultLocale + "/" + x + "/" + t.getName() + " : "
-                                + this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
+                                + Global.rd.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                         imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
-                                this.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
+                                Global.rd.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                     }
                 }
             }
@@ -97,21 +97,12 @@ public class IconHandler {
         Debugger.warn(imageIcons);
     }
 
-    public ImageIcon request(String key) {
-        return imageIcons.get(key) == null ? new ImageIcon(new byte[] { (byte) 0xFF, (byte) 0x36 })
-                : imageIcons.get(key);
-    }
-
     @Localized(stability = true)
     public ImageIcon requestApplied(String key) {
-        if (imageIcons.size() == 0)
-            load();
         return ColorManager.hueTheme(imageIcons.get(key));
     }
 
     public ImageIcon getFromAsImageIcon(String key) {
-        if (imageIcons.size() == 0)
-            load();
         return requestApplied(key);
     }
 }
