@@ -83,15 +83,26 @@ public class IconHandler {
             if (Objects.requireNonNull(xr.listFiles()).length > 0) {
                 for (File t : Objects.requireNonNull(xr.listFiles())) {
                     if (t.getAbsolutePath().endsWith(".png")) {
-                        Debugger.warn(defaultLocale + "/" + x + "/" + t.getName() + " : "
-                                + Global.rd.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
                         imageIcons.put(defaultLocale + "/" + x + "/" + t.getName(),
-                                Global.rd.getFromAsImageIcon(defaultLocale + "/" + x + "/" + t.getName()));
+                                request(defaultLocale + "/" + x + "/" + t.getName()));
                     }
                 }
             }
         }
-        Debugger.warn(imageIcons);
+    }
+    /**
+     * Gets an ImageIcon from the resource folder.
+     *
+     * @param path The path to the image
+     * @return ImageIcon The image icon
+     */
+    public ImageIcon request(String path) {
+        try {
+            return new ImageIcon(
+                    java.util.Objects.requireNonNull(getClass().getResource(path)));
+        } catch (NullPointerException e) {
+            return new ImageIcon(path);
+        }
     }
 
     @Localized(stability = true)
@@ -100,6 +111,6 @@ public class IconHandler {
     }
 
     public ImageIcon getFromAsImageIcon(String key) {
-        return requestApplied(key);
+        return imageIcons.get(key);
     }
 }

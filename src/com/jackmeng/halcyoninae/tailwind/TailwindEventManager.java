@@ -45,7 +45,6 @@ import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A global scoped targeted towards managing multiple
@@ -56,9 +55,9 @@ import java.util.Objects;
  * @since 3.1
  */
 public class TailwindEventManager {
-    private final List<WeakReference<TailwindListener.TimeUpdateListener>> timeListeners;
-    private final List<WeakReference<TailwindListener.StatusUpdateListener>> statusUpdateListeners;
-    private final List<WeakReference<TailwindListener.GenericUpdateListener>> genericUpdateListeners;
+    private final List<TailwindListener.TimeUpdateListener> timeListeners;
+    private final List<TailwindListener.StatusUpdateListener> statusUpdateListeners;
+    private final List<TailwindListener.GenericUpdateListener> genericUpdateListeners;
     private TailwindListener.FrameBufferListener bufferListener;
 
     public TailwindEventManager() {
@@ -72,7 +71,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addTimeListener(TailwindListener.TimeUpdateListener e) {
-        return timeListeners.add(new WeakReference<>(e));
+        return timeListeners.add(e);
     }
 
     /**
@@ -80,7 +79,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addStatusUpdateListener(TailwindListener.StatusUpdateListener e) {
-        return statusUpdateListeners.add(new WeakReference<>(e));
+        return statusUpdateListeners.add(e);
     }
 
     /**
@@ -88,7 +87,7 @@ public class TailwindEventManager {
      * @return boolean
      */
     public boolean addGenericUpdateListener(TailwindListener.GenericUpdateListener e) {
-        return genericUpdateListeners.add(new WeakReference<>(e));
+        return genericUpdateListeners.add(e);
     }
 
     /**
@@ -101,21 +100,21 @@ public class TailwindEventManager {
     /**
      * @return e
      */
-    public List<WeakReference<TailwindListener.TimeUpdateListener>> getTimeListeners() {
+    public List<TailwindListener.TimeUpdateListener> getTimeListeners() {
         return timeListeners;
     }
 
     /**
      * @return e
      */
-    public List<WeakReference<TailwindListener.StatusUpdateListener>> getStatusUpdateListeners() {
+    public List<TailwindListener.StatusUpdateListener> getStatusUpdateListeners() {
         return statusUpdateListeners;
     }
 
     /**
      * @return e
      */
-    public List<WeakReference<TailwindListener.GenericUpdateListener>> getGenericUpdateListeners() {
+    public List<TailwindListener.GenericUpdateListener> getGenericUpdateListeners() {
         return genericUpdateListeners;
     }
 
@@ -130,8 +129,8 @@ public class TailwindEventManager {
      * @param time
      */
     public synchronized void dispatchTimeEvent(long time) {
-        for (WeakReference<TailwindListener.TimeUpdateListener> e : timeListeners) {
-            Objects.requireNonNull(e.get()).trackCurrentTime(time);
+        for (TailwindListener.TimeUpdateListener e : timeListeners) {
+            e.trackCurrentTime(time);
         }
 
     }
@@ -140,8 +139,8 @@ public class TailwindEventManager {
      * @param status
      */
     public synchronized void dispatchStatusEvent(TailwindStatus status) {
-        for (WeakReference<TailwindListener.StatusUpdateListener> e : statusUpdateListeners) {
-            Objects.requireNonNull(e.get()).statusUpdate(status);
+        for (TailwindListener.StatusUpdateListener e : statusUpdateListeners) {
+            e.statusUpdate(status);
         }
 
     }
@@ -150,13 +149,14 @@ public class TailwindEventManager {
      * @param event
      */
     public synchronized void dispatchGenericEvent(TailwindEvent event) {
-        for (WeakReference<TailwindListener.GenericUpdateListener> e : genericUpdateListeners) {
-            Objects.requireNonNull(e.get()).genericUpdate(event);
+        for (TailwindListener.GenericUpdateListener e : genericUpdateListeners) {
+            e.genericUpdate(event);
         }
     }
 
     /**
      * @param samples
+     * @param s_
      */
     public synchronized void dispatchNewBufferEvent(byte[] samples) {
         Wrapper.threadedRun(() -> bufferListener.frameUpdate(samples));
