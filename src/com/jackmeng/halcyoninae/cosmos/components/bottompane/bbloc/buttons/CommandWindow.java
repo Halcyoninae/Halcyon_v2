@@ -1,10 +1,10 @@
 package com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.buttons;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.bbloc.BBlocButton;
-import com.jackmeng.halcyoninae.halcyon.command.CommandPrompt;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.DeImage;
+import com.jackmeng.locale.CommandPrompt;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

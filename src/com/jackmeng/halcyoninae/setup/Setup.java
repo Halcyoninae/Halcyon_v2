@@ -39,8 +39,8 @@
 
 package com.jackmeng.halcyoninae.setup;
 
-import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
-import com.jackmeng.halcyoninae.cloudspin.lib.gradient.GradientGenerator;
+import com.jackmeng.halcyoninae.cloudspin.SpeedStyle;
+import com.jackmeng.halcyoninae.cloudspin.lib.GradientGenerator;
 import com.jackmeng.halcyoninae.cosmos.Cosmos;
 import com.jackmeng.halcyoninae.cosmos.components.AttributableButton;
 import com.jackmeng.halcyoninae.cosmos.components.ErrorWindow;

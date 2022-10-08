@@ -37,7 +37,7 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.lib.blurhash;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
 import java.util.Arrays;
 

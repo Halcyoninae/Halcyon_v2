@@ -37,46 +37,38 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.lib.blurhash;
+package com.jackmeng.locale;
 
-import com.jackmeng.halcyoninae.cloudspin.lib.Blur;
+import java.lang.annotation.*;
 
-import java.awt.image.BufferedImage;
-
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 /**
- * The Main BlurHash Extern Class that provides
- * a High Level Method to directly interface with the
- * Child Low Level Class
+ * This annotation is used by the Command
+ * Prompt to determine what methods to load
+ * from a class instance automatically. Any
+ * methods with this annotation will be
+ * loaded and visible to the user for usage.
  *
  * @author Jack Meng
- * @see com.jackmeng.halcyoninae.cloudspin.lib.Blur
- * @since 1.0
+ * @since 3.3
  */
-public class BlurHash implements Blur {
+public @interface Invokable {
 
-    /**
-     * @param image
-     * @param _x
-     * @param _y
-     * @param otherParams
-     * @return BufferedImage
-     */
-    @Override
-    public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
-        int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
-        String hash = BlurHashChild.enc(pixels, image.getWidth(), image.getHeight(), _x, _y);
-        double p = 1.2d;
-        if (otherParams != null) {
-            if (otherParams[0] instanceof Double) {
-                if ((Double) otherParams[0] > 0) {
-                    p = (Double) otherParams[0];
-                }
-            }
-        }
-        int[] dec = BlurHashChild.dec(hash, image.getWidth(), image.getHeight(), p);
-        BufferedImage res = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        res.setRGB(0, 0, image.getWidth(), image.getHeight(), dec, 0, image.getWidth());
-        return res;
-    }
+  /**
+   * Aliases are additional commands
+   * that point to this same method, but
+   * with a different name. This functionality
+   * should be avoided as much as possible
+   * if there can be aliasing duplications.
+   */
+  String[] aliases() default {};
 
+  /**
+   * This string is primarily used to get
+   * the details of a command in order to
+   * display a "helpful" message about it.
+   */
+  String commandDescription() default "";
 }

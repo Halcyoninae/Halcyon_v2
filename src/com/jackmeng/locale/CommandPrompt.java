@@ -1,4 +1,4 @@
-package com.jackmeng.halcyoninae.halcyon.command;
+package com.jackmeng.locale;
 
 import com.jackmeng.halcyoninae.cosmos.components.NavFilterText;
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
@@ -6,7 +6,6 @@ import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.utils.ColorTool;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.TimeParser;
-import com.jackmeng.locale.Pair;
 
 import javax.swing.*;
 import java.awt.*;

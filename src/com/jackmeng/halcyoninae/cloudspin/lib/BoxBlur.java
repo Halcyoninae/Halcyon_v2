@@ -37,15 +37,14 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.lib.boxblur;
-
-import com.jackmeng.halcyoninae.cloudspin.enums.SpeedStyle;
-import com.jackmeng.halcyoninae.cloudspin.lib.Blur;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ConvolveOp;
 import java.awt.image.Kernel;
+
+import com.jackmeng.halcyoninae.cloudspin.SpeedStyle;
 
 /**
  * @author Jack Meng

@@ -1,5 +1,5 @@
 /*
- * Halcyon ~ exoad
+ *  Halcyon ~ exoad:
  *
  * A simplistic & robust audio library that
  * is created OPENLY and distributed in hopes
@@ -33,44 +33,31 @@
  * ============================================
  * If you did not receive a copy of the VENDOR_LICENSE,
  * consult the following link:
- * https://raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
+ * https: //raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.helpers;
+package com.jackmeng.halcyoninae.cloudspin.lib;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
+ * A class that handles fast accent color gathering from an image
+ *
  * @author Jack Meng
- * @since 3.2
+ * @since 3.4.1
  */
-public final class math {
-    private math() {
-    }
+public final class AccentColor {
+  private AccentColor() {}
+
+  public static Color getAccentColor(BufferedImage img) {
 
 
-    /**
-     * @param arr
-     * @return double
-     */
-    public static double _max(double[][] arr) {
-        double max = arr[0][0];
-        for (double[] doubles : arr) {
-            for (double aDouble : doubles) {
-                if (aDouble > max) {
-                    max = aDouble;
-                }
-            }
-        }
-        return max;
-    }
+    return Color.BLACK;
+  }
 
-
-    /**
-     * @param val
-     * @param exp
-     * @return double
-     */
-    public static double signpow(double val, double exp) {
-        return Math.copySign(Math.pow(Math.abs(val), exp), val);
-    }
+  public static int[][] getColorPalette(BufferedImage img) {
+  return (int[][]) null;
+  }
 }

@@ -37,9 +37,9 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.lib.blurhash;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
-import com.jackmeng.halcyoninae.cloudspin.helpers.math;
+import com.jackmeng.halcyoninae.cloudspin.math;
 
 /**
  * Base 83 Helper Class

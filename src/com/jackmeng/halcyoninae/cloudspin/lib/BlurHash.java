@@ -1,5 +1,5 @@
 /*
- *  Halcyon ~ exoad:
+ * Halcyon ~ exoad
  *
  * A simplistic & robust audio library that
  * is created OPENLY and distributed in hopes
@@ -33,31 +33,48 @@
  * ============================================
  * If you did not receive a copy of the VENDOR_LICENSE,
  * consult the following link:
- * https: //raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
+ * https://raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.cloudspin.lib.domclr;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
- * A class that handles fast accent color gathering from an image
+ * The Main BlurHash Extern Class that provides
+ * a High Level Method to directly interface with the
+ * Child Low Level Class
  *
  * @author Jack Meng
- * @since 3.4.1
+ * @see com.jackmeng.halcyoninae.cloudspin.lib.Blur
+ * @since 1.0
  */
-public final class AccentColor {
-  private AccentColor() {}
+public class BlurHash implements Blur {
 
-  public static Color getAccentColor(BufferedImage img) {
+    /**
+     * @param image
+     * @param _x
+     * @param _y
+     * @param otherParams
+     * @return BufferedImage
+     */
+    @Override
+    public BufferedImage blur(BufferedImage image, int _x, int _y, Object... otherParams) {
+        int[] pixels = image.getRGB(0, 0, image.getWidth(), image.getHeight(), null, 0, image.getWidth());
+        String hash = BlurHashChild.enc(pixels, image.getWidth(), image.getHeight(), _x, _y);
+        double p = 1.2d;
+        if (otherParams != null) {
+            if (otherParams[0] instanceof Double) {
+                if ((Double) otherParams[0] > 0) {
+                    p = (Double) otherParams[0];
+                }
+            }
+        }
+        int[] dec = BlurHashChild.dec(hash, image.getWidth(), image.getHeight(), p);
+        BufferedImage res = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_ARGB);
+        res.setRGB(0, 0, image.getWidth(), image.getHeight(), dec, 0, image.getWidth());
+        return res;
+    }
 
-
-    return Color.BLACK;
-  }
-
-  public static int[][] getColorPalette(BufferedImage img) {
-  return (int[][]) null;
-  }
 }

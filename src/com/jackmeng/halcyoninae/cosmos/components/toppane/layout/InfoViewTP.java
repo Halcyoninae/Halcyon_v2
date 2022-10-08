@@ -40,7 +40,7 @@
 package com.jackmeng.halcyoninae.cosmos.components.toppane.layout;
 
 import com.jackmeng.halcyoninae.cloudspin.CloudSpin;
-import com.jackmeng.halcyoninae.cloudspin.lib.swing.StdBlurLayer;
+import com.jackmeng.halcyoninae.cloudspin.lib.StdBlurLayer;
 import com.jackmeng.halcyoninae.halcyon.Halcyon;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;

@@ -37,7 +37,7 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.halcyon.command;
+package com.jackmeng.locale;
 
 import java.awt.*;
 import java.io.BufferedReader;

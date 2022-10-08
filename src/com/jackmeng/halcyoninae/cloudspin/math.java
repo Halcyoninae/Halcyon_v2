@@ -36,12 +36,41 @@
  * https://raw.githubusercontent.com/Halcyoninae/Halcyon/live/LICENSE.txt
  * ============================================
  */
-package com.jackmeng.halcyoninae.cloudspin.enums;
+
+package com.jackmeng.halcyoninae.cloudspin;
 
 /**
  * @author Jack Meng
  * @since 3.2
  */
-public enum SpeedStyle {
-    SPEED, QUALITY, GENERAL
+public final class math {
+    private math() {
+    }
+
+
+    /**
+     * @param arr
+     * @return double
+     */
+    public static double _max(double[][] arr) {
+        double max = arr[0][0];
+        for (double[] doubles : arr) {
+            for (double aDouble : doubles) {
+                if (aDouble > max) {
+                    max = aDouble;
+                }
+            }
+        }
+        return max;
+    }
+
+
+    /**
+     * @param val
+     * @param exp
+     * @return double
+     */
+    public static double signpow(double val, double exp) {
+        return Math.copySign(Math.pow(Math.abs(val), exp), val);
+    }
 }

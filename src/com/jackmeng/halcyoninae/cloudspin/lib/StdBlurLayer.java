@@ -37,38 +37,47 @@
  * ============================================
  */
 
-package com.jackmeng.halcyoninae.halcyon.command;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
-import java.lang.annotation.*;
+import com.twelvemonkeys.image.ConvolveWithEdgeOp;
 
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
-/**
- * This annotation is used by the Command
- * Prompt to determine what methods to load
- * from a class instance automatically. Any
- * methods with this annotation will be
- * loaded and visible to the user for usage.
- *
- * @author Jack Meng
- * @since 3.3
- */
-public @interface Invokable {
+import javax.swing.*;
+import javax.swing.plaf.LayerUI;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.Kernel;
 
-  /**
-   * Aliases are additional commands
-   * that point to this same method, but
-   * with a different name. This functionality
-   * should be avoided as much as possible
-   * if there can be aliasing duplications.
-   */
-  String[] aliases() default {};
+public class StdBlurLayer extends LayerUI<Component> {
+    private transient BufferedImageOp oImageOp;
 
-  /**
-   * This string is primarily used to get
-   * the details of a command in order to
-   * display a "helpful" message about it.
-   */
-  String commandDescription() default "";
+    public StdBlurLayer(int blur, RenderingHints renderer, int edgeNotation) {
+        float[] matrix = new float[blur * blur];
+        float frac = 1.0F / (blur * blur);
+        for (int i = 0; i < blur * blur; i++) {
+            matrix[i] = frac;
+        }
+        oImageOp = new ConvolveWithEdgeOp(new Kernel(blur, blur, matrix), edgeNotation, renderer);
+    }
+
+    /**
+     * @param g
+     * @param comp
+     */
+    @Override
+    public void paint(Graphics g, JComponent comp) {
+        if (comp.getWidth() == 0 || comp.getHeight() == 0)
+            return;
+
+        BufferedImage img = new BufferedImage(comp.getWidth(), comp.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D ig2 = img.createGraphics();
+        ig2.setClip(g.getClip());
+        super.paint(ig2, comp);
+        ig2.dispose();
+        Graphics2D g2 = (Graphics2D) g;
+        g2.drawImage(img, oImageOp, 0, 0);
+        g2.dispose();
+        g.dispose();
+    }
 }

@@ -1,4 +1,4 @@
-package com.jackmeng.halcyoninae.cloudspin.lib.hinter;
+package com.jackmeng.halcyoninae.cloudspin.lib;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
