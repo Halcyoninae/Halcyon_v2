@@ -284,7 +284,6 @@ A Native Bundle provides a runtime image based on your specified architecture
 ![](https://img.shields.io/github/commit-activity/w/Halcyoninae/Halcyon?label=weekly%20activity&style=flat-square)
 ![](https://img.shields.io/github/last-commit/Halcyoninae/Halcyon?style=flat-square)
 ![](https://img.shields.io/github/commits-since/Halcyoninae/Halcyon/latest?label=last%20release&style=flat-square)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1673939abd204e86a0629c73b2e917ff)](https://www.codacy.com/gh/exoad/Halcyon/dashboard?utm_source=github.com&utm_medium=referral&utm_content=exoad/Halcyon&utm_campaign=Badge_Grade)
 
 </center>
 
