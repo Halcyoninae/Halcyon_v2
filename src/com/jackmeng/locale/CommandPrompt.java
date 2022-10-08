@@ -30,12 +30,12 @@ public class CommandPrompt extends JFrame implements Runnable {
   static final int WIDTH = 690, HEIGHT = 450;
 
   private final String HEADER = "<html><body style=\"background:" + ColorTool.rgbTohex(ColorManager.MAIN_BG_THEME)
-      + ";color:" + ColorManager.MAIN_FG_STR + "\"><pre>", FOOTER = "</pre></body></html>";
+      + ";color:" + ColorManager.MAIN_FG_STR + "\"><pre>";
   private StringBuilder buffer;
-  private JEditorPane commandOut;
-  private volatile String prompt;
-  private JTextField commandIn;
-  private transient Map<String, Pair<Object, Method>> invokables;
+  private final JEditorPane commandOut;
+  private final String prompt;
+  private final JTextField commandIn;
+  private final transient Map<String, Pair<Object, Method>> invokables;
 
   public CommandPrompt() {
     super("Halcyon ~ exoad (CLI)");
@@ -88,7 +88,7 @@ public class CommandPrompt extends JFrame implements Runnable {
   public static String arrayStr(Object... e) {
     StringBuilder sb = new StringBuilder();
     for (Object t : e) {
-      sb.append(t + " ");
+      sb.append(t).append(" ");
     }
     return sb.toString();
   }
@@ -97,18 +97,18 @@ public class CommandPrompt extends JFrame implements Runnable {
    * @return String
    */
   private String get_str__() {
+    String FOOTER = "</pre></body></html>";
     return HEADER + buffer.toString() + FOOTER;
   }
 
   /**
    * @param arr
-   * @param ele
    * @return String[]
    */
-  private static String[] purge__(String[] arr, String ele) {
+  private static String[] purge__(String[] arr) {
     ArrayList<String> newArgs = new ArrayList<>(arr.length);
     for (String s : arr) {
-      if (!s.equals(ele)) {
+      if (!s.equals("")) {
         newArgs.add(s);
       }
     }
@@ -125,7 +125,7 @@ public class CommandPrompt extends JFrame implements Runnable {
       sb.add(st.nextToken());
     }
     String[] argTokens = sb.toArray(new String[0]);
-    argTokens = purge__(argTokens, "");
+    argTokens = purge__(argTokens);
     Debugger.warn(cmd + " | " + Arrays.toString(argTokens));
     if (invokables.get(cmd) == null) {
       print(wrap("<em>Failed to find the command:</em><br>&emsp;", null, Color.RED) + cmd
@@ -136,7 +136,7 @@ public class CommandPrompt extends JFrame implements Runnable {
           String str;
           if (invokables.get(cmd).second.getParameterCount() > 0) {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first,
-                (String[]) (argTokens.length > 0 ? argTokens : null)));
+                    (Object) (argTokens.length > 0 ? argTokens : null)));
           } else {
             str = (String) (invokables.get(cmd).second.invoke(invokables.get(cmd).first));
           }
@@ -165,7 +165,7 @@ public class CommandPrompt extends JFrame implements Runnable {
     if (paramsDefs.length > 0) {
       StringBuilder sbt = new StringBuilder();
       for (Class<?> c : paramsDefs) {
-        sbt.append("<" + c.getSimpleName() + "> ");
+        sbt.append("<").append(c.getSimpleName()).append("> ");
       }
       return sbt.toString();
     }
@@ -180,9 +180,7 @@ public class CommandPrompt extends JFrame implements Runnable {
     StringBuilder sb = new StringBuilder();
     sb.append(wrap("<strong><u>Available Commands</u></strong><br>", null, ColorTool.hexToRGBA("#ff7039")));
     for (String key : invokables.keySet()) {
-      sb.append(key + " | "
-          + param_str__(invokables.get(key).second.getParameterTypes()) + " ->  "
-          + invokables.get(key).second.getName()).append("()<br>");
+      sb.append(key).append(" | ").append(param_str__(invokables.get(key).second.getParameterTypes())).append(" ->  ").append(invokables.get(key).second.getName()).append("()<br>");
     }
     return sb.toString();
   }
