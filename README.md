@@ -23,6 +23,7 @@
 
 ### <strong><u>Description</u></strong>
 
+> **WORK IN PROGRESS**
 > Halcyon is designed to be a lightweight
 > and efficient native audio player that
 > fits the needs of anyone.
