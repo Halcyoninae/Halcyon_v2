@@ -1,5 +1,5 @@
 <a href="https://halcyoninae.github.io/.github/"><img src="repo/img/github_banner.png" alt="Repository Banner" width="320"/></a> 
-# <strong>Halcyon</strong> : <br/> <em>A Robust Audio API</em>
+# <strong>Halcyon</strong> : <br/> <em>A Robust Audio Player</em>
 > <em>Copyright (C) [Jack Meng 2021](mailto://jackmeng0814@gmail.com)</em>
 
 <hr>
