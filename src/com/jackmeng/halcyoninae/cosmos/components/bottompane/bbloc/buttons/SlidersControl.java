@@ -64,7 +64,7 @@ public class SlidersControl extends JButton implements BBlocButton {
     private boolean isPressed;
 
     public SlidersControl() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.SLIDERS_BUTTON_DEFAULT_ICON), BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
         setToolTipText("Open a window to display sliders that can alter certain things");
         setOpaque(true);
         setBorder(null);

@@ -77,10 +77,7 @@ public final class TailwindHelper {
                         false);
                 ais = AudioSystem.getAudioInputStream(decode, ais);
                 return ais;
-            } else if (target.equals(FileFormat.WAV)) {
-                ais = AudioSystem.getAudioInputStream(locale);
-                return ais;
-            } else if (target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC)) {
+            } else if (target.equals(FileFormat.WAV) || target.equals(FileFormat.AIFF) || target.equals(FileFormat.AIFC) || target.equals(FileFormat.AU)) {
                 ais = AudioSystem.getAudioInputStream(locale);
                 return ais;
             } else if (target.equals(FileFormat.OGG)) {

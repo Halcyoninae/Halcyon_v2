@@ -80,7 +80,7 @@ public final class GenericWebsiteLinker {
          * @param url     The url to link to.
          */
         public WebsitePage(String tooltip, ImageIcon ico, String url) {
-            super(DeImage.resizeImage(ico, 16, 16));
+            super(DeImage.resizeImage(ico, BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
             setToolTipText(tooltip);
             addActionListener(this);
             setOpaque(true);

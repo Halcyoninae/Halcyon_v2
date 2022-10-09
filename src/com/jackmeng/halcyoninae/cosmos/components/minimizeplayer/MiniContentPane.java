@@ -139,7 +139,7 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
 
         progressBar = new JProgressBar();
         progressBar.setPreferredSize(progressPanel.getPreferredSize());
-        progressBar.setMaximum(250);
+        progressBar.setMaximum(1000);
         progressBar.setMinimum(0);
         progressBar.setValue(0);
         progressBar.setBackground(new Color(1, 1, 1, 130));
@@ -166,11 +166,6 @@ public class MiniContentPane extends JPanel implements InfoViewUpdateListener {
                             Global.player.getStream().getPosition() * (double) progressBar
                                     .getMaximum(),
                             Global.player.getStream().getLength())));
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        // IGNORED.
-                    }
                 }
             }
         });

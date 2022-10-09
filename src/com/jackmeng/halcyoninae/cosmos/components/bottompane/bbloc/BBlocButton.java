@@ -50,6 +50,8 @@ import java.awt.event.ActionListener;
  * @since 3.0
  */
 public interface BBlocButton extends ActionListener {
+    final int DEFAULT_SIZE_BBLOC = 18;
+
     /**
      * @return The Component representing this BBloc Button
      */

@@ -99,12 +99,12 @@ public class ThreadedScheduler {
 
 
         // PROGRAMMABLE THREADS
-        WeakReference<Runnable[]> tasks = new WeakReference<>(new Runnable[]{
+        Runnable[] tasks = new Runnable[]{
             new PingFileView(Global.bp),
             new DefunctOptimizer(),
-        });
+        };
 
-        for (Runnable t : Objects.requireNonNull(tasks.get())) {
+        for (Runnable t : tasks) {
             t.run();
         }
 

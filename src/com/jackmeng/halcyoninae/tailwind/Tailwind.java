@@ -88,7 +88,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class Tailwind implements Audio {
     // PUBLIC STATIC UTIL START
-    public static final int MAGIC_NUMBER = 4096;
+    public static final int MAGIC_NUMBER = 2048;
     public static final String MASTER_GAIN_STR = "Master Gain", BALANCE_STR = "Balance", PAN_STR = "Pan";
     // PUBLIC STATIC UTIL END
     private final Object referencable = new Object();
@@ -245,7 +245,7 @@ public class Tailwind implements Audio {
 
                 if (new AudioInfo(url).getTag(AudioInfo.KEY_MEDIA_DURATION) == null) {
                     if (this.microsecondLength < 0) {
-                        byte[] buffer = new byte[MAGIC_NUMBER];
+                        byte[] buffer = new byte[4096];
                         int readBytes;
 
                         while ((readBytes = this.ais.read(buffer)) != -1) {
@@ -742,9 +742,7 @@ public class Tailwind implements Audio {
                      * float[] samples = new float[MAGIC_NUMBER * formatAudio.getChannels()];
                      * long[] transfer = new long[samples.length];
                      */
-                    buffer = new byte[my_magic_number == -1
-                            ? ais.getFormat().getFrameSize() * 2
-                            : MAGIC_NUMBER];
+                    buffer = new byte[ais.getFormat().getFrameSize()];
                     Debugger.warn("Tailwind_buffer_size: " + buffer.length);
                 }
                 line.start();

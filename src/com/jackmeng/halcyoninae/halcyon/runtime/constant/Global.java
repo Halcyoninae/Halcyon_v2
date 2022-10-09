@@ -39,6 +39,8 @@
 
 package com.jackmeng.halcyoninae.halcyon.runtime.constant;
 
+import java.util.Timer;
+
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.filelist.LikeList;
 import com.jackmeng.halcyoninae.cosmos.components.moreapps.MoreApps;
@@ -72,6 +74,7 @@ public final class Global {
     public static Player player          = new Player();
     public static LikeList ll            = new LikeList();
     public static MoreApps moreApps      = new MoreApps();
+    public static Timer scheduler        = new Timer("Global Scheduler");
 
     static {
         player.getStream().addStatusUpdateListener(bctp);

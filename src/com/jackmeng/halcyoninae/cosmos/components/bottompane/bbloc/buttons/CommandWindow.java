@@ -14,7 +14,7 @@ public class CommandWindow extends JButton implements BBlocButton {
   final String CMD_BBLOC = Manager.RSC_FOLDER_NAME + "/bbloc/cmd-bbloc.png";
 
   public CommandWindow() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(CMD_BBLOC), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(CMD_BBLOC), BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
         addActionListener(this);
         setOpaque(true);
         setBackground(null);

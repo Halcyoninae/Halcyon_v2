@@ -62,11 +62,9 @@ public class WaveFormLinker extends JButton implements BBlocButton {
     private WaveFormPane pane;
 
     public WaveFormLinker() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(
-            Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png"), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.RSC_FOLDER_NAME + "/bbloc/dots.png"), BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
         setBorder(BorderFactory.createEmptyBorder());
-        setPreferredSize(new Dimension(16, 16));
+        setPreferredSize(new Dimension(BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
         addActionListener(this);
         setToolTipText("WaveForm display Currently Unavailable due to technical issues");
     }

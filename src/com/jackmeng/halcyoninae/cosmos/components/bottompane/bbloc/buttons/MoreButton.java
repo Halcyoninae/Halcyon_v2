@@ -59,14 +59,12 @@ import java.awt.event.WindowEvent;
 public class MoreButton extends JButton implements BBlocButton {
     // MoreButton CONFIG START
     public static final String DEFAULT_ICON = Manager.RSC_FOLDER_NAME + "/bbloc/dots.png";
-    public static final String PRESSED_ICON = Manager.RSC_FOLDER_NAME + "/bbloc/dots_pressed.png";
     // MoreButton CONFIG END
 
     private boolean isPressed;
 
     public MoreButton() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(DEFAULT_ICON), 16, 16));
-        setRolloverIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(PRESSED_ICON), 16, 16));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(DEFAULT_ICON), BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
         setToolTipText("Open a window to display more apps");
         setOpaque(true);
         setBorder(null);

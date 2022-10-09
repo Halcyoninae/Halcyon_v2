@@ -40,8 +40,17 @@
 package com.jackmeng.halcyoninae.cosmos.tasks;
 
 import com.jackmeng.halcyoninae.cosmos.components.bottompane.BottomPane;
+import com.jackmeng.halcyoninae.halcyon.runtime.Program;
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.Global;
+import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * A class designed to constantly ping
@@ -53,7 +62,6 @@ import java.util.concurrent.ExecutorService;
  */
 public final class PingFileView implements Runnable {
     private final BottomPane bp;
-    private ExecutorService worker;
 
     /**
      * Calls the default BottomPane Object
@@ -67,24 +75,22 @@ public final class PingFileView implements Runnable {
 
     @Override
     public void run() {
-        if (worker == null) {
-            /*
-             * worker = new Thread(() -> {
-             * while (true) {
-             * bp.mastRevalidate();
-             * Program.cacher.pingLikedTracks();
-             * Program.cacher.pingSavedPlaylists();
-             * Program.cacher.forceSaveQuiet();
-             * try {
-             * Thread.sleep(ConcurrentTiming.MAX_TLE);
-             * } catch (InterruptedException e) {
-             * e.printStackTrace();
-             * }
-             * }
-             * });
-             * worker.start();
-             */
-        }
+        Global.scheduler.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Program.cacher.forceSaveQuiet();
+                Debugger.info("Autosaving user configs...");
+            }
+        }, 1000L, 10000L);
+        Global.scheduler.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Program.cacher.pingLikedTracks();
+                Program.cacher.pingSavedPlaylists();
+                Program.cacher.forceSaveQuiet();
+                bp.mastRevalidate();
+            }
+        }, 1000L, 1000L);
     }
 
 }
