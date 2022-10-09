@@ -41,6 +41,8 @@ Pull Requests are the standard when coming to proposing a change, the changes in
 
 ## <strong>request-urgency</strong>
 
+An extremely urgent vulnerability will have its description and other be removed and drafted for an advisory in GitHub's security tab with a presume CWE Enumerator.
+
 ## <strong>request-number</strong>
 
 ## <strong>request-title</strong>
