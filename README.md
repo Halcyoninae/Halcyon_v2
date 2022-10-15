@@ -35,6 +35,7 @@
 ### <strong><u>Features</u></strong>
 
 - Efficient Audio Pipeline: Tailwind
+- Fully implemented and documented Audio Math Library
 - Many supported audio formats (and more to be supported)
 - Inbuilt Swing extendable (BlurredUILayer, Scalable Frames, etc.) that you can use in your own programs
 - OpenGL backing for Swing Frameworks, enabling better performance and better flow control over the GUI wrapper.
