@@ -34,7 +34,7 @@
 
 ### <strong><u>Features</u></strong>
 
-- Multiple [audio pipelines](repo/text/audio_lineage.md) to choose from and used to play audio efficiently
+- Efficient Audio Pipeline: Tailwind
 - Many supported audio formats (and more to be supported)
 - Inbuilt Swing extendable (BlurredUILayer, Scalable Frames, etc.) that you can use in your own programs
 - OpenGL backing for Swing Frameworks, enabling better performance and better flow control over the GUI wrapper.
