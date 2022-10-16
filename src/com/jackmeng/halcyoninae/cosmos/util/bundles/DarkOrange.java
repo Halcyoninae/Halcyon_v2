@@ -70,7 +70,7 @@ public class DarkOrange implements Theme {
      */
     @Override
     public Color getForegroundColor2() {
-        return ColorTool.hexToRGBA("#f2c29d");
+        return ColorTool.hexToRGBA("#edae89");
     }
 
     /**
@@ -78,7 +78,7 @@ public class DarkOrange implements Theme {
      */
     @Override
     public Color getForegroundColor() {
-        return ColorTool.hexToRGBA("#fa9548");
+        return ColorTool.hexToRGBA("#e87a3a");
     }
 
     /**

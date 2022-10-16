@@ -282,4 +282,5 @@ public final class CloudSpin {
         g.dispose();
         return resized;
     }
+
 }

@@ -62,7 +62,7 @@ public class DefunctOptimizer implements Runnable {
     public void run() {
         if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("true")) {
             ScheduledExecutorService s = Executors.newScheduledThreadPool(1);
-            s.scheduleAtFixedRate(System::gc, 0, 250, TimeUnit.MILLISECONDS);
+            s.scheduleAtFixedRate(System::gc, 0, 50000, TimeUnit.MILLISECONDS);
         }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Halcyon ~ exoad
+ * Halcyon
  *
  * A simplistic & robust audio library that
  * is created OPENLY and distributed in hopes
@@ -77,10 +77,10 @@ public class Cosmos implements Runnable, TailwindListener.StatusUpdateListener {
      */
     public Cosmos(JSplitPane mainPane) {
         mainPane.setBorder(BorderFactory.createEmptyBorder());
-        container = new JFrame("Halcyon Beta ~ exoad");
+        container = new JFrame("Halcyon");
         if (ExternalResource.pm.get(ProgramResourceManager.KEY_PROGRAM_FORCE_OPTIMIZATION).equals("false")) {
             container.setUndecorated(true);
-            container = new JFrame("Halcyon Beta ~ exoad") {
+            container = new JFrame("Halcyon") {
                 @Override
                 public void paint(Graphics g) {
                     super.paint(g);

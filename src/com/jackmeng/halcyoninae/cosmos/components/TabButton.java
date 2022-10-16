@@ -39,6 +39,7 @@
 
 package com.jackmeng.halcyoninae.cosmos.components;
 
+import com.jackmeng.halcyoninae.halcyon.runtime.constant.ColorManager;
 import com.jackmeng.halcyoninae.halcyon.runtime.constant.Manager;
 import com.jackmeng.halcyoninae.halcyon.utils.Debugger;
 import com.jackmeng.halcyoninae.halcyon.utils.ExternalResource;
@@ -125,7 +126,7 @@ public class TabButton extends JPanel {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(1));
-            g2.setColor(Color.WHITE);
+            g2.setColor(ColorManager.MAIN_FG_THEME);
             g2.drawLine(3, 3, getWidth() - 3, getHeight() - 3);
             g2.drawLine(getWidth() - 3, 3, 3, getHeight() - 3);
             g2.dispose();
@@ -160,7 +161,7 @@ public class TabButton extends JPanel {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setStroke(new BasicStroke(1));
-            g2.setColor(Color.WHITE);
+            g2.setColor(ColorManager.MAIN_FG_THEME);
             int i = 3, last_loc = 0;
             while (i-- > 0) {
                 g2.fillOval(last_loc, this.getHeight() / 2 - 1, 3, 3);
@@ -184,7 +185,7 @@ public class TabButton extends JPanel {
             });
 
             popMenu.add(openInExplorer);
-            popMenu.show(this, TabButton.this.getX(), TabButton.this.getY());
+            popMenu.show(this, ((Component)e.getSource()).getX(), ((Component) e.getSource()).getY());
         }
 
     }

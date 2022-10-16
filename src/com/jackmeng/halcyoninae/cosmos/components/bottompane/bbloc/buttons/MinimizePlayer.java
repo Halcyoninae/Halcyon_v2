@@ -59,10 +59,11 @@ import java.awt.event.ActionEvent;
  * @since 3.2
  */
 public class MinimizePlayer extends JButton implements BBlocButton {
+    private final MiniPlayer player;
     private boolean pressed = false;
 
     public MinimizePlayer() {
-        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), BBlocButton.DEFAULT_SIZE_BBLOC, BBlocButton.DEFAULT_SIZE_BBLOC));
+        setIcon(DeImage.resizeImage(Global.ico.getFromAsImageIcon(Manager.BBLOC_MINIMIZED_PLAYER), 16, 16));
         setToolTipText("Launch the audio player in a mini display form factor");
         setRolloverEnabled(false);
         setBorder(null);
@@ -70,6 +71,8 @@ public class MinimizePlayer extends JButton implements BBlocButton {
         setDoubleBuffered(true);
         setBackground(null);
         addActionListener(this);
+        player = new MiniPlayer();
+        player.setMiniPlayerListener(() -> pressed = false);
     }
 
     /**
@@ -78,9 +81,7 @@ public class MinimizePlayer extends JButton implements BBlocButton {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!pressed) {
-            MiniPlayer mp = new MiniPlayer();
-            mp.setMiniPlayerListener(() -> pressed = false);
-            SwingUtilities.invokeLater(mp::run);
+            player.run();
             pressed = true;
         }
     }

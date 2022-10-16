@@ -538,13 +538,17 @@ public class Tailwind implements Audio {
      */
     @Override
     public void setGain(float percent) {
-        if (isDefaultPipeline()) {
-            FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
-            control.setValue(percent < control.getMinimum() ? control.getMinimum()
-                    : (Math.min(percent, control.getMaximum())));
-            if (((int) control.getValue()) == ((int) control.getMaximum())) {
-                Debugger.good(">3< Earrape Mode! Let's go!");
+        try {
+            if (isDefaultPipeline()) {
+                FloatControl control = (FloatControl) this.controlTable.get(MASTER_GAIN_STR);
+                control.setValue(percent < control.getMinimum() ? control.getMinimum()
+                        : (Math.min(percent, control.getMaximum())));
+                if (((int) control.getValue()) == ((int) control.getMaximum())) {
+                    Debugger.good(">3< Earrape Mode! Let's go!");
+                }
             }
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
     }
 
@@ -553,10 +557,14 @@ public class Tailwind implements Audio {
      */
     @Override
     public void setBalance(float balance) {
-        if (isDefaultPipeline()) {
-            FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
-            bal.setValue(
-                    balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+        try {
+            if (isDefaultPipeline()) {
+                FloatControl bal = (FloatControl) this.controlTable.get(BALANCE_STR);
+                bal.setValue(
+                        balance < bal.getMinimum() ? bal.getMinimum() : (Math.min(balance, bal.getMaximum())));
+            }
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
     }
 
@@ -564,10 +572,14 @@ public class Tailwind implements Audio {
      * @param pan
      */
     public void setPan(float pan) {
-        if (isDefaultPipeline()) {
-            FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
-            ctrl.setValue(
-                    pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
+        try {
+            if (isDefaultPipeline()) {
+                FloatControl ctrl = (FloatControl) this.controlTable.get(PAN_STR);
+                ctrl.setValue(
+                        pan < ctrl.getMinimum() ? ctrl.getMinimum() : (Math.min(pan, ctrl.getMaximum())));
+            }
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
     }
 
@@ -582,18 +594,22 @@ public class Tailwind implements Audio {
 
     @Override
     public void resume() {
-        if (isDefaultPipeline()) {
-            if (paused) {
-                playing = true;
-                paused = false;
-                synchronized (referencable) {
-                    referencable.notifyAll();
+        try {
+            if (isDefaultPipeline()) {
+                if (paused) {
+                    playing = true;
+                    paused = false;
+                    synchronized (referencable) {
+                        referencable.notifyAll();
+                    }
+                } else {
+                    play();
                 }
-            } else {
-                play();
             }
+            events.dispatchStatusEvent(TailwindStatus.RESUMED);
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
-        events.dispatchStatusEvent(TailwindStatus.RESUMED);
     }
 
     /**
@@ -614,55 +630,67 @@ public class Tailwind implements Audio {
      */
     @Override
     public void seekTo(long millis) {
-        if (isDefaultPipeline()) {
-            if (open || playing) {
-                long time = getPosition() + millis;
-                Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
-                        + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n"
-                        + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time)
-                        + "\nCurrent Time"
-                        + TimeParser.fromMillis(milliPos));
-                if (time < 0 || millis == -2) {
-                    milliPos = 0L;
-                    setPosition(0);
-                    Debugger.warn("FAULT: Lower bound exceeded for parameter: " + millis + "(ms)");
-                } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
-                    milliPos = getMicrosecondLength() / 1000L;
-                    setPosition(getMicrosecondLength() / 1000L);
-                    Debugger.warn("FAULT: Upper bound exceeded for parameter: " + millis + "(ms)");
-                } else {
-                    milliPos = time;
-                    setPosition(time);
-                    Debugger.good("OK: Bound checked. Skipping: " + millis);
+        try {
+            if (isDefaultPipeline()) {
+                if (open || playing) {
+                    long time = getPosition() + millis;
+                    Debugger.info("Vanilla Time Submission:" + millis + "\nTime Submission: " + time + "\nFor Pos: "
+                            + getPosition() + "\nFor Length: " + getMicrosecondLength() / 1000L + "\n"
+                            + TimeParser.fromMillis(millis) + "\nTime sub: " + TimeParser.fromMillis(time)
+                            + "\nCurrent Time"
+                            + TimeParser.fromMillis(milliPos));
+                    if (time < 0 || millis == -2) {
+                        milliPos = 0L;
+                        setPosition(0);
+                        Debugger.warn("FAULT: Lower bound exceeded for parameter: " + millis + "(ms)");
+                    } else if (time > getMicrosecondLength() / 1000L || millis == -1) {
+                        milliPos = getMicrosecondLength() / 1000L;
+                        setPosition(getMicrosecondLength() / 1000L);
+                        Debugger.warn("FAULT: Upper bound exceeded for parameter: " + millis + "(ms)");
+                    } else {
+                        milliPos = time;
+                        setPosition(time);
+                        Debugger.good("OK: Bound checked. Skipping: " + millis);
+                    }
                 }
             }
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
     }
 
     @Override
     public void pause() {
-        if (isDefaultPipeline()) {
-            if (playing && !paused) {
-                paused = true;
-                playing = false;
-                events.dispatchStatusEvent(TailwindStatus.PAUSED);
+        try {
+            if (isDefaultPipeline()) {
+                if (playing && !paused) {
+                    paused = true;
+                    playing = false;
+                    events.dispatchStatusEvent(TailwindStatus.PAUSED);
+                }
             }
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
     }
 
     @Override
     public void stop() {
-        if (isDefaultPipeline()) {
-            playing = false;
-            if (paused) {
-                synchronized (referencable) {
-                    referencable.notifyAll();
+        try {
+            if (isDefaultPipeline()) {
+                playing = false;
+                if (paused) {
+                    synchronized (referencable) {
+                        referencable.notifyAll();
+                    }
+                    paused = false;
                 }
-                paused = false;
+                setPosition(0);
             }
-            setPosition(0);
+            events.dispatchStatusEvent(TailwindStatus.CLOSED);
+        } catch (Exception e) {
+            events.dispatchStatusEvent(TailwindStatus.PAUSED);
         }
-        events.dispatchStatusEvent(TailwindStatus.CLOSED);
     }
 
     /**

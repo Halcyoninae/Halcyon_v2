@@ -172,7 +172,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                 bi,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT,
                 INFOVIEW_ARTWORK_RESIZE_TO_HEIGHT);
-        bi.setAccelerationPriority(0.8F);
         artWork = new JLabel(new ImageIcon(bi));
         artWork.setBorder(BorderFactory.createEmptyBorder());
         artWork.setHorizontalAlignment(SwingConstants.CENTER);
@@ -265,8 +264,6 @@ public class InfoViewTP extends JPanel implements ComponentListener {
                     img = null;
                 }
                 backPanelArt = img;
-                if(backPanelArt != null)
-                    backPanelArt.setAccelerationPriority(0.7F);
                 backPanel.repaint(30L);
             }
         });
