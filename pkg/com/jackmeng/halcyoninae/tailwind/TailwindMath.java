@@ -45,24 +45,11 @@ import javax.sound.sampled.AudioFormat;
  * This class handles all mathematics related functions
  * that can be used to manipulate concurrent or nonconcurrent
  * audio data.
- * 
+ *
  * @author Jack Meng
  * @since 3.4.1
  */
 public final class TailwindMath {
-    public static final class Tailwind_FFT {
-        public static void factor_4_decomp_1(double[] data, double[] transfer, int fft_sz, int step, int i) {
-            int sz = fft_sz << 1;
-            int transfer_len = transfer.length >> 1;
-            while(step < sz) {
-                if(step << 2 == transfer_len) {
-                    factor_4_decomp_1(data, transfer, fft_sz, step, i);
-                    return;
-                }
-                int max_1 = 
-            }
-        }
-    }
 
     private TailwindMath() {}
 
@@ -86,46 +73,46 @@ public final class TailwindMath {
     /**
      * Converts a linear scaled value to a logarithmic
      * value (decibels)
-     * 
+     *
      * @param val The linear scaled value (float)
      * @return float The logarithmic scaled value (float_decibels)
      */
     public static float linear_to_db(float val) {
-        return (float) (Math.log((double) (val == 0.0 ? 0.0001 : val)) / Math.log(10.0d) * 20.0d);
+        return (float) (Math.log((val == 0.0 ? 0.0001 : val)) / Math.log(10.0d) * 20.0d);
     }
 
     /**
      * Converts a given time unit (milliseconds)
      * to the byte length based on a provided/known
      * AudioFormat. This function represents method_1
-     * of doing this which uses a very lack luster 
+     * of doing this which uses a very lack luster
      * sampleRate * channelcount * samplesize
-     * 
+     *
      * @param fmt An AudioFormat object (javax.sound.sampled)
      * @param time An int time unit representing the milliseconds (int_ms)
      * @return long The byte length calculated
      */
     public static long millis_to_byte_len_1(AudioFormat fmt, int time) {
-        return (long) (time * (fmt.getSampleRate() * fmt.getChannels() * fmt.getSampledSizeInBits()) / 8000.0F);
+        return (long) (time * (fmt.getSampleRate() * fmt.getChannels() * fmt.getSampleSizeInBits()) / 8000.0F);
     }
 
     /**
      * Converts a given time unit (milliseconds)
      * to the byte length based on a provided/known
      * AudioFormat. This function represents method_2
-     * 
+     *
      * @param fmt An AudioFormat object (javax.sound.sampled)
      * @param time An int time unit representing the milliseconds (int_ms)
      * @return long The byte length calculated
      */
     public static long millis_to_byte_len_2(AudioFormat fmt, int time) {
-        return align((long) (time * fmt.getFrameRate() / 1000.0F * fmt.getFrameSize()), fmt.getFrameSize());
+        return align_by_block_sz((long) (time * fmt.getFrameRate() / 1000.0F * fmt.getFrameSize()), fmt.getFrameSize());
     }
 
     /**
      * Converts a logarithmic scaled value (decibels)
      * to its linear scaled counterpart.
-     * 
+     *
      * @param val Decibels value (float)
      * @return float The linear scaled value (float_linear)
      */
@@ -134,9 +121,9 @@ public final class TailwindMath {
     }
 
     /**
-     * Converts a signed byte array to an unsigned 
+     * Converts a signed byte array to an unsigned
      * byte array.
-     * 
+     *
      * @param signed_arr Byte Array Data
      * @param offset Offset (int)
      * @param length Maxim (int)
@@ -149,7 +136,7 @@ public final class TailwindMath {
 
     /**
      * @param bps Bits per Second (int)
-     * @return int Normalized data 
+     * @return int Normalized data
      */
     public static int normalize(int bps) {
         return bps + 7 >> 3;
