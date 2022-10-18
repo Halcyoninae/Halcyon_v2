@@ -1,3 +1,8 @@
+[***] #51 "GUI Overhaul"
+    Detailed Description:
+        View the work here:
+            https://github.com/exoad/HalcyonGUI_overhaul
+
 [**] #50 "Internal Shell better implementation"
     Detailed Description: Make the internal shell better, 
     to contrast the usability. This includes the following
