@@ -42,7 +42,6 @@ package com.jackmeng.halcyoninae.tailwind;
 import com.jackmeng.halcyoninae.halcyon.utils.Wrapper;
 import com.jackmeng.halcyoninae.tailwind.TailwindEvent.TailwindStatus;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
