@@ -2,7 +2,12 @@
     Detailed Description:
         View the work here:
             https://github.com/exoad/HalcyonGUI_overhaul
-
+        Does not make the UI very different but features
+        a completely different pipeline on how components
+        are added and displayed on the screen making it
+        much more efficient.
+    Status: In Progress
+    
 [**] #50 "Internal Shell better implementation"
     Detailed Description: Make the internal shell better, 
     to contrast the usability. This includes the following
