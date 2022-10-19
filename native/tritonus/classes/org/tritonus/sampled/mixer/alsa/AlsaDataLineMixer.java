@@ -1,0 +1,332 @@
+/*
+ *	AlsaDataLineMixer.java
+ *
+ *	This file is part of Tritonus: http://www.tritonus.org/
+ */
+
+/*
+ *  Copyright (c) 1999 - 2004 by Matthias Pfisterer
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ *
+ */
+
+/*
+|<---            this code is formatted to fit into 80 columns             --->|
+*/
+
+package org.tritonus.sampled.mixer.alsa;
+
+import org.tritonus.lowlevel.alsa.Alsa;
+import org.tritonus.lowlevel.alsa.AlsaPcm;
+import org.tritonus.lowlevel.alsa.AlsaPcmHWParams;
+import org.tritonus.lowlevel.alsa.AlsaPcmHWParamsFormatMask;
+import org.tritonus.share.GlobalInfo;
+import org.tritonus.share.TDebug;
+import org.tritonus.share.TSettings;
+import org.tritonus.share.sampled.mixer.TMixer;
+import org.tritonus.share.sampled.mixer.TMixerInfo;
+import org.tritonus.share.sampled.mixer.TSoftClip;
+
+import javax.sound.sampled.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+
+public class AlsaDataLineMixer
+        extends TMixer {
+    private static final AudioFormat[] EMPTY_AUDIOFORMAT_ARRAY = new AudioFormat[0];
+    private static final int CHANNELS_LIMIT = 32;
+
+    // default buffer size in bytes.
+    private static final int DEFAULT_BUFFER_SIZE = 32768;
+
+    /*	The name of the sound card this mixer is representing.
+     */
+    private final String m_strPcmName;
+
+
+    public AlsaDataLineMixer() {
+        this(0);
+    }
+
+
+    public AlsaDataLineMixer(int nCard) {
+        this(getPcmName(nCard));
+    }
+
+
+    public AlsaDataLineMixer(String strPcmName) {
+        super(new TMixerInfo(
+                        "Alsa DataLine Mixer (" + strPcmName + ")",
+                        GlobalInfo.getVendor(),
+                        "Mixer for the Advanced Linux Sound Architecture (card " + strPcmName + ")",
+                        GlobalInfo.getVersion()),
+                new Line.Info(Mixer.class));
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.<init>(String): begin.");
+        }
+        m_strPcmName = strPcmName;
+        List<AudioFormat> sourceFormats = getSupportedFormats(AlsaPcm.SND_PCM_STREAM_PLAYBACK);
+        List<AudioFormat> targetFormats = getSupportedFormats(AlsaPcm.SND_PCM_STREAM_CAPTURE);
+        List<Line.Info> sourceLineInfos = new ArrayList<Line.Info>();
+        Line.Info sourceLineInfo = new DataLine.Info(
+                SourceDataLine.class,
+                sourceFormats.toArray(EMPTY_AUDIOFORMAT_ARRAY),
+                AudioSystem.NOT_SPECIFIED,
+                AudioSystem.NOT_SPECIFIED);
+        sourceLineInfos.add(sourceLineInfo);
+        List<Line.Info> targetLineInfos = new ArrayList<Line.Info>();
+        Line.Info targetLineInfo = new DataLine.Info(
+                TargetDataLine.class,
+                targetFormats.toArray(EMPTY_AUDIOFORMAT_ARRAY),
+                AudioSystem.NOT_SPECIFIED,
+                AudioSystem.NOT_SPECIFIED);
+        targetLineInfos.add(targetLineInfo);
+        setSupportInformation(sourceFormats,
+                targetFormats,
+                sourceLineInfos,
+                targetLineInfos);
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.<init>(String): end.");
+        }
+    }
+
+    public static String getDeviceNamePrefix() {
+        if (TSettings.AlsaUsePlughw) {
+            return "plughw";
+        } else {
+            return "hw";
+        }
+    }
+
+    public static String getPcmName(int nCard) {
+        String strPcmName = getDeviceNamePrefix()
+                + ":" + nCard;
+        if (TSettings.AlsaUsePlughw) {
+            // strPcmName += ",0";
+        }
+        return strPcmName;
+    }
+
+    private static void addChanneledAudioFormats(
+            Collection<AudioFormat> collection,
+            AudioFormat protoAudioFormat,
+            int nMinChannels,
+            int nMaxChannels) {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.addChanneledAudioFormats(): begin");
+        }
+        for (int nChannels = nMinChannels; nChannels <= nMaxChannels; nChannels++) {
+            AudioFormat channeledAudioFormat = getChanneledAudioFormat(protoAudioFormat, nChannels);
+            if (TDebug.TraceMixer) {
+                TDebug.out("AlsaDataLineMixer.addChanneledAudioFormats(): adding AudioFormat: " + channeledAudioFormat);
+            }
+            collection.add(channeledAudioFormat);
+        }
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.addChanneledAudioFormats(): end");
+        }
+    }
+
+
+    //////////////// Line //////////////////////////////////////
+
+    // TODO: better name
+    // TODO: calculation of frame size is not perfect
+    private static AudioFormat getChanneledAudioFormat(AudioFormat audioFormat, int nChannels) {
+        AudioFormat channeledAudioFormat = new AudioFormat(
+                audioFormat.getEncoding(),
+                audioFormat.getSampleRate(),
+                audioFormat.getSampleSizeInBits(),
+                nChannels,
+                (audioFormat.getSampleSizeInBits() / 8) * nChannels,
+                audioFormat.getFrameRate(),
+                audioFormat.isBigEndian());
+        return channeledAudioFormat;
+    }
+
+    public String getPcmName() {
+        return m_strPcmName;
+    }
+
+
+    //////////////// Mixer //////////////////////////////////////
+
+    // TODO: allow real close and reopen of mixer
+    public void open() {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.open(): begin");
+        }
+
+        // currently does nothing
+
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.open(): end");
+        }
+    }
+
+
+    //////////////// private //////////////////////////////////////
+
+    public void close() {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.close(): begin");
+        }
+
+        // currently does nothing
+
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.close(): end");
+        }
+    }
+
+    public int getMaxLines(Line.Info info) {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getMaxLines(): begin");
+        }
+        // TODO:
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getMaxLines(): end");
+        }
+        return 0;
+    }
+
+    // nBufferSize is in bytes!
+    protected SourceDataLine getSourceDataLine(AudioFormat format, int nBufferSize)
+            throws LineUnavailableException {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSourceDataLine(): begin");
+        }
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSourceDataLine(): format: " + format);
+            TDebug.out("AlsaDataLineMixer.getSourceDataLine(): buffer size: " + nBufferSize);
+        }
+        if (nBufferSize < 1) {
+            nBufferSize = DEFAULT_BUFFER_SIZE;
+        }
+        AlsaSourceDataLine sourceDataLine = new AlsaSourceDataLine(this, format, nBufferSize);
+        // sourceDataLine.start();
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSourceDataLine(): returning: " + sourceDataLine);
+        }
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSourceDataLine(): end");
+        }
+        return sourceDataLine;
+    }
+
+    // nBufferSize is in bytes!
+    protected TargetDataLine getTargetDataLine(AudioFormat format, int nBufferSize)
+            throws LineUnavailableException {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getTargetDataLine(): begin");
+        }
+        int nBufferSizeInBytes = nBufferSize * format.getFrameSize();
+        AlsaTargetDataLine targetDataLine = new AlsaTargetDataLine(this, format, nBufferSizeInBytes);
+        // targetDataLine.start();
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getTargetDataLine(): returning: " + targetDataLine);
+        }
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getTargetDataLine(): end");
+        }
+        return targetDataLine;
+    }
+
+    protected Clip getClip(AudioFormat format)
+            throws LineUnavailableException {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getClip(): begin");
+        }
+        Clip clip = new TSoftClip(this, format);
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getClip(): end");
+        }
+        return clip;
+    }
+
+    /*
+      nDirection: should be AlsaPcm.SND_PCM_STREAM_PLAYBACK or
+      AlsaPcm.SND_PCM_STREAM_CAPTURE.
+     */
+    private List<AudioFormat> getSupportedFormats(int nDirection) {
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): begin");
+        }
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): direction: " + nDirection);
+        }
+        List<AudioFormat> supportedFormats = new ArrayList<AudioFormat>();
+        AlsaPcm alsaPcm = null;
+        try {
+            alsaPcm = new AlsaPcm(
+                    getPcmName(),
+                    nDirection,
+                    0);    // no special mode
+        } catch (Exception e) {
+            if (TDebug.TraceAllExceptions) {
+                TDebug.out(e);
+            }
+            throw new RuntimeException("cannot open pcm");
+        }
+        int nReturn;
+        AlsaPcmHWParams hwParams = new AlsaPcmHWParams();
+        nReturn = alsaPcm.getAnyHWParams(hwParams);
+        if (nReturn != 0) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): getAnyHWParams(): " + Alsa.getStringError(nReturn));
+            throw new RuntimeException(Alsa.getStringError(nReturn));
+        }
+        AlsaPcmHWParamsFormatMask formatMask = new AlsaPcmHWParamsFormatMask();
+        int nMinChannels = hwParams.getChannelsMin();
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): min channels: " + nMinChannels);
+        }
+        int nMaxChannels = hwParams.getChannelsMax();
+        nMaxChannels = Math.min(nMaxChannels, CHANNELS_LIMIT);
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): max channels: " + nMaxChannels);
+        }
+        hwParams.getFormatMask(formatMask);
+        for (int i = 0; i < 32; i++) {
+            if (TDebug.TraceMixer) {
+                TDebug.out("AlsaDataLineMixer.getSupportedFormats(): checking ALSA format index: " + i);
+            }
+            if (formatMask.test(i)) {
+                if (TDebug.TraceMixer) {
+                    TDebug.out("AlsaDataLineMixer.getSupportedFormats(): ...supported");
+                }
+                AudioFormat audioFormat = AlsaUtils.getAlsaFormat(i);
+                if (TDebug.TraceMixer) {
+                    TDebug.out("AlsaDataLineMixer.getSupportedFormats(): adding AudioFormat: " + audioFormat);
+                }
+                addChanneledAudioFormats(supportedFormats, audioFormat, nMinChannels, nMaxChannels);
+                // supportedFormats.add(audioFormat);
+            } else {
+                if (TDebug.TraceMixer) {
+                    TDebug.out("AlsaDataLineMixer.getSupportedFormats(): ...not supported");
+                }
+            }
+        }
+        // TODO: close/free mask & hwParams?
+        alsaPcm.close();
+        if (TDebug.TraceMixer) {
+            TDebug.out("AlsaDataLineMixer.getSupportedFormats(): end");
+        }
+        return supportedFormats;
+    }
+}
+
+
+/*** AlsaDataLineMixer.java ***/

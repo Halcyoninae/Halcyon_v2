@@ -1,0 +1,7 @@
+{
+    "name" : "Tanh",
+    "uid"  : 16829942394719614092,
+    "category" : "Calculus",
+    "input-names" : ["in"],
+    "output-names" : ["out"]
+}
