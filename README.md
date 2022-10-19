@@ -233,7 +233,7 @@ Check the documentation for more: [Tailwind Docs](https://halcyoninae.github.io/
 
 This project is the 3rd iteration of a much older project, which you can find [here](https://github.com/Halcyoninae/mp4j-old), so technical version number starts from **3** (rolling iteration). This number will increase by 1 (+1) per every 1 whole iteration in the rolling release number.
 
-<u>Rolling Release:</u> 3.4.1<br>
+<u>Rolling Release:</u> 3.4.2<br>
 <u>Rolling Iteration:</u> 3.0<br>
 <u>Version Meta:</u> Beta<br>
 
