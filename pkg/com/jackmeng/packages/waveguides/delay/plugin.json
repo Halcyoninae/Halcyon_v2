@@ -1,7 +1,0 @@
-{
-  "name": "Delay",
-  "uid": 6074670381660910441,
-  "category": "Waveguides",
-  "input-names": [ "in", "gain", "t"],
-  "output-names": [ "out" ]
-}

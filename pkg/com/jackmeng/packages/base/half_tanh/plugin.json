@@ -1,7 +1,0 @@
-{
-    "name" : "HalfTanh",
-    "uid"  : 15866720791468112911,
-    "category" : "Calculus",
-    "input-names" : ["in"],
-    "output-names" : ["out"]
-}

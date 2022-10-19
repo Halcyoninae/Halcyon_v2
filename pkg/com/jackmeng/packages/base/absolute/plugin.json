@@ -1,7 +1,0 @@
-{
-    "name" : "Absolute",
-    "uid"  : 1235849085197680920,
-    "category" : "Calculus",
-    "input-names" : ["in"],
-    "output-names" : ["out"]
-}

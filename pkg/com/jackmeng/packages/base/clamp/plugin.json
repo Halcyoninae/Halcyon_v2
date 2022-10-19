@@ -1,7 +1,0 @@
-{
-    "name" : "Clamp",
-    "uid"  : 7692610958130762003,
-    "category" : "Calculus",
-    "input-names" : ["in", "min", "max"],
-    "output-names" : ["out"]
-}

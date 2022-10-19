@@ -1,7 +1,0 @@
-{
-    "name" : "ReadPoint",
-    "uid"  : 7108073296196716329,
-    "category" : "Waveguides",
-    "input-names" : ["in -", "in +"],
-    "output-names" : ["out +", "Read", "out -"]
-}
