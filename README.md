@@ -21,7 +21,7 @@
     width="419" align="right" />
 </a>
 
-<Strong>[!] Status: Repository is dormant. A [GUI overhaul](https://github.com/exoad/HalcyonGUI_overhaul) is under way</strong>
+<Strong>[!] Status: Repository is dormant. A [GUI overhaul](https://gitlab.com/exoad/halcyon-gui-overhaul) is under way</strong>
 
 ### <strong><u>Description</u></strong>
 
