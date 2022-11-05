@@ -1,7 +1,0 @@
-{
-    "name" : "ADSR",
-    "uid"  : 11735043973976220348,
-    "category" : "Envelope",
-    "input-names" : ["gate", "attack", "decay", "sustain", "release"],
-    "output-names" : ["out"]
-}

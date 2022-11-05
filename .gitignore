@@ -33,3 +33,6 @@ Source/com/jackmeng/test
 /default
 MAKE.sh
 .editorconfig
+/pkg/
+/include
+/native/
