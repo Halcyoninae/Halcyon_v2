@@ -1,6 +1,6 @@
 <a href="https://halcyoninae.github.io/.github/"><img src="repo/img/github_banner.png" alt="Repository Banner" width="320"/></a> 
 # <strong>Halcyon</strong> : <br/> <em>A Robust Audio Player</em>
-> <em>Copyright (C) [Jack Meng 2021](mailto://jackmeng0814@gmail.com)</em>
+> <em>Copyright (C) [Jack Meng 2021-2022](mailto://jackmeng0814@gmail.com)</em>
 
 <hr>
 
@@ -14,7 +14,7 @@
     WORK IN PROGRESS and subject
     to change at any time.
 
-    COPYRIGHT © Jack Meng 2021
+    COPYRIGHT © Jack Meng 2021-2022
 -->
 <a href="https://halcyoninae.github.io/.github/">
 <img src="repo/img/upload.png" alt="Snapshot from the GUI wrapper for the internal Audio API"
