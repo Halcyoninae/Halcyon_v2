@@ -125,6 +125,8 @@ This license is not provided with a patent claim, and users besides the original
 
 ## **11.   Resource(s)**
 
+Check RESOURCE_LICENSE.md for Halcyon's software resiurce license.
+
 _This clause only comes into effect if the original license holder DOES NOT provide a secondary license for resources and prefers to use this license as a whole to protect their work._
 
 This license does not fully protect any resource files (e.g. Image Files, Archive Files, Raw Documents *.doc, *.docx, *.pdf, etc.)
