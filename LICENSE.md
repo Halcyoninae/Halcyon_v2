@@ -125,7 +125,7 @@ This license is not provided with a patent claim, and users besides the original
 
 ## **11.   Resource(s)**
 
-Check RESOURCE_LICENSE.md for Halcyon's software resiurce license.
+Check RESOURCE_LICENSE.md for Halcyon's software resource license.
 
 _This clause only comes into effect if the original license holder DOES NOT provide a secondary license for resources and prefers to use this license as a whole to protect their work._
 
