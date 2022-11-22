@@ -28,8 +28,9 @@
 > fits the needs of anyone.
 
 > **[!] Notice**
-> This Halcyon version is not the same as
-> Exoad's Halcyon.
+> This Halcyon version is the main "downstream"
+> image, with Exoad's Halcyon being the upstream
+> provider; this repository is production code.
 
 **A robust and intuitive audio player**
 
